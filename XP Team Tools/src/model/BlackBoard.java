@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BlackBoard {
@@ -29,6 +30,16 @@ public class BlackBoard {
 
 	public void moveTaskToState(String taskName, String targetState) {
 		this.tasks.get(taskName).changeState(targetState);
+	}
+
+	public ArrayList<Task> getTasks(String targetState) {
+		ArrayList<Task> list = new ArrayList<Task>();
+		for (Task task : tasks.values()) {
+			if (task.getState().compareTo(targetState)==0) {
+				list.add(task);
+			}
+		}
+		return list;
 	}
 
 }

@@ -18,6 +18,13 @@ public class Task {
 		this.state = TODO;
 	}
 
+	public Task(String name) {
+		super();
+		this.name = name;
+		this.description = "";
+		this.state = TODO;
+	}
+
 	public void addParticipant(String participant) {
 		this.participants.add(participant);
 	}

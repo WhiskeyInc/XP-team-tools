@@ -49,7 +49,7 @@ public class USShowCaseTest {
 		ussc.addNewUs("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		ussc.addNewUs("us2", "Voglio che ci sia un menù che...");
-		ussc.getBoard("us1").addNewTask("Timeline", "Componente che deve...");
+		ussc.getBoard("us1").addTask("Timeline", "Componente che deve...");
 		assertEquals(1+0,ussc.getBoard("us1").getTasksNumber()+ussc.getBoard("us2").getTasksNumber());
 	}
 

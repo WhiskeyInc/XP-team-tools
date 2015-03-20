@@ -1,7 +1,11 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import model.BlackBoard;
+import model.Task;
 
 import org.junit.Test;
 
@@ -43,5 +47,20 @@ public class BlackBoardTest {
 				.getTask("Timeline").toString()
 				+ blackboard.getTask("Timeline").getDescription()
 				+ blackboard.getTask("Timeline").getState());
+	}
+	
+	@Test
+	public void findTasksByState() {
+		ArrayList<String> tasks = new ArrayList<String>();
+		blackboard.addTask("Timeline");
+		blackboard.addTask("Board");
+		blackboard.addTask("Chat");
+		blackboard.moveTaskToState("Timeline", "IN PROGRESS");
+		tasks.add("Timeline");
+		ArrayList<String> inProgressTasks = new ArrayList<String>();
+		for (Task task : blackboard.getTasks("IN PROGRESS")) {
+			inProgressTasks.add(task.toString());
+		}
+		assertEquals(tasks, inProgressTasks);
 	}
 }
