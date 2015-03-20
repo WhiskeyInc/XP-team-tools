@@ -1,9 +1,9 @@
-package model;
+package boards;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BlackBoard {
+public class TasksBoard {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 
