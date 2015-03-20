@@ -34,21 +34,13 @@ public class Timeline {
 		this.events.remove(eventName);
 	}
 
-	public String getEventDate(String eventName) {
-		return this.events.get(eventName).getDate();
-	}
-
 	public void moveEvent(String eventName, String newDate) {
 		this.events.remove(eventName);
 		Event newEvent = new Event(eventName, newDate);
 		this.events.put(newEvent.toString(), newEvent);
 	}
 
-	public ArrayList<String> getParticipants(String eventName) {
-		return this.events.get(eventName).getParticipants();
-	}
-
-	public void addParticipant(String eventName, String participant) {
-		this.events.get(eventName).addParticipant(participant);
+	public Event getEvent(String eventName){
+		return this.events.get(eventName);
 	}
 }
