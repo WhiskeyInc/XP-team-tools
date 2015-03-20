@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Task {
 
 	private final static String TODO = "TODO";
-	private final static String IN_PROGRESS = "IN PROGRESS";
-	private final static String DONE = "DONE";
 
 	private String name;
 	private String description;
@@ -20,8 +18,8 @@ public class Task {
 		this.state = TODO;
 	}
 
-	public void addPartecipant(String partecipant) {
-		this.participants.add(partecipant);
+	public void addParticipant(String participant) {
+		this.participants.add(participant);
 	}
 
 	public void setName(String name) {
@@ -36,19 +34,19 @@ public class Task {
 		this.description = description;
 	}
 
-	public void toInProgress() {
-		this.state = IN_PROGRESS;
-	}
-
-	public void toDone() {
-		this.state = DONE;
-	}
-
 	public String getState() {
 		return state;
 	}
 
+	public void changeState(String targetState) {
+		this.state = targetState;		
+	}
+	
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.name;
 	}

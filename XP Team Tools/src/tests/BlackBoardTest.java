@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import model.BlackBoard;
 
 import org.junit.Test;
@@ -11,38 +11,37 @@ public class BlackBoardTest {
 
 	@Test
 	public void addnewTaskTest() {
-		blackboard.addNewTask("Timeline", "Componente che deve...");
+		blackboard.addTask("Timeline", "Componente che deve...");
 		assertEquals(1, blackboard.getTasksNumber());
 	}
 
 	@Test
-	public void moveTaskInProgressTest() {
-		blackboard.addNewTask("Timeline", "Componente che deve...");
-		blackboard.taskInProgress("Timeline");
-		assertEquals("IN PROGRESS", blackboard.getTask("Timeline").getState());
+	public void taskCreatedIsTODO() {
+		blackboard.addTask("Timeline", "Componente che deve...");
+		assertEquals("TODO", blackboard.getTask("Timeline").getState());
+	}
+	
+	@Test
+	public void changeTaskState() throws Exception {
+		blackboard.addTask("Timeline");
+		blackboard.moveTaskToState("Timeline", "ACCEPTED");
+		assertEquals("ACCEPTED", blackboard.getTask("Timeline").getState());
 	}
 
-	@Test
-	public void moveTaskDoneTest() {
-		blackboard.addNewTask("Timeline", "Componente che deve...");
-		blackboard.taskDone("Timeline");
-		assertEquals("DONE", blackboard.getTask("Timeline").getState());
-	}
 
 	@Test
 	public void dropTaskTest() {
-		blackboard.addNewTask("Timeline", "Componente che deve...");
-		blackboard.dropTask("Timeline");
+		blackboard.addTask("Timeline", "Componente che deve...");
+		blackboard.deleteTask("Timeline");
 		assertEquals(null, blackboard.getTask("Timeline"));
 	}
 
 	@Test
 	public void displayTasksTest() {
-		blackboard.addNewTask("Timeline", "Componente che deve...");
+		blackboard.addTask("Timeline", "Componente che deve...");
 		assertEquals("Timeline" + "Componente che deve..." + "TODO", blackboard
 				.getTask("Timeline").toString()
 				+ blackboard.getTask("Timeline").getDescription()
 				+ blackboard.getTask("Timeline").getState());
 	}
-
 }

@@ -6,20 +6,16 @@ public class BlackBoard {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 
-	public void addNewTask(String taskName, String description) {
+	public void addTask(String taskName, String description) {
 		Task task = new Task(taskName, description);
 		tasks.put(task.toString(), task);
 	}
-
-	public void taskInProgress(String taskName) {
-		tasks.get(taskName).toInProgress();
+	
+	public void addTask(String taskName) {
+		this.addTask(taskName, "");		
 	}
 
-	public void taskDone(String taskname) {
-		tasks.get(taskname).toDone();
-	}
-
-	public void dropTask(String taskName) {
+	public void deleteTask(String taskName) {
 		tasks.remove(taskName);
 	}
 
@@ -29,6 +25,10 @@ public class BlackBoard {
 
 	public int getTasksNumber() {
 		return tasks.size();
+	}
+
+	public void moveTaskToState(String taskName, String targetState) {
+		this.tasks.get(taskName).changeState(targetState);
 	}
 
 }
