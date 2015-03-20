@@ -36,7 +36,7 @@ public class TimelineTest {
 	@Test
 	public void dateDisplayTest() {
 		timeline.addEvent(new Event("Briefing", "23 02 2014"));
-		assertEquals("23 02 2014", timeline.getEventDate("Briefing"));
+		assertEquals("23 02 2014", timeline.getEvent("Briefing").getDate());
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class TimelineTest {
 		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
 		Calendar cal = Calendar.getInstance();
 		String creationDate = format.format(cal.getTime());
-		assertEquals(creationDate, timeline.getEventDate("creation"));
+		assertEquals(creationDate, timeline.getEvent("creation").getDate());
 	}
 
 	@Test
@@ -52,14 +52,14 @@ public class TimelineTest {
 		timeline.addEvent(new Event("Riunione sulla timeline", "20 03 2015"));
 		timeline.moveEvent("Riunione sulla timeline", "21 03 2015");
 		assertEquals("21 03 2015",
-				timeline.getEventDate("Riunione sulla timeline"));
+				timeline.getEvent("Riunione sulla timeline").getDate());
 	}
 
 	@Test
 	public void participantAdditionTest() throws Exception {
 		timeline.addEvent(new Event("Briefing", "20 03 2015"));
-		timeline.addParticipant("Briefing", "Simone Colucci");
-		assertTrue(timeline.getParticipants("Briefing").contains(
+		timeline.getEvent("Briefing").addParticipant("Simone Colucci");
+		assertTrue(timeline.getEvent("Briefing").getParticipants().contains(
 				"Simone Colucci"));
 	}
 
