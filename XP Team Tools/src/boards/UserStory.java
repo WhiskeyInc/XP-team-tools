@@ -5,6 +5,7 @@ public class UserStory {
 	private String title;
 	private String description;
 	private String state;
+	private TasksManager taskManager = new TasksManager();
 	
 	public UserStory(String title) {
 		this.state = "TODO";
@@ -37,5 +38,17 @@ public class UserStory {
 	@Override
 	public String toString() {
 		return this.title;
+	}
+
+	public TasksManager getTasksManager() {
+		return this.taskManager ;
+	}
+
+	public int getTasksNumber() {
+		return this.taskManager.getTasksNumber();
+	}
+
+	public void addTask(String taskName, String description) {
+		this.taskManager.addTask(taskName, description);		
 	}
 }

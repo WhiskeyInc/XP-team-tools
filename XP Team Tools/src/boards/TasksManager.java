@@ -3,7 +3,7 @@ package boards;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TasksBoard {
+public class TasksManager {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 
