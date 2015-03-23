@@ -62,5 +62,4 @@ public class TimelineTest {
 		assertTrue(timeline.getEvent("Briefing").getParticipants().contains(
 				"Simone Colucci"));
 	}
-
 }
