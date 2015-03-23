@@ -6,7 +6,7 @@ public class Test1 {
 
 		int asd = 1;
 
-		System.out.println("asd");
+		System.out.println("asdt");
 	}
 
 }
