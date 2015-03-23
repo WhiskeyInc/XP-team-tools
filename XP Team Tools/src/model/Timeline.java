@@ -14,13 +14,6 @@ public class Timeline {
 		events.put(event.toString(), event);
 	}
 
-	private String creationDate() {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
-		Calendar currentCalendar = Calendar.getInstance();
-		String creationDate = dateFormatter.format(currentCalendar.getTime());
-		return creationDate;
-	}
-
 	public int getEventsNumber() {
 		return this.events.keySet().size();
 	}
@@ -41,5 +34,12 @@ public class Timeline {
 
 	public Event getEvent(String eventName){
 		return this.events.get(eventName);
+	}
+	
+	private String creationDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
+		Calendar currentCalendar = Calendar.getInstance();
+		String creationDate = dateFormatter.format(currentCalendar.getTime());
+		return creationDate;
 	}
 }

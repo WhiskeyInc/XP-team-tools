@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.junit.Test;
+import model.Event;
+import model.Timeline;
 
-import timeline.Event;
-import timeline.Timeline;
+import org.junit.Test;
 
 public class TimelineTest {
 

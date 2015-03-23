@@ -3,8 +3,8 @@ package tests;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import timeline.Event;
-import timeline.Timeline;
+import model.Event;
+import model.Timeline;
 import boards.TasksManager;
 
 public class Tool {
