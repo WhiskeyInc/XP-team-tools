@@ -28,14 +28,24 @@ public class TimelineIntegrationTest {
 	}
 
 	@Test
-	public void automaticEventsTest() throws Exception {
+	public void automaticEventsTest() {
 		String currentDate = getCurrentDate();
 		tool.addTask("Timer", "");
 		assertEquals("Created task: Timer",
 				tool.getEvent("Created task: Timer").toString());
 		assertEquals(currentDate,
-				tool.getEvent("Created task: Timer").getDate());
-		
+				tool.getEvent("Created task: Timer").getDate());	
+	}
+	
+	@Test
+	public void taskModifyTest() {
+		tool.addTask("Timer", "");
+		tool.moveTaskToState("Timer", "DONE");
+		assertEquals(3, tool.getEventsNumber());
+		assertEquals("Changed state of task Timer now it is DONE",
+				tool.getEvent("Changed state of task Timer now it is DONE").toString());
+		assertEquals(getCurrentDate(),
+				tool.getEvent("Changed state of task Timer now it is DONE").getDate());
 	}
 
 	private String getCurrentDate() {

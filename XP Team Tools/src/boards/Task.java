@@ -45,7 +45,7 @@ public class Task {
 		return state;
 	}
 
-	public void changeState(String targetState) {
+	public void moveTaskToState(String targetState) {
 		this.state = targetState;		
 	}
 	

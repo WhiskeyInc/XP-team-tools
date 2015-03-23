@@ -29,7 +29,7 @@ public class TasksManager {
 	}
 
 	public void moveTaskToState(String taskName, String targetState) {
-		this.tasks.get(taskName).changeState(targetState);
+		this.tasks.get(taskName).moveTaskToState(targetState);
 	}
 
 	public ArrayList<Task> getTasks(String targetState) {

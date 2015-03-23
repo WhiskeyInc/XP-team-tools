@@ -12,7 +12,8 @@ public class Tool {
 
 	public void addTask(String taskName, String description) {
 		this.taskManager.addTask(taskName, description);
-		this.timeline.addEvent(new Event("Created task: " + taskName, getCurrentDate()));
+		this.timeline.addEvent(new Event("Created task: " + taskName,
+				getCurrentDate()));
 	}
 
 	public int getEventsNumber() {
@@ -21,11 +22,18 @@ public class Tool {
 
 	public void deleteTask(String taskName) {
 		this.taskManager.deleteTask(taskName);
-		timeline.addEvent(new Event("Deleted task: "+ taskName, getCurrentDate()));
+		timeline.addEvent(new Event("Deleted task: " + taskName,
+				getCurrentDate()));
 	}
 
 	public Event getEvent(String eventName) {
 		return this.timeline.getEvent(eventName);
+	}
+
+	public void moveTaskToState(String taskName, String targetState) {
+		this.taskManager.moveTaskToState(taskName, targetState);
+		this.timeline.addEvent(new Event("Changed state of task " + taskName
+				+ " now it is " + targetState, this.getCurrentDate()));
 	}
 
 	private String getCurrentDate() {
@@ -34,4 +42,5 @@ public class Tool {
 		String creationDate = format.format(cal.getTime());
 		return creationDate;
 	}
+
 }
