@@ -1,13 +1,13 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import model.Tool;
-
 import org.junit.Test;
+
+import timeline.Tool;
 
 public class TimelineIntegrationTest {
 

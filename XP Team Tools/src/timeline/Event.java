@@ -1,4 +1,4 @@
-package model;
+package timeline;
 
 import java.util.ArrayList;
 
