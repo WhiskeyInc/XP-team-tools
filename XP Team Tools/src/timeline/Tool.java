@@ -3,6 +3,7 @@ package timeline;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import boards.Task;
 import boards.TasksManager;
 
 public class Tool {
@@ -33,7 +34,20 @@ public class Tool {
 	public void moveTaskToState(String taskName, String targetState) {
 		this.taskManager.moveTaskToState(taskName, targetState);
 		this.timeline.addEvent(new Event("Changed state of task " + taskName
-				+ " now it is " + targetState, this.getCurrentDate()));
+				+ ": now it is " + targetState, this.getCurrentDate()));
+	}
+
+	public void addParticipantTo(String taskName, String participant) {
+		checkTask(taskName);
+		taskManager.getTask(taskName).addParticipant(participant);
+		timeline.addEvent(new Event("Added "+participant+" to task: "+taskName, getCurrentDate()));
+	}
+
+	private void checkTask(String taskName) {
+		Task task = taskManager.getTask(taskName);
+		if (task == null) {
+			taskManager.addTask(taskName);
+		}
 	}
 
 	private String getCurrentDate() {
@@ -42,5 +56,4 @@ public class Tool {
 		String creationDate = format.format(cal.getTime());
 		return creationDate;
 	}
-
 }

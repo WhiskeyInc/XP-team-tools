@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,10 +42,18 @@ public class TimelineIntegrationTest {
 		tool.addTask("Timer", "");
 		tool.moveTaskToState("Timer", "DONE");
 		assertEquals(3, tool.getEventsNumber());
-		assertEquals("Changed state of task Timer now it is DONE",
-				tool.getEvent("Changed state of task Timer now it is DONE").toString());
+		assertEquals("Changed state of task Timer: now it is DONE",
+				tool.getEvent("Changed state of task Timer: now it is DONE").toString());
 		assertEquals(getCurrentDate(),
-				tool.getEvent("Changed state of task Timer now it is DONE").getDate());
+				tool.getEvent("Changed state of task Timer: now it is DONE").getDate());
+	}
+	
+	@Test
+	public void participantAdditionCreatesEvent() throws Exception {
+		assertEquals(1, tool.getEventsNumber());
+		tool.addParticipantTo("Timeline", "usk");
+		assertEquals("24 03 2015", tool.getEvent("Added usk to task: Timeline").getDate());
+		assertEquals(2, tool.getEventsNumber());
 	}
 
 	private String getCurrentDate() {
