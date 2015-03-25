@@ -85,5 +85,14 @@ public class TimelineIntegrationTest {
 		String currentDate = format.format(cal.getTime());
 		return currentDate;
 	}
+	
+	@Test
+	public void eventsByTargetMember() throws Exception {
+		teamManager.addMember("sumo");
+		teamManager.addDeveloperTo("Timer", "sumo");
+		teamManager.moveTaskToState("Timer", "DONE");
+		teamManager.deleteTask("Timer");
+		assertEquals(4, teamManager.getEvents("sumo").size());
+	}
 
 }

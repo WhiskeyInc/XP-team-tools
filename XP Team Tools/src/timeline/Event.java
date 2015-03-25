@@ -34,4 +34,8 @@ public class Event {
 		return this.name;
 	}
 
+	public void addParticipants(ArrayList<String> developers) {
+		this.participants.addAll(developers);		
+	}
+
 }

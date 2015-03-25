@@ -26,9 +26,10 @@ public class TeamManager {
 	}
 
 	public void deleteTask(String taskName) {
+		Event event = new Event("Deleted task: " + taskName, getCurrentDate());
+		addDevelopersToEvent(taskName, event);
 		this.taskManager.deleteTask(taskName);
-		timeline.addEvent(new Event("Deleted task: " + taskName,
-				getCurrentDate()));
+		timeline.addEvent(event);
 	}
 
 	public Event getEvent(String eventName) {
@@ -37,15 +38,21 @@ public class TeamManager {
 
 	public void moveTaskToState(String taskName, String targetState) {
 		this.taskManager.moveTaskToState(taskName, targetState);
-		this.timeline.addEvent(new Event("Changed state of task " + taskName
-				+ ": now it is " + targetState, this.getCurrentDate()));
+		Event event = new Event("Changed state of task " + taskName
+				+ ": now it is " + targetState, this.getCurrentDate());
+		addDevelopersToEvent(taskName, event);
+		this.timeline.addEvent(event);
 	}
 
-	public void addDeveloperTo(String taskName, String developer) throws InvalidMemberException {
+	public void addDeveloperTo(String taskName, String developer)
+			throws InvalidMemberException {
 		checkTask(taskName);
 		checkMember(developer);
-		taskManager.getTask(taskName).addParticipant(developer);
-		timeline.addEvent(new Event("Added "+developer+" to task: "+taskName, getCurrentDate()));
+		taskManager.getTask(taskName).addDeveloper(developer);
+		Event event = new Event("Added " + developer + " to task: " + taskName,
+				getCurrentDate());
+		event.addParticipant(developer);
+		timeline.addEvent(event);
 	}
 
 	private void checkTask(String taskName) {
@@ -55,21 +62,33 @@ public class TeamManager {
 		}
 	}
 
+	public void addMember(String member) {
+		members.add(member);
+		Event event = new Event("Added member: " + member, getCurrentDate());
+		event.addParticipant(member);
+		timeline.addEvent(event);
+	}
+
+	public ArrayList<Event> getEvents(String member) throws InvalidMemberException {
+		checkMember(member);
+		return timeline.getEvents(member);
+	}
+
+	private void checkMember(String member) throws InvalidMemberException {
+		if (!members.contains(member)) {
+			throw new InvalidMemberException(member);
+		}
+	}
+
 	private String getCurrentDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
 		Calendar cal = Calendar.getInstance();
 		String creationDate = format.format(cal.getTime());
 		return creationDate;
 	}
-
-	public void addMember(String member) {		
-		members.add(member);
-		timeline.addEvent(new Event("Added member: "+member, getCurrentDate()));
-	}
 	
-	private void checkMember(String member) throws InvalidMemberException {
-		if (!members .contains(member)) {
-			throw new InvalidMemberException(member);
-		}		
+
+	private void addDevelopersToEvent(String taskName, Event event) {
+		event.addParticipants(taskManager.getTask(taskName).getDevelopers());
 	}
 }

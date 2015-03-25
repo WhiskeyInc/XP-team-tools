@@ -1,7 +1,10 @@
 package timeline;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Timeline {
@@ -36,10 +39,27 @@ public class Timeline {
 		return this.events.get(eventName);
 	}
 	
+
+	public ArrayList<Event> getEvents() {
+		ArrayList<Event> eventsList = new ArrayList<Event>();
+		eventsList.addAll(this.events.values());
+		return eventsList;
+	}
+	
 	private String creationDate() {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
 		Calendar currentCalendar = Calendar.getInstance();
 		String creationDate = dateFormatter.format(currentCalendar.getTime());
 		return creationDate;
+	}
+
+	public ArrayList<Event> getEvents(String member) {
+		ArrayList<Event> list = new ArrayList<Event>();
+		for (Event event : this.getEvents()) {
+			if (event.getParticipants().contains(member)) {
+				list.add(event);
+			}
+		}
+		return list;
 	}
 }

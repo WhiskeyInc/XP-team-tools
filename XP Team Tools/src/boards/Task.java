@@ -9,7 +9,7 @@ public class Task {
 	private String name;
 	private String description;
 	private String state;
-	private ArrayList<String> participants = new ArrayList<String>();
+	private ArrayList<String> developers = new ArrayList<String>();
 
 	public Task(String name, String description) {
 		super();
@@ -25,8 +25,8 @@ public class Task {
 		this.state = TODO;
 	}
 
-	public void addParticipant(String participant) {
-		this.participants.add(participant);
+	public void addDeveloper(String developer) {
+		this.developers.add(developer);
 	}
 
 	public void setName(String name) {
@@ -56,6 +56,10 @@ public class Task {
 	 */
 	public String toString() {
 		return this.name;
+	}
+
+	public ArrayList<String> getDevelopers() {
+		return this.developers;
 	}
 
 }
