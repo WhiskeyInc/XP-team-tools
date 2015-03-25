@@ -1,8 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,65 +9,76 @@ import model.TeamManager;
 
 import org.junit.Test;
 
+import timeline.Event;
+
 public class TimelineIntegrationTest {
 
-	TeamManager tool = new TeamManager();
+	TeamManager teamManager = new TeamManager();
 
 	@Test
 	public void taskAdditionCreatesEvent() {
-		tool.addTask("Nuovo task", "Integrare task in timeline");
-		assertEquals(2, tool.getEventsNumber());
+		teamManager.addTask("Nuovo task", "Integrare task in timeline");
+		assertEquals(2, teamManager.getEventsNumber());
 	}
 
 	@Test
 	public void taskDeletionCreatesEvent() {
-		tool.addTask("Timer", "creare un timer che...");
-		tool.addTask("Timeline", "creare una classe che...");
-		tool.deleteTask("Timer");
-		assertEquals(4, tool.getEventsNumber());
+		teamManager.addTask("Timer", "creare un timer che...");
+		teamManager.addTask("Timeline", "creare una classe che...");
+		teamManager.deleteTask("Timer");
+		assertEquals(4, teamManager.getEventsNumber());
 	}
 
 	@Test
 	public void automaticEventsTest() {
 		String currentDate = getCurrentDate();
-		tool.addTask("Timer", "");
+		teamManager.addTask("Timer", "");
 		assertEquals("Created task: Timer",
-				tool.getEvent("Created task: Timer").toString());
+				teamManager.getEvent("Created task: Timer").toString());
 		assertEquals(currentDate,
-				tool.getEvent("Created task: Timer").getDate());	
+				teamManager.getEvent("Created task: Timer").getDate());	
 	}
 	
 	@Test
 	public void taskModifyTest() {
-		tool.addTask("Timer", "");
-		tool.moveTaskToState("Timer", "DONE");
-		assertEquals(3, tool.getEventsNumber());
+		teamManager.addTask("Timer", "");
+		teamManager.moveTaskToState("Timer", "DONE");
+		assertEquals(3, teamManager.getEventsNumber());
 		assertEquals("Changed state of task Timer: now it is DONE",
-				tool.getEvent("Changed state of task Timer: now it is DONE").toString());
+				teamManager.getEvent("Changed state of task Timer: now it is DONE").toString());
 		assertEquals(getCurrentDate(),
-				tool.getEvent("Changed state of task Timer: now it is DONE").getDate());
+				teamManager.getEvent("Changed state of task Timer: now it is DONE").getDate());
 	}
 	
 	@Test
 	public void participantAdditionCreatesEvent() throws Exception {
-		assertEquals(1, tool.getEventsNumber());
-		tool.addMember("usk");
-		tool.addDeveloperTo("Timeline", "usk");
-		assertEquals(getCurrentDate(), tool.getEvent("Added usk to task: Timeline").getDate());
-		assertEquals(2, tool.getEventsNumber());
+		assertEquals(1, teamManager.getEventsNumber());
+		teamManager.addMember("usk");
+		teamManager.addDeveloperTo("Timeline", "usk");
+		assertEquals(getCurrentDate(), teamManager.getEvent("Added usk to task: Timeline").getDate());
+		assertEquals(3, teamManager.getEventsNumber());
 	}
 	
 	@Test
 	public void participantAdditionFailsWhenInvalidParticipant() throws Exception {
-		tool.addMember("sumo");
+		teamManager.addMember("sumo");
 		try {
-			tool.addDeveloperTo("Timeline", "ziobrando");
+			teamManager.addDeveloperTo("Timeline", "ziobrando");
 			fail();
 		} catch (Exception e) {
 			assertTrue(true);
 		}
 	}
-
+	
+	@Test
+	public void memberAdditionCreatesEvent() throws Exception {
+		assertEquals(1, teamManager.getEventsNumber());
+		teamManager.addMember("usk");
+		Event event = teamManager.getEvent("Added member: usk");
+		assertEquals(2, teamManager.getEventsNumber());
+		assertEquals(getCurrentDate(), event.getDate());
+	}
+	
 	private String getCurrentDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
 		Calendar cal = Calendar.getInstance();

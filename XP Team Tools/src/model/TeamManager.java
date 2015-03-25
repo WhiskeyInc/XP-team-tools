@@ -64,6 +64,7 @@ public class TeamManager {
 
 	public void addMember(String member) {		
 		members.add(member);
+		timeline.addEvent(new Event("Added member: "+member, getCurrentDate()));
 	}
 	
 	private void checkMember(String member) throws InvalidMemberException {
