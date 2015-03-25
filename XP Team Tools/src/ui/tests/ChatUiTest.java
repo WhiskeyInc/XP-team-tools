@@ -22,6 +22,7 @@ public class ChatUiTest {
 	public void testChatArea() throws Exception {
 		ChatUITestable chat = new ChatUITestable();
 		chat.setChatAreaText("Test");
+		System.out.println(chat.getChatAreaText());
 		assertEquals(chat.getChatAreaText(), "Test");
 	}
 	@Test
@@ -38,6 +39,8 @@ public class ChatUiTest {
 		
 		chat.simulateButtonClick();
 		
+		System.out.println(chat.getChatAreaText());
+
 		assertEquals(chat.getChatAreaText(), "Test");
 	}
 }
