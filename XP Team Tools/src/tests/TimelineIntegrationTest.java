@@ -1,17 +1,19 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.junit.Test;
+import model.TeamManager;
 
-import timeline.Tool;
+import org.junit.Test;
 
 public class TimelineIntegrationTest {
 
-	Tool tool = new Tool();
+	TeamManager tool = new TeamManager();
 
 	@Test
 	public void taskAdditionCreatesEvent() {
@@ -51,9 +53,21 @@ public class TimelineIntegrationTest {
 	@Test
 	public void participantAdditionCreatesEvent() throws Exception {
 		assertEquals(1, tool.getEventsNumber());
-		tool.addParticipantTo("Timeline", "usk");
-		assertEquals("24 03 2015", tool.getEvent("Added usk to task: Timeline").getDate());
+		tool.addMember("usk");
+		tool.addDeveloperTo("Timeline", "usk");
+		assertEquals(getCurrentDate(), tool.getEvent("Added usk to task: Timeline").getDate());
 		assertEquals(2, tool.getEventsNumber());
+	}
+	
+	@Test
+	public void participantAdditionFailsWhenInvalidParticipant() throws Exception {
+		tool.addMember("sumo");
+		try {
+			tool.addDeveloperTo("Timeline", "ziobrando");
+			fail();
+		} catch (Exception e) {
+			assertTrue(true);
+		}
 	}
 
 	private String getCurrentDate() {

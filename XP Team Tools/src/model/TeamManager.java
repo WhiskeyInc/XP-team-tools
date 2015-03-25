@@ -1,15 +1,19 @@
-package timeline;
+package model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import timeline.Event;
+import timeline.Timeline;
 import boards.Task;
 import boards.TasksManager;
 
-public class Tool {
+public class TeamManager {
 
 	private TasksManager taskManager = new TasksManager();
 	private Timeline timeline = new Timeline();
+	private ArrayList<String> members = new ArrayList<String>();
 
 	public void addTask(String taskName, String description) {
 		this.taskManager.addTask(taskName, description);
@@ -37,10 +41,11 @@ public class Tool {
 				+ ": now it is " + targetState, this.getCurrentDate()));
 	}
 
-	public void addParticipantTo(String taskName, String participant) {
+	public void addDeveloperTo(String taskName, String developer) throws InvalidMemberException {
 		checkTask(taskName);
-		taskManager.getTask(taskName).addParticipant(participant);
-		timeline.addEvent(new Event("Added "+participant+" to task: "+taskName, getCurrentDate()));
+		checkMember(developer);
+		taskManager.getTask(taskName).addParticipant(developer);
+		timeline.addEvent(new Event("Added "+developer+" to task: "+taskName, getCurrentDate()));
 	}
 
 	private void checkTask(String taskName) {
@@ -55,5 +60,15 @@ public class Tool {
 		Calendar cal = Calendar.getInstance();
 		String creationDate = format.format(cal.getTime());
 		return creationDate;
+	}
+
+	public void addMember(String member) {		
+		members.add(member);
+	}
+	
+	private void checkMember(String member) throws InvalidMemberException {
+		if (!members .contains(member)) {
+			throw new InvalidMemberException(member);
+		}		
 	}
 }
