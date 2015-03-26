@@ -19,7 +19,9 @@ public class TimerUI extends JPanel {
 	private JButton timerButton;
 	private JTextField timerArea;
 	private int second;
+	private int initialSecond;
 	private int minute;
+	private int initialMinute;
 	private String time;
 	private Timer timer;
 
@@ -37,6 +39,21 @@ public class TimerUI extends JPanel {
 			}
 
 			private void showCountdown() {
+				setDisplay();
+				if (minute == 0 && second == 0) {
+					time = "Stop working";
+					timerArea.setText(time);
+					timer.stop();
+					setMinute(initialMinute);
+					setSecond(initialSecond + 1);
+				} else if (second == 0) {
+					second = 60;
+					minute--;
+				}
+				second--;
+			}
+
+			private void setDisplay() {
 				if (minute < 10 && second < 10)
 					time = "0" + String.valueOf(minute) + " : 0"
 							+ String.valueOf(second);
@@ -50,15 +67,6 @@ public class TimerUI extends JPanel {
 					time = String.valueOf(minute) + " : "
 							+ String.valueOf(second);
 				timerArea.setText(time);
-				if (minute == 0 && second == 0) {
-					time = "Stop working";
-					timerArea.setText(time);
-					timer.stop();
-				} else if (second == 0) {
-					second = 60;
-					minute--;
-				}
-				second--;
 			}
 		});
 
@@ -94,10 +102,12 @@ public class TimerUI extends JPanel {
 
 	public void setSecond(int second) {
 		this.second = second;
+		initialSecond = second;
 	}
 
 	public void setMinute(int minute) {
 		this.minute = minute;
+		initialMinute = minute;
 	}
 
 }
