@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import sounds.SoundPlayer;
+
+/**
+ * The UI of the Timer, with the StartButton and a display that shows the
+ * countdown
+ * 
+ * @author alessandro B.
+ * 
+ */
 public class TimerUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +32,7 @@ public class TimerUI extends JPanel {
 	private int initialMinute;
 	private String time;
 	private Timer timer;
+	private SoundPlayer player;
 
 	public TimerUI() {
 		GridBagLayout layout = new GridBagLayout();
@@ -44,6 +53,7 @@ public class TimerUI extends JPanel {
 					time = "Stop working";
 					timerArea.setText(time);
 					timer.stop();
+					player.playSong();
 					setMinute(initialMinute);
 					setSecond(initialSecond + 1);
 				} else if (second == 0) {
@@ -108,6 +118,10 @@ public class TimerUI extends JPanel {
 	public void setMinute(int minute) {
 		this.minute = minute;
 		initialMinute = minute;
+	}
+
+	public void setPlayer(SoundPlayer player) {
+		this.player = player;
 	}
 
 }

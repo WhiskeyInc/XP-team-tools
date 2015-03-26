@@ -2,6 +2,7 @@ package timer.tests;
 
 import javax.swing.JFrame;
 
+import sounds.SoundPlayer;
 import ui.TimerUI;
 import ui.tests.FramesUtils;
 
@@ -14,6 +15,8 @@ public class TimerTest01 {
 		frame.getContentPane().add(timer);
 		timer.setSecond(3);
 		timer.setMinute(0);
+		SoundPlayer player = new SoundPlayer("sounds/TempleBell.wav");
+		timer.setPlayer(player);
 		frame.setVisible(true);
 	}
 	
