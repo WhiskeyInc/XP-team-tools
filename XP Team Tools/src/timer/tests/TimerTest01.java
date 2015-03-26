@@ -13,7 +13,7 @@ public class TimerTest01 {
 		TimerUI timer = new TimerUI();
 		frame.getContentPane().add(timer);
 		timer.setSecond(3);
-		timer.setMinute(1);
+		timer.setMinute(0);
 		frame.setVisible(true);
 	}
 	
