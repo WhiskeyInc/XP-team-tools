@@ -1,10 +1,8 @@
 package timeline;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class Timeline {
@@ -12,7 +10,7 @@ public class Timeline {
 	private HashMap<String, Event> events = new HashMap<String, Event>();
 
 	public Timeline() {
-		String creationDate = creationDate();
+		GregorianCalendar creationDate = (GregorianCalendar) Calendar.getInstance();
 		Event event = new Event("creation", creationDate);
 		events.put(event.toString(), event);
 	}
@@ -29,7 +27,7 @@ public class Timeline {
 		this.events.remove(eventName);
 	}
 
-	public void moveEvent(String eventName, String newDate) {
+	public void moveEvent(String eventName, GregorianCalendar newDate) {
 		this.events.remove(eventName);
 		Event newEvent = new Event(eventName, newDate);
 		this.events.put(newEvent.toString(), newEvent);
@@ -44,22 +42,5 @@ public class Timeline {
 		ArrayList<Event> eventsList = new ArrayList<Event>();
 		eventsList.addAll(this.events.values());
 		return eventsList;
-	}
-	
-	private String creationDate() {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
-		Calendar currentCalendar = Calendar.getInstance();
-		String creationDate = dateFormatter.format(currentCalendar.getTime());
-		return creationDate;
-	}
-
-	public ArrayList<Event> getEvents(String member) {
-		ArrayList<Event> list = new ArrayList<Event>();
-		for (Event event : this.getEvents()) {
-			if (event.getParticipants().contains(member)) {
-				list.add(event);
-			}
-		}
-		return list;
 	}
 }

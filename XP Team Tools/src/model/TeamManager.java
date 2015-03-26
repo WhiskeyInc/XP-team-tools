@@ -1,14 +1,14 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-import filtering.Filter;
 import timeline.Event;
 import timeline.Timeline;
 import boards.Task;
 import boards.TasksManager;
+import filtering.Filter;
 
 public class TeamManager {
 
@@ -80,11 +80,8 @@ public class TeamManager {
 		}
 	}
 
-	private String getCurrentDate() {
-		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
-		Calendar cal = Calendar.getInstance();
-		String creationDate = format.format(cal.getTime());
-		return creationDate;
+	private GregorianCalendar getCurrentDate() {
+		return (GregorianCalendar) Calendar.getInstance();
 	}
 	
 	public ArrayList<Event> getEvents(Filter<Event> filter) {

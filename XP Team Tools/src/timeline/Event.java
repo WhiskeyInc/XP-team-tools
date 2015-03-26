@@ -1,14 +1,15 @@
 package timeline;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Event {
 
 	private ArrayList<String> participants = new ArrayList<String>();
-	private String date;
+	private GregorianCalendar date;
 	private String name;
 
-	public Event(String name, String date) {
+	public Event(String name, GregorianCalendar date) {
 		this.date = date;
 		this.name = name;
 	}
@@ -21,7 +22,7 @@ public class Event {
 		return this.participants;
 	}
 
-	public String getDate() {
+	public GregorianCalendar getDate() {
 		return this.date;
 	}
 	
