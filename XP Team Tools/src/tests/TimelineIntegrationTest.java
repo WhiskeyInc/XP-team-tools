@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import model.InvalidStateException;
 import model.TeamManager;
 
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void taskDeletionCreatesEvent() {
-		teamManager.addTask("Timer", "creare un timer che...");
+		teamManager.addTask("Timer", "creare un timer che...");		teamManager.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
 		teamManager.addTask("Timeline", "creare una classe che...");
 		teamManager.deleteTask("Timer");
 		assertEquals(4, teamManager.getEventsNumber());
@@ -40,9 +41,13 @@ public class TimelineIntegrationTest {
 	}
 	
 	@Test
-	public void taskModifyTest() {
+	public void taskModifyTest() throws InvalidStateException {
+		teamManager.setPossibleStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addTask("Timer", "");
 		teamManager.moveTaskToState("Timer", "DONE");
+		for (Event event : teamManager.getEvents()) {
+			System.err.println(event.toString());;
+		}
 		assertEquals(3, teamManager.getEventsNumber());
 		assertEquals("Changed state of task Timer: now it is DONE",
 				teamManager.getEvent("Changed state of task Timer: now it is DONE").toString());
@@ -88,6 +93,7 @@ public class TimelineIntegrationTest {
 	
 	@Test
 	public void eventsByTargetMember() throws Exception {
+		teamManager.setPossibleStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addMember("sumo");
 		teamManager.addDeveloperTo("Timer", "sumo");
 		teamManager.moveTaskToState("Timer", "DONE");

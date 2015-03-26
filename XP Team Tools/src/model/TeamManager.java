@@ -14,6 +14,7 @@ public class TeamManager {
 	private TasksManager taskManager = new TasksManager();
 	private Timeline timeline = new Timeline();
 	private ArrayList<String> members = new ArrayList<String>();
+	private ArrayList<String> possibleStates = new ArrayList<String>();
 
 	public void addTask(String taskName, String description) {
 		this.taskManager.addTask(taskName, description);
@@ -36,12 +37,19 @@ public class TeamManager {
 		return this.timeline.getEvent(eventName);
 	}
 
-	public void moveTaskToState(String taskName, String targetState) {
+	public void moveTaskToState(String taskName, String targetState) throws InvalidStateException {
+		checkState(targetState);
 		this.taskManager.moveTaskToState(taskName, targetState);
 		Event event = new Event("Changed state of task " + taskName
 				+ ": now it is " + targetState, this.getCurrentDate());
 		addDevelopersToEvent(taskName, event);
 		this.timeline.addEvent(event);
+	}
+
+	private void checkState(String targetState) throws InvalidStateException {
+		if (!possibleStates.contains(targetState)) {
+			throw new InvalidStateException(targetState);
+		}		
 	}
 
 	public void addDeveloperTo(String taskName, String developer)
@@ -90,5 +98,19 @@ public class TeamManager {
 
 	private void addDevelopersToEvent(String taskName, Event event) {
 		event.addParticipants(taskManager.getTask(taskName).getDevelopers());
+	}
+
+	public void addTask(String taskName) {
+		this.addTask(taskName, "");		
+	}
+
+	public void setPossibleStates(String... possibleStates) {
+		for (String state : possibleStates) {
+			this.possibleStates.add(state);
+		}	
+	}
+
+	public ArrayList<Event> getEvents() {
+		return this.timeline.getEvents();
 	}
 }
