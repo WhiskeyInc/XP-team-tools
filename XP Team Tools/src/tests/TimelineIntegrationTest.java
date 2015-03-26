@@ -11,6 +11,9 @@ import model.TeamSettings;
 
 import org.junit.Test;
 
+import filtering.MemberFilter;
+import filtering.NoFilter;
+import filtering.TargetFilter;
 import timeline.Event;
 
 public class TimelineIntegrationTest {
@@ -48,7 +51,7 @@ public class TimelineIntegrationTest {
 		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addTask("Timer", "");
 		teamManager.moveTaskToState("Timer", "DONE");
-		for (Event event : teamManager.getEvents()) {
+		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
 			System.err.println(event.toString());
 			;
 		}
@@ -108,7 +111,7 @@ public class TimelineIntegrationTest {
 		teamManager.addDeveloperTo("Timer", "sumo");
 		teamManager.moveTaskToState("Timer", "DONE");
 		teamManager.deleteTask("Timer");
-		assertEquals(3, teamManager.getEvents("sumo").size());
+		assertEquals(3, teamManager.getEvents(new TargetFilter<Event>(new MemberFilter("sumo"))).size());
 	}
 
 }

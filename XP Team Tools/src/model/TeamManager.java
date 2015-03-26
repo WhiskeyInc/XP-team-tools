@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import filtering.Filter;
 import timeline.Event;
 import timeline.Timeline;
 import boards.Task;
@@ -73,24 +74,22 @@ public class TeamManager {
 		}
 	}
 
-	public ArrayList<Event> getEvents(String member) throws InvalidMemberException {
-		checkMember(member);
-		return timeline.getEvents(member);
-	}
-
 	private void checkMember(String member) throws InvalidMemberException {
 		if (!settings.getTeamMembers().contains(member)) {
 			throw new InvalidMemberException(member);
 		}
 	}
 
-	String getCurrentDate() {
+	private String getCurrentDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
 		Calendar cal = Calendar.getInstance();
 		String creationDate = format.format(cal.getTime());
 		return creationDate;
 	}
 	
+	public ArrayList<Event> getEvents(Filter<Event> filter) {
+		return filter.filter(timeline.getEvents());
+	}	
 
 	private void addDevelopersToEvent(String taskName, Event event) {
 		event.addParticipants(taskManager.getTask(taskName).getDevelopers());
@@ -98,9 +97,5 @@ public class TeamManager {
 
 	public void addTask(String taskName) {
 		this.addTask(taskName, "");		
-	}
-
-	public ArrayList<Event> getEvents() {
-		return this.timeline.getEvents();
 	}
 }
