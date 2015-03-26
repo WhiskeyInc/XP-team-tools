@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import ui.TimerUI;
 import ui.tests.FramesUtils;
 
-public class TimerTest02 {
+public class TimerTest01 {
 	
 	public static void main(String[] args) {
 		
