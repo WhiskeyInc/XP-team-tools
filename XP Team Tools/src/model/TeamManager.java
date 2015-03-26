@@ -13,8 +13,11 @@ public class TeamManager {
 
 	private TasksManager taskManager = new TasksManager();
 	private Timeline timeline = new Timeline();
-	private ArrayList<String> members = new ArrayList<String>();
-	private ArrayList<String> possibleStates = new ArrayList<String>();
+	private TeamSettings settings;
+	
+	public TeamManager(TeamSettings settings) {
+		this.settings = settings;
+	}
 
 	public void addTask(String taskName, String description) {
 		this.taskManager.addTask(taskName, description);
@@ -47,7 +50,7 @@ public class TeamManager {
 	}
 
 	private void checkState(String targetState) throws InvalidStateException {
-		if (!possibleStates.contains(targetState)) {
+		if (!settings.getPossibleStates().contains(targetState)) {
 			throw new InvalidStateException(targetState);
 		}		
 	}
@@ -70,25 +73,18 @@ public class TeamManager {
 		}
 	}
 
-	public void addMember(String member) {
-		members.add(member);
-		Event event = new Event("Added member: " + member, getCurrentDate());
-		event.addParticipant(member);
-		timeline.addEvent(event);
-	}
-
 	public ArrayList<Event> getEvents(String member) throws InvalidMemberException {
 		checkMember(member);
 		return timeline.getEvents(member);
 	}
 
 	private void checkMember(String member) throws InvalidMemberException {
-		if (!members.contains(member)) {
+		if (!settings.getTeamMembers().contains(member)) {
 			throw new InvalidMemberException(member);
 		}
 	}
 
-	private String getCurrentDate() {
+	String getCurrentDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
 		Calendar cal = Calendar.getInstance();
 		String creationDate = format.format(cal.getTime());
@@ -102,12 +98,6 @@ public class TeamManager {
 
 	public void addTask(String taskName) {
 		this.addTask(taskName, "");		
-	}
-
-	public void setPossibleStates(String... possibleStates) {
-		for (String state : possibleStates) {
-			this.possibleStates.add(state);
-		}	
 	}
 
 	public ArrayList<Event> getEvents() {
