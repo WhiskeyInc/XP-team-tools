@@ -13,8 +13,8 @@ public class TimerTest01 {
 		JFrame frame = FramesUtils.createFrame("Timer", 200, 200);
 		TimerUI timer = new TimerUI();
 		frame.getContentPane().add(timer);
-		timer.setSecond(3);
-		timer.setMinute(0);
+		timer.setSecond(0);
+		timer.setMinute(1);
 		SoundPlayer player = new SoundPlayer("sounds/TempleBell.wav");
 		timer.setPlayer(player);
 		frame.setVisible(true);

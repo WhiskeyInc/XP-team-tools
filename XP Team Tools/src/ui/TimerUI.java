@@ -54,8 +54,8 @@ public class TimerUI extends JPanel {
 					timerArea.setText(time);
 					timer.stop();
 					player.playSong();
-					setMinute(initialMinute);
-					setSecond(initialSecond + 1);
+					minute = initialMinute;
+					second = initialSecond + 1;
 				} else if (second == 0) {
 					second = 60;
 					minute--;
