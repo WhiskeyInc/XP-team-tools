@@ -94,14 +94,14 @@ public class TimelineIntegrationTest {
 		}
 	}
 
-	/*
-	 * @Test public void memberAdditionCreatesEvent() throws Exception {
-	 * assertEquals(1, teamManager.getEventsNumber());
-	 * settings.addTeamMember("usk"); Event event =
-	 * teamManager.getEvent("Added member: usk"); assertEquals(2,
-	 * teamManager.getEventsNumber()); assertEquals(getCurrentDate(),
-	 * event.getDate()); }
-	 */
+	/*@Test
+	public void memberAdditionCreatesEvent() throws Exception {
+		assertEquals(1, teamManager.getEventsNumber());
+		settings.addTeamMember("usk");
+		Event event = teamManager.getEvent("Added member: usk");
+		assertEquals(2, teamManager.getEventsNumber());
+		assertEquals(getCurrentDate(), event.getDate());
+	}*/
 
 	private GregorianCalendar getCurrentDate() {
 		Calendar cal = Calendar.getInstance();
@@ -122,4 +122,32 @@ public class TimelineIntegrationTest {
 						.size());
 	}
 
+	@Test
+	public void userStoryAdditionCreatesEvent() {
+		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
+		assertEquals(2, teamManager.getEventsNumber());
+	}
+	
+	@Test
+	public void userStoryDeletionCreatesEvent() {
+		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
+		settings.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
+		teamManager.deleteUserStory("Timeline");
+		assertEquals(3, teamManager.getEventsNumber());
+	}
+	
+	@Test
+	public void userStoryModifyTest() throws InvalidStateException {
+		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
+		teamManager.addUserStory("Timeline", "");
+		teamManager.moveStoryToState("Timeline", "DONE");
+		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
+			System.err.println(event.toString());
+			;
+		}
+		assertEquals(3, teamManager.getEventsNumber());
+		assertEquals("Changed state of userstory Timeline: now it is DONE", teamManager
+				.getEvent("Changed state of userstory Timeline: now it is DONE")
+				.toString());
+	}
 }
