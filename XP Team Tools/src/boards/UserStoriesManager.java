@@ -31,4 +31,8 @@ public class UserStoriesManager {
 		this.stories.get(storyName).setState(targetState);
 	}
 
+	public void deleteUserStory(String title) {
+		this.stories.remove(title);
+	}
+
 }
