@@ -11,7 +11,7 @@ public class UserStoriesManagerTest {
 	UserStoriesManager manager = new UserStoriesManager();
 
 	@Test
-	public void addStoryTest() {
+	public void addStoryTest() throws Exception {
 		manager.addUserStory("Timeline",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals(
@@ -22,14 +22,14 @@ public class UserStoriesManagerTest {
 	}
 
 	@Test
-	public void defaultStateTest() {
+	public void defaultStateTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals("TODO", manager.getUserStory("us1").getState());
 	}
 
 	@Test
-	public void setStateTest() {
+	public void setStateTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		manager.moveStoryToState("us1", "ACCOMPLISHED");
@@ -37,7 +37,7 @@ public class UserStoriesManagerTest {
 	}
 
 	@Test
-	public void changePriorityTest() {
+	public void changePriorityTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		manager.addUserStory("us2", "Voglio che ci sia un menù che...");
@@ -52,7 +52,7 @@ public class UserStoriesManagerTest {
 	}
 
 	@Test
-	public void taskAdditionToStory() {
+	public void taskAdditionToStory() throws Exception {
 		manager.addUserStory("Timer",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		manager.getUserStory("Timer").addTask("Timeline",
@@ -61,7 +61,7 @@ public class UserStoriesManagerTest {
 	}
 
 	@Test
-	public void deleteUserStoryTest(){
+	public void deleteUserStoryTest() throws Exception{
 		manager.addUserStory("Timer",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		manager.deleteUserStory("Timer");

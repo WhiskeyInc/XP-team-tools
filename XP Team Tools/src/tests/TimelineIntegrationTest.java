@@ -23,27 +23,27 @@ public class TimelineIntegrationTest {
 	TeamManager teamManager = new TeamManager(settings);
 
 	@Test
-	public void taskAdditionCreatesEvent() {
-		teamManager.addTask("Nuovo task", "Integrare task in timeline");
+	public void taskAdditionCreatesEvent() throws Exception {
+		teamManager.addTask("Nuovo task", "Integrare task in timeline", "GENERAL");
 		assertEquals(2, teamManager.getEventsNumber());
 	}
 
 	@Test
-	public void taskDeletionCreatesEvent() {
-		teamManager.addTask("Timer", "creare un timer che...");
+	public void taskDeletionCreatesEvent() throws Exception {
+		teamManager.addTask("Timer", "creare un timer che...", "GENERAL");
 		settings.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
-		teamManager.addTask("Timeline", "creare una classe che...");
-		teamManager.deleteTask("Timer");
+		teamManager.addTask("Timeline", "creare una classe che...", "GENERAL");
+		teamManager.deleteTask("Timer", "GENERAL");
 		assertEquals(4, teamManager.getEventsNumber());
 	}
 
 	@Test
-	public void automaticEventsTest() {
+	public void automaticEventsTest() throws Exception {
 		GregorianCalendar currentDate = getCurrentDate();
-		teamManager.addTask("Timer", "");
-		assertEquals("Created task: Timer",
-				teamManager.getEvent("Created task: Timer").toString());
-		assertEquals(currentDate, teamManager.getEvent("Created task: Timer")
+		teamManager.addTask("Timer", "", "GENERAL");
+		assertEquals("Created task: Timer for: GENERAL",
+				teamManager.getEvent("Created task: Timer for: GENERAL").toString());
+		assertEquals(currentDate, teamManager.getEvent("Created task: Timer for: GENERAL")
 				.getDate());
 	}
 
@@ -52,17 +52,17 @@ public class TimelineIntegrationTest {
 	 * Last test is commented because it may fail because of computing delays of
 	 * few millis
 	 */
-	public void taskModifyTest() throws InvalidStateException {
+	public void taskModifyTest() throws Exception {
 		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
-		teamManager.addTask("Timer", "");
-		teamManager.moveTaskToState("Timer", "DONE");
+		teamManager.addTask("Timer", "", "GENERAL");
+		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
 			System.err.println(event.toString());
 			;
 		}
 		assertEquals(3, teamManager.getEventsNumber());
-		assertEquals("Changed state of task Timer: now it is DONE", teamManager
-				.getEvent("Changed state of task Timer: now it is DONE")
+		assertEquals("Changed state of task Timer of: GENERAL. Now it is DONE", teamManager
+				.getEvent("Changed state of task Timer of: GENERAL. Now it is DONE")
 				.toString());
 		// assertEquals(
 		// getCurrentDate(),
@@ -87,7 +87,7 @@ public class TimelineIntegrationTest {
 			throws Exception {
 		settings.addTeamMember("sumo");
 		try {
-			teamManager.addDeveloperTo("Timeline", "ziobrando");
+			teamManager.addDeveloperTo("Timeline", "ziobrando", "GENERAL");
 			fail();
 		} catch (Exception e) {
 			assertTrue(true);
@@ -112,9 +112,9 @@ public class TimelineIntegrationTest {
 	public void eventsByTargetMember() throws Exception {
 		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
 		settings.addTeamMember("sumo");
-		teamManager.addDeveloperTo("Timer", "sumo");
-		teamManager.moveTaskToState("Timer", "DONE");
-		teamManager.deleteTask("Timer");
+		teamManager.addDeveloperTo("Timer", "sumo", "GENERAL");
+		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
+		teamManager.deleteTask("Timer", "GENERAL");
 		assertEquals(
 				3,
 				teamManager.getEvents(
@@ -123,13 +123,13 @@ public class TimelineIntegrationTest {
 	}
 
 	@Test
-	public void userStoryAdditionCreatesEvent() {
+	public void userStoryAdditionCreatesEvent() throws Exception {
 		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals(2, teamManager.getEventsNumber());
 	}
 	
 	@Test
-	public void userStoryDeletionCreatesEvent() {
+	public void userStoryDeletionCreatesEvent() throws Exception {
 		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
 		settings.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
 		teamManager.deleteUserStory("Timeline");
@@ -137,7 +137,7 @@ public class TimelineIntegrationTest {
 	}
 	
 	@Test
-	public void userStoryModifyTest() throws InvalidStateException {
+	public void userStoryModifyTest() throws Exception {
 		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addUserStory("Timeline", "");
 		teamManager.moveStoryToState("Timeline", "DONE");

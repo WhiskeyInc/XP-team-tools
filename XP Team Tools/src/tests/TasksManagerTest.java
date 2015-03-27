@@ -14,13 +14,13 @@ public class TasksManagerTest {
 	TasksManager manager = new TasksManager();
 
 	@Test
-	public void newTaskTest() {
+	public void newTaskTest() throws Exception {
 		manager.addTask("Timeline", "Componente che deve...");
 		assertEquals(1, manager.getTasksNumber());
 	}
 
 	@Test
-	public void taskCreatedIsTODO() {
+	public void taskCreatedIsTODO() throws Exception {
 		manager.addTask("Timeline", "Componente che deve...");
 		assertEquals("TODO", manager.getTask("Timeline").getState());
 	}
@@ -34,14 +34,14 @@ public class TasksManagerTest {
 
 
 	@Test
-	public void dropTaskTest() {
+	public void dropTaskTest() throws Exception {
 		manager.addTask("Timeline", "Componente che deve...");
 		manager.deleteTask("Timeline");
 		assertEquals(null, manager.getTask("Timeline"));
 	}
 
 	@Test
-	public void displayTasksTest() {
+	public void displayTasksTest() throws Exception {
 		manager.addTask("Timeline", "Componente che deve...");
 		assertEquals("Timeline" + "Componente che deve..." + "TODO", manager
 				.getTask("Timeline").toString()
@@ -50,7 +50,7 @@ public class TasksManagerTest {
 	}
 	
 	@Test
-	public void findTasksByState() {
+	public void findTasksByState() throws Exception {
 		ArrayList<String> tasks = new ArrayList<String>();
 		manager.addTask("Timeline");
 		manager.addTask("Board");

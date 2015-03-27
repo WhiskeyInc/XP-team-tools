@@ -3,16 +3,25 @@ package boards;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.NameAlreadyInUseException;
+
 public class TasksManager {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 
-	public void addTask(String taskName, String description) {
+	public void addTask(String taskName, String description) throws NameAlreadyInUseException {
+		checkTaskName(taskName);
 		Task task = new Task(taskName, description);
 		tasks.put(task.toString(), task);
 	}
 	
-	public void addTask(String taskName) {
+	private void checkTaskName(String taskName) throws NameAlreadyInUseException {
+		if(tasks.containsKey(taskName)){
+			throw new NameAlreadyInUseException(taskName);
+		}
+	}
+
+	public void addTask(String taskName) throws NameAlreadyInUseException {
 		this.addTask(taskName, "");		
 	}
 

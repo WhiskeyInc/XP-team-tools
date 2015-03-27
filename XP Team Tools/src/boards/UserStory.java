@@ -1,5 +1,7 @@
 package boards;
 
+import model.NameAlreadyInUseException;
+
 public class UserStory {
 
 	private String title;
@@ -48,7 +50,7 @@ public class UserStory {
 		return this.taskManager.getTasksNumber();
 	}
 
-	public void addTask(String taskName, String description) {
+	public void addTask(String taskName, String description) throws NameAlreadyInUseException {
 		this.taskManager.addTask(taskName, description);		
 	}
 }
