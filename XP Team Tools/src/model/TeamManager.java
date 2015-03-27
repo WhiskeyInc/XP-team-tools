@@ -8,11 +8,13 @@ import timeline.Event;
 import timeline.Timeline;
 import boards.Task;
 import boards.TasksManager;
+import boards.UserStoriesManager;
 import filtering.Filter;
 
 public class TeamManager {
 
 	private TasksManager taskManager = new TasksManager();
+	private UserStoriesManager userstoryManager = new UserStoriesManager();
 	private Timeline timeline = new Timeline();
 	private TeamSettings settings;
 	
@@ -94,5 +96,28 @@ public class TeamManager {
 
 	public void addTask(String taskName) {
 		this.addTask(taskName, "");		
+	}
+	
+	public void addUserStory(String title, String description){
+		this.userstoryManager.addUserStory(title, description);
+		this.timeline.addEvent(new Event("Created userstory: " + title,  getCurrentDate()));
+	}
+	
+	public void addUserStory(String title){
+		this.addUserStory(title, "");
+	}
+	
+	public void deleteUserStory(String title) {
+		Event event = new Event("Deleted userstory: " + title, getCurrentDate());
+		this.userstoryManager.deleteUserStory(title);;
+		timeline.addEvent(event);
+	}
+	
+	public void moveStoryToState(String title, String targetState) throws InvalidStateException {
+		checkState(targetState);
+		this.userstoryManager.moveStoryToState(title, targetState);
+		Event event = new Event("Changed state of userstory " + title
+				+ ": now it is " + targetState, this.getCurrentDate());
+		this.timeline.addEvent(event);
 	}
 }
