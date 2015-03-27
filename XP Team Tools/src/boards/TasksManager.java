@@ -51,4 +51,12 @@ public class TasksManager {
 		return list;
 	}
 
+	public ArrayList<Task> getTasks() {
+		ArrayList<Task> list = new ArrayList<Task>();
+		for (Task task : tasks.values()) {
+			list.add(task);
+		}
+		return list;
+	}
+
 }

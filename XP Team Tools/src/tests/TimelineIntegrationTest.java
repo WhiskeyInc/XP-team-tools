@@ -24,26 +24,29 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void taskAdditionCreatesEvent() throws Exception {
-		teamManager.addTask("Nuovo task", "Integrare task in timeline", "GENERAL");
-		assertEquals(2, teamManager.getEventsNumber());
+		teamManager.addUserStory("Notifiche temporali", "voglio che...");
+		teamManager.addTaskToUserStory("Nuovo task",
+				"Integrare task in timeline", "Notifiche temporali");
+		assertEquals(3, teamManager.getEventsNumber());
 	}
 
 	@Test
 	public void taskDeletionCreatesEvent() throws Exception {
-		teamManager.addTask("Timer", "creare un timer che...", "GENERAL");
-		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
-		teamManager.addTask("Timeline", "creare una classe che...", "GENERAL");
-		teamManager.deleteTask("Timer", "GENERAL");
+		teamManager.addGeneralTask("Timer", "creare un timer che...");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED",
+				"DONE");
+		teamManager.moveTaskToState("Timer", "DONE");
+		teamManager.deleteTask("Timer");
 		assertEquals(4, teamManager.getEventsNumber());
 	}
 
 	@Test
 	public void automaticEventsTest() throws Exception {
 		GregorianCalendar currentDate = getCurrentDate();
-		teamManager.addTask("Timer", "", "GENERAL");
-		assertEquals("Created task: Timer for: GENERAL",
-				teamManager.getEvent("Created task: Timer for: GENERAL").toString());
-		assertEquals(currentDate, teamManager.getEvent("Created task: Timer for: GENERAL")
+		teamManager.addGeneralTask("Timer");
+		assertEquals("Created task: Timer",
+				teamManager.getEvent("Created task: Timer").toString());
+		assertEquals(currentDate, teamManager.getEvent("Created task: Timer")
 				.getDate());
 	}
 
@@ -54,16 +57,20 @@ public class TimelineIntegrationTest {
 	 */
 	public void taskModifyTest() throws Exception {
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
-		teamManager.addTask("Timer", "", "GENERAL");
-		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
+		teamManager.addUserStory("Notifiche temporali");
+		teamManager.addTaskToUserStory("Timer", "", "Notifiche temporali");
+		teamManager.moveTaskToState("Timer", "DONE");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
 			System.err.println(event.toString());
 			;
 		}
-		assertEquals(3, teamManager.getEventsNumber());
-		assertEquals("Changed state of task Timer of: GENERAL. Now it is DONE", teamManager
-				.getEvent("Changed state of task Timer of: GENERAL. Now it is DONE")
-				.toString());
+		assertEquals(4, teamManager.getEventsNumber());
+		assertEquals(
+				"Changed state of task Timer of: Notifiche temporali. Now it is DONE",
+				teamManager
+						.getEvent(
+								"Changed state of task Timer of: Notifiche temporali. Now it is DONE")
+						.toString());
 		// assertEquals(
 		// getCurrentDate(),
 		// teamManager.getEvent(
@@ -86,22 +93,23 @@ public class TimelineIntegrationTest {
 	public void participantAdditionFailsWhenInvalidParticipant()
 			throws Exception {
 		settings.addTeamMember("sumo");
+		teamManager.addGeneralTask("Timeline");
 		try {
-			teamManager.addDeveloperTo("Timeline", "ziobrando", "GENERAL");
+			teamManager.addDeveloperTo("Timeline", "ziobrando");
 			fail();
 		} catch (Exception e) {
 			assertTrue(true);
 		}
 	}
 
-	/*@Test
-	public void memberAdditionCreatesEvent() throws Exception {
-		assertEquals(1, teamManager.getEventsNumber());
-		settings.addTeamMember("usk");
-		Event event = teamManager.getEvent("Added member: usk");
-		assertEquals(2, teamManager.getEventsNumber());
-		assertEquals(getCurrentDate(), event.getDate());
-	}*/
+	/*
+	 * @Test public void memberAdditionCreatesEvent() throws Exception {
+	 * assertEquals(1, teamManager.getEventsNumber());
+	 * settings.addTeamMember("usk"); Event event =
+	 * teamManager.getEvent("Added member: usk"); assertEquals(2,
+	 * teamManager.getEventsNumber()); assertEquals(getCurrentDate(),
+	 * event.getDate()); }
+	 */
 
 	private GregorianCalendar getCurrentDate() {
 		Calendar cal = Calendar.getInstance();
@@ -112,9 +120,11 @@ public class TimelineIntegrationTest {
 	public void eventsByTargetMember() throws Exception {
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		settings.addTeamMember("sumo");
-		teamManager.addDeveloperTo("Timer", "sumo", "GENERAL");
-		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
-		teamManager.deleteTask("Timer", "GENERAL");
+		teamManager.addUserStory("Client WEB");
+		teamManager.addTaskToUserStory("Timer", "Client WEB");
+		teamManager.addDeveloperTo("Timer", "sumo");
+		teamManager.moveTaskToState("Timer", "DONE");
+		teamManager.deleteTask("Timer");
 		assertEquals(
 				3,
 				teamManager.getEvents(
@@ -124,30 +134,38 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void userStoryAdditionCreatesEvent() throws Exception {
-		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
+		teamManager.addUserStory("Timeline",
+				"Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals(2, teamManager.getEventsNumber());
 	}
-	
+
 	@Test
 	public void userStoryDeletionCreatesEvent() throws Exception {
-		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
-		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
+		teamManager.addUserStory("Timeline",
+				"Voglio che ci sia un pannello con dei tasti che...");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED",
+				"DONE");
 		teamManager.deleteUserStory("Timeline");
 		assertEquals(3, teamManager.getEventsNumber());
 	}
-	
+
 	@Test
 	public void userStoryModifyTest() throws Exception {
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleUserStoriesStates("TODO", "IN PRORESS",
+				"ACCOMPLISHED");
 		teamManager.addUserStory("Timeline", "");
-		teamManager.moveStoryToState("Timeline", "DONE");
+		teamManager.moveStoryToState("Timeline", "ACCOMPLISHED");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
 			System.err.println(event.toString());
 			;
 		}
 		assertEquals(3, teamManager.getEventsNumber());
-		assertEquals("Changed state of userstory Timeline: now it is DONE", teamManager
-				.getEvent("Changed state of userstory Timeline: now it is DONE")
-				.toString());
+		assertEquals(
+				"Changed state of userstory Timeline: now it is ACCOMPLISHED",
+				teamManager
+						.getEvent(
+								"Changed state of userstory Timeline: now it is ACCOMPLISHED")
+						.toString());
 	}
 }

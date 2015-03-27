@@ -14,9 +14,9 @@ public class TeamManagerTest {
 
 	@Test
 	public void tasksStateCheckTest01() throws Exception {
-		teamManager.addTask("Timeline", "GENERAL");
+		teamManager.addGeneralTask("Timeline");
 		try {
-			teamManager.moveTaskToState("Timeline", "IMPLEMENTED", "GENERAL");
+			teamManager.moveTaskToState("Timeline", "IMPLEMENTED");
 			fail();
 		} catch (InvalidStateException e) {
 			assertTrue(true);
@@ -25,10 +25,10 @@ public class TeamManagerTest {
 	
 	@Test
 	public void tasksStateCheckTest02() throws Exception {
-		teamManager.addTask("Timeline", "GENERAL");
+		teamManager.addGeneralTask("Timeline");
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		try {
-			teamManager.moveTaskToState("Timeline", "DONE", "GENERAL");
+			teamManager.moveTaskToState("Timeline", "DONE");
 		} catch (InvalidStateException e) {
 			fail();
 		}
