@@ -14,6 +14,11 @@ public class UserStoriesManager {
 		sortedStories.add(userStory);
 	}
 
+	public void deleteUserStory(String title){
+		sortedStories.remove(stories.get(title));
+		stories.remove(title);
+	}
+	
 	public ArrayList<UserStory> getSortedStories() {
 		return sortedStories;
 	}
@@ -31,8 +36,5 @@ public class UserStoriesManager {
 		this.stories.get(storyName).setState(targetState);
 	}
 
-	public void deleteUserStory(String title) {
-		this.stories.remove(title);
-	}
-
+	
 }

@@ -60,4 +60,11 @@ public class UserStoriesManagerTest {
 		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
 	}
 
+	@Test
+	public void deleteUserStoryTest(){
+		manager.addUserStory("Timer",
+				"Voglio che ci sia un pannello con dei tasti che...");
+		manager.deleteUserStory("Timer");
+		assertEquals(null, manager.getUserStory("Timer"));
+	}
 }
