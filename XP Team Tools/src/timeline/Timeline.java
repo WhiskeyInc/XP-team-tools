@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import filtering.Filter;
+
 public class Timeline {
 
 	private HashMap<String, Event> events = new HashMap<String, Event>();
@@ -42,5 +44,9 @@ public class Timeline {
 		ArrayList<Event> eventsList = new ArrayList<Event>();
 		eventsList.addAll(this.events.values());
 		return eventsList;
+	}
+
+	public ArrayList<Event> getEvents(Filter<Event> filter) {
+		return filter.filter(this.getEvents());
 	}
 }

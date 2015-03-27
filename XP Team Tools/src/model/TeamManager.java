@@ -85,7 +85,7 @@ public class TeamManager {
 	}
 	
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
-		return filter.filter(timeline.getEvents());
+		return timeline.getEvents(filter);
 	}	
 
 	private void addDevelopersToEvent(String taskName, Event event) {
