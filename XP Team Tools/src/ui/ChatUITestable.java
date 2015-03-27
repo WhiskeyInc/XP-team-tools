@@ -16,7 +16,7 @@ public class ChatUITestable extends ChatUI{
 	/**
 	 * Simulate the click of the sendMessage button [test]
 	 */
-	public void simulateButtonClick() {
+	public void simulateSendClick() {
 		sendMessage.doClick();
 	}
 }

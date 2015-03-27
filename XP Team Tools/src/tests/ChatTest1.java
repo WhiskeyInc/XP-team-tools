@@ -1,37 +1,41 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import org.junit.Test;
 
 import server.model.AbstractServer;
-import server.model.ServerTest;
+import server.model.ServerTestable;
+import ui.ChatUI;
+import ui.ChatUITestable;
 import client.model.Client;
 
 public class ChatTest1 {
 
-	@Test
-	public void receptionMessageTest1() {
-		
-		ServerTest server = new ServerTest();
-
-		assertEquals("Ciao", server.getLastMessage());
-	}
-	
-	@Test
-	public void sendReceptionTest() throws Exception {
-		
-		Client client = new Client();
-		ServerTest server = new ServerTest();
-
-		
-		assertEquals(client.sendMessage("Ciao"), server.getLastMessage());
-	}
+//	@Test
+//	public void receptionMessageTest1() {
+//		
+//		ServerTestable server = new ServerTestable();
+//
+//		assertEquals("Ciao", server.getLastMessage());
+//	}
+//	
+//	@Test
+//	public void sendReceptionTest() throws Exception {
+//		
+//		Client client = new Client();
+//		ServerTestable server = new ServerTestable();
+//
+//		
+//		assertEquals(client.sendMessage("Ciao"), server.getLastMessage());
+//	}
 	
 	@Test
 	public void openPortTest() throws Exception {
-		AbstractServer server = new ServerTest();
+		AbstractServer server = new ServerTestable();
 		
 		server.openPort(9999);
 		assertTrue(!server.isPortClosed());
@@ -43,12 +47,10 @@ public class ChatTest1 {
 	@Test
 	public void closePortTest() throws Exception {
 	
-		AbstractServer server = new ServerTest();
+		AbstractServer server = new ServerTestable();
 		server.openPort(9999);
 		server.closePort();
 		assertTrue(server.isPortClosed());
 	}
-	
-	
 
 }

@@ -1,45 +1,53 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
+import org.junit.Test;
+
+import server.model.ServerTestable;
 import ui.ChatUITestable;
 import client.model.Client;
 
-public class ClientMain {
-	public static void main(String[] args) {
+public class ChatTest2 {
+
+	@Test
+	public void clientServerChatTest() throws Exception {
 		final Client client = new Client();
 		client.openStreams("localhost", 9999);
+		final ServerTestable server = new ServerTestable();
+		server.openPort(9999);
+		
+		System.out.println("aa");
 		Runnable runnable = new Runnable() {
 			
 			@Override
 			public void run() {
-				try {
-					client.readFromSocket();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				server.listenClients();
+
 			}
 		};
-		
+
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		client.sendMessageToServer("taooooooooooooooooooooooooooooooooooooooooo\n");
 
+		
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(chatUI.getMessage());
+				client.sendMessageToServer(chatUI.getMessage());				
 			}
 		});
-
-		chatUI.setMessageText("Ciao a tutti!\n");
+		
+		chatUI.setMessageText("Ciao a tutti!");
 		chatUI.simulateSendClick();
 
+		
+		assertEquals(chatUI.getMessage(), server.getLastMessage());
 	}
+
 }

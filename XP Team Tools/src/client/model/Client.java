@@ -1,7 +1,10 @@
 package client.model;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Client {
@@ -14,10 +17,9 @@ public class Client {
 
 		try {
 			clientSocket = new Socket(hostName, port);
-			 os = new DataOutputStream(
-					clientSocket.getOutputStream());
-			 is = new DataInputStream(
-					clientSocket.getInputStream());
+			os = new DataOutputStream(clientSocket.getOutputStream());
+			is = new DataInputStream(clientSocket.getInputStream());
+
 		} catch (Exception e) {
 
 		}
@@ -32,12 +34,39 @@ public class Client {
 		if (clientSocket != null && os != null && is != null) {
 			try {
 				os.writeBytes(message);
-				os.close();
-				is.close();
-				clientSocket.close();
+				os.flush();
 			} catch (Exception e) {
 
 			}
+		}
+	}
+
+	public void readFromSocket() throws IOException {
+
+		BufferedReader input;
+		try {
+			input = new BufferedReader(new InputStreamReader(
+					clientSocket.getInputStream()));
+			while (true) {
+				String read = input.readLine();
+				if(read!= null)
+					System.out.println("Sono nel client " + read );
+
+			}
+		} catch (IOException e) {
+
+		}
+
+	}
+
+	public void closeStream() {
+		try {
+
+			os.close();
+			is.close();
+			clientSocket.close();
+		} catch (IOException e) {
+
 		}
 	}
 }

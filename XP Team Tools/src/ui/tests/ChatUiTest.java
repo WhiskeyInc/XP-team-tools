@@ -37,7 +37,7 @@ public class ChatUiTest {
 			}
 		});
 		
-		chat.simulateButtonClick();
+		chat.simulateSendClick();
 		
 		System.out.println(chat.getChatAreaText());
 
