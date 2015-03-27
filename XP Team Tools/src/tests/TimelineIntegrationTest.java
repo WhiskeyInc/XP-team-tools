@@ -31,7 +31,7 @@ public class TimelineIntegrationTest {
 	@Test
 	public void taskDeletionCreatesEvent() throws Exception {
 		teamManager.addTask("Timer", "creare un timer che...", "GENERAL");
-		settings.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
 		teamManager.addTask("Timeline", "creare una classe che...", "GENERAL");
 		teamManager.deleteTask("Timer", "GENERAL");
 		assertEquals(4, teamManager.getEventsNumber());
@@ -53,7 +53,7 @@ public class TimelineIntegrationTest {
 	 * few millis
 	 */
 	public void taskModifyTest() throws Exception {
-		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addTask("Timer", "", "GENERAL");
 		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {
@@ -110,7 +110,7 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void eventsByTargetMember() throws Exception {
-		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		settings.addTeamMember("sumo");
 		teamManager.addDeveloperTo("Timer", "sumo", "GENERAL");
 		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
@@ -131,14 +131,14 @@ public class TimelineIntegrationTest {
 	@Test
 	public void userStoryDeletionCreatesEvent() throws Exception {
 		teamManager.addUserStory("Timeline", "Voglio che ci sia un pannello con dei tasti che...");
-		settings.setPossibleStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCEPTED", "DONE");
 		teamManager.deleteUserStory("Timeline");
 		assertEquals(3, teamManager.getEventsNumber());
 	}
 	
 	@Test
 	public void userStoryModifyTest() throws Exception {
-		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addUserStory("Timeline", "");
 		teamManager.moveStoryToState("Timeline", "DONE");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {

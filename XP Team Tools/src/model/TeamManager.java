@@ -49,7 +49,7 @@ public class TeamManager {
 
 	public void moveTaskToState(String taskName, String targetState,
 			String title) throws InvalidStateException {
-		checkState(targetState);
+		checkTasksState(targetState);
 		getTaskManager(title).moveTaskToState(taskName, targetState);
 		Event event = new Event("Changed state of task " + taskName + " of: "
 				+ title + ". Now it is " + targetState, this.getCurrentDate());
@@ -57,8 +57,8 @@ public class TeamManager {
 		this.timeline.addEvent(event);
 	}
 
-	private void checkState(String targetState) throws InvalidStateException {
-		if (!settings.getPossibleStates().contains(targetState)) {
+	private void checkTasksState(String targetState) throws InvalidStateException {
+		if (!settings.getPossibleTasksStates().contains(targetState)) {
 			throw new InvalidStateException(targetState);
 		}
 	}
@@ -123,11 +123,17 @@ public class TeamManager {
 
 	public void moveStoryToState(String title, String targetState)
 			throws InvalidStateException {
-		checkState(targetState);
+		checkUserStoriesState(targetState);
 		this.userstoryManager.moveStoryToState(title, targetState);
 		Event event = new Event("Changed state of userstory " + title
 				+ ": now it is " + targetState, this.getCurrentDate());
 		this.timeline.addEvent(event);
+	}
+
+	private void checkUserStoriesState(String targetState) throws InvalidStateException {
+		if (!settings.getPossibleUserStoriesStates().contains(targetState)) {
+			throw new InvalidStateException(targetState);
+		}		
 	}
 
 	private TasksManager getTaskManager(String title) {

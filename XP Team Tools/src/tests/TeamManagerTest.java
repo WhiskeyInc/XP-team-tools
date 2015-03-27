@@ -26,7 +26,7 @@ public class TeamManagerTest {
 	@Test
 	public void tasksStateCheckTest02() throws Exception {
 		teamManager.addTask("Timeline", "GENERAL");
-		settings.setPossibleStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		try {
 			teamManager.moveTaskToState("Timeline", "DONE", "GENERAL");
 		} catch (InvalidStateException e) {
@@ -34,4 +34,26 @@ public class TeamManagerTest {
 		}
 	}
 
+	@Test
+	public void UserStoriesStateCheckTest01() throws Exception {
+		teamManager.addUserStory("Timeline", "Voglio un pannello che...");
+		try {
+			teamManager.moveStoryToState("Timeline", "ACCOMPLISHED");
+			fail();
+		} catch (InvalidStateException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void UserStoriesStateCheckTest02() throws Exception {
+		teamManager.addUserStory("Timeline", "Voglio un pannello che...");
+		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
+		try {
+			teamManager.moveStoryToState("Timeline", "DONE");
+		} catch (InvalidStateException e) {
+			fail();
+		}
+	}
+	
 }
