@@ -2,22 +2,23 @@ package filtering;
 
 import timeline.Event;
 
-public class MemberFilter implements Checker<Event> {
+public class MemberEventFilter implements Checker<Event> {
 	
-	private String targetMember;
+	private String[] targetMembers;
 	
-	public MemberFilter(String targetMember) {
-		this.targetMember = targetMember;
+	public MemberEventFilter(String ... targetMembers) {
+		this.targetMembers = new String[targetMembers.length];
+		this.targetMembers = targetMembers;
 	}
 
 	@Override
 	public boolean check(Event tobeChecked) {
-		for (String participant : tobeChecked.getParticipants()) {
-			if (participant.compareToIgnoreCase(targetMember)==0) {
-				return true;
+		for(int i =0;i<targetMembers.length;i++) {
+			if(!tobeChecked.getParticipants().contains(targetMembers[i])){
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
