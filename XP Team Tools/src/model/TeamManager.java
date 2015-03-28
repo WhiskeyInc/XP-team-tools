@@ -149,4 +149,8 @@ public class TeamManager {
 		return userstoryManager.getUserStories(filter);
 	}
 	
+	public ArrayList<Task> getTasks(String title, Filter<Task> filter) {
+		return userstoryManager.getUserStory(title).getTasksManager().getTasks(filter);
+	}
+	
 }

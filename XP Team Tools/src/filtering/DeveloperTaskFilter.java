@@ -14,12 +14,10 @@ public class DeveloperTaskFilter implements Checker<Task> {
 	@Override
 	public boolean check(Task tobeChecked) {
 		for (int i = 0; i < targetMembers.length; i++) {
-			for (String developer : tobeChecked.getDevelopers()) {
-				if (developer.compareToIgnoreCase(targetMembers[i]) == 0) {
-					return true;
-				}
+			if(!tobeChecked.getDevelopers().contains(targetMembers[i])){
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 }

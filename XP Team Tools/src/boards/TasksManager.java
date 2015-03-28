@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.NameAlreadyInUseException;
+import filtering.Filter;
 
 public class TasksManager {
 
@@ -53,10 +54,12 @@ public class TasksManager {
 
 	public ArrayList<Task> getTasks() {
 		ArrayList<Task> list = new ArrayList<Task>();
-		for (Task task : tasks.values()) {
-			list.add(task);
-		}
+		list.addAll(this.tasks.values());
 		return list;
+	}
+	
+	public ArrayList<Task> getTasks(Filter<Task> filter){
+		return filter.filter(this.getTasks());
 	}
 
 }
