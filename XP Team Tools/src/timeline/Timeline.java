@@ -2,6 +2,7 @@ package timeline;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -47,6 +48,9 @@ public class Timeline {
 	}
 
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
-		return filter.filter(this.getEvents());
+		ArrayList<Event> filteredandsortedEvents = new ArrayList<Event>();
+		filteredandsortedEvents.addAll(filter.filter(this.getEvents()));
+		Collections.sort(filteredandsortedEvents);
+		return filteredandsortedEvents;
 	}
 }

@@ -148,7 +148,7 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void userStoryModifyTest() throws Exception {
-		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
+		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
 		teamManager.addUserStory("Timeline", "");
 		teamManager.moveStoryToState("Timeline", "DONE");
 		for (Event event : teamManager.getEvents(new NoFilter<Event>())) {

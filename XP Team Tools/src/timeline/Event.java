@@ -3,7 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Event {
+public class Event implements Comparable<Event> {
 
 	private ArrayList<String> participants = new ArrayList<String>();
 	private GregorianCalendar date;
@@ -37,6 +37,11 @@ public class Event {
 
 	public void addParticipants(ArrayList<String> developers) {
 		this.participants.addAll(developers);		
+	}
+
+	@Override
+	public int compareTo(Event otherevent) {
+		return this.getDate().compareTo(otherevent.getDate());
 	}
 
 }
