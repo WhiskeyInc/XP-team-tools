@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import javax.naming.InvalidNameException;
 
+import timeline.Event;
+import filtering.Filter;
 import model.NameAlreadyInUseException;
 
 public class UserStoriesManager {
@@ -47,5 +49,14 @@ public class UserStoriesManager {
 		this.stories.get(storyName).setState(targetState);
 	}
 
+	public ArrayList<UserStory> getUserStories() {
+		ArrayList<UserStory> userstoriesList = new ArrayList<UserStory>();
+		userstoriesList.addAll(this.stories.values());
+		return userstoriesList;
+	}
+	
+	public ArrayList<UserStory> getUserStories(Filter<UserStory> filter) {
+		return filter.filter(this.getUserStories());
+	}
 	
 }

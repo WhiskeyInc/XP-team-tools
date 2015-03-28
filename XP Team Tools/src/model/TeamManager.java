@@ -9,6 +9,7 @@ import timeline.Timeline;
 import boards.Task;
 import boards.TasksManager;
 import boards.UserStoriesManager;
+import boards.UserStory;
 import filtering.Filter;
 
 public class TeamManager {
@@ -143,4 +144,9 @@ public class TeamManager {
 			return userstoryManager.getUserStory(title).getTasksManager();
 		}
 	}
+	
+	public ArrayList<UserStory> getUserStory(Filter<UserStory> filter) {
+		return userstoryManager.getUserStories(filter);
+	}
+	
 }
