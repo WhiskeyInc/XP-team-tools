@@ -23,8 +23,6 @@ public class UserStoryFilteringTest {
 		teammanager.moveStoryToState("Timeline", "ACCOMPLISHED");
 		teammanager.addUserStory("Board",
 				"Voglio che ci sia un'area di testo editabile...");
-		teammanager.getUserStory(new TargetFilter<UserStory>(
-				new StateUserStoryFilter("ACCOMPLISHED")));
 		assertEquals(
 				1,
 				teammanager.getUserStory(

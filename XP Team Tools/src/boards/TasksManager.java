@@ -15,12 +15,6 @@ public class TasksManager {
 		Task task = new Task(taskName, description);
 		tasks.put(task.toString(), task);
 	}
-	
-	private void checkTaskName(String taskName) throws NameAlreadyInUseException {
-		if(tasks.containsKey(taskName)){
-			throw new NameAlreadyInUseException(taskName);
-		}
-	}
 
 	public void addTask(String taskName) throws NameAlreadyInUseException {
 		this.addTask(taskName, "");		
@@ -41,25 +35,34 @@ public class TasksManager {
 	public void moveTaskToState(String taskName, String targetState) {
 		this.tasks.get(taskName).moveTaskToState(targetState);
 	}
-
-	public ArrayList<Task> getTasks(String targetState) {
-		ArrayList<Task> list = new ArrayList<Task>();
-		for (Task task : tasks.values()) {
-			if (task.getState().compareTo(targetState)==0) {
-				list.add(task);
-			}
-		}
-		return list;
+	
+	public ArrayList<Task> getTasks(Filter<Task> filter){
+		return filter.filter(this.getAllTasks());
 	}
-
-	public ArrayList<Task> getTasks() {
+	
+	private ArrayList<Task> getAllTasks() {
 		ArrayList<Task> list = new ArrayList<Task>();
 		list.addAll(this.tasks.values());
 		return list;
 	}
 	
-	public ArrayList<Task> getTasks(Filter<Task> filter){
-		return filter.filter(this.getTasks());
+	private void checkTaskName(String taskName) throws NameAlreadyInUseException {
+		if(tasks.containsKey(taskName)){
+			throw new NameAlreadyInUseException(taskName);
+		}
 	}
+	
+	/*
+	 * The following method is outdated! Filtering functionality has been moved to TeamManager	
+	 */
+//	public ArrayList<Task> getTasks(String targetState) {
+//		ArrayList<Task> list = new ArrayList<Task>();
+//		for (Task task : tasks.values()) {
+//			if (task.getState().compareTo(targetState)==0) {
+//				list.add(task);
+//			}
+//		}
+//		return list;
+//	}
 
 }

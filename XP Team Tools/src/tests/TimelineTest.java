@@ -3,15 +3,13 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import filtering.NoFilter;
 import timeline.Event;
 import timeline.Timeline;
+import filtering.NoFilter;
 
 public class TimelineTest {
 

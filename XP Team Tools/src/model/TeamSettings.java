@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import timeline.Event;
-
 public class TeamSettings {
 	
 	private ArrayList<String> teamMembers = new ArrayList<String>();

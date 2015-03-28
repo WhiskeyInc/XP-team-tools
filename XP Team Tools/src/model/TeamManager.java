@@ -17,7 +17,7 @@ public class TeamManager {
 	private final static String GENERAL = "GENERAL";
 
 	private TasksManager generalTaskManager = new TasksManager();
-	private UserStoriesManager userstoryManager = new UserStoriesManager();
+	private UserStoriesManager userStoryManager = new UserStoriesManager();
 	private Timeline timeline = new Timeline();
 	private TeamSettings settings;
 
@@ -26,7 +26,7 @@ public class TeamManager {
 	}
 
 	public void addTask(String taskName, String description, String title) throws NameAlreadyInUseException {
-		getTaskManager(title).addTask(taskName, description);
+		this.getTaskManager(title).addTask(taskName, description);
 		this.timeline.addEvent(new Event("Created task: " + taskName + " for: "
 				+ title, getCurrentDate()));
 	}
@@ -106,7 +106,7 @@ public class TeamManager {
 	}
 
 	public void addUserStory(String title, String description) throws NameAlreadyInUseException {
-		this.userstoryManager.addUserStory(title, description);
+		this.userStoryManager.addUserStory(title, description);
 		this.timeline.addEvent(new Event("Created userstory: " + title,
 				getCurrentDate()));
 	}
@@ -117,7 +117,7 @@ public class TeamManager {
 
 	public void deleteUserStory(String title) {
 		Event event = new Event("Deleted userstory: " + title, getCurrentDate());
-		this.userstoryManager.deleteUserStory(title);
+		this.userStoryManager.deleteUserStory(title);
 		;
 		timeline.addEvent(event);
 	}
@@ -125,7 +125,7 @@ public class TeamManager {
 	public void moveStoryToState(String title, String targetState)
 			throws InvalidStateException {
 		checkUserStoryState(targetState);
-		this.userstoryManager.moveStoryToState(title, targetState);
+		this.userStoryManager.moveStoryToState(title, targetState);
 		Event event = new Event("Changed state of userstory " + title
 				+ ": now it is " + targetState, this.getCurrentDate());
 		this.timeline.addEvent(event);
@@ -141,16 +141,16 @@ public class TeamManager {
 		if (title.compareTo(GENERAL) == 0) {
 			return this.generalTaskManager;
 		} else {
-			return userstoryManager.getUserStory(title).getTasksManager();
+			return userStoryManager.getUserStory(title).getTasksManager();
 		}
 	}
 	
 	public ArrayList<UserStory> getUserStory(Filter<UserStory> filter) {
-		return userstoryManager.getUserStories(filter);
+		return userStoryManager.getUserStories(filter);
 	}
 	
 	public ArrayList<Task> getTasks(String title, Filter<Task> filter) {
-		return userstoryManager.getUserStory(title).getTasksManager().getTasks(filter);
+		return userStoryManager.getUserStory(title).getTasksManager().getTasks(filter);
 	}
 	
 }

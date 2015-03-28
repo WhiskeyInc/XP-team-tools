@@ -1,12 +1,9 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import boards.Task;
 import boards.TasksManager;
 
 public class TasksManagerTest {
@@ -49,18 +46,21 @@ public class TasksManagerTest {
 				+ manager.getTask("Timeline").getState());
 	}
 	
-	@Test
-	public void findTasksByState() throws Exception {
-		ArrayList<String> tasks = new ArrayList<String>();
-		manager.addTask("Timeline");
-		manager.addTask("Board");
-		manager.addTask("Chat");
-		manager.moveTaskToState("Timeline", "IN PROGRESS");
-		tasks.add("Timeline");
-		ArrayList<String> inProgressTasks = new ArrayList<String>();
-		for (Task task : manager.getTasks("IN PROGRESS")) {
-			inProgressTasks.add(task.toString());
-		}
-		assertEquals(tasks, inProgressTasks);
-	}
+	/* This test is outdated! Filtering according to state has been moved to TeamManager
+	 * 
+	 */
+//	@Test
+//	public void findTasksByState() throws Exception {
+//		ArrayList<String> tasks = new ArrayList<String>();
+//		manager.addTask("Timeline");
+//		manager.addTask("Board");
+//		manager.addTask("Chat");
+//		manager.moveTaskToState("Timeline", "IN PROGRESS");
+//		tasks.add("Timeline");
+//		ArrayList<String> inProgressTasks = new ArrayList<String>();
+//		for (Task task : manager.getTasks("IN PROGRESS")) {
+//			inProgressTasks.add(task.toString());
+//		}
+//		assertEquals(tasks, inProgressTasks);
+//	}
 }

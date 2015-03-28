@@ -39,18 +39,12 @@ public class Timeline {
 	public Event getEvent(String eventName){
 		return this.events.get(eventName);
 	}
-	
-
-	public ArrayList<Event> getEvents() {
-		ArrayList<Event> eventsList = new ArrayList<Event>();
-		eventsList.addAll(this.events.values());
-		return eventsList;
-	}
 
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
-		ArrayList<Event> filteredandsortedEvents = new ArrayList<Event>();
-		filteredandsortedEvents.addAll(filter.filter(this.getEvents()));
-		Collections.sort(filteredandsortedEvents);
-		return filteredandsortedEvents;
+		ArrayList<Event> filteredAndSortedEvents = new ArrayList<Event>();
+		filteredAndSortedEvents.addAll(this.events.values());
+		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
+		Collections.sort(filteredAndSortedEvents);
+		return filteredAndSortedEvents;
 	}
 }

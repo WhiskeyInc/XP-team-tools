@@ -3,11 +3,8 @@ package boards;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.naming.InvalidNameException;
-
-import timeline.Event;
-import filtering.Filter;
 import model.NameAlreadyInUseException;
+import filtering.Filter;
 
 public class UserStoriesManager {
 
@@ -19,12 +16,6 @@ public class UserStoriesManager {
 		UserStory userStory = new UserStory(title, description);
 		stories.put(userStory.toString(), userStory);
 		sortedStories.add(userStory);
-	}
-
-	private void checkUserStoryName(String title) throws NameAlreadyInUseException {
-		if(stories.containsKey(title)){
-			throw new NameAlreadyInUseException(title);
-		}
 	}
 
 	public void deleteUserStory(String title){
@@ -48,15 +39,21 @@ public class UserStoriesManager {
 	public void moveStoryToState(String storyName, String targetState) {
 		this.stories.get(storyName).setState(targetState);
 	}
-
-	public ArrayList<UserStory> getUserStories() {
-		ArrayList<UserStory> userstoriesList = new ArrayList<UserStory>();
-		userstoriesList.addAll(this.stories.values());
-		return userstoriesList;
-	}
 	
 	public ArrayList<UserStory> getUserStories(Filter<UserStory> filter) {
 		return filter.filter(this.getUserStories());
+	}
+	
+	private ArrayList<UserStory> getUserStories() {
+		ArrayList<UserStory> userStoriesList = new ArrayList<UserStory>();
+		userStoriesList.addAll(this.stories.values());
+		return userStoriesList;
+	}
+	
+	private void checkUserStoryName(String title) throws NameAlreadyInUseException {
+		if(stories.containsKey(title)){
+			throw new NameAlreadyInUseException(title);
+		}
 	}
 	
 }
