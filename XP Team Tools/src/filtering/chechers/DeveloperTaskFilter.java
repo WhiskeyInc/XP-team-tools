@@ -1,5 +1,6 @@
-package filtering;
+package filtering.chechers;
 
+import filtering.Checker;
 import boards.Task;
 
 public class DeveloperTaskFilter implements Checker<Task> {

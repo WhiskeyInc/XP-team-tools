@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="filtering.DateEventFilter" project="XP Team Tools" 
-    file="/XP Team Tools/src/filtering/DateEventFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="filtering.chechers.DateEventFilter" project="XP Team Tools" 
+    file="/XP Team Tools/src/filtering/chechers/DateEventFilter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="348" y="420"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="filtering.DeveloperTaskFilter" project="XP Team Tools" 
-    file="/XP Team Tools/src/filtering/DeveloperTaskFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="filtering.chechers.DeveloperTaskFilter" project="XP Team Tools" 
+    file="/XP Team Tools/src/filtering/chechers/DeveloperTaskFilter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="588" y="417"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="filtering.MemberEventFilter" project="XP Team Tools" 
-    file="/XP Team Tools/src/filtering/MemberEventFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="filtering.chechers.MemberEventFilter" project="XP Team Tools" 
+    file="/XP Team Tools/src/filtering/chechers/MemberEventFilter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="757" y="423"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="filtering.StateTaskFilter" project="XP Team Tools" 
-    file="/XP Team Tools/src/filtering/StateTaskFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="filtering.chechers.StateTaskFilter" project="XP Team Tools" 
+    file="/XP Team Tools/src/filtering/chechers/StateTaskFilter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="125" y="413"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="filtering.StateUserStoryFilter" project="XP Team Tools" 
-    file="/XP Team Tools/src/filtering/StateUserStoryFilter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="filtering.chechers.StateUserStoryFilter" project="XP Team Tools" 
+    file="/XP Team Tools/src/filtering/chechers/StateUserStoryFilter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="95" y="449"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

@@ -1,7 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
@@ -88,5 +87,20 @@ public class TimelineTest {
 				+ timeline.getEvents(new NoFilter<Event>()).get(2).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(3).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(4).toString());
+	}
+
+	@Test
+	public void movableEventsTest() throws Exception {
+		Timeline timeline2 = new Timeline();
+		assertTrue(!timeline2.moveEvent("creation", new GregorianCalendar(2000,
+				12, 21, 12, 12, 12)));
+		timeline2.addEvent(new Event("ciao", new GregorianCalendar(2000,
+				12, 21, 12, 12, 13)));
+		assertTrue(timeline2.moveEvent("ciao", new GregorianCalendar(2000,
+				12, 21, 12, 12, 11)));
+		timeline2.addEvent(new Event("bau", new GregorianCalendar(2000,
+				12, 21, 12, 12, 14), false));
+		assertTrue(!timeline2.moveEvent("bau", new GregorianCalendar(2000,
+				12, 21, 12, 12, 15)));
 	}
 }

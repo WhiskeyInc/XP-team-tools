@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import timeline.Event;
 import timeline.Timeline;
-import filtering.DateEventFilter;
-import filtering.MemberEventFilter;
 import filtering.TargetFilter;
+import filtering.chechers.DateEventFilter;
+import filtering.chechers.MemberEventFilter;
 
 public class EventFilteringTests {
 

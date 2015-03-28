@@ -4,10 +4,11 @@ import model.TeamManager;
 import model.TeamSettings;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 import boards.UserStory;
-import filtering.StateUserStoryFilter;
 import filtering.TargetFilter;
+import filtering.chechers.StateUserStoryFilter;
 
 public class UserStoryFilteringTest {
 

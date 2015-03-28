@@ -1,5 +1,6 @@
-package filtering;
+package filtering.chechers;
 
+import filtering.Checker;
 import timeline.Event;
 
 public class MemberEventFilter implements Checker<Event> {

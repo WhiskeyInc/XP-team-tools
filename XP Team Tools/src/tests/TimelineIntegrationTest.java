@@ -13,9 +13,9 @@ import model.TeamSettings;
 import org.junit.Test;
 
 import timeline.Event;
-import filtering.MemberEventFilter;
 import filtering.NoFilter;
 import filtering.TargetFilter;
+import filtering.chechers.MemberEventFilter;
 
 public class TimelineIntegrationTest {
 
@@ -104,7 +104,7 @@ public class TimelineIntegrationTest {
 			throws Exception {
 		settings.addTeamMember("sumo");
 		try {
-			teamManager.addDeveloperTo("Timeline", "ziobrando", "GENERAL");
+			teamManager.addDeveloperToTask("Timeline", "ziobrando", "GENERAL");
 			fail();
 		} catch (Exception e) {
 			assertTrue(true);
@@ -126,7 +126,7 @@ public class TimelineIntegrationTest {
 	public void eventsByTargetMember() throws Exception {
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		settings.addTeamMember("sumo");
-		teamManager.addDeveloperTo("Timer", "sumo", "GENERAL");
+		teamManager.addDeveloperToTask("Timer", "sumo", "GENERAL");
 		teamManager.moveTaskToState("Timer", "DONE", "GENERAL");
 		teamManager.deleteTask("Timer", "GENERAL");
 		assertEquals(

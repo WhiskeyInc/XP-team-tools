@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import boards.Task;
-import filtering.DeveloperTaskFilter;
-import filtering.StateTaskFilter;
 import filtering.TargetFilter;
+import filtering.chechers.DeveloperTaskFilter;
+import filtering.chechers.StateTaskFilter;
 
 public class TaskFilteringTest {
 
@@ -46,11 +46,11 @@ public class TaskFilteringTest {
 		teammanager.addUserStory("Timeline", "Voglio un pannello che...");
 		teammanager.addTask("Filtro", "Timeline");
 		teammanager.addTask("Bacheca", "Timeline");
-		teammanager.addDeveloperTo("Filtro", "Simone", "Timeline");
-		teammanager.addDeveloperTo("Filtro", "Alessandro", "Timeline");
-		teammanager.addDeveloperTo("Filtro", "Emanuele", "Timeline");
-		teammanager.addDeveloperTo("Bacheca", "Emanuele", "Timeline");
-		teammanager.addDeveloperTo("Bacheca", "Simone", "Timeline");
+		teammanager.addDeveloperToTask("Filtro", "Simone", "Timeline");
+		teammanager.addDeveloperToTask("Filtro", "Alessandro", "Timeline");
+		teammanager.addDeveloperToTask("Filtro", "Emanuele", "Timeline");
+		teammanager.addDeveloperToTask("Bacheca", "Emanuele", "Timeline");
+		teammanager.addDeveloperToTask("Bacheca", "Simone", "Timeline");
 		assertEquals(
 				2,
 				teammanager.getTasks(

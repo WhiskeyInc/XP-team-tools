@@ -1,5 +1,6 @@
-package filtering;
+package filtering.chechers;
 
+import filtering.Checker;
 import boards.UserStory;
 
 public class StateUserStoryFilter implements Checker<UserStory> {

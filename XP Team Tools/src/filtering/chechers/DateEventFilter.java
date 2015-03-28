@@ -1,7 +1,8 @@
-package filtering;
+package filtering.chechers;
 
 import java.util.GregorianCalendar;
 
+import filtering.Checker;
 import timeline.Event;
 
 public class DateEventFilter implements Checker<Event> {

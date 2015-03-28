@@ -11,10 +11,12 @@ import filtering.Filter;
 public class Timeline {
 
 	private HashMap<String, Event> events = new HashMap<String, Event>();
+	private static final String CREATION_EVENT = "creation";
 
 	public Timeline() {
-		GregorianCalendar creationDate = (GregorianCalendar) Calendar.getInstance();
-		Event event = new Event("creation", creationDate);
+		GregorianCalendar creationDate = (GregorianCalendar) Calendar
+				.getInstance();
+		Event event = new Event(CREATION_EVENT, creationDate, false);
 		events.put(event.toString(), event);
 	}
 
@@ -30,13 +32,16 @@ public class Timeline {
 		this.events.remove(eventName);
 	}
 
-	public void moveEvent(String eventName, GregorianCalendar newDate) {
-		this.events.remove(eventName);
-		Event newEvent = new Event(eventName, newDate);
-		this.events.put(newEvent.toString(), newEvent);
+	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
+		if (this.events.get(eventName).isMovable()) {
+			this.changeEventDate(eventName, newDate);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public Event getEvent(String eventName){
+	public Event getEvent(String eventName) {
 		return this.events.get(eventName);
 	}
 
@@ -46,5 +51,11 @@ public class Timeline {
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
+	}
+	
+	private void changeEventDate(String eventName, GregorianCalendar newDate) {
+		this.events.remove(eventName);
+		Event newEvent = new Event(eventName, newDate);
+		this.events.put(newEvent.toString(), newEvent);
 	}
 }
