@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import org.junit.Test;
 
+import server.model.CacheList;
 import server.model.ServerTestable;
 import ui.ChatUITestable;
 import client.model.Client;
@@ -20,12 +21,11 @@ public class ChatTest2 {
 
 	@Test
 	public void clientServerChatTest() throws Exception {
+		final ServerTestable server = new ServerTestable(new CacheList());
+		server.openPort(9999);
 		final Client client = new Client();
 		client.openStreams("localhost", 9999);
-		final ServerTestable server = new ServerTestable();
-		server.openPort(9999);
 
-		System.out.println("aa");
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -47,10 +47,22 @@ public class ChatTest2 {
 			}
 		});
 
-		chatUI.setMessageText("Ciao a tutti!");
+		chatUI.setMessageText("Ciao a tutti!\n");
 		chatUI.simulateSendClick();
+		waitTCPSending(server);
 
-		assertEquals(chatUI.getMessage(), server.getLastMessage());
+		assertEquals(chatUI.getMessage(), server.getLastMessage() + "\n");
+	}
+
+	private void waitTCPSending(final ServerTestable server) {
+		boolean notArrived = true;
+		while(notArrived)
+		try {
+			server.getLastMessage();
+			notArrived = false;
+		} catch (Exception e) {
+
+		}
 	}
 
 	// test pavlo e nicola
@@ -76,6 +88,9 @@ public class ChatTest2 {
 
 		}
 	}
+
+	
+
 
 	@Test
 	public void sendMsgTest() throws Exception {
