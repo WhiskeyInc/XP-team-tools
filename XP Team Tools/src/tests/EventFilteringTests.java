@@ -11,6 +11,7 @@ import timeline.Timeline;
 import filtering.TargetFilter;
 import filtering.chechers.DateEventFilter;
 import filtering.chechers.MemberEventFilter;
+import filtering.chechers.NameEventFilter;
 
 public class EventFilteringTests {
 
@@ -48,9 +49,36 @@ public class EventFilteringTests {
 				timeline.getEvents(
 						new TargetFilter<Event>(new MemberEventFilter(
 								partecipants))).size());
-		assertEquals("Briefing",timeline.getEvents(
+		assertEquals(
+				"Briefing",
+				timeline.getEvents(
 						new TargetFilter<Event>(new MemberEventFilter(
 								partecipants))).get(0).toString());
+	}
+
+	@Test
+	public void NameEventFilterTest() {
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
+				20, 23, 3, 50)));
+		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2015,
+				01, 10, 23, 3, 50)));
+		timeline.addEvent(new Event("SomeEvent somewhere...",
+				new GregorianCalendar(2015, 02, 20, 23, 3, 50)));
+		assertEquals(
+				2,
+				timeline.getEvents(
+						new TargetFilter<Event>(new NameEventFilter("Event")))
+						.size());
+		assertEquals(
+				"OtherEvent" + "SomeEvent somewhere...",
+				timeline.getEvents(
+						new TargetFilter<Event>(new NameEventFilter("Event")))
+						.get(0).toString()
+						+ timeline
+								.getEvents(
+										new TargetFilter<Event>(
+												new NameEventFilter("Event")))
+								.get(1).toString());
 	}
 
 }
