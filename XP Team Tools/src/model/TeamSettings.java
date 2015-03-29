@@ -32,8 +32,18 @@ public class TeamSettings {
 		return possibleUserStoriesStates;
 	}
 	
-	public void addTeamMember(String member) {
-		this.teamMembers.add(member);
+	public void addTeamMember(String... member) throws NameAlreadyInUseException  {
+		for(int i=0;i<member.length;i++){
+			checkMemberName(member[i]);
+			this.teamMembers.add(member[i]);
+		}
+	}
+
+	private void checkMemberName(String member) throws NameAlreadyInUseException {
+		if(this.teamMembers.contains(member)){
+			throw new NameAlreadyInUseException(member);
+		}
+		
 	}
 
 	
