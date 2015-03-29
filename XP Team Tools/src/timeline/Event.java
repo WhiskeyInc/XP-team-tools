@@ -3,6 +3,8 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import tests.FixedEventException;
+
 /**
  * This class represent an event which has four characteristics: a name
  * (mandatory), a date, stored with the precision of a second, a list of
@@ -93,6 +95,21 @@ public class Event implements Comparable<Event> {
 	 */
 	public GregorianCalendar getDate() {
 		return this.date;
+	}
+	
+	/**
+	 * Changes the date of this event
+	 * 
+	 * @param newDate: the date to set
+	 * @throws FixedEventException: if this event is fixed
+	 * @see {@link Event}.isMovable()
+	 */
+	public void setDate(GregorianCalendar newDate) throws FixedEventException {
+		if (!movable) {
+			throw new FixedEventException();
+		}
+		this.date = newDate;
+		
 	}
 
 	/**

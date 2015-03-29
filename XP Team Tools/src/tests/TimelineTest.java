@@ -55,8 +55,12 @@ public class TimelineTest {
 	public void timeChangeTest() {
 		timeline.addEvent(new Event("Riunione sulla timeline",
 				new GregorianCalendar(2015, 02, 20, 23, 3, 50)));
-		timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
-				2015, 02, 20, 23, 3, 50));
+		try {
+			timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
+					2015, 02, 20, 23, 3, 50));
+		} catch (FixedEventException e) {
+			fail();
+		}
 		assertEquals(new GregorianCalendar(2015, 02, 20, 23, 3, 50), timeline
 				.getEvent("Riunione sulla timeline").getDate());
 	}
@@ -87,20 +91,5 @@ public class TimelineTest {
 				+ timeline.getEvents(new NoFilter<Event>()).get(2).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(3).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(4).toString());
-	}
-
-	@Test
-	public void movableEventsTest() throws Exception {
-		Timeline timeline2 = new Timeline();
-		assertTrue(!timeline2.moveEvent("creation", new GregorianCalendar(2000,
-				12, 21, 12, 12, 12)));
-		timeline2.addEvent(new Event("ciao", new GregorianCalendar(2000,
-				12, 21, 12, 12, 13)));
-		assertTrue(timeline2.moveEvent("ciao", new GregorianCalendar(2000,
-				12, 21, 12, 12, 11)));
-		timeline2.addEvent(new Event("bau", new GregorianCalendar(2000,
-				12, 21, 12, 12, 14), false));
-		assertTrue(!timeline2.moveEvent("bau", new GregorianCalendar(2000,
-				12, 21, 12, 12, 15)));
 	}
 }

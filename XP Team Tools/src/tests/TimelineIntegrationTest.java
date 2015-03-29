@@ -167,6 +167,16 @@ public class TimelineIntegrationTest {
 						.toString());
 	}
 	
+	@Test
+	public void fixedEventsAreFixed() throws Exception {
+		try {
+			teamManager.moveEvent("creation", new GregorianCalendar(2015, 1, 12, 12, 45, 34));
+			fail();
+		} catch (FixedEventException e) {
+			assertTrue(true);
+		}
+	}
+	
 	private GregorianCalendar getCurrentDate() {
 		Calendar cal = Calendar.getInstance();
 		return (GregorianCalendar) cal;

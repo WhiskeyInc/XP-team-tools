@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import tests.FixedEventException;
 import filtering.Filter;
 
 public class Timeline {
@@ -32,13 +33,8 @@ public class Timeline {
 		this.events.remove(eventName);
 	}
 
-	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
-		if (this.events.get(eventName).isMovable()) {
-			this.changeEventDate(eventName, newDate);
-			return true;
-		} else {
-			return false;
-		}
+	public void moveEvent(String eventName, GregorianCalendar newDate) throws FixedEventException{
+		this.events.get(eventName).setDate(newDate);
 	}
 
 	public Event getEvent(String eventName) {
@@ -51,11 +47,5 @@ public class Timeline {
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
-	}
-	
-	private void changeEventDate(String eventName, GregorianCalendar newDate) {
-		this.events.remove(eventName);
-		Event newEvent = new Event(eventName, newDate);
-		this.events.put(newEvent.toString(), newEvent);
 	}
 }

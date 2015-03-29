@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import tests.FixedEventException;
 import timeline.Event;
 import timeline.Timeline;
 import boards.Task;
@@ -28,44 +29,46 @@ public class TeamManager {
 	
 	
 	
-	public void addTask(String taskName, String title) throws NameAlreadyInUseException {
-		this.addTask(taskName, "", title);
+	
+	
+	public void addTask(String taskName, String relatedUserStory) throws NameAlreadyInUseException {
+		this.addTask(taskName, "", relatedUserStory);
 		this.timeline.addEvent(new Event("Created task: " + taskName + " for: "
-				+ title, getCurrentDate(), false));
+				+ relatedUserStory, getCurrentDate(), false));
 	}
 
-	public void addTask(String taskName, String description, String title) throws NameAlreadyInUseException {
-		this.getTaskManager(title).addTask(taskName, description);
+	public void addTask(String taskName, String description, String relatedUserStory) throws NameAlreadyInUseException {
+		this.getTaskManager(relatedUserStory).addTask(taskName, description);
 		this.timeline.addEvent(new Event("Created task: " + taskName + " for: "
-				+ title, getCurrentDate(), false));
+				+ relatedUserStory, getCurrentDate(), false));
 	}
 
-	public void deleteTask(String taskName, String title) {
+	public void deleteTask(String taskName, String relatedUserStory) {
 		Event event = new Event(
-				"Deleted task: " + taskName + " from: " + title,
+				"Deleted task: " + taskName + " from: " + relatedUserStory,
 				getCurrentDate(), false);
-		addDevelopersToEvent(taskName, event, title);
-		getTaskManager(title).deleteTask(taskName);
+		addDevelopersToEvent(taskName, event, relatedUserStory);
+		getTaskManager(relatedUserStory).deleteTask(taskName);
 		timeline.addEvent(event);
 	}
 	
 	public void moveTaskToState(String taskName, String targetState,
-			String title) throws InvalidStateException {
+			String relatedUserStory) throws InvalidStateException {
 		checkTaskState(targetState);
-		getTaskManager(title).moveTaskToState(taskName, targetState);
+		getTaskManager(relatedUserStory).moveTaskToState(taskName, targetState);
 		Event event = new Event("Changed state of task " + taskName + " of: "
-				+ title + ". Now it is " + targetState, this.getCurrentDate(), false);
-		addDevelopersToEvent(taskName, event, title);
+				+ relatedUserStory + ". Now it is " + targetState, this.getCurrentDate(), false);
+		addDevelopersToEvent(taskName, event, relatedUserStory);
 		this.timeline.addEvent(event);
 	}
 	
-	public void addDeveloperToTask(String taskName, String developer, String title)
+	public void addDeveloperToTask(String taskName, String developer, String relatedUserStory)
 			throws InvalidMemberException, NameAlreadyInUseException {
-		checkTask(taskName, title);
+		checkTask(taskName, relatedUserStory);
 		checkMember(developer);
-		getTaskManager(title).getTask(taskName).addDeveloper(developer);
+		getTaskManager(relatedUserStory).getTask(taskName).addDeveloper(developer);
 		Event event = new Event("Added " + developer + " to task: " + taskName
-				+ " of: " + title, getCurrentDate(), false);
+				+ " of: " + relatedUserStory, getCurrentDate(), false);
 		event.addParticipant(developer);
 		timeline.addEvent(event);
 	}
@@ -81,8 +84,8 @@ public class TeamManager {
 		this.timeline.addEvent(event);
 	}
 	
-	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
-		return this.timeline.moveEvent(eventName, newDate);
+	public void moveEvent(String eventName, GregorianCalendar newDate) throws FixedEventException {
+		timeline.moveEvent(eventName, newDate);
 	}
 	
 	public void dropEvent(String eventName) {
