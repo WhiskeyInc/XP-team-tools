@@ -21,7 +21,7 @@ public class Conversations {
 		return "Ciao";
 	}
 
-	public boolean hasConversations() {
+	public boolean hasConversations() {//tmp method for testing
 
 		// convs.add("Anus");
 		return !(convs.isEmpty());
