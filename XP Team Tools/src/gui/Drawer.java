@@ -23,7 +23,7 @@ public class Drawer extends JPanel{
 
 	public void draw(Graphics g) {
 		for (Drawable drawable : drawables) {
-			drawable.draw(g, 10, 10, 20, 50);
+			drawable.draw(g, 10, 10, 10, 50);
 		}
 	}
 }
