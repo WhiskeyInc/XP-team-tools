@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-import tests.FixedEventException;
+import model.FixedEventException;
 import filtering.Filter;
 
 public class Timeline {

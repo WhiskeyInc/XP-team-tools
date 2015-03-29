@@ -3,7 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import tests.FixedEventException;
+import model.FixedEventException;
 
 /**
  * This class represent an event which has four characteristics: a name
@@ -106,7 +106,7 @@ public class Event implements Comparable<Event> {
 	 */
 	public void setDate(GregorianCalendar newDate) throws FixedEventException {
 		if (!movable) {
-			throw new FixedEventException();
+			throw new FixedEventException(this.name);
 		}
 		this.date = newDate;
 		

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
+import model.FixedEventException;
 import model.InvalidStateException;
 import model.TeamManager;
 import model.TeamSettings;

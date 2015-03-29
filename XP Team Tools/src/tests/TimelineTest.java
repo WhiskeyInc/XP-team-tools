@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
+import model.FixedEventException;
+
 import org.junit.Test;
 
 import timeline.Event;
