@@ -110,13 +110,22 @@ public class TeamManagerTest {
 		assertEquals(date, teamManager.getEvent("Release").getDate());
 	}
 	
+	@Test
 	public void changeDateTest() throws Exception {
 		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
 		teamManager.addEvent(new Event("Release", date));
 		GregorianCalendar newDate = new GregorianCalendar(2014, 05, 12, 12, 12, 12);
-		assertTrue(teamManager.moveEvent("Relese", newDate));
+		assertTrue(teamManager.moveEvent("Release", newDate));
 		assertEquals(newDate, teamManager.getEvent("Release").getDate());
 		assertTrue(!teamManager.moveEvent("creation", newDate));
+	}
+	
+	@Test
+	public void dropEventTest() throws Exception {
+		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
+		teamManager.addEvent(new Event("Release", date));
+		teamManager.dropEvent("Release");
+		assertEquals(1, teamManager.getEventsNumber());
 	}
 	
 	

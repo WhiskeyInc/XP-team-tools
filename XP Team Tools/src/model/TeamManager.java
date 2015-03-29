@@ -81,6 +81,14 @@ public class TeamManager {
 		this.timeline.addEvent(event);
 	}
 	
+	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
+		return this.timeline.moveEvent(eventName, newDate);
+	}
+	
+	public void dropEvent(String eventName) {
+		this.timeline.dropEvent(eventName);		
+	}
+	
 	public int getEventsNumber() {
 		return this.timeline.getEventsNumber();
 	}
@@ -173,16 +181,6 @@ public class TeamManager {
 		} else {
 			return userStoryManager.getUserStory(title).getTasksManager();
 		}
-	}
-
-
-
-	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
-		return this.timeline.moveEvent(eventName, newDate);
-	}
-
-
-
-	
+	}	
 	
 }
