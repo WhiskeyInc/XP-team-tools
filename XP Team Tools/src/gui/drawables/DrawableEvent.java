@@ -28,7 +28,11 @@ public class DrawableEvent implements Drawable {
 		int stringLength = g.getFontMetrics().stringWidth(string + "...");
 		boolean modified = false;
 		while(stringLength > stringSpace){
-			string = string.substring(0, string.length()-2);
+			try {
+				string = string.substring(0, string.length()-2);
+			} catch (IndexOutOfBoundsException e) {
+				return "...";
+			}
 			stringLength = g.getFontMetrics().stringWidth(string + "...");
 			modified = true;
 		}
