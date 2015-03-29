@@ -14,14 +14,13 @@ public class Client {
 	private DataInputStream is;
 
 	public void openStreams(String hostName, int port) {
-
 		try {
 			clientSocket = new Socket(hostName, port);
 			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 

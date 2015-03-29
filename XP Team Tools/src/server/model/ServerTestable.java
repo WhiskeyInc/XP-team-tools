@@ -1,23 +1,27 @@
 package server.model;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class ServerTestable extends AbstractServer {
 
 	private Socket clientSocket;
-	private IMessageSaver messageSaver;
-	private ArrayList<String> messageList = new ArrayList<String>();
+	private IChatStorer chatStorer;
+
+	
+	public ServerTestable(IChatStorer messageStorer) {
+		super();
+		this.chatStorer = messageStorer;
+	}
+
+	public ServerTestable() {
+		super();
+	}
 
 	@Override
 	public void listenClients() {
@@ -29,24 +33,10 @@ public class ServerTestable extends AbstractServer {
 			clientSocket = serverSocket.accept();
 
 			while (true) {
-
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						clientSocket.getInputStream()));
-				line = in.readLine();
+				line = getLine();
 				if (line != null) {
-					messageList.add(line);
-//					PrintWriter out = 
-//							new PrintWriter(clientSocket.getOutputStream());
-//					out.print(line);
-//					out.flush();
-
-					BufferedWriter out = new BufferedWriter(
-							new OutputStreamWriter(clientSocket.getOutputStream()));
-					out.write(line);
-					out.flush();
-					// messageSaver.saveMessage(line);
-					// propagateMessage();
-					System.out.println(line);
+					chatStorer.storeMessage(line);
+					propagateMessage(line);
 				}
 			}
 			
@@ -56,12 +46,27 @@ public class ServerTestable extends AbstractServer {
 		}
 	}
 
+	private String getLine() throws IOException {
+		String line;
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				clientSocket.getInputStream()));
+		line = in.readLine();
+		return line;
+	}
+
+	private void propagateMessage(String message) throws IOException {
+
+		BufferedWriter out = new BufferedWriter(
+				new OutputStreamWriter(clientSocket.getOutputStream()));
+		out.write(message);
+		out.flush();
+	}
+	
 	public String getLastMessage() {
 		
-		int messages = messageList.size();
+		ArrayList<String> messages = chatStorer.getMessages();
 		
-		return messageList.get(messages-1);
-
+		return messages.get(messages.size()-1);
 	}
 
 }

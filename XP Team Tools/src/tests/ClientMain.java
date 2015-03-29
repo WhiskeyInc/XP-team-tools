@@ -27,7 +27,7 @@ public class ClientMain {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		
-		client.sendMessageToServer("taooooooooooooooooooooooooooooooooooooooooo\n");
+		client.sendMessageToServer("Hi\n");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
