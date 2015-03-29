@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * The class is responsible of conversations management. The
  * {@link Conversation} is stored into a LinkedList which has to be used as a
  * session buffer and it has to be saved into a different data structure as a
- * DB, file or whatever and, at a a new session, it has to retrieve the last TOT
+ * DB, file or whatever and, at a new session, it has to retrieve the last TOT
  * conversations. Those last convs have to contain TOT last messages (to be
  * implemented).
  * 
