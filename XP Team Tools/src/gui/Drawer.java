@@ -22,8 +22,12 @@ public class Drawer extends JPanel{
 	}
 
 	public void draw(Graphics g) {
+		int x = super.getX();
+		int y = super.getY();
+		int width = super.getWidth();
+		int height = super.getHeight();
 		for (Drawable drawable : drawables) {
-			drawable.draw(g, 10, 10, 10, 50);
+			drawable.draw(g, x, y, width, height);
 		}
 	}
 }
