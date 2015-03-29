@@ -77,6 +77,10 @@ public class TeamManager {
 	
 	
 	
+	public void addEvent(Event event) {
+		this.timeline.addEvent(event);
+	}
+	
 	public int getEventsNumber() {
 		return this.timeline.getEventsNumber();
 	}
@@ -84,7 +88,6 @@ public class TeamManager {
 	public Event getEvent(String eventName) {
 		return this.timeline.getEvent(eventName);
 	}
-
 
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
 		return timeline.getEvents(filter);
@@ -171,5 +174,15 @@ public class TeamManager {
 			return userStoryManager.getUserStory(title).getTasksManager();
 		}
 	}
+
+
+
+	public boolean moveEvent(String eventName, GregorianCalendar newDate) {
+		return this.timeline.moveEvent(eventName, newDate);
+	}
+
+
+
+	
 	
 }

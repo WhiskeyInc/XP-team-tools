@@ -1,7 +1,9 @@
 package tests;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+
+import java.util.GregorianCalendar;
+
 import model.InvalidStateException;
 import model.TeamManager;
 import model.TeamSettings;
@@ -98,4 +100,24 @@ public class TeamManagerTest {
 		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(9).isMovable());
 		
 	}
+	
+	@Test
+	public void addEventTest() throws Exception {
+		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
+		teamManager.addEvent(new Event("Release", date));
+		assertEquals(2, teamManager.getEventsNumber());
+		assertEquals("Release", teamManager.getEvent("Release").toString());
+		assertEquals(date, teamManager.getEvent("Release").getDate());
+	}
+	
+	public void changeDateTest() throws Exception {
+		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
+		teamManager.addEvent(new Event("Release", date));
+		GregorianCalendar newDate = new GregorianCalendar(2014, 05, 12, 12, 12, 12);
+		assertTrue(teamManager.moveEvent("Relese", newDate));
+		assertEquals(newDate, teamManager.getEvent("Release").getDate());
+		assertTrue(!teamManager.moveEvent("creation", newDate));
+	}
+	
+	
 }
