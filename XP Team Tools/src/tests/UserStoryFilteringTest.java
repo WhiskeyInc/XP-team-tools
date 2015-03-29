@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import boards.UserStory;
 import filtering.TargetFilter;
-import filtering.chechers.StateUserStoryFilter;
+import filtering.chechers.TargetStateUserStoryChecker;
 
 public class UserStoryFilteringTest {
 
@@ -27,10 +27,10 @@ public class UserStoryFilteringTest {
 		assertEquals(
 				1,
 				teammanager.getUserStory(
-						new TargetFilter<UserStory>(new StateUserStoryFilter(
+						new TargetFilter<UserStory>(new TargetStateUserStoryChecker(
 								"ACCOMPLISHED"))).size());
 		assertEquals("Timeline", teammanager.getUserStory(
-						new TargetFilter<UserStory>(new StateUserStoryFilter(
+						new TargetFilter<UserStory>(new TargetStateUserStoryChecker(
 								"ACCOMPLISHED"))).get(0).toString());
 	}
 

@@ -1,18 +1,18 @@
 package filtering.chechers;
 
 import filtering.Checker;
-import boards.UserStory;
+import boards.Task;
 
-public class StateUserStoryFilter implements Checker<UserStory> {
+public class TargetStateTaskChecker implements Checker<Task> {
 
 	private String state;
 	
-	public StateUserStoryFilter(String state) {
+	public TargetStateTaskChecker(String state) {
 		this.state=state;
 	}
 	
 	@Override
-	public boolean check(UserStory tobeChecked) {
+	public boolean check(Task tobeChecked) {
 		if(tobeChecked.getState().compareTo(state)==0){
 			return true;
 		}

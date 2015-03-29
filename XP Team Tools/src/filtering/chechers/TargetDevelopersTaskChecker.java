@@ -3,11 +3,11 @@ package filtering.chechers;
 import filtering.Checker;
 import boards.Task;
 
-public class DeveloperTaskFilter implements Checker<Task> {
+public class TargetDevelopersTaskChecker implements Checker<Task> {
 
 	private String[] targetMembers;
 
-	public DeveloperTaskFilter(String... targetMembers) {
+	public TargetDevelopersTaskChecker(String... targetMembers) {
 		this.targetMembers = new String[targetMembers.length];
 		this.targetMembers = targetMembers;
 	}

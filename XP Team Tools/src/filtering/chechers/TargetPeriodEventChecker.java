@@ -5,12 +5,12 @@ import java.util.GregorianCalendar;
 import filtering.Checker;
 import timeline.Event;
 
-public class DateEventFilter implements Checker<Event> {
+public class TargetPeriodEventChecker implements Checker<Event> {
 
 	private GregorianCalendar fromdate;
 	private GregorianCalendar todate;
 
-	public DateEventFilter(GregorianCalendar fromdate,GregorianCalendar todate) {
+	public TargetPeriodEventChecker(GregorianCalendar fromdate,GregorianCalendar todate) {
 		this.fromdate = fromdate;
 		this.todate = todate;
 	}

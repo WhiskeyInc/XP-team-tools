@@ -8,8 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import boards.Task;
 import filtering.TargetFilter;
-import filtering.chechers.DeveloperTaskFilter;
-import filtering.chechers.StateTaskFilter;
+import filtering.chechers.TargetDevelopersTaskChecker;
+import filtering.chechers.TargetStateTaskChecker;
 
 public class TaskFilteringTest {
 
@@ -27,14 +27,14 @@ public class TaskFilteringTest {
 				1,
 				teammanager.getTasks(
 						"Timeline",
-						new TargetFilter<Task>(new StateTaskFilter(
+						new TargetFilter<Task>(new TargetStateTaskChecker(
 								"ACCOMPLISHED"))).size());
 		assertEquals(
 				"Bacheca",
 				teammanager
 						.getTasks(
 								"Timeline",
-								new TargetFilter<Task>(new StateTaskFilter(
+								new TargetFilter<Task>(new TargetStateTaskChecker(
 										"ACCOMPLISHED"))).get(0).toString());
 	}
 
@@ -55,28 +55,28 @@ public class TaskFilteringTest {
 				2,
 				teammanager.getTasks(
 						"Timeline",
-						new TargetFilter<Task>(new DeveloperTaskFilter(
+						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
 								"Emanuele", "Simone"))).size());
 		assertEquals(
 				"Filtro"+" Bacheca",
 				teammanager.getTasks(
 						"Timeline",
-						new TargetFilter<Task>(new DeveloperTaskFilter(
+						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
 								"Emanuele", "Simone"))).get(1).toString()+" "+teammanager.getTasks(
 										"Timeline",
-										new TargetFilter<Task>(new DeveloperTaskFilter(
+										new TargetFilter<Task>(new TargetDevelopersTaskChecker(
 												"Emanuele", "Simone"))).get(0).toString());
 		assertEquals(
 				1,
 				teammanager.getTasks(
 						"Timeline",
-						new TargetFilter<Task>(new DeveloperTaskFilter(
+						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
 								"Alessandro"))).size());
 		assertEquals(
 				"Filtro",
 				teammanager.getTasks(
 						"Timeline",
-						new TargetFilter<Task>(new DeveloperTaskFilter(
+						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
 								"Alessandro"))).get(0).toString());
 	}
 }

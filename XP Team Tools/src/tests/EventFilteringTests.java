@@ -9,9 +9,9 @@ import org.junit.Test;
 import timeline.Event;
 import timeline.Timeline;
 import filtering.TargetFilter;
-import filtering.chechers.DateEventFilter;
-import filtering.chechers.MemberEventFilter;
-import filtering.chechers.NameEventFilter;
+import filtering.chechers.TargetPeriodEventChecker;
+import filtering.chechers.TargetMembersEventChecker;
+import filtering.chechers.TargetNameEventChecker;
 
 public class EventFilteringTests {
 
@@ -26,7 +26,7 @@ public class EventFilteringTests {
 		assertEquals(
 				1,
 				timeline.getEvents(
-						new TargetFilter<Event>(new DateEventFilter(
+						new TargetFilter<Event>(new TargetPeriodEventChecker(
 								new GregorianCalendar(2015, 01, 01, 23, 3, 50),
 								new GregorianCalendar(2015, 01, 11, 23, 3, 50))))
 						.size());
@@ -47,12 +47,12 @@ public class EventFilteringTests {
 		assertEquals(
 				1,
 				timeline.getEvents(
-						new TargetFilter<Event>(new MemberEventFilter(
+						new TargetFilter<Event>(new TargetMembersEventChecker(
 								partecipants))).size());
 		assertEquals(
 				"Briefing",
 				timeline.getEvents(
-						new TargetFilter<Event>(new MemberEventFilter(
+						new TargetFilter<Event>(new TargetMembersEventChecker(
 								partecipants))).get(0).toString());
 	}
 
@@ -67,17 +67,17 @@ public class EventFilteringTests {
 		assertEquals(
 				2,
 				timeline.getEvents(
-						new TargetFilter<Event>(new NameEventFilter("Event")))
+						new TargetFilter<Event>(new TargetNameEventChecker("Event")))
 						.size());
 		assertEquals(
 				"OtherEvent" + "SomeEvent somewhere...",
 				timeline.getEvents(
-						new TargetFilter<Event>(new NameEventFilter("Event")))
+						new TargetFilter<Event>(new TargetNameEventChecker("Event")))
 						.get(0).toString()
 						+ timeline
 								.getEvents(
 										new TargetFilter<Event>(
-												new NameEventFilter("Event")))
+												new TargetNameEventChecker("Event")))
 								.get(1).toString());
 	}
 

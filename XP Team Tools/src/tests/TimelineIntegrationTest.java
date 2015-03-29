@@ -13,7 +13,7 @@ import org.junit.Test;
 import timeline.Event;
 import filtering.NoFilter;
 import filtering.TargetFilter;
-import filtering.chechers.MemberEventFilter;
+import filtering.chechers.TargetMembersEventChecker;
 
 public class TimelineIntegrationTest {
 
@@ -130,7 +130,7 @@ public class TimelineIntegrationTest {
 		assertEquals(
 				3,
 				teamManager.getEvents(
-						new TargetFilter<Event>(new MemberEventFilter("sumo")))
+						new TargetFilter<Event>(new TargetMembersEventChecker("sumo")))
 						.size());
 	}
 
