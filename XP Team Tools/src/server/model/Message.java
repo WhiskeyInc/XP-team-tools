@@ -5,7 +5,7 @@ public class Message {
 	public String author;
 	public String message;
 
-	public Message(String author, String message) {// classe separata
+	public Message(String author, String message) {
 		super();
 		this.author = author;
 		this.message = message;
