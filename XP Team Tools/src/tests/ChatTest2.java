@@ -1,70 +1,17 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import org.junit.Test;
-
-import server.model.CacheList;
-import server.model.ServerTestable;
-import ui.ChatUITestable;
-import client.model.Client;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 import java.util.Set;
 
+import org.junit.Test;
+
 import server.model.Conversations;
-import string.formatter.NewLineMaker;
 
 public class ChatTest2 {
 
-	@Test
-	public void clientServerChatTest() throws Exception {
-		final ServerTestable server = new ServerTestable(new CacheList());
-		server.openPort(9999);
-		final Client client = new Client();
-		client.openStreams("localhost", 9999);
-
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				server.listenClients();
-
-			}
-		};
-
-		Thread thread = new Thread(runnable);
-		thread.start();
-
-		final ChatUITestable chatUI = new ChatUITestable();
-		chatUI.setButtonAction(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(chatUI.getMessage());
-			}
-		});
-
-		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
-		chatUI.simulateSendClick();
-		waitTCPSending(server);
-
-		assertEquals(chatUI.getMessage(), NewLineMaker.appendNewLine(server.getLastMessage()));
-	}
-
-	private void waitTCPSending(final ServerTestable server) {
-		boolean notArrived = true;
-		while(notArrived)
-		try {
-			server.getLastMessage();
-			notArrived = false;
-		} catch (Exception e) {
-
-		}
-	}
 
 	// test pavlo e nicola
 	@Test

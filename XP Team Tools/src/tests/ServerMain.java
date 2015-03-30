@@ -2,11 +2,11 @@ package tests;
 
 import server.model.AbstractServer;
 import server.model.CacheList;
-import server.model.ServerTestable;
+import server.model.TestableServer;
 
 public class ServerMain {
 	public static void main(String[] args) {
-		AbstractServer server = new ServerTestable(new CacheList());
+		AbstractServer server = new TestableServer(new CacheList());
 		
 		try {
 			server.openPort(9999);

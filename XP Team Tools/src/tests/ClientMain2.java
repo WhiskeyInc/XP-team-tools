@@ -8,12 +8,19 @@ import string.formatter.NewLineMaker;
 import ui.ChatUITestable;
 import client.model.Client;
 
-public class ClientMain {
+/**
+ * This class, with clientMain and serverMain, tests the communication between 2
+ * Clients and 1 Server
+ * 
+ * @author alberto
+ *
+ */
+public class ClientMain2 {
 	public static void main(String[] args) {
 		final Client client = new Client();
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -24,11 +31,12 @@ public class ClientMain {
 				}
 			}
 		};
-		
+
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		client.sendMessageToServer(NewLineMaker.appendNewLine("Hi"));
+
+		client.sendMessageToServer(NewLineMaker
+				.appendNewLine("Io sono l' altro client"));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -38,7 +46,7 @@ public class ClientMain {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
+		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciaooo!"));
 		chatUI.simulateSendClick();
 
 	}

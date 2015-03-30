@@ -1,34 +1,38 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
+import org.junit.Test;
+
+import server.model.CacheList;
+import server.model.TestableServer;
 import string.formatter.NewLineMaker;
 import ui.ChatUITestable;
 import client.model.Client;
 
-public class ClientMain {
-	public static void main(String[] args) {
+public class ClientServerTests {
+
+	@Test
+	public void clientServerChatTest() throws Exception {
+		final TestableServer server = new TestableServer(new CacheList());
+		server.openPort(9999);
 		final Client client = new Client();
 		client.openStreams("localhost", 9999);
+
 		Runnable runnable = new Runnable() {
-			
+
 			@Override
 			public void run() {
-				try {
-					client.readFromSocket();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				server.listenClients();
+
 			}
 		};
-		
+
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		client.sendMessageToServer(NewLineMaker.appendNewLine("Hi"));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -38,8 +42,23 @@ public class ClientMain {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
+
 		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
 		chatUI.simulateSendClick();
+		waitTCPSending(server);
 
+		assertEquals(chatUI.getMessage(), NewLineMaker.appendNewLine(server.getLastMessage()));
+	}
+
+
+	private void waitTCPSending(final TestableServer server) {
+		boolean notArrived = true;
+		while(notArrived)
+		try {
+			server.getLastMessage();
+			notArrived = false;
+		} catch (Exception e) {
+
+		}
 	}
 }
