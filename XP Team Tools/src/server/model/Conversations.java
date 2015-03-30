@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * conversations. Those last convs have to contain TOT last messages (to be
  * implemented).
  * 
- * @author koelio
+ * @author koelio, nicola
  *
  */
 public class Conversations {

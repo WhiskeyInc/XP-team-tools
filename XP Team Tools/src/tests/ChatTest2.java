@@ -90,8 +90,6 @@ public class ChatTest2 {
 		}
 	}
 
-	
-
 
 	@Test
 	public void sendMsgTest() throws Exception {
@@ -115,16 +113,16 @@ public class ChatTest2 {
 
 		// String timestamp =
 		// server.getConvs().get(j).getConv().keySet().toString();
-		Set<Timestamp> timestamp2 = conversations.getConvs().get(j).getConv()
+		Set<Timestamp> timestamp2 = conversations.getConvs().get(j).getMessages()
 				.keySet();
-		System.out.println(timestamp2);// test
-		System.out.println(timestamp2.toArray()[0]);// test
-		System.out.println(conversations.getConvs().get(j).getConv()
-				.get(timestamp2.toArray()[0]).getMessage());
+//		System.out.println(timestamp2);
+//		System.out.println(timestamp2.toArray()[0]);
+//		System.out.println(conversations.getConvs().get(j).getMessages()
+//				.get(timestamp2.toArray()[0]).getMessage());
 
 		assertEquals(
 				"ciao",
-				conversations.getConvs().get(j).getConv()
+				conversations.getConvs().get(j).getMessages()
 						.get(timestamp2.toArray()[0]).getMessage());
 	}
 

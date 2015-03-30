@@ -13,13 +13,13 @@ import java.util.LinkedList;
  * a conv.
  * 
  * 
- * @author koelio
+ * @author koelio, nicola
  *
  */
 public class Conversation {
 
 	private LinkedList<String> participants = new LinkedList<String>();
-	private HashMap<Timestamp, Message> conv = new HashMap<Timestamp, Message>();
+	private HashMap<Timestamp, Message> messages = new HashMap<Timestamp, Message>();
 
 	public Conversation(String[] participants) {
 		for (int i = 0; i < participants.length; i++) {
@@ -28,7 +28,7 @@ public class Conversation {
 	}
 
 	public void addMessage(String author, String msg) {
-		conv.put(new Timestamp(System.currentTimeMillis()), new Message(author,
+		messages.put(new Timestamp(System.currentTimeMillis()), new Message(author,
 				msg));
 	}
 
@@ -36,8 +36,8 @@ public class Conversation {
 		return participants;
 	}
 
-	public HashMap<Timestamp, Message> getConv() {
-		return conv;
+	public HashMap<Timestamp, Message> getMessages() {
+		return messages;
 	}
 
 }
