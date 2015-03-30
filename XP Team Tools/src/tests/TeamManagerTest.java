@@ -4,26 +4,41 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
-import model.FixedEventException;
-import model.InvalidStateException;
 import model.TeamManager;
-import model.TeamSettings;
+import model.ConcreteTeamManager;
+import model.ConcreteTeamSettings;
+import model.exceptions.InvalidStateException;
+import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
 
+import boards.TaskManager;
+import boards.ConcreteTaskManager;
+import boards.TeamTaskManager;
+import boards.TeamUserStoriesManager;
+import boards.ConcreteUserStoriesManager;
+import boards.UserStoriesManager;
 import timeline.Event;
+import timeline.ConcreteTimeline;
+import timeline.Timeline;
 import filtering.NoFilter;
 
 public class TeamManagerTest {
 
-	private TeamSettings settings = new TeamSettings();
-	private TeamManager teamManager = new TeamManager(settings);
+	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
+	private Timeline timeline = new ConcreteTimeline();
+	private TeamManager teamManager = new ConcreteTeamManager(settings, timeline);
+	private TaskManager taskBoard = new TeamTaskManager(new ConcreteTaskManager(),
+			teamManager);
+	private UserStoriesManager userStoriesBoard = new TeamUserStoriesManager(
+			new ConcreteUserStoriesManager(), teamManager);
+
 
 	@Test
 	public void tasksStateCheckTest01() throws Exception {
-		teamManager.addTask("Timeline", "GENERAL");
+		taskBoard.addTask("Timeline");
 		try {
-			teamManager.moveTaskToState("Timeline", "IMPLEMENTED", "GENERAL");
+			taskBoard.moveTaskToState("Timeline", "IMPLEMENTED");
 			fail();
 		} catch (InvalidStateException e) {
 			assertTrue(true);
@@ -32,10 +47,10 @@ public class TeamManagerTest {
 	
 	@Test
 	public void tasksStateCheckTest02() throws Exception {
-		teamManager.addTask("Timeline", "GENERAL");
+		taskBoard.addTask("Timeline");
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "DONE");
 		try {
-			teamManager.moveTaskToState("Timeline", "DONE", "GENERAL");
+			taskBoard.moveTaskToState("Timeline", "DONE");
 		} catch (InvalidStateException e) {
 			fail();
 		}
@@ -43,9 +58,9 @@ public class TeamManagerTest {
 
 	@Test
 	public void UserStoriesStateCheckTest01() throws Exception {
-		teamManager.addUserStory("Timeline", "Voglio un pannello che...");
+		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
 		try {
-			teamManager.moveStoryToState("Timeline", "ACCOMPLISHED");
+			userStoriesBoard.moveUserStoryToState("Timeline", "ACCOMPLISHED");
 			fail();
 		} catch (InvalidStateException e) {
 			assertTrue(true);
@@ -54,10 +69,10 @@ public class TeamManagerTest {
 	
 	@Test
 	public void UserStoriesStateCheckTest02() throws Exception {
-		teamManager.addUserStory("Timeline", "Voglio un pannello che...");
+		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
 		try {
-			teamManager.moveStoryToState("Timeline", "DONE");
+			userStoriesBoard.moveUserStoryToState("Timeline", "DONE");
 		} catch (InvalidStateException e) {
 			fail();
 		}
@@ -68,64 +83,64 @@ public class TeamManagerTest {
 		
 		settings.setPossibleTasksStates("TODO", "DONE");
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
-		settings.addTeamMember("Lele");
+		settings.addTeamMember("Lele", "Simo");
 		
-		Event creation = teamManager.getEvent("creation");
+		Event creation = timeline.getEvent("creation");
 		assertTrue(!creation.isMovable());
 		
-		teamManager.addUserStory("Timeline", "Voglio un pannello che...");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(1).isMovable());
+		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(1).isMovable());
 		
-		teamManager.addTask("Dormire", "Timeline");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(2).isMovable());
+		taskBoard.addTask("Dormire");
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(2).isMovable());
 		
-		teamManager.addTask("Dormire2", "Dormire tanto perchè cambia l'ora", "Timeline");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(3).isMovable());
+		taskBoard.addTask("Dormire2", "Dormire tanto perchè cambia l'ora");
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(3).isMovable());
 		
-		teamManager.deleteTask("Dormire2", "Timeline");		
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(4).isMovable());
+		taskBoard.deleteTask("Dormire2");		
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(4).isMovable());
 		
-		teamManager.moveTaskToState("Dormire", "TODO", "Timeline");		
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(5).isMovable());
+		taskBoard.moveTaskToState("Dormire", "TODO");		
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(5).isMovable());
 		
-		teamManager.addDeveloperToTask("Dormire", "Lele", "Timeline");		
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(6).isMovable());
+		taskBoard.addDevelopersToTask("Dormire", "Lele", "Simo");		
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(6).isMovable());
 				
-		teamManager.addUserStory("Timeline2");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(7).isMovable());
+		userStoriesBoard.addUserStory("Timeline2", null);
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(7).isMovable());
 		
-		teamManager.deleteUserStory("Timeline2");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(8).isMovable());
+		userStoriesBoard.deleteUserStory("Timeline2");
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(8).isMovable());
 		
-		teamManager.moveStoryToState("Timeline", "DONE");
-		assertTrue(!teamManager.getEvents(new NoFilter<Event>()).get(9).isMovable());
+		userStoriesBoard.moveUserStoryToState("Timeline", "DONE");
+		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(9).isMovable());
 		
 	}
 	
 	@Test
 	public void addEventTest() throws Exception {
 		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
-		teamManager.addEvent(new Event("Release", date));
-		assertEquals(2, teamManager.getEventsNumber());
-		assertEquals("Release", teamManager.getEvent("Release").toString());
-		assertEquals(date, teamManager.getEvent("Release").getDate());
+		timeline.addEvent(new Event("Release", date));
+		assertEquals(2, timeline.getEventsNumber());
+		assertEquals("Release", timeline.getEvent("Release").toString());
+		assertEquals(date, timeline.getEvent("Release").getDate());
 	}
 	
 	@Test
 	public void changeDateTest() {
 		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
-		teamManager.addEvent(new Event("Release", date));
+		timeline.addEvent(new Event("Release", date));
 		GregorianCalendar newDate = new GregorianCalendar(2014, 05, 12, 12, 12, 12);
 		try {
-			teamManager.moveEvent("Release", newDate);
-		} catch (FixedEventException e) {
+			timeline.moveEvent("Release", newDate);
+		} catch (UnmovableEventException e) {
 			fail();
 		}
-		assertEquals(newDate, teamManager.getEvent("Release").getDate());
+		assertEquals(newDate, timeline.getEvent("Release").getDate());
 		try {
-			teamManager.moveEvent("creation", newDate);
+			timeline.moveEvent("creation", newDate);
 			fail();
-		} catch (FixedEventException e) {
+		} catch (UnmovableEventException e) {
 			assertTrue(true);
 		}
 	}
@@ -133,9 +148,9 @@ public class TeamManagerTest {
 	@Test
 	public void dropEventTest() throws Exception {
 		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
-		teamManager.addEvent(new Event("Release", date));
-		teamManager.dropEvent("Release");
-		assertEquals(1, teamManager.getEventsNumber());
+		timeline.addEvent(new Event("Release", date));
+		timeline.deleteEvent("Release");
+		assertEquals(1, timeline.getEventsNumber());
 	}
 	
 	

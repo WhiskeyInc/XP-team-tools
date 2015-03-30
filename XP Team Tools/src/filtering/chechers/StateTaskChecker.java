@@ -3,11 +3,11 @@ package filtering.chechers;
 import filtering.Checker;
 import boards.Task;
 
-public class TargetStateTaskChecker implements Checker<Task> {
+public class StateTaskChecker implements Checker<Task> {
 
 	private String state;
 	
-	public TargetStateTaskChecker(String state) {
+	public StateTaskChecker(String state) {
 		this.state=state;
 	}
 	

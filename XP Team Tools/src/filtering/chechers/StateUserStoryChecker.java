@@ -3,11 +3,11 @@ package filtering.chechers;
 import filtering.Checker;
 import boards.UserStory;
 
-public class TargetStateUserStoryChecker implements Checker<UserStory> {
+public class StateUserStoryChecker implements Checker<UserStory> {
 
 	private String state;
 	
-	public TargetStateUserStoryChecker(String state) {
+	public StateUserStoryChecker(String state) {
 		this.state=state;
 	}
 	

@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import boards.ConcreteUserStoriesManager;
 import boards.UserStoriesManager;
 
 public class UserStoriesManagerTest {
 
-	UserStoriesManager manager = new UserStoriesManager();
+	UserStoriesManager manager = new ConcreteUserStoriesManager();
 
 	@Test
 	public void addStoryTest() throws Exception {
@@ -32,7 +33,7 @@ public class UserStoriesManagerTest {
 	public void setStateTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
-		manager.moveStoryToState("us1", "ACCOMPLISHED");
+		manager.moveUserStoryToState("us1", "ACCOMPLISHED");
 		assertEquals("ACCOMPLISHED", manager.getUserStory("us1").getState());
 	}
 

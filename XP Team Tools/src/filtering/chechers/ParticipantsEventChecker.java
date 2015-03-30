@@ -3,11 +3,11 @@ package filtering.chechers;
 import filtering.Checker;
 import timeline.Event;
 
-public class TargetMembersEventChecker implements Checker<Event> {
+public class ParticipantsEventChecker implements Checker<Event> {
 	
 	private String[] targetMembers;
 	
-	public TargetMembersEventChecker(String ... targetMembers) {
+	public ParticipantsEventChecker(String ... targetMembers) {
 		this.targetMembers = new String[targetMembers.length];
 		this.targetMembers = targetMembers;
 	}

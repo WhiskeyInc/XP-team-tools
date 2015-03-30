@@ -1,4 +1,4 @@
-package model;
+package model.exceptions;
 
 public class NameAlreadyInUseException extends Exception {
 

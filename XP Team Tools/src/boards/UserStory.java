@@ -1,13 +1,13 @@
 package boards;
 
-import model.NameAlreadyInUseException;
+import model.exceptions.NameAlreadyInUseException;
 
 public class UserStory {
 
 	private String title;
 	private String description;
 	private String state;
-	private TasksManager taskManager = new TasksManager();
+	private TaskManager taskManager = new ConcreteTaskManager();
 	
 	public UserStory(String title) {
 		this.state = "TODO";
@@ -42,7 +42,7 @@ public class UserStory {
 		return this.title;
 	}
 
-	public TasksManager getTasksManager() {
+	public TaskManager getTasksManager() {
 		return this.taskManager ;
 	}
 

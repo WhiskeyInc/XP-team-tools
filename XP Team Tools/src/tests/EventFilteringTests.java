@@ -7,15 +7,16 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 import timeline.Event;
+import timeline.ConcreteTimeline;
 import timeline.Timeline;
 import filtering.TargetFilter;
-import filtering.chechers.TargetPeriodEventChecker;
-import filtering.chechers.TargetMembersEventChecker;
-import filtering.chechers.TargetNameEventChecker;
+import filtering.chechers.PeriodEventChecker;
+import filtering.chechers.ParticipantsEventChecker;
+import filtering.chechers.NameEventChecker;
 
 public class EventFilteringTests {
 
-	Timeline timeline = new Timeline();
+	Timeline timeline = new ConcreteTimeline();
 
 	@Test
 	public void DateEventFilterTest() {
@@ -26,7 +27,7 @@ public class EventFilteringTests {
 		assertEquals(
 				1,
 				timeline.getEvents(
-						new TargetFilter<Event>(new TargetPeriodEventChecker(
+						new TargetFilter<Event>(new PeriodEventChecker(
 								new GregorianCalendar(2015, 01, 01, 23, 3, 50),
 								new GregorianCalendar(2015, 01, 11, 23, 3, 50))))
 						.size());
@@ -47,12 +48,12 @@ public class EventFilteringTests {
 		assertEquals(
 				1,
 				timeline.getEvents(
-						new TargetFilter<Event>(new TargetMembersEventChecker(
+						new TargetFilter<Event>(new ParticipantsEventChecker(
 								partecipants))).size());
 		assertEquals(
 				"Briefing",
 				timeline.getEvents(
-						new TargetFilter<Event>(new TargetMembersEventChecker(
+						new TargetFilter<Event>(new ParticipantsEventChecker(
 								partecipants))).get(0).toString());
 	}
 
@@ -67,17 +68,17 @@ public class EventFilteringTests {
 		assertEquals(
 				2,
 				timeline.getEvents(
-						new TargetFilter<Event>(new TargetNameEventChecker("Event")))
+						new TargetFilter<Event>(new NameEventChecker("Event")))
 						.size());
 		assertEquals(
 				"OtherEvent" + "SomeEvent somewhere...",
 				timeline.getEvents(
-						new TargetFilter<Event>(new TargetNameEventChecker("Event")))
+						new TargetFilter<Event>(new NameEventChecker("Event")))
 						.get(0).toString()
 						+ timeline
 								.getEvents(
 										new TargetFilter<Event>(
-												new TargetNameEventChecker("Event")))
+												new NameEventChecker("Event")))
 								.get(1).toString());
 	}
 

@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import boards.TasksManager;
+import boards.TaskManager;
+import boards.ConcreteTaskManager;
 
 public class TasksManagerTest {
 
-	TasksManager manager = new TasksManager();
+	TaskManager manager = new ConcreteTaskManager();
 
 	@Test
 	public void newTaskTest() throws Exception {

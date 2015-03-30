@@ -3,39 +3,67 @@ package boards;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.NameAlreadyInUseException;
+import model.exceptions.NameAlreadyInUseException;
 import filtering.Filter;
 
-public class TasksManager {
+public class ConcreteTaskManager implements TaskManager {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#addTask(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void addTask(String taskName, String description) throws NameAlreadyInUseException {
 		checkTaskName(taskName);
 		Task task = new Task(taskName, description);
 		tasks.put(task.toString(), task);
 	}
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#addTask(java.lang.String)
+	 */
+	@Override
 	public void addTask(String taskName) throws NameAlreadyInUseException {
 		this.addTask(taskName, "");		
 	}
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#deleteTask(java.lang.String)
+	 */
+	@Override
 	public void deleteTask(String taskName) {
 		tasks.remove(taskName);
 	}
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#getTask(java.lang.String)
+	 */
+	@Override
 	public Task getTask(String taskName) {
 		return tasks.get(taskName);
 	}
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#getTasksNumber()
+	 */
+	@Override
 	public int getTasksNumber() {
 		return tasks.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#moveTaskToState(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void moveTaskToState(String taskName, String targetState) {
 		this.tasks.get(taskName).moveTaskToState(targetState);
 	}
 	
+	/* (non-Javadoc)
+	 * @see boards.TaskManager#getTasks(filtering.Filter)
+	 */
+	@Override
 	public ArrayList<Task> getTasks(Filter<Task> filter){
 		return filter.filter(this.getAllTasks());
 	}
@@ -51,18 +79,11 @@ public class TasksManager {
 			throw new NameAlreadyInUseException(taskName);
 		}
 	}
-	
-	/*
-	 * The following method is outdated! Filtering functionality has been moved to TeamManager	
-	 */
-//	public ArrayList<Task> getTasks(String targetState) {
-//		ArrayList<Task> list = new ArrayList<Task>();
-//		for (Task task : tasks.values()) {
-//			if (task.getState().compareTo(targetState)==0) {
-//				list.add(task);
-//			}
-//		}
-//		return list;
-//	}
 
+	public void addDevelopersToTask(String taskName, String... developers) {
+		for (String developer : developers) {
+			this.getTask(taskName).addDeveloper(developer);
+		}
+		
+	}
 }

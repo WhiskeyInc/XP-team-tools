@@ -4,17 +4,18 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
-import model.FixedEventException;
+import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
 
 import timeline.Event;
+import timeline.ConcreteTimeline;
 import timeline.Timeline;
 import filtering.NoFilter;
 
 public class TimelineTest {
 
-	Timeline timeline = new Timeline();
+	Timeline timeline = new ConcreteTimeline();
 
 	@Test
 	public void timelineCreationTest() {
@@ -32,7 +33,7 @@ public class TimelineTest {
 	public void dropEventTest() {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
 				20, 23, 3, 50)));
-		timeline.dropEvent("Briefing");
+		timeline.deleteEvent("Briefing");
 		assertEquals(1, timeline.getEventsNumber());
 	}
 
@@ -60,7 +61,7 @@ public class TimelineTest {
 		try {
 			timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
 					2015, 02, 20, 23, 3, 50));
-		} catch (FixedEventException e) {
+		} catch (UnmovableEventException e) {
 			fail();
 		}
 		assertEquals(new GregorianCalendar(2015, 02, 20, 23, 3, 50), timeline

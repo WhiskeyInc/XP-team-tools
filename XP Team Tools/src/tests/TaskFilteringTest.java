@@ -1,41 +1,61 @@
 package tests;
 
+import model.ConcreteTeamManager;
+import model.ConcreteTeamSettings;
 import model.TeamManager;
-import model.TeamSettings;
 
 import org.junit.Test;
 
+import timeline.ConcreteTimeline;
+import timeline.Timeline;
 import static org.junit.Assert.*;
 import boards.Task;
+import boards.TaskManager;
+import boards.ConcreteTaskManager;
+import boards.TeamTaskManager;
+import boards.TeamUserStoriesManager;
+import boards.ConcreteUserStoriesManager;
+import boards.UserStoriesManager;
 import filtering.TargetFilter;
-import filtering.chechers.TargetDevelopersTaskChecker;
-import filtering.chechers.TargetStateTaskChecker;
+import filtering.chechers.DevelopersTaskChecker;
+import filtering.chechers.StateTaskChecker;
 
 public class TaskFilteringTest {
 
-	TeamSettings settings = new TeamSettings();
-	TeamManager teammanager = new TeamManager(settings);
+	ConcreteTeamSettings settings = new ConcreteTeamSettings();
+	ConcreteTaskManager taskBoard = new ConcreteTaskManager();
+	Timeline timeline = new ConcreteTimeline();
+	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
+	TeamManager manager = new ConcreteTeamManager(settings, timeline);
+	UserStoriesManager userStoriesManager = new TeamUserStoriesManager(
+			userStoriesBoard, manager);
+	TaskManager teamTaskManager = new TeamTaskManager(taskBoard, manager);
 
 	@Test
 	public void StateTaskFilterTest() throws Exception {
 		settings.setPossibleTasksStates("TODO", "IN PROGRESS", "ACCOMPLISHED");
-		teammanager.addUserStory("Timeline", "Voglio un pannello che...");
-		teammanager.addTask("Filtro", "Timeline");
-		teammanager.addTask("Bacheca", "Timeline");
-		teammanager.moveTaskToState("Bacheca", "ACCOMPLISHED", "Timeline");
+		teamTaskManager.addTask("Timeline");
+		teamTaskManager.addTask("Filtro");
+		teamTaskManager.addTask("Bacheca");
+		teamTaskManager.moveTaskToState("Bacheca", "ACCOMPLISHED");
 		assertEquals(
 				1,
-				teammanager.getTasks(
-						"Timeline",
-						new TargetFilter<Task>(new TargetStateTaskChecker(
+				teamTaskManager.getTasks(
+						new TargetFilter<Task>(new StateTaskChecker(
 								"ACCOMPLISHED"))).size());
 		assertEquals(
 				"Bacheca",
-				teammanager
+				teamTaskManager
 						.getTasks(
-								"Timeline",
-								new TargetFilter<Task>(new TargetStateTaskChecker(
-										"ACCOMPLISHED"))).get(0).toString());
+								new TargetFilter<Task>(
+										new StateTaskChecker(
+												"ACCOMPLISHED"))).get(0)
+						.toString());
+		assertEquals(
+				0,
+				teamTaskManager.getTasks(
+						new TargetFilter<Task>(new StateTaskChecker(
+								"IN PROGRESS"))).size());
 	}
 
 	@Test
@@ -43,40 +63,46 @@ public class TaskFilteringTest {
 		settings.addTeamMember("Simone");
 		settings.addTeamMember("Emanuele");
 		settings.addTeamMember("Alessandro");
-		teammanager.addUserStory("Timeline", "Voglio un pannello che...");
-		teammanager.addTask("Filtro", "Timeline");
-		teammanager.addTask("Bacheca", "Timeline");
-		teammanager.addDeveloperToTask("Filtro", "Simone", "Timeline");
-		teammanager.addDeveloperToTask("Filtro", "Alessandro", "Timeline");
-		teammanager.addDeveloperToTask("Filtro", "Emanuele", "Timeline");
-		teammanager.addDeveloperToTask("Bacheca", "Emanuele", "Timeline");
-		teammanager.addDeveloperToTask("Bacheca", "Simone", "Timeline");
+		teamTaskManager.addTask("Filtro");
+		teamTaskManager.addTask("Bacheca");
+		teamTaskManager.addTask("Nessun Partecipante");
+		teamTaskManager.addDevelopersToTask("Filtro", "Simone");
+		teamTaskManager.addDevelopersToTask("Filtro", "Emanuele");
+		teamTaskManager.addDevelopersToTask("Filtro", "Alessandro");
+		teamTaskManager.addDevelopersToTask("Bacheca", "Simone", "Emanuele");
+		teamTaskManager.addDevelopersToTask("Bacheca", "Simone");
 		assertEquals(
 				2,
-				teammanager.getTasks(
-						"Timeline",
-						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
+				teamTaskManager.getTasks(
+						new TargetFilter<Task>(new DevelopersTaskChecker(
 								"Emanuele", "Simone"))).size());
 		assertEquals(
-				"Filtro"+" Bacheca",
-				teammanager.getTasks(
-						"Timeline",
-						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
-								"Emanuele", "Simone"))).get(1).toString()+" "+teammanager.getTasks(
-										"Timeline",
-										new TargetFilter<Task>(new TargetDevelopersTaskChecker(
-												"Emanuele", "Simone"))).get(0).toString());
+				"Filtro" + " Bacheca",
+				teamTaskManager
+						.getTasks(
+								new TargetFilter<Task>(
+										new DevelopersTaskChecker(
+												"Emanuele", "Simone"))).get(1)
+						.toString()
+						+ " "
+						+ teamTaskManager
+								.getTasks(
+										new TargetFilter<Task>(
+												new DevelopersTaskChecker(
+														"Emanuele", "Simone")))
+								.get(0).toString());
 		assertEquals(
 				1,
-				teammanager.getTasks(
-						"Timeline",
-						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
+				teamTaskManager.getTasks(
+						new TargetFilter<Task>(new DevelopersTaskChecker(
 								"Alessandro"))).size());
 		assertEquals(
 				"Filtro",
-				teammanager.getTasks(
-						"Timeline",
-						new TargetFilter<Task>(new TargetDevelopersTaskChecker(
-								"Alessandro"))).get(0).toString());
+				teamTaskManager
+						.getTasks(
+								new TargetFilter<Task>(
+										new DevelopersTaskChecker(
+												"Alessandro"))).get(0)
+						.toString());
 	}
 }

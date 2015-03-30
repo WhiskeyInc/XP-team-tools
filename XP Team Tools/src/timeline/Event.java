@@ -3,7 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import model.FixedEventException;
+import model.exceptions.UnmovableEventException;
 
 /**
  * This class represent an event which has four characteristics: a name
@@ -101,12 +101,12 @@ public class Event implements Comparable<Event> {
 	 * Changes the date of this event
 	 * 
 	 * @param newDate: the date to set
-	 * @throws FixedEventException: if this event is fixed
+	 * @throws UnmovableEventException: if this event is fixed
 	 * @see {@link Event}.isMovable()
 	 */
-	public void setDate(GregorianCalendar newDate) throws FixedEventException {
+	public void setDate(GregorianCalendar newDate) throws UnmovableEventException {
 		if (!movable) {
-			throw new FixedEventException(this.name);
+			throw new UnmovableEventException(this.name);
 		}
 		this.date = newDate;
 		
@@ -122,6 +122,10 @@ public class Event implements Comparable<Event> {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	public int compareTo(Event otherevent) {
 		return this.getDate().compareTo(otherevent.getDate());
 	}

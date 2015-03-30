@@ -1,204 +1,30 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import timeline.Event;
-import timeline.Timeline;
 import boards.Task;
-import boards.TasksManager;
-import boards.UserStoriesManager;
 import boards.UserStory;
-import filtering.Filter;
 
-public class TeamManager {
+public interface TeamManager {
 
-	private final static String GENERAL = "GENERAL";
+	public void userStoryAdded(UserStory userStory);
 
-	private TasksManager generalTaskManager = new TasksManager();
-	private UserStoriesManager userStoryManager = new UserStoriesManager();
-	private Timeline timeline = new Timeline();
-	private TeamSettings settings;
+	public void userStoryDeleted(UserStory userStory);
 
-	public TeamManager(TeamSettings settings) {
-		this.settings = settings;
-	}
+	public void userStoryStateChanged(UserStory userStory, String newState);
 
-	public void addTask(String taskName, String relatedUserStory)
-			throws NameAlreadyInUseException {
-		this.addTask(taskName, "", relatedUserStory);
-		this.timeline.addEvent(new Event("Created task: " + taskName + " for: "
-				+ relatedUserStory, getCurrentDate(), false));
-	}
+	public void userStoryPriorityChanged(UserStory userStory); //TODO
 
-	public void addTask(String taskName, String description,
-			String relatedUserStory) throws NameAlreadyInUseException {
-		this.getTaskManager(relatedUserStory).addTask(taskName, description);
-		this.timeline.addEvent(new Event("Created task: " + taskName + " for: "
-				+ relatedUserStory, getCurrentDate(), false));
-	}
+	public boolean isValidUserStoryState(String state);
 
-	public void deleteTask(String taskName, String relatedUserStory) throws NoSuchTaskException {
-		if(!taskExists(taskName, relatedUserStory)){
-			throw new NoSuchTaskException(taskName);
-		}
-		Event event = new Event("Deleted task: " + taskName + " from: "
-				+ relatedUserStory, getCurrentDate(), false);
-		addDevelopersToEvent(taskName, event, relatedUserStory);
-		getTaskManager(relatedUserStory).deleteTask(taskName);
-		timeline.addEvent(event);
-	}
+	public boolean isValidTaskState(String state);
 
-	public void moveTaskToState(String taskName, String targetState,
-			String relatedUserStory) throws NoSuchTaskException, InvalidStateException {
-		if(!taskExists(taskName, relatedUserStory)){
-			throw new NoSuchTaskException(taskName);
-		}
-		checkTaskState(targetState);
-		getTaskManager(relatedUserStory).moveTaskToState(taskName, targetState);
-		Event event = new Event("Changed state of task " + taskName + " of: "
-				+ relatedUserStory + ". Now it is " + targetState,
-				this.getCurrentDate(), false);
-		addDevelopersToEvent(taskName, event, relatedUserStory);
-		this.timeline.addEvent(event);
-	}
+	public boolean isValidMember(String member);
 
-	public void addDeveloperToTask(String taskName, String developer,
-			String relatedUserStory) throws InvalidMemberException,
-			NameAlreadyInUseException {
-		if(!taskExists(taskName, relatedUserStory)){
-			getTaskManager(relatedUserStory).addTask(taskName);
-		}
-		checkMember(developer);
-		getTaskManager(relatedUserStory).getTask(taskName).addDeveloper(
-				developer);
-		Event event = new Event("Added " + developer + " to task: " + taskName
-				+ " of: " + relatedUserStory, getCurrentDate(), false);
-		event.addParticipant(developer);
-		timeline.addEvent(event);
-	}
+	public void developersAdded(Task task, String... developers);
 
-	public ArrayList<Task> getTasks(String title, Filter<Task> filter) {
-		return userStoryManager.getUserStory(title).getTasksManager()
-				.getTasks(filter);
-	}
+	public void taskStateChanged(Task task, String newState);
 
-	public void addEvent(Event event) {
-		this.timeline.addEvent(event);
-	}
+	public void taskDeleted(Task task);
 
-	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws FixedEventException {
-		timeline.moveEvent(eventName, newDate);
-	}
-
-	public void dropEvent(String eventName) {
-		this.timeline.dropEvent(eventName);
-	}
-
-	public int getEventsNumber() {
-		return this.timeline.getEventsNumber();
-	}
-
-	public Event getEvent(String eventName) {
-		return this.timeline.getEvent(eventName);
-	}
-
-	public ArrayList<Event> getEvents(Filter<Event> filter) {
-		return timeline.getEvents(filter);
-	}
-
-	public void addUserStory(String title, String description)
-			throws NameAlreadyInUseException {
-		this.userStoryManager.addUserStory(title, description);
-		this.timeline.addEvent(new Event("Created userstory: " + title,
-				getCurrentDate(), false));
-	}
-
-	public void addUserStory(String title) throws NameAlreadyInUseException {
-		this.addUserStory(title, "");
-		this.timeline.addEvent(new Event("Created userstory: " + title,
-				getCurrentDate(), false));
-	}
-
-	public void deleteUserStory(String title) throws NoSuchUserStoryException {
-		if(!userStoryExists(title)){
-			throw new NoSuchUserStoryException(title);
-		}
-		Event event = new Event("Deleted userstory: " + title,
-				getCurrentDate(), false);
-		this.userStoryManager.deleteUserStory(title);
-		timeline.addEvent(event);
-	}
-
-	public void moveStoryToState(String title, String targetState)
-			throws NoSuchUserStoryException, InvalidStateException {
-		if(!userStoryExists(title)){
-			throw new NoSuchUserStoryException(title);
-		}
-		checkUserStoryState(targetState);
-		this.userStoryManager.moveStoryToState(title, targetState);
-		Event event = new Event("Changed state of userstory " + title
-				+ ": now it is " + targetState, this.getCurrentDate(), false);
-		this.timeline.addEvent(event);
-	}
-
-	public ArrayList<UserStory> getUserStory(Filter<UserStory> filter) {
-		return userStoryManager.getUserStories(filter);
-	}
-
-	private void checkTaskState(String targetState)
-			throws InvalidStateException {
-		if (!settings.getPossibleTasksStates().contains(targetState)) {
-			throw new InvalidStateException(targetState);
-		}
-	}
-
-	private boolean taskExists(String taskName, String title){
-		Task task = getTaskManager(title).getTask(taskName);
-		if (task == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private void checkMember(String member) throws InvalidMemberException {
-		if (!settings.getTeamMembers().contains(member)) {
-			throw new InvalidMemberException(member);
-		}
-	}
-
-	private void addDevelopersToEvent(String taskName, Event event, String title) {
-		event.addParticipants(getTaskManager(title).getTask(taskName)
-				.getDevelopers());
-	}
-
-	private GregorianCalendar getCurrentDate() {
-		return (GregorianCalendar) Calendar.getInstance();
-	}
-
-	private boolean userStoryExists(String title){
-		UserStory userstory = userStoryManager.getUserStory(title);
-		if (userstory == null) {
-			return false;
-		}
-		return true;
-	}
-	
-	private void checkUserStoryState(String targetState)
-			throws InvalidStateException {
-		if (!settings.getPossibleUserStoriesStates().contains(targetState)) {
-			throw new InvalidStateException(targetState);
-		}
-	}
-
-	private TasksManager getTaskManager(String title) {
-		if (title.compareTo(GENERAL) == 0) {
-			return this.generalTaskManager;
-		} else {
-			return userStoryManager.getUserStory(title).getTasksManager();
-		}
-	}
+	public void taskAdded(Task task);
 
 }
