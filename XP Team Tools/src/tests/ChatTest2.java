@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 import server.model.Conversations;
+import string.formatter.NewLineMaker;
 
 public class ChatTest2 {
 
@@ -47,11 +48,11 @@ public class ChatTest2 {
 			}
 		});
 
-		chatUI.setMessageText("Ciao a tutti!\n");
+		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
 		chatUI.simulateSendClick();
 		waitTCPSending(server);
 
-		assertEquals(chatUI.getMessage(), server.getLastMessage() + "\n");
+		assertEquals(chatUI.getMessage(), NewLineMaker.appendNewLine(server.getLastMessage()));
 	}
 
 	private void waitTCPSending(final ServerTestable server) {

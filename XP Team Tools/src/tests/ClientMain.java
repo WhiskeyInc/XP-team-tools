@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import string.formatter.NewLineMaker;
 import ui.ChatUITestable;
 import client.model.Client;
 
@@ -27,7 +28,7 @@ public class ClientMain {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		
-		client.sendMessageToServer("Hi\n");
+		client.sendMessageToServer(NewLineMaker.appendNewLine("Hi"));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -38,7 +39,7 @@ public class ClientMain {
 			}
 		});
 
-		chatUI.setMessageText("Ciao a tutti!\n");
+		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
 		chatUI.simulateSendClick();
 
 	}
