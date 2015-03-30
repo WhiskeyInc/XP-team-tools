@@ -1,28 +1,28 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import model.TeamManager;
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
+import model.TeamManager;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
 
-import boards.TaskManager;
+import timeline.ConcreteTimeline;
+import timeline.Event;
+import timeline.Timeline;
 import boards.ConcreteTaskManager;
+import boards.ConcreteUserStoriesManager;
+import boards.TaskManager;
 import boards.TeamTaskManager;
 import boards.TeamUserStoriesManager;
-import boards.ConcreteUserStoriesManager;
 import boards.UserStoriesManager;
-import timeline.Event;
-import timeline.ConcreteTimeline;
-import timeline.Timeline;
-import filtering.NoFilter;
 import filtering.TargetFilter;
 import filtering.chechers.ParticipantsEventChecker;
 
@@ -54,7 +54,7 @@ public class TimelineIntegrationTest {
 
 	@Test
 	public void automaticEventsTest() throws Exception {
-		GregorianCalendar currentDate = getCurrentDate();
+//		GregorianCalendar currentDate = getCurrentDate();
 		taskBoard.addTask("Timer", "");
 		assertEquals("Created task: Timer",
 				timeline.getEvent("Created task: Timer")
@@ -179,8 +179,8 @@ public class TimelineIntegrationTest {
 		}
 	}
 
-	private GregorianCalendar getCurrentDate() {
-		Calendar cal = Calendar.getInstance();
-		return (GregorianCalendar) cal;
-	}
+//	private GregorianCalendar getCurrentDate() {
+//		Calendar cal = Calendar.getInstance();
+//		return (GregorianCalendar) cal;
+//	}
 }
