@@ -6,6 +6,7 @@ import model.TeamManager;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
+import model.exceptions.NoSuchTaskException;
 import filtering.Filter;
 
 public class TeamTaskManager implements TaskManager {
@@ -23,24 +24,32 @@ public class TeamTaskManager implements TaskManager {
 	public void addTask(String taskName, String description)
 			throws NameAlreadyInUseException {
 		taskManager.addTask(taskName, description);
-		teamManager.taskAdded(this.getTask(taskName));
+		try {
+			teamManager.taskAdded(this.getTask(taskName));
+		} catch (NoSuchTaskException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	@Override
 	public void addTask(String taskName) throws NameAlreadyInUseException {
 		this.taskManager.addTask(taskName);
-		teamManager.taskAdded(this.getTask(taskName));
+		try {
+			teamManager.taskAdded(this.getTask(taskName));
+		} catch (NoSuchTaskException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	@Override
-	public void deleteTask(String taskName) {
+	public void deleteTask(String taskName) throws NoSuchTaskException {
 		Task task = taskManager.getTask(taskName);
 		this.taskManager.deleteTask(taskName);
 		this.teamManager.taskDeleted(task);
 	}
 
 	@Override
-	public Task getTask(String taskName) {
+	public Task getTask(String taskName) throws NoSuchTaskException {
 		return this.taskManager.getTask(taskName);
 	}
 
@@ -51,7 +60,7 @@ public class TeamTaskManager implements TaskManager {
 
 	@Override
 	public void moveTaskToState(String taskName, String targetState)
-			throws InvalidStateException {
+			throws InvalidStateException, NoSuchTaskException {
 		if (!teamManager.isValidTaskState(targetState)) {
 			throw new InvalidStateException(targetState);
 		}
@@ -62,7 +71,7 @@ public class TeamTaskManager implements TaskManager {
 
 	@Override
 	public void addDevelopersToTask(String taskName, String... developers)
-			throws InvalidMemberException {
+			throws InvalidMemberException, NoSuchTaskException {
 		for (String string : developers) {
 			if (!this.teamManager.isValidMember(string)) {
 				throw new InvalidMemberException(string);
