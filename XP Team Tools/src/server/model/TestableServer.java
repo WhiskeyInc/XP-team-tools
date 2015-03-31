@@ -64,27 +64,28 @@ public class TestableServer extends AbstractServer {
 					}
 				}
 			}
-			private String getLine() throws IOException {
-				String line;
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						clientSocket.getInputStream()));
-				line = in.readLine();
-				return line;
-			}
-
-			private void propagateMessage(String message) throws IOException {
-
-				for (Socket socket : clientSocketList) {
-					BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-							socket.getOutputStream()));
-					out.write(NewLineMaker.appendNewLine(message));
-					out.flush();
-				}
-			}
+			
 		};
 		return runnable;
 	}
 
+	private String getLine() throws IOException {
+		String line;
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				clientSocket.getInputStream()));
+		line = in.readLine();
+		return line;
+	}
+
+	private void propagateMessage(String message) throws IOException {
+
+		for (Socket socket : clientSocketList) {
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+					socket.getOutputStream()));
+			out.write(NewLineMaker.appendNewLine(message));
+			out.flush();
+		}
+	}
 
 	public String getLastMessage() {
 

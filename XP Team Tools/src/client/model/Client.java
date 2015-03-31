@@ -6,19 +6,31 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.sql.Timestamp;
+
+import string.formatter.NickNameFormatter;
 
 public class Client {
 
 	private Socket clientSocket;
+	private String nickname;
 	private DataOutputStream os;
 	private DataInputStream is;
+
+	public Client() {
+		super();
+	}
+
+	public Client(String nickname) {
+		super();
+		this.nickname = nickname;
+	}
 
 	public void openStreams(String hostName, int port) {
 		try {
 			clientSocket = new Socket(hostName, port);
 			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,6 +44,7 @@ public class Client {
 	public void sendMessageToServer(String message) {
 		if (clientSocket != null && os != null && is != null) {
 			try {
+				os.writeBytes(NickNameFormatter.formatNickname(nickname));
 				os.writeBytes(message);
 				os.flush();
 			} catch (Exception e) {

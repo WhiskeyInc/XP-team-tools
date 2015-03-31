@@ -2,8 +2,8 @@ package server.model;
 
 public class Message {
 
-	public String author;
-	public String message;
+	private String author;
+	private String message;
 
 	public Message(String author, String message) {
 		super();
@@ -16,4 +16,7 @@ public class Message {
 		return message;
 	}
 
+	public String getAuthor() {
+		return author;
+	}
 }

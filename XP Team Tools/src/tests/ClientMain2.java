@@ -17,7 +17,7 @@ import client.model.Client;
  */
 public class ClientMain2 {
 	public static void main(String[] args) {
-		final Client client = new Client();
+		final Client client = new Client("LuBardo");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 

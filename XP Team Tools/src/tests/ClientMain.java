@@ -10,7 +10,7 @@ import client.model.Client;
 
 public class ClientMain {
 	public static void main(String[] args) {
-		final Client client = new Client();
+		final Client client = new Client("IncreMetal");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 			
