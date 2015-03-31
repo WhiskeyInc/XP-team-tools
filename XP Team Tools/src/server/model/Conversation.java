@@ -28,8 +28,18 @@ public class Conversation {
 	}
 
 	public void addMessage(String author, String msg) {
-		messages.put(new Timestamp(System.currentTimeMillis()), new Message(author,
-				msg));
+
+		if (isParticipant(author))
+			messages.put(new Timestamp(System.currentTimeMillis()),
+					new Message(author, msg));
+	}
+
+	private boolean isParticipant(String p) {
+		for (String string : participants) {
+			if (string.equals(p))
+				return true;
+		}
+		return false;
 	}
 
 	public LinkedList<String> getParticipants() {
