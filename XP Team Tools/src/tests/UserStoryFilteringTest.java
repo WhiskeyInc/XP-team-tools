@@ -8,12 +8,12 @@ import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import static org.junit.Assert.*;
-import boards.TeamUserStoriesManager;
-import boards.ConcreteUserStoriesManager;
-import boards.UserStoriesManager;
-import boards.UserStory;
+import boards.UserStoryBoard.ConcreteUserStoriesManager;
+import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.UserStoriesManager;
+import boards.UserStoryBoard.UserStory;
 import filtering.TargetFilter;
-import filtering.chechers.StateUserStoryChecker;
+import filtering.checkers.StateUserStoryChecker;
 
 public class UserStoryFilteringTest {
 

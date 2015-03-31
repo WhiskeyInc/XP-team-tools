@@ -5,8 +5,8 @@ import java.util.GregorianCalendar;
 
 import timeline.Event;
 import timeline.Timeline;
-import boards.Task;
-import boards.UserStory;
+import boards.UserStoryBoard.UserStory;
+import boards.taskBoard.Task;
 
 public class ConcreteTeamManager implements TeamManager {
 

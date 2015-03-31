@@ -1,4 +1,4 @@
-package boards;
+package boards.taskBoard;
 
 import java.util.ArrayList;
 import java.util.HashMap;

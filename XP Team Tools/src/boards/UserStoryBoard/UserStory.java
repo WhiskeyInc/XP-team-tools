@@ -1,5 +1,7 @@
-package boards;
+package boards.UserStoryBoard;
 
+import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.TaskManager;
 import model.exceptions.NameAlreadyInUseException;
 
 public class UserStory {

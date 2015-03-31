@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import boards.TaskManager;
-import boards.ConcreteTaskManager;
+import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.TaskManager;
 
 public class TasksManagerTest {
 

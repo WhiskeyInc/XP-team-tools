@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="boards.ConcreteTaskManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/ConcreteTaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="boards.taskBoard.ConcreteTaskManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/taskBoard/ConcreteTaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="667" y="330"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="boards.ConcreteUserStoriesManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/ConcreteUserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="boards.UserStoryBoard.ConcreteUserStoriesManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/UserStoryBoard/ConcreteUserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="410" y="175"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="boards.Task" project="XP Team Tools" file="/XP Team Tools/src/boards/Task.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="boards.taskBoard.Task" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/taskBoard/Task.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="672" y="423"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="4" language="java" name="boards.TaskManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/TaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="4" language="java" name="boards.taskBoard.TaskManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/taskBoard/TaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="658" y="242"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="boards.TeamTaskManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/TeamTaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="boards.taskBoard.TeamTaskManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/taskBoard/TeamTaskManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="839" y="241"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="boards.TeamUserStoriesManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/TeamUserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="boards.UserStoryBoard.TeamUserStoriesManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/UserStoryBoard/TeamUserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="117" y="60"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="boards.UserStoriesManager" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/UserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="7" language="java" name="boards.UserStoryBoard.UserStoriesManager" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/UserStoryBoard/UserStoriesManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="413" y="60"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="boards.UserStory" project="XP Team Tools" 
-    file="/XP Team Tools/src/boards/UserStory.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="boards.UserStoryBoard.UserStory" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/UserStoryBoard/UserStory.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="416" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -74,69 +74,93 @@
     </display>  
   </class>  
   <realization id="9">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="10">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </realization>  
-  <association id="10">    
+  <realization id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="12">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="11" name="sortedStories"/>      
-      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
+      <attribute id="13" name="stories">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="13">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <realization id="14">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
   <association id="15">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="16" name="tasks"/>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="16" name="taskManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="18">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="19" name="taskManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="19" name="userStoriesManager"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
+      <attribute id="22" name="userStoriesManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="23" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="22" name="taskManager"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
+  <association id="24">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="25" name="tasks">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="26" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="24">    
+  <realization id="27">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="28">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="25" name="stories"/>      
-      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
+      <attribute id="29" name="sortedStories">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="taskManager"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="30">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="true"/>    

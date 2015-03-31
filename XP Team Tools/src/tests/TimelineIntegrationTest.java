@@ -17,14 +17,14 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
-import boards.ConcreteTaskManager;
-import boards.ConcreteUserStoriesManager;
-import boards.TaskManager;
-import boards.TeamTaskManager;
-import boards.TeamUserStoriesManager;
-import boards.UserStoriesManager;
+import boards.UserStoryBoard.ConcreteUserStoriesManager;
+import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.UserStoriesManager;
+import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.TaskManager;
+import boards.taskBoard.TeamTaskManager;
 import filtering.TargetFilter;
-import filtering.chechers.ParticipantsEventChecker;
+import filtering.checkers.ParticipantsEventChecker;
 
 public class TimelineIntegrationTest {
 

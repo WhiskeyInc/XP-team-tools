@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import boards.ConcreteUserStoriesManager;
-import boards.UserStoriesManager;
+import boards.UserStoryBoard.ConcreteUserStoriesManager;
+import boards.UserStoryBoard.UserStoriesManager;
 
 public class UserStoriesManagerTest {
 

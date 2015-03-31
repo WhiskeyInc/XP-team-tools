@@ -9,16 +9,16 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
 import static org.junit.Assert.*;
-import boards.Task;
-import boards.TaskManager;
-import boards.ConcreteTaskManager;
-import boards.TeamTaskManager;
-import boards.TeamUserStoriesManager;
-import boards.ConcreteUserStoriesManager;
-import boards.UserStoriesManager;
+import boards.UserStoryBoard.ConcreteUserStoriesManager;
+import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.UserStoriesManager;
+import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.Task;
+import boards.taskBoard.TaskManager;
+import boards.taskBoard.TeamTaskManager;
 import filtering.TargetFilter;
-import filtering.chechers.DevelopersTaskChecker;
-import filtering.chechers.StateTaskChecker;
+import filtering.checkers.DevelopersTaskChecker;
+import filtering.checkers.StateTaskChecker;
 
 public class TaskFilteringTest {
 

@@ -1,4 +1,4 @@
-package boards;
+package boards.UserStoryBoard;
 
 import java.util.ArrayList;
 

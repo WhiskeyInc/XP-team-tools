@@ -1,7 +1,7 @@
 package model;
 
-import boards.Task;
-import boards.UserStory;
+import boards.UserStoryBoard.UserStory;
+import boards.taskBoard.Task;
 
 public interface TeamManager {
 

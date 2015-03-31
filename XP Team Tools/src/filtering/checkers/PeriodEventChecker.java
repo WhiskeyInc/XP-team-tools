@@ -1,4 +1,4 @@
-package filtering.chechers;
+package filtering.checkers;
 
 import java.util.GregorianCalendar;
 

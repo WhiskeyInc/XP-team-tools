@@ -1,4 +1,4 @@
-package filtering.chechers;
+package filtering.checkers;
 
 import timeline.Event;
 import filtering.Checker;

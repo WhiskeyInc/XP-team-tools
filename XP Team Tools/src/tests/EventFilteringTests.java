@@ -10,9 +10,9 @@ import timeline.Event;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
 import filtering.TargetFilter;
-import filtering.chechers.PeriodEventChecker;
-import filtering.chechers.ParticipantsEventChecker;
-import filtering.chechers.NameEventChecker;
+import filtering.checkers.NameEventChecker;
+import filtering.checkers.ParticipantsEventChecker;
+import filtering.checkers.PeriodEventChecker;
 
 public class EventFilteringTests {
 

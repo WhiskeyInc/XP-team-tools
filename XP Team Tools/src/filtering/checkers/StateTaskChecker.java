@@ -1,7 +1,7 @@
-package filtering.chechers;
+package filtering.checkers;
 
 import filtering.Checker;
-import boards.Task;
+import boards.taskBoard.Task;
 
 public class StateTaskChecker implements Checker<Task> {
 
