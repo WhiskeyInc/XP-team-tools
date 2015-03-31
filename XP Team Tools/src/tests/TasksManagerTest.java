@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import model.exceptions.NameAlreadyInUseException;
+import model.exceptions.NoSuchTaskException;
 
 import org.junit.Test;
 
@@ -32,10 +34,14 @@ public class TasksManagerTest {
 
 
 	@Test
-	public void dropTaskTest() throws Exception {
+	public void dropTaskTest() throws NoSuchTaskException, NameAlreadyInUseException {
 		manager.addTask("Timeline", "Componente che deve...");
 		manager.deleteTask("Timeline");
-		assertEquals(null, manager.getTask("Timeline"));
+		try {
+			assertEquals(null, manager.getTask("Timeline"));
+		} catch (NoSuchTaskException e) {
+			assertEquals(true, true);
+		}
 	}
 
 	@Test
