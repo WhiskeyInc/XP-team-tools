@@ -19,7 +19,7 @@ import java.util.LinkedList;
 public class Conversation {
 
 	private LinkedList<String> participants = new LinkedList<String>();
-	private HashMap<Timestamp, Message> messages = new HashMap<Timestamp, Message>();
+	private HashMap<Long, Message> messages = new HashMap<Long, Message>();
 
 	public Conversation(String[] participants) {
 		for (int i = 0; i < participants.length; i++) {
@@ -30,8 +30,7 @@ public class Conversation {
 	public void addMessage(String author, String msg) {
 
 		if (isParticipant(author))
-			messages.put(new Timestamp(System.currentTimeMillis()),
-					new Message(author, msg));
+			messages.put(System.currentTimeMillis(), new Message(author, msg));
 	}
 
 	private boolean isParticipant(String p) {
@@ -40,13 +39,14 @@ public class Conversation {
 				return true;
 		}
 		return false;
+
 	}
 
 	public LinkedList<String> getParticipants() {
 		return participants;
 	}
 
-	public HashMap<Timestamp, Message> getMessages() {
+	public HashMap<Long, Message> getMessages() {
 		return messages;
 	}
 
