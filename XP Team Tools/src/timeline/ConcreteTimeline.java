@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import model.exceptions.InvalidDateException;
+import model.exceptions.NoSuchEventException;
 import model.exceptions.UnmovableEventException;
 import filtering.Filter;
 
@@ -39,9 +40,11 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
-		if (event.getDate().before(this.getEvent(CREATION_EVENT).getDate())) {
-			throw new InvalidDateException(event.getDate());
-		}
+		try {
+			if (event.getDate().before(this.getEvent(CREATION_EVENT).getDate())) {
+				throw new InvalidDateException(event.getDate());
+			}
+		} catch (NoSuchEventException e) {}
 		this.events.put(event.toString(), event);
 	}
 
@@ -51,7 +54,10 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#dropEvent(java.lang.String)
 	 */
 	@Override
-	public void deleteEvent(String eventName) {
+	public void deleteEvent(String eventName) throws NoSuchEventException {
+		if (!isAnExistingEvent(eventName)) {
+			throw new NoSuchEventException(eventName);
+		}
 		this.events.remove(eventName);
 	}
 
@@ -63,7 +69,10 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnmovableEventException {
+			throws UnmovableEventException, NoSuchEventException {
+		if (!isAnExistingEvent(eventName)) {
+			throw new NoSuchEventException(eventName);
+		}
 		this.events.get(eventName).setDate(newDate);
 	}
 
@@ -73,9 +82,13 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#getEvent(java.lang.String)
 	 */
 	@Override
-	public Event getEvent(String eventName) {
+	public Event getEvent(String eventName) throws NoSuchEventException {
+		if (!isAnExistingEvent(eventName)) {
+			throw new NoSuchEventException(eventName);
+		}
 		return this.events.get(eventName);
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -89,5 +102,21 @@ public class ConcreteTimeline implements Timeline {
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
+	}
+	
+	private boolean isAnExistingEvent(String eventName) {
+		boolean found = false;
+		for (Event event : this.getEvents()) {
+			if (event.toString().compareTo(eventName)==0) {
+				found = true;
+			}
+		}
+		return found;
+	}
+
+	private ArrayList<Event> getEvents() {
+		ArrayList<Event> list = new ArrayList<Event>();
+		list.addAll(this.events.values());
+		return list;
 	}
 }

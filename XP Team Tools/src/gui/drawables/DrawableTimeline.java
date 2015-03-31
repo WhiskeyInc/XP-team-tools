@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+import model.exceptions.NoSuchEventException;
 import timeline.Event;
 import timeline.Timeline;
 import filtering.NoFilter;
@@ -54,8 +55,12 @@ public class DrawableTimeline implements Drawable {
 	}
 
 	private int getLineX(int initialX, Event event) {
-		return initialX + timelineSeconds(event, timeline.getEvent("creation"))
-				/ SECONDS_PER_PIXEL;
+		try {
+			return initialX + timelineSeconds(event, timeline.getEvent("creation"))
+					/ SECONDS_PER_PIXEL;
+		} catch (NoSuchEventException e) {
+			return initialX;
+		}
 	}
 
 	private int getEventX(int initialX, Event event) {
@@ -64,9 +69,14 @@ public class DrawableTimeline implements Drawable {
 
 	private int getTimelineSeconds() {
 		Event lastEvent = getLastEvent();
-		Event initialEvent = timeline.getEvent("creation");
-		int timelineSeconds = timelineSeconds(lastEvent, initialEvent);
-		return timelineSeconds;
+		Event initialEvent;
+		try {
+			initialEvent = timeline.getEvent("creation");
+			int timelineSeconds = timelineSeconds(lastEvent, initialEvent);
+			return timelineSeconds;
+		} catch (NoSuchEventException e) {
+			return 0;
+		}
 	}
 
 	private int timelineSeconds(Event lastEvent, Event initialEvent) {

@@ -13,7 +13,7 @@ public class InvalidDateException extends Exception {
 				+ invalidDate.get(GregorianCalendar.HOUR_OF_DAY) + ":"
 				+ invalidDate.get(GregorianCalendar.MINUTE) + ":"
 				+ invalidDate.get(GregorianCalendar.SECOND)
-				+ "is not a valid date");
+				+ " is not a valid date");
 	}
 
 }

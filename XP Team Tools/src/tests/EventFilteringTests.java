@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.GregorianCalendar;
 
 import model.exceptions.InvalidDateException;
+import model.exceptions.NoSuchEventException;
 
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class EventFilteringTests {
 	}
 
 	@Test
-	public void MemberEventFilter() throws InvalidDateException {
+	public void MemberEventFilter() throws InvalidDateException, NoSuchEventException {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020,

@@ -1,16 +1,19 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.GregorianCalendar;
 
 import model.exceptions.InvalidDateException;
+import model.exceptions.NoSuchEventException;
 import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
 
-import timeline.Event;
 import timeline.ConcreteTimeline;
+import timeline.Event;
 import timeline.Timeline;
 import filtering.NoFilter;
 
@@ -31,7 +34,7 @@ public class TimelineTest {
 	}
 
 	@Test
-	public void dropEventTest() throws InvalidDateException {
+	public void dropEventTest() throws InvalidDateException, NoSuchEventException {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		timeline.deleteEvent("Briefing");
@@ -39,7 +42,7 @@ public class TimelineTest {
 	}
 
 	@Test
-	public void dateDisplayTest() throws InvalidDateException {
+	public void dateDisplayTest() throws InvalidDateException, NoSuchEventException {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		assertEquals(new GregorianCalendar(2020, 02, 20, 23, 3, 50), timeline
@@ -56,12 +59,12 @@ public class TimelineTest {
 	// }
 
 	@Test
-	public void timeChangeTest() throws InvalidDateException {
+	public void timeChangeTest() throws InvalidDateException, NoSuchEventException {
 		timeline.addEvent(new Event("Riunione sulla timeline",
 				new GregorianCalendar(2020, 02, 20, 23, 3, 50)));
 		try {
-			timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
-					2015, 02, 20, 23, 3, 50));
+			timeline.moveEvent("Riunione sulla timeline",
+					new GregorianCalendar(2015, 02, 20, 23, 3, 50));
 		} catch (UnmovableEventException e) {
 			fail();
 		}
@@ -96,16 +99,41 @@ public class TimelineTest {
 				+ timeline.getEvents(new NoFilter<Event>()).get(3).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(4).toString());
 	}
-	
-	
+
 	@Test
 	public void noDateBeforeCreation() {
 		try {
-			timeline.addEvent(new Event("Test", new GregorianCalendar(2015, 01, 29, 02, 02, 02)));
+			timeline.addEvent(new Event("Test", new GregorianCalendar(2015, 01,
+					29, 02, 02, 02)));
 			fail();
 		} catch (InvalidDateException e) {
 			assertTrue(true);
 		}
-			
+	}
+
+	@Test
+	public void noSuchEventTest() throws Exception {
+		try {
+			timeline.getEvent("Non esisto");
+			fail();
+		} catch (NoSuchEventException e) {
+			assertTrue(true);
+			;
+		}
+		try {
+			timeline.deleteEvent("Non esisto");
+			fail();
+		} catch (NoSuchEventException e) {
+			assertTrue(true);
+			;
+		}
+		try {
+			timeline.moveEvent("Non esisto", new GregorianCalendar(2020, 1, 1,
+					1, 1, 1));
+			fail();
+		} catch (NoSuchEventException e) {
+			assertTrue(true);
+			;
+		}
 	}
 }

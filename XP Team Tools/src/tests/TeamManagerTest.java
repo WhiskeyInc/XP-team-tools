@@ -9,6 +9,7 @@ import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.exceptions.InvalidDateException;
 import model.exceptions.InvalidStateException;
+import model.exceptions.NoSuchEventException;
 import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
@@ -128,7 +129,7 @@ public class TeamManagerTest {
 	}
 	
 	@Test
-	public void changeDateTest() throws InvalidDateException {
+	public void changeDateTest() throws InvalidDateException, NoSuchEventException {
 		GregorianCalendar date = new GregorianCalendar(2015, 04, 12, 12, 12, 12);
 		timeline.addEvent(new Event("Release", date));
 		GregorianCalendar newDate = new GregorianCalendar(2014, 05, 12, 12, 12, 12);

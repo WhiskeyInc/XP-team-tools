@@ -2,7 +2,6 @@ package boards.taskBoard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchTaskException;
