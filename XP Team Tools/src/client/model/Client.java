@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.sql.Timestamp;
 
 import string.formatter.NickNameFormatter;
 
@@ -33,8 +32,10 @@ public class Client {
 			is = new DataInputStream(clientSocket.getInputStream());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
+
+	
 
 	public String sendMessage(String message) {
 

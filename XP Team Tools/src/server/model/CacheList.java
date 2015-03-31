@@ -2,6 +2,7 @@ package server.model;
 
 import java.util.ArrayList;
 
+
 public class CacheList implements IChatStorer, IMessageRecover{
 
 	private ArrayList<String> messageList = new ArrayList<String>();
@@ -26,6 +27,11 @@ public class CacheList implements IChatStorer, IMessageRecover{
 			messages[i] = messageList.get(size - numOfMessages + i);
 		}
 		return messages;
+	}
+
+	@Override
+	public int getNumOfMessages() {
+		return messageList.size();
 	}
 	
 

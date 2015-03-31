@@ -8,7 +8,7 @@ import string.formatter.NewLineMaker;
 import ui.ChatUITestable;
 import client.model.Client;
 
-public class ClientMain {
+public class ClientMain1 {
 	public static void main(String[] args) {
 		final Client client = new Client("IncreMetal");
 		client.openStreams("localhost", 9999);
@@ -38,7 +38,7 @@ public class ClientMain {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
+		chatUI.setMessageText(NewLineMaker.appendNewLine("Striscia Bardo!"));
 		chatUI.simulateSendClick();
 
 	}

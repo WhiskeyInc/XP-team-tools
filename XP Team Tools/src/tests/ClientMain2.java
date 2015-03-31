@@ -46,7 +46,7 @@ public class ClientMain2 {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciaooo!"));
+		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciaooo! No Incre! Ehehehe"));
 		chatUI.simulateSendClick();
 
 	}

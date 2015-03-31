@@ -17,6 +17,14 @@ public class TestableServer extends AbstractServer {
 	private List<Socket> clientSocketList = new LinkedList<Socket>();
 	private IChatStorer chatStorer;
 	private Socket clientSocket;
+	private IMessageRecover recover;
+	public static final int NUM_OF_MESSAGES = 10;
+
+	public TestableServer(IChatStorer chatStorer, IMessageRecover recover) {
+		super();
+		this.chatStorer = chatStorer;
+		this.recover = recover;
+	}
 
 	public TestableServer(IChatStorer messageStorer) {
 		super();
@@ -34,6 +42,7 @@ public class TestableServer extends AbstractServer {
 
 			while (true) {
 				clientSocket = serverSocket.accept();
+				alignClient();
 				clientSocketList.add(clientSocket);
 				Runnable runnable = getRunnable();
 				Thread thread = new Thread(runnable);
@@ -41,6 +50,13 @@ public class TestableServer extends AbstractServer {
 			}
 		} catch (IOException e) {
 
+		}
+	}
+	//this is for to get the messages sent to a offline client
+	private void alignClient() throws IOException {
+		String[] messages = recoverMessages();
+		for (int i = 0; i < messages.length; i++) {
+			propagateMessage(messages[i], clientSocket);
 		}
 	}
 
@@ -55,16 +71,16 @@ public class TestableServer extends AbstractServer {
 						String line = getLine();
 
 						if (line != null) {
-							System.out.println(line); //TODO
+							System.out.println(line); // TODO
 							chatStorer.storeMessage(line);
-							propagateMessage(line);
+							propagateMessageToAllClients(line);
 						}
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 				}
 			}
-			
+
 		};
 		return runnable;
 	}
@@ -77,14 +93,31 @@ public class TestableServer extends AbstractServer {
 		return line;
 	}
 
-	private void propagateMessage(String message) throws IOException {
+	private void propagateMessageToAllClients(String message) throws IOException {
 
 		for (Socket socket : clientSocketList) {
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-					socket.getOutputStream()));
-			out.write(NewLineMaker.appendNewLine(message));
-			out.flush();
+			propagateMessage(message, socket);
 		}
+	}
+
+	private void propagateMessage(String message, Socket socket)
+			throws IOException {
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+				socket.getOutputStream()));
+		out.write(NewLineMaker.appendNewLine(message));
+		out.flush();
+	}
+
+	private String[] recoverMessages() {
+		int numOfMessages = NUM_OF_MESSAGES;
+		String[] sentMessages;
+
+		if (recover.getNumOfMessages() < numOfMessages) {
+			numOfMessages = recover.getNumOfMessages();
+		}
+		sentMessages = recover.recoverLastMessages(numOfMessages);
+		
+		return sentMessages;
 	}
 
 	public String getLastMessage() {
