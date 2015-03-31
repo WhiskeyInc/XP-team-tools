@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,9 @@ import sounds.SoundPlayer;
 
 /**
  * The UI of the Timer, with the StartButton and a display that shows the
- * countdown
+ * countdown. A "semaphor" helps the user to identify immediately the time.
+ * GREEN: working time YELLOW: the user must make a choice, he can take a short
+ * break or restart the timer RED: break time
  * 
  * @author alessandro B.
  * 
@@ -37,6 +38,7 @@ public class TimerUI extends JPanel {
 	private String time;
 	private Timer timer;
 	private SoundPlayer player;
+	private TimerPainter painter;
 	private boolean timeOver;
 	private boolean PauseIndex;
 
@@ -46,6 +48,7 @@ public class TimerUI extends JPanel {
 		createTimerButton();
 		createTimerArea();
 		createPauseButton();
+		painter = new TimerPainter(timerButton, pauseButton);
 
 		timer = new Timer(1000, new ActionListener() {
 
@@ -57,69 +60,81 @@ public class TimerUI extends JPanel {
 			private void showCountdown() {
 				setDisplay();
 				if (minute == 0 && second == 0) {
-					if(!PauseIndex){
-					time = "Stop working";
-					colorStopWorkingTimeBackGround();
-					}
-					timerArea.setText(time);
-					timer.stop();
-					player.playSong();
-					minute = initialMinute;
-					second = initialSecond + 1;
-					timeOver = true;
-					timerButton.setText("Restart");
-					pauseButton.setText("Take a break!!!");
-					if(PauseIndex){
-						PauseIndex = false;
-						timeOver = false;
-						timer.start();
-						timerButton.setText("");
-						pauseButton.setText("");
-						colorWorkingTimeBackground();
-					}
+					timeOverActions();
 				} else if (second == 0) {
 					second = 60;
 					minute--;
 				}
 				second--;
 			}
-
-			private void setDisplay() {
-				if (minute < 10 && second < 10)
-					time = "0" + String.valueOf(minute) + " : 0"
-							+ String.valueOf(second);
-				if (minute >= 10 && second < 10)
-					time = String.valueOf(minute) + " : 0"
-							+ String.valueOf(second);
-				if (minute < 10 && second >= 10)
-					time = "0" + String.valueOf(minute) + " : "
-							+ String.valueOf(second);
-				if (minute >= 10 && second >= 10)
-					time = String.valueOf(minute) + " : "
-							+ String.valueOf(second);
-				timerArea.setText(time);
-			}
 		});
 
 		timer.setInitialDelay(0);
 	}
 
+	private void setDisplay() {
+		if (minute < 10 && second < 10)
+			time = "0" + String.valueOf(minute) + " : 0"
+					+ String.valueOf(second);
+		if (minute >= 10 && second < 10)
+			time = String.valueOf(minute) + " : 0" + String.valueOf(second);
+		if (minute < 10 && second >= 10)
+			time = "0" + String.valueOf(minute) + " : "
+					+ String.valueOf(second);
+		if (minute >= 10 && second >= 10)
+			time = String.valueOf(minute) + " : " + String.valueOf(second);
+		timerArea.setText(time);
+	}
+
+	private void timeOverActions() {
+		if (!PauseIndex) {
+			workingTimeEndingActions();
+		}
+		timerArea.setText(time);
+		timer.stop();
+		player.playSong();
+		minute = initialMinute;
+		second = initialSecond + 1;
+		timeOver = true;
+		setButtonText();
+		if (PauseIndex) {
+			pauseEndingActions();
+		}
+	}
+
+	private void pauseEndingActions() {
+		PauseIndex = false;
+		timeOver = false;
+		timer.start();
+		deleteButtonText();
+		painter.colorWorkingTimeBackground();
+	}
+
+	private void workingTimeEndingActions() {
+		time = "Stop working";
+		painter.colorStopWorkingTimeBackGround();
+	}
+
+	private void setButtonText() {
+		timerButton.setText("Restart");
+		pauseButton.setText("Take a break!!!");
+	}
+
 	private void createPauseButton() {
 		pauseButton = new JButton("");
 		pauseButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(timeOver){
-				second = pauseSecond;
-				minute = pauseMinute;
-				timer.start();
-				PauseIndex = true;
-				timerButton.setText("");
-				pauseButton.setText("");
-				timeOver = false;
-				colorPauseTimeBackground();
+
+				if (timeOver) {
+					second = pauseSecond;
+					minute = pauseMinute;
+					timer.start();
+					PauseIndex = true;
+					deleteButtonText();
+					timeOver = false;
+					painter.colorPauseTimeBackground();
 				}
 			}
 		});
@@ -135,14 +150,18 @@ public class TimerUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
+				timerButtonAction();
+			}
+
+			private void timerButtonAction() {
 				timer.start();
-				timerButton.setText("");
-				pauseButton.setText("");
+				deleteButtonText();
 				timeOver = false;
-				if(!PauseIndex){
-				colorWorkingTimeBackground();
+				if (!PauseIndex) {
+					painter.colorWorkingTimeBackground();
 				}
 			}
+
 		});
 		Dimension dim = new Dimension(180, 50);
 		timerButton.setPreferredSize(dim);
@@ -169,11 +188,11 @@ public class TimerUI extends JPanel {
 		this.minute = minute;
 		initialMinute = minute;
 	}
-	
+
 	public void setPauseMinute(int pauseMinute) {
 		this.pauseMinute = pauseMinute;
 	}
-	
+
 	public void setPauseSecond(int pauseSecond) {
 		this.pauseSecond = pauseSecond;
 	}
@@ -181,20 +200,10 @@ public class TimerUI extends JPanel {
 	public void setPlayer(SoundPlayer player) {
 		this.player = player;
 	}
-	
-	public void colorWorkingTimeBackground(){
-		timerButton.setBackground(Color.GREEN);
-		pauseButton.setBackground(Color.GREEN);
-	}
-	
-	public void colorPauseTimeBackground(){
-		timerButton.setBackground(Color.RED);
-		pauseButton.setBackground(Color.RED);
-	}
-	
-	public void colorStopWorkingTimeBackGround(){
-		timerButton.setBackground(Color.ORANGE);
-		pauseButton.setBackground(Color.ORANGE);
+
+	private void deleteButtonText() {
+		timerButton.setText("");
+		pauseButton.setText("");
 	}
 
 }
