@@ -47,6 +47,13 @@ public class UserStoryFilteringTest {
 										new StateUserStoryChecker(
 												"ACCOMPLISHED"))).get(0)
 						.toString());
+		assertEquals(
+				0,
+				userStoriesBoard
+						.getUserStories(
+								new TargetFilter<UserStory>(
+										new StateUserStoryChecker(
+												"IN PROGRESS"))).size());
 	}
 
 }

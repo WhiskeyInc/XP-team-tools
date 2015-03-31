@@ -41,7 +41,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
 		try {
-			if (event.getDate().before(this.getEvent(CREATION_EVENT).getDate())) {
+			if (isNotValidDate(event)) {
 				throw new InvalidDateException(event.getDate());
 			}
 		} catch (NoSuchEventException e) {}
@@ -55,10 +55,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void deleteEvent(String eventName) throws NoSuchEventException {
-		if (!isAnExistingEvent(eventName)) {
-			throw new NoSuchEventException(eventName);
-		}
-		this.events.remove(eventName);
+		this.events.remove(this.getEvent(eventName).toString());
 	}
 
 	/*
@@ -70,10 +67,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public void moveEvent(String eventName, GregorianCalendar newDate)
 			throws UnmovableEventException, NoSuchEventException {
-		if (!isAnExistingEvent(eventName)) {
-			throw new NoSuchEventException(eventName);
-		}
-		this.events.get(eventName).setDate(newDate);
+		this.getEvent(eventName).setDate(newDate);
 	}
 
 	/*
@@ -118,5 +112,9 @@ public class ConcreteTimeline implements Timeline {
 		ArrayList<Event> list = new ArrayList<Event>();
 		list.addAll(this.events.values());
 		return list;
+	}
+	
+	private boolean isNotValidDate(Event event) throws NoSuchEventException {
+		return event.getDate().before(this.getEvent(CREATION_EVENT).getDate());
 	}
 }

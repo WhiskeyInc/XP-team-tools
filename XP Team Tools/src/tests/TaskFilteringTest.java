@@ -47,15 +47,18 @@ public class TaskFilteringTest {
 				"Bacheca",
 				teamTaskManager
 						.getTasks(
-								new TargetFilter<Task>(
-										new StateTaskChecker(
-												"ACCOMPLISHED"))).get(0)
-						.toString());
+								new TargetFilter<Task>(new StateTaskChecker(
+										"ACCOMPLISHED"))).get(0).toString());
 		assertEquals(
 				0,
 				teamTaskManager.getTasks(
 						new TargetFilter<Task>(new StateTaskChecker(
 								"IN PROGRESS"))).size());
+		assertEquals(
+				2,
+				teamTaskManager.getTasks(
+						new TargetFilter<Task>(new StateTaskChecker("TODO")))
+						.size());
 	}
 
 	@Test
@@ -77,14 +80,12 @@ public class TaskFilteringTest {
 						new TargetFilter<Task>(new DevelopersTaskChecker(
 								"Emanuele", "Simone"))).size());
 		assertEquals(
-				"Filtro" + " Bacheca",
+				"Filtro" + "Bacheca",
 				teamTaskManager
 						.getTasks(
 								new TargetFilter<Task>(
-										new DevelopersTaskChecker(
-												"Emanuele", "Simone"))).get(1)
-						.toString()
-						+ " "
+										new DevelopersTaskChecker("Emanuele",
+												"Simone"))).get(1).toString()
 						+ teamTaskManager
 								.getTasks(
 										new TargetFilter<Task>(
@@ -101,8 +102,7 @@ public class TaskFilteringTest {
 				teamTaskManager
 						.getTasks(
 								new TargetFilter<Task>(
-										new DevelopersTaskChecker(
-												"Alessandro"))).get(0)
-						.toString());
+										new DevelopersTaskChecker("Alessandro")))
+						.get(0).toString());
 	}
 }
