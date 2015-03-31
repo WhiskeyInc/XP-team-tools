@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.exceptions.NameAlreadyInUseException;
+import model.exceptions.NoSuchUserStoryException;
 import filtering.Filter;
 
 public class ConcreteUserStoriesManager implements UserStoriesManager {
@@ -15,9 +16,9 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#addUserStory(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void addUserStory(String title, String description) throws NameAlreadyInUseException {
-		checkUserStoryName(title);
-		UserStory userStory = new UserStory(title, description);
+	public void addUserStory(String userStoryName, String description) throws NameAlreadyInUseException {
+		validateName(userStoryName);
+		UserStory userStory = new UserStory(userStoryName, description);
 		stories.put(userStory.toString(), userStory);
 		sortedStories.add(userStory);
 	}
@@ -26,9 +27,10 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#deleteUserStory(java.lang.String)
 	 */
 	@Override
-	public void deleteUserStory(String title){
-		sortedStories.remove(stories.get(title));
-		stories.remove(title);
+	public void deleteUserStory(String userStoryName) throws NoSuchUserStoryException{
+		validateExistance(userStoryName);
+		sortedStories.remove(stories.get(userStoryName));
+		stories.remove(userStoryName);
 	}
 	
 	/* (non-Javadoc)
@@ -43,9 +45,10 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#changeStoryPriority(java.lang.String, int)
 	 */
 	@Override
-	public void changeStoryPriority(String storyName, int newPriority) {
-		sortedStories.remove(stories.get(storyName));
-		sortedStories.add(newPriority, stories.get(storyName));
+	public void changeStoryPriority(String userStoryName, int newPriority) throws NoSuchUserStoryException {
+		validateExistance(userStoryName);
+		sortedStories.remove(stories.get(userStoryName));
+		sortedStories.add(newPriority, stories.get(userStoryName));
 	}
 
 	/* (non-Javadoc)
@@ -60,7 +63,9 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#moveStoryToState(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void moveUserStoryToState(String storyName, String targetState) {
+	public void moveUserStoryToState(String storyName, String targetState)
+			throws NoSuchUserStoryException {
+		validateExistance(storyName);
 		this.stories.get(storyName).setState(targetState);
 	}
 	
@@ -69,19 +74,29 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 */
 	@Override
 	public ArrayList<UserStory> getUserStories(Filter<UserStory> filter) {
-		return filter.filter(this.getUserStories());
+		return filter.filter(this.getAllUserStories());
 	}
 	
-	private ArrayList<UserStory> getUserStories() {
+	private ArrayList<UserStory> getAllUserStories() {
 		ArrayList<UserStory> userStoriesList = new ArrayList<UserStory>();
 		userStoriesList.addAll(this.stories.values());
 		return userStoriesList;
 	}
 	
-	private void checkUserStoryName(String title) throws NameAlreadyInUseException {
-		if(stories.containsKey(title)){
-			throw new NameAlreadyInUseException(title);
+	private void validateName(String storyName) throws NameAlreadyInUseException {
+		if(storyExists(storyName)){
+			throw new NameAlreadyInUseException(storyName);
 		}
+	}
+	
+	private void validateExistance(String storyName) throws NoSuchUserStoryException {
+		if(!storyExists(storyName)){
+			throw new NoSuchUserStoryException(storyName);
+		}
+	}
+
+	private boolean storyExists(String title) {
+		return stories.containsKey(title);
 	}
 	
 }

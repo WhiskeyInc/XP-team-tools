@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.TeamManager;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
+import model.exceptions.NoSuchUserStoryException;
 import filtering.Filter;
 
 public class TeamUserStoriesManager implements UserStoriesManager {
@@ -32,7 +33,7 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	}
 
 	@Override
-	public void deleteUserStory(String storyName) {
+	public void deleteUserStory(String storyName) throws NoSuchUserStoryException {
 		UserStory userStory = this.getUserStory(storyName);
 		userStoriesManager.deleteUserStory(storyName);
 		teamManager.userStoryDeleted(userStory);
@@ -45,7 +46,7 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	}
 
 	@Override
-	public void changeStoryPriority(String storyName, int newPriority) {
+	public void changeStoryPriority(String storyName, int newPriority) throws NoSuchUserStoryException {
 		userStoriesManager.changeStoryPriority(storyName, newPriority);
 		teamManager.userStoryPriorityChanged(this.getUserStory(storyName));
 	}
@@ -56,7 +57,8 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	}
 
 	@Override
-	public void moveUserStoryToState(String storyName, String targetState) throws InvalidStateException {
+	public void moveUserStoryToState(String storyName, String targetState)
+			throws InvalidStateException, NoSuchUserStoryException {
 		if (!this.teamManager.isValidUserStoryState(targetState)) {
 			throw new InvalidStateException(targetState);
 		}
