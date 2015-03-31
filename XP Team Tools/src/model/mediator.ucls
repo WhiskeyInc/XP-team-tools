@@ -37,17 +37,12 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <package id="5" language="java" name="boards" project="XP Team Tools" file="/XP Team Tools/src/boards" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="754" y="55"/>    
-    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <package id="6" language="java" name="model.exceptions" project="XP Team Tools" 
+  <package id="5" language="java" name="model.exceptions" project="XP Team Tools" 
     file="/XP Team Tools/src/model/exceptions" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="757" y="238"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="7" language="java" name="timeline.Timeline" project="XP Team Tools" 
+  <interface id="6" language="java" name="timeline.Timeline" project="XP Team Tools" 
     file="/XP Team Tools/src/timeline/Timeline.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="139" y="259"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,8 +50,8 @@
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
-  </class>  
-  <class id="8" language="java" name="timeline.ConcreteTimeline" project="XP Team Tools" 
+  </interface>  
+  <class id="7" language="java" name="timeline.ConcreteTimeline" project="XP Team Tools" 
     file="/XP Team Tools/src/timeline/ConcreteTimeline.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="126" y="380"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -65,43 +60,71 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="9">    
+  <package id="8" language="java" name="boards.taskBoard" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/taskBoard" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="807" y="54"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="9" language="java" name="boards.UserStoryBoard" project="XP Team Tools" 
+    file="/XP Team Tools/src/boards/UserStoryBoard" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="630" y="128"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <realization id="11">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <association id="13">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="10" name="timeline"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+      <attribute id="14" name="timeline">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="12">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
-  <realization id="13">    
+  <dependency id="17">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="18">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <realization id="14">    
+  <dependency id="19">    
     <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="15">    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="20">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="16" name="settings">        
+      <attribute id="21" name="settings">        
         <position height="17" width="44" x="358" y="222"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <realization id="19">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
+  <realization id="23">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

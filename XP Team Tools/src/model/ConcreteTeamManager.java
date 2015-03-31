@@ -3,6 +3,7 @@ package model;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import model.exceptions.InvalidDateException;
 import timeline.Event;
 import timeline.Timeline;
 import boards.UserStoryBoard.UserStory;
@@ -20,15 +21,23 @@ public class ConcreteTeamManager implements TeamManager {
 
 	@Override
 	public void taskAdded(Task task) {
-		this.timeline.addEvent(generateAutomaticEvent("Created task: "
-				+ task.toString()));
+		try {
+			this.timeline.addEvent(generateAutomaticEvent("Created task: "
+					+ task.toString()));
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	@Override
 	public void taskDeleted(Task task) {
 		Event event = generateAutomaticEvent("Deleted task: " + task.toString());
 		event.addParticipants(task.getDevelopers());
-		timeline.addEvent(event);
+		try {
+			timeline.addEvent(event);
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	@Override
@@ -36,7 +45,11 @@ public class ConcreteTeamManager implements TeamManager {
 		Event event = generateAutomaticEvent("Changed state of task "
 				+ task.toString() + ". Now it is " + newState);
 		event.addParticipants(task.getDevelopers());
-		this.timeline.addEvent(event);
+		try {
+			this.timeline.addEvent(event);
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	@Override
@@ -49,7 +62,11 @@ public class ConcreteTeamManager implements TeamManager {
 		for (String developer : developers) {
 			event.addParticipant(developer);
 		}
-		timeline.addEvent(event);
+		try {
+			timeline.addEvent(event);
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	/*
@@ -59,8 +76,12 @@ public class ConcreteTeamManager implements TeamManager {
 	 */
 	@Override
 	public void userStoryAdded(UserStory userStory) {
-		this.timeline.addEvent(generateAutomaticEvent("Created userstory: "
-				+ userStory.toString()));
+		try {
+			this.timeline.addEvent(generateAutomaticEvent("Created userstory: "
+					+ userStory.toString()));
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	/*
@@ -70,8 +91,12 @@ public class ConcreteTeamManager implements TeamManager {
 	 */
 	@Override
 	public void userStoryDeleted(UserStory userStory) {
-		timeline.addEvent(generateAutomaticEvent("Deleted userstory: "
-				+ userStory.toString()));
+		try {
+			timeline.addEvent(generateAutomaticEvent("Deleted userstory: "
+					+ userStory.toString()));
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	/*
@@ -82,9 +107,13 @@ public class ConcreteTeamManager implements TeamManager {
 	 */
 	@Override
 	public void userStoryStateChanged(UserStory userStory, String newState) {
-		this.timeline
-				.addEvent(generateAutomaticEvent("Changed state of userstory "
-						+ userStory.toString() + ": now it is " + newState));
+		try {
+			this.timeline
+					.addEvent(generateAutomaticEvent("Changed state of userstory "
+							+ userStory.toString() + ": now it is " + newState));
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 
 	/*
@@ -94,8 +123,12 @@ public class ConcreteTeamManager implements TeamManager {
 	 */
 	@Override
 	public void userStoryPriorityChanged(UserStory userStory) {
-		timeline.addEvent(generateAutomaticEvent("Changed priority of userstory: "
-				+ userStory.toString()));
+		try {
+			timeline.addEvent(generateAutomaticEvent("Changed priority of userstory: "
+					+ userStory.toString()));
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}
 	}
 	
 	@Override

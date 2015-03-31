@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
+import model.exceptions.InvalidDateException;
 import model.exceptions.UnmovableEventException;
 
 import org.junit.Test;
@@ -23,25 +24,25 @@ public class TimelineTest {
 	}
 
 	@Test
-	public void addEventTest() {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
+	public void addEventTest() throws InvalidDateException {
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		assertEquals(2, timeline.getEventsNumber());
 	}
 
 	@Test
-	public void dropEventTest() {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
+	public void dropEventTest() throws InvalidDateException {
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		timeline.deleteEvent("Briefing");
 		assertEquals(1, timeline.getEventsNumber());
 	}
 
 	@Test
-	public void dateDisplayTest() {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
+	public void dateDisplayTest() throws InvalidDateException {
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
-		assertEquals(new GregorianCalendar(2015, 02, 20, 23, 3, 50), timeline
+		assertEquals(new GregorianCalendar(2020, 02, 20, 23, 3, 50), timeline
 				.getEvent("Briefing").getDate());
 	}
 
@@ -55,9 +56,9 @@ public class TimelineTest {
 	// }
 
 	@Test
-	public void timeChangeTest() {
+	public void timeChangeTest() throws InvalidDateException {
 		timeline.addEvent(new Event("Riunione sulla timeline",
-				new GregorianCalendar(2015, 02, 20, 23, 3, 50)));
+				new GregorianCalendar(2020, 02, 20, 23, 3, 50)));
 		try {
 			timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
 					2015, 02, 20, 23, 3, 50));
@@ -70,7 +71,7 @@ public class TimelineTest {
 
 	@Test
 	public void participantAdditionTest() throws Exception {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2015, 02,
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
 				20, 23, 3, 50)));
 		timeline.getEvent("Briefing").addParticipant("Simone Colucci");
 		assertTrue(timeline.getEvent("Briefing").getParticipants()
@@ -94,5 +95,17 @@ public class TimelineTest {
 				+ timeline.getEvents(new NoFilter<Event>()).get(2).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(3).toString()
 				+ timeline.getEvents(new NoFilter<Event>()).get(4).toString());
+	}
+	
+	
+	@Test
+	public void noDateBeforeCreation() {
+		try {
+			timeline.addEvent(new Event("Test", new GregorianCalendar(2015, 01, 29, 02, 02, 02)));
+			fail();
+		} catch (InvalidDateException e) {
+			assertTrue(true);
+		}
+			
 	}
 }

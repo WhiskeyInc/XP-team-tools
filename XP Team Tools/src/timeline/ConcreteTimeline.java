@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import model.exceptions.InvalidDateException;
 import model.exceptions.UnmovableEventException;
 import filtering.Filter;
 
@@ -21,7 +22,9 @@ public class ConcreteTimeline implements Timeline {
 		events.put(event.toString(), event);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEventsNumber()
 	 */
 	@Override
@@ -29,15 +32,22 @@ public class ConcreteTimeline implements Timeline {
 		return this.events.keySet().size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#addEvent(timeline.Event)
 	 */
 	@Override
-	public void addEvent(Event event) {
+	public void addEvent(Event event) throws InvalidDateException {
+		if (event.getDate().before(this.getEvent(CREATION_EVENT).getDate())) {
+			throw new InvalidDateException(event.getDate());
+		}
 		this.events.put(event.toString(), event);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#dropEvent(java.lang.String)
 	 */
 	@Override
@@ -45,15 +55,21 @@ public class ConcreteTimeline implements Timeline {
 		this.events.remove(eventName);
 	}
 
-	/* (non-Javadoc)
-	 * @see timeline.Timeline#moveEvent(java.lang.String, java.util.GregorianCalendar)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see timeline.Timeline#moveEvent(java.lang.String,
+	 * java.util.GregorianCalendar)
 	 */
 	@Override
-	public void moveEvent(String eventName, GregorianCalendar newDate) throws UnmovableEventException{
+	public void moveEvent(String eventName, GregorianCalendar newDate)
+			throws UnmovableEventException {
 		this.events.get(eventName).setDate(newDate);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEvent(java.lang.String)
 	 */
 	@Override
@@ -61,7 +77,9 @@ public class ConcreteTimeline implements Timeline {
 		return this.events.get(eventName);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEvents(filtering.Filter)
 	 */
 	@Override

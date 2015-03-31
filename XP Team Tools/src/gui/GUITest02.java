@@ -6,13 +6,14 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 
+import model.exceptions.InvalidDateException;
 import timeline.Event;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
 
 public class GUITest02 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidDateException {
 		JFrame frame = new JFrame("GUI Test02");
 		Timeline timeline = new ConcreteTimeline();
 		timeline.addEvent(new Event("Riunione", new GregorianCalendar(2015, 03, 29, 23, 44, 04)));

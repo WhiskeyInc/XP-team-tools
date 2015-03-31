@@ -3,6 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import model.exceptions.InvalidDateException;
 import model.exceptions.UnmovableEventException;
 import filtering.Filter;
 
@@ -10,7 +11,7 @@ public interface Timeline {
 
 	public int getEventsNumber();
 
-	public void addEvent(Event event);
+	public void addEvent(Event event) throws InvalidDateException;
 
 	public void deleteEvent(String eventName);
 
