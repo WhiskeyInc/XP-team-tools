@@ -12,7 +12,6 @@ import server.model.Conversations;
 
 public class ChatTest2 {
 
-
 	// test pavlo e nicola
 	@Test
 	public void addNewChatTest() {
@@ -37,7 +36,6 @@ public class ChatTest2 {
 		}
 	}
 
-
 	@Test
 	public void sendMsgTest() throws Exception {
 		Conversations conversations = new Conversations();
@@ -60,12 +58,12 @@ public class ChatTest2 {
 
 		// String timestamp =
 		// server.getConvs().get(j).getConv().keySet().toString();
-		Set<Timestamp> timestamp2 = conversations.getConvs().get(j).getMessages()
+		Set<Long> timestamp2 = conversations.getConvs().get(j).getMessages()
 				.keySet();
-//		System.out.println(timestamp2);
-//		System.out.println(timestamp2.toArray()[0]);
-//		System.out.println(conversations.getConvs().get(j).getMessages()
-//				.get(timestamp2.toArray()[0]).getMessage());
+		System.out.println(timestamp2);
+		System.out.println(timestamp2.toArray()[0]);
+		System.out.println(conversations.getConvs().get(j).getMessages()
+				.get(timestamp2.toArray()[0]).getMessage());
 
 		assertEquals(
 				"ciao",
@@ -73,4 +71,13 @@ public class ChatTest2 {
 						.get(timestamp2.toArray()[0]).getMessage());
 	}
 
+	@Test
+	public void addExistingConvTest() throws Exception {
+		Conversations conversations = new Conversations();
+		int j = 0;
+
+		conversations.addConv("Anna", "Cesare");
+
+		assertEquals("Conv esiste", conversations.addConv("Anna", "Cesare"));
+	}
 }

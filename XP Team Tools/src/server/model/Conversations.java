@@ -21,7 +21,7 @@ public class Conversations {
 		return "Ciao";
 	}
 
-	public boolean hasConversations() {//tmp method for testing
+	public boolean hasConversations() {// tmp method for testing
 
 		// convs.add("Anus");
 		return !(convs.isEmpty());
@@ -36,8 +36,32 @@ public class Conversations {
 	 * 
 	 * @param participants
 	 */
-	public void addConv(String... participants) {
-		convs.add(new Conversation(participants));
+	public String addConv(String... participants) {
+		int convIndex = checkConv(participants);
+		if (convIndex != (-1)) {
+			// TODO
+
+			return "Conv esiste";
+		} else {
+			convs.add(new Conversation(participants));
+			return "Conv NON esiste";
+		}
 	}
 
+	private int checkConv(String[] participants) {
+
+		LinkedList<String> tmp = new LinkedList<String>();
+
+		for (int i = 0; i < participants.length; i++) {
+			tmp.add(participants[i]);
+		}
+
+		for (int i = 0; i < convs.size(); i++) {
+			if (convs.get(i).getParticipants().containsAll(tmp)
+					&& tmp.containsAll(convs.get(i).getParticipants())) {
+				return i;
+			}
+		}
+		return -1;
+	}
 }
