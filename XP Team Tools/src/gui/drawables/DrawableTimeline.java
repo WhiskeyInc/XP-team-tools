@@ -1,5 +1,6 @@
 package gui.drawables;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,18 +35,34 @@ public class DrawableTimeline implements Drawable, Zoomable {
 		int timelineSeconds = getTimelineSeconds();
 		int initialX = x + margin;
 		int rowY = y + (int) (ROWY_PERCENTAGE * height);
-		g.drawLine(initialX, rowY,
-				initialX + timelineSeconds / secondsPerPixel, rowY);
+		drawLine(g, timelineSeconds, initialX, rowY);
 
 		for (Event event : timeline.getEvents(new NoFilter<Event>())) {
 			DrawableEvent drawableEvent = new DrawableEvent(event);
 			int lineY = getY(rowY);
 			drawableEvent.draw(g, getEventX(initialX, event), lineY
 					- EVENTBOX_HEIGHT, eventBoxWidth, EVENTBOX_HEIGHT);
-			g.drawLine(getLineX(initialX, event), lineY,
-					getLineX(initialX, event), rowY);
+			drawConnections(g, initialX, rowY, event, lineY);
 
 		}
+	}
+
+	private void drawLine(Graphics g, int timelineSeconds, int initialX,
+			int rowY) {
+		Color oldColor = g.getColor();
+		g.setColor(Color.RED.darker().darker());
+		g.drawLine(initialX, rowY,
+				initialX + timelineSeconds / secondsPerPixel, rowY);
+		g.setColor(oldColor);
+	}
+
+	private void drawConnections(Graphics g, int initialX, int rowY,
+			Event event, int lineY) {
+		Color oldColor = g.getColor();
+		g.setColor(Color.gray);
+		g.drawLine(getLineX(initialX, event), lineY,
+				getLineX(initialX, event), rowY);
+		g.setColor(oldColor);
 	}
 
 	private int getY(int rowY) {
