@@ -1,8 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
@@ -53,15 +51,11 @@ public class TimelineTest {
 
 	@Test
 	public void timeChangeTest() throws InvalidDateException,
-			NoSuchEventException {
+			NoSuchEventException, UnmovableEventException {
 		timeline.addEvent(new Event("Riunione sulla timeline",
 				new GregorianCalendar(2020, 02, 20, 23, 3, 50)));
-		try {
-			timeline.moveEvent("Riunione sulla timeline",
-					new GregorianCalendar(2020, 02, 20, 23, 3, 50));
-		} catch (UnmovableEventException e) {
-			fail();
-		}
+		timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
+				2020, 02, 20, 23, 3, 50));
 		assertEquals(new GregorianCalendar(2020, 02, 20, 23, 3, 50), timeline
 				.getEvent("Riunione sulla timeline").getDate());
 	}
@@ -143,7 +137,8 @@ public class TimelineTest {
 			fail();
 		}
 		try {
-			timeline.moveEvent("Esisto", new GregorianCalendar(2020, 1, 1, 1, 1, 1));
+			timeline.moveEvent("Esisto", new GregorianCalendar(2020, 1, 1, 1,
+					1, 1));
 			assertTrue(true);
 		} catch (NoSuchEventException e) {
 			fail();
@@ -154,7 +149,26 @@ public class TimelineTest {
 		} catch (NoSuchEventException e) {
 			fail();
 		}
-		
+	}
+
+	@Test
+	public void unmovableEventTest() throws InvalidDateException,
+			NoSuchEventException {
+		timeline.addEvent(new Event("Timeline", new GregorianCalendar(2020, 2,
+				2, 2, 2, 2)));
+		try {
+			timeline.moveEvent("creation", new GregorianCalendar(2020, 2, 2, 2,
+					2, 2));
+			fail();
+		} catch (UnmovableEventException e) {
+			assertEquals(1, 1);
+		}
+		try {
+			timeline.moveEvent("Timeline", new GregorianCalendar(2030, 3, 3, 3,
+					3, 3));
+		} catch (UnmovableEventException e) {
+			fail();
+		}
 	}
 
 	// @Test

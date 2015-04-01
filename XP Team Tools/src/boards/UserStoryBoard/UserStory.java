@@ -9,7 +9,7 @@ public class UserStory {
 	private String title;
 	private String description;
 	private String state;
-	private TaskManager taskManager = new ConcreteTaskManager();
+	private TaskManager taskManager = new ConcreteTaskManager(); //TODO: useless interface, to became a constructor parameter??
 	
 	public UserStory(String title) {
 		this.state = "TODO";

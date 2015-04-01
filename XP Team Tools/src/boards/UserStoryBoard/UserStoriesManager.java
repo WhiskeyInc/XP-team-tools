@@ -12,16 +12,18 @@ public interface UserStoriesManager {
 	public void addUserStory(String storyName, String description)
 			throws NameAlreadyInUseException;
 
-	public void deleteUserStory(String storyName) throws NoSuchUserStoryException;
+	public void deleteUserStory(String storyName)
+			throws NoSuchUserStoryException;
 
-	public ArrayList<UserStory> getSortedStories(); //TODO
+	public ArrayList<UserStory> getSortedStories(); // TODO
 
-	public void changeStoryPriority(String storyName, int newPriority) throws NoSuchUserStoryException; //TODO
+	public void changeStoryPriority(String storyName, int newPriority)
+			throws NoSuchUserStoryException; // TODO
 
 	public UserStory getUserStory(String storyName);
 
 	public void moveUserStoryToState(String storyName, String targetState)
-			throws InvalidStateException, NoSuchUserStoryException;
+			throws NoSuchUserStoryException, InvalidStateException;
 
 	public ArrayList<UserStory> getUserStories(Filter<UserStory> filter);
 

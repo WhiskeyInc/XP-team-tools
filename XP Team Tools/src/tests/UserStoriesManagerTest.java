@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import model.exceptions.NameAlreadyInUseException;
+import model.exceptions.NoSuchUserStoryException;
 
 import org.junit.Test;
 
@@ -36,6 +39,19 @@ public class UserStoriesManagerTest {
 		manager.moveUserStoryToState("us1", "ACCOMPLISHED");
 		assertEquals("ACCOMPLISHED", manager.getUserStory("us1").getState());
 	}
+	
+	@Test
+	public void defaultPriorityTest() throws Exception {
+		manager.addUserStory("us1",
+				"Voglio che ci sia un pannello con dei tasti che...");
+		manager.addUserStory("us2", "Voglio che ci sia un menù che...");
+		manager.addUserStory("us3",
+				"Ci deve essere un'area di testo dove poter...");
+		assertEquals("us1" + "us2" + "us3", manager.getSortedStories().get(0)
+				.toString()
+				+ manager.getSortedStories().get(1).toString()
+				+ manager.getSortedStories().get(2).toString());
+	}
 
 	@Test
 	public void changePriorityTest() throws Exception {
@@ -44,21 +60,12 @@ public class UserStoriesManagerTest {
 		manager.addUserStory("us2", "Voglio che ci sia un menù che...");
 		manager.addUserStory("us3",
 				"Ci deve essere un'area di testo dove poter...");
+		assertEquals(3, manager.getSortedStories().size());
 		manager.changeStoryPriority("us3", 0);
 		assertEquals("us3" + "us1" + "us2", manager.getSortedStories().get(0)
 				.toString()
 				+ manager.getSortedStories().get(1).toString()
 				+ manager.getSortedStories().get(2).toString());
-		assertEquals(3, manager.getSortedStories().size());
-	}
-
-	@Test
-	public void taskAdditionToStory() throws Exception {
-		manager.addUserStory("Timer",
-				"Voglio che ci sia un pannello con dei tasti che...");
-		manager.getUserStory("Timer").addTask("Timeline",
-				"Componente che deve...");
-		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
 	}
 
 	@Test
@@ -68,4 +75,47 @@ public class UserStoriesManagerTest {
 		manager.deleteUserStory("Timer");
 		assertEquals(null, manager.getUserStory("Timer"));
 	}
+	
+	@Test
+	public void nameAlreadyInUseExceptionTest() {
+		try {
+			manager.addUserStory("Timeline", "Voglio una timeline che...");
+		} catch (NameAlreadyInUseException e) {
+			fail();
+		}
+		try {
+			manager.addUserStory("Timeline", "Voglio una timeline che...");
+			fail();
+		} catch (NameAlreadyInUseException e) {
+			assertEquals(1, 1);
+		}
+	}
+	
+	@Test
+	public void noSuchUserStoryTest() throws NameAlreadyInUseException {
+		manager.addUserStory("Timeline", "Voglio una timeline che...");
+		try {
+			manager.deleteUserStory("Non esisto");
+			fail();
+		} catch (NoSuchUserStoryException e) {
+			assertEquals(1, 1);
+		}
+		try {
+			manager.deleteUserStory("Timeline");
+		} catch (NoSuchUserStoryException e) {
+			fail();
+		}
+	}
+	
+	
+//  TODO: move to UserStoryTest
+//	@Test
+//	public void taskAdditionToStory() throws Exception {
+//		manager.addUserStory("Timer",
+//				"Voglio che ci sia un pannello con dei tasti che...");
+//		manager.getUserStory("Timer").addTask("Timeline",
+//				"Componente che deve...");
+//		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
+//	}
+
 }

@@ -40,11 +40,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
-		try {
-			if (isNotValidDate(event)) {
-				throw new InvalidDateException(event.getDate());
-			}
-		} catch (NoSuchEventException e) {}
+		validateDate(event.getDate());
 		this.events.put(event.toString(), event);
 	}
 
@@ -77,9 +73,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public Event getEvent(String eventName) throws NoSuchEventException {
-		if (!isAnExistingEvent(eventName)) {
-			throw new NoSuchEventException(eventName);
-		}
+		this.validateEvent(eventName);
 		return this.events.get(eventName);
 	}
 
@@ -98,23 +92,27 @@ public class ConcreteTimeline implements Timeline {
 		return filteredAndSortedEvents;
 	}
 	
-	private boolean isAnExistingEvent(String eventName) {
-		boolean found = false;
-		for (Event event : this.getEvents()) {
-			if (event.toString().compareTo(eventName)==0) {
-				found = true;
-			}
+	private void validateEvent(String eventName) throws NoSuchEventException {
+		if(!EventExists(eventName)){
+			throw new NoSuchEventException(eventName);
 		}
-		return found;
 	}
 
-	private ArrayList<Event> getEvents() {
-		ArrayList<Event> list = new ArrayList<Event>();
-		list.addAll(this.events.values());
-		return list;
+	private boolean EventExists(String eventName) {
+		return this.events.containsKey(eventName);
 	}
 	
-	private boolean isNotValidDate(Event event) throws NoSuchEventException {
-		return event.getDate().before(this.getEvent(CREATION_EVENT).getDate());
+	private void validateDate(GregorianCalendar date) throws InvalidDateException {
+		if(dateBeforeCreation(date)){
+			throw new InvalidDateException(date);
+		}
+	}
+
+	private boolean dateBeforeCreation(GregorianCalendar date) {
+		try {
+			return date.before(this.getEvent(CREATION_EVENT).getDate());
+		} catch (NoSuchEventException e) {
+			throw new RuntimeException("Fatal error: creation not found");
+		}
 	}
 }
