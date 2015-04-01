@@ -67,7 +67,6 @@ public class TimerUI extends JPanel {
 		timer.setInitialDelay(0);
 	}
 
-
 	private void timeOverActions() {
 		if (!indexManager.isPauseIndex()) {
 			workingTimeEndingActions();
@@ -80,6 +79,7 @@ public class TimerUI extends JPanel {
 		if (indexManager.isPauseIndex()) {
 			pauseEndingActions();
 		}
+		;
 	}
 
 	private void pauseEndingActions() {
@@ -161,10 +161,11 @@ public class TimerUI extends JPanel {
 	public void setPlayer(SoundPlayer player) {
 		this.player = player;
 	}
-	
+
 	public void setManager(TimerManager manager) {
 		this.manager = manager;
 	}
+
 	public void setIndexManager(TimerIndexManager indexManager) {
 		this.indexManager = indexManager;
 	}

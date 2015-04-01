@@ -1,5 +1,11 @@
 package timer;
 
+/**
+ * A class that manages the countdown to be shown on the display
+ * 
+ * @author alessandro B
+ *
+ */
 public class TimerManager {
 	
 	private int second;

@@ -1,5 +1,12 @@
 package timer;
 
+/**
+ * A class that manages the boolean index thanks to which the transition from a previous phase
+ * to the next phase takes place
+ * 
+ * @author alessandro B
+ *
+ */
 public class TimerIndexManager {
 	
 	private boolean timeOver;

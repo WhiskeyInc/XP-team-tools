@@ -4,6 +4,12 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 
+/**
+ * A class that set the colors of the "semaphore"
+ * 
+ * @author alessandro B
+ *
+ */
 public class TimerPainter {
 	
 	private JButton button1;
