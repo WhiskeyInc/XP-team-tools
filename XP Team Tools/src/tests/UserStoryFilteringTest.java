@@ -1,5 +1,6 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.TeamManager;
@@ -7,7 +8,6 @@ import model.TeamManager;
 import org.junit.Test;
 
 import timeline.ConcreteTimeline;
-import static org.junit.Assert.*;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.TeamUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;

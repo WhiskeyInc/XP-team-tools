@@ -9,8 +9,8 @@ import model.exceptions.NoSuchEventException;
 
 import org.junit.Test;
 
-import timeline.Event;
 import timeline.ConcreteTimeline;
+import timeline.Event;
 import timeline.Timeline;
 import filtering.TargetFilter;
 import filtering.checkers.NameEventChecker;

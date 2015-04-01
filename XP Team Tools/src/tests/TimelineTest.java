@@ -152,7 +152,7 @@ public class TimelineTest {
 	}
 
 	@Test
-	public void unmovableEventTest() throws InvalidDateException,
+	public void unMovableEventTest() throws InvalidDateException,
 			NoSuchEventException {
 		timeline.addEvent(new Event("Timeline", new GregorianCalendar(2020, 2,
 				2, 2, 2, 2)));
@@ -169,6 +169,18 @@ public class TimelineTest {
 		} catch (UnmovableEventException e) {
 			fail();
 		}
+	}
+
+	@Test
+	public void eventComparationTest() throws Exception {
+		timeline.addEvent(new Event("Terzo", new GregorianCalendar(2020, 2, 2,
+				2, 2, 2)));
+		timeline.addEvent(new Event("Secondo", new GregorianCalendar(2020, 2,
+				2, 2, 2, 1)));
+		assertEquals("Secondo" + "Terzo",
+				timeline.getEvents(new NoFilter<Event>()).get(1).toString()
+						+ timeline.getEvents(new NoFilter<Event>()).get(2)
+								.toString());
 	}
 
 	// @Test

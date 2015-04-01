@@ -18,9 +18,8 @@ public class UserStoriesManagerTest {
 	public void addStoryTest() throws Exception {
 		manager.addUserStory("Timeline",
 				"Voglio che ci sia un pannello con dei tasti che...");
-		assertEquals(
-				"Timeline"
-						+ "Voglio che ci sia un pannello con dei tasti che...",
+		assertEquals("Timeline"
+				+ "Voglio che ci sia un pannello con dei tasti che...",
 				manager.getUserStory("Timeline").toString()
 						+ manager.getUserStory("Timeline").getDescription());
 	}
@@ -39,7 +38,7 @@ public class UserStoriesManagerTest {
 		manager.moveUserStoryToState("us1", "ACCOMPLISHED");
 		assertEquals("ACCOMPLISHED", manager.getUserStory("us1").getState());
 	}
-	
+
 	@Test
 	public void defaultPriorityTest() throws Exception {
 		manager.addUserStory("us1",
@@ -69,13 +68,13 @@ public class UserStoriesManagerTest {
 	}
 
 	@Test
-	public void deleteUserStoryTest() throws Exception{
+	public void deleteUserStoryTest() throws Exception {
 		manager.addUserStory("Timer",
 				"Voglio che ci sia un pannello con dei tasti che...");
 		manager.deleteUserStory("Timer");
 		assertEquals(null, manager.getUserStory("Timer"));
 	}
-	
+
 	@Test
 	public void nameAlreadyInUseExceptionTest() {
 		try {
@@ -90,7 +89,7 @@ public class UserStoriesManagerTest {
 			assertEquals(1, 1);
 		}
 	}
-	
+
 	@Test
 	public void noSuchUserStoryTest() throws NameAlreadyInUseException {
 		manager.addUserStory("Timeline", "Voglio una timeline che...");
@@ -106,16 +105,14 @@ public class UserStoriesManagerTest {
 			fail();
 		}
 	}
-	
-	
-//  TODO: move to UserStoryTest
-//	@Test
-//	public void taskAdditionToStory() throws Exception {
-//		manager.addUserStory("Timer",
-//				"Voglio che ci sia un pannello con dei tasti che...");
-//		manager.getUserStory("Timer").addTask("Timeline",
-//				"Componente che deve...");
-//		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
-//	}
+
+	@Test
+	public void taskAdditionToStory() throws Exception {
+		manager.addUserStory("Timer",
+				"Voglio che ci sia un pannello con dei tasti che...");
+		manager.getUserStory("Timer").addTask("Timeline",
+				"Componente che deve...");
+		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
+	}
 
 }

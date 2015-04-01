@@ -105,7 +105,7 @@ public class Event implements Comparable<Event> {
 	 * @see {@link Event}.isMovable()
 	 */
 	public void setDate(GregorianCalendar newDate) throws UnmovableEventException {
-		if (!movable) {
+		if (!isMovable()) {
 			throw new UnmovableEventException(this.name);
 		}
 		this.date = newDate;
@@ -113,7 +113,7 @@ public class Event implements Comparable<Event> {
 	}
 
 	/**
-	 * Lets yuo know if the date of this event can be changed
+	 * Lets you know if the date of this event can be changed
 	 * 
 	 * @return TRUE if the date of this event can be changed, else FALSE
 	 */
