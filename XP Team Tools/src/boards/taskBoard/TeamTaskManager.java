@@ -11,7 +11,7 @@ import filtering.Filter;
 
 /**
  * A DP Decorator oriented implementation of {@link TaskManager} interface. This
- * class encapsulates a concrete implementation of task but adds team
+ * class encapsulates a concrete implementation of that interface but adds team
  * functionalities, like parameters validation (over {@link TeamManager} rules)
  * and event notification
  * 
