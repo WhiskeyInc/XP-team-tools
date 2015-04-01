@@ -1,4 +1,4 @@
-package ui;
+package timer.utils;
 
 import java.awt.Color;
 
