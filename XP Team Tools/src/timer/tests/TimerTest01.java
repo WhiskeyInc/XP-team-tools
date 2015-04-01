@@ -3,8 +3,8 @@ package timer.tests;
 import javax.swing.JFrame;
 
 import sounds.SoundPlayer;
-import timer.utils.TimerIndexManager;
-import timer.utils.TimerManager;
+import timer.TimerIndexManager;
+import timer.TimerManager;
 import ui.TimerUI;
 import ui.tests.FramesUtils;
 

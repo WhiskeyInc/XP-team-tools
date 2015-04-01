@@ -13,9 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import sounds.SoundPlayer;
-import timer.utils.TimerIndexManager;
-import timer.utils.TimerPainter;
-import timer.utils.TimerManager;
+import timer.TimerIndexManager;
+import timer.TimerManager;
+import timer.TimerPainter;
 
 /**
  * The UI of the Timer, with the StartButton and a display that shows the

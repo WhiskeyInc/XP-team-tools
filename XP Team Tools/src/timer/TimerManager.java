@@ -1,4 +1,4 @@
-package timer.utils;
+package timer;
 
 public class TimerManager {
 	
