@@ -2,6 +2,7 @@ package boards.UserStoryBoard;
 
 import java.util.ArrayList;
 
+import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchUserStoryException;
@@ -15,10 +16,8 @@ public interface UserStoriesManager {
 	public void deleteUserStory(String storyName)
 			throws NoSuchUserStoryException;
 
-	public ArrayList<UserStory> getSortedStories(); // TODO
-
-	public void changeStoryPriority(String storyName, int newPriority)
-			throws NoSuchUserStoryException; // TODO
+	public void changeStoryPriority(String storyName, String newPriority)
+			throws NoSuchUserStoryException, InvalidPriorityException;
 
 	public UserStory getUserStory(String storyName);
 

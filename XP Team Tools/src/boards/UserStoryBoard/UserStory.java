@@ -9,18 +9,21 @@ public class UserStory {
 	private String title;
 	private String description;
 	private String state;
+	private String priority;
 	private TaskManager taskManager = new ConcreteTaskManager(); //TODO: useless interface, to became a constructor parameter??
 	
 	public UserStory(String title) {
 		this.state = "TODO";
 		this.description = "";
 		this.title = title;
+		this.priority = "DEFAULT";
 	}
 	
 	public UserStory(String title, String description) {
 		this.state = "TODO";
 		this.description = description;
 		this.title = title;
+	    this.priority = "DEFAULT";
 	}
 
 	public String getDescription() {
@@ -31,12 +34,20 @@ public class UserStory {
 		return this.state;
 	}
 
+	public String getPriority() {
+		return this.priority;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	public void setState(String state) {
 		this.state = state;
+	}
+	
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 	
 	@Override

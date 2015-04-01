@@ -122,10 +122,10 @@ public class ConcreteTeamManager implements TeamManager {
 	 * @see model.TeamManager#userStoryPriorityChanged(java.lang.String)
 	 */
 	@Override
-	public void userStoryPriorityChanged(UserStory userStory) {
+	public void userStoryPriorityChanged(UserStory userStory, String newPriority) {
 		try {
 			timeline.addEvent(generateAutomaticEvent("Changed priority of userstory: "
-					+ userStory.toString()));
+					+ userStory.toString() + ": now it is " + newPriority));
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
 		}
@@ -144,6 +144,11 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public boolean isValidUserStoryState(String state){
 		return settings.getPossibleUserStoryStates().contains(state);
+	}
+	
+	@Override
+	public boolean isValidUserStoryPriority(String priority) {
+		return settings.getPossibleUserStoryPriorities().contains(priority);
 	}
 	
 	private GregorianCalendar getCurrentDate() {

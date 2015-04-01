@@ -9,6 +9,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 	private ArrayList<String> teamMembers = new ArrayList<String>();
 	private ArrayList<String> possibleTasksStates = new ArrayList<String>();
 	private ArrayList<String> possibleUserStoriesStates = new ArrayList<String>();
+	private ArrayList<String> possibleUserStoriesPriorities = new ArrayList<String>();
 	
 	public void setPossibleTasksStates(String... possibleStates) {
 		for (String state : possibleStates) {
@@ -19,6 +20,12 @@ public class ConcreteTeamSettings implements TeamSettings {
 	public void setPossibleUserStoriesStates(String... possibleStates) {
 		for (String state : possibleStates) {
 			this.possibleUserStoriesStates.add(state);
+		}		
+	}
+	
+	public void setPossibleUserStoriesPriorities(String... possiblePriorities) {
+		for (String priority : possiblePriorities) {
+			this.possibleUserStoriesPriorities.add(priority);
 		}		
 	}
 	
@@ -46,6 +53,11 @@ public class ConcreteTeamSettings implements TeamSettings {
 		return possibleUserStoriesStates;
 	}
 	
+	@Override
+	public ArrayList<String> getPossibleUserStoryPriorities() {
+		return possibleUserStoriesPriorities;
+	}
+	
 	public void addTeamMember(String... member) throws NameAlreadyInUseException  {
 		for(int i=0;i<member.length;i++){
 			checkMemberName(member[i]);
@@ -59,6 +71,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 		}
 		
 	}
+
 
 	
 }

@@ -3,6 +3,7 @@ package boards.UserStoryBoard;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.exceptions.InvalidPriorityException;
 import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchUserStoryException;
 import filtering.Filter;
@@ -10,7 +11,6 @@ import filtering.Filter;
 public class ConcreteUserStoriesManager implements UserStoriesManager {
 
 	private HashMap<String, UserStory> stories = new HashMap<String, UserStory>();
-	private ArrayList<UserStory> sortedStories = new ArrayList<UserStory>();
 
 	/* (non-Javadoc)
 	 * @see boards.UserStoriesManager#addUserStory(java.lang.String, java.lang.String)
@@ -20,7 +20,6 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 		validateName(userStoryName);
 		UserStory userStory = new UserStory(userStoryName, description);
 		stories.put(userStory.toString(), userStory);
-		sortedStories.add(userStory);
 	}
 
 	/* (non-Javadoc)
@@ -29,26 +28,18 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	@Override
 	public void deleteUserStory(String userStoryName) throws NoSuchUserStoryException{
 		validateExistance(userStoryName);
-		sortedStories.remove(stories.get(userStoryName));
 		stories.remove(userStoryName);
 	}
 	
-	/* (non-Javadoc)
-	 * @see boards.UserStoriesManager#getSortedStories()
-	 */
-	@Override
-	public ArrayList<UserStory> getSortedStories() {
-		return sortedStories;
-	}
+	
 
 	/* (non-Javadoc)
 	 * @see boards.UserStoriesManager#changeStoryPriority(java.lang.String, int)
 	 */
 	@Override
-	public void changeStoryPriority(String userStoryName, int newPriority) throws NoSuchUserStoryException {
+	public void changeStoryPriority(String userStoryName, String newPriority) throws NoSuchUserStoryException, InvalidPriorityException {
 		validateExistance(userStoryName);
-		sortedStories.remove(stories.get(userStoryName));
-		sortedStories.add(newPriority, stories.get(userStoryName));
+		this.stories.get(userStoryName).setPriority(newPriority);
 	}
 
 	/* (non-Javadoc)

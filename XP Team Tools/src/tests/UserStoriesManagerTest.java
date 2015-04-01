@@ -30,6 +30,13 @@ public class UserStoriesManagerTest {
 				"Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals("TODO", manager.getUserStory("us1").getState());
 	}
+	
+	@Test
+	public void defaultPriorityTest() throws Exception {
+		manager.addUserStory("us1",
+				"Voglio che ci sia un pannello con dei tasti che...");
+		assertEquals("DEFAULT", manager.getUserStory("us1").getPriority());
+	}
 
 	@Test
 	public void setStateTest() throws Exception {
@@ -39,32 +46,14 @@ public class UserStoriesManagerTest {
 		assertEquals("ACCOMPLISHED", manager.getUserStory("us1").getState());
 	}
 
+	
 	@Test
-	public void defaultPriorityTest() throws Exception {
+	public void setPriorityTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
-		manager.addUserStory("us2", "Voglio che ci sia un menù che...");
-		manager.addUserStory("us3",
-				"Ci deve essere un'area di testo dove poter...");
-		assertEquals("us1" + "us2" + "us3", manager.getSortedStories().get(0)
-				.toString()
-				+ manager.getSortedStories().get(1).toString()
-				+ manager.getSortedStories().get(2).toString());
-	}
-
-	@Test
-	public void changePriorityTest() throws Exception {
-		manager.addUserStory("us1",
-				"Voglio che ci sia un pannello con dei tasti che...");
-		manager.addUserStory("us2", "Voglio che ci sia un menù che...");
-		manager.addUserStory("us3",
-				"Ci deve essere un'area di testo dove poter...");
-		assertEquals(3, manager.getSortedStories().size());
-		manager.changeStoryPriority("us3", 0);
-		assertEquals("us3" + "us1" + "us2", manager.getSortedStories().get(0)
-				.toString()
-				+ manager.getSortedStories().get(1).toString()
-				+ manager.getSortedStories().get(2).toString());
+		manager.changeStoryPriority("us1", "MAX");
+		assertEquals("us1" + "MAX", manager.getUserStory("us1").toString()
+				+ manager.getUserStory("us1").getPriority());
 	}
 
 	@Test

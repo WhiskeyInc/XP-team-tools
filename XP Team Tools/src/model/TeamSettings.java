@@ -9,5 +9,7 @@ public interface TeamSettings {
 	public ArrayList<String> getPossibleTaskStates();
 
 	public ArrayList<String> getPossibleUserStoryStates();
+	
+	public ArrayList<String> getPossibleUserStoryPriorities();
 
 }

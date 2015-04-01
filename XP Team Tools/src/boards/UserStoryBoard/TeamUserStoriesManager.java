@@ -3,6 +3,7 @@ package boards.UserStoryBoard;
 import java.util.ArrayList;
 
 import model.TeamManager;
+import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchUserStoryException;
@@ -40,15 +41,14 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 
 	}
 
+	
 	@Override
-	public ArrayList<UserStory> getSortedStories() {
-		return userStoriesManager.getSortedStories();
-	}
-
-	@Override
-	public void changeStoryPriority(String storyName, int newPriority) throws NoSuchUserStoryException {
-		userStoriesManager.changeStoryPriority(storyName, newPriority);
-		teamManager.userStoryPriorityChanged(this.getUserStory(storyName));
+	public void changeStoryPriority(String storyName, String targetPriority) throws NoSuchUserStoryException,InvalidPriorityException {
+		if(!this.teamManager.isValidUserStoryPriority(targetPriority)) {
+			throw new InvalidPriorityException(targetPriority);
+		}
+		userStoriesManager.changeStoryPriority(storyName, targetPriority);
+		teamManager.userStoryPriorityChanged(this.getUserStory(storyName),targetPriority);
 	}
 
 	@Override
