@@ -9,6 +9,17 @@ import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchTaskException;
 import filtering.Filter;
 
+/**
+ * A DP Decorator oriented implementation of {@link TaskManager} interface. This
+ * class encapsulates a concrete implementation of task but adds team
+ * functionalities, like parameters validation (over {@link TeamManager} rules)
+ * and event notification
+ * 
+ * @author simone, lele, usk, incre
+ * @see {@link TaskManager}, {@link TeamManager}
+ * @since 1.0
+ *
+ */
 public class TeamTaskManager implements TaskManager {
 
 	private TaskManager taskManager;
@@ -21,6 +32,10 @@ public class TeamTaskManager implements TaskManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#addTask(java.lang.String, java.lang.String)
+	 */
 	public void addTask(String taskName, String description)
 			throws NameAlreadyInUseException {
 		taskManager.addTask(taskName, description);
@@ -32,6 +47,10 @@ public class TeamTaskManager implements TaskManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#addTask(java.lang.String)
+	 */
 	public void addTask(String taskName) throws NameAlreadyInUseException {
 		this.taskManager.addTask(taskName);
 		try {
@@ -42,6 +61,10 @@ public class TeamTaskManager implements TaskManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#deleteTask(java.lang.String)
+	 */
 	public void deleteTask(String taskName) throws NoSuchTaskException {
 		Task task = taskManager.getTask(taskName);
 		this.taskManager.deleteTask(taskName);
@@ -49,27 +72,42 @@ public class TeamTaskManager implements TaskManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#getTask(java.lang.String)
+	 */
 	public Task getTask(String taskName) throws NoSuchTaskException {
 		return this.taskManager.getTask(taskName);
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#getTasksNumber()
+	 */
 	public int getTasksNumber() {
 		return this.taskManager.getTasksNumber();
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#moveTaskToState(java.lang.String, java.lang.String)
+	 */
 	public void moveTaskToState(String taskName, String targetState)
 			throws InvalidStateException, NoSuchTaskException {
 		if (!teamManager.isValidTaskState(targetState)) {
 			throw new InvalidStateException(targetState);
 		}
 		this.taskManager.moveTaskToState(taskName, targetState);
-		this.teamManager.taskStateChanged(this.getTask(taskName),
-				targetState);
+		this.teamManager.taskStateChanged(this.getTask(taskName), targetState);
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#addDevelopersToTask(java.lang.String, java.lang.String[])
+	 */
 	public void addDevelopersToTask(String taskName, String... developers)
 			throws InvalidMemberException, NoSuchTaskException {
 		for (String string : developers) {
@@ -78,11 +116,14 @@ public class TeamTaskManager implements TaskManager {
 			}
 		}
 		this.taskManager.addDevelopersToTask(taskName, developers);
-		this.teamManager.developersAdded(this.getTask(taskName),
-				developers);
+		this.teamManager.developersAdded(this.getTask(taskName), developers);
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see boards.taskBoard.TaskManager#getTasks(filtering.Filter)
+	 */
 	public ArrayList<Task> getTasks(Filter<Task> filter) {
 		return this.taskManager.getTasks(filter);
 	}

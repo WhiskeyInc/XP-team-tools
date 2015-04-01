@@ -3,10 +3,24 @@ package boards.taskBoard;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.exceptions.InvalidMemberException;
+import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
 import model.exceptions.NoSuchTaskException;
 import filtering.Filter;
 
+/**
+ * A simple implementation of {@link TaskManager} interface. It does implement
+ * existance control when editing a task, valid name control when adding a new
+ * one, but does not implement any kind of state or developer validation (i.e
+ * {@link InvalidStateException} and {@link InvalidMemberException} are never
+ * thrown)
+ * 
+ * @author simone, lele, usk, incre
+ * @see {@link TaskManager}
+ * @since 1.0
+ *
+ */
 public class ConcreteTaskManager implements TaskManager {
 
 	private HashMap<String, Task> tasks = new HashMap<String, Task>();
@@ -73,7 +87,8 @@ public class ConcreteTaskManager implements TaskManager {
 	 * java.lang.String)
 	 */
 	@Override
-	public void moveTaskToState(String taskName, String targetState) throws NoSuchTaskException{
+	public void moveTaskToState(String taskName, String targetState)
+			throws NoSuchTaskException {
 		validateExistance(taskName);
 		this.getTask(taskName).moveTaskToState(targetState);
 	}
@@ -88,7 +103,8 @@ public class ConcreteTaskManager implements TaskManager {
 		return filter.filter(this.getAllTasks());
 	}
 
-	public void addDevelopersToTask(String taskName, String... developers) throws NoSuchTaskException {
+	public void addDevelopersToTask(String taskName, String... developers)
+			throws NoSuchTaskException {
 		validateExistance(taskName);
 		for (String developer : developers) {
 			this.getTask(taskName).addDeveloper(developer);
@@ -105,18 +121,17 @@ public class ConcreteTaskManager implements TaskManager {
 	private boolean taskExists(String taskName) {
 		return tasks.containsKey(taskName);
 	}
-	
+
 	private void validateExistance(String taskName) throws NoSuchTaskException {
 		if (!taskExists(taskName)) {
 			throw new NoSuchTaskException(taskName);
 		}
 	}
-	
+
 	private void validateName(String taskName) throws NameAlreadyInUseException {
 		if (taskExists(taskName)) {
 			throw new NameAlreadyInUseException(taskName);
 		}
 	}
-
 
 }
