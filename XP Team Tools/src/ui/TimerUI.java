@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import sounds.SoundPlayer;
+import timer.utils.TimerIndexManager;
+import timer.utils.TimerPainter;
+import timer.utils.TimerManager;
 
 /**
  * The UI of the Timer, with the StartButton and a display that shows the
@@ -29,18 +32,11 @@ public class TimerUI extends JPanel {
 	private JButton timerButton;
 	private JTextField timerArea;
 	private JButton pauseButton;
-	private int second;
-	private int initialSecond;
-	private int minute;
-	private int initialMinute;
-	private int pauseSecond;
-	private int pauseMinute;
-	private String time;
 	private Timer timer;
 	private SoundPlayer player;
 	private TimerPainter painter;
-	private boolean timeOver;
-	private boolean PauseIndex;
+	private TimerManager manager;
+	private TimerIndexManager indexManager;
 
 	public TimerUI() {
 		GridBagLayout layout = new GridBagLayout();
@@ -58,60 +54,44 @@ public class TimerUI extends JPanel {
 			}
 
 			private void showCountdown() {
-				setDisplay();
-				if (minute == 0 && second == 0) {
+				timerArea.setText(manager.getDisplay());
+				if (indexManager.isTimeTerminated()) {
 					timeOverActions();
-				} else if (second == 0) {
-					second = 60;
-					minute--;
+				} else if (indexManager.isMinuteTerminated()) {
+					manager.minuteTerminatedActions();
 				}
-				second--;
+				manager.secondDecrementer();
 			}
 		});
 
 		timer.setInitialDelay(0);
 	}
 
-	private void setDisplay() {
-		if (minute < 10 && second < 10)
-			time = "0" + String.valueOf(minute) + " : 0"
-					+ String.valueOf(second);
-		if (minute >= 10 && second < 10)
-			time = String.valueOf(minute) + " : 0" + String.valueOf(second);
-		if (minute < 10 && second >= 10)
-			time = "0" + String.valueOf(minute) + " : "
-					+ String.valueOf(second);
-		if (minute >= 10 && second >= 10)
-			time = String.valueOf(minute) + " : " + String.valueOf(second);
-		timerArea.setText(time);
-	}
 
 	private void timeOverActions() {
-		if (!PauseIndex) {
+		if (!indexManager.isPauseIndex()) {
 			workingTimeEndingActions();
 		}
-		timerArea.setText(time);
 		timer.stop();
 		player.playSong();
-		minute = initialMinute;
-		second = initialSecond + 1;
-		timeOver = true;
+		manager.setTimer();
+		indexManager.setTimeOver(true);
 		setButtonText();
-		if (PauseIndex) {
+		if (indexManager.isPauseIndex()) {
 			pauseEndingActions();
 		}
 	}
 
 	private void pauseEndingActions() {
-		PauseIndex = false;
-		timeOver = false;
+		indexManager.setPauseIndex(false);
+		indexManager.setTimeOver(false);
 		timer.start();
 		deleteButtonText();
 		painter.colorWorkingTimeBackground();
 	}
 
 	private void workingTimeEndingActions() {
-		time = "Stop working";
+		timerArea.setText("Stop working");
 		painter.colorStopWorkingTimeBackGround();
 	}
 
@@ -127,13 +107,12 @@ public class TimerUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (timeOver) {
-					second = pauseSecond;
-					minute = pauseMinute;
+				if (indexManager.isTimeOver()) {
+					manager.setPause();
 					timer.start();
-					PauseIndex = true;
+					indexManager.setPauseIndex(true);
 					deleteButtonText();
-					timeOver = false;
+					indexManager.setTimeOver(false);
 					painter.colorPauseTimeBackground();
 				}
 			}
@@ -156,8 +135,8 @@ public class TimerUI extends JPanel {
 			private void timerButtonAction() {
 				timer.start();
 				deleteButtonText();
-				timeOver = false;
-				if (!PauseIndex) {
+				indexManager.setTimeOver(false);
+				if (!indexManager.isPauseIndex()) {
 					painter.colorWorkingTimeBackground();
 				}
 			}
@@ -179,26 +158,15 @@ public class TimerUI extends JPanel {
 		super.add(timerArea);
 	}
 
-	public void setSecond(int second) {
-		this.second = second;
-		initialSecond = second;
-	}
-
-	public void setMinute(int minute) {
-		this.minute = minute;
-		initialMinute = minute;
-	}
-
-	public void setPauseMinute(int pauseMinute) {
-		this.pauseMinute = pauseMinute;
-	}
-
-	public void setPauseSecond(int pauseSecond) {
-		this.pauseSecond = pauseSecond;
-	}
-
 	public void setPlayer(SoundPlayer player) {
 		this.player = player;
+	}
+	
+	public void setManager(TimerManager manager) {
+		this.manager = manager;
+	}
+	public void setIndexManager(TimerIndexManager indexManager) {
+		this.indexManager = indexManager;
 	}
 
 	private void deleteButtonText() {
