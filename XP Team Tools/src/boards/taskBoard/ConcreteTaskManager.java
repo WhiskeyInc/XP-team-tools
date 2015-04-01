@@ -74,6 +74,7 @@ public class ConcreteTaskManager implements TaskManager {
 	 */
 	@Override
 	public void moveTaskToState(String taskName, String targetState) throws NoSuchTaskException{
+		validateExistance(taskName);
 		this.getTask(taskName).moveTaskToState(targetState);
 	}
 
@@ -88,6 +89,7 @@ public class ConcreteTaskManager implements TaskManager {
 	}
 
 	public void addDevelopersToTask(String taskName, String... developers) throws NoSuchTaskException {
+		validateExistance(taskName);
 		for (String developer : developers) {
 			this.getTask(taskName).addDeveloper(developer);
 		}
