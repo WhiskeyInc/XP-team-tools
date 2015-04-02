@@ -16,7 +16,7 @@ import filtering.Filter;
  * 
  * @author simone, lele, usk, incre
  * @since 1.0
- * @see Task, name
+ * @see Task
  */
 public interface TaskManager {
 
@@ -93,6 +93,7 @@ public interface TaskManager {
 	 *            : the rule to choose whether or not a task should be included
 	 *            in the returned list
 	 * @return: the filtered list of tasks
+	 * @see Filter
 	 */
 	public ArrayList<Task> getTasks(Filter<Task> filter);
 

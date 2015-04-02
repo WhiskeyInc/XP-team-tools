@@ -9,6 +9,7 @@ import model.exceptions.NameAlreadyInUseException;
  * The UserStory class represents a simple develoment user story
  * 
  * @author simone, lele, incre, usk
+ * @since 1.0
  *
  */
 public class UserStory {
