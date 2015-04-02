@@ -57,7 +57,7 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	public void moveUserStoryToState(String storyName, String targetState)
 			throws NoSuchUserStoryException {
 		validateExistance(storyName);
-		this.stories.get(storyName).setState(targetState);
+		this.stories.get(storyName).moveToState(targetState);
 	}
 	
 	/* (non-Javadoc)

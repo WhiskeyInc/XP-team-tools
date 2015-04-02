@@ -25,6 +25,16 @@ public class TeamTaskManager implements TaskManager {
 	private TaskManager taskManager;
 	private TeamManager teamManager;
 
+	/**
+	 * Creates a new istance of this class
+	 * 
+	 * @param taskManager
+	 *            : the concrete implementation of {@link TaskManager} to
+	 *            encapsulate
+	 * @param teamManager
+	 *            : the {@link TeamManager} istance that will implement team
+	 *            functionalities
+	 */
 	public TeamTaskManager(TaskManager taskManager, TeamManager teamManager) {
 		super();
 		this.taskManager = taskManager;
@@ -34,7 +44,9 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
-	 * @see boards.taskBoard.TaskManager#addTask(java.lang.String, java.lang.String)
+	 * 
+	 * @see boards.taskBoard.TaskManager#addTask(java.lang.String,
+	 * java.lang.String)
 	 */
 	public void addTask(String taskName, String description)
 			throws NameAlreadyInUseException {
@@ -49,6 +61,7 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see boards.taskBoard.TaskManager#addTask(java.lang.String)
 	 */
 	public void addTask(String taskName) throws NameAlreadyInUseException {
@@ -63,6 +76,7 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see boards.taskBoard.TaskManager#deleteTask(java.lang.String)
 	 */
 	public void deleteTask(String taskName) throws NoSuchTaskException {
@@ -74,6 +88,7 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see boards.taskBoard.TaskManager#getTask(java.lang.String)
 	 */
 	public Task getTask(String taskName) throws NoSuchTaskException {
@@ -83,6 +98,7 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see boards.taskBoard.TaskManager#getTasksNumber()
 	 */
 	public int getTasksNumber() {
@@ -92,7 +108,9 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
-	 * @see boards.taskBoard.TaskManager#moveTaskToState(java.lang.String, java.lang.String)
+	 * 
+	 * @see boards.taskBoard.TaskManager#moveTaskToState(java.lang.String,
+	 * java.lang.String)
 	 */
 	public void moveTaskToState(String taskName, String targetState)
 			throws InvalidStateException, NoSuchTaskException {
@@ -106,7 +124,9 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
-	 * @see boards.taskBoard.TaskManager#addDevelopersToTask(java.lang.String, java.lang.String[])
+	 * 
+	 * @see boards.taskBoard.TaskManager#addDevelopersToTask(java.lang.String,
+	 * java.lang.String[])
 	 */
 	public void addDevelopersToTask(String taskName, String... developers)
 			throws InvalidMemberException, NoSuchTaskException {
@@ -122,6 +142,7 @@ public class TeamTaskManager implements TaskManager {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see boards.taskBoard.TaskManager#getTasks(filtering.Filter)
 	 */
 	public ArrayList<Task> getTasks(Filter<Task> filter) {
