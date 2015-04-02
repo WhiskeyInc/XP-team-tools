@@ -2,7 +2,6 @@ package boards.UserStoryBoard;
 
 import java.util.ArrayList;
 
-import boards.taskBoard.TaskManager;
 import model.TeamManager;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;

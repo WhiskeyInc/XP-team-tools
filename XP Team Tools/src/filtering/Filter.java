@@ -1,7 +1,6 @@
 package filtering;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Filter interface can implement any kind of filtering algohrithm that work on

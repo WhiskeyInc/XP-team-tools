@@ -3,8 +3,6 @@ package boards.UserStoryBoard;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import boards.taskBoard.TaskManager;
-import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
