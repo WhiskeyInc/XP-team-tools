@@ -17,7 +17,7 @@ import filtering.Filter;
  * {@link TeamManager} rules) and event notification
  * 
  * @author simone, lele, usk, incre
- * @see {@link UserStoriesManage}r, {@link TeamManager}
+ * @see {@link UserStoriesManager}, {@link TeamManager}
  * @since 1.0
  *
  */
