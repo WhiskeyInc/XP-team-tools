@@ -12,6 +12,13 @@ import java.util.List;
 
 import string.formatter.NewLineMaker;
 
+/**
+ * An implementation of the abstract class {@link AbstractServer} 
+ * It carries many clients giving the duty of each one to a thread.
+ * From each client it receives messages and at the same time it propagates them
+ * to all the others
+ * @author alberto
+ */
 public class TestableServer extends AbstractServer {
 
 	private List<Socket> clientSocketList = new LinkedList<Socket>();
@@ -52,7 +59,8 @@ public class TestableServer extends AbstractServer {
 
 		}
 	}
-	//this is for to get the messages sent to a offline client
+	
+	//function to propagate the messages sent to an offline client
 	private void alignClient() throws IOException {
 		String[] messages = recoverMessages();
 		for (int i = 0; i < messages.length; i++) {
@@ -120,10 +128,13 @@ public class TestableServer extends AbstractServer {
 		return sentMessages;
 	}
 
+	/**
+	 * Function getting the last message
+	 * @return the last message
+	 */
 	public String getLastMessage() {
 
 		ArrayList<String> messages = chatStorer.getMessages();
-
 		return messages.get(messages.size() - 1);
 	}
 

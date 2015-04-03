@@ -27,6 +27,11 @@ public class Conversation {
 		}
 	}
 
+	/**
+	 * Adds a message to a conversation
+	 * @param author Author of the message
+	 * @param msg Body of the message
+	 */
 	public void addMessage(String author, String msg) {
 
 		if (isParticipant(author))

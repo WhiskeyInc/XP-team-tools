@@ -21,6 +21,10 @@ public class Conversations {
 		return "Ciao";
 	}
 
+	/**
+	 * Tells if there are conversations
+	 * @return true if there's at least a conversation
+	 */
 	public boolean hasConversations() {// tmp method for testing
 
 		// convs.add("Anus");

@@ -1,3 +1,3 @@
-To test server and client' s work, run first ServerMain, then ClientMain1
+To test server and client' s work, run first ServerMainRecover, then ClientMain1
 To test server and client's work with Recover messages feature, run ServerMainRecover,
  then ClientMain1 and ClientMain2

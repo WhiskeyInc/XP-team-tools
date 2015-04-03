@@ -9,6 +9,12 @@ import java.net.Socket;
 
 import string.formatter.NickNameFormatter;
 
+/**
+ * A client of the chat system, it sends and receives messages of one or more 
+ * conversations (chats)
+ * 
+ * @author alberto
+ */
 public class Client {
 
 	private Socket clientSocket;
@@ -25,6 +31,11 @@ public class Client {
 		this.nickname = nickname;
 	}
 
+	/**
+	 * Opens input and output stream to the given hostname at the given port
+	 * @param hostName name of the host or ip address in the correct form (x.x.x.x)
+	 * @param port port of the server opened for the connection
+	 */
 	public void openStreams(String hostName, int port) {
 		try {
 			clientSocket = new Socket(hostName, port);
@@ -42,6 +53,10 @@ public class Client {
 		return message;
 	}
 
+	/**
+	 * Sends a string message to the server to which it is connected 
+	 * @param message Message to send
+	 */
 	public void sendMessageToServer(String message) {
 		if (clientSocket != null && os != null && is != null) {
 			try {
@@ -54,6 +69,10 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Reads from the socket messages
+	 * @throws IOException when doens't find the input stream
+	 */
 	public void readFromSocket() throws IOException {
 
 		BufferedReader input;
@@ -72,6 +91,9 @@ public class Client {
 
 	}
 
+	/**
+	 * Closes the input/output stream and the socket
+	 */
 	public void closeStream() {
 		try {
 

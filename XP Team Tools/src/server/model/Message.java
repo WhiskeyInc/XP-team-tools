@@ -1,5 +1,9 @@
 package server.model;
 
+/**
+ * Class representing a message
+ * [Still needs a responsability]
+ */
 public class Message {
 
 	private String author;
