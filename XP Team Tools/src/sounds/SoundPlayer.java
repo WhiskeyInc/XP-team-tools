@@ -11,6 +11,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import timer.TimerManager;
+
+/**
+ * SoundPlayer class to play audio file, at the moment useful for the {@link TimerManager}
+ * when a time countdown expires
+ * @author alessandro
+ */
 public class SoundPlayer {
 	
 	 String filename ;
@@ -23,6 +30,9 @@ public class SoundPlayer {
 		this.filename = filename;
 	}
 	 
+	 /**
+	  * Function to play the charged song in the runtime execution of the tool
+	  */
 	 public void playSong(){
 		 try {
 			stream = AudioSystem.getAudioInputStream(new File(filename));
