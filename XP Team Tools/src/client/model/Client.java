@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import string.formatter.Formatter;
+import string.formatter.IStringFormatter;
 import string.formatter.NickNameFormatter;
 
 /**
@@ -21,14 +23,19 @@ public class Client {
 	private String nickname;
 	private DataOutputStream os;
 	private DataInputStream is;
-
+	
+	private IStringFormatter formatter;
+	
 	public Client() {
 		super();
+		
+		this.formatter = new Formatter();
 	}
 
 	public Client(String nickname) {
 		super();
 		this.nickname = nickname;
+		this.formatter = new Formatter();
 	}
 
 	/**
@@ -60,7 +67,7 @@ public class Client {
 	public void sendMessageToServer(String message) {
 		if (clientSocket != null && os != null && is != null) {
 			try {
-				os.writeBytes(NickNameFormatter.formatNickname(nickname));
+				os.writeBytes(formatter.formatMessage(nickname));
 				os.writeBytes(message);
 				os.flush();
 			} catch (Exception e) {
