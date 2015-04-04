@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import org.junit.Test;
 
 import server.model.CacheList;
-import server.model.TestableServer;
+import server.model.TestableServerRecover;
 import string.formatter.NewLineMaker;
 import ui.ChatUITestable;
 import client.model.Client;
@@ -17,7 +17,7 @@ public class ClientServerTests {
 
 	@Test
 	public void clientServerChatTest() throws Exception {
-		final TestableServer server = new TestableServer(new CacheList());
+		final TestableServerRecover server = new TestableServerRecover(new CacheList());
 		server.openPort(9999);
 		final Client client = new Client();
 		client.openStreams("localhost", 9999);
@@ -51,7 +51,7 @@ public class ClientServerTests {
 	}
 
 
-	private void waitTCPSending(final TestableServer server) {
+	private void waitTCPSending(final TestableServerRecover server) {
 		boolean notArrived = true;
 		while(notArrived)
 		try {

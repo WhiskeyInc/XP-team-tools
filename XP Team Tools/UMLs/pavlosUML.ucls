@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="server.model.Conversation" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/Conversation.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="234" x="116" y="148"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
@@ -13,8 +13,8 @@
   <class id="2" language="java" name="server.model.Conversations" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/Conversations.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="204" x="57" y="51"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
@@ -22,8 +22,8 @@
   <class id="3" language="java" name="server.model.Message" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/Message.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="136" x="142" y="248"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
@@ -31,17 +31,17 @@
   <class id="4" language="java" name="server.model.AbstractServer" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/AbstractServer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="158" x="614" y="19"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="server.model.TestableServer" project="XP Team Tools" 
-    file="/XP Team Tools/src/server/model/TestableServer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="server.model.TestableServerRecover" project="XP Team Tools" 
+    file="/XP Team Tools/src/server/model/TestableServerRecover.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="164" x="611" y="98"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
@@ -49,8 +49,8 @@
   <interface id="6" language="java" name="server.model.IChatStorer" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/IChatStorer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="182" x="604" y="188"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
@@ -58,50 +58,42 @@
   <class id="7" language="java" name="server.model.CacheList" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/CacheList.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="182" x="370" y="191"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <association id="8">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="9" name="conv"/>      
-      <multiplicity id="10" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="11">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="convs">        
+      <attribute id="9" name="convs">        
         <position height="0" width="0" x="-132" y="2"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="2147483647">        
+      <multiplicity id="10" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="-132" y="2"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <realization id="15">    
+  <realization id="11">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
-  <association id="16">    
+  <association id="12">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="17" name="chatStorer"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="13" name="chatStorer"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-    sort-features="false" accessors="true" visibility="true">    
+    accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
     <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  

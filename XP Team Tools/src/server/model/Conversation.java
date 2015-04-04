@@ -1,6 +1,5 @@
 package server.model;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 
