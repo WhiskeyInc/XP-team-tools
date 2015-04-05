@@ -1,3 +1,14 @@
 To test server and client' s work, run first ServerMainRecover, then ClientMain1
 To test server and client's work with Recover messages feature, run ServerMainRecover,
  then ClientMain1 and ClientMain2
+
+To test the division by team, run first ServerMainRecoverTeam, then ClientMain1 
+and ClientMain2(they are in the same team);
+
+If you want test two clients in different teams(That don't communicate between themselves, run first ServerMainRecoverTeam,
+ then ClientMain1 and ClientMain2DifferentTeam
+ 
+ 
+ TODO: recover-team messages, take care of disconnection part
+ 
+ 

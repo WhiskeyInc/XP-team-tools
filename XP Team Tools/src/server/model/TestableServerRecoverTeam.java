@@ -7,32 +7,35 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import string.formatter.Formatter;
 
-public class TestableServerRecover extends AbstractServer {
+public class TestableServerRecoverTeam extends AbstractServer {
 
-	private List<Socket> clientSocketList = new LinkedList<Socket>();
+	private HashMap<String, List<Socket>> clientMap = new HashMap<String, List<Socket>>();
+
 	private IChatStorer chatStorer;
 	private Socket clientSocket;
 	private IMessageRecover recover;
 	private BufferedReader in;
 	public static final int NUM_OF_MESSAGES = 10;
 
-	public TestableServerRecover(IChatStorer chatStorer, IMessageRecover recover) {
+	public TestableServerRecoverTeam(IChatStorer chatStorer,
+			IMessageRecover recover) {
 		super();
 		this.chatStorer = chatStorer;
 		this.recover = recover;
 	}
 
-	public TestableServerRecover(IChatStorer messageStorer) {
+	public TestableServerRecoverTeam(IChatStorer messageStorer) {
 		super();
 		this.chatStorer = messageStorer;
 	}
 
-	public TestableServerRecover() {
+	public TestableServerRecoverTeam() {
 		super();
 	}
 
@@ -44,8 +47,8 @@ public class TestableServerRecover extends AbstractServer {
 			while (true) {
 				clientSocket = serverSocket.accept();
 				setInStream();
-				alignClient();
-				clientSocketList.add(clientSocket);
+				groupByTeam();
+			//	alignClient();
 				Runnable runnable = getRunnable();
 				Thread thread = new Thread(runnable);
 				thread.start();
@@ -55,11 +58,25 @@ public class TestableServerRecover extends AbstractServer {
 		}
 	}
 
+	private void groupByTeam() throws IOException {
+		String teamName = getLine(in);
+		teamName = Formatter.removeSecretCode(teamName);
+		System.out.println(teamName);
+		if (clientMap.containsKey(teamName)) {
+			clientMap.get(teamName).add(clientSocket);
+		} else {
+			List<Socket> socketList = new LinkedList<Socket>();
+			socketList.add(clientSocket);
+			clientMap.put(teamName, socketList);
+		}
+	}
+
 	private void setInStream() throws IOException {
 		in = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
 	}
-	//this is to get the messages sent to an offline client
+
+	// this is to get the messages sent to an offline client
 	private void alignClient() throws IOException {
 		String[] messages = recoverMessages();
 		for (int i = 0; i < messages.length; i++) {
@@ -76,11 +93,19 @@ public class TestableServerRecover extends AbstractServer {
 					try {
 
 						String line = getLine(in);
-
 						if (line != null) {
-							System.out.println(line); // TODO
-							chatStorer.storeMessage(line);
-							propagateMessageToAllClients(line);
+							String[] lines = line.split(Formatter.SECRET_CODE);
+
+							String teamName = lines[0];
+							String message = lines[1];
+							System.out.println("Il team è: " + teamName);
+							System.out.println(message); // TODO
+							propagateMessageToTeamClients(message,
+									clientMap.get(teamName));
+							chatStorer.storeMessage(message);// TODO tutto
+																// compreso il
+																// team o solo
+																// il messaggio?
 						}
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -98,7 +123,8 @@ public class TestableServerRecover extends AbstractServer {
 		return line;
 	}
 
-	private void propagateMessageToAllClients(String message) throws IOException {
+	private void propagateMessageToTeamClients(String message,
+			List<Socket> clientSocketList) throws IOException {
 
 		for (Socket socket : clientSocketList) {
 			propagateMessage(message, socket);
@@ -121,7 +147,7 @@ public class TestableServerRecover extends AbstractServer {
 			numOfMessages = recover.getNumOfMessages();
 		}
 		sentMessages = recover.recoverLastMessages(numOfMessages);
-		
+
 		return sentMessages;
 	}
 

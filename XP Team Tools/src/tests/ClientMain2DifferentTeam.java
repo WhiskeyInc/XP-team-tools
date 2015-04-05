@@ -7,12 +7,19 @@ import java.io.IOException;
 import ui.ChatUITestable;
 import client.model.Client;
 
-public class ClientMain1 {
+/**
+ * This class, with clientMain and serverMain, tests the communication between 2
+ * Clients and 1 Server
+ * 
+ * @author alberto
+ *
+ */
+public class ClientMain2DifferentTeam {
 	public static void main(String[] args) {
-		final Client client = new Client("IncreMetal", "TeamFere");
+		final Client client = new Client("LuBardo", "TeamBardi");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -23,11 +30,10 @@ public class ClientMain1 {
 				}
 			}
 		};
-		
+
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		client.sendMessageToServer("Hi");
+		client.sendMessageToServer("Io sono l' altro client");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -37,7 +43,7 @@ public class ClientMain1 {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText("Striscia Bardo!");
+		chatUI.setMessageText("Ciaooo! No Incre! Ehehehe");
 		chatUI.simulateSendClick();
 
 	}

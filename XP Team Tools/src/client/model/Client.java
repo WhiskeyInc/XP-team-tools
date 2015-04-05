@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 import string.formatter.Formatter;
-import string.formatter.IStringFormatter;
-import string.formatter.NickNameFormatter;
 
 /**
  * A client of the chat system, it sends and receives messages of one or more 
@@ -21,21 +19,26 @@ public class Client {
 
 	private Socket clientSocket;
 	private String nickname;
+	private String teamName;
 	private DataOutputStream os;
 	private DataInputStream is;
-	
-	private IStringFormatter formatter;
 	
 	public Client() {
 		super();
 		
-		this.formatter = new Formatter();
 	}
 
 	public Client(String nickname) {
 		super();
 		this.nickname = nickname;
-		this.formatter = new Formatter();
+	}
+	
+	
+
+	public Client(String nickname, String teamName) {
+		super();
+		this.nickname = nickname;
+		this.teamName = teamName;
 	}
 
 	/**
@@ -48,26 +51,24 @@ public class Client {
 			clientSocket = new Socket(hostName, port);
 			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
+			os.writeBytes(Formatter.appendNewLine(Formatter.makeMessagedistinguishable(teamName)));
+			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 	}
 
-	
-
-	public String sendMessage(String message) {
-
-		return message;
-	}
 
 	/**
 	 * Sends a string message to the server to which it is connected 
 	 * @param message Message to send
 	 */
 	public void sendMessageToServer(String message) {
+		message = Formatter.appendNewLine(message);
 		if (clientSocket != null && os != null && is != null) {
 			try {
-				os.writeBytes(formatter.formatMessage(nickname));
+				os.writeBytes(Formatter.makeMessagedistinguishable(teamName));
+				os.writeBytes(Formatter.formatNickname(nickname));
 				os.writeBytes(message);
 				os.flush();
 			} catch (Exception e) {

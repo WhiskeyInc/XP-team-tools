@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import string.formatter.NewLineMaker;
+import string.formatter.Formatter;
 
 public class TestableServerNoRecover extends AbstractServer {
 
@@ -89,7 +89,7 @@ public class TestableServerNoRecover extends AbstractServer {
 			throws IOException {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 				socket.getOutputStream()));
-		out.write(NewLineMaker.appendNewLine(message));
+		out.write(Formatter.appendNewLine(message));
 		out.flush();
 	}
 

@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import server.model.CacheList;
 import server.model.TestableServerRecover;
-import string.formatter.NewLineMaker;
+import string.formatter.Formatter;
 import ui.ChatUITestable;
 import client.model.Client;
 
@@ -43,11 +43,11 @@ public class ClientServerTests {
 			}
 		});
 
-		chatUI.setMessageText(NewLineMaker.appendNewLine("Ciao a tutti!"));
+		chatUI.setMessageText(Formatter.appendNewLine("Ciao a tutti!"));
 		chatUI.simulateSendClick();
 		waitTCPSending(server);
 
-		assertEquals(chatUI.getMessage(), NewLineMaker.appendNewLine(server.getLastMessage()));
+		assertEquals(chatUI.getMessage(), Formatter.appendNewLine(server.getLastMessage()));
 	}
 
 
