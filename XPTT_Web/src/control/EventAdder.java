@@ -35,7 +35,7 @@ public class EventAdder extends HttpServlet {
 	}
 
 	private void redirect(HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/XTream/timeline.jsp");
+		response.sendRedirect("timeline.jsp");
 	}
 
 	private void addEventToTimeline(HttpServletRequest request, Event event) {
