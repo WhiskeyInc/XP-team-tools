@@ -36,7 +36,7 @@
 		}
 	%>
 	<div id="footer">
-		<a href="/XTream/additions.html">Aggiungi eventi</a>
+		<a href="additions.html">Aggiungi eventi</a>
 	</div>
 </body>
 </html>
