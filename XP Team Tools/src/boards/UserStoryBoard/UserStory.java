@@ -12,12 +12,15 @@ import model.exceptions.NameAlreadyInUseException;
  * @since 1.0
  *
  */
-public class UserStory {
+public class UserStory implements Comparable<UserStory> {
 
+	public final static int MINPRIORITY = 0;
+	public final static int MAXPRIORITY = 10;
+	
 	private String title;
 	private String description;
 	private String state;
-	private String priority;
+	private int priority;
 	// TODO: very bad dependency to a concrete class
 	private TaskManager taskManager = new ConcreteTaskManager();
 
@@ -31,7 +34,7 @@ public class UserStory {
 		this.state = "TODO";
 		this.description = "";
 		this.title = title;
-		this.priority = "DEFAULT";
+		this.priority = MINPRIORITY;
 	}
 
 	/**
@@ -47,7 +50,7 @@ public class UserStory {
 		this.state = "TODO";
 		this.description = description;
 		this.title = title;
-		this.priority = "DEFAULT";
+		this.priority = MINPRIORITY;
 	}
 
 	/**
@@ -74,7 +77,7 @@ public class UserStory {
 	 * 
 	 * @return: a string representing this story's priority
 	 */
-	public String getPriority() {
+	public int getPriority() {
 		return this.priority;
 	}
 
@@ -106,7 +109,7 @@ public class UserStory {
 	 * @param priority
 	 *            : a string representing the priority level
 	 */
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
@@ -156,5 +159,10 @@ public class UserStory {
 	public void addTask(String taskName, String description)
 			throws NameAlreadyInUseException {
 		this.taskManager.addTask(taskName, description);
+	}
+
+	@Override
+	public int compareTo(UserStory otheruserstory) {
+		return ((Integer)otheruserstory.getPriority()).compareTo(this.getPriority());
 	}
 }

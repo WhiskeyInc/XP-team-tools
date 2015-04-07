@@ -1,6 +1,7 @@
 package boards.UserStoryBoard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import model.exceptions.InvalidPriorityException;
@@ -57,7 +58,7 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#changeStoryPriority(java.lang.String, int)
 	 */
 	@Override
-	public void changeStoryPriority(String userStoryName, String newPriority)
+	public void changeStoryPriority(String userStoryName, int newPriority)
 			throws NoSuchUserStoryException, InvalidPriorityException {
 		validateExistance(userStoryName);
 		this.stories.get(userStoryName).setPriority(newPriority);
@@ -99,6 +100,7 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	private ArrayList<UserStory> getAllUserStories() {
 		ArrayList<UserStory> userStoriesList = new ArrayList<UserStory>();
 		userStoriesList.addAll(this.stories.values());
+		Collections.sort(userStoriesList);
 		return userStoriesList;
 	}
 

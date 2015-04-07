@@ -122,7 +122,7 @@ public class ConcreteTeamManager implements TeamManager {
 	 * @see model.TeamManager#userStoryPriorityChanged(java.lang.String)
 	 */
 	@Override
-	public void userStoryPriorityChanged(UserStory userStory, String newPriority) {
+	public void userStoryPriorityChanged(UserStory userStory, int newPriority) {
 		try {
 			timeline.addEvent(generateAutomaticEvent("Changed priority of userstory: "
 					+ userStory.toString() + ": now it is " + newPriority));
@@ -147,8 +147,8 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 	
 	@Override
-	public boolean isValidUserStoryPriority(String priority) {
-		return settings.getPossibleUserStoryPriorities().contains(priority);
+	public boolean isValidUserStoryPriority(int priority) {
+		return settings.isValidUserStoryPriority(priority);
 	}
 	
 	private GregorianCalendar getCurrentDate() {

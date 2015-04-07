@@ -13,7 +13,6 @@ import boards.UserStoryBoard.TeamUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import filtering.TargetFilter;
-import filtering.checkers.PriorityUserStoryChecker;
 import filtering.checkers.StateUserStoryChecker;
 
 public class UserStoryFilteringTest {
@@ -57,37 +56,37 @@ public class UserStoryFilteringTest {
 												"IN PROGRESS"))).size());
 	}
 	
-	@Test
-	public void PriorityUserStoryFilterTest() throws Exception {
-		settings.setPossibleUserStoriesPriorities("DEFAULT", "MIN",
-				"MAX");
-		userStoriesBoard.addUserStory("Timeline",
-				"Voglio che ci sia un pannello con dei tasti che...");
-		userStoriesBoard.changeStoryPriority("Timeline", "MIN");
-		userStoriesBoard.addUserStory("Board",
-				"Voglio che ci sia un'area di testo editabile...");
-		assertEquals(
-				1,
-				userStoriesBoard
-						.getUserStories(
-								new TargetFilter<UserStory>(
-										new PriorityUserStoryChecker(
-												"MIN"))).size());
-		assertEquals(
-				"Timeline",
-				userStoriesBoard
-						.getUserStories(
-								new TargetFilter<UserStory>(
-										new PriorityUserStoryChecker(
-												"MIN"))).get(0)
-						.toString());
-		assertEquals(
-				0,
-				userStoriesBoard
-						.getUserStories(
-								new TargetFilter<UserStory>(
-										new PriorityUserStoryChecker(
-												"MAX"))).size());
-	}
+	//@Test
+	//public void PriorityUserStoryFilterTest() throws Exception {
+		//settings.setPossibleUserStoriesPriorities("DEFAULT", "MIN",
+			//	"MAX");
+		//userStoriesBoard.addUserStory("Timeline",
+			//	"Voglio che ci sia un pannello con dei tasti che...");
+		//userStoriesBoard.changeStoryPriority("Timeline", "MIN");
+		//userStoriesBoard.addUserStory("Board",
+				//"Voglio che ci sia un'area di testo editabile...");
+		//assertEquals(
+				//1,
+				//userStoriesBoard
+						//.getUserStories(
+								//new TargetFilter<UserStory>(
+										//new PriorityUserStoryChecker(
+												//"MIN"))).size());
+		//assertEquals(
+				//"Timeline",
+				//userStoriesBoard
+						//.getUserStories(
+								//new TargetFilter<UserStory>(
+										//new PriorityUserStoryChecker(
+												//"MIN"))).get(0)
+						//.toString());
+		//assertEquals(
+				//0,
+				//userStoriesBoard
+						//.getUserStories(
+								//new TargetFilter<UserStory>(
+										//new PriorityUserStoryChecker(
+												//"MAX"))).size());
+	//}
 
 }

@@ -56,7 +56,7 @@ public interface UserStoriesManager {
 	 * @throws InvalidPriorityException
 	 *             : if newPriority is considered invalid
 	 */
-	public void changeStoryPriority(String storyName, String newPriority)
+	public void changeStoryPriority(String storyName, int newPriority)
 			throws NoSuchUserStoryException, InvalidPriorityException;
 
 	/**

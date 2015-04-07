@@ -10,6 +10,6 @@ public interface TeamSettings {
 
 	public ArrayList<String> getPossibleUserStoryStates();
 	
-	public ArrayList<String> getPossibleUserStoryPriorities();
+	public boolean isValidUserStoryPriority(int priority);
 
 }

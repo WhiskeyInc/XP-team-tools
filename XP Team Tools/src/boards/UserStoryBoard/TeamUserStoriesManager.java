@@ -66,7 +66,7 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	}
 
 	@Override
-	public void changeStoryPriority(String storyName, String targetPriority)
+	public void changeStoryPriority(String storyName, int targetPriority)
 			throws NoSuchUserStoryException, InvalidPriorityException {
 		if (!this.teamManager.isValidUserStoryPriority(targetPriority)) {
 			throw new InvalidPriorityException(targetPriority);

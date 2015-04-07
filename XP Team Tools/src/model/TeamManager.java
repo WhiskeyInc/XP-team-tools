@@ -11,11 +11,11 @@ public interface TeamManager {
 
 	public void userStoryStateChanged(UserStory userStory, String newState);
 
-	public void userStoryPriorityChanged(UserStory userStory, String newPriority);
+	public void userStoryPriorityChanged(UserStory userStory, int newPriority);
 
 	public boolean isValidUserStoryState(String state);
 	
-	public boolean isValidUserStoryPriority(String priority);
+	public boolean isValidUserStoryPriority(int priority);
 
 	public boolean isValidTaskState(String state);
 

@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
+import boards.UserStoryBoard.UserStory;
+import filtering.NoFilter;
 
 public class UserStoriesManagerTest {
 
@@ -30,12 +32,12 @@ public class UserStoriesManagerTest {
 				"Voglio che ci sia un pannello con dei tasti che...");
 		assertEquals("TODO", manager.getUserStory("us1").getState());
 	}
-	
+
 	@Test
 	public void defaultPriorityTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
-		assertEquals("DEFAULT", manager.getUserStory("us1").getPriority());
+		assertEquals(0, manager.getUserStory("us1").getPriority());
 	}
 
 	@Test
@@ -46,13 +48,12 @@ public class UserStoriesManagerTest {
 		assertEquals("ACCOMPLISHED", manager.getUserStory("us1").getState());
 	}
 
-	
 	@Test
 	public void setPriorityTest() throws Exception {
 		manager.addUserStory("us1",
 				"Voglio che ci sia un pannello con dei tasti che...");
-		manager.changeStoryPriority("us1", "MAX");
-		assertEquals("us1" + "MAX", manager.getUserStory("us1").toString()
+		manager.changeStoryPriority("us1", 9);
+		assertEquals("us1" + 9, manager.getUserStory("us1").toString()
 				+ manager.getUserStory("us1").getPriority());
 	}
 
@@ -102,6 +103,23 @@ public class UserStoriesManagerTest {
 		manager.getUserStory("Timer").addTask("Timeline",
 				"Componente che deve...");
 		assertEquals(1, manager.getUserStory("Timer").getTasksNumber());
+	}
+
+	@Test
+	public void orderUserStoriesTest() throws Exception {
+		manager.addUserStory("StoriaA", "DescrizioneA");
+		manager.addUserStory("StoriaB", "DescrizioneB");
+		manager.addUserStory("StoriaC", "DescrizioneC");
+		manager.addUserStory("StoriaD", "DescrizioneD");
+		manager.changeStoryPriority("StoriaA", 2);
+		manager.changeStoryPriority("StoriaB", 9);
+		manager.changeStoryPriority("StoriaC", 5);
+		manager.changeStoryPriority("StoriaD", 2);
+		assertEquals("StoriaB" + "StoriaC" + "StoriaD" + "StoriaA", manager
+				.getUserStories(new NoFilter<UserStory>()).get(0).toString()
+				+ manager.getUserStories(new NoFilter<UserStory>()).get(1).toString()
+				+ manager.getUserStories(new NoFilter<UserStory>()).get(2).toString()
+				+ manager.getUserStories(new NoFilter<UserStory>()).get(3).toString());
 	}
 
 }

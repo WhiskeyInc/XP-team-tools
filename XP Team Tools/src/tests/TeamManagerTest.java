@@ -7,6 +7,7 @@ import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.TeamManager;
 import model.exceptions.InvalidMemberException;
+import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 
 import org.junit.Test;
@@ -85,10 +86,10 @@ public class TeamManagerTest {
 
 	@Test
 	public void priorityChangedTest() throws Exception {
-		teamManager.userStoryPriorityChanged(new UserStory("Timeline"), "DEFAULT");
+		teamManager.userStoryPriorityChanged(new UserStory("Timeline"), 0);
 		assertEquals(2, timeline.getEventsNumber());
 		System.err.println(timeline.getEvents(new NoFilter<Event>()).get(1).toString());
-		assertEquals("Changed priority of userstory: Timeline: now it is DEFAULT", timeline.getEvent("Changed priority of userstory: Timeline: now it is DEFAULT").toString());
+		assertEquals("Changed priority of userstory: Timeline: now it is 0", timeline.getEvent("Changed priority of userstory: Timeline: now it is 0").toString());
 	}
 	
 	@Test
@@ -139,6 +140,27 @@ public class TeamManagerTest {
 		try {
 			userStoriesBoard.moveUserStoryToState("Timeline", "DONE");
 		} catch (InvalidStateException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void UserStoriesPriorityCheckTest01() throws Exception {
+		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		try {
+			userStoriesBoard.changeStoryPriority("Timeline", 11);
+			fail();
+		} catch (InvalidPriorityException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void UserStoriesPriorityCheckTest02() throws Exception {
+		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		try {
+			userStoriesBoard.changeStoryPriority("Timeline", 10);
+		} catch (InvalidPriorityException e) {
 			fail();
 		}
 	}
