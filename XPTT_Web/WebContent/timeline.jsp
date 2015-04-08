@@ -34,8 +34,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="home.html">xTrEAM
-				</a>
+				<a class="navbar-brand" href="home.html">xTrEAM </a>
 			</div>
 			<!-- Collect the nav links for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -89,9 +88,7 @@
 			</div>
 
 		</div>
-
-	</div>
-	<div class="footer"> Ciao
+		<br>
 	</div>
 	<!-- /.container -->
 

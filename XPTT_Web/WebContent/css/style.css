@@ -1,6 +1,4 @@
-﻿
-
-/*====================================
+﻿/*====================================
  Free To Use For Personal And Commercial Usage
 Author: http://binarytheme.com
  License: Open source - MIT
@@ -8,51 +6,52 @@ Author: http://binarytheme.com
  Share Us if You Like Us and Enjoy Our Codes For Free Always.
 ======================================*/
 
-
 /*=======================================
     GENERAL STYLES
 ==================================================*/
 body {
-        background-color:#336633;
-          font-family:'Open Sans', sans-serif;
-    font-size:15px;
+	background-color: #B97C6D;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
 }
 
 .nav a {
-    color:#ffffff !important;
+	color: #ffffff !important;
 }
+
 .navbar-header a {
-    color:#ffffff !important;
-    padding-right:100px;
+	color: #ffffff !important;
+	padding-right: 100px;
 }
 
 .text-center {
-    text-align:center;
+	text-align: center;
 }
 
 .top-pad {
-    padding-top:70px;
+	padding-top: 70px;
 }
+
 .top-margin {
-    margin-top:90px;
+	margin-top: 90px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:'Open Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
+
 h1 {
-   
-    font-weight:700;
-    font-size:50px;
-    color:#1fa51f; /* green color code */
+	font-weight: 700;
+	font-size: 50px;
+	color: #1fa51f; /* green color code */
 }
 
 p {
-    font-weight:400;
-    line-height:29px;
-    padding-bottom:50px;
-}
-.margin-bot {
-    margin-bottom:50px;
+	font-weight: 400;
+	line-height: 29px;
+	padding-bottom: 50px;
 }
 
+.margin-bot {
+	margin-bottom: 50px;
+}
