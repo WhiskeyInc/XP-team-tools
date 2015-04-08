@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Free Bootstrap Timeline Example BY BINARY THEME</title>
+<title>xTrEAM - Timeline</title>
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
@@ -34,16 +34,15 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="htttp://www.binarytheme.com">YOUR
-					LOGO </a>
+				<a class="navbar-brand" href="home.html">xTrEAM
+				</a>
 			</div>
 			<!-- Collect the nav links for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="home.html">Home</a></li>
+					<li><a href="timeline.jsp">Timeline</a></li>
+					<li><a href="#">Tasks</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -56,34 +55,43 @@
 			<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
 				<div>
 					<ul class="timeline">
-						<li class="time-label"><span class="bg-orange">See Our
-								Timeline </span> <br /> <br /></li>
-								
-						<%for (Event event : this.getEventsList(application)) {%>
+						<li class="time-label"><span class="bg-black">Our
+								Activities </span> <br /> <br /></li>
+
+						<%
+							for (Event event : this.getEventsList(application)) {
+						%>
 
 						<li><i class="fa fa-clock-o bg-blue"></i>
 							<div class="timeline-item">
-								<span class="time"><i class="fa fa-clock-o"></i><%= this.getFormattedDate(event) %></span>
+								<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(event)%></span>
 								<h3 class="timeline-header">
-									<%= event.toString() %>
+									<b><%=event.toString()%></b>
 								</h3>
 								<div class="timeline-body">
-								<%for (String participant : event.getParticipants()) {%>
-								<%= participant %><br>
-								<%} %>
+									<%
+										for (String participant : event.getParticipants()) {
+									%>
+									<%=participant%><br>
+									<%
+										}
+									%>
 								</div>
 								<div class='timeline-footer'>
-									<a class="btn btn-primary btn-xs">Share</a> <a
-										class="btn btn-danger btn-xs">Read More</a>
+									<a class="btn btn-danger btn-xs">Delete</a>
 								</div>
 							</div></li>
-						<%} %>
+						<%
+							}
+						%>
 					</ul>
 				</div>
 			</div>
 
 		</div>
 
+	</div>
+	<div class="footer"> Ciao
 	</div>
 	<!-- /.container -->
 
@@ -97,16 +105,19 @@
 <%!private ArrayList<Event> getEventsList(ServletContext context) {
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		Timeline timeline = (Timeline) context.getAttribute("timeline");
+		Collections.shuffle(eventList);
 		return eventList = timeline.getEvents(new NoFilter<Event>());
 	}
-	private String getFormattedDate(Event event){
+
+	private String getFormattedDate(Event event) {
 		GregorianCalendar date = event.getDate();
 		int day = date.get(GregorianCalendar.DATE);
-		String month = date.getDisplayName(GregorianCalendar.MONTH, GregorianCalendar.LONG, Locale.ITALY);
+		String month = date.getDisplayName(GregorianCalendar.MONTH,
+				GregorianCalendar.LONG, Locale.ITALY);
 		int year = date.get(GregorianCalendar.YEAR);
 		int sec = date.get(GregorianCalendar.SECOND);
 		int min = date.get(GregorianCalendar.MINUTE);
 		int hour = date.get(GregorianCalendar.HOUR_OF_DAY);
-		return day + " " + month + " " + year + ", " + hour + ":" + min + ":" + sec;
-	}
-%>
+		return day + " " + month + " " + year + ", " + hour + ":" + min + ":"
+				+ sec;
+	}%>
