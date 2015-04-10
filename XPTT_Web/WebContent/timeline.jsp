@@ -77,7 +77,14 @@
 									%>
 								</div>
 								<div class='timeline-footer'>
-									<a class="btn btn-danger btn-xs">Delete</a>
+									<%
+										if (event.isEditable()) {
+									%>
+									<a class="btn btn-warning btn-xs">Move</a>&nbsp; <a
+										class="btn btn-danger btn-xs">Delete</a>
+									<%
+										}
+									%>
 								</div>
 							</div></li>
 						<%
@@ -89,6 +96,11 @@
 
 		</div>
 		<br>
+	</div>
+	<br>
+	<br>
+	<div align="center">
+		<a class="btn btn-primary btn-xl" href="additions.html">Add an Event</a>
 	</div>
 	<!-- /.container -->
 

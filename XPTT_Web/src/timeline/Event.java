@@ -3,7 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import model.exceptions.UnmovableEventException;
+import model.exceptions.UnEditableEventException;
 
 /**
  * This class represent an event which has four characteristics: a name
@@ -23,7 +23,7 @@ public class Event implements Comparable<Event> {
 	private ArrayList<String> participants = new ArrayList<String>();
 	private GregorianCalendar date;
 	private String name;
-	private boolean movable = true;
+	private boolean editable = true;
 
 	/**
 	 * Creates an Event and assigns it a name and a date. Default value is
@@ -48,14 +48,14 @@ public class Event implements Comparable<Event> {
 	 *            : the name of the Event.
 	 * @param date
 	 *            : the date the Event is assumed to take place at.
-	 * @param movable
-	 *            : if its value is TRUE, the date can be modified, otherwise it
-	 *            will be forever the one specified in the constructor.
+	 * @param editable
+	 *            : if its value is TRUE, the event can be modified, otherwise
+	 *            it will be forever as specified in the constructor.
 	 */
-	public Event(String name, GregorianCalendar date, boolean movable) {
+	public Event(String name, GregorianCalendar date, boolean editable) {
 		this.date = date;
 		this.name = name;
-		this.movable = movable;
+		this.editable = editable;
 	}
 
 	/**
@@ -96,20 +96,23 @@ public class Event implements Comparable<Event> {
 	public GregorianCalendar getDate() {
 		return this.date;
 	}
-	
+
 	/**
 	 * Changes the date of this event
 	 * 
-	 * @param newDate: the date to set
-	 * @throws UnmovableEventException: if this event is fixed
+	 * @param newDate
+	 *            : the date to set
+	 * @throws UnEditableEventException
+	 *             : if this event is fixed
 	 * @see {@link Event}.isMovable()
 	 */
-	public void setDate(GregorianCalendar newDate) throws UnmovableEventException {
-		if (!isMovable()) {
-			throw new UnmovableEventException(this.name);
+	public void setDate(GregorianCalendar newDate)
+			throws UnEditableEventException {
+		if (!isEditable()) {
+			throw new UnEditableEventException(this.name);
 		}
 		this.date = newDate;
-		
+
 	}
 
 	/**
@@ -117,13 +120,14 @@ public class Event implements Comparable<Event> {
 	 * 
 	 * @return TRUE if the date of this event can be changed, else FALSE
 	 */
-	public boolean isMovable() {
-		return this.movable;
+	public boolean isEditable() {
+		return this.editable;
 	}
 
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Event otherevent) {

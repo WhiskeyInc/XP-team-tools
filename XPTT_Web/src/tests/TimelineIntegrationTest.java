@@ -111,44 +111,44 @@ public class TimelineIntegrationTest {
 		settings.addTeamMember("Lele", "Simo");
 
 		Event creation = timeline.getEvent("creation");
-		assertTrue(!creation.isMovable());
+		assertTrue(!creation.isEditable());
 
 		userStoriesManager
 				.addUserStory("Timeline", "Voglio un pannello che...");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(1)
-				.isMovable());
+				.isEditable());
 
 		taskManager.addTask("Dormire");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(2)
-				.isMovable());
+				.isEditable());
 
 		taskManager.addTask("Dormire2", "Dormire tanto perchè cambia l'ora");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(3)
-				.isMovable());
+				.isEditable());
 
 		taskManager.deleteTask("Dormire2");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(4)
-				.isMovable());
+				.isEditable());
 
 		taskManager.moveTaskToState("Dormire", "TODO");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(5)
-				.isMovable());
+				.isEditable());
 
 		taskManager.addDevelopersToTask("Dormire", "Lele", "Simo");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(6)
-				.isMovable());
+				.isEditable());
 
 		userStoriesManager.addUserStory("Timeline2", null);
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(7)
-				.isMovable());
+				.isEditable());
 
 		userStoriesManager.deleteUserStory("Timeline2");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(8)
-				.isMovable());
+				.isEditable());
 
 		userStoriesManager.moveUserStoryToState("Timeline", "DONE");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(9)
-				.isMovable());
+				.isEditable());
 	}
 
 	/*

@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
-import model.exceptions.UnmovableEventException;
+import model.exceptions.UnEditableEventException;
 
 import org.junit.Test;
 
@@ -51,7 +51,7 @@ public class TimelineTest {
 
 	@Test
 	public void timeChangeTest() throws InvalidDateException,
-			NoSuchEventException, UnmovableEventException {
+			NoSuchEventException, UnEditableEventException {
 		timeline.addEvent(new Event("Riunione sulla timeline",
 				new GregorianCalendar(2020, 02, 20, 23, 3, 50)));
 		timeline.moveEvent("Riunione sulla timeline", new GregorianCalendar(
@@ -160,13 +160,13 @@ public class TimelineTest {
 			timeline.moveEvent("creation", new GregorianCalendar(2020, 2, 2, 2,
 					2, 2));
 			fail();
-		} catch (UnmovableEventException e) {
+		} catch (UnEditableEventException e) {
 			assertEquals(1, 1);
 		}
 		try {
 			timeline.moveEvent("Timeline", new GregorianCalendar(2030, 3, 3, 3,
 					3, 3));
-		} catch (UnmovableEventException e) {
+		} catch (UnEditableEventException e) {
 			fail();
 		}
 	}

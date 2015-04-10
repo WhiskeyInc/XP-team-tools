@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
-import model.exceptions.UnmovableEventException;
+import model.exceptions.UnEditableEventException;
 import filtering.Filter;
 
 public class ConcreteTimeline implements Timeline {
@@ -62,7 +62,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnmovableEventException, NoSuchEventException {
+			throws UnEditableEventException, NoSuchEventException {
 		this.getEvent(eventName).setDate(newDate);
 	}
 
