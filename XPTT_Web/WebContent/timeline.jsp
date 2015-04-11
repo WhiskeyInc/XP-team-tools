@@ -66,9 +66,21 @@
 						<li><i class="fa fa-clock-o bg-blue"></i>
 							<div class="timeline-item">
 								<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(event)%></span>
+								<%
+									if (!event.isEditable()) {
+								%>
+								<h3 class="timeline-header text-purple">
+									<%=event.toString()%>
+								</h3>
+								<%
+									} else {
+								%>
 								<h3 class="timeline-header">
 									<%=event.toString()%>
 								</h3>
+								<%
+									}
+								%>
 								<div class="timeline-body">
 									<%
 										for (String participant : event.getParticipants()) {
@@ -82,8 +94,8 @@
 									<%
 										if (event.isEditable()) {
 									%>
-									<a class="btn btn-warning btn-xs">Move</a>&nbsp; <a
-										class="btn btn-danger btn-xs">Delete</a>
+									<a class="btn btn-warning btn-xs"><i class="fa fa-clock-o"></i> Move</a>&nbsp; <a
+										class="btn btn-danger btn-xs"><i class="fa fa-eraser"></i> Delete</a>
 									<%
 										}
 									%>
@@ -92,6 +104,7 @@
 						<%
 							}
 						%>
+						<li><i class="fa fa-flag-checkered"></i></li>
 					</ul>
 				</div>
 			</div>
@@ -128,8 +141,8 @@
 		GregorianCalendar date = event.getDate();
 		return this.doFormatDate(date, formatter);
 	}
-	
-	private String doFormatDate(GregorianCalendar date, NumberFormat formatter){
+
+	private String doFormatDate(GregorianCalendar date, NumberFormat formatter) {
 		String day = formatter.format(date.get(GregorianCalendar.DATE));
 		String month = date.getDisplayName(GregorianCalendar.MONTH,
 				GregorianCalendar.LONG, Locale.ITALY);

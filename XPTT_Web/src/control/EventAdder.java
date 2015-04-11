@@ -42,13 +42,24 @@ public class EventAdder extends HttpServlet {
 		try {
 			((Timeline) super.getServletContext().getAttribute("timeline"))
 					.addEvent(event);
-		} catch (InvalidDateException e) {}
+		} catch (InvalidDateException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Event createEventFromRequest(HttpServletRequest request) {
-		Event event = new Event(request.getParameter("eventName"),
-				new GregorianCalendar());
+		GregorianCalendar date = generateEventDate(request);
+		Event event = new Event(request.getParameter("eventName"), date);
 		return event;
+	}
+	private GregorianCalendar generateEventDate(HttpServletRequest request) {
+		int year = Integer.parseInt(request.getParameter("eventYear"));
+		int month = Integer.parseInt(request.getParameter("eventMonth"));
+		int day = Integer.parseInt(request.getParameter("eventDay"));
+		int hour = Integer.parseInt(request.getParameter("eventHour"));
+		int min = Integer.parseInt(request.getParameter("eventMin"));
+		GregorianCalendar date = new GregorianCalendar(year, month - 1, day, hour, min, 0);
+		return date;
 	}
 
 }
