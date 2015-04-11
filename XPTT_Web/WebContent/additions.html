@@ -43,21 +43,28 @@
 		<!-- /.container -->
 	</nav>
 	<div align="center">
-		<br>
-		<br>
-		<br>
-		<br>
-		<h4>Add a generic event</h4>
-		<form action="eventAdder" method="post">
-			<input type="text" name="eventName" placeholder="Name..."><br>
-			<input type="text" name="eventDay" placeholder="Day" maxlength="2"><br>
-			<input type="text" name="eventMonth" placeholder="Month"
-				maxlength="2"><br> <input type="text" name="eventYear"
-				placeholder="Year" maxlength="4"><br>
-			<input type="text" name="eventHour" placeholder="Hour" maxlength="2"><br>
-			<input type="text" name="eventMin" placeholder="Min" maxlength="2"><br>
-			<br><br>
-				<input class="btn btn-default btn-xl" type="submit" value="Add to the Timeline">
+		<br> <br> <br> <br>
+		<h3>Add a generic event</h3>
+		<form action="eventAdder" method="post" role="form">
+			<div class="form-group">
+				<label for="eventName">Give a name to your event!</label> 
+				<input type="text" class="form-control" name="eventName" placeholder="Name...">
+			</div>
+			<div class="form-group">
+				<label for="eventDate">Give a date to your event!</label>
+				<div class="input-group">
+				<input type="text" class="form-control" name="eventDay" placeholder="Day" maxlength="2">
+				<span class="input-group-addon">/</span>  
+				<input type="text" class="form-control" name="eventMonth" placeholder="Month" maxlength="2">
+				<span class="input-group-addon">/</span>  
+				<input type="text" class="form-control" name="eventYear" placeholder="Year" maxlength="4">
+				<span class="input-group-addon">@</span>
+				<input type="text" class="form-control" name="eventHour" placeholder="Hour" maxlength="2">
+				<span class="input-group-addon">:</span>
+				<input type="text" class="form-control" name="eventMin" placeholder="Min" maxlength="2">
+				</div>
+			</div>
+			<button class="btn btn-primary btn-xl" type="submit">Add to Timeline</button>
 		</form>
 	</div>
 </body>

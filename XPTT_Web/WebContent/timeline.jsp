@@ -146,7 +146,7 @@
 		String day = formatter.format(date.get(GregorianCalendar.DATE));
 		String month = date.getDisplayName(GregorianCalendar.MONTH,
 				GregorianCalendar.LONG, Locale.ITALY);
-		String year = formatter.format(date.get(GregorianCalendar.YEAR));
+		int year = date.get(GregorianCalendar.YEAR);
 		String sec = formatter.format(date.get(GregorianCalendar.SECOND));
 		String min = formatter.format(date.get(GregorianCalendar.MINUTE));
 		String hour = formatter.format(date.get(GregorianCalendar.HOUR_OF_DAY));
