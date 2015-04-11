@@ -1,6 +1,8 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="filtering.*"%>
 <%@page import="timeline.*"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -65,7 +67,7 @@
 							<div class="timeline-item">
 								<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(event)%></span>
 								<h3 class="timeline-header">
-									<b><%=event.toString()%></b>
+									<%=event.toString()%>
 								</h3>
 								<div class="timeline-body">
 									<%
@@ -120,14 +122,21 @@
 	}
 
 	private String getFormattedDate(Event event) {
+		NumberFormat formatter = NumberFormat.getInstance();
+		formatter.setMaximumIntegerDigits(2);
+		formatter.setMinimumIntegerDigits(2);
 		GregorianCalendar date = event.getDate();
-		int day = date.get(GregorianCalendar.DATE);
+		return this.doFormatDate(date, formatter);
+	}
+	
+	private String doFormatDate(GregorianCalendar date, NumberFormat formatter){
+		String day = formatter.format(date.get(GregorianCalendar.DATE));
 		String month = date.getDisplayName(GregorianCalendar.MONTH,
 				GregorianCalendar.LONG, Locale.ITALY);
-		int year = date.get(GregorianCalendar.YEAR);
-		int sec = date.get(GregorianCalendar.SECOND);
-		int min = date.get(GregorianCalendar.MINUTE);
-		int hour = date.get(GregorianCalendar.HOUR_OF_DAY);
+		String year = formatter.format(date.get(GregorianCalendar.YEAR));
+		String sec = formatter.format(date.get(GregorianCalendar.SECOND));
+		String min = formatter.format(date.get(GregorianCalendar.MINUTE));
+		String hour = formatter.format(date.get(GregorianCalendar.HOUR_OF_DAY));
 		return day + " " + month + " " + year + ", " + hour + ":" + min + ":"
 				+ sec;
 	}%>

@@ -65,10 +65,10 @@
   padding: 5px;
   font-size: 16px;
   line-height: 1.1;
+  font-weight: 900;
+  font-style: italic;
 }
-.timeline > li > .timeline-item > .timeline-header > a {
-  font-weight: 600;
-}
+
 .timeline > li > .timeline-item > .timeline-body,
 .timeline > li > .timeline-item > .timeline-footer {
   padding: 10px;
