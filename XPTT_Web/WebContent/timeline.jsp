@@ -40,8 +40,8 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="home.html">Home</a></li>
+					<li><a href="members.jsp">Members</a></li>
 					<li><a href="timeline.jsp">Timeline</a></li>
-					<li><a href="#">Tasks</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -71,7 +71,7 @@
 									<%
 										for (String participant : event.getParticipants()) {
 									%>
-									<%=participant%><br>
+									<%=participant%>&nbsp;&nbsp;
 									<%
 										}
 									%>
@@ -100,7 +100,8 @@
 	<br>
 	<br>
 	<div align="center">
-		<a class="btn btn-primary btn-xl" href="additions.html">Add an Event</a>
+		<a class="btn btn-primary btn-xl" href="additions.html">Add an
+			Event</a>
 	</div>
 	<!-- /.container -->
 

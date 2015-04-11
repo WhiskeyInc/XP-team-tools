@@ -159,4 +159,17 @@ public class ConcreteTeamManager implements TeamManager {
 		return new Event(eventName, getCurrentDate(), false);
 	}
 
+	@Override
+	public void membersAdded(String[] member) {
+		try {
+			Event event = generateAutomaticEvent("Added members to the team");
+			for (String string : member) {
+				event.addParticipant(string);
+			}
+			timeline.addEvent(event);
+		} catch (InvalidDateException e) {
+			throw new RuntimeException("Fatal Error");
+		}		
+	}
+
 }

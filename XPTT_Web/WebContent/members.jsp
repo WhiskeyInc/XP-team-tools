@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<%@page import="model.TeamSettings" import="java.util.*"%>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>xTrEAM - Home</title>
+<title>xTrEAM - Members</title>
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
@@ -18,7 +19,7 @@
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
 </head>
-<body link="red">
+<body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -45,18 +46,30 @@
 	<br>
 	<br>
 	<br>
-
-	<h1 align="center">
-		<strong>x T r E A M</strong>
-	</h1>
-	<h4 align="center">The ToolBox you have ever looked for</h4>
+	<br>
+	<h2 align="center">Members of this TEAM</h2>
+	<br>
+	<br>
+	<%
+		for (String string : getMembersList(application)) {
+	%>
+	<h4 align="center"><%=string%></h4>
+	<%
+		}
+	%>
+	<br>
 	<div align="center">
-		<img width="600" vspace="30"
-			src="http://www.extendcode.com/images/main_ex.jpg">
-	</div>
-	<div align="center">
-		<a class="btn btn-primary btn-xl">Sign Up</a> &nbsp;&nbsp;<a
-			class="btn btn-default btn-xl">Sign In</a>
+		<form action="memberAdder" method="post">
+			<input type="text" name="member" placeholder="Member's userName"><br>
+			<br> <input class="btn btn-default btn-xl" type="submit"
+				value="Add">
+		</form>
 	</div>
 </body>
 </html>
+
+<%!private ArrayList<String> getMembersList(ServletContext application) {
+		TeamSettings settings = (TeamSettings) application
+				.getAttribute("settings");
+		return settings.getTeamMembers();
+	}%>
