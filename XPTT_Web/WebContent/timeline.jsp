@@ -27,29 +27,10 @@
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="home.html">xTrEAM </a>
-			</div>
-			<!-- Collect the nav links for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="home.html">Home</a></li>
-					<li><a href="members.jsp">Members</a></li>
-					<li><a href="timeline.jsp">Timeline</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
+	<jsp:include page="menu.jsp"><jsp:param
+			name="page" value="Timeline" />
+	</jsp:include>
+
 	<div class="container">
 		<div class="row ">
 
@@ -94,8 +75,9 @@
 									<%
 										if (event.isEditable()) {
 									%>
-									<a class="btn btn-warning btn-xs"><i class="fa fa-clock-o"></i> Move</a>&nbsp; <a
-										class="btn btn-danger btn-xs"><i class="fa fa-eraser"></i> Delete</a>
+									<a class="btn btn-warning btn-xs"><i class="fa fa-clock-o"></i>
+										Move</a>&nbsp; <a class="btn btn-danger btn-xs"><i
+										class="fa fa-eraser"></i> Delete</a>
 									<%
 										}
 									%>
