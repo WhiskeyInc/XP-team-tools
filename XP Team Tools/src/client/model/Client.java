@@ -112,4 +112,12 @@ public class Client {
 
 		}
 	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
 }

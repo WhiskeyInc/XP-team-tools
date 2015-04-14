@@ -1,5 +1,6 @@
 package server.model;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -15,8 +16,21 @@ import java.util.LinkedList;
  */
 public class Conversations {
 
+	private HashMap<String, Conversation> conversations = new HashMap<String, Conversation>();
 	private LinkedList<Conversation> convs = new LinkedList<Conversation>();
 
+	
+	public void addMessage(String team, String author, String message){
+		
+		if (conversations.containsKey(team) == false){
+			//TODO addConv
+		}else{
+			conversations.get(team).addMessage(author, message);
+		}
+			
+		
+	}
+	
 	public String getLastMessage() {// tmp method for testing
 		return "Ciao";
 	}
