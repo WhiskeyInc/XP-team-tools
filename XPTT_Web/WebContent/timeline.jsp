@@ -76,8 +76,8 @@
 										if (event.isEditable()) {
 									%>
 									<form class="form-inline" role = "form" method = "POST" action = "EventDeleter">
-										<input type="hidden" name = "event" value= <%=event.toString()%>>
-										<button class="btn btn-danger btn-xs" onclick="EventDeleter"><i class="fa fa-eraser"></i> Delete</button>
+										<input type="hidden" name = "event" value= "<%=event.toString()%>">
+										<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-eraser"></i> Delete</button>
 									</form>
 									<button class="btn btn-warning btn-xs"><i class="fa fa-clock-o"></i>Move</button>&nbsp; 
 									<%
