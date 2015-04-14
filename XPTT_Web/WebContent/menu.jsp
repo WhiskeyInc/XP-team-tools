@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -32,9 +32,9 @@
 		<!-- Collect the nav links for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="home.html"><%=page("Home", request)%></a></li>
-				<li><a href="members.jsp"><%=page("Members", request)%></a></li>
-				<li><a href="timeline.jsp"><%=page("Timeline", request)%></a></li>
+				<li <%=page("Home", request)%>><a href="home.jsp">Home</a></li>
+				<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
+				<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -49,7 +49,7 @@
 </html>
 <%!private String page(String pageName, HttpServletRequest request) {
 		if (request.getParameter("page").equals(pageName)) {
-			return "<font color= \"red\">" + pageName + "</font>";
+			return "class =  \"active\"";
 		}
-		return pageName;
+		return "";
 	}%>

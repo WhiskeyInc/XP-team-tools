@@ -10,7 +10,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<welcome-file-list>
-	    <welcome-file>home.html</welcome-file>
+	    <welcome-file>home.jsp</welcome-file>
 		<welcome-file>timeline.jsp</welcome-file>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
