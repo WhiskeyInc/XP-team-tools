@@ -33,7 +33,7 @@ public class ClientMain2 {
 
 		Thread thread = new Thread(runnable);
 		thread.start();
-		client.sendMessageToServer("Io sono l' altro client");
+		client.sendMessageToServer("Vai murotz");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -43,7 +43,7 @@ public class ClientMain2 {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText("Ciaooo! No Incre! Ehehehe");
+		chatUI.setMessageText("Ehehehe");
 		chatUI.simulateSendClick();
 
 	}

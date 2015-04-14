@@ -34,7 +34,7 @@ public class Formatter {
 	 * @return
 	 */
 
-	public static String makeMessagedistinguishable(String message) {
+	public static String makeMessageDistinguishable(String message) {
 		return message + SECRET_CODE;
 	}
 

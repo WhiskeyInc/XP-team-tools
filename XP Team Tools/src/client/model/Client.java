@@ -51,7 +51,7 @@ public class Client {
 			clientSocket = new Socket(hostName, port);
 			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
-			os.writeBytes(Formatter.appendNewLine(Formatter.makeMessagedistinguishable(teamName)));
+			os.writeBytes(Formatter.appendNewLine(Formatter.makeMessageDistinguishable(teamName)));
 			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class Client {
 		message = Formatter.appendNewLine(message);
 		if (clientSocket != null && os != null && is != null) {
 			try {
-				os.writeBytes(Formatter.makeMessagedistinguishable(teamName));
+				os.writeBytes(Formatter.makeMessageDistinguishable(teamName));
 				os.writeBytes(Formatter.formatNickname(nickname));
 				os.writeBytes(message);
 				os.flush();

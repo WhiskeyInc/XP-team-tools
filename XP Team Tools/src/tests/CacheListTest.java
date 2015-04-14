@@ -17,20 +17,20 @@ public class CacheListTest {
 		String[] messages = new String[numOfMessages];
 		
 		for (int i = 0; i < totMessages; i++) {
-			cache.storeMessage("" + i);
+			cache.storeMessage(null, "" + i);
 		}
 		for (int i = 5; i < totMessages; i++) {
 			messages[i-numOfMessages] = "" + i;
 		}
 		
-		assertArrayEquals(cache.recoverLastMessages(numOfMessages), messages);
+		assertArrayEquals(cache.recoverLastMessages(null, numOfMessages), messages);
 		numOfMessages = 4;
 		messages = new String[numOfMessages];
 		for (int i = 6; i < totMessages; i++) {
 			messages[i-numOfMessages-2] = "" + i;
 		}
 		
-		assertArrayEquals(cache.recoverLastMessages(numOfMessages), messages);
+		assertArrayEquals(cache.recoverLastMessages(null, numOfMessages), messages);
 		
 	}
 }

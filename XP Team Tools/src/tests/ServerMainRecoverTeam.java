@@ -2,11 +2,12 @@ package tests;
 
 import server.model.AbstractServer;
 import server.model.CacheList;
+import server.model.CacheMap;
 import server.model.TestableServerRecoverTeam;
 
 public class ServerMainRecoverTeam {
 	public static void main(String[] args) {
-		CacheList cache = new CacheList();
+		CacheMap cache = new CacheMap();
 		
 		AbstractServer server = new TestableServerRecoverTeam(cache, cache);
 		

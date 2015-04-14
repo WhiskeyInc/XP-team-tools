@@ -12,7 +12,7 @@ public class ConversationGenerator implements IChatStorer {
 	}
 	
 	@Override
-	public void storeMessage(String rawmessage) {
+	public void storeMessage(String teamName, String rawmessage) {
 		StringTokenizer tok = new StringTokenizer(rawmessage, "[]:");
 		
 		String team = tok.nextToken();

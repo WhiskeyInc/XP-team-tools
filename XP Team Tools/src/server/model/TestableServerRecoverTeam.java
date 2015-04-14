@@ -47,8 +47,14 @@ public class TestableServerRecoverTeam extends AbstractServer {
 			while (true) {
 				clientSocket = serverSocket.accept();
 				setInStream();
-				groupByTeam();
-			//	alignClient();
+				String teamName = groupByTeam();
+				
+				try {
+					alignClient(teamName);
+				} catch (Exception e) {
+					
+				}
+				
 				Runnable runnable = getRunnable();
 				Thread thread = new Thread(runnable);
 				thread.start();
@@ -58,7 +64,7 @@ public class TestableServerRecoverTeam extends AbstractServer {
 		}
 	}
 
-	private void groupByTeam() throws IOException {
+	private String groupByTeam() throws IOException {
 		String teamName = getLine(in);
 		teamName = Formatter.removeSecretCode(teamName);
 		System.out.println(teamName);
@@ -69,6 +75,7 @@ public class TestableServerRecoverTeam extends AbstractServer {
 			socketList.add(clientSocket);
 			clientMap.put(teamName, socketList);
 		}
+		return teamName;
 	}
 
 	private void setInStream() throws IOException {
@@ -77,8 +84,8 @@ public class TestableServerRecoverTeam extends AbstractServer {
 	}
 
 	// this is to get the messages sent to an offline client
-	private void alignClient() throws IOException {
-		String[] messages = recoverMessages();
+	private void alignClient(String teamName) throws Exception {
+		String[] messages = recoverMessages(teamName);
 		for (int i = 0; i < messages.length; i++) {
 			propagateMessage(messages[i], clientSocket);
 		}
@@ -102,7 +109,7 @@ public class TestableServerRecoverTeam extends AbstractServer {
 							System.out.println(message); // TODO
 							propagateMessageToTeamClients(message,
 									clientMap.get(teamName));
-							chatStorer.storeMessage(message);// TODO tutto
+							chatStorer.storeMessage(teamName, message);// TODO tutto
 																// compreso il
 																// team o solo
 																// il messaggio?
@@ -139,23 +146,23 @@ public class TestableServerRecoverTeam extends AbstractServer {
 		out.flush();
 	}
 
-	private String[] recoverMessages() {
+	private String[] recoverMessages(String teamName) throws Exception {
 		int numOfMessages = NUM_OF_MESSAGES;
 		String[] sentMessages;
 
-		if (recover.getNumOfMessages() < numOfMessages) {
-			numOfMessages = recover.getNumOfMessages();
+		if (recover.getNumOfMessages(teamName) < numOfMessages) {
+			numOfMessages = recover.getNumOfMessages(teamName);
 		}
-		sentMessages = recover.recoverLastMessages(numOfMessages);
+		sentMessages = recover.recoverLastMessages(teamName, numOfMessages);
 
 		return sentMessages;
 	}
 
-	public String getLastMessage() {
-
-		ArrayList<String> messages = chatStorer.getMessages();
-
-		return messages.get(messages.size() - 1);
-	}
+//	public String getLastMessage() {
+//
+//		ArrayList<String> messages = chatStorer.getMessages();
+//
+//		return messages.get(messages.size() - 1);
+//	}
 
 }

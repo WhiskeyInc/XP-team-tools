@@ -10,9 +10,10 @@ public interface IChatStorer {
 	
 	/**
 	 * Method to store a message
+	 * @param teamName TODO
 	 * @param message message to store
 	 */
-	public void storeMessage(String message);
+	public void storeMessage(String teamName, String message);
 	
 	/**
 	 * @return an {@link ArrayList} of messages

@@ -59,7 +59,8 @@ public class TestableServerRecover extends AbstractServer {
 		in = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
 	}
-	//this is to get the messages sent to an offline client
+
+	// this is to get the messages sent to an offline client
 	private void alignClient() throws IOException {
 		String[] messages = recoverMessages();
 		for (int i = 0; i < messages.length; i++) {
@@ -79,7 +80,7 @@ public class TestableServerRecover extends AbstractServer {
 
 						if (line != null) {
 							System.out.println(line); // TODO
-							chatStorer.storeMessage(line);
+							chatStorer.storeMessage(null, line);
 							propagateMessageToAllClients(line);
 						}
 					} catch (Exception e) {
@@ -98,7 +99,8 @@ public class TestableServerRecover extends AbstractServer {
 		return line;
 	}
 
-	private void propagateMessageToAllClients(String message) throws IOException {
+	private void propagateMessageToAllClients(String message)
+			throws IOException {
 
 		for (Socket socket : clientSocketList) {
 			propagateMessage(message, socket);
@@ -115,13 +117,16 @@ public class TestableServerRecover extends AbstractServer {
 
 	private String[] recoverMessages() {
 		int numOfMessages = NUM_OF_MESSAGES;
-		String[] sentMessages;
+		String[] sentMessages = null;
+		try {
 
-		if (recover.getNumOfMessages() < numOfMessages) {
-			numOfMessages = recover.getNumOfMessages();
+			if (recover.getNumOfMessages(null) < numOfMessages) {
+				numOfMessages = recover.getNumOfMessages(null);
+			}
+			sentMessages = recover.recoverLastMessages(null, numOfMessages);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		sentMessages = recover.recoverLastMessages(numOfMessages);
-		
 		return sentMessages;
 	}
 

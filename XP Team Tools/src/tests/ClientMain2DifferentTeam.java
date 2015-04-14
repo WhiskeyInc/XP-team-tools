@@ -16,7 +16,7 @@ import client.model.Client;
  */
 public class ClientMain2DifferentTeam {
 	public static void main(String[] args) {
-		final Client client = new Client("LuBardo", "TeamBardi");
+		final Client client = new Client("LuPavlo", "TeamBardi");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
@@ -33,7 +33,7 @@ public class ClientMain2DifferentTeam {
 
 		Thread thread = new Thread(runnable);
 		thread.start();
-		client.sendMessageToServer("Io sono l' altro client");
+		client.sendMessageToServer("Io sono Pavlo");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -43,7 +43,7 @@ public class ClientMain2DifferentTeam {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText("Ciaooo! No Incre! Ehehehe");
+		chatUI.setMessageText("E' vero, meglio che strisci tu Incre");
 		chatUI.simulateSendClick();
 
 	}

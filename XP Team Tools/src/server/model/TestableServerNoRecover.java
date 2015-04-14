@@ -57,7 +57,7 @@ public class TestableServerNoRecover extends AbstractServer {
 
 						if (line != null) {
 							System.out.println(line); // TODO
-							chatStorer.storeMessage(line);
+							chatStorer.storeMessage(null, line);
 							propagateMessageToAllClients(line);
 						}
 					} catch (Exception e) {
