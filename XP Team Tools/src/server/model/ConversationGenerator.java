@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 public class ConversationGenerator implements IChatStorer {
 
-	Conversations convs;
+	private Conversations convs;
 	
 	public ConversationGenerator(){
 		Conversations convs = new Conversations();
@@ -16,10 +16,11 @@ public class ConversationGenerator implements IChatStorer {
 		StringTokenizer tok = new StringTokenizer(rawmessage, "[]:");
 		
 		String team = tok.nextToken();
-		String sender = tok.nextToken();
-		String msg = tok.nextToken();
-		
-		convs.addMessage(team, sender, msg);
+		if(tok.hasMoreTokens()){
+			String sender = tok.nextToken();
+			String msg = tok.nextToken();
+			convs.addMessage(team, sender, msg);
+		}	
 		
 //		long time = Long.parseLong(tok.nextToken());
 //		String id = tok.nextToken();

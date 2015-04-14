@@ -1,4 +1,4 @@
-package tests;
+package tests.convmanager;
 
 import java.io.IOException;
 

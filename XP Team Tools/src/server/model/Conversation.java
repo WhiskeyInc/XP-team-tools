@@ -17,12 +17,14 @@ import java.util.LinkedList;
  */
 public class Conversation {
 
+	private String teamName;
 	private LinkedList<String> participants = new LinkedList<String>();
 	private HashMap<Long, Message> messages = new HashMap<Long, Message>();
 
-	public Conversation(String[] participants) {
+	public Conversation(String teamName, String[] participants) {
 		for (int i = 0; i < participants.length; i++) {
 			this.participants.add(participants[i]);
+			this.teamName = teamName;
 		}
 	}
 
