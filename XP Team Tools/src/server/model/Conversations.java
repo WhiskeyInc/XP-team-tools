@@ -22,7 +22,7 @@ public class Conversations {
 	
 	public void addMessage(String team, String author, String message){
 		
-		if (conversations.containsKey(team) == false){
+		if (!(conversations.containsKey(team))){
 			//TODO addConv
 		}else{
 			conversations.get(team).addMessage(author, message);

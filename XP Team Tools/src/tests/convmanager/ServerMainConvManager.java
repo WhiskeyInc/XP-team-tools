@@ -1,4 +1,4 @@
-package tests;
+package tests.convmanager;
 
 import server.model.AbstractServer;
 import server.model.CacheList;
