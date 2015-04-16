@@ -19,7 +19,7 @@ import control.actions.EventMover;
 public class TimelineController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, Action> actions = new HashMap<String, Action>();
+	private HashMap<String, HttpAction> actions = new HashMap<String, HttpAction>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()

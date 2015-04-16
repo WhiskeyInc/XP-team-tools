@@ -7,19 +7,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import control.Action;
 import model.exceptions.InvalidDateException;
 import timeline.Event;
 import timeline.Timeline;
+import control.HttpAction;
 
-public class EventAdder implements Action {
+public class EventAdder extends EventHttpAction implements HttpAction {
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * control.actions.EventHttpAction#perform(javax.servlet.http.HttpServletRequest
+	 * , javax.servlet.http.HttpServletResponse)
+	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response) {
 		Event event = createEventFromRequest(request);
 		addEventToTimeline(request, event);
 		try {
-			redirect(response);
+			super.redirect(response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -27,11 +34,6 @@ public class EventAdder implements Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	private void redirect(HttpServletResponse response)
-			throws ServletException, IOException {
-		response.sendRedirect("timeline.jsp");
 	}
 
 	private void addEventToTimeline(HttpServletRequest request, Event event) {
@@ -44,20 +46,8 @@ public class EventAdder implements Action {
 	}
 
 	private Event createEventFromRequest(HttpServletRequest request) {
-		GregorianCalendar date = generateEventDate(request);
+		GregorianCalendar date = super.generateEventDate(request);
 		Event event = new Event(request.getParameter("eventName"), date);
 		return event;
 	}
-
-	private GregorianCalendar generateEventDate(HttpServletRequest request) {
-		int year = Integer.parseInt(request.getParameter("eventYear"));
-		int month = Integer.parseInt(request.getParameter("eventMonth"));
-		int day = Integer.parseInt(request.getParameter("eventDay"));
-		int hour = Integer.parseInt(request.getParameter("eventHour"));
-		int min = Integer.parseInt(request.getParameter("eventMin"));
-		GregorianCalendar date = new GregorianCalendar(year, month - 1, day,
-				hour, min, 0);
-		return date;
-	}
-
 }

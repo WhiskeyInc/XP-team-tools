@@ -1,7 +1,6 @@
 package control.actions;
 
 import java.io.IOException;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,16 +10,18 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import timeline.Timeline;
-import control.Action;
+import control.HttpAction;
 
-public class EventMover implements Action {
+public class EventMover extends EventHttpAction implements HttpAction {
 
 	@Override
-	public void perform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void perform(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Timeline timeline = (Timeline) request.getServletContext()
 				.getAttribute("timeline");
 		try {
-			timeline.moveEvent(request.getParameter("event"), this.generateEventDate(request));
+			timeline.moveEvent(request.getParameter("event"),
+					super.generateEventDate(request));
 		} catch (UnEditableEventException e) {
 			e.printStackTrace();
 		} catch (NoSuchEventException e) {
@@ -30,25 +31,7 @@ public class EventMover implements Action {
 			// TODO: gestire l'eccezione
 			e.printStackTrace();
 		}
-		this.redirect(response);
+		super.redirect(response);
 
 	}
-
-	private void redirect(HttpServletResponse response)
-			throws ServletException, IOException {
-		response.sendRedirect("timeline.jsp");
-	}
-
-	private GregorianCalendar generateEventDate(HttpServletRequest request) {
-		int year = Integer.parseInt(request.getParameter("eventYear"));
-		int month = Integer.parseInt(request.getParameter("eventMonth"));
-		int day = Integer.parseInt(request.getParameter("eventDay"));
-		int hour = Integer.parseInt(request.getParameter("eventHour"));
-		int min = Integer.parseInt(request.getParameter("eventMin"));
-		GregorianCalendar date = new GregorianCalendar(year, month - 1, day,
-				hour, min, 0);
-		return date;
-
-	}
-
 }
