@@ -17,7 +17,7 @@ public interface Timeline {
 	public void deleteEvent(String eventName) throws NoSuchEventException;
 
 	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnEditableEventException, NoSuchEventException;
+			throws UnEditableEventException, NoSuchEventException, InvalidDateException;
 
 	public Event getEvent(String eventName) throws NoSuchEventException;
 

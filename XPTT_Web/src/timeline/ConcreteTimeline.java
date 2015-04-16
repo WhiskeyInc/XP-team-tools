@@ -62,7 +62,8 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnEditableEventException, NoSuchEventException {
+			throws UnEditableEventException, NoSuchEventException, InvalidDateException {
+		this.validateDate(newDate);
 		this.getEvent(eventName).setDate(newDate);
 	}
 

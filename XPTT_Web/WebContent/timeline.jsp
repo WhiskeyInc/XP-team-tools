@@ -25,6 +25,8 @@
 <link href="css/timeline.css" rel="stylesheet" />
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- Adding a form when required -->
+<script src="js/formAdder.js" type="text/javascript"></script>
 </head>
 <body>
 	<jsp:include page="menu.jsp"><jsp:param
@@ -41,6 +43,7 @@
 								Activities </span> <br /> <br /></li>
 
 						<%
+							int i = 1;
 							for (Event event : this.getEventsList(application)) {
 						%>
 
@@ -71,7 +74,7 @@
 										}
 									%>
 								</div>
-								<div class='timeline-footer'>
+								<div class='timeline-footer' id="timelineItem<%=i%>">
 									<%
 										if (event.isEditable()) {
 									%>
@@ -79,13 +82,14 @@
 										<input type="hidden" name = "event" value= "<%=event.toString()%>">
 										<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-eraser"></i> Delete</button>
 									</form>
-									<button class="btn btn-warning btn-xs"><i class="fa fa-clock-o"></i>Move</button>&nbsp; 
+									<button class="btn btn-warning btn-xs" onclick="showForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-clock-o"></i> Move</button>&nbsp; 
 									<%
 										}
 									%>
 								</div>
 							</div></li>
-						<%
+						<%	
+							i++;
 							}
 						%>
 						<li><i class="fa fa-flag-checkered"></i></li>
@@ -99,7 +103,7 @@
 	<br>
 	<br>
 	<div align="center">
-		<a class="btn btn-primary btn-xl" href="additions.html">Add an
+		<a class="btn btn-primary btn-xl" href="eventAdder.jsp">Add an
 			Event</a>
 	</div>
 	<!-- /.container -->
