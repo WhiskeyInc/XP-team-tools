@@ -82,7 +82,8 @@
 										<input type="hidden" name = "event" value= "<%=event.toString()%>">
 										<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-eraser"></i> Delete</button>
 									</form>
-									<button class="btn btn-warning btn-xs" onclick="showForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-clock-o"></i> Move</button>&nbsp; 
+									<button class="btn btn-warning btn-xs" onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-clock-o"></i> Move</button>&nbsp; 
+									<button class="btn btn-success btn-xs" onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-user-plus"></i> Add participant</button>&nbsp; 
 									<%
 										}
 									%>

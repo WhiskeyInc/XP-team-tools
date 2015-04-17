@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import control.actions.EventAdder;
 import control.actions.EventMover;
+import control.actions.EventParticipantAdder;
 
 /**
  * Servlet implementation class TimelineController
@@ -32,6 +33,7 @@ public class TimelineController extends HttpServlet {
 	private void initializeMap() {
 		this.actions.put("addition", new EventAdder());
 		this.actions.put("changeDate", new EventMover());
+		this.actions.put("addParticipant", new EventParticipantAdder());
 	}
 
 	/**

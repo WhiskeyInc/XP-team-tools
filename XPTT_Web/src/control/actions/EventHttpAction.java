@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import timeline.Timeline;
 import control.HttpAction;
 
 public abstract class EventHttpAction implements HttpAction {
@@ -35,7 +36,10 @@ public abstract class EventHttpAction implements HttpAction {
 		GregorianCalendar date = new GregorianCalendar(year, month - 1, day,
 				hour, min, 0);
 		return date;
-
+	}
+	
+	protected Timeline getTimelineFromRequest(HttpServletRequest request) {
+		return (Timeline) request.getServletContext().getAttribute("timeline");
 	}
 
 }

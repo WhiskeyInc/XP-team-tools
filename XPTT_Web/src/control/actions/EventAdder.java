@@ -37,9 +37,9 @@ public class EventAdder extends EventHttpAction implements HttpAction {
 	}
 
 	private void addEventToTimeline(HttpServletRequest request, Event event) {
+		Timeline timeline = super.getTimelineFromRequest(request);
 		try {
-			((Timeline) request.getServletContext().getAttribute("timeline"))
-					.addEvent(event);
+			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
 			e.printStackTrace();
 		}
