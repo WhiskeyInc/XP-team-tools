@@ -13,7 +13,7 @@ import control.actions.HttpAction;
 import control.actions.timeline.EventAdder;
 import control.actions.timeline.EventDeleter;
 import control.actions.timeline.EventMover;
-import control.actions.EventParticipantAdder;
+import control.actions.timeline.EventParticipantAdder;
 
 /**
  * Servlet implementation class TimelineController

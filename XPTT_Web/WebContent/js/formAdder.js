@@ -2,7 +2,7 @@ var formDisplayed = false;
 function showDateModificationForm(divName, eventName) {
 	if(formDisplayed == false){
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML = "<form action='TimelineController' method='post' role='form'>"+
+		newdiv.innerHTML = "<br>" + "<form action='TimelineController' method='post' role='form'>"+
 		"<div class='form-group'>"+
 		"<label for='eventDate'>Change the date to your event!</label>"+
 		"<div class='input-group' id = 'eventDate'>"+
@@ -19,7 +19,10 @@ function showDateModificationForm(divName, eventName) {
 		"</div>"+
 		"<input type='hidden' name='event' value='"+eventName+"'>"+
 		"<input type='hidden' name='action' value='changeDate'>"+
-		"<button class='btn btn-primary btn-xl' type='submit'>Change!</button>"+
+		"<div class='btn-group btn-group-xs' role='group'>"+
+		"<button class='btn btn-primary' type='submit'>Change!</button>"+
+		"<button class='btn btn-success' type='button' onclick='history.go(0)'>Back!</button>"+
+		"</div>"+
 		"</form>";
 		document.getElementById(divName).appendChild(newdiv);
 		formDisplayed = true;
@@ -29,7 +32,7 @@ function showDateModificationForm(divName, eventName) {
 function showParticipantAdditionForm(divName, eventName) {
 	if(formDisplayed == false){
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML = "<form action='TimelineController' method='post' role='form'>"+
+		newdiv.innerHTML = "<br>" + "<form action='TimelineController' method='post' role='form'>"+
 		"<div class='form-group'>"+
 		"<label for='participantAddition'>Add a partcipant to your event!</label>"+
 		"<div class='input-group'>"+ 
@@ -38,7 +41,28 @@ function showParticipantAdditionForm(divName, eventName) {
 		"</div>"+
 		"<input type='hidden' name='event' value='"+eventName+"'>"+
 		"<input type='hidden' name='action' value='addParticipant'>"+
-		"<button class='btn btn-primary btn-xl' type='submit'>Add!</button>"+
+		"<div class='btn-group btn-group-xs' role='group'>"+
+		"<button class='btn btn-primary' type='submit'>Add!</button>"+
+		"<button class='btn btn-success' type='button' onclick='history.go(0)'>Back!</button>"+
+		"</div>"+
+		"</form>";
+		document.getElementById(divName).appendChild(newdiv);
+		formDisplayed = true;
+	}
+}
+
+function showDeleteConfirmForm(divName, eventName) {
+	if(formDisplayed == false){
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = "<br>" +
+		"<div class='alert alert-danger'><strong>Warning: this is final!</strong> Are you really sure you want to delete this event?</div>"+
+		"<form action='TimelineController' method='post' role='form'>"+
+		"<input type='hidden' name='event' value='"+eventName+"'>"+
+		"<input type='hidden' name='action' value='deletion'>"+
+		"<div class='btn-group btn-group-xs' role='group'>"+
+		"<button class='btn btn-danger' type='submit'>Delete!</button>"+
+		"<button class='btn btn-success' type='button' onclick='history.go(0)'>Back!</button>"+	
+		"</div>"+
 		"</form>";
 		document.getElementById(divName).appendChild(newdiv);
 		formDisplayed = true;

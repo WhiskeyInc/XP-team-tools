@@ -78,23 +78,11 @@
 									<%
 										if (event.isEditable()) {
 									%>
-									<form style="float: left; margin-right: 20px;"
-										class="form-inline" role="form" method="POST"
-										action="TimelineController">
-										<input type="hidden" name="action" value="deletion"> <input
-											type="hidden" name="event" value="<%=event.toString()%>">
-										<button class="btn btn-danger btn-xs" type="submit">
-											<i class="fa fa-times"></i> Delete
-										</button>
-									</form>
-									<button class="btn btn-warning btn-xs"
-										style="margin-right: 20px;"
-										onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
-										<i class="fa fa-clock-o"></i> Move
-									</button>
-									<button onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )" class="btn btn-primary btn-xs">
-										<i class="fa fa-group"></i> Add Participants
-									</button>
+									<div class="btn-group btn-group-sm" role="group">
+										<button class="btn btn-danger" onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.toString()%>' )"> <i class="fa fa-times"></i> Delete</button>
+										<button class="btn btn-warning" onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )"> <i class="fa fa-clock-o"></i> Move</button>
+										<button class="btn btn-success" onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-user-plus"></i> Add Participant</button>
+									</div>
 									<%
 										}
 									%>

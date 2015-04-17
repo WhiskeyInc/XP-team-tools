@@ -1,7 +1,7 @@
 /**
  * 
  */
-package control.actions;
+package control.actions.timeline;
 
 import java.io.IOException;
 
@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.exceptions.NoSuchEventException;
 import timeline.Timeline;
-import control.HttpAction;
-import control.actions.timeline.TimelineAction;
 
 /**
  * @author lele
