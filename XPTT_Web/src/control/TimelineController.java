@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import control.actions.EventAdder;
-import control.actions.EventMover;
+import control.actions.HttpAction;
+import control.actions.timeline.EventAdder;
+import control.actions.timeline.EventDeleter;
+import control.actions.timeline.EventMover;
 import control.actions.EventParticipantAdder;
 
 /**
@@ -33,6 +35,7 @@ public class TimelineController extends HttpServlet {
 	private void initializeMap() {
 		this.actions.put("addition", new EventAdder());
 		this.actions.put("changeDate", new EventMover());
+		this.actions.put("deletion", new EventDeleter());
 		this.actions.put("addParticipant", new EventParticipantAdder());
 	}
 
