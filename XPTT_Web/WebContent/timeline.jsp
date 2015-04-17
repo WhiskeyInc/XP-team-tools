@@ -29,8 +29,8 @@
 <script src="js/formAdder.js" type="text/javascript"></script>
 </head>
 <body>
-	<jsp:include page="menu.jsp"><jsp:param
-			name="page" value="Timeline" />
+	<jsp:include page="menu.jsp"><jsp:param name="page"
+			value="Timeline" />
 	</jsp:include>
 
 	<div class="container">
@@ -78,18 +78,29 @@
 									<%
 										if (event.isEditable()) {
 									%>
-									<form class="form-inline" role = "form" method = "POST" action = "EventDeleter">
-										<input type="hidden" name = "event" value= "<%=event.toString()%>">
-										<button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-eraser"></i> Delete</button>
+									<form style="float: left; margin-right: 20px;"
+										class="form-inline" role="form" method="POST"
+										action="TimelineController">
+										<input type="hidden" name="action" value="deletion"> <input
+											type="hidden" name="event" value="<%=event.toString()%>">
+										<button class="btn btn-danger btn-xs" type="submit">
+											<i class="fa fa-times"></i> Delete
+										</button>
 									</form>
-									<button class="btn btn-warning btn-xs" onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-clock-o"></i> Move</button>&nbsp; 
-									<button class="btn btn-success btn-xs" onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-user-plus"></i> Add participant</button>&nbsp; 
+									<button class="btn btn-warning btn-xs"
+										style="margin-right: 20px;"
+										onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+										<i class="fa fa-clock-o"></i> Move
+									</button>
+									<button onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )" class="btn btn-primary btn-xs">
+										<i class="fa fa-group"></i> Add Participants
+									</button>
 									<%
 										}
 									%>
 								</div>
 							</div></li>
-						<%	
+						<%
 							i++;
 							}
 						%>
@@ -136,9 +147,7 @@
 		String month = date.getDisplayName(GregorianCalendar.MONTH,
 				GregorianCalendar.LONG, Locale.ITALY);
 		int year = date.get(GregorianCalendar.YEAR);
-		String sec = formatter.format(date.get(GregorianCalendar.SECOND));
 		String min = formatter.format(date.get(GregorianCalendar.MINUTE));
 		String hour = formatter.format(date.get(GregorianCalendar.HOUR_OF_DAY));
-		return day + " " + month + " " + year + ", " + hour + ":" + min + ":"
-				+ sec;
+		return day + " " + month + " " + year + ", " + hour + ":" + min;
 	}%>
