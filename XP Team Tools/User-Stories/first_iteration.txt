@@ -1,0 +1,20 @@
+Italiano:
+
+1) Un membro del team si connette alla chat di gruppo e invia messaggi agli altri membri
+
+2) Il team decide di far partire un "pomodoro" sincronizzato di una durata prefissata: parte un timer condiviso che allo scadere avvisa tutti
+
+3) I membri della chat non connessi ricevono i messaggi pendenti alla connessione
+
+4) Dalla chat di team gli utenti creano un evento di timeline TODO
+________________________________________________________________________________________________________________________
+
+English:
+
+1) A team member connects to his team-chat and sends messages to the other members
+
+2) The XP team decide to start a "Programming Tomato" (programming time slice): a shared synchronized timer starts and notifies all the programmers at the end of the tomato
+
+3) The people not connected to the team-chat can receive all the messages sent in the offline period when they connect
+
+4) From the team-chat can born a timeline event TODO
