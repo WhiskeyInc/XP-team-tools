@@ -118,7 +118,7 @@
 <%!private ArrayList<Event> getEventsList(ServletContext context) {
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		Timeline timeline = (Timeline) context.getAttribute("timeline");
-		Collections.shuffle(eventList);
+		Collections.sort(eventList);
 		return eventList = timeline.getEvents(new NoFilter<Event>());
 	}
 

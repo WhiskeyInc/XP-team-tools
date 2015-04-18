@@ -131,7 +131,7 @@ public class Event implements Comparable<Event> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Event otherevent) {
-		return this.getDate().compareTo(otherevent.getDate());
+		return -(this.getDate().compareTo(otherevent.getDate()));
 	}
 
 	@Override
