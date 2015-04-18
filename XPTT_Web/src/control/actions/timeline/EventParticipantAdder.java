@@ -26,7 +26,7 @@ public class EventParticipantAdder extends TimelineAction {
 			throws ServletException, IOException {
 		Timeline timeline = super.getTimeline(request);
 		try {
-			timeline.getEvent(request.getParameter("event")).addParticipant(request.getParameter("participant"));
+			timeline.getEvent(Integer.parseInt(request.getParameter("eventId"))).addParticipant(request.getParameter("participant"));
 		} catch (NoSuchEventException e) {
 			e.printStackTrace();
 		}

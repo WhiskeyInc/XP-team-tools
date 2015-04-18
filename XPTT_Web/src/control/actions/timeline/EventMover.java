@@ -18,7 +18,7 @@ public class EventMover extends DateHandlerAction{
 			throws ServletException, IOException {
 		Timeline timeline = super.getTimeline(request);
 		try {
-			timeline.moveEvent(request.getParameter("event"),
+			timeline.moveEvent(Integer.parseInt(request.getParameter("eventId")),
 					super.generateEventDate(request));
 		} catch (UnEditableEventException e) {
 			e.printStackTrace();
