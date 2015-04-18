@@ -1,20 +1,34 @@
 Italiano:
 
-1) Un membro del team si connette alla chat di gruppo e invia messaggi agli altri membri
+1)	Un membro del team si connette alla chat di gruppo e invia messaggi agli altri membri. Mentre è connesso riceve i messaggi inviati al gruppo dagli altri membri.
+	Informazioni tecniche:
+	Sviluppatori: Alberto - Pavel - Nicola
+	Dettagli: Ogni membro è un client che si connette al server il quale gestisce e smista tutti i messaggi.
 
-2) Il team decide di far partire un "pomodoro" sincronizzato di una durata prefissata: parte un timer condiviso che allo scadere avvisa tutti
+2)	Il team decide di far partire un "pomodoro" sincronizzato di una durata prefissata: parte un timer condiviso che allo scadere consiglia a tutti i programmatori di prendersi una pausa
+	Successivamente un nuovo "pomodoro" può iniziare
+	Sviluppatori: Alessandro B. - Alberto
+	Dettagli: I client possono far partire un timer che parte sul server, in questo modo il client iniziale e tutti gli altri ricevono lo stop contemporaneamente
 
-3) I membri della chat non connessi ricevono i messaggi pendenti alla connessione
+3)	I membri della chat che non sono connessi ricevono i messaggi pendenti al momento della connessione; Ogni utente ha quindi tutti i messaggi della conversazione nella sua finestra.
+	Sviluppatori: Alberto
+	Dettagli: Il server nel ricevere i messaggi li conserva, e un client al momento della connessione richiede i messaggi circolati quando lui era offline
 
-4) Dalla chat di team gli utenti creano un evento di timeline TODO
+4)	Dalla chat di team gli utenti creano un evento che si aggiunge in timeline TODO
 ________________________________________________________________________________________________________________________
 
 English:
 
-1) A team member connects to his team-chat and sends messages to the other members
+1)	A team member connects to his team-chat and sends messages to the other members. While he's connected he receives the messages from the other members
+	Developers: Alberto - Pavel - Nicola
+	Details: Every member is identified in a client which connects to the server. The server switchs the messages to the other clients
 
-2) The XP team decide to start a "Programming Tomato" (programming time slice): a shared synchronized timer starts and notifies all the programmers at the end of the tomato
+2)	The XP team decide to start a "Programming Tomato" (programming time slice): a shared synchronized timer starts and notifies all the programmers at the end of the tomato
+	Developers: Alessandro B. - Alberto
+	Details: The clients can start a shared timer with a particular message to the server, this timer is switched to every client and the programming session is stop at the same time on every client
 
-3) The people not connected to the team-chat can receive all the messages sent in the offline period when they connect
+3)	The people not connected to the team-chat can receive all the messages sent in the offline period when they connect
+	Developers: Alberto
+	Details: The server receives the messages storing them, then a client when it connects it asks for the messages sent in his offline period and the server sends them
 
-4) From the team-chat can born a timeline event TODO
+4)	From the team-chat can born a timeline event TODO
