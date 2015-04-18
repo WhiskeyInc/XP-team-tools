@@ -60,8 +60,7 @@ public class TimelineIntegrationTest {
 		taskManager.moveTaskToState("Timer", "DONE");
 		assertEquals(3, timeline.getEventsNumber());
 		assertEquals("Changed state of task Timer. Now it is DONE", timeline
-				.getEvent("Changed state of task Timer. Now it is DONE")
-				.toString());
+				.getEvent(2).toString());
 		// assertEquals(
 		// getCurrentDate(),
 		// teamManager.getEvent(
@@ -82,7 +81,8 @@ public class TimelineIntegrationTest {
 	public void userStoryAdditionCreatesEvent() throws Exception {
 		TaskManager taskmanager = new ConcreteTaskManager();
 		userStoriesManager.addUserStory(new UserStory("Timeline",
-				"Voglio che ci sia un pannello con dei tasti che...",taskmanager));
+				"Voglio che ci sia un pannello con dei tasti che...",
+				taskmanager));
 		assertEquals(2, timeline.getEventsNumber());
 	}
 
@@ -90,7 +90,8 @@ public class TimelineIntegrationTest {
 	public void userStoryDeletionCreatesEvent() throws Exception {
 		TaskManager taskmanager = new ConcreteTaskManager();
 		userStoriesManager.addUserStory(new UserStory("Timeline",
-				"Voglio che ci sia un pannello con dei tasti che...",taskmanager));
+				"Voglio che ci sia un pannello con dei tasti che...",
+				taskmanager));
 		userStoriesManager.deleteUserStory("Timeline");
 		assertEquals(3, timeline.getEventsNumber());
 	}
@@ -99,14 +100,12 @@ public class TimelineIntegrationTest {
 	public void userStoryModifyCreatesEventTest() throws Exception {
 		TaskManager taskmanager = new ConcreteTaskManager();
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
-		userStoriesManager.addUserStory(new UserStory("Timeline", "",taskmanager));
+		userStoriesManager.addUserStory(new UserStory("Timeline", "",
+				taskmanager));
 		userStoriesManager.moveUserStoryToState("Timeline", "DONE");
 		assertEquals(3, timeline.getEventsNumber());
-		assertEquals(
-				"Changed state of userstory Timeline: now it is DONE",
-				timeline.getEvent(
-						"Changed state of userstory Timeline: now it is DONE")
-						.toString());
+		assertEquals("Changed state of userstory Timeline: now it is DONE",
+				timeline.getEvent(2).toString());
 	}
 
 	@Test
@@ -118,11 +117,11 @@ public class TimelineIntegrationTest {
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
 		settings.addTeamMember("Lele", "Simo");
 
-		Event creation = timeline.getEvent("creation");
+		Event creation = timeline.getEvent(0);
 		assertTrue(!creation.isEditable());
 
-		userStoriesManager
-				.addUserStory(new UserStory("Timeline", "Voglio un pannello che...",taskmanager));
+		userStoriesManager.addUserStory(new UserStory("Timeline",
+				"Voglio un pannello che...", taskmanager));
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(1)
 				.isEditable());
 
@@ -146,7 +145,8 @@ public class TimelineIntegrationTest {
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(6)
 				.isEditable());
 
-		userStoriesManager.addUserStory(new UserStory("Timeline2", null,taskmanager2));
+		userStoriesManager.addUserStory(new UserStory("Timeline2", null,
+				taskmanager2));
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(7)
 				.isEditable());
 

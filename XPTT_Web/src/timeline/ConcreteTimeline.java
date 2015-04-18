@@ -13,14 +13,19 @@ import filtering.Filter;
 
 public class ConcreteTimeline implements Timeline {
 
-	private HashMap<String, Event> events = new HashMap<String, Event>();
+	private static final int CREATION_EVENT_ID = 0;
 	private static final String CREATION_EVENT = "creation";
+
+	private HashMap<Integer, Event> events = new HashMap<Integer, Event>();
+	private int nextEventId = 1;
 
 	public ConcreteTimeline() {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
 				.getInstance();
-		Event event = new Event(CREATION_EVENT, creationDate, false);
-		events.put(event.toString(), event);
+		Event event = new Event(CREATION_EVENT, CREATION_EVENT_ID,
+				creationDate, false);
+		System.out.println(event.getId());
+		events.put(event.getId(), event);
 	}
 
 	/*
@@ -39,9 +44,17 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#addEvent(timeline.Event)
 	 */
 	@Override
-	public void addEvent(Event event) throws InvalidDateException {
+	public void addEvent(String eventName, boolean editable,
+			GregorianCalendar date, ArrayList<String> participants)
+			throws InvalidDateException {
+		Event event = new Event(eventName, nextEventId, date, editable);
+		if (participants != null) {
+			event.addParticipants(participants);
+		}
 		validateDate(event.getDate());
-		this.events.put(event.toString(), event);
+		this.events.put(event.getId(), event);
+		System.out.println(nextEventId);
+		updateNextEventId();
 	}
 
 	/*
@@ -50,8 +63,8 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#dropEvent(java.lang.String)
 	 */
 	@Override
-	public void deleteEvent(String eventName) throws NoSuchEventException {
-		this.events.remove(this.getEvent(eventName).toString());
+	public void deleteEvent(int eventId) throws NoSuchEventException {
+		this.events.remove(this.getEvent(eventId).toString());
 	}
 
 	/*
@@ -61,10 +74,11 @@ public class ConcreteTimeline implements Timeline {
 	 * java.util.GregorianCalendar)
 	 */
 	@Override
-	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnEditableEventException, NoSuchEventException, InvalidDateException {
+	public void moveEvent(int eventId, GregorianCalendar newDate)
+			throws UnEditableEventException, NoSuchEventException,
+			InvalidDateException {
 		this.validateDate(newDate);
-		this.getEvent(eventName).setDate(newDate);
+		this.getEvent(eventId).setDate(newDate);
 	}
 
 	/*
@@ -73,11 +87,10 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#getEvent(java.lang.String)
 	 */
 	@Override
-	public Event getEvent(String eventName) throws NoSuchEventException {
-		this.validateEvent(eventName);
-		return this.events.get(eventName);
+	public Event getEvent(int eventId) throws NoSuchEventException {
+		this.validateEvent(eventId);
+		return this.events.get(eventId);
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -92,28 +105,34 @@ public class ConcreteTimeline implements Timeline {
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
 	}
-	
-	private void validateEvent(String eventName) throws NoSuchEventException {
-		if(!EventExists(eventName)){
-			throw new NoSuchEventException(eventName);
+
+	private void validateEvent(int eventId) throws NoSuchEventException {
+		if (!EventExists(eventId)) {
+			throw new NoSuchEventException(eventId);
 		}
 	}
 
-	private boolean EventExists(String eventName) {
-		return this.events.containsKey(eventName);
+	private boolean EventExists(int eventId) {
+		return this.events.containsKey(eventId);
 	}
-	
-	private void validateDate(GregorianCalendar date) throws InvalidDateException {
-		if(dateBeforeCreation(date)){
+
+	private void validateDate(GregorianCalendar date)
+			throws InvalidDateException {
+		if (dateBeforeCreation(date)) {
 			throw new InvalidDateException(date);
 		}
 	}
 
 	private boolean dateBeforeCreation(GregorianCalendar date) {
 		try {
-			return date.before(this.getEvent(CREATION_EVENT).getDate());
+			return date.before(this.getEvent(CREATION_EVENT_ID).getDate());
 		} catch (NoSuchEventException e) {
 			throw new RuntimeException("Fatal error: creation not found");
 		}
 	}
+
+	private void updateNextEventId() {
+		this.nextEventId = this.nextEventId + 1;
+	}
+
 }

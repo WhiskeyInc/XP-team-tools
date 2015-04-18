@@ -12,14 +12,17 @@ public interface Timeline {
 
 	public int getEventsNumber();
 
-	public void addEvent(Event event) throws InvalidDateException;
+	public void addEvent(String eventName, boolean editable,
+			GregorianCalendar date, ArrayList<String> participants)
+			throws InvalidDateException;
 
-	public void deleteEvent(String eventName) throws NoSuchEventException;
+	public void deleteEvent(int eventId) throws NoSuchEventException;
 
-	public void moveEvent(String eventName, GregorianCalendar newDate)
-			throws UnEditableEventException, NoSuchEventException, InvalidDateException;
+	public void moveEvent(int eventId, GregorianCalendar newDate)
+			throws UnEditableEventException, NoSuchEventException,
+			InvalidDateException;
 
-	public Event getEvent(String eventName) throws NoSuchEventException;
+	public Event getEvent(int eventId) throws NoSuchEventException;
 
 	public ArrayList<Event> getEvents(Filter<Event> filter);
 

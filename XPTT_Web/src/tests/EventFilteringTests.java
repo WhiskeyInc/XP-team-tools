@@ -23,12 +23,12 @@ public class EventFilteringTests {
 
 	@Test
 	public void DateEventFilterTest() throws InvalidDateException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
-				20, 23, 3, 50)));
-		timeline.addEvent(new Event("Riunione", new GregorianCalendar(2020, 01,
-				01, 23, 4, 50)));
-		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020,
-				01, 10, 23, 3, 50)));
+		timeline.addEvent("Briefing",true, new GregorianCalendar(2020, 02,
+				20, 23, 3, 50),null);
+		timeline.addEvent("Riunione",true, new GregorianCalendar(2020, 01,
+				01, 23, 4, 50),null);
+		timeline.addEvent("OtherEvent",true, new GregorianCalendar(2020,
+				01, 10, 23, 3, 50),null);
 		assertEquals(
 				2,
 				timeline.getEvents(
@@ -40,13 +40,13 @@ public class EventFilteringTests {
 
 	@Test
 	public void participantsEventFilter() throws InvalidDateException, NoSuchEventException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
-				20, 23, 3, 50)));
-		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020,
-				01, 10, 23, 3, 50)));
-		timeline.getEvent("Briefing").addParticipant("Simone");
-		timeline.getEvent("Briefing").addParticipant("Alessandro");
-		timeline.getEvent("OtherEvent").addParticipant("Simone");
+		timeline.addEvent("Briefing",true, new GregorianCalendar(2020, 02,
+				20, 23, 3, 50),null);
+		timeline.addEvent("OtherEvent",true, new GregorianCalendar(2020,
+				01, 10, 23, 3, 50),null);
+		timeline.getEvent(1).addParticipant("Simone");
+		timeline.getEvent(1).addParticipant("Alessandro");
+		timeline.getEvent(2).addParticipant("Simone");
 		assertEquals(
 				1,
 				timeline.getEvents(
@@ -66,12 +66,12 @@ public class EventFilteringTests {
 
 	@Test
 	public void NameEventFilterTest() throws InvalidDateException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
-				20, 23, 3, 50)));
-		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020,
-				01, 10, 23, 3, 50)));
-		timeline.addEvent(new Event("SomeEvent somewhere...",
-				new GregorianCalendar(2020, 02, 20, 23, 3, 50)));
+		timeline.addEvent("Briefing",true, new GregorianCalendar(2020, 02,
+				20, 23, 3, 50),null);
+		timeline.addEvent("OtherEvent",true, new GregorianCalendar(2020,
+				01, 10, 23, 3, 50),null);
+		timeline.addEvent("SomeEvent somewhere...",true,
+				new GregorianCalendar(2020, 02, 20, 23, 3, 50),null);
 		assertEquals(
 				2,
 				timeline.getEvents(

@@ -6,11 +6,11 @@ import java.util.GregorianCalendar;
 import model.exceptions.UnEditableEventException;
 
 /**
- * This class represent an event which has four characteristics: a name
- * (mandatory), a date, stored with the precision of a second, a list of
- * participant and a flag which indicates whether its date can be changed or
- * not. The default values for this flag is TRUE: it means the date can be
- * modified if not differently specified in the constructor.
+ * This class represent an event which has five characteristics: an
+ * id(exclusive), a name (mandatory), a date, stored with the precision of a
+ * second, a list of participant and a flag which indicates whether its date can
+ * be changed or not. The default values for this flag is TRUE: it means the
+ * date can be modified if not differently specified in the constructor.
  * 
  * This class implements {@link Comparable}: two Events are compared according
  * to their date
@@ -20,6 +20,7 @@ import model.exceptions.UnEditableEventException;
  */
 public class Event implements Comparable<Event> {
 
+	private int id;
 	private ArrayList<String> participants = new ArrayList<String>();
 	private GregorianCalendar date;
 	private String name;
@@ -35,7 +36,8 @@ public class Event implements Comparable<Event> {
 	 * @param date
 	 *            : the date the Event is assumed to take place at.
 	 */
-	public Event(String name, GregorianCalendar date) {
+	public Event(String name, int id, GregorianCalendar date) {
+		this.id = id;
 		this.date = date;
 		this.name = name;
 	}
@@ -52,7 +54,8 @@ public class Event implements Comparable<Event> {
 	 *            : if its value is TRUE, the event can be modified, otherwise
 	 *            it will be forever as specified in the constructor.
 	 */
-	public Event(String name, GregorianCalendar date, boolean editable) {
+	public Event(String name, int id, GregorianCalendar date, boolean editable) {
+		this.id = id;
 		this.date = date;
 		this.name = name;
 		this.editable = editable;
@@ -144,4 +147,12 @@ public class Event implements Comparable<Event> {
 		return this.name;
 	}
 
+	public int getId(){
+		return this.id;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 }
