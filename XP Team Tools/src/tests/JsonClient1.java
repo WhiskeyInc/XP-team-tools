@@ -19,7 +19,7 @@ public class JsonClient1 {
 			public void run() {
 				try {
 					client.readFromSocket();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

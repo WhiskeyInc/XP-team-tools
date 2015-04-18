@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import server.model.JsonParser;
 import string.formatter.Formatter;
 
 /**
@@ -82,9 +83,9 @@ public class Client2 {
 
 	/**
 	 * Reads from the socket messages
-	 * @throws IOException when doens't find the input stream
+	 * @throws Exception TODO
 	 */
-	public void readFromSocket() throws IOException {
+	public void readFromSocket() throws Exception {
 
 		BufferedReader input;
 		try {
@@ -92,8 +93,25 @@ public class Client2 {
 					clientSocket.getInputStream()));
 			while (true) {
 				String read = input.readLine();
-				if(read!= null)
-					System.out.println("Sono nel client " + read );
+				if(read!= null) {
+					//System.err.println(read);
+					int request = JsonParser.getRequest(read);
+					switch (request) {
+					case JsonParser.CHAT:
+						String[] lines = JsonParser
+								.parseChatRequest(read);
+						//String teamName = lines[0];
+						String message = lines[1];
+						System.out.println("Sono nel client " + message);
+						break;
+
+					case JsonParser.TIMER: 
+						//TODO
+						break;
+					default:
+						break;
+					}
+				}
 
 			}
 		} catch (IOException e) {

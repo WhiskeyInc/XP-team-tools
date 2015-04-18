@@ -107,9 +107,9 @@ public class JsonServer extends AbstractServer {
 								String message = lines[1];
 								System.out.println("Il team è: " + teamName);
 								System.out.println(message); // TODO
-								propagateMessageToTeamClients(message,
+								propagateMessageToTeamClients(line,
 										clientMap.get(teamName));
-								chatStorer.storeMessage(teamName, message);
+								chatStorer.storeMessage(teamName, line);
 								
 								break;
 

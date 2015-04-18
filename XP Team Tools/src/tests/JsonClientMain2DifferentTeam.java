@@ -26,7 +26,7 @@ public class JsonClientMain2DifferentTeam {
 			public void run() {
 				try {
 					client.readFromSocket();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
