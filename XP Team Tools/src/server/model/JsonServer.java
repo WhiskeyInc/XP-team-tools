@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.Timer;
 
@@ -28,9 +29,9 @@ public class JsonServer extends AbstractServer {
 	private BufferedReader in;
 	public static final int NUM_OF_MESSAGES = 10;
 	public static final int TOTAL_MILLIS = 1000;
-	private long totalMillis;
-	private Timer timer;
-
+	private Map<String, Long> millisMap = new HashMap<String, Long>();
+	private Map<String, Timer> timerMap = new HashMap<String, Timer>();
+	
 
 	public JsonServer(IChatStorer chatStorer, IMessageRecover recover) {
 		super();
@@ -126,12 +127,17 @@ public class JsonServer extends AbstractServer {
 							case JsonParser.TIMER:
 								String[] timerLines = JsonParser.parseTimerRequest(line);
 								teamName = timerLines[0];
+								
 								int minutes = Integer.parseInt(timerLines[1]);
 								int seconds = Integer.parseInt(timerLines[2]);
-								totalMillis = TimerFormatter.getMillis(minutes, seconds);
+								if(millisMap.containsKey(teamName)) {
+									millisMap.replace(teamName, TimerFormatter.getMillis(minutes, seconds));
+								} else {
+									millisMap.put(teamName, TimerFormatter.getMillis(minutes, seconds));
+								}
+								
 								startTimer(teamName);
 								
-								//TODO
 								break;
 							default:
 								break;
@@ -185,12 +191,14 @@ public class JsonServer extends AbstractServer {
 	private void startTimer(final String teamName) {
 		
 		
-		timer = new Timer(TOTAL_MILLIS, new ActionListener() {
+		
+		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				final long totalMillis = millisMap.get(teamName);
 				if(totalMillis==0) {
-					timer.stop();
+					timerMap.get(teamName).stop();
 				}
 				try {
 					int [] vet = TimerFormatter.getTimeStamp(totalMillis);
@@ -200,14 +208,19 @@ public class JsonServer extends AbstractServer {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				totalMillis -= TOTAL_MILLIS;
+				millisMap.replace(teamName, totalMillis - TOTAL_MILLIS);
 
 			}
 		});
-
-		timer.setInitialDelay(0);
-		timer.start();
 		
+		if(timerMap.containsKey(teamName)) {
+			timerMap.replace(teamName, timer);
+		} else {
+			timerMap.put(teamName, timer);
+		}
+
+		timerMap.get(teamName).setInitialDelay(0);
+		timerMap.get(teamName).start();
 	}
 
 }

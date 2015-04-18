@@ -2,7 +2,6 @@ package tests;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import string.formatter.Formatter;
 import ui.ChatUITestable;
