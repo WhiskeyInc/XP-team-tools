@@ -81,7 +81,7 @@
 									<div class="btn-group btn-group-sm" role="group">
 										<button class="btn btn-danger"
 											onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
-											<i class="fa fa-times"></i> Delete
+											<i class="fa fa-trash-o"></i> Delete
 										</button>
 										<button class="btn btn-warning"
 											onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
