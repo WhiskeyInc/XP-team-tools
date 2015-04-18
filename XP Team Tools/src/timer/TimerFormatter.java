@@ -2,15 +2,17 @@ package timer;
 
 public class TimerFormatter {
 	
-	public static String getTimeStamp(long millis){
-		long secondiTot = millis / 1000;
-		long minuti = secondiTot / 60;
-		long secondi = secondiTot % 60;
+	public static int[] getTimeStamp(long millis){
+		Integer secondiTot = (int)millis / 1000;
 		
-		return getDisplay(minuti, secondi);
+		int[] vett = new int[2];
+		vett[0] = secondiTot / 60;
+		vett[1] = secondiTot % 60;
+		
+		return vett;
 	}
 	
-	private static String getDisplay(long minute, long second) {
+	public static String getDisplay(int minute, int second) {
 		String display = "";
 		if (minute < 10 && second < 10)
 			display = "0" + String.valueOf(minute) + " : 0"
@@ -23,6 +25,10 @@ public class TimerFormatter {
 		if (minute >= 10 && second >= 10)
 			display = String.valueOf(minute) + " : " + String.valueOf(second);
 		return display;
+	}
+	
+	public static long getMillis(int minutes, int seconds) {
+		return (minutes*60 + seconds)*1000;
 	}
 
 }

@@ -1,5 +1,7 @@
 package server.model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -10,7 +12,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.Timer;
+
 import string.formatter.Formatter;
+import timer.TimerFormatter;
+import client.model.JsonMaker;
 
 public class JsonServer extends AbstractServer {
 
@@ -21,6 +27,10 @@ public class JsonServer extends AbstractServer {
 	private IMessageRecover recover;
 	private BufferedReader in;
 	public static final int NUM_OF_MESSAGES = 10;
+	public static final int TOTAL_MILLIS = 1000;
+	private long totalMillis;
+	private Timer timer;
+
 
 	public JsonServer(IChatStorer chatStorer, IMessageRecover recover) {
 		super();
@@ -113,7 +123,14 @@ public class JsonServer extends AbstractServer {
 								
 								break;
 
-							case JsonParser.TIMER: 
+							case JsonParser.TIMER:
+								String[] timerLines = JsonParser.parseTimerRequest(line);
+								teamName = timerLines[0];
+								int minutes = Integer.parseInt(timerLines[1]);
+								int seconds = Integer.parseInt(timerLines[2]);
+								totalMillis = TimerFormatter.getMillis(minutes, seconds);
+								startTimer(teamName);
+								
 								//TODO
 								break;
 							default:
@@ -165,11 +182,32 @@ public class JsonServer extends AbstractServer {
 		return sentMessages;
 	}
 
-	// public String getLastMessage() {
-	//
-	// ArrayList<String> messages = chatStorer.getMessages();
-	//
-	// return messages.get(messages.size() - 1);
-	// }
+	private void startTimer(final String teamName) {
+		
+		
+		timer = new Timer(TOTAL_MILLIS, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(totalMillis==0) {
+					timer.stop();
+				}
+				try {
+					int [] vet = TimerFormatter.getTimeStamp(totalMillis);
+					String lineTimer = JsonMaker.timerRequest(teamName, vet[0], vet[1]); //minuti, secondi
+					propagateMessageToTeamClients(lineTimer, clientMap.get(teamName));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				totalMillis -= TOTAL_MILLIS;
+
+			}
+		});
+
+		timer.setInitialDelay(0);
+		timer.start();
+		
+	}
 
 }

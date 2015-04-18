@@ -9,6 +9,7 @@ import java.net.Socket;
 
 import server.model.JsonParser;
 import string.formatter.Formatter;
+import timer.TimerFormatter;
 
 /**
  * A client of the chat system, it sends and receives messages of one or more 
@@ -100,13 +101,17 @@ public class Client2 {
 					case JsonParser.CHAT:
 						String[] lines = JsonParser
 								.parseChatRequest(read);
-						//String teamName = lines[0];
 						String message = lines[1];
 						System.out.println("Sono nel client " + message);
 						break;
 
 					case JsonParser.TIMER: 
-						//TODO
+						lines = JsonParser
+						.parseTimerRequest(read);
+						String timeStamp = 
+								TimerFormatter.getDisplay(Integer.parseInt(lines[1]),
+								Integer.parseInt(lines[2]));
+						System.out.println(timeStamp);
 						break;
 					default:
 						break;

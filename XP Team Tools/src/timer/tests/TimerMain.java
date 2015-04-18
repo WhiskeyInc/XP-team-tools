@@ -9,7 +9,7 @@ public class TimerMain {
 	public static void main(String[] args) {
 		
 		TimerModel model = new TimerModel(3000);
-		model.startTimer();
+		model.startTimer("");
 		
 		JFrame frame = new JFrame();
 		frame.setVisible(true);

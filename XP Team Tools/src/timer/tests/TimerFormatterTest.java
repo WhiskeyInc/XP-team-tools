@@ -10,10 +10,10 @@ public class TimerFormatterTest {
 
 	@Test
 	public void test() {
-		assertEquals(TimerFormatter.getTimeStamp(500000), "08 : 20");
-		assertEquals(TimerFormatter.getTimeStamp(100000), "01 : 40");
-		assertEquals(TimerFormatter.getTimeStamp(10000), "00 : 10");
-		
+		assertEquals(TimerFormatter.getDisplay(8, 20), "08 : 20");
+		assertEquals(TimerFormatter.getDisplay(1, 40), "01 : 40");
+		assertEquals(TimerFormatter.getDisplay(0, 10), "00 : 10");
+//		
 	}
 	
 

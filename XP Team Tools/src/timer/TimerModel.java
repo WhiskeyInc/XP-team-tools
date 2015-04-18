@@ -9,26 +9,26 @@ public class TimerModel {
 
 	private Timer timer;
 	private String timeStamp;
-	public static final int TOTAL_SECONDS = 1000;
-	private long totalTime;
+	public static final int TOTAL_MILLIS = 1000;
+	private long totalMillis;
 	private boolean isChanged = false;
 	
-	public TimerModel(long totalTime) {
-		this.totalTime = totalTime;
+	public TimerModel(long totalMillis) {
+		this.totalMillis = totalMillis;
 	}
 
-	public void startTimer() {
+	public void startTimer(String teamName) {
 		
-
-		
-		timer = new Timer(TOTAL_SECONDS, new ActionListener() {
+		timer = new Timer(TOTAL_MILLIS, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(totalTime==0) timer.stop();
-				timeStamp = TimerFormatter.getTimeStamp(totalTime);
+				if(totalMillis==0) {
+					timer.stop();
+				}
+			//	timeStamp = TimerFormatter.getTimeStamp(totalMillis);
 				isChanged = true;
-				totalTime -= TOTAL_SECONDS;
+				totalMillis -= TOTAL_MILLIS;
 				System.out.println(timeStamp);
 			}
 		});

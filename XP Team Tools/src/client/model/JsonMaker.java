@@ -35,7 +35,6 @@ public class JsonMaker {
 		json.put(TEAM_NAME, teamName);
 		json.put(MINUTES, minutes);
 		json.put(SECONDS, seconds);
-		
 		return json.toString();
 	}
 

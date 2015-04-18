@@ -11,7 +11,7 @@ public class TimerModelTest {
 	@Test
 	public void test() {
 		TimerModel model = new TimerModel(3000);
-		model.startTimer();
+		model.startTimer("");
 	}
 
 }
