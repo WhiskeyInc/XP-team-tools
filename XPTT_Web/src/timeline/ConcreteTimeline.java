@@ -24,7 +24,6 @@ public class ConcreteTimeline implements Timeline {
 				.getInstance();
 		Event event = new Event(CREATION_EVENT, CREATION_EVENT_ID,
 				creationDate, false);
-		System.out.println(event.getId());
 		events.put(event.getId(), event);
 	}
 
@@ -53,7 +52,6 @@ public class ConcreteTimeline implements Timeline {
 		}
 		validateDate(event.getDate());
 		this.events.put(event.getId(), event);
-		System.out.println(nextEventId);
 		updateNextEventId();
 	}
 
