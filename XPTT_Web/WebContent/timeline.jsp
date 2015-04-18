@@ -53,7 +53,7 @@
 								<%
 									if (!event.isEditable()) {
 								%>
-								<h3 class="timeline-header text-purple">
+								<h3 class="timeline-header text-blue">
 									<%=event.toString()%>
 								</h3>
 								<%
@@ -79,9 +79,18 @@
 										if (event.isEditable()) {
 									%>
 									<div class="btn-group btn-group-sm" role="group">
-										<button class="btn btn-danger" onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.toString()%>' )"> <i class="fa fa-times"></i> Delete</button>
-										<button class="btn btn-warning" onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )"> <i class="fa fa-clock-o"></i> Move</button>
-										<button class="btn btn-success" onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )"><i class="fa fa-user-plus"></i> Add Participant</button>
+										<button class="btn btn-danger"
+											onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											<i class="fa fa-times"></i> Delete
+										</button>
+										<button class="btn btn-warning"
+											onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											<i class="fa fa-clock-o"></i> Move
+										</button>
+										<button class="btn btn-success"
+											onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											<i class="fa fa-user-plus"></i> Add Participant
+										</button>
 									</div>
 									<%
 										}
@@ -103,9 +112,11 @@
 	<br>
 	<br>
 	<div align="center">
-		<a class="btn btn-primary btn-xl" href="eventAdder.jsp">Add an
-			Event</a>
+		<button class="btn btn-primary" onclick="showEventAdditionForm('adder')">
+			<i class="fa fa-plus"></i> Add a new Event
+		</button>
 	</div>
+	<div id="adder"></div>
 	<!-- /.container -->
 
 	<!--Core JavaScript file  -->

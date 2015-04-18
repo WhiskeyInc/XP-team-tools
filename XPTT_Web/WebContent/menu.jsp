@@ -27,7 +27,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="home.html">xTrEAM </a>
+			<a class="navbar-brand" href="home.jsp">xTrEAM</a>
 		</div>
 		<!-- Collect the nav links for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -44,7 +44,6 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
 	<script src="js/bootstrap.js"></script>
-	<font color="red">pageName</font>
 </body>
 </html>
 <%!private String page(String pageName, HttpServletRequest request) {
