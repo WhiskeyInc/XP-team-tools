@@ -15,7 +15,7 @@ import string.formatter.Formatter;
  * 
  * @author alberto
  */
-public class Client {
+public class Client2 {
 
 	private Socket clientSocket;
 	private String nickname;
@@ -23,19 +23,20 @@ public class Client {
 	private DataOutputStream os;
 	private DataInputStream is;
 	
-	public Client() {
+	
+	public Client2() {
 		super();
 		
 	}
 
-	public Client(String nickname) {
+	public Client2(String nickname) {
 		super();
 		this.nickname = nickname;
 	}
 	
 	
 
-	public Client(String nickname, String teamName) {
+	public Client2(String nickname, String teamName) {
 		super();
 		this.nickname = nickname;
 		this.teamName = teamName;
@@ -51,7 +52,7 @@ public class Client {
 			clientSocket = new Socket(hostName, port);
 			os = new DataOutputStream(clientSocket.getOutputStream());
 			is = new DataInputStream(clientSocket.getInputStream());
-			os.writeBytes(Formatter.appendNewLine(Formatter.markMessage(teamName)));
+			os.writeBytes(Formatter.appendNewLine((teamName)));
 			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,6 +60,8 @@ public class Client {
 	}
 
 
+	
+	
 	/**
 	 * Sends a string message to the server to which it is connected 
 	 * @param message Message to send
@@ -67,8 +70,8 @@ public class Client {
 		message = Formatter.appendNewLine(message);
 		if (clientSocket != null && os != null && is != null) {
 			try {
-				os.writeBytes(Formatter.markMessage(teamName));
-				os.writeBytes(Formatter.formatNickname(nickname));
+				//os.writeBytes(Formatter.markMessage(teamName));
+				//os.writeBytes(Formatter.formatNickname(nickname));
 				os.writeBytes(message);
 				os.flush();
 			} catch (Exception e) {

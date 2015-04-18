@@ -23,7 +23,7 @@ public class FormatterTest {
 
 	@Test
 	public void testDistinguishableMessage() throws Exception {
-		assertEquals(Formatter.makeMessageDistinguishable("Ciao"), "Ciao" + Formatter.SECRET_CODE);
+		assertEquals(Formatter.markMessage("Ciao"), "Ciao" + Formatter.SECRET_CODE);
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class FormatterTest {
 	
 	@Test
 	public void testContains() throws Exception {
-		String hidden = Formatter.makeMessageDistinguishable("Ciao");
+		String hidden = Formatter.markMessage("Ciao");
 		assertTrue(hidden.contains(Formatter.SECRET_CODE));
 		assertFalse(hidden.contains("@#C"));
 	}
