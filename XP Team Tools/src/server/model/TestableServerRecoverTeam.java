@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,7 +64,7 @@ public class TestableServerRecoverTeam extends AbstractServer {
 	}
 
 	private String groupByTeam() throws IOException {
-		String teamName = getLine(in);
+		String teamName = in.readLine(); //TODO to test if it works; if not, see testableserverrecover
 		teamName = Formatter.removeSecretCode(teamName);
 		System.out.println(teamName);
 		if (clientMap.containsKey(teamName)) {
@@ -93,13 +92,15 @@ public class TestableServerRecoverTeam extends AbstractServer {
 
 	private Runnable getRunnable() {
 		Runnable runnable = new Runnable() {
+			final BufferedReader input = in;
+
 
 			@Override
 			public void run() {
 				while (true) {
 					try {
 
-						String line = getLine(in);
+						String line = input.readLine();
 						if (line != null) {
 							String[] lines = line.split(Formatter.SECRET_CODE);
 
@@ -122,12 +123,6 @@ public class TestableServerRecoverTeam extends AbstractServer {
 
 		};
 		return runnable;
-	}
-
-	private String getLine(BufferedReader in) throws IOException {
-		String line;
-		line = in.readLine();
-		return line;
 	}
 
 	private void propagateMessageToTeamClients(String message,

@@ -67,9 +67,7 @@ public class Client {
 		message = Formatter.appendNewLine(message);
 		if (clientSocket != null && os != null && is != null) {
 			try {
-				os.writeBytes(Formatter.markMessage(teamName));
-				os.writeBytes(Formatter.formatNickname(nickname));
-				os.writeBytes(message);
+				os.writeBytes(Formatter.markMessage(teamName) + Formatter.formatNickname(nickname) + message);
 				os.flush();
 			} catch (Exception e) {
 

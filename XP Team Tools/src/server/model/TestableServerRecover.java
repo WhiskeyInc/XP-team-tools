@@ -70,14 +70,14 @@ public class TestableServerRecover extends AbstractServer {
 
 	private Runnable getRunnable() {
 		Runnable runnable = new Runnable() {
-
+			final BufferedReader input = in;
 			@Override
 			public void run() {
 				while (true) {
 					try {
 
-						String line = getLine(in);
-
+						String line = input.readLine();	
+						
 						if (line != null) {
 							System.out.println(line); // TODO
 							chatStorer.storeMessage(null, line);
@@ -93,11 +93,11 @@ public class TestableServerRecover extends AbstractServer {
 		return runnable;
 	}
 
-	private String getLine(BufferedReader in) throws IOException {
-		String line;
-		line = in.readLine();
-		return line;
-	}
+//	private String getLine(BufferedReader in) throws IOException {
+//		String line;
+//		line = in.readLine();
+//		return line;
+//	}
 
 	private void propagateMessageToAllClients(String message)
 			throws IOException {

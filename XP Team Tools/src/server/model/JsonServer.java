@@ -74,7 +74,7 @@ public class JsonServer extends AbstractServer {
 	}
 
 	private String groupByTeam() throws IOException {
-		String teamName = getLine(in);
+		String teamName = getLine(in); //TODO
 		System.out.println(teamName);
 		if (clientMap.containsKey(teamName)) {
 			clientMap.get(teamName).add(clientSocket);
@@ -101,13 +101,14 @@ public class JsonServer extends AbstractServer {
 
 	private Runnable getRunnable() {
 		Runnable runnable = new Runnable() {
+			final BufferedReader input = in;
 
 			@Override
 			public void run() {
 				while (true) {
 					try {
 
-						String line = getLine(in);
+						String line = getLine(input);
 						if (line != null) {
 							int request = JsonParser.getRequest(line);
 							switch (request) {
