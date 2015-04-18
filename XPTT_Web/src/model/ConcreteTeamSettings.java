@@ -70,6 +70,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 		return false;
 	}
 
+
 	public void addTeamMember(String... member)
 			throws NameAlreadyInUseException {
 		for (int i = 0; i < member.length; i++) {

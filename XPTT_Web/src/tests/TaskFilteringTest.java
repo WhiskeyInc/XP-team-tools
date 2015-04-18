@@ -63,6 +63,7 @@ public class TaskFilteringTest {
 
 	@Test
 	public void DeveloperTaskFilterTest() throws Exception {
+		settings.setManager(manager);
 		settings.addTeamMember("Simone");
 		settings.addTeamMember("Emanuele");
 		settings.addTeamMember("Alessandro");

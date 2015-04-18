@@ -33,10 +33,9 @@ public class ConcreteUserStoriesManager implements UserStoriesManager {
 	 * java.lang.String)
 	 */
 	@Override
-	public void addUserStory(String userStoryName, String description)
+	public void addUserStory(UserStory userStory)
 			throws NameAlreadyInUseException {
-		validateName(userStoryName);
-		UserStory userStory = new UserStory(userStoryName, description);
+		validateName(userStory.toString());
 		stories.put(userStory.toString(), userStory);
 	}
 

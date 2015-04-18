@@ -49,10 +49,10 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	 * @see boards.UserStoriesManager#addUserStory(java.lang.String,
 	 * java.lang.String)
 	 */
-	public void addUserStory(String storyName, String description)
+	public void addUserStory(UserStory userStory)
 			throws NameAlreadyInUseException {
-		userStoriesManager.addUserStory(storyName, description);
-		teamManager.userStoryAdded(this.getUserStory(storyName));
+		userStoriesManager.addUserStory(userStory);
+		teamManager.userStoryAdded(this.getUserStory(userStory.toString()));
 
 	}
 

@@ -64,29 +64,33 @@ public class TeamManagerTest {
 	
 	@Test
 	public void developersAddedTest() throws Exception {
+		settings.setManager(teamManager);
 		settings.addTeamMember("Simo", "Lele", "Ale", "Andre");
 		teamManager.developersAdded(new Task("Timeline"), "Lele", "Ale");
-		assertEquals(2, timeline.getEventsNumber());
+		assertEquals(3, timeline.getEventsNumber());
 		assertEquals("Developers added to task Timeline: Lele Ale ", timeline.getEvent("Developers added to task Timeline: Lele Ale ").toString());
 	}
 	
 	@Test
 	public void userStoryAddedTest() throws Exception {
-		teamManager.userStoryAdded(new UserStory("Timeline"));
+		TaskManager taskmanager = new ConcreteTaskManager();
+		teamManager.userStoryAdded(new UserStory("Timeline",taskmanager));
 		assertEquals(2, timeline.getEventsNumber());
 		assertEquals("Created userstory: Timeline", timeline.getEvent("Created userstory: Timeline").toString());
 		}
 	
 	@Test
 	public void userStoryDeletedTest() throws Exception {
-		teamManager.userStoryDeleted(new UserStory("Timeline"));
+		TaskManager taskmanager = new ConcreteTaskManager();
+		teamManager.userStoryDeleted(new UserStory("Timeline",taskmanager));
 		assertEquals(2, timeline.getEventsNumber());
 		assertEquals("Deleted userstory: Timeline", timeline.getEvent("Deleted userstory: Timeline").toString());
 	}
 
 	@Test
 	public void priorityChangedTest() throws Exception {
-		teamManager.userStoryPriorityChanged(new UserStory("Timeline"), 0);
+		TaskManager taskmanager = new ConcreteTaskManager();
+		teamManager.userStoryPriorityChanged(new UserStory("Timeline",taskmanager), 0);
 		assertEquals(2, timeline.getEventsNumber());
 		System.err.println(timeline.getEvents(new NoFilter<Event>()).get(1).toString());
 		assertEquals("Changed priority of userstory: Timeline: now it is 0", timeline.getEvent("Changed priority of userstory: Timeline: now it is 0").toString());
@@ -94,8 +98,9 @@ public class TeamManagerTest {
 	
 	@Test
 	public void userStoryStateChangedTest() throws Exception {
+		TaskManager taskmanager = new ConcreteTaskManager();
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
-		teamManager.userStoryStateChanged(new UserStory("Timeline"), "DONE");
+		teamManager.userStoryStateChanged(new UserStory("Timeline",taskmanager), "DONE");
 		assertEquals(2, timeline.getEventsNumber());
 		assertEquals("Changed state of userstory Timeline: now it is DONE", timeline.getEvent("Changed state of userstory Timeline: now it is DONE").toString());
 	}	
@@ -124,7 +129,8 @@ public class TeamManagerTest {
 
 	@Test
 	public void UserStoriesStateCheckTest01() throws Exception {
-		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		TaskManager taskmanager = new ConcreteTaskManager();
+		userStoriesBoard.addUserStory(new UserStory("Timeline", "Voglio un pannello che...",taskmanager));
 		try {
 			userStoriesBoard.moveUserStoryToState("Timeline", "ACCOMPLISHED");
 			fail();
@@ -135,7 +141,8 @@ public class TeamManagerTest {
 
 	@Test
 	public void UserStoriesStateCheckTest02() throws Exception {
-		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		TaskManager taskmanager = new ConcreteTaskManager();
+		userStoriesBoard.addUserStory(new UserStory("Timeline", "Voglio un pannello che...",taskmanager));
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
 		try {
 			userStoriesBoard.moveUserStoryToState("Timeline", "DONE");
@@ -146,7 +153,8 @@ public class TeamManagerTest {
 	
 	@Test
 	public void UserStoriesPriorityCheckTest01() throws Exception {
-		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		TaskManager taskmanager = new ConcreteTaskManager();
+		userStoriesBoard.addUserStory(new UserStory("Timeline", "Voglio un pannello che...",taskmanager));
 		try {
 			userStoriesBoard.changeStoryPriority("Timeline", 11);
 			fail();
@@ -157,7 +165,8 @@ public class TeamManagerTest {
 	
 	@Test
 	public void UserStoriesPriorityCheckTest02() throws Exception {
-		userStoriesBoard.addUserStory("Timeline", "Voglio un pannello che...");
+		TaskManager taskmanager = new ConcreteTaskManager();
+		userStoriesBoard.addUserStory(new UserStory("Timeline", "Voglio un pannello che...",taskmanager));
 		try {
 			userStoriesBoard.changeStoryPriority("Timeline", 10);
 		} catch (InvalidPriorityException e) {
@@ -168,6 +177,7 @@ public class TeamManagerTest {
 	@Test
 	public void participantAdditionFailsWhenInvalidParticipant()
 			throws Exception {
+		settings.setManager(teamManager);
 		settings.addTeamMember("sumo");
 		try {
 			taskBoard.addDevelopersToTask("Timeline", "ziobrando");

@@ -1,6 +1,6 @@
 package boards.UserStoryBoard;
 
-import boards.taskBoard.ConcreteTaskManager;
+
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
 import model.exceptions.NameAlreadyInUseException;
@@ -21,20 +21,23 @@ public class UserStory implements Comparable<UserStory> {
 	private String description;
 	private String state;
 	private int priority;
-	// TODO: very bad dependency to a concrete class
-	private TaskManager taskManager = new ConcreteTaskManager();
+	private TaskManager taskManager;
 
 	/**
 	 * Creates a new instance of this class
 	 * 
 	 * @param title
 	 *            : a string to identify the story
+	 * @param taskManager
+	 * 			  : an implementation of TaskManager interface, so that we can add, remove and
+	 *              edit task from this story
 	 */
-	public UserStory(String title) {
+	public UserStory(String title, TaskManager taskManager) {
 		this.state = "TODO";
 		this.description = "";
 		this.title = title;
 		this.priority = MINPRIORITY;
+		this.taskManager = taskManager;
 	}
 
 	/**
@@ -45,14 +48,19 @@ public class UserStory implements Comparable<UserStory> {
 	 * @param description
 	 *            : a short string description to make story's details more
 	 *            clear
+	 * @param taskManager
+	 * 			  : an implementation of TaskManager interface, so that we can add, remove and
+	 *              edit task from this story
 	 */
-	public UserStory(String title, String description) {
+	public UserStory(String title, String description, TaskManager taskManager) {
 		this.state = "TODO";
 		this.description = description;
 		this.title = title;
 		this.priority = MINPRIORITY;
+		this.taskManager = taskManager;
 	}
 
+	
 	/**
 	 * Returns a description for this story
 	 * 

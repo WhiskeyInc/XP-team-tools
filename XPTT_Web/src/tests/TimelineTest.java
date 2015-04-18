@@ -176,7 +176,7 @@ public class TimelineTest {
 		timeline.addEvent(new Event("Terzo", new GregorianCalendar(2020, 2, 2,
 				2, 2, 2)));
 		timeline.addEvent(new Event("Secondo", new GregorianCalendar(2020, 2,
-				2, 2, 2, 1)));
+				2, 2, 1, 1)));
 		assertEquals("Secondo" + "Terzo",
 				timeline.getEvents(new NoFilter<Event>()).get(1).toString()
 						+ timeline.getEvents(new NoFilter<Event>()).get(2)

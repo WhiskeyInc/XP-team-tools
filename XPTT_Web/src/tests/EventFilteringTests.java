@@ -86,12 +86,12 @@ public class EventFilteringTests {
 				"OtherEvent" + "SomeEvent somewhere...",
 				timeline.getEvents(
 						new TargetFilter<Event>(new NameEventChecker("Event")))
-						.get(0).toString()
+						.get(1).toString()
 						+ timeline
 								.getEvents(
 										new TargetFilter<Event>(
 												new NameEventChecker("Event")))
-								.get(1).toString());
+								.get(0).toString());
 	}
 
 }

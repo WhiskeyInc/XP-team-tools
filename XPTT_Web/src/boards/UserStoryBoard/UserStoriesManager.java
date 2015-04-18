@@ -23,14 +23,12 @@ public interface UserStoriesManager {
 	/**
 	 * Adds a new story to the collection
 	 * 
-	 * @param storyName
-	 *            : the name of the story
-	 * @param description
-	 *            : a short string description to make details more clear
+	 * @param userStory
+	 *            : the new story we want to add to the collection
 	 * @throws NameAlreadyInUseException
 	 *             : if storyName matches with an existing story
 	 */
-	public void addUserStory(String storyName, String description)
+	public void addUserStory(UserStory userStory)
 			throws NameAlreadyInUseException;
 
 	/**
