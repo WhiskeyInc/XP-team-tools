@@ -26,22 +26,25 @@ public class TimelineTest {
 
 	@Test
 	public void addEventTest() throws InvalidDateException {
-		timeline.addEvent("Briefing",true, new GregorianCalendar(2050, 12, 22, 13,13,13),null);
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
+				22, 13, 13, 13), true));
 		assertEquals(2, timeline.getEventsNumber());
 	}
 
 	@Test
 	public void deleteEventTest() throws InvalidDateException,
 			NoSuchEventException {
-		timeline.addEvent("Briefing",true,new GregorianCalendar(2050, 12, 22, 13,13,13),null);
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
+				22, 13, 13, 13), true));
 		timeline.deleteEvent(1);
-		assertEquals(2, timeline.getEventsNumber());
+		assertEquals(1, timeline.getEventsNumber());
 	}
 
 	@Test
 	public void dateDisplayTest() throws InvalidDateException,
 			NoSuchEventException {
-		timeline.addEvent("Briefing",true, new GregorianCalendar(2050, 12, 22, 13,13,13),null );
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
+				22, 13, 13, 13), true));
 		assertEquals(new GregorianCalendar(2050, 12, 22, 13, 13, 13), timeline
 				.getEvent(1).getDate());
 	}
@@ -49,18 +52,17 @@ public class TimelineTest {
 	@Test
 	public void timeChangeTest() throws InvalidDateException,
 			NoSuchEventException, UnEditableEventException {
-		timeline.addEvent("Riunione sulla timeline",true,
-				new GregorianCalendar(2020, 02, 20, 23, 3, 50),null);
-		timeline.moveEvent(1, new GregorianCalendar(
-				2020, 02, 20, 23, 3, 50));
+		timeline.addEvent(new Event("Riunione sulla timeline",
+				new GregorianCalendar(2020, 02, 20, 23, 3, 50), true));
+		timeline.moveEvent(1, new GregorianCalendar(2020, 02, 20, 23, 3, 50));
 		assertEquals(new GregorianCalendar(2020, 02, 20, 23, 3, 50), timeline
 				.getEvent(1).getDate());
 	}
 
 	@Test
 	public void participantAdditionTest() throws Exception {
-		timeline.addEvent("Briefing",true, new GregorianCalendar(2020, 02,
-				20, 23, 3, 50),null);
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
+				20, 23, 3, 50), true));
 		timeline.getEvent(1).addParticipant("Simone Colucci");
 		assertTrue(timeline.getEvent(1).getParticipants()
 				.contains("Simone Colucci"));
@@ -68,14 +70,14 @@ public class TimelineTest {
 
 	@Test
 	public void getEventsOrderedTest() throws Exception {
-		timeline.addEvent("Briefing",true, new GregorianCalendar(2035, 05,
-				20, 23, 3, 50),null);
-		timeline.addEvent("Setting",true, new GregorianCalendar(2035, 05,
-				20, 22, 3, 50),null);
-		timeline.addEvent("Meeting",true, new GregorianCalendar(2040, 02,
-				20, 23, 3, 50),null);
-		timeline.addEvent("Something else...",true, new GregorianCalendar(
-				2030, 03, 30, 23, 3, 50),null);
+		timeline.addEvent(new Event("Briefing",new GregorianCalendar(2035, 05,
+				20, 23, 3, 50),true));
+		timeline.addEvent(new Event("Setting",new GregorianCalendar(2035, 05,
+				20, 22, 3, 50),true));
+		timeline.addEvent(new Event("Meeting",new GregorianCalendar(2040, 02,
+				20, 23, 3, 50),true));
+		timeline.addEvent(new Event("Something else...",new GregorianCalendar(
+				2030, 03, 30, 23, 3, 50),true));
 		assertEquals("creation" + "Something else..." + "Setting" + "Briefing"
 				+ "Meeting", timeline.getEvents(new NoFilter<Event>()).get(4)
 				.toString()
@@ -88,15 +90,15 @@ public class TimelineTest {
 	@Test
 	public void noDateBeforeCreation() {
 		try {
-			timeline.addEvent("Test",true, new GregorianCalendar(2015, 01,
-					29, 02, 02, 02),null);
+			timeline.addEvent(new Event("Test",new GregorianCalendar(2015, 01, 29,
+					02, 02, 02), true));
 			fail();
 		} catch (InvalidDateException e) {
 			assertTrue(true);
 		}
 		try {
-			timeline.addEvent("Test",true, new GregorianCalendar(2020, 01,
-					29, 02, 02, 02),null);
+			timeline.addEvent(new Event("Test",new GregorianCalendar(2020, 01, 29,
+					02, 02, 02), true));
 			assertTrue(true);
 		} catch (InvalidDateException e) {
 			fail();
@@ -118,15 +120,14 @@ public class TimelineTest {
 			assertTrue(true);
 		}
 		try {
-			timeline.moveEvent(3, new GregorianCalendar(2020, 1, 1,
-					1, 1, 1));
+			timeline.moveEvent(3, new GregorianCalendar(2020, 1, 1, 1, 1, 1));
 			fail();
 		} catch (NoSuchEventException e) {
 			assertTrue(true);
 		}
 
-		timeline.addEvent("Esisto",true, new GregorianCalendar(2020, 1, 1,
-				1, 1, 1),null);
+		timeline.addEvent(new Event("Esisto",new GregorianCalendar(2020, 1, 1, 1,
+				1, 1), true));
 		try {
 			timeline.getEvent(1);
 			assertTrue(true);
@@ -134,8 +135,7 @@ public class TimelineTest {
 			fail();
 		}
 		try {
-			timeline.moveEvent(1, new GregorianCalendar(2020, 1, 1, 1,
-					1, 1));
+			timeline.moveEvent(1, new GregorianCalendar(2020, 1, 1, 1, 1, 1));
 			assertTrue(true);
 		} catch (NoSuchEventException e) {
 			fail();
@@ -151,18 +151,16 @@ public class TimelineTest {
 	@Test
 	public void unMovableEventTest() throws InvalidDateException,
 			NoSuchEventException {
-		timeline.addEvent("Timeline",true, new GregorianCalendar(2020, 2,
-				2, 2, 2, 2),null);
+		timeline.addEvent(new Event("Timeline",new GregorianCalendar(2020, 2, 2,
+				2, 2, 2), true));
 		try {
-			timeline.moveEvent(0, new GregorianCalendar(2020, 2, 2, 2,
-					2, 2));
+			timeline.moveEvent(0, new GregorianCalendar(2020, 2, 2, 2, 2, 2));
 			fail();
 		} catch (UnEditableEventException e) {
 			assertEquals(1, 1);
 		}
 		try {
-			timeline.moveEvent(1, new GregorianCalendar(2030, 3, 3, 3,
-					3, 3));
+			timeline.moveEvent(1, new GregorianCalendar(2030, 3, 3, 3, 3, 3));
 		} catch (UnEditableEventException e) {
 			fail();
 		}
@@ -170,10 +168,10 @@ public class TimelineTest {
 
 	@Test
 	public void eventComparationTest() throws Exception {
-		timeline.addEvent("Terzo",true, new GregorianCalendar(2020, 2, 2,
-				2, 2, 2),null);
-		timeline.addEvent("Secondo",true, new GregorianCalendar(2020, 2,
-				2, 2, 1, 1),null);
+		timeline.addEvent(new Event("Terzo", new GregorianCalendar(2020, 2, 2, 2,
+				2, 2), true));
+		timeline.addEvent(new Event("Secondo", new GregorianCalendar(2020, 2, 2, 2,
+				1, 1), true));
 		assertEquals("Terzo" + "Secondo",
 				timeline.getEvents(new NoFilter<Event>()).get(0).toString()
 						+ timeline.getEvents(new NoFilter<Event>()).get(1)

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.exceptions.InvalidDateException;
+import timeline.Event;
 
 public class EventAdder extends DateHandlerAction {
 
@@ -26,9 +27,9 @@ public class EventAdder extends DateHandlerAction {
 
 	private void addEventToTimeline(HttpServletRequest request) {
 		try {
-			super.getTimeline(request).addEvent(
-					request.getParameter("eventName"), true,
-					super.generateEventDate(request), null);
+			super.getTimeline(request).addEvent(new Event(
+					request.getParameter("eventName"),
+					super.generateEventDate(request), true));
 		} catch (InvalidDateException e) {
 			e.printStackTrace();
 		}

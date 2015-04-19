@@ -67,14 +67,12 @@ public class TeamManagerTest {
 		settings.setManager(teamManager);
 		settings.addTeamMember("Simo", "Lele", "Ale", "Andre");
 		teamManager.developersAdded(new Task("Timeline"), "Lele", "Ale");
-		timeline.addEvent("Evento nuovo", true,new GregorianCalendar(2050, 11, 15, 22, 22, 22), null);
+		timeline.addEvent(new Event("Evento nuovo", new GregorianCalendar(2050,
+				11, 15, 22, 22, 22), true));
 		assertEquals(4, timeline.getEventsNumber());
 		assertEquals("Developers added to task Timeline: Lele Ale ", timeline
-				.getEvent(2)
-				.toString());
-		assertEquals("Evento nuovo", timeline
-				.getEvent(3)
-				.toString());
+				.getEvent(2).toString());
+		assertEquals("Evento nuovo", timeline.getEvent(3).toString());
 	}
 
 	@Test
@@ -82,8 +80,8 @@ public class TeamManagerTest {
 		TaskManager taskmanager = new ConcreteTaskManager();
 		teamManager.userStoryAdded(new UserStory("Timeline", taskmanager));
 		assertEquals(2, timeline.getEventsNumber());
-		assertEquals("Created userstory: Timeline",
-				timeline.getEvent(1).toString());
+		assertEquals("Created userstory: Timeline", timeline.getEvent(1)
+				.toString());
 	}
 
 	@Test
@@ -91,8 +89,8 @@ public class TeamManagerTest {
 		TaskManager taskmanager = new ConcreteTaskManager();
 		teamManager.userStoryDeleted(new UserStory("Timeline", taskmanager));
 		assertEquals(2, timeline.getEventsNumber());
-		assertEquals("Deleted userstory: Timeline",
-				timeline.getEvent(1).toString());
+		assertEquals("Deleted userstory: Timeline", timeline.getEvent(1)
+				.toString());
 	}
 
 	@Test
@@ -103,10 +101,8 @@ public class TeamManagerTest {
 		assertEquals(2, timeline.getEventsNumber());
 		System.err.println(timeline.getEvents(new NoFilter<Event>()).get(1)
 				.toString());
-		assertEquals(
-				"Changed priority of userstory: Timeline: now it is 0",
-				timeline.getEvent(1)
-						.toString());
+		assertEquals("Changed priority of userstory: Timeline: now it is 0",
+				timeline.getEvent(1).toString());
 	}
 
 	@Test
@@ -116,10 +112,8 @@ public class TeamManagerTest {
 		teamManager.userStoryStateChanged(
 				new UserStory("Timeline", taskmanager), "DONE");
 		assertEquals(2, timeline.getEventsNumber());
-		assertEquals(
-				"Changed state of userstory Timeline: now it is DONE",
-				timeline.getEvent(1)
-						.toString());
+		assertEquals("Changed state of userstory Timeline: now it is DONE",
+				timeline.getEvent(1).toString());
 	}
 
 	@Test

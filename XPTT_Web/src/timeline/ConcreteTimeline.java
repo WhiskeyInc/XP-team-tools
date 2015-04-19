@@ -22,8 +22,8 @@ public class ConcreteTimeline implements Timeline {
 	public ConcreteTimeline() {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
 				.getInstance();
-		Event event = new Event(CREATION_EVENT, CREATION_EVENT_ID,
-				creationDate, false);
+		Event event = new Event(CREATION_EVENT, creationDate, false);
+		event.setId(CREATION_EVENT_ID);
 		events.put(event.getId(), event);
 	}
 
@@ -43,13 +43,9 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#addEvent(timeline.Event)
 	 */
 	@Override
-	public void addEvent(String eventName, boolean editable,
-			GregorianCalendar date, ArrayList<String> participants)
+	public void addEvent(Event event)
 			throws InvalidDateException {
-		Event event = new Event(eventName, nextEventId, date, editable);
-		if (participants != null) {
-			event.addParticipants(participants);
-		}
+		event.setId(nextEventId);
 		validateDate(event.getDate());
 		this.events.put(event.getId(), event);
 		updateNextEventId();

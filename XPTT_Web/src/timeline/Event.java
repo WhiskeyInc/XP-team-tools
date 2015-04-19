@@ -36,8 +36,7 @@ public class Event implements Comparable<Event> {
 	 * @param date
 	 *            : the date the Event is assumed to take place at.
 	 */
-	public Event(String name, int id, GregorianCalendar date) {
-		this.id = id;
+	public Event(String name, GregorianCalendar date) {
 		this.date = date;
 		this.name = name;
 	}
@@ -54,8 +53,7 @@ public class Event implements Comparable<Event> {
 	 *            : if its value is TRUE, the event can be modified, otherwise
 	 *            it will be forever as specified in the constructor.
 	 */
-	public Event(String name, int id, GregorianCalendar date, boolean editable) {
-		this.id = id;
+	public Event(String name, GregorianCalendar date, boolean editable) {
 		this.date = date;
 		this.name = name;
 		this.editable = editable;
@@ -147,6 +145,10 @@ public class Event implements Comparable<Event> {
 		return this.name;
 	}
 
+	public void setId(int id){
+		this.id=id;
+	}
+	
 	public int getId(){
 		return this.id;
 	}

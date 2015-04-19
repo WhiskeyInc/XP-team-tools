@@ -12,8 +12,7 @@ public interface Timeline {
 
 	public int getEventsNumber();
 
-	public void addEvent(String eventName, boolean editable,
-			GregorianCalendar date, ArrayList<String> participants)
+	public void addEvent(Event event)
 			throws InvalidDateException;
 
 	public void deleteEvent(int eventId) throws NoSuchEventException;
