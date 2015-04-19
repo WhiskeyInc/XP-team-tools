@@ -3,6 +3,8 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -31,10 +33,10 @@ public class TimerUIA extends JPanel {
 		super();
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();
-		dim.setSize(100, 80);
+		dim.setSize(200, 120);
 		timerArea.setPreferredSize(dim);
 		timerArea.setMinimumSize(dim);
-		timerArea.setFont(new Font("TimesRoman", Font.BOLD, 30));
+		timerArea.setFont(new Font("TimesRoman", Font.BOLD, 55));
 		timerArea.setDocument(new FixedSizeDocument());
 		timerArea.getDocument().addDocumentListener(new DocumentListener() {
 			
@@ -57,14 +59,21 @@ public class TimerUIA extends JPanel {
 			}
 		});
 		dim = new Dimension();
-		dim.setSize(70, 80);
+		dim.setSize(200, 40);
 		startButton = new JButton("Start");
 		startButton.setBackground(Color.GREEN);
 		startButton.setPreferredSize(dim);
 		startButton.setMinimumSize(dim);
-		
-		super.add(startButton);
-		super.add(timerArea);
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 0;
+		super.setLayout(layout);
+		super.add(timerArea, lim);
+		lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 1;
+		super.add(startButton, lim);
 	}
 	
 	public void setButtonTimerListener(ActionListener actionListener) {

@@ -21,7 +21,7 @@ import client.model.JsonMaker;
  * @author alberto
  *
  */
-public class JsonConcreteClientMainTimer {
+public class CopyOfJsonConcreteClientMainTimer2 {
 	public static void main(String[] args) {
 		
 
@@ -69,7 +69,7 @@ public class JsonConcreteClientMainTimer {
 		thread.start();
 		
 		JFrame frame = new JFrame();
-		frame.setSize(400, 500);
+		frame.setSize(500, 600);
 		JPanel panel = new JPanel();
 		panel.add(chatUI);
 		panel.add(timerUI);
