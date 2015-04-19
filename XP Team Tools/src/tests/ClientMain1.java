@@ -38,7 +38,7 @@ public class ClientMain1 {
 			}
 		});
 		chatUI.setMessageText("Striscia Bardo!");
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 
 	}
 }

@@ -44,7 +44,7 @@ public class ClientMain2 {
 			}
 		});
 		chatUI.setMessageText("Ehehehe");
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 
 	}
 }

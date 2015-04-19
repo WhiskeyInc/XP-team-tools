@@ -44,7 +44,7 @@ public class ClientServerTests {
 		});
 
 		chatUI.setMessageText(Formatter.appendNewLine("Ciao a tutti!"));
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 		waitTCPSending(server);
 
 		assertEquals(chatUI.getMessage(), Formatter.appendNewLine(server.getLastMessage()));

@@ -40,7 +40,7 @@ public class JsonClient1 {
 			}
 		});
 		chatUI.setMessageText("Striscia Bardo!");
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 
 	}
 }

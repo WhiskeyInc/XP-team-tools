@@ -46,7 +46,7 @@ public class JsonClient2 {
 			}
 		});
 		chatUI.setMessageText("Ehehehe");
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 
 	}
 }

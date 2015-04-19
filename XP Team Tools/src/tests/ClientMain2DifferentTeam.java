@@ -44,7 +44,7 @@ public class ClientMain2DifferentTeam {
 			}
 		});
 		chatUI.setMessageText("E' vero, meglio che strisci tu Incre");
-		chatUI.simulateSendClick();
+		chatUI.simulateSendButtonClick();
 
 	}
 }
