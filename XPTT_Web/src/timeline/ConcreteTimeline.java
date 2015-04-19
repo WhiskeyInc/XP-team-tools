@@ -62,7 +62,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public void deleteEvent(int eventId) throws NoSuchEventException {
-		this.events.remove(this.getEvent(eventId).toString());
+		this.events.remove(this.getEvent(eventId).getId());
 	}
 
 	/*

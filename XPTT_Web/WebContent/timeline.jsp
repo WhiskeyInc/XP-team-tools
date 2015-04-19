@@ -80,15 +80,15 @@
 									%>
 									<div class="btn-group btn-group-sm" role="group">
 										<button class="btn btn-danger"
-											onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
 											<i class="fa fa-trash-o"></i> Delete
 										</button>
 										<button class="btn btn-warning"
-											onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
 											<i class="fa fa-clock-o"></i> Move
 										</button>
 										<button class="btn btn-success"
-											onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.toString()%>' )">
+											onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
 											<i class="fa fa-user-plus"></i> Add Participant
 										</button>
 									</div>

@@ -1,5 +1,5 @@
 var formDisplayed = false;
-function showDateModificationForm(divName, eventName) {
+function showDateModificationForm(divName, eventId) {
 	if (formDisplayed == false) {
 		var newdiv = document.createElement('div');
 		newdiv.innerHTML = "<br>"
@@ -18,8 +18,8 @@ function showDateModificationForm(divName, eventName) {
 				+ "<input type='text' class='form-control' name='eventMin' placeholder='Min' maxlength='2'>"
 				+ "</div>"
 				+ "</div>"
-				+ "<input type='hidden' name='event' value='"
-				+ eventName
+				+ "<input type='hidden' name='eventId' value='"
+				+ eventId
 				+ "'>"
 				+ "<input type='hidden' name='action' value='changeDate'>"
 				+ "<div class='btn-group btn-group-xs' role='group'>"
@@ -31,7 +31,7 @@ function showDateModificationForm(divName, eventName) {
 	}
 }
 
-function showParticipantAdditionForm(divName, eventName) {
+function showParticipantAdditionForm(divName, eventId) {
 	if (formDisplayed == false) {
 		var newdiv = document.createElement('div');
 		newdiv.innerHTML = "<br>"
@@ -42,8 +42,8 @@ function showParticipantAdditionForm(divName, eventName) {
 				+ "<input type='text' class='form-control' name='participant' placeholder='Name'>"
 				+ "</div>"
 				+ "</div>"
-				+ "<input type='hidden' name='event' value='"
-				+ eventName
+				+ "<input type='hidden' name='eventId' value='"
+				+ eventId
 				+ "'>"
 				+ "<input type='hidden' name='action' value='addParticipant'>"
 				+ "<div class='btn-group btn-group-xs' role='group'>"
@@ -55,14 +55,14 @@ function showParticipantAdditionForm(divName, eventName) {
 	}
 }
 
-function showDeleteConfirmForm(divName, eventName) {
+function showDeleteConfirmForm(divName, eventId) {
 	if (formDisplayed == false) {
 		var newdiv = document.createElement('div');
 		newdiv.innerHTML = "<br>"
 				+ "<div class='alert alert-danger'><strong>Warning: this is final!</strong> Are you really sure you want to delete this event?</div>"
 				+ "<form action='TimelineController' method='post' role='form'>"
-				+ "<input type='hidden' name='event' value='"
-				+ eventName
+				+ "<input type='hidden' name='eventId' value='"
+				+ eventId
 				+ "'>"
 				+ "<input type='hidden' name='action' value='deletion'>"
 				+ "<div class='btn-group btn-group-xs' role='group'>"
