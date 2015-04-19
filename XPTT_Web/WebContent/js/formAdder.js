@@ -37,7 +37,7 @@ function showParticipantAdditionForm(divName, eventId) {
 		newdiv.innerHTML = "<br>"
 				+ "<form action='TimelineController' method='post' role='form'>"
 				+ "<div class='form-group'>"
-				+ "<label for='participantAddition'>Add the participant</label>"
+				+ "<label for='participantAddition'>Add the participant:</label>"
 				+ "<div class='input-group'>"
 				+ "<input type='text' class='form-control' name='participant' placeholder='Name'>"
 				+ "</div>"

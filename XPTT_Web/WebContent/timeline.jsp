@@ -11,6 +11,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>xTrEAM - Timeline</title>
@@ -25,8 +26,6 @@
 <link href="css/timeline.css" rel="stylesheet" />
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
-<!-- Adding a form when required -->
-<script src="js/formAdder.js" type="text/javascript"></script>
 </head>
 <body>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
@@ -107,22 +106,31 @@
 			</div>
 
 		</div>
-		<br>
+		<br> <br>
+		<div class="col-md-offset-2 col-md-8 col-sm-12">
+			<button class="btn btn-primary"
+				onclick="showEventAdditionForm('adder')">
+				<i class="fa fa-plus"></i> Add a new Event
+			</button>
+		</div>
+		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder"></div>
 	</div>
-	<br>
-	<br>
-	<div align="center">
-		<button class="btn btn-primary" onclick="showEventAdditionForm('adder')">
-			<i class="fa fa-plus"></i> Add a new Event
-		</button>
-	</div>
-	<div id="adder"></div>
 	<!-- /.container -->
+	<br><br>
+	<footer class="footer">
+		<div class="container">
+			<p class="">
+				<script src="js/last_update.js"></script>
+			</p>
+		</div>
+	</footer>
 
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
 	<script src="js/bootstrap.js"></script>
+	<!-- Adding a form when required -->
+	<script src="js/formAdder.js" type="text/javascript"></script>
 </body>
 </html>
 

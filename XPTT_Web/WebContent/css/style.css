@@ -13,7 +13,13 @@ body {
 	background-color: #99CCFF;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
-	margin-bottom: 30px
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
 }
 
 .nav a {
@@ -50,9 +56,21 @@ h1 {
 p {
 	font-weight: 400;
 	line-height: 29px;
-	padding-bottom: 50px;
+	/*commented because it does not permit to put the footer to the bottom of the page*/
+	/*padding-bottom: 50px;*/
 }
 
 .margin-bot {
 	margin-bottom: 50px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	font-weight: 600;
+	color: #ffffff;
+	background-color: #000000;
 }
