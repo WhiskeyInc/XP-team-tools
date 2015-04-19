@@ -127,7 +127,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<strong>Warning: </strong><%=exception.getMessage()%>
+				<strong><i class="fa fa-exclamation-triangle"></i> Warning: </strong><%=exception.getMessage()%>
 			</div>
 			<%
 				application.removeAttribute("exception");
