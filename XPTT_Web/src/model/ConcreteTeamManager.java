@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import model.exceptions.InvalidDateException;
+import timeline.AutomaticEvent;
 import timeline.Event;
 import timeline.Timeline;
 import boards.UserStoryBoard.UserStory;
@@ -23,8 +24,7 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void taskAdded(Task task) {
 		try {
-			Event event = new Event("Created task: " + task.toString(),
-					(GregorianCalendar) Calendar.getInstance(), false);
+			Event event = new AutomaticEvent("Created task: " + task.toString());
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -35,8 +35,7 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void taskDeleted(Task task) {
 		try {
-			Event event = new Event("Deleted task: " + task.toString(),
-					(GregorianCalendar) Calendar.getInstance(), false);
+			Event event = new AutomaticEvent("Deleted task: " + task.toString());
 			event.addParticipants(task.getDevelopers());
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -47,9 +46,8 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void taskStateChanged(Task task, String newState) {
 		try {
-			Event event = new Event("Changed state of task " + task.toString()
-					+ ". Now it is " + newState,
-					(GregorianCalendar) Calendar.getInstance(), false);
+			Event event = new AutomaticEvent("Changed state of task " + task.toString()
+					+ ". Now it is " + newState);
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -64,9 +62,8 @@ public class ConcreteTeamManager implements TeamManager {
 			developerNames = developerNames + developer + " ";
 		}
 		try {
-			Event event = new Event("Developers added to task "
-					+ task.toString() + ": " + developerNames,
-					(GregorianCalendar) Calendar.getInstance(), false);
+			Event event = new AutomaticEvent("Developers added to task "
+					+ task.toString() + ": " + developerNames);
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
@@ -81,9 +78,8 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void userStoryAdded(UserStory userStory) {
 		try {
-			this.timeline.addEvent(new Event("Created userstory: "
-					+ userStory.toString(), (GregorianCalendar) Calendar
-					.getInstance(), false));
+			this.timeline.addEvent(new AutomaticEvent("Created userstory: "
+					+ userStory.toString()));
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
 		}
@@ -97,9 +93,8 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void userStoryDeleted(UserStory userStory) {
 		try {
-			timeline.addEvent(new Event("Deleted userstory: "
-					+ userStory.toString(), (GregorianCalendar) Calendar
-					.getInstance(), false));
+			timeline.addEvent(new AutomaticEvent("Deleted userstory: "
+					+ userStory.toString()));
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
 		}
@@ -114,9 +109,8 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void userStoryStateChanged(UserStory userStory, String newState) {
 		try {
-			this.timeline.addEvent(new Event("Changed state of userstory "
-					+ userStory.toString() + ": now it is " + newState,
-					(GregorianCalendar) Calendar.getInstance(), false));
+			this.timeline.addEvent(new AutomaticEvent("Changed state of userstory "
+					+ userStory.toString() + ": now it is " + newState));
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
 		}
@@ -130,10 +124,9 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void userStoryPriorityChanged(UserStory userStory, int newPriority) {
 		try {
-			timeline.addEvent(new Event(
+			timeline.addEvent(new AutomaticEvent(
 					"Changed priority of userstory: " + userStory.toString()
-							+ ": now it is " + newPriority,
-					(GregorianCalendar) Calendar.getInstance(),false));
+							+ ": now it is " + newPriority));
 		} catch (InvalidDateException e) {
 			throw new RuntimeException("Fatal Error");
 		}
