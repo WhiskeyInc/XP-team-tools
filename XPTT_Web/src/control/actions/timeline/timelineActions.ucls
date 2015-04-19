@@ -1,65 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="control.actions.timeline.TimelineAction" project="XPTT_Web" 
-    file="/XPTT_Web/src/control/actions/timeline/TimelineAction.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="517" y="75"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="control.actions.timeline.DateHandlerAction" project="XPTT_Web" 
+  <class id="1" language="java" name="control.actions.timeline.DateHandlerAction" project="XPTT_Web" 
     file="/XPTT_Web/src/control/actions/timeline/DateHandlerAction.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="185" y="181"/>    
+    <position height="-1" width="-1" x="205" y="206"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="control.actions.timeline.EventMover" project="XPTT_Web" 
-    file="/XPTT_Web/src/control/actions/timeline/EventMover.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="147" y="392"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="control.actions.timeline.EventAdder" project="XPTT_Web" 
+  <class id="2" language="java" name="control.actions.timeline.EventAdder" project="XPTT_Web" 
     file="/XPTT_Web/src/control/actions/timeline/EventAdder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="396" y="398"/>    
+    <position height="-1" width="-1" x="109" y="375"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="control.actions.timeline.EventDeleter" project="XPTT_Web" 
+  <class id="3" language="java" name="control.actions.timeline.EventDeleter" project="XPTT_Web" 
     file="/XPTT_Web/src/control/actions/timeline/EventDeleter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="839" y="186"/>    
+    <position height="-1" width="-1" x="533" y="208"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="6">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="7">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
+  <class id="4" language="java" name="control.actions.timeline.EventMover" project="XPTT_Web" 
+    file="/XPTT_Web/src/control/actions/timeline/EventMover.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="425" y="357"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="control.actions.timeline.EventParticipantAdder" project="XPTT_Web" 
+    file="/XPTT_Web/src/control/actions/timeline/EventParticipantAdder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="853" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="control.actions.HttpAction" project="XPTT_Web" 
+    file="/XPTT_Web/src/control/actions/HttpAction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="251" y="64"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="control.actions.timeline.TimelineAction" project="XPTT_Web" 
+    file="/XPTT_Web/src/control/actions/timeline/TimelineAction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="615" y="67"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <generalization id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <realization id="9">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <generalization id="10">    
     <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="9">    
-    <end type="SOURCE" refId="2"/>    
+  <generalization id="12">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

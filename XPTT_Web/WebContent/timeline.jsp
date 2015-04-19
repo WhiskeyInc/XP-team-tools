@@ -1,3 +1,5 @@
+<%@page import="model.exceptions.InvalidDateException"%>
+<%@page import="com.sun.media.sound.InvalidDataException"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="filtering.*"%>
@@ -113,13 +115,32 @@
 				<i class="fa fa-plus"></i> Add a new Event
 			</button>
 		</div>
-		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder"></div>
+		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder">
+			<%
+				InvalidDateException exception = (InvalidDateException) application
+						.getAttribute("exception");
+				if (exception != null) {
+			%>
+			<br>
+			<div class='alert alert-danger alert-dismissible' role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Warning: </strong><%=exception.getMessage()%>
+			</div>
+			<%
+				application.removeAttribute("exception");
+				}
+			%>
+		</div>
 	</div>
 	<!-- /.container -->
-	<br><br>
+	<br>
+	<br>
 	<footer class="footer">
 		<div class="container">
-			<p class="">
+			<p>
 				<script src="js/last_update.js"></script>
 			</p>
 		</div>

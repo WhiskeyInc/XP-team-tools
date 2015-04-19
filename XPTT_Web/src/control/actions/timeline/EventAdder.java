@@ -31,7 +31,7 @@ public class EventAdder extends DateHandlerAction {
 					request.getParameter("eventName"),
 					super.generateEventDate(request), true));
 		} catch (InvalidDateException e) {
-			e.printStackTrace();
+			request.getServletContext().setAttribute("exception", e);
 		}
 	}
 }

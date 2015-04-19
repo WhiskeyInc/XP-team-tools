@@ -7,13 +7,12 @@ public class InvalidDateException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public InvalidDateException(GregorianCalendar invalidDate) {
-		super("" + invalidDate.get(GregorianCalendar.YEAR) + "/"
-				+ invalidDate.get(GregorianCalendar.MONTH) + 1 + "/"
-				+ invalidDate.get(GregorianCalendar.DATE) + " "
+		super("" + invalidDate.get(GregorianCalendar.DATE) + "/"
+				+ (invalidDate.get(GregorianCalendar.MONTH) + 1) + "/"
+				+  invalidDate.get(GregorianCalendar.YEAR)+ " "
 				+ invalidDate.get(GregorianCalendar.HOUR_OF_DAY) + ":"
-				+ invalidDate.get(GregorianCalendar.MINUTE) + ":"
-				+ invalidDate.get(GregorianCalendar.SECOND)
-				+ " is not a valid date");
+				+ invalidDate.get(GregorianCalendar.MINUTE)
+				+ " is not a valid date.");
 	}
 
 }
