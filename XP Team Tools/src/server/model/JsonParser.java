@@ -4,6 +4,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * a class that builds the requests sent to the server
+ * @author alberto
+ *
+ */
 public class JsonParser {
 	
 	public static final int CHAT = 1;

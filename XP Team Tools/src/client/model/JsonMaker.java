@@ -2,6 +2,13 @@ package client.model;
 
 import org.json.simple.JSONObject;
 
+/**
+ * this class handles the two possible requests which will be sent to the server
+ * (1 = chat, 2 = timer)
+ * 
+ * @author alberto
+ *
+ */
 public class JsonMaker {
 	
 
@@ -17,6 +24,12 @@ public class JsonMaker {
 	
 	
 	@SuppressWarnings("unchecked")
+	
+	/**
+	 * creates a chat request for the server
+	 * @param teamName
+	 * @param message
+	 */
 	public static String chatRequest(String teamName, String message) {
 		
 		JSONObject json = new JSONObject();
@@ -28,6 +41,13 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
+	
+	/**
+	 * creates a timer request for the server
+	 * @param teamName
+	 * @param minutes
+	 * @param seconds
+	 */
 	public static String timerRequest(String teamName, int minutes, int seconds) {
 		
 		JSONObject json = new JSONObject();
