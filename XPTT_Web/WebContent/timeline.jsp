@@ -17,6 +17,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>xTrEAM - Timeline</title>
+<!--icon shortcut  -->
+<link href="img/favicon.ico" rel="shortcut icon">
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
