@@ -26,7 +26,6 @@ import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
 import boards.taskBoard.TeamTaskManager;
-import filtering.NoFilter;
 
 public class TeamManagerTest {
 
@@ -99,8 +98,6 @@ public class TeamManagerTest {
 		teamManager.userStoryPriorityChanged(new UserStory("Timeline",
 				taskmanager), 0);
 		assertEquals(2, timeline.getEventsNumber());
-		System.err.println(timeline.getEvents(new NoFilter<Event>()).get(1)
-				.toString());
 		assertEquals("Changed priority of userstory: Timeline: now it is 0",
 				timeline.getEvent(1).toString());
 	}

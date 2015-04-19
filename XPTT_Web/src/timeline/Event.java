@@ -145,16 +145,23 @@ public class Event implements Comparable<Event> {
 		return this.name;
 	}
 
-	public void setId(int id){
-		this.id=id;
+	/**
+	 * Let you set the id of an event. The id should be an integer number.
+	 * 
+	 * @param id
+	 *            : the id of the event
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public int getId(){
+
+	/**
+	 * Let you know the id of this event
+	 * 
+	 * @return the id of the event
+	 */
+	public int getId() {
 		return this.id;
 	}
-	
-	public String getName(){
-		return this.name;
-	}
-	
+
 }
