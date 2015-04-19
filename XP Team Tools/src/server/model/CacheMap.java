@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import server.utils.FileWriter;
-import string.formatter.Formatter;
 
 public class CacheMap implements IChatStorer, IMessageRecover {
 
@@ -27,8 +26,8 @@ public class CacheMap implements IChatStorer, IMessageRecover {
 	}
 
 	private void addTeamMessage(String teamName, String message) {
-		String formattedMessage = Formatter.formatMessage(message);
-		mapMessageList.get(teamName).add(formattedMessage);
+	//	String formattedMessage = Formatter.formatMessage(message);
+		mapMessageList.get(teamName).add(message);
 		writeData();
 	}
 

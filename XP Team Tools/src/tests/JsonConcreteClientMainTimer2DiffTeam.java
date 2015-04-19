@@ -19,16 +19,15 @@ import client.model.JsonMaker;
  * @author alberto
  *
  */
-public class CopyOfJsonConcreteClientMainTimer2 {
+public class JsonConcreteClientMainTimer2DiffTeam {
 	public static void main(String[] args) {
-		
 
 
 		UI ui = new UI();
 		final ChatUI chatUI = ui.getChatUI();
 		final TimerUIA timerUI = ui.getTimerUI();
 
-		final AbstractClient client = new ConcreteClient("Alb", "Prova",
+		final AbstractClient client = new ConcreteClient("Alb", "Prova2",
 				chatUI, timerUI);
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {

@@ -1,14 +1,28 @@
-To test server and client' s work, run first ServerMainRecover, then ClientMain1
-To test server and client's work with Recover messages feature, run ServerMainRecover,
- then ClientMain1 and ClientMain2
+Tests TODO before heavy commit:
+-run JsonServeMain
 
-To test the division by team, run first ServerMainRecoverTeam, then ClientMain1 
-and ClientMain2(they are in the same team);
+a) run JsonConcreteClientMainTimer
+   run JsonConcreteClientMainTimer1
+   
+   try if the chat and the timer is ok
 
-If you want test two clients in different teams(That don't communicate between themselves, run first ServerMainRecoverTeam,
- then ClientMain1 and ClientMain2DifferentTeam
+b) run JsonConcreteClientMainTimer
+   write some messages
+   run JsonConcreteClientMainTimer1
+   verify the alignment
+   verify chat and timer' s work
+   
+c) run JsonConcreteClientMainTimer
+   run JsonConcreteClientMainTimer1
+   chat
+   run JsonConcreteClientMainTimer2DiffTeam
+   verify the not alignment
+   verify the chat separation --> the third client's messages don't arrive to the other clients
+   verify the timer as the top
+   
+
+	
  
- 
- TODO: recover-team messages, take care of disconnection part
+ TODO: take care of disconnection part
  
  

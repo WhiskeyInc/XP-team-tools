@@ -40,6 +40,7 @@ public class UI extends JFrame{
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
 		super.getContentPane().add(panel);
 		super.setVisible(true);
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void setChatUI(ActionListener actionListener) {

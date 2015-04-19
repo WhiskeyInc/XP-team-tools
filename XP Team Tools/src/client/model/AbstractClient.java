@@ -95,7 +95,7 @@ public abstract class AbstractClient {
 			while (true) {
 				String read = input.readLine();
 				if(read!= null) {
-					//System.err.println(read);
+					//System.out.println(read);
 					int request = JsonParser.getRequest(read);
 					switch (request) {
 					case JsonParser.CHAT:
