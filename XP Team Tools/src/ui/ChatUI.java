@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class ChatUI extends JPanel{
 	public ChatUI() {
 		createChatArea();
 		messageArea.setLineWrap(true);
+		messageArea.requestFocus();
 		JScrollPane messagePane = createVerticalJScrollPane();
 		
 		GridBagLayout layout = new GridBagLayout();
@@ -144,13 +146,29 @@ public class ChatUI extends JPanel{
 		sendMessage.addActionListener(actionListener);
 	}
 	/**
+	 * Sets the KeyListener on the message text area
+	 * @param actionListener
+	 */
+	public void setEnterListener(KeyListener keyListener) {
+		messageArea.addKeyListener(keyListener);
+		messageArea.requestFocus();
+	}
+	public JTextArea getMessageArea() {
+		return messageArea;
+	}
+	/**
 	 * It return the text of the message area
 	 * @return
 	 */
 	public String getMessage() {
 		return messageArea.getText();
 	}
-	
+	/**
+	 * It empties the message area
+	 */
+	public void emptyMessageArea() {
+		messageArea.setText("");
+	}
 	/**
 	 * It returns the JPanel upon the ChatArea, to allow to add other features
 	 * @return

@@ -1,7 +1,12 @@
 package ui;
 
-public class ChatUITestable extends ChatUI{
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
+public class ChatUITestable extends ChatUI {
+
+	
 	/**
 	 * 
 	 */
@@ -16,7 +21,23 @@ public class ChatUITestable extends ChatUI{
 	/**
 	 * Simulate the click of the sendMessage button [test]
 	 */
-	public void simulateSendClick() {
+	public void simulateSendButtonClick() {
 		sendMessage.doClick();
+	}
+	/**
+	 * Simulate the enter click [test]
+	 */
+	public void simulateSendEnterClick() {
+		try {
+	        Robot robot = new Robot();
+	        
+	        messageArea.requestFocus();
+	        messageArea.requestFocusInWindow();
+	        
+	        robot.keyPress(KeyEvent.VK_ENTER);
+	        robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
 	}
 }
