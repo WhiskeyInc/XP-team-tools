@@ -28,6 +28,9 @@ public class ConcreteClient extends AbstractClient {
 	@Override
 	protected void handleTimeStamp(String timeStamp) {
 		timerUI.setTimer(timeStamp);
+		if(!timeStamp.equals(TimerUIA.ENDTIMER)) {
+			timerUI.setTimerEditable(false);
+		}
 	}
 	
 

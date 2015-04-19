@@ -8,10 +8,12 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 /**
  * The UI of the chat, it extend JPanel
  * @author alberto
@@ -33,6 +35,15 @@ public class ChatUI extends JPanel{
 		createChatArea();
 		messageArea.setLineWrap(true);
 		messageArea.requestFocus();
+		messageArea.setFont(new Font("TimesRoman", Font.ITALIC, 13));
+		messageArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Write a message",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
 		JScrollPane messagePane = createVerticalJScrollPane();
 		
 		GridBagLayout layout = new GridBagLayout();
@@ -46,12 +57,12 @@ public class ChatUI extends JPanel{
 		super.add(topButPanel, lim);
 		
 		setChatPaneConstraints(lim);
-		dim = new Dimension(250, 300);
+		dim = new Dimension(275, 300);
 		JScrollPane chatPane = createResaizableJScrollPane(dim);
 		super.add(chatPane, lim);
 		
 		setMessagePaneConstraints(lim);
-		dim = new Dimension(175, 50);
+		dim = new Dimension(200, 75);
 		messagePane.setMinimumSize(dim);
 		messagePane.setPreferredSize(dim);
 		super.add(messagePane, lim);
@@ -116,6 +127,15 @@ public class ChatUI extends JPanel{
 		chatArea.setEditable(false);
 		chatArea.setLineWrap(true);
 		chatArea.setBackground(new Color(248, 244, 255));
+		chatArea.setFont(new Font("TimesRoman", Font.ITALIC, 16));
+		chatArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Team's Chat",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new Font("Verdana", 1, 11)
+		      ),
+		      BorderFactory.createEmptyBorder(4, 4, 4, 4)
+		   ));
 	}
 	/**
 	 * Set the chat area text
