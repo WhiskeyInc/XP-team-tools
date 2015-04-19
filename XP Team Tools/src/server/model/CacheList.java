@@ -16,9 +16,9 @@ public class CacheList implements IChatStorer, IMessageRecover{
 	}
 
 	@Override
-	public ArrayList<String> getMessages() {
+	public Map<String, ArrayList<String>> getMessages() {
 
-		return messageList;
+		return mapMessageList;
 	}
 
 	@Override

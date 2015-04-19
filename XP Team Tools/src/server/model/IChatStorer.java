@@ -1,6 +1,7 @@
 package server.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Interface of a storer of messages
@@ -18,5 +19,5 @@ public interface IChatStorer {
 	/**
 	 * @return an {@link ArrayList} of messages
 	 */
-	public ArrayList<String> getMessages();
+	public Map<String, ArrayList<String>> getMessages();
 }

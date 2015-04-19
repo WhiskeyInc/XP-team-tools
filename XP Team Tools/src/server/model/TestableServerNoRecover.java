@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import string.formatter.Formatter;
 
@@ -78,7 +80,8 @@ public class TestableServerNoRecover extends AbstractServer {
 		return line;
 	}
 
-	private void propagateMessageToAllClients(String message) throws IOException {
+	private void propagateMessageToAllClients(String message)
+			throws IOException {
 
 		for (Socket socket : clientSocketList) {
 			propagateMessage(message, socket);
@@ -93,9 +96,21 @@ public class TestableServerNoRecover extends AbstractServer {
 		out.flush();
 	}
 
+	/**
+	 * obtains the entire map from chatstorer and extracts all and only messages
+	 * in natural order (!)
+	 * 
+	 * @return
+	 */
+
 	public String getLastMessage() {
 
-		ArrayList<String> messages = chatStorer.getMessages();
+		Map<String, ArrayList<String>> mapMessages = chatStorer.getMessages();
+		Set<String> keys = mapMessages.keySet();
+		ArrayList<String> messages = new ArrayList<String>();
+		for (String key : keys) {
+			messages.addAll(mapMessages.get(key));
+		}
 
 		return messages.get(messages.size() - 1);
 	}

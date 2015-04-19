@@ -23,7 +23,7 @@ public class Conversations {
 	public void addMessage(String team, String author, String message){
 		
 		if (!(conversations.containsKey(team))){
-			//TODO addConv
+			//TODO
 		}else{
 			conversations.get(team).addMessage(author, message);
 		}
@@ -52,11 +52,11 @@ public class Conversations {
 	 * creates new conversation with separated String participant's names
 	 * @param participants
 	 */
-	public String addConversation(String name, String... participants) {
-		if (findConversation(name, participants)) {
+	public String addConversation(String team, String... participants) {
+		if (findConversation(team, participants)) {
 			return "Conv esiste";
 		} else {
-			convs.add(new Conversation(name,participants));
+			convs.add(new Conversation(team,participants));
 			return "Conv NON esiste";
 		}
 	}

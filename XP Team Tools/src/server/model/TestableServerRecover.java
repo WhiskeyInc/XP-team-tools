@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import string.formatter.Formatter;
 
@@ -132,7 +134,12 @@ public class TestableServerRecover extends AbstractServer {
 
 	public String getLastMessage() {
 
-		ArrayList<String> messages = chatStorer.getMessages();
+		Map<String, ArrayList<String>> mapMessages = chatStorer.getMessages();
+		Set<String> keys = mapMessages.keySet();
+		ArrayList<String> messages = new ArrayList<String>();
+		for (String key : keys) {
+			messages.addAll(mapMessages.get(key));
+		}
 
 		return messages.get(messages.size() - 1);
 	}

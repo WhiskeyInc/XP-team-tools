@@ -1,14 +1,15 @@
 package server.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class ConversationGenerator implements IChatStorer {
 
-	private Conversations convs;
+	private Conversations convs = new Conversations();
 	
 	public ConversationGenerator(){
-		Conversations convs = new Conversations();
+		//Conversations convs = new Conversations();
 	}
 	
 	@Override
@@ -34,7 +35,7 @@ public class ConversationGenerator implements IChatStorer {
 	}
 	
 	@Override
-	public ArrayList<String> getMessages() {
+	public Map<String, ArrayList<String>> getMessages() {
 		// TODO Auto-generated method stub
 		return null;
 	}

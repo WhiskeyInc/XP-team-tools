@@ -3,6 +3,7 @@ package tests;
 import server.model.AbstractServer;
 import server.model.CacheMap;
 import server.model.JsonServer;
+import server.utils.FileWriter;
 
 public class JsonServerMain {
 	public static void main(String[] args) {
