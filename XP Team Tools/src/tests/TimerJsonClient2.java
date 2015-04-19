@@ -1,7 +1,6 @@
 package tests;
 
 import client.model.Client2;
-import client.model.JsonMaker;
 
 public class TimerJsonClient2 {
 	public static void main(String[] args) {

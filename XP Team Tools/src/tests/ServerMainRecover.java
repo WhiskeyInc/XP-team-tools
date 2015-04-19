@@ -3,7 +3,6 @@ package tests;
 import server.model.AbstractServer;
 import server.model.CacheList;
 import server.model.TestableServerRecover;
-import server.utils.FileWriter;
 
 public class ServerMainRecover {
 	public static void main(String[] args) {

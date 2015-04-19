@@ -1,7 +1,6 @@
 package tests;
 
 import server.model.AbstractServer;
-import server.model.CacheList;
 import server.model.CacheMap;
 import server.model.TestableServerRecoverTeam;
 
