@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import string.formatter.Formatter;
+import timer.TimerFormatter;
 import ui.ChatUITestable;
 import ui.TimerUIA;
 import client.model.AbstractClient;
@@ -19,15 +21,16 @@ import client.model.JsonMaker;
  * @author alberto
  *
  */
-public class JsonConcreteClientMain {
+public class JsonConcreteClientMainTimer {
 	public static void main(String[] args) {
 		
 
 		final ChatUITestable chatUI = new ChatUITestable();
+		final TimerUIA timerUI = new TimerUIA();
 		
 		
-		final AbstractClient client = new ConcreteClient("Alb", "TeamFere", chatUI, new TimerUIA());
-		client.openStreams("koelio.no-ip.org", 9999);
+		final AbstractClient client = new ConcreteClient("Alb", "TeamFere", chatUI, timerUI);
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -49,13 +52,28 @@ public class JsonConcreteClientMain {
 				chatUI.setMessageText(null);
 			}
 		});
+		timerUI.setButtonTimerListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(timerUI.isTimeStampValid(timerUI.getTimeStamp())) {
+					int[] time = TimerFormatter.getMinSec(timerUI.getTimeStamp());
+					timerUI.setTimerEditable(false);
+					client.sendMessageToServer(JsonMaker.timerRequest(teamName, time[0], time[1]));
+				}
+			}
+		});
+		
 
 		Thread thread = new Thread(runnable);
 		thread.start();
 		
 		JFrame frame = new JFrame();
 		frame.setSize(400, 500);
-		frame.getContentPane().add(chatUI);
+		JPanel panel = new JPanel();
+		panel.add(chatUI);
+		panel.add(timerUI);
+		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 
 	}

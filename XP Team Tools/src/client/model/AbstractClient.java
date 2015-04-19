@@ -112,7 +112,7 @@ public abstract class AbstractClient {
 						String timeStamp = 
 								TimerFormatter.getDisplay(Integer.parseInt(lines[1]),
 								Integer.parseInt(lines[2]));
-						System.out.println(timeStamp);
+						handleTimeStamp(timeStamp);
 						break;
 					default:
 						break;
@@ -153,4 +153,5 @@ public abstract class AbstractClient {
 	 * @param message
 	 */
 	protected abstract void handleMessage(String message);
+	protected abstract void handleTimeStamp(String timeStamp);
 }
