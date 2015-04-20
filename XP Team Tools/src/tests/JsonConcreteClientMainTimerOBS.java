@@ -7,11 +7,12 @@ import java.awt.event.KeyListener;
 
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import ui.ChatUIObserver;
+import ui.ChatUI;
 import ui.TimerUIA;
 import ui.UI;
+import client.model.AbstractClient;
+import client.model.ConcreteClient;
 import client.model.JsonMaker;
-import client.model.ObservableClient;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -20,16 +21,17 @@ import client.model.ObservableClient;
  * @author alberto
  *
  */
-public class JsonConcreteClientMainTimer {
+public class JsonConcreteClientMainTimerOBS {
 	public static void main(String[] args) {
 		
-		
-		final ObservableClient client = new ObservableClient("Nic","Prova");
-		
 		UI ui = new UI();
-		final ChatUIObserver chatUI = new ChatUIObserver(client);
+		final ChatUI chatUI = ui.getChatUI();
 		final TimerUIA timerUI = ui.getTimerUI();
 		
+		
+
+		final AbstractClient client = new ConcreteClient("Nic", "Prova2",
+				chatUI, timerUI);
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 

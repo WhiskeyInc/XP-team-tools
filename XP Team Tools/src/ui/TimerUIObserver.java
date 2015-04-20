@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,32 +17,30 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import client.model.ObservableClient;
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
 
-
-/**
- * 
- * The UI of the timer: it includes a display that shows the countdown and a button for
- * timer's start
- * 
- * @author alessandro B, Alberto
- *
- */
-public class TimerUIA extends JPanel {
+public class TimerUIObserver extends JPanel implements Observer{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private ObservableClient client = new ObservableClient("Nic", "Prova");
+
 	private JTextField timerArea;
 	private JButton startButton;
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
 
-	public TimerUIA() {
+	public TimerUIObserver(ObservableClient client) {
 		super();
+		
+		this.client = client;
+		client.addObserver(this);
+		
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();
 		dim.setSize(200, 120);
@@ -115,13 +115,18 @@ public class TimerUIA extends JPanel {
 		return TimerFormatter.isTimeStampValid(timeStamp);
 	}
 
-	/**
-	 * plays an alarm when the time is over
-	 */
 	private void alertEndTimer() {
 		if (timerArea.getText().equals(ENDTIMER)) {
 			player.playSong();
 			setTimerEditable(true);
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setTimer(client.getCurrentTimestamp());
+		if(!client.getCurrentTimestamp().equals(TimerUIA.ENDTIMER)) {
+			setTimerEditable(false);
 		}
 	}
 
