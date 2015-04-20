@@ -2,6 +2,8 @@ package tests;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import string.formatter.Formatter;
 import timer.TimerFormatter;
@@ -67,6 +69,22 @@ public class JsonConcreteClientMainTimer1 {
 							time[0], time[1]));
 				}
 			}
+		});
+		final ChatUI chat = ui.getChatUI();
+		chat.setEnterListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					chat.appendChatAreaText(chat.getMessage());
+					chat.emptyMessageArea();
+					//chat.getMessageArea().setCaretPosition(0);
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {}
 		});
 
 		Thread thread = new Thread(runnable);
