@@ -11,10 +11,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import timer.TimerManager;
-
 /**
- * SoundPlayer class to play audio file, at the moment useful for the {@link TimerManager}
+ * SoundPlayer class to play audio file
  * when a time countdown expires
  * @author alessandro
  */

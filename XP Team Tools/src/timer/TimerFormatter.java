@@ -2,8 +2,20 @@ package timer;
 
 import java.util.StringTokenizer;
 
+
+/**
+ * a class that manages the countdown shown on the display
+ * 
+ * @author alessandro B., Alberto
+ *
+ */
 public class TimerFormatter {
 	
+	/**
+	 * 
+	 * @param millis
+	 * @return an array containing minutes and seconds
+	 */
 	public static int[] getTimeStamp(long millis){
 		Integer secondiTot = (int)millis / 1000;
 		
@@ -14,6 +26,12 @@ public class TimerFormatter {
 		return vett;
 	}
 	
+	/**
+	 * 
+	 * @param minute
+	 * @param second
+	 * @return a string with the display og the timer
+	 */
 	public static String getDisplay(int minute, int second) {
 		String display = "";
 		if (minute < 10 && second < 10)
@@ -47,6 +65,11 @@ public class TimerFormatter {
 		return time; 
 	}
 	
+	/**
+	 * checks the validity of the string representing initial time of the timer
+	 * @param timeStamp
+	 * @return
+	 */
 	public static boolean isTimeStampValid(String timeStamp) {
 		StringTokenizer strtok = new StringTokenizer(timeStamp, ":");
 		boolean isValid = true;

@@ -3,7 +3,7 @@ package client.model;
 import ui.ChatUI;
 import ui.TimerUIA;
 /**
- * Concrete client fused with the Ui
+ * Concrete client with the Ui
  * @author alberto
  *
  */

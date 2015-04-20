@@ -4,6 +4,14 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+/**
+ * 
+ * A class that imposes that the time setted by the user is in the following format:
+ * mm:ss
+ * 
+ * @author Alberto
+ *
+ */
 public class FixedSizeDocument extends PlainDocument {
 
 	/**

@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUIA}
+ * 
+ * @author Alberto
+ *
+ */
+
 public class UI extends JFrame{
 
 	/**

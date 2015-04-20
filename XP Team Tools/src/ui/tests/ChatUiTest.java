@@ -46,29 +46,5 @@ public class ChatUiTest {
 		assertEquals(chat.getChatAreaText(), "TestButton");
 	}
 	
-//	@Test
-//	public void testSendEnter() throws Exception {
-//		final ChatUITestable chat = new ChatUITestable();
-//		chat.setEnterListener(new KeyListener() {
-//			@Override
-//			public void keyTyped(KeyEvent e) {}
-//			@Override
-//			public void keyReleased(KeyEvent e) {}
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				
-//				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-//					chat.appendChatAreaText("TestEnter");
-//				}
-//				
-//			}
-//		});
-//		
-//		chat.simulateSendEnterClick();
-//
-//		System.out.println(chat.getChatAreaText());
-//		
-//		assertEquals(chat.getChatAreaText(), "TestEnter");
-//	}
 	
 }

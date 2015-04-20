@@ -18,6 +18,15 @@ import javax.swing.event.DocumentListener;
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
 
+
+/**
+ * 
+ * The UI of the timer: it includes a display that shows the countdown and a button for
+ * timer's start
+ * 
+ * @author alessandro B, Alberto
+ *
+ */
 public class TimerUIA extends JPanel {
 
 	/**
@@ -106,6 +115,9 @@ public class TimerUIA extends JPanel {
 		return TimerFormatter.isTimeStampValid(timeStamp);
 	}
 
+	/**
+	 * plays an alarm when the time is over
+	 */
 	private void alertEndTimer() {
 		if (timerArea.getText().equals(ENDTIMER)) {
 			player.playSong();
