@@ -119,7 +119,7 @@
 		</div>
 		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder">
 			<%
-				InvalidDateException exception = (InvalidDateException) application
+				InvalidDateException exception = (InvalidDateException) session
 						.getAttribute("exception");
 				if (exception != null) {
 			%>
@@ -133,7 +133,7 @@
 				</strong><%=exception.getMessage()%>
 			</div>
 			<%
-				application.removeAttribute("exception");
+				session.removeAttribute("exception");
 				}
 			%>
 		</div>
@@ -178,7 +178,7 @@
 	private String doFormatDate(GregorianCalendar date, NumberFormat formatter) {
 		String day = formatter.format(date.get(GregorianCalendar.DATE));
 		String month = date.getDisplayName(GregorianCalendar.MONTH,
-				GregorianCalendar.LONG, Locale.ITALY);
+				GregorianCalendar.LONG, Locale.US);
 		int year = date.get(GregorianCalendar.YEAR);
 		String min = formatter.format(date.get(GregorianCalendar.MINUTE));
 		String hour = formatter.format(date.get(GregorianCalendar.HOUR_OF_DAY));

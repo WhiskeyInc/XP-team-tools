@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
@@ -21,7 +22,7 @@ public class ConcreteTimeline implements Timeline {
 
 	public ConcreteTimeline() {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
-				.getInstance();
+				.getInstance(TimeZone.getTimeZone("Europe/Rome"));
 		Event event = new Event(CREATION_EVENT, creationDate, false);
 		event.setId(CREATION_EVENT_ID);
 		events.put(event.getId(), event);
