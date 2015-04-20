@@ -19,6 +19,13 @@ import string.formatter.Formatter;
 import timer.TimerFormatter;
 import client.model.JsonMaker;
 
+/**
+ * 
+ * A server with useful features (it stores the message and it sends them to clients)
+ * 
+ * @author alberto
+ *
+ */
 public class JsonServer extends AbstractServer {
 
 	private HashMap<String, List<Socket>> clientMap = new HashMap<String, List<Socket>>();
@@ -73,6 +80,12 @@ public class JsonServer extends AbstractServer {
 		}
 	}
 
+	/**
+	 * It make a division of clients by team-name
+	 * 
+	 * @return the name of the team
+	 * @throws IOException
+	 */
 	private String groupByTeam() throws IOException {
 		String teamName = getLine(in); //TODO
 		System.out.println(teamName);
@@ -91,7 +104,12 @@ public class JsonServer extends AbstractServer {
 				clientSocket.getInputStream()));
 	}
 
-	// this is to get the messages sent to an offline client
+	/**
+	 * allows the messages to be sent to an offline client
+	 * 
+	 * @param teamName
+	 * @throws Exception
+	 */
 	private void alignClient(String teamName) throws Exception {
 		String[] messages = recoverMessages(teamName);
 		for (int i = 0; i < messages.length; i++) {
@@ -189,6 +207,13 @@ public class JsonServer extends AbstractServer {
 		return sentMessages;
 	}
 
+	/**
+	 * 
+	 * It starts the timer making a division by groups (the timer is synchronized only with
+	 * members of the same team)
+	 * 
+	 * @param teamName
+	 */
 	private void startTimer(final String teamName) {
 		
 		

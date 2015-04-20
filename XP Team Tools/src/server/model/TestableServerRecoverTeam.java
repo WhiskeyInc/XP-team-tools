@@ -82,7 +82,6 @@ public class TestableServerRecoverTeam extends AbstractServer {
 				clientSocket.getInputStream()));
 	}
 
-	// this is to get the messages sent to an offline client
 	private void alignClient(String teamName) throws Exception {
 		String[] messages = recoverMessages(teamName);
 		for (int i = 0; i < messages.length; i++) {
@@ -152,12 +151,5 @@ public class TestableServerRecoverTeam extends AbstractServer {
 
 		return sentMessages;
 	}
-
-//	public String getLastMessage() {
-//
-//		ArrayList<String> messages = chatStorer.getMessages();
-//
-//		return messages.get(messages.size() - 1);
-//	}
 
 }

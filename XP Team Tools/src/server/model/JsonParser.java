@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  * a class that builds the requests sent to the server
+ * 
  * @author alberto
  *
  */

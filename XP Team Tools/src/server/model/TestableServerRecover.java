@@ -62,7 +62,6 @@ public class TestableServerRecover extends AbstractServer {
 				clientSocket.getInputStream()));
 	}
 
-	// this is to get the messages sent to an offline client
 	private void alignClient() throws IOException {
 		String[] messages = recoverMessages();
 		for (int i = 0; i < messages.length; i++) {
