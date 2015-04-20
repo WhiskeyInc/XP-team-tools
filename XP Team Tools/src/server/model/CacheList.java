@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * a class with useful features for the managing of messages
- * @author ???
+ * A class with useful features for the managing of messages
+ * 
+ * @author alberto
  *
  */
 public class CacheList implements IChatStorer, IMessageRecover{
