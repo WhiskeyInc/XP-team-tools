@@ -24,13 +24,13 @@ public class JsonObserverClientMainTimer {
 	public static void main(String[] args) {
 		
 		
-		final ObservableClient client = new ObservableClient("Nic2","Prova2");
+		final ObservableClient client = new ObservableClient("Pav","Prova2");
 		
 		UIObserver ui = new UIObserver(client);
 		final ChatUIObserver chatUI = ui.getChatUI();
 		final TimerUIObserver timerUI = ui.getTimerUI();
 		
-		client.openStreams("localhost", 9999);
+		client.openStreams("ec2-52-74-20-119.ap-southeast-1.compute.amazonaws.com", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
