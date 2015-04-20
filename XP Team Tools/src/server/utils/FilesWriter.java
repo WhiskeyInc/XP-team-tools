@@ -1,6 +1,7 @@
 package server.utils;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -20,11 +21,11 @@ import string.formatter.Formatter;
  *
  */
 
-public class FileWriter {
+public class FilesWriter {
 
 	private Map<String, ArrayList<String>> mapMessageList;
 
-	public FileWriter(CacheMap cache) {
+	public FilesWriter(CacheMap cache) {
 		this.mapMessageList = cache.getMessages();
 	}
 
@@ -35,7 +36,7 @@ public class FileWriter {
 
 			for (String key : keys) {
 
-				java.io.FileWriter writer = new java.io.FileWriter(new File(
+				FileWriter writer = new FileWriter(new File(
 						"database/" + key + ".txt"));
 
 				ArrayList<String> value = mapMessageList.get(key);

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import server.utils.FileWriter;
+import server.utils.FilesWriter;
 
 public class CacheMap implements IChatStorer, IMessageRecover {
 
 	private Map<String, ArrayList<String>> mapMessageList = new HashMap<String, ArrayList<String>>();
-	private FileWriter database = new FileWriter(this);
+	private FilesWriter database = new FilesWriter(this);
 	
 	@Override
 	public void storeMessage(String teamName, String message) {
