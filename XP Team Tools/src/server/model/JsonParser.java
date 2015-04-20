@@ -20,6 +20,12 @@ public class JsonParser {
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
 	
+	/**
+	 * It builds a chat's request
+	 * @param s the string to be parsed
+	 * @return an array containing TeamName and the Message
+	 * @throws ParseException
+	 */
 	public static String[] parseChatRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -29,6 +35,12 @@ public class JsonParser {
 		return chatVet;
 	}
 	
+	/**
+	 * It builds a timer's request
+	 * @param s the string to be parsed
+	 * @return an array containing TeamName, minutes and seconds
+	 * @throws ParseException
+	 */
 	public static String[] parseTimerRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);

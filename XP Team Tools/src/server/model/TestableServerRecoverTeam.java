@@ -12,6 +12,12 @@ import java.util.List;
 
 import string.formatter.Formatter;
 
+/**
+ * A testable server with message recovery functions (only beetween same team members)
+ * 
+ * @author Alberto
+ *
+ */
 public class TestableServerRecoverTeam extends AbstractServer {
 
 	private HashMap<String, List<Socket>> clientMap = new HashMap<String, List<Socket>>();
@@ -63,6 +69,11 @@ public class TestableServerRecoverTeam extends AbstractServer {
 		}
 	}
 
+	/**
+	 * Makes a division team by team
+	 * @return team name
+	 * @throws IOException
+	 */
 	private String groupByTeam() throws IOException {
 		String teamName = in.readLine(); //TODO to test if it works; if not, see testableserverrecover
 		teamName = Formatter.removeSecretCode(teamName);

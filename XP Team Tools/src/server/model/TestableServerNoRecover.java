@@ -14,6 +14,12 @@ import java.util.Set;
 
 import string.formatter.Formatter;
 
+/**
+ * A testable server with no message recovery function
+ * 
+ * @author alberto
+ *
+ */
 public class TestableServerNoRecover extends AbstractServer {
 
 	private List<Socket> clientSocketList = new LinkedList<Socket>();

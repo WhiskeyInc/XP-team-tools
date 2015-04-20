@@ -40,6 +40,8 @@ public abstract class AbstractServer {
 
 		serverSocket.close();
 	}
+	
+	
 
 	/**
 	 * Function to implement in order to listen all the clients (executed for all the life of the server)

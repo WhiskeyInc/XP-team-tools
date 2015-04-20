@@ -29,6 +29,9 @@ public class FilesWriter {
 		this.mapMessageList = cache.getMessages();
 	}
 
+	/**
+	 * Writes messages on the database
+	 */
 	public void writeDatabase() {
 		try {
 

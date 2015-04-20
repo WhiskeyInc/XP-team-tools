@@ -80,6 +80,11 @@ public class Formatter {
 		return message + SECRET_CODE;
 	}
 
+	/**
+	 * Removes the secret code previously saved
+	 * @param message
+	 * @return
+	 */
 	public static String removeSecretCode(String message) {
 		return message.substring(0, message.length() - SECRET_CODE.length());
 	}

@@ -29,7 +29,7 @@ public class SoundPlayer {
 	}
 	 
 	 /**
-	  * Function to play the charged song in the runtime execution of the tool
+	  * Plays the charged song when the time is over
 	  */
 	 public void playSong(){
 		 try {

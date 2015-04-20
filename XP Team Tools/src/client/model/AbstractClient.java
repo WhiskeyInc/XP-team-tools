@@ -149,9 +149,15 @@ public abstract class AbstractClient {
 	}
 	/**
 	 * It is the abstract method, used in @see readFromSocket method, that have to handle the
-	 * message, for example printing it in UI
+	 * message
 	 * @param message
 	 */
 	protected abstract void handleMessage(String message);
+	
+	/**
+	 * It is the abstract method, used in @see readFromSocket method, that have to handle the
+	 * timestamp
+	 * @param timeStamp
+	 */
 	protected abstract void handleTimeStamp(String timeStamp);
 }
