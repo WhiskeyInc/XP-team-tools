@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import server.model.CacheMap;
+import string.formatter.Formatter;
 
 /**
  * The class writes out a file of all the conversations for each team; It
@@ -40,7 +41,7 @@ public class FileWriter {
 				ArrayList<String> value = mapMessageList.get(key);
 
 				for (int i = 0; i < value.size(); i++) {
-					writer.write(value.get(i) + "\n");
+					writer.write(Formatter.formatMessage(value.get(i)) + "\n");
 				}
 
 				writer.close();
