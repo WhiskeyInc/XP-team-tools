@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
-
 import string.formatter.Formatter;
+import timer.TimerFormatter;
 import ui.ChatUIObserver;
+import ui.TimerUIObserver;
+import ui.UIObserver;
 import client.model.JsonMaker;
 import client.model.ObservableClient;
 
@@ -19,12 +20,15 @@ import client.model.ObservableClient;
  * @author alberto
  *
  */
-public class JsonConcreteClientMainOBS {
+public class JsonObserverClientMainTimer {
 	public static void main(String[] args) {
 		
-		final ObservableClient client = new ObservableClient("nic","Prova");
 		
-		final ChatUIObserver chatUI = new ChatUIObserver(client);
+		final ObservableClient client = new ObservableClient("Nic2","Prova2");
+		
+		UIObserver ui = new UIObserver(client);
+		final ChatUIObserver chatUI = ui.getChatUI();
+		final TimerUIObserver timerUI = ui.getTimerUI();
 		
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
@@ -40,14 +44,31 @@ public class JsonConcreteClientMainOBS {
 			}
 		};
 		final String teamName = client.getTeamName();
-		chatUI.setButtonAction(new ActionListener() {
+		ui.setChatUI(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
+				client.sendMessageToServer(JsonMaker.chatRequest(
+						teamName,
+						Formatter.formatNickname(client.getNickname())
+								+ chatUI.getMessage()));
 				chatUI.emptyMessageArea();
 			}
 		});
+		ui.setTimerUI(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (timerUI.isTimeStampValid(timerUI.getTimeStamp())) {
+					int[] time = TimerFormatter.getMinSec(timerUI
+							.getTimeStamp());
+					timerUI.setTimerEditable(false);// TODO se è connesso...
+					client.sendMessageToServer(JsonMaker.timerRequest(teamName,
+							time[0], time[1]));
+				}
+			}
+		});
+
 		chatUI.setEnterListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -70,11 +91,6 @@ public class JsonConcreteClientMainOBS {
 
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		JFrame frame = new JFrame();
-		frame.setSize(400, 500);
-		frame.getContentPane().add(chatUI);
-		frame.setVisible(true);
 
 	}
 }

@@ -13,12 +13,13 @@ import string.formatter.Formatter;
 import timer.TimerFormatter;
 
 /**
- * An abstract client of the chat system.
- * The abstraction is to uncouple the model from the UI
- * 
- * @author alberto
+ * A client of the chat system, it sends and receives messages of one or more 
+ * conversations (chats)
+ * The connection between model and ui is handled with an observer pattern
+ * There are two inner classes describing current timestamp and current message which are observable
+ * @author nicola
  */
-public class ObservableClient extends Observable {
+public class ObservableClient{
 
 	private Socket clientSocket;
 	private String nickname;
@@ -26,8 +27,41 @@ public class ObservableClient extends Observable {
 	private DataOutputStream os;
 	private DataInputStream is;
 	
-	private String currentTimestamp;
-	private String currentMessage;
+	public class CurrentTimestamp extends Observable{
+		private String currentTimestamp = "00:10";
+
+		public String getCurrentTimestampString() {
+			return currentTimestamp;
+		}
+		public void setCurrentTimestamp(String currentTimestamp) {
+			this.currentTimestamp = currentTimestamp;
+			update();
+		}
+		private void update() {
+			setChanged();
+			notifyObservers();
+		}
+	}
+	
+	public class CurrentMessage extends Observable{
+		private String currentMessage="";
+
+		public String getCurrentMessageString() {
+			return currentMessage;
+		}
+		public void setCurrentMessage(String currentMessage) {
+			this.currentMessage = currentMessage;
+			update();
+		}
+		private void update() {
+			setChanged();
+			notifyObservers();
+		}
+		
+	}
+	
+	private CurrentTimestamp currentTimestamp = new CurrentTimestamp();
+	private CurrentMessage currentMessage = new CurrentMessage();
 	
 	public ObservableClient() {
 		super();
@@ -129,29 +163,21 @@ public class ObservableClient extends Observable {
 	}
 
 	public void setCurrentTimestamp(String currentTimestamp) {
-		this.currentTimestamp = currentTimestamp;
-		update();
+		this.currentTimestamp.setCurrentTimestamp(currentTimestamp);
 	}
 
 	public void setCurrentMessage(String currentMessage) {
-		this.currentMessage = currentMessage;
-		update();
+		this.currentMessage.setCurrentMessage(currentMessage);
 	}
-	
-	public String getCurrentTimestamp() {
+
+	public CurrentTimestamp getCurrentTimestamp() {
 		return currentTimestamp;
 	}
 
-	public String getCurrentMessage() {
+	public CurrentMessage getCurrentMessage() {
 		return currentMessage;
 	}
 
-
-	private void update() {
-		setChanged();
-		notifyObservers();
-	}
-	
 	/**
 	 * Closes the input/output stream and the socket
 	 */

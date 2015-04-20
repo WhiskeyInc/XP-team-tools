@@ -28,8 +28,8 @@ public class TimerUIObserver extends JPanel implements Observer{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ObservableClient client = new ObservableClient("Nic", "Prova");
-
+	private ObservableClient client;
+	
 	private JTextField timerArea;
 	private JButton startButton;
 	public static final String ENDTIMER = "00:00";
@@ -39,7 +39,7 @@ public class TimerUIObserver extends JPanel implements Observer{
 		super();
 		
 		this.client = client;
-		client.addObserver(this);
+		client.getCurrentTimestamp().addObserver(this);
 		
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();
@@ -124,8 +124,9 @@ public class TimerUIObserver extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		setTimer(client.getCurrentTimestamp());
-		if(!client.getCurrentTimestamp().equals(TimerUIA.ENDTIMER)) {
+		
+		setTimer(client.getCurrentTimestamp().getCurrentTimestampString());
+		if(!client.getCurrentTimestamp().getCurrentTimestampString().equals(TimerUIObserver.ENDTIMER)) {
 			setTimerEditable(false);
 		}
 	}

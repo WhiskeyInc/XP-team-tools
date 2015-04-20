@@ -34,11 +34,12 @@ public class ChatUIObserver extends JPanel implements Observer{
 	protected JButton sendMessage = new JButton("SEND");
 	private JTextArea chatArea;
 	protected JTextArea messageArea = new JTextArea();
+	
 	private ObservableClient client;
 	
 	public ChatUIObserver(ObservableClient client) {
 		this.client = client;
-		this.client.addObserver(this);
+		this.client.getCurrentMessage().addObserver(this);
 		
 		createChatArea();
 		messageArea.setLineWrap(true);
@@ -209,6 +210,6 @@ public class ChatUIObserver extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		appendChatAreaText(client.getCurrentMessage()+"\n");
+		appendChatAreaText(client.getCurrentMessage().getCurrentMessageString()+"\n");
 	}
 }

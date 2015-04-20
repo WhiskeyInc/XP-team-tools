@@ -30,9 +30,9 @@ public class JsonConcreteClientMainTimer {
 		
 		
 
-		final AbstractClient client = new ConcreteClient("Nic", "Prova",
+		final AbstractClient client = new ConcreteClient("NicAbstract", "Prova",
 				chatUI, timerUI);
-		client.openStreams("ec2-52-74-20-119.ap-southeast-1.compute.amazonaws.com", 9999);
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
