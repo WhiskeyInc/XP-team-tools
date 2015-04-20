@@ -1,7 +1,7 @@
 package client.model;
 
 import ui.ChatUI;
-import ui.TimerUIA;
+import ui.TimerUI;
 /**
  * Concrete client with the Ui
  * @author alberto
@@ -10,9 +10,9 @@ import ui.TimerUIA;
 public class ConcreteClient extends AbstractClient {
 
 	private ChatUI chatUI;
-	private TimerUIA timerUI;
+	private TimerUI timerUI;
 	
-	public ConcreteClient(String nickname, String teamName, ChatUI chatUI, TimerUIA timerUI) {
+	public ConcreteClient(String nickname, String teamName, ChatUI chatUI, TimerUI timerUI) {
 		super(nickname, teamName);
 		this.chatUI = chatUI;
 		this.timerUI = timerUI;
@@ -28,7 +28,7 @@ public class ConcreteClient extends AbstractClient {
 	@Override
 	protected void handleTimeStamp(String timeStamp) {
 		timerUI.setTimer(timeStamp);
-		if(!timeStamp.equals(TimerUIA.ENDTIMER)) {
+		if(!timeStamp.equals(TimerUI.ENDTIMER)) {
 			timerUI.setTimerEditable(false);
 		}
 	}

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import client.model.ObservableClient;
 
 /**
- * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUIA}
+ * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUI}
  * 
  */
 

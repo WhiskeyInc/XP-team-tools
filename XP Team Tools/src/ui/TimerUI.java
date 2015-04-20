@@ -27,7 +27,7 @@ import timer.TimerFormatter;
  * @author alessandro B, Alberto
  *
  */
-public class TimerUIA extends JPanel {
+public class TimerUI extends JPanel {
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class TimerUIA extends JPanel {
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
 
-	public TimerUIA() {
+	public TimerUI() {
 		super();
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();

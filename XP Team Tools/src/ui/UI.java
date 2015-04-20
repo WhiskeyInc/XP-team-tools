@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUIA}
+ * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUI}
  * 
  * @author Alberto
  *
@@ -26,7 +26,7 @@ public class UI extends JFrame{
 	
 
 	private final ChatUITestable chatUI = new ChatUITestable();
-	private final TimerUIA timerUI = new TimerUIA();
+	private final TimerUI timerUI = new TimerUI();
 	
 	
 	public UI() {
@@ -58,7 +58,7 @@ public class UI extends JFrame{
 		timerUI.setButtonTimerListener(actionListener);
 	}
 	
-	public TimerUIA getTimerUI() {
+	public TimerUI getTimerUI() {
 		return timerUI;
 	}
 	

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import string.formatter.Formatter;
 import ui.ChatUITestable;
-import ui.TimerUIA;
+import ui.TimerUI;
 import client.model.AbstractClient;
 import client.model.ConcreteClient;
 import client.model.JsonMaker;
@@ -26,7 +26,7 @@ public class JsonConcreteClientMain {
 		final ChatUITestable chatUI = new ChatUITestable();
 		
 		
-		final AbstractClient client = new ConcreteClient("Alb", "TeamFere", chatUI, new TimerUIA());
+		final AbstractClient client = new ConcreteClient("Alb", "TeamFere", chatUI, new TimerUI());
 		client.openStreams("koelio.no-ip.org", 9999);
 		Runnable runnable = new Runnable() {
 

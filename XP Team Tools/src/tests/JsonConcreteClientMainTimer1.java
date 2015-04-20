@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 import ui.ChatUI;
-import ui.TimerUIA;
+import ui.TimerUI;
 import ui.UI;
 import client.model.AbstractClient;
 import client.model.ConcreteClient;
@@ -28,7 +28,7 @@ public class JsonConcreteClientMainTimer1 {
 
 		UI ui = new UI();
 		final ChatUI chatUI = ui.getChatUI();
-		final TimerUIA timerUI = ui.getTimerUI();
+		final TimerUI timerUI = ui.getTimerUI();
 
 		final AbstractClient client = new ConcreteClient("Pav", "Prova",
 				chatUI, timerUI);

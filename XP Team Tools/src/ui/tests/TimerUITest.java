@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import ui.TimerUIA;
+import ui.TimerUI;
 
 public class TimerUITest {
 	public static void main(String[] args) {
-		final TimerUIA timerUI = new TimerUIA();
+		final TimerUI timerUI = new TimerUI();
 		timerUI.setButtonTimerListener(new ActionListener() {
 			
 			@Override
