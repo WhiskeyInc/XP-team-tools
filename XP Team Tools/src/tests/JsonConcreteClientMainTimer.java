@@ -30,7 +30,7 @@ public class JsonConcreteClientMainTimer {
 
 		final AbstractClient client = new ConcreteClient("Nic", "Prova",
 				chatUI, timerUI);
-		client.openStreams("192.168.1.13", 9999);
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -69,21 +69,24 @@ public class JsonConcreteClientMainTimer {
 			}
 		});
 
-		final ChatUI chat = ui.getChatUI();
-		chat.setEnterListener(new KeyListener() {
+		chatUI.setEnterListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {}
 			@Override
-			public void keyReleased(KeyEvent e) {
-				
+			public void keyReleased(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {
+
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					chat.appendChatAreaText(chat.getMessage());
-					chat.emptyMessageArea();
+					e.consume();
+					client.sendMessageToServer(JsonMaker.chatRequest(
+							teamName,
+							Formatter.formatNickname(client.getNickname())
+									+ chatUI.getMessage()));
+					chatUI.emptyMessageArea();
 					//chat.getMessageArea().setCaretPosition(0);
 				}
 			}
-			@Override
-			public void keyPressed(KeyEvent e) {}
 		});
 
 		Thread thread = new Thread(runnable);

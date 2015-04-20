@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultCaret;
 /**
  * The UI of the chat, it extend JPanel
  * @author alberto
@@ -136,6 +137,8 @@ public class ChatUI extends JPanel{
 		      ),
 		      BorderFactory.createEmptyBorder(4, 4, 4, 4)
 		   ));
+		DefaultCaret caret = (DefaultCaret)chatArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 	}
 	/**
 	 * Set the chat area text

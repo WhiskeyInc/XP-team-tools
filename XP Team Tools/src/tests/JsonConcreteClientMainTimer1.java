@@ -70,21 +70,25 @@ public class JsonConcreteClientMainTimer1 {
 				}
 			}
 		});
-		final ChatUI chat = ui.getChatUI();
-		chat.setEnterListener(new KeyListener() {
+		
+		chatUI.setEnterListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {}
 			@Override
-			public void keyReleased(KeyEvent e) {
-				
+			public void keyReleased(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {
+
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					chat.appendChatAreaText(chat.getMessage());
-					chat.emptyMessageArea();
+					e.consume();
+					client.sendMessageToServer(JsonMaker.chatRequest(
+							teamName,
+							Formatter.formatNickname(client.getNickname())
+									+ chatUI.getMessage()));
+					chatUI.emptyMessageArea();
 					//chat.getMessageArea().setCaretPosition(0);
 				}
 			}
-			@Override
-			public void keyPressed(KeyEvent e) {}
 		});
 
 		Thread thread = new Thread(runnable);
