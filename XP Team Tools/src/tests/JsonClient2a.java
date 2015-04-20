@@ -2,14 +2,15 @@ package tests;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
+import string.formatter.Formatter;
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client2;
+import client.model.JsonMaker;
 
-public class ClientMain1 {
+public class JsonClient2a {
 	public static void main(String[] args) {
-		final Client client = new Client("IncreMetal", "TeamFere");
+		final Client2 client = new Client2("IncreMetal", "TeamFere");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 			
@@ -17,7 +18,7 @@ public class ClientMain1 {
 			public void run() {
 				try {
 					client.readFromSocket();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -26,15 +27,15 @@ public class ClientMain1 {
 		
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
-		client.sendMessageToServer("Hi");
+		final String teamName = client.getTeamName();
+		client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + "Hi"));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(chatUI.getMessage());
+				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
 			}
 		});
 		chatUI.setMessageText("Striscia Bardo!");

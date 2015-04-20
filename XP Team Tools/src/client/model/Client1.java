@@ -15,7 +15,7 @@ import string.formatter.Formatter;
  * 
  * @author alberto
  */
-public class Client {
+public class Client1 {
 
 	private Socket clientSocket;
 	private String nickname;
@@ -23,19 +23,19 @@ public class Client {
 	private DataOutputStream os;
 	private DataInputStream is;
 	
-	public Client() {
+	public Client1() {
 		super();
 		
 	}
 
-	public Client(String nickname) {
+	public Client1(String nickname) {
 		super();
 		this.nickname = nickname;
 	}
 	
 	
 
-	public Client(String nickname, String teamName) {
+	public Client1(String nickname, String teamName) {
 		super();
 		this.nickname = nickname;
 		this.teamName = teamName;

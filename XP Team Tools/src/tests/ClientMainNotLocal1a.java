@@ -4,22 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client1;
 
-/**
- * This class, with clientMain and serverMain, tests the communication between 2
- * Clients and 1 Server
- * 
- * @author alberto
- *
- */
-public class ClientMain2DifferentTeam {
+public class ClientMainNotLocal1a {
 	public static void main(String[] args) {
-		final Client client = new Client("LuPavlo", "TeamBardi");
-		client.openStreams("localhost", 9999);
+		final Client1 client = new Client1("IncreMetal", "TeamFere");
+		client.openStreams("koelio.no-ip.org", 9999);
 		Runnable runnable = new Runnable() {
-
+			
 			@Override
 			public void run() {
 				try {
@@ -30,10 +25,11 @@ public class ClientMain2DifferentTeam {
 				}
 			}
 		};
-
+		
 		Thread thread = new Thread(runnable);
 		thread.start();
-		client.sendMessageToServer("Io sono Pavlo");
+		
+		//client.sendMessageToServer("Hi");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -43,8 +39,9 @@ public class ClientMain2DifferentTeam {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		chatUI.setMessageText("E' vero, meglio che strisci tu Incre");
-		chatUI.simulateSendButtonClick();
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(chatUI);
+		frame.setVisible(true);
 
 	}
 }

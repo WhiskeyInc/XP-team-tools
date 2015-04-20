@@ -4,14 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.JFrame;
-
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client1;
 
-public class ClientMainNotLocal2 {
+public class ClientMain1a {
 	public static void main(String[] args) {
-		final Client client = new Client("B", "TeamFere");
+		final Client1 client = new Client1("IncreMetal", "TeamFere");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 			
@@ -29,7 +27,7 @@ public class ClientMainNotLocal2 {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		
-		//client.sendMessageToServer("Hi");
+		client.sendMessageToServer("Hi");
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -39,9 +37,8 @@ public class ClientMainNotLocal2 {
 				client.sendMessageToServer(chatUI.getMessage());
 			}
 		});
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(chatUI);
-		frame.setVisible(true);
+		chatUI.setMessageText("Striscia Bardo!");
+		chatUI.simulateSendButtonClick();
 
 	}
 }

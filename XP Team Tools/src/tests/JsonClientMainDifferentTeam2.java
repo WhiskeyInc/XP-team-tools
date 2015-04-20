@@ -15,9 +15,9 @@ import client.model.JsonMaker;
  * @author alberto
  *
  */
-public class JsonClient2 {
+public class JsonClientMainDifferentTeam2 {
 	public static void main(String[] args) {
-		final Client2 client = new Client2("LuBardo", "TeamFere");
+		final Client2 client = new Client2("LuPavlo", "TeamBardi");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
@@ -35,7 +35,8 @@ public class JsonClient2 {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		final String teamName = client.getTeamName();
-		client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + "Vai murotz"));
+		client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + "Io sono Pavlo"));
+
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
@@ -45,7 +46,7 @@ public class JsonClient2 {
 				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
 			}
 		});
-		chatUI.setMessageText("Ehehehe");
+		chatUI.setMessageText("E' vero, meglio che strisci tu Incre");
 		chatUI.simulateSendButtonClick();
 
 	}

@@ -7,12 +7,12 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client1;
 
-public class ClientMainNotLocal {
+public class ClientMainNotLocal1b {
 	public static void main(String[] args) {
-		final Client client = new Client("IncreMetal", "TeamFere");
-		client.openStreams("koelio.no-ip.org", 9999);
+		final Client1 client = new Client1("B", "TeamFere");
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 			
 			@Override

@@ -2,10 +2,11 @@ package tests;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
+import string.formatter.Formatter;
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client2;
+import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -14,9 +15,9 @@ import client.model.Client;
  * @author alberto
  *
  */
-public class ClientMain2 {
+public class JsonClient2b {
 	public static void main(String[] args) {
-		final Client client = new Client("LuBardo", "TeamFere");
+		final Client2 client = new Client2("LuBardo", "TeamFere");
 		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
@@ -24,7 +25,7 @@ public class ClientMain2 {
 			public void run() {
 				try {
 					client.readFromSocket();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -33,14 +34,15 @@ public class ClientMain2 {
 
 		Thread thread = new Thread(runnable);
 		thread.start();
-		client.sendMessageToServer("Vai murotz");
+		final String teamName = client.getTeamName();
+		client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + "Vai murotz"));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(chatUI.getMessage());
+				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
 			}
 		});
 		chatUI.setMessageText("Ehehehe");

@@ -11,15 +11,15 @@ import server.model.CacheList;
 import server.model.TestableServerRecover;
 import string.formatter.Formatter;
 import ui.ChatUITestable;
-import client.model.Client;
+import client.model.Client1;
 
-public class ClientServerTests {
+public class ClientServerTests1 {
 
 	@Test
 	public void clientServerChatTest() throws Exception {
 		final TestableServerRecover server = new TestableServerRecover(new CacheList());
 		server.openPort(9999);
-		final Client client = new Client();
+		final Client1 client = new Client1();
 		client.openStreams("localhost", 9999);
 
 		Runnable runnable = new Runnable() {
