@@ -29,6 +29,6 @@ public interface TeamManager {
 
 	public void taskAdded(Task task);
 
-	public void membersAdded(String[] member);
+	public void membersAdded(Member[] member);
 
 }

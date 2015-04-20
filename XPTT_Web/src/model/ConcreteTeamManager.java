@@ -132,14 +132,14 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 	
 	@Override
-	public void membersAdded(String[] member) {
+	public void membersAdded(Member[] members) {
 		try {
-			ArrayList<String> members = new ArrayList<String>();
-			for (String string : member) {
-				members.add(string);
+			ArrayList<String> membersList = new ArrayList<String>();
+			for (Member member : members) {
+				membersList.add(member.toString());
 			}
 			Event event = new AutomaticEvent("Added members to the team");
-			event.addParticipants(members);
+			event.addParticipants(membersList);
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();

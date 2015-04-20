@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ConcreteTeamSettings;
+import model.Member;
 import model.exceptions.NameAlreadyInUseException;
 
 /**
@@ -17,6 +18,7 @@ import model.exceptions.NameAlreadyInUseException;
 @WebServlet("/memberAdder")
 public class memberAdder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String PASSWORD = "hardCodedPWD";
 
 	public memberAdder() {
 		super();
@@ -30,11 +32,23 @@ public class memberAdder extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		ConcreteTeamSettings settings = (ConcreteTeamSettings) request
 				.getServletContext().getAttribute("settings");
+		String defaultDestination = "members.jsp";
 		try {
-			settings.addTeamMember(request.getParameter("member"));
+			if (request.getParameter("password").equals(PASSWORD)) {
+				settings.addTeamMember(getMember(request));
+				defaultDestination = "timeline.jsp";
+			}
+			response.sendRedirect(defaultDestination);
 		} catch (NameAlreadyInUseException e) {
+			response.sendRedirect(defaultDestination);
 		}
-		response.sendRedirect("timeline.jsp");
+	}
+
+	private Member getMember(HttpServletRequest request) {
+		String name = request.getParameter("name");
+		String lastName = request.getParameter("surname");
+		String role = request.getParameter("role");
+		return new Member(name, lastName, role);
 	}
 
 }

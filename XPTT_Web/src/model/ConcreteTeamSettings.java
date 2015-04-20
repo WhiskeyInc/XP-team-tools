@@ -6,7 +6,7 @@ import model.exceptions.NameAlreadyInUseException;
 
 public class ConcreteTeamSettings implements TeamSettings {
 
-	private ArrayList<String> teamMembers = new ArrayList<String>();
+	private ArrayList<Member> teamMembers = new ArrayList<Member>();
 	private ArrayList<String> possibleTasksStates = new ArrayList<String>();
 	private ArrayList<String> possibleUserStoriesStates = new ArrayList<String>();
 	private TeamManager manager;
@@ -22,7 +22,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 			this.possibleUserStoriesStates.add(state);
 		}
 	}
-	
+
 	public void setManager(TeamManager manager) {
 		this.manager = manager;
 	}
@@ -33,7 +33,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 	 * @see model.TeamSettings#getTeamMembers()
 	 */
 	@Override
-	public ArrayList<String> getTeamMembers() {
+	public ArrayList<Member> getTeamMembers() {
 		return teamMembers;
 	}
 
@@ -60,6 +60,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see model.TeamSettings#isValidUserStoryPriority(int)
 	 */
 	public boolean isValidUserStoryPriority(int priority) {
@@ -70,8 +71,7 @@ public class ConcreteTeamSettings implements TeamSettings {
 		return false;
 	}
 
-
-	public void addTeamMember(String... member)
+	public void addTeamMember(Member... member)
 			throws NameAlreadyInUseException {
 		for (int i = 0; i < member.length; i++) {
 			checkMemberName(member[i]);
@@ -80,10 +80,10 @@ public class ConcreteTeamSettings implements TeamSettings {
 		manager.membersAdded(member);
 	}
 
-	private void checkMemberName(String member)
+	private void checkMemberName(Member member)
 			throws NameAlreadyInUseException {
 		if (this.teamMembers.contains(member)) {
-			throw new NameAlreadyInUseException(member);
+			throw new NameAlreadyInUseException(member.toString());
 		}
 
 	}

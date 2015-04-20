@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface TeamSettings {
 
-	public ArrayList<String> getTeamMembers();
+	public ArrayList<Member> getTeamMembers();
 
 	public ArrayList<String> getPossibleTaskStates();
 

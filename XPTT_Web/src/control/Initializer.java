@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
+import model.Member;
 import model.TeamManager;
 import model.exceptions.NameAlreadyInUseException;
 import timeline.ConcreteTimeline;
@@ -29,7 +30,11 @@ public class Initializer extends HttpServlet {
 		super.getServletContext().setAttribute("settings", settings);
 		super.getServletContext().setAttribute("manager", manager);
 		try {
-			settings.addTeamMember("sumo", "usk", "incre", "lele");
+			settings.addTeamMember(new Member("Simone", "Colucci",
+					"Design Patterns Analyst"), new Member("Emanuele",
+					"Fabbiani", "JUnit Tester"), new Member("Alessandro",
+					"Incremona", "Open Source Responsable"), new Member(
+					"Andrea", "Aschei", "Components Analyst"));
 		} catch (NameAlreadyInUseException e) {
 			e.printStackTrace();
 		}

@@ -1,3 +1,4 @@
+<%@page import="filtering.Filter"%>
 <%@page import="model.exceptions.InvalidDateException"%>
 <%@page import="com.sun.media.sound.InvalidDataException"%>
 <%@page import="java.text.NumberFormat"%>
@@ -38,7 +39,6 @@
 
 	<div class="container">
 		<div class="row ">
-
 			<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
 				<div>
 					<ul class="timeline">
@@ -47,7 +47,7 @@
 
 						<%
 							int i = 1;
-							for (Event event : this.getEventsList(application)) {
+							for (Event event : this.getEventsList(request)) {
 						%>
 
 						<li><i class="fa fa-clock-o bg-blue"></i>
@@ -143,8 +143,7 @@
 	<br>
 	<footer class="footer">
 		<div class="container">
-			xTrEAM - Provided by
-			Whiskey Inc
+			xTrEAM - Provided by Whiskey Inc
 			<div class="last-updated">
 				<script src="js/last_update.js"></script>
 			</div>
@@ -160,11 +159,12 @@
 </body>
 </html>
 
-<%!private ArrayList<Event> getEventsList(ServletContext context) {
+<%!private ArrayList<Event> getEventsList(HttpServletRequest request) {
 		ArrayList<Event> eventList = new ArrayList<Event>();
-		Timeline timeline = (Timeline) context.getAttribute("timeline");
+		Timeline timeline = (Timeline) request.getServletContext()
+				.getAttribute("timeline");
 		Collections.sort(eventList);
-		return eventList = timeline.getEvents(new NoFilter<Event>());
+		return eventList = timeline.getEvents(getEventFilter(request));
 	}
 
 	private String getFormattedDate(Event event) {
@@ -183,4 +183,13 @@
 		String min = formatter.format(date.get(GregorianCalendar.MINUTE));
 		String hour = formatter.format(date.get(GregorianCalendar.HOUR_OF_DAY));
 		return day + " " + month + " " + year + ", " + hour + ":" + min;
+	}
+
+	private Filter<Event> getEventFilter(HttpServletRequest request) {
+		Filter<Event> filter = (Filter<Event>) request.getSession()
+				.getAttribute("filter");
+		if (filter == null) {
+			filter = new NoFilter<Event>();
+		}
+		return filter;
 	}%>
