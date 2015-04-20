@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
+import model.Member;
 import model.TeamManager;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
@@ -15,6 +16,7 @@ import model.exceptions.InvalidStateException;
 
 import org.junit.Test;
 
+import sun.awt.X11.MWMConstants;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
@@ -64,12 +66,13 @@ public class TeamManagerTest {
 	@Test
 	public void developersAddedTest() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember("Simo", "Lele", "Ale", "Andre");
-		teamManager.developersAdded(new Task("Timeline"), "Lele", "Ale");
+		settings.addTeamMember(new Member("Al", "I", "Boh"), new Member("Lele",
+				"F", "Tutto"), new Member("Boh", "BohBoh", "niente"));
+		teamManager.developersAdded(new Task("Timeline"), "Lele F", "Ale I");
 		timeline.addEvent(new Event("Evento nuovo", new GregorianCalendar(2050,
 				11, 15, 22, 22, 22), true));
 		assertEquals(4, timeline.getEventsNumber());
-		assertEquals("Developers added to task Timeline: Lele Ale ", timeline
+		assertEquals("Developers added to task Timeline: Lele F Ale I ", timeline
 				.getEvent(2).toString());
 		assertEquals("Evento nuovo", timeline.getEvent(3).toString());
 	}
@@ -190,7 +193,7 @@ public class TeamManagerTest {
 	public void participantAdditionFailsWhenInvalidParticipant()
 			throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember("sumo");
+		settings.addTeamMember(new Member("Simone", "nonHoVoglia", "DP"));
 		try {
 			taskBoard.addDevelopersToTask("Timeline", "ziobrando");
 			fail();

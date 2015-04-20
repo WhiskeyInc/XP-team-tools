@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
+import model.Member;
 import model.TeamManager;
 
 import org.junit.Test;
@@ -64,46 +65,45 @@ public class TaskFilteringTest {
 	@Test
 	public void DeveloperTaskFilterTest() throws Exception {
 		settings.setManager(manager);
-		settings.addTeamMember("Simone");
-		settings.addTeamMember("Emanuele");
-		settings.addTeamMember("Alessandro");
+		settings.addTeamMember(new Member("Simone", "C", "DP"));
+		settings.addTeamMember(new Member("Lele", "Fabs", "Tester"), new Member("Al", "Incre", "OS"));
 		teamTaskManager.addTask("Filtro");
 		teamTaskManager.addTask("Bacheca");
 		teamTaskManager.addTask("Nessun Partecipante");
-		teamTaskManager.addDevelopersToTask("Filtro", "Simone");
-		teamTaskManager.addDevelopersToTask("Filtro", "Emanuele");
-		teamTaskManager.addDevelopersToTask("Filtro", "Alessandro");
-		teamTaskManager.addDevelopersToTask("Bacheca", "Simone", "Emanuele");
-		teamTaskManager.addDevelopersToTask("Bacheca", "Simone");
+		teamTaskManager.addDevelopersToTask("Filtro", "Simone C");
+		teamTaskManager.addDevelopersToTask("Filtro", "Lele Fabs");
+		teamTaskManager.addDevelopersToTask("Filtro", "Al Incre");
+		teamTaskManager.addDevelopersToTask("Bacheca", "Simone C", "Lele Fabs");
+		teamTaskManager.addDevelopersToTask("Bacheca", "Simone C");
 		assertEquals(
 				2,
 				teamTaskManager.getTasks(
 						new TargetFilter<Task>(new DevelopersTaskChecker(
-								"Emanuele", "Simone"))).size());
+								"Lele Fabs", "Simone C"))).size());
 		assertEquals(
 				"Filtro" + "Bacheca",
 				teamTaskManager
 						.getTasks(
 								new TargetFilter<Task>(
-										new DevelopersTaskChecker("Emanuele",
-												"Simone"))).get(1).toString()
+										new DevelopersTaskChecker("Lele Fabs",
+												"Simone C"))).get(1).toString()
 						+ teamTaskManager
 								.getTasks(
 										new TargetFilter<Task>(
 												new DevelopersTaskChecker(
-														"Emanuele", "Simone")))
+														"Lele Fabs", "Simone C")))
 								.get(0).toString());
 		assertEquals(
 				1,
 				teamTaskManager.getTasks(
 						new TargetFilter<Task>(new DevelopersTaskChecker(
-								"Alessandro"))).size());
+								"Al Incre"))).size());
 		assertEquals(
 				"Filtro",
 				teamTaskManager
 						.getTasks(
 								new TargetFilter<Task>(
-										new DevelopersTaskChecker("Alessandro")))
+										new DevelopersTaskChecker("Al Incre")))
 						.get(0).toString());
 	}
 }

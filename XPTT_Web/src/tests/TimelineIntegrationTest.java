@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
+import model.Member;
 import model.TeamManager;
 
 import org.junit.Test;
@@ -71,9 +72,11 @@ public class TimelineIntegrationTest {
 	@Test
 	public void developersAdditionCreateswEvent() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember("Simo", "Lele", "Ale");
+		settings.addTeamMember(new Member("Simo", "Colucci", "DP"), new Member(
+				"Lele", "Fabbiani", "Test"), new Member("Ale", "Incre",
+				"OpenSource"));
 		taskManager.addTask("timeline");
-		taskManager.addDevelopersToTask("timeline", "Simo", "Lele", "Ale");
+		taskManager.addDevelopersToTask("timeline", "Simo Colucci", "Lele Fabbiani", "Ale Incre");
 		assertEquals(4, timeline.getEventsNumber());
 	}
 
@@ -115,7 +118,8 @@ public class TimelineIntegrationTest {
 		settings.setManager(teamManager);
 		settings.setPossibleTasksStates("TODO", "DONE");
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
-		settings.addTeamMember("Lele", "Simo");
+		settings.addTeamMember(new Member("Simo", "Colucci", "DP"), new Member(
+				"Lele", "Fabbiani", "Test"));
 
 		Event creation = timeline.getEvent(0);
 		assertTrue(!creation.isEditable());
@@ -141,7 +145,8 @@ public class TimelineIntegrationTest {
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(5)
 				.isEditable());
 
-		taskManager.addDevelopersToTask("Dormire", "Lele", "Simo");
+		taskManager.addDevelopersToTask("Dormire", "Lele Fabbiani",
+				"Simo Colucci");
 		assertTrue(!timeline.getEvents(new NoFilter<Event>()).get(6)
 				.isEditable());
 

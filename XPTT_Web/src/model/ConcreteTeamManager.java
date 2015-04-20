@@ -148,7 +148,11 @@ public class ConcreteTeamManager implements TeamManager {
 
 	@Override
 	public boolean isValidMember(String member) {
-		return settings.getTeamMembers().contains(member);
+		ArrayList<String> list = new ArrayList<String>();
+		for (Member memberObject : settings.getTeamMembers()) {
+			list.add(memberObject.toString());
+		}
+		return list.contains(member);
 	}
 
 	@Override

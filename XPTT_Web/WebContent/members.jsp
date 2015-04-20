@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="model.TeamSettings" import="java.util.*"%>
 <%@page import="model.Member"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -72,22 +72,24 @@
 		</div>
 	</div>
 	<div align="center">
-		<form action="memberAdder" method="post">
+		<form action="SettingsController" method="post">
 			<input type="text" name="name" placeholder="First Name"><input
 				type="text" name="surname" placeholder="Last Name"><input
-				type="text" name="role" placeholder="Role"><br>
-			<input type="password" name="password"
-				placeholder="Administration password"><button
-				class="btn btn-primary btn-xl" type="submit"> Add to the Team</button>
+				type="text" name="role" placeholder="Role"><br> <input
+				type="hidden" name="action" value="addition"> <input
+				type="password" name="password"
+				placeholder="Administration password">
+			<button class="btn btn-primary btn-xl" type="submit">Add to
+				the Team</button>
 		</form>
 	</div>
 	<footer class="footer">
-	<div class="container">
-		xTrEAM - Provided by Whiskey Inc
-		<div class="last-updated">
-			<script src="js/last_update.js"></script>
+		<div class="container">
+			xTrEAM - Provided by Whiskey Inc
+			<div class="last-updated">
+				<script src="js/last_update.js"></script>
+			</div>
 		</div>
-	</div>
 	</footer>
 </body>
 </html>
