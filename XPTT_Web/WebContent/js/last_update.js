@@ -1,4 +1,3 @@
-// Script che scrive la data di ultima modifica
 
 function initArray() {
 	for (var i = 0; i < initArray.arguments.length; i++)

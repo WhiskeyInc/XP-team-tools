@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import timeline.Timeline;
-import control.actions.HttpAction;
+import control.HttpAction;
 
 public abstract class TimelineAction implements HttpAction {
 
