@@ -63,20 +63,11 @@ public class TestableServerRecover extends AbstractServer {
 		}
 	}
 
-	/**
-	 * Sets input stream
-	 * @throws IOException
-	 */
 	private void setInStream() throws IOException {
 		in = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
 	}
 
-	/**
-	 * Handles an alignement function: message sent when a user was offline
-	 * are recovered and propagated
-	 * @throws IOException
-	 */
 	private void alignClient() throws IOException {
 		String[] messages = recoverMessages();
 		for (int i = 0; i < messages.length; i++) {
@@ -125,10 +116,6 @@ public class TestableServerRecover extends AbstractServer {
 		out.flush();
 	}
 
-	/**
-	 * Recovers messages sent when a user is offline
-	 * @return
-	 */
 	private String[] recoverMessages() {
 		int numOfMessages = NUM_OF_MESSAGES;
 		String[] sentMessages = null;

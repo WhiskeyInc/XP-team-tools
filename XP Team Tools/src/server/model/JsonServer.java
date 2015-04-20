@@ -80,12 +80,6 @@ public class JsonServer extends AbstractServer {
 		}
 	}
 
-	/**
-	 * It make a division of clients by team-name
-	 * 
-	 * @return the name of the team
-	 * @throws IOException
-	 */
 	private String groupByTeam() throws IOException {
 		String teamName = getLine(in); //TODO
 		System.out.println(teamName);
@@ -99,21 +93,11 @@ public class JsonServer extends AbstractServer {
 		return teamName;
 	}
 
-	/**
-	 * It sets the input stream
-	 * @throws IOException
-	 */
 	private void setInStream() throws IOException {
 		in = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
 	}
 
-	/**
-	 * allows the messages to be sent to an offline client
-	 * 
-	 * @param teamName
-	 * @throws Exception
-	 */
 	private void alignClient(String teamName) throws Exception {
 		String[] messages = recoverMessages(teamName);
 		for (int i = 0; i < messages.length; i++) {
@@ -183,12 +167,6 @@ public class JsonServer extends AbstractServer {
 		return line;
 	}
 
-	/**
-	 * It sends messages to same team client's
-	 * @param message
-	 * @param clientSocketList
-	 * @throws IOException
-	 */
 	private void propagateMessageToTeamClients(String message,
 			List<Socket> clientSocketList) throws IOException {
 
@@ -197,12 +175,6 @@ public class JsonServer extends AbstractServer {
 		}
 	}
 
-	/**
-	 * It propagate to server messages sent by user
-	 * @param message
-	 * @param socket
-	 * @throws IOException
-	 */
 	private void propagateMessage(String message, Socket socket)
 			throws IOException {
 		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
@@ -211,12 +183,7 @@ public class JsonServer extends AbstractServer {
 		out.flush();
 	}
 
-	/**
-	 * It recovers messages sent when the user was offline
-	 * @param teamName
-	 * @return messages sent
-	 * @throws Exception
-	 */
+
 	private String[] recoverMessages(String teamName) throws Exception {
 		int numOfMessages = NUM_OF_MESSAGES;
 		String[] sentMessages;
@@ -229,13 +196,6 @@ public class JsonServer extends AbstractServer {
 		return sentMessages;
 	}
 
-	/**
-	 * 
-	 * It starts the timer making a division by groups (the timer is synchronized only with
-	 * members of the same team)
-	 * 
-	 * @param teamName
-	 */
 	private void startTimer(final String teamName) {
 		
 		

@@ -7,7 +7,7 @@ import java.util.Map;
 import server.utils.FilesWriter;
 
 /**
- * A class that
+ * A class that manages the map of messages 
  * 
  * @author alberto
  *
@@ -26,21 +26,11 @@ public class CacheMap implements IChatStorer, IMessageRecover {
 		}
 	}
 
-	/**
-	 * It initializes the Message List for a team, adding the teamName as key
-	 * of the map
-	 * 
-	 * @param teamName
-	 * @param message
-	 */
 	private void initMapMessageList(String teamName, String message) {
 		mapMessageList.put(teamName, new ArrayList<String>());
 		addTeamMessage(teamName, message);
 	}
 
-	/**
-	 * It adds a message to the team's database
-	 */
 	private void addTeamMessage(String teamName, String message) {
 		mapMessageList.get(teamName).add(message);
 		writeData();

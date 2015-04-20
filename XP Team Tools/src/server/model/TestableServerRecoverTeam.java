@@ -69,11 +69,7 @@ public class TestableServerRecoverTeam extends AbstractServer {
 		}
 	}
 
-	/**
-	 * Makes a division team by team
-	 * @return team name
-	 * @throws IOException
-	 */
+
 	private String groupByTeam() throws IOException {
 		String teamName = in.readLine(); //TODO to test if it works; if not, see testableserverrecover
 		teamName = Formatter.removeSecretCode(teamName);
