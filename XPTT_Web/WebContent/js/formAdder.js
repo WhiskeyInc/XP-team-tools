@@ -110,3 +110,94 @@ function showEventAdditionForm(divName) {
 		formDisplayed = true;
 	}
 }
+
+function showEventNameFilteringForm(divName) {
+	if (formDisplayed == false) {
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = "<br>"
+				+ "<form action='FilteringController' method='post' role='form'>"
+				+ "<div class='form-group'>"
+				+ "<label for='eventName'>Search event which contains:</label>"
+				+ "<div class='input-group'>"
+				+ "<input id='eventName' type='text' class='form-control' name='event' placeholder='Name'>"
+				+ "</div>"
+				+ "</div>"
+				+ "<input type='hidden' name='action' value='nameEventFilter'>"
+				+ "<div class='btn-group btn-group-xl' role='group'>"
+				+ "<button class='btn btn-primary' type='submit'>Search</button>"
+				+ "<button class='btn btn-success' type='button' onclick='history.go(0)'>Back</button>"
+				+ "</div>" + "</form>";
+		document.getElementById(divName).appendChild(newdiv);
+		formDisplayed = true;
+	}
+}
+
+function showEventParticipantFilteringForm(divName) {
+	if (formDisplayed == false) {
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = "<br>"
+				+ "<form action='FilteringController' method='post' role='form'>"
+				+ "<div class='form-group'>"
+				+ "<label for='eventName'>Search event which contains:</label>"
+				+ "<div class='input-group'>"
+				+ "<input id='eventName' type='text' class='form-control' name='participant' placeholder='Participant'>"
+				+ "</div>"
+				+ "</div>"
+				+ "<input type='hidden' name='action' value='participantEventFilter'>"
+				+ "<div class='btn-group btn-group-xl' role='group'>"
+				+ "<button class='btn btn-primary' type='submit'>Search</button>"
+				+ "<button class='btn btn-success' type='button' onclick='history.go(0)'>Back</button>"
+				+ "</div>" + "</form>";
+		document.getElementById(divName).appendChild(newdiv);
+		formDisplayed = true;
+	}
+}
+
+function showPeriodEventFilteringForm(divName) {
+	if (formDisplayed == false) {
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = "<br>"
+				+ "<form action='FilteringController' method='post' role='form'>"
+				+ "<div class='form-group'>"
+				+ "<label for='eventDate'>From:</label>"
+				+ "<div class='input-group' id = 'eventDate'>"
+				+ "<input type='text' class='form-control' name='fromEventDay'"
+				+ "placeholder='Day' maxlength='2'> <span "
+				+ "class='input-group-addon'>/</span> <input type='text'"
+				+ "	class='form-control' name='fromEventMonth' placeholder='Month'"
+				+ "maxlength='2'> <span class='input-group-addon'>/</span> <input"
+				+ "	type='text' class='form-control' name='fromEventYear'"
+				+ "	placeholder='Year' maxlength='4'> <span "
+				+ "class='input-group-addon'>at</span> <input type='text'"
+				+ "class='form-control' name='fromEventHour' placeholder='Hour'"
+				+ "maxlength='2'> <span class='input-group-addon'>:</span> <input"
+				+ "	type='text' class='form-control' name='fromEventMin' placeholder='Min'"
+				+ "	maxlength='2'>"
+				+ "</div>"
+				+ "</div>"
+				+ "<div class='form-group'>"
+				+ "<label for='eventDate2'>To:</label>"
+				+ "<div class='input-group' id ='eventDate2'>"
+				+ "<input type='text' class='form-control' name='toEventDay'"
+				+ "placeholder='Day' maxlength='2'> <span "
+				+ "class='input-group-addon'>/</span> <input type='text'"
+				+ "	class='form-control' name='toEventMonth' placeholder='Month'"
+				+ "maxlength='2'> <span class='input-group-addon'>/</span> <input"
+				+ "	type='text' class='form-control' name='toEventYear'"
+				+ "	placeholder='Year' maxlength='4'> <span "
+				+ "class='input-group-addon'>at</span> <input type='text'"
+				+ "class='form-control' name='toEventHour' placeholder='Hour'"
+				+ "maxlength='2'> <span class='input-group-addon'>:</span> <input"
+				+ "	type='text' class='form-control' name='toEventMin' placeholder='Min'"
+				+ "	maxlength='2'>"
+				+ "</div>"
+				+ "</div>"
+				+ "<input type='hidden' name='action' value='periodEventFilter'>"
+				+ "<div class='btn-group btn-group-xl' role='group'>"
+				+ "<button class='btn btn-primary' type='submit'>Search</button>"
+				+ "<button class='btn btn-success' type='button' onclick='history.go(0)'>Back</button>"
+				+ "</div>" + "</form>";
+		document.getElementById(divName).appendChild(newdiv);
+		formDisplayed = true;
+	}
+}

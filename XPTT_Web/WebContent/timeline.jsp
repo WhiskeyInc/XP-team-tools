@@ -1,5 +1,4 @@
 <%@page import="filtering.Filter"%>
-<%@page import="model.exceptions.InvalidDateException"%>
 <%@page import="com.sun.media.sound.InvalidDataException"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.*"%>
@@ -38,7 +37,28 @@
 	</jsp:include>
 
 	<div class="container">
-		<div class="row ">
+		<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin-exception"
+			id="error">
+			<%
+				Exception exception = (Exception) session.getAttribute("exception");
+				if (exception != null) {
+			%>
+			<br>
+			<div class='alert alert-danger alert-dismissible' role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong><i class="fa fa-exclamation-triangle"></i> Warning
+				</strong>: Cannot perform action.
+				<%=exception.getMessage()%>
+			</div>
+			<%
+				session.removeAttribute("exception");
+				}
+			%>
+		</div>
+		<div class="row">
 			<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
 				<div>
 					<ul class="timeline">
@@ -112,31 +132,40 @@
 		</div>
 		<br> <br>
 		<div class="col-md-offset-2 col-md-8 col-sm-12">
-			<button class="btn btn-primary"
-				onclick="showEventAdditionForm('adder')">
-				<i class="fa fa-plus"></i> Add a new Event
-			</button>
-		</div>
-		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder">
-			<%
-				Exception exception = (Exception) session
-						.getAttribute("exception");
-				if (exception != null) {
-			%>
-			<br>
-			<div class='alert alert-danger alert-dismissible' role="alert">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+			<div class="btn-group-md">
+				<button type="button" class="btn btn-primary"
+					onclick="showEventAdditionForm('adder')">
+					<i class="fa fa-plus"></i> Add a new Event
 				</button>
-				<strong><i class="fa fa-exclamation-triangle"></i> Warning:
-				</strong><%=exception.getMessage()%>
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">
+						Filter by... <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#" onclick="showEventNameFilteringForm('adder')"><i
+								class="fa fa-check-square-o"></i> Name</a></li>
+						<li><a href="#"
+							onclick="showEventParticipantFilteringForm('adder')"><i
+								class="fa fa-group"></i> Participant</a></li>
+						<li><a href="#"
+							onclick="showPeriodEventFilteringForm('adder')"><i
+								class="fa fa-calendar-o"></i> Date</a></li>
+						<li class="divider"></li>
+						<li><a href="#"
+							onclick="document.getElementById('SetNoFilter').submit()"><i
+								class="fa fa-trash"></i> Remove filter</a></li>
+					</ul>
+				</div>
 			</div>
-			<%
-				session.removeAttribute("exception");
-				}
-			%>
 		</div>
+		<form id="SetNoFilter" action="FilteringController" method="post"
+			role="form">
+			<div class="form-group">
+				<input type="hidden" name="action" value="noFilterEvent">
+			</div>
+		</form>
+		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder"></div>
 	</div>
 	<!-- /.container -->
 	<br>
@@ -154,6 +183,8 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
 	<script src="js/bootstrap.js"></script>
+	<!-- Adding a form when required -->
+	<script src="js/bootstrap.min.js"></script>
 	<!-- Adding a form when required -->
 	<script src="js/formAdder.js" type="text/javascript"></script>
 </body>
