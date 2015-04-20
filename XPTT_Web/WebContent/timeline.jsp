@@ -119,7 +119,7 @@
 		</div>
 		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder">
 			<%
-				InvalidDateException exception = (InvalidDateException) session
+				Exception exception = (Exception) session
 						.getAttribute("exception");
 				if (exception != null) {
 			%>

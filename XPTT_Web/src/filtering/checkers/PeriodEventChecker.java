@@ -22,5 +22,4 @@ public class PeriodEventChecker implements Checker<Event> {
 		}
 		return false;
 	}
-
 }

@@ -15,8 +15,8 @@ public class EventDeleter extends TimelineAction {
 			throws ServletException, IOException {
 		try {
 			super.getTimeline(request).deleteEvent(Integer.parseInt(request.getParameter("eventId")));
-		} catch (NoSuchEventException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			request.getSession().setAttribute("exception", e);
 		}		
 		super.redirect(response);
 	}

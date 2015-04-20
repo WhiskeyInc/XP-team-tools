@@ -30,7 +30,7 @@ public class EventAdder extends DateHandlerAction {
 			super.getTimeline(request).addEvent(new Event(
 					request.getParameter("eventName"),
 					super.generateEventDate(request), true));
-		} catch (InvalidDateException e) {
+		} catch (Exception e) {
 			request.getSession().setAttribute("exception", e);
 		}
 	}
