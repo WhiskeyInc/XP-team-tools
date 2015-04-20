@@ -15,6 +15,8 @@ import java.util.Map;
 
 import javax.swing.Timer;
 
+import org.json.simple.parser.ParseException;
+
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 import client.model.JsonMaker;
@@ -119,31 +121,12 @@ public class JsonServer extends AbstractServer {
 							int request = JsonParser.getRequest(line);
 							switch (request) {
 							case JsonParser.CHAT:
-								String[] lines = JsonParser
-										.parseChatRequest(line);
-								String teamName = lines[0];
-								String message = lines[1];
-								System.out.println("Il team è: " + teamName);
-								System.out.println(message); // TODO
-								propagateMessageToTeamClients(line,
-										clientMap.get(teamName));
-								chatStorer.storeMessage(teamName, line);
+								chatRequest(line);
 								
 								break;
 
 							case JsonParser.TIMER:
-								String[] timerLines = JsonParser.parseTimerRequest(line);
-								teamName = timerLines[0];
-								
-								int minutes = Integer.parseInt(timerLines[1]);
-								int seconds = Integer.parseInt(timerLines[2]);
-								if(millisMap.containsKey(teamName)) {
-									millisMap.replace(teamName, TimerFormatter.getMillis(minutes, seconds));
-								} else {
-									millisMap.put(teamName, TimerFormatter.getMillis(minutes, seconds));
-								}
-								
-								startTimer(teamName);
+								timerRequest(line);
 								
 								break;
 							default:
@@ -155,6 +138,34 @@ public class JsonServer extends AbstractServer {
 						// TODO: handle exception
 					}
 				}
+			}
+
+			private void timerRequest(String line) throws ParseException {
+				String[] timerLines = JsonParser.parseTimerRequest(line);
+				String teamName = timerLines[0];
+				
+				int minutes = Integer.parseInt(timerLines[1]);
+				int seconds = Integer.parseInt(timerLines[2]);
+				if(millisMap.containsKey(teamName)) {
+					millisMap.replace(teamName, TimerFormatter.getMillis(minutes, seconds));
+				} else {
+					millisMap.put(teamName, TimerFormatter.getMillis(minutes, seconds));
+				}
+				
+				startTimer(teamName);
+			}
+
+			private void chatRequest(String line) throws ParseException,
+					IOException {
+				String[] lines = JsonParser
+						.parseChatRequest(line);
+				String teamName = lines[0];
+				String message = lines[1];
+				System.out.println("Il team è: " + teamName);
+				System.out.println(message); // TODO
+				propagateMessageToTeamClients(line,
+						clientMap.get(teamName));
+				chatStorer.storeMessage(teamName, line);
 			}
 
 		};
