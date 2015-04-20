@@ -69,8 +69,14 @@ p {
 	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
-	height: 60px;
-	font-weight: 600;
+	height: 40px;
+	font-weight: 400;
 	color: #ffffff;
-	background-color: #000000;
+	padding: 10px;
+	background-color: #222;
+}
+
+.last-updated{
+	color: #ccc;
+	float:right;
 }

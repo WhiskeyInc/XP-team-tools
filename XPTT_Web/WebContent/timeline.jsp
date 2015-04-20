@@ -129,7 +129,8 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<strong><i class="fa fa-exclamation-triangle"></i> Warning: </strong><%=exception.getMessage()%>
+				<strong><i class="fa fa-exclamation-triangle"></i> Warning:
+				</strong><%=exception.getMessage()%>
 			</div>
 			<%
 				application.removeAttribute("exception");
@@ -142,9 +143,11 @@
 	<br>
 	<footer class="footer">
 		<div class="container">
-			<p>
+			xTrEAM - Provided by
+			Whiskey Inc
+			<div class="last-updated">
 				<script src="js/last_update.js"></script>
-			</p>
+			</div>
 		</div>
 	</footer>
 

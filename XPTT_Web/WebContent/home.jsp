@@ -9,6 +9,8 @@
 <meta name="author" content="">
 <link rel="import" href="menu.jsp">
 <title>xTrEAM - Home</title>
+<!--icon shortcut  -->
+<link href="img/favicon.ico" rel="shortcut icon">
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
@@ -41,5 +43,13 @@
 		<a class="btn btn-primary btn-xl">Sign Up</a> &nbsp;&nbsp;<a
 			class="btn btn-default btn-xl">Sign In</a>
 	</div>
+	<footer class="footer">
+		<div class="container">
+			xTrEAM - Provided by Whiskey Inc
+			<div class="last-updated">
+				<script src="js/last_update.js"></script>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

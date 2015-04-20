@@ -7,6 +7,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>xTrEAM - Members</title>
+<!--icon shortcut  -->
+<link href="img/favicon.ico" rel="shortcut icon">
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
@@ -46,6 +48,15 @@
 		</form>
 	</div>
 </body>
+<footer class="footer">
+		<div class="container">
+			xTrEAM - Provided by
+			Whiskey Inc
+			<div class="last-updated">
+				<script src="js/last_update.js"></script>
+			</div>
+		</div>
+	</footer>
 </html>
 
 <%!private ArrayList<String> getMembersList(ServletContext application) {
