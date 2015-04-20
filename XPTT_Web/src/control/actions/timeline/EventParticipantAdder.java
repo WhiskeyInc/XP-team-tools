@@ -18,15 +18,23 @@ import timeline.Timeline;
  */
 public class EventParticipantAdder extends TimelineAction {
 
-	/* (non-Javadoc)
-	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Timeline timeline = super.getTimeline(request);
 		try {
-			timeline.getEvent(Integer.parseInt(request.getParameter("eventId"))).addParticipant(request.getParameter("participant"));
+			String participant = request.getParameter("participant");
+			if (participant.trim().equals("")) {
+				throw new Exception("For input string: \"\"");
+			}
+			timeline.getEvent(Integer.parseInt(request.getParameter("eventId")))
+					.addParticipant(participant);
 		} catch (Exception e) {
 			request.getSession().setAttribute("exception", e);
 		}

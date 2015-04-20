@@ -26,10 +26,14 @@ public class EventAdder extends DateHandlerAction {
 	}
 
 	private void addEventToTimeline(HttpServletRequest request) {
+		String eventName = request.getParameter("eventName");
 		try {
-			super.getTimeline(request).addEvent(new Event(
-					request.getParameter("eventName"),
-					super.generateEventDate(request), true));
+			if (eventName.trim().equals("")) {
+				throw new Exception("You should give a name to your event");
+			}
+			super.getTimeline(request).addEvent(
+					new Event(request.getParameter("eventName"), super
+							.generateEventDate(request), true));
 		} catch (Exception e) {
 			request.getSession().setAttribute("exception", e);
 		}
