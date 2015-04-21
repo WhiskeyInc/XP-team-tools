@@ -1,7 +1,6 @@
 package server.model;
 
 import java.io.IOException;
-import java.net.Socket;
 
 import org.json.simple.parser.ParseException;
 
@@ -17,7 +16,7 @@ public class ChatService implements IService {
 	}
 
 	@Override
-	public void doAction(Socket clientSocket, String line) throws IOException,
+	public void doAction(String line) throws IOException,
 			ParseException {
 		
 		String[] lines = JsonParser

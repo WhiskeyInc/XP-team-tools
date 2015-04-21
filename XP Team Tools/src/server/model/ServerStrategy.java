@@ -85,7 +85,7 @@ public class ServerStrategy extends AbstractServer {
 
 							// TODO controllare se service non c'è... gestire
 							if (service != null) {
-								service.doAction(clientSocket, line);
+								service.doAction(line);
 							}
 
 						}

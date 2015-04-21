@@ -3,7 +3,6 @@ package server.model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class TimerService implements IService {
 	}
 
 	@Override
-	public void doAction(Socket clientSocket, String line) throws IOException,
+	public void doAction(String line) throws IOException,
 			ParseException {
 
 		String[] timerLines = JsonParser.parseTimerRequest(line);

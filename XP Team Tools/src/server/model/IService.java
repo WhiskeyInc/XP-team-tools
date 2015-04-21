@@ -1,27 +1,23 @@
 package server.model;
 
 import java.io.IOException;
-import java.net.Socket;
 
 import org.json.simple.parser.ParseException;
 
 /**
- * Generico Servizio
- * 
- * TODO: rivedere javadoc
- * 
+ * General service served from the server
  * @author nicola
  */
 public interface IService {
 
 	/**
-	 * TODO :
+	 * Function to offer the service when it's asked
 	 * 
-	 * @param clientSocket
-	 * @param uri
+	 * @param line
 	 * @throws IOException
+	 * @throws ParseException
 	 */
-	public void doAction(final Socket clientSocket, String line)
+	public void doAction(String line)
 			throws IOException, ParseException;
 
 }
