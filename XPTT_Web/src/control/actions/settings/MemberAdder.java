@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ConcreteTeamSettings;
 import model.Member;
-import model.exceptions.NameAlreadyInUseException;
 
 public class MemberAdder extends SettingsAction {
 

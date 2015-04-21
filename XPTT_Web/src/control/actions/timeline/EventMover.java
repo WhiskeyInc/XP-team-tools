@@ -6,9 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.exceptions.InvalidDateException;
-import model.exceptions.NoSuchEventException;
-import model.exceptions.UnEditableEventException;
 import timeline.Timeline;
 
 public class EventMover extends DateHandlerAction {

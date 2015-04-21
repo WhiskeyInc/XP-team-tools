@@ -16,7 +16,6 @@ import model.exceptions.InvalidStateException;
 
 import org.junit.Test;
 
-import sun.awt.X11.MWMConstants;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;

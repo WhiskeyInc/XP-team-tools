@@ -36,7 +36,7 @@
 	</h1>
 	<h4 align="center">The ToolBox you have ever looked for</h4>
 	<div align="center">
-		<img width="600" vspace="30"
+		<img class="img img-responsive img-rounded" width="600" vspace="30"
 			src="http://www.extendcode.com/images/main_ex.jpg">
 	</div>
 	<div align="center">

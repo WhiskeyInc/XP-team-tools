@@ -1,7 +1,7 @@
 package filtering.checkers;
 
-import filtering.Checker;
 import boards.taskBoard.Task;
+import filtering.Checker;
 
 /**
  * This implementation of {@link Checker} interface provides {@link Task}

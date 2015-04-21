@@ -1,9 +1,9 @@
 package boards.UserStoryBoard;
 
 
+import model.exceptions.NameAlreadyInUseException;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
-import model.exceptions.NameAlreadyInUseException;
 
 /**
  * The UserStory class represents a simple develoment user story

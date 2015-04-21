@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.exceptions.InvalidDateException;
 import timeline.Event;
 
 public class EventAdder extends DateHandlerAction {

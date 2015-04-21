@@ -2,8 +2,8 @@ package filtering.checkers;
 
 import java.util.GregorianCalendar;
 
-import filtering.Checker;
 import timeline.Event;
+import filtering.Checker;
 
 public class PeriodEventChecker implements Checker<Event> {
 

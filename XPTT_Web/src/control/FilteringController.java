@@ -14,10 +14,6 @@ import control.actions.filtering.NoFilterGenerator;
 import control.actions.filtering.events.EventPeriodFilterGenerator;
 import control.actions.filtering.events.NameEventCheckerGenerator;
 import control.actions.filtering.events.ParticipantEventCheckerGenerator;
-import control.actions.timeline.EventAdder;
-import control.actions.timeline.EventDeleter;
-import control.actions.timeline.EventMover;
-import control.actions.timeline.EventParticipantAdder;
 
 /**
  * Servlet implementation class TimelineController
