@@ -25,11 +25,29 @@
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Members" />
 	</jsp:include>
+	<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin-exception"
+		id="error">
+		<%
+			Exception exception = (Exception) session.getAttribute("exception");
+			if (exception != null) {
+		%>
+		<br>
+		<div class='alert alert-danger alert-dismissible' role="alert">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong><i class="fa fa-exclamation-triangle"></i> Warning </strong>:
+			Cannot perform action.
+			<%=exception.getMessage()%>
+		</div>
+		<%
+			session.removeAttribute("exception");
+			}
+		%>
+	</div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-offset-3 col-sm-6">
-			<div align="center" class="panel-heading c-list">
-				<span class="title">This is us</span>
-			</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 top-margin">
 			<div class="panel panel-default">
 				<div class="row" style="display: none;">
 					<div class="col-xs-12">
@@ -72,16 +90,29 @@
 		</div>
 	</div>
 	<div align="center">
-		<form action="SettingsController" method="post">
-			<input type="text" name="name" placeholder="First Name"><input
-				type="text" name="surname" placeholder="Last Name"><input
-				type="text" name="role" placeholder="Role"><br> <input
-				type="hidden" name="action" value="addition"> <input
-				type="password" name="password"
-				placeholder="Administration password">
-			<button class="btn btn-primary btn-xl" type="submit">Add to
-				the Team</button>
+		<form class="form-inline" action="SettingsController" method="post"
+			role="form">
+			<div class="form-group">
+				<input name="name" type="text" class="form-control" id="Name"
+					placeholder="First name">
+			</div>
+			<div class="form-group">
+				<input name="surname" type="text" class="form-control" id="Surname"
+					placeholder="Last name">
+			</div>
+			<div class="form-group">
+				<input name="role" type="text" class="form-control" id="Role"
+					placeholder="Role">
+			</div>
+			<div class="form-group">
+				<input name="password" type="password" class="form-control"
+					id="password" placeholder="Password">
+			</div>
+			<input type="hidden" name="action" value="memberAddition">
+			<button type="submit" class="btn btn-primary btn-xl">Add to
+				the team</button>
 		</form>
+
 	</div>
 	<footer class="footer">
 		<div class="container">

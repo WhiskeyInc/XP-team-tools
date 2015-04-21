@@ -29,7 +29,7 @@ public class SettingsController extends HttpServlet {
 	}
 
 	private void initializeMap() {
-		this.actions.put("addition", new MemberAdder());
+		this.actions.put("memberAddition", new MemberAdder());
 	}
 
 	/**

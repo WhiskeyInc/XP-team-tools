@@ -5,7 +5,7 @@
 
 body {
 	padding: 30px 0px 60px;
-	padding-top: 100px;
+	padding-top: 0px;
 }
 
 .panel>.list-group .list-group-item:first-child {
@@ -58,7 +58,7 @@ body {
 	font-size: 1.4em;
 	font-weight: bold;
 	padding: 5px 15px;
-	color: #222;
+	color: #ffffff;
 }
 
 .member-role {
