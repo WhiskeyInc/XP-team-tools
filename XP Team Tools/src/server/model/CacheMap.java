@@ -63,6 +63,9 @@ public class CacheMap implements IChatStorer, IMessageRecover {
 
 	@Override
 	public int getNumOfMessages(String teamName) throws NoMessagesException {
+		if(mapMessageList.get(teamName) == null)
+			throw new NoMessagesException("No messages");
+		
 		return mapMessageList.get(teamName).size();
 	}
 	
