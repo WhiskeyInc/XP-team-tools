@@ -7,20 +7,38 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+import util.serialization.Serializable;
 import util.serialization.SerializerCollector;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import filtering.Filter;
 
+/**
+ * This implementation of {@link Timeline} interface provides uniqueness control
+ * for the events to be collected. This is guaranteed by the inherited methods
+ * of {@link SerializerCollector} superclass.
+ * 
+ * @author simone
+ * @see Event, {@link Timeline}, {@link SerializerCollector},
+ *      {@link Serializable}
+ *
+ */
 public class ConcreteTimeline extends SerializerCollector<Event> implements
 		Timeline {
 
+	/**
+	 * The name of the event matching with this object's creation itself
+	 */
 	public static final String CREATION_EVENT = "creation";
 
-	public ConcreteTimeline() {
+	/**
+	 * Creates a new instance of this class. When created, it will be
+	 * automatically added and event to take note of this creation itself
+	 */
+	public ConcreteTimeline(TimeZone locale) {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
-				.getInstance(TimeZone.getTimeZone("Europe/Rome"));
+				.getInstance(locale);
 		Event event = new Event(CREATION_EVENT, creationDate, false);
 		super.addItem(event);
 	}
@@ -52,9 +70,15 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	 * @see timeline.Timeline#dropEvent(java.lang.String)
 	 */
 	@Override
-	public void deleteEvent(int eventId) throws NoSuchEventException{
+	public void deleteEvent(int eventId) throws NoSuchEventException,
+			UnEditableEventException {
 		this.validateEvent(eventId);
-		super.deleteItem(eventId);
+		Event event = super.getItem(eventId);
+		if (event.isEditable()) {
+			super.deleteItem(eventId);
+			return;
+		}
+		throw new UnEditableEventException(event.toString());
 	}
 
 	/*
@@ -68,6 +92,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 			throws UnEditableEventException, NoSuchEventException,
 			InvalidDateException {
 		this.validateDate(newDate);
+		this.validateEvent(eventId);
 		super.getItem(eventId).setDate(newDate);
 	}
 
@@ -115,7 +140,8 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 
 	private boolean dateBeforeCreation(GregorianCalendar date) {
 		try {
-			return date.before(this.getEvent(SerializerCollector.FIRST_ID).getDate());
+			return date.before(this.getEvent(SerializerCollector.FIRST_ID)
+					.getDate());
 		} catch (NoSuchEventException e) {
 			throw new RuntimeException("Fatal error: creation not found");
 		}

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
@@ -31,7 +32,7 @@ import boards.taskBoard.TeamTaskManager;
 public class TeamManagerTest {
 
 	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
-	private Timeline timeline = new ConcreteTimeline();
+	private Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
 	private TeamManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskBoard = new TeamTaskManager(

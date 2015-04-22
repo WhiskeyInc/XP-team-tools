@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.TimeZone;
+
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.Member;
@@ -25,7 +28,7 @@ public class TaskFilteringTest {
 
 	ConcreteTeamSettings settings = new ConcreteTeamSettings();
 	ConcreteTaskManager taskBoard = new ConcreteTaskManager();
-	Timeline timeline = new ConcreteTimeline();
+	Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
 	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
 	TeamManager manager = new ConcreteTeamManager(settings, timeline);
 	UserStoriesManager userStoriesManager = new TeamUserStoriesManager(

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 import model.exceptions.InvalidDateException;
 import timeline.AutomaticEvent;
@@ -12,6 +13,7 @@ import boards.taskBoard.Task;
 public class ConcreteTeamManager implements TeamManager {
 
 	private Timeline timeline;
+	private TimeZone locale = TimeZone.getTimeZone("Europe/Rome");
 	private TeamSettings settings;
 
 	public ConcreteTeamManager(TeamSettings settings, Timeline timeline) {
@@ -22,7 +24,7 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void taskAdded(Task task) {
 		try {
-			Event event = new AutomaticEvent("Created task: " + task.toString());
+			Event event = new AutomaticEvent("Created task: " + task.toString(), TimeZone.getTimeZone("Europe/Rome"));
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -33,7 +35,7 @@ public class ConcreteTeamManager implements TeamManager {
 	@Override
 	public void taskDeleted(Task task) {
 		try {
-			Event event = new AutomaticEvent("Deleted task: " + task.toString());
+			Event event = new AutomaticEvent("Deleted task: " + task.toString(), locale);
 			event.addParticipants(task.getDevelopers());
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -45,7 +47,7 @@ public class ConcreteTeamManager implements TeamManager {
 	public void taskStateChanged(Task task, String newState) {
 		try {
 			Event event = new AutomaticEvent("Changed state of task "
-					+ task.toString() + ". Now it is " + newState);
+					+ task.toString() + ". Now it is " + newState, locale);
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -61,7 +63,7 @@ public class ConcreteTeamManager implements TeamManager {
 		}
 		try {
 			Event event = new AutomaticEvent("Developers added to task "
-					+ task.toString() + ": " + developerNames);
+					+ task.toString() + ": " + developerNames, locale);
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();
@@ -77,7 +79,7 @@ public class ConcreteTeamManager implements TeamManager {
 	public void userStoryAdded(UserStory userStory) {
 		try {
 			this.timeline.addEvent(new AutomaticEvent("Created userstory: "
-					+ userStory.toString()));
+					+ userStory.toString(), locale));
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();
 		}
@@ -92,7 +94,7 @@ public class ConcreteTeamManager implements TeamManager {
 	public void userStoryDeleted(UserStory userStory) {
 		try {
 			timeline.addEvent(new AutomaticEvent("Deleted userstory: "
-					+ userStory.toString()));
+					+ userStory.toString(), locale));
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();
 		}
@@ -109,7 +111,7 @@ public class ConcreteTeamManager implements TeamManager {
 		try {
 			this.timeline.addEvent(new AutomaticEvent(
 					"Changed state of userstory " + userStory.toString()
-							+ ": now it is " + newState));
+							+ ": now it is " + newState, locale));
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();
 		}
@@ -125,7 +127,7 @@ public class ConcreteTeamManager implements TeamManager {
 		try {
 			timeline.addEvent(new AutomaticEvent(
 					"Changed priority of userstory: " + userStory.toString()
-							+ ": now it is " + newPriority));
+							+ ": now it is " + newPriority, locale));
 		} catch (InvalidDateException e) {
 			throwAutomaticEventDateRunTimeException();
 		}
@@ -138,7 +140,7 @@ public class ConcreteTeamManager implements TeamManager {
 			for (Member member : members) {
 				membersList.add(member.toString());
 			}
-			Event event = new AutomaticEvent("Added members to the team");
+			Event event = new AutomaticEvent("Added members to the team", locale);
 			event.addParticipants(membersList);
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {

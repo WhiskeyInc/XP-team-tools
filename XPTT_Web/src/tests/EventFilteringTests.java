@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
@@ -19,7 +20,7 @@ import filtering.checkers.PeriodEventChecker;
 
 public class EventFilteringTests {
 
-	Timeline timeline = new ConcreteTimeline();
+	Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
 
 	@Test
 	public void DateEventFilterTest() throws InvalidDateException {

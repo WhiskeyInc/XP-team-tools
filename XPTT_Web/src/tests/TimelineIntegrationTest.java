@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.TimeZone;
+
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.Member;
@@ -24,7 +27,8 @@ import filtering.NoFilter;
 public class TimelineIntegrationTest {
 
 	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
-	private Timeline timeline = new ConcreteTimeline();
+	private Timeline timeline = new ConcreteTimeline(
+			TimeZone.getTimeZone("Europe/Rome"));
 	private TeamManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskManager = new TeamTaskManager(
@@ -76,7 +80,8 @@ public class TimelineIntegrationTest {
 				"Lele", "Fabbiani", "Test"), new Member("Ale", "Incre",
 				"OpenSource"));
 		taskManager.addTask("timeline");
-		taskManager.addDevelopersToTask("timeline", "Simo Colucci", "Lele Fabbiani", "Ale Incre");
+		taskManager.addDevelopersToTask("timeline", "Simo Colucci",
+				"Lele Fabbiani", "Ale Incre");
 		assertEquals(4, timeline.getEventsNumber());
 	}
 

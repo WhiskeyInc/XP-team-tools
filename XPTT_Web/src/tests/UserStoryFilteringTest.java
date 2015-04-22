@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.TimeZone;
+
 import model.ConcreteTeamManager;
 import model.ConcreteTeamSettings;
 import model.TeamManager;
@@ -21,7 +24,7 @@ public class UserStoryFilteringTest {
 
 	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
 	private TeamManager teammanager = new ConcreteTeamManager(settings,
-			new ConcreteTimeline());
+			new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome")));
 	private UserStoriesManager userStoriesBoard = new TeamUserStoriesManager(
 			new ConcreteUserStoriesManager(), teammanager);
 
@@ -32,17 +35,18 @@ public class UserStoryFilteringTest {
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS",
 				"ACCOMPLISHED");
 		userStoriesBoard.addUserStory(new UserStory("Timeline",
-				"Voglio che ci sia un pannello con dei tasti che...",taskmanager1));
+				"Voglio che ci sia un pannello con dei tasti che...",
+				taskmanager1));
 		userStoriesBoard.moveUserStoryToState("Timeline", "ACCOMPLISHED");
-		userStoriesBoard.addUserStory(new UserStory("Board",
-				"Voglio che ci sia un'area di testo editabile...",taskmanager2));
+		userStoriesBoard
+				.addUserStory(new UserStory("Board",
+						"Voglio che ci sia un'area di testo editabile...",
+						taskmanager2));
 		assertEquals(
 				1,
-				userStoriesBoard
-						.getUserStories(
-								new TargetFilter<UserStory>(
-										new StateUserStoryChecker(
-												"ACCOMPLISHED"))).size());
+				userStoriesBoard.getUserStories(
+						new TargetFilter<UserStory>(new StateUserStoryChecker(
+								"ACCOMPLISHED"))).size());
 		assertEquals(
 				"Timeline",
 				userStoriesBoard
@@ -53,44 +57,42 @@ public class UserStoryFilteringTest {
 						.toString());
 		assertEquals(
 				0,
-				userStoriesBoard
-						.getUserStories(
-								new TargetFilter<UserStory>(
-										new StateUserStoryChecker(
-												"IN PROGRESS"))).size());
+				userStoriesBoard.getUserStories(
+						new TargetFilter<UserStory>(new StateUserStoryChecker(
+								"IN PROGRESS"))).size());
 	}
-	
-	//@Test
-	//public void PriorityUserStoryFilterTest() throws Exception {
-		//settings.setPossibleUserStoriesPriorities("DEFAULT", "MIN",
-			//	"MAX");
-		//userStoriesBoard.addUserStory("Timeline",
-			//	"Voglio che ci sia un pannello con dei tasti che...");
-		//userStoriesBoard.changeStoryPriority("Timeline", "MIN");
-		//userStoriesBoard.addUserStory("Board",
-				//"Voglio che ci sia un'area di testo editabile...");
-		//assertEquals(
-				//1,
-				//userStoriesBoard
-						//.getUserStories(
-								//new TargetFilter<UserStory>(
-										//new PriorityUserStoryChecker(
-												//"MIN"))).size());
-		//assertEquals(
-				//"Timeline",
-				//userStoriesBoard
-						//.getUserStories(
-								//new TargetFilter<UserStory>(
-										//new PriorityUserStoryChecker(
-												//"MIN"))).get(0)
-						//.toString());
-		//assertEquals(
-				//0,
-				//userStoriesBoard
-						//.getUserStories(
-								//new TargetFilter<UserStory>(
-										//new PriorityUserStoryChecker(
-												//"MAX"))).size());
-	//}
+
+	// @Test
+	// public void PriorityUserStoryFilterTest() throws Exception {
+	// settings.setPossibleUserStoriesPriorities("DEFAULT", "MIN",
+	// "MAX");
+	// userStoriesBoard.addUserStory("Timeline",
+	// "Voglio che ci sia un pannello con dei tasti che...");
+	// userStoriesBoard.changeStoryPriority("Timeline", "MIN");
+	// userStoriesBoard.addUserStory("Board",
+	// "Voglio che ci sia un'area di testo editabile...");
+	// assertEquals(
+	// 1,
+	// userStoriesBoard
+	// .getUserStories(
+	// new TargetFilter<UserStory>(
+	// new PriorityUserStoryChecker(
+	// "MIN"))).size());
+	// assertEquals(
+	// "Timeline",
+	// userStoriesBoard
+	// .getUserStories(
+	// new TargetFilter<UserStory>(
+	// new PriorityUserStoryChecker(
+	// "MIN"))).get(0)
+	// .toString());
+	// assertEquals(
+	// 0,
+	// userStoriesBoard
+	// .getUserStories(
+	// new TargetFilter<UserStory>(
+	// new PriorityUserStoryChecker(
+	// "MAX"))).size());
+	// }
 
 }

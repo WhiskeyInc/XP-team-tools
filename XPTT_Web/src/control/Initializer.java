@@ -1,5 +1,7 @@
 package control;
 
+import java.util.TimeZone;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +24,8 @@ public class Initializer extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		Timeline timeline = new ConcreteTimeline();
+		Timeline timeline = new ConcreteTimeline(
+				TimeZone.getTimeZone("Europe/Rome"));
 		ConcreteTeamSettings settings = new ConcreteTeamSettings();
 		TeamManager manager = new ConcreteTeamManager(settings, timeline);
 		settings.setManager(manager);
