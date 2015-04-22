@@ -6,8 +6,8 @@ import org.json.simple.parser.ParseException;
 
 public class ChatService implements IService {
 
-	ClientsManager clientsManager;
-	IChatStorer chatStorer;
+	private ClientsManager clientsManager;
+	private IChatStorer chatStorer;
 
 	public ChatService(ClientsManager clientsManager, IChatStorer chatStorer) {
 		super();

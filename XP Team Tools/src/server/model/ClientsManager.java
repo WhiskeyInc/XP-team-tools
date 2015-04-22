@@ -75,6 +75,7 @@ public class ClientsManager {
 			out.flush();
 		} catch (SocketException e) {
 			clientMap.remove(clientMap.get(teamName));
+			//TODO
 		}
 	}
 

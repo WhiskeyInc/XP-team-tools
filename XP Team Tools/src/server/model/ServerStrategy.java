@@ -11,14 +11,14 @@ import java.util.List;
  * A general server with the possibility to add services, it needs a client
  * manager to manage all the connecting clients
  * Implementation of the "design pattern strategy"
- * @author nicola
+ * @author nicola, Alberto
  *
  */
 public class ServerStrategy extends AbstractServer {
 
 	private HashMap<Integer, IService> services = new HashMap<Integer, IService>();
 
-	private HashMap<String, List<Socket>> clientMap;
+	//private HashMap<String, List<Socket>> clientMap;
 
 	private Socket clientSocket;
 	private ClientsManager clientsManager;
@@ -31,7 +31,7 @@ public class ServerStrategy extends AbstractServer {
 
 		this.clientsManager = clientsManager;
 
-		clientMap = clientsManager.getMap();
+		//clientMap = clientsManager.getMap();
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class ServerStrategy extends AbstractServer {
 
 						}
 					} catch (Exception e) {
-						clientMap.remove(clientMap.get("Prova"));
+//						clientMap.remove(clientMap.get("Prova"));
 						e.printStackTrace();
 					}
 				}

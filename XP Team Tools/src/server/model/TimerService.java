@@ -15,7 +15,7 @@ import client.model.JsonMaker;
 
 public class TimerService implements IService {
 
-	ClientsManager clientManager;
+	private ClientsManager clientManager;
 
 	public static final int TOTAL_MILLIS = 1000;
 
@@ -27,6 +27,13 @@ public class TimerService implements IService {
 		this.clientManager = clientManager;
 	}
 
+	/**
+	 * 
+	 * It starts the timer making a division by groups (the timer is
+	 * synchronized only with members of the same team)
+	 * 
+	 * @param teamName
+	 */
 	@Override
 	public void doAction(String line) throws IOException,
 			ParseException {
@@ -46,13 +53,7 @@ public class TimerService implements IService {
 		startTimer(teamName);
 	}
 
-	/**
-	 * 
-	 * It starts the timer making a division by groups (the timer is
-	 * synchronized only with members of the same team)
-	 * 
-	 * @param teamName
-	 */
+	
 	private void startTimer(final String teamName) {
 
 		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {

@@ -24,7 +24,7 @@ public class JsonObserverClientMainTimer {
 	public static void main(String[] args) {
 		
 		
-		final ObservableClient client = new ObservableClient("Pav","Prova2");
+		final ObservableClient client = new ObservableClient("Nic","Prova");
 		
 		UIObserver ui = new UIObserver(client);
 		final ChatUIObserver chatUI = ui.getChatUI();

@@ -5,14 +5,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import server.model.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import ui.ChatUI;
-import ui.TimerUI;
-import ui.UI;
-import client.model.AbstractClient;
-import client.model.ConcreteClient;
+import ui.ChatUIObserverStrategy;
+import ui.TimerUIObserverStrategy;
+import ui.UIObserverStrategy;
+import client.model.IClientService;
 import client.model.JsonMaker;
+import client.model.SetMessageService;
+import client.model.SetTimeStampService;
+import client.model.StrategyClient;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -21,18 +24,21 @@ import client.model.JsonMaker;
  * @author alberto
  *
  */
-public class JsonConcreteClientMainTimer {
+public class StrategyClientMain {
 	public static void main(String[] args) {
 		
-		UI ui = new UI();
-		final ChatUI chatUI = ui.getChatUI();
-		final TimerUI timerUI = ui.getTimerUI();
+		IClientService serviceMessage = new SetMessageService();
+		IClientService serviceTimeStamp = new SetTimeStampService();
+	
+		final StrategyClient client = new StrategyClient("Nic","LeFere");
+		client.addService(JsonParser.CHAT, serviceMessage);
+		client.addService(JsonParser.TIMER, serviceTimeStamp);
 		
+		UIObserverStrategy ui = new UIObserverStrategy(serviceMessage, serviceTimeStamp, client);
+		final ChatUIObserverStrategy chatUI = ui.getChatUI();
+		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 		
-
-		final AbstractClient client = new ConcreteClient("NicAbstract", "Prova2",
-				chatUI, timerUI);
-		client.openStreams("192.168.1.13", 9999);
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
