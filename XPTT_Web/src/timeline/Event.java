@@ -3,6 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import util.serialization.Serializable;
 import model.exceptions.UnEditableEventException;
 
 /**
@@ -18,9 +19,8 @@ import model.exceptions.UnEditableEventException;
  * @author lele, simo, ale, andre
  *
  */
-public class Event implements Comparable<Event> {
+public class Event extends Serializable implements Comparable<Event> {
 
-	private int id;
 	private ArrayList<String> participants = new ArrayList<String>();
 	private GregorianCalendar date;
 	private String name;
@@ -144,24 +144,4 @@ public class Event implements Comparable<Event> {
 	public String toString() {
 		return this.name;
 	}
-
-	/**
-	 * Let you set the id of an event. The id should be an integer number.
-	 * 
-	 * @param id
-	 *            : the id of the event
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Let you know the id of this event
-	 * 
-	 * @return the id of the event
-	 */
-	public int getId() {
-		return this.id;
-	}
-
 }

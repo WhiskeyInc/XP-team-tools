@@ -7,25 +7,22 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+import util.serialization.SerializerCollector;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import filtering.Filter;
 
-public class ConcreteTimeline implements Timeline {
+public class ConcreteTimeline extends SerializerCollector<Event> implements
+		Timeline {
 
-	private static final int CREATION_EVENT_ID = 0;
-	private static final String CREATION_EVENT = "creation";
-
-	private HashMap<Integer, Event> events = new HashMap<Integer, Event>();
-	private int nextEventId = 1;
+	public static final String CREATION_EVENT = "creation";
 
 	public ConcreteTimeline() {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
 				.getInstance(TimeZone.getTimeZone("Europe/Rome"));
 		Event event = new Event(CREATION_EVENT, creationDate, false);
-		event.setId(CREATION_EVENT_ID);
-		events.put(event.getId(), event);
+		super.addItem(event);
 	}
 
 	/*
@@ -35,7 +32,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public int getEventsNumber() {
-		return this.events.keySet().size();
+		return super.getItems().size();
 	}
 
 	/*
@@ -44,12 +41,9 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#addEvent(timeline.Event)
 	 */
 	@Override
-	public void addEvent(Event event)
-			throws InvalidDateException {
-		event.setId(nextEventId);
+	public void addEvent(Event event) throws InvalidDateException {
 		validateDate(event.getDate());
-		this.events.put(event.getId(), event);
-		updateNextEventId();
+		super.addItem(event);
 	}
 
 	/*
@@ -58,8 +52,9 @@ public class ConcreteTimeline implements Timeline {
 	 * @see timeline.Timeline#dropEvent(java.lang.String)
 	 */
 	@Override
-	public void deleteEvent(int eventId) throws NoSuchEventException {
-		this.events.remove(this.getEvent(eventId).getId());
+	public void deleteEvent(int eventId) throws NoSuchEventException{
+		this.validateEvent(eventId);
+		super.deleteItem(eventId);
 	}
 
 	/*
@@ -73,7 +68,7 @@ public class ConcreteTimeline implements Timeline {
 			throws UnEditableEventException, NoSuchEventException,
 			InvalidDateException {
 		this.validateDate(newDate);
-		this.getEvent(eventId).setDate(newDate);
+		super.getItem(eventId).setDate(newDate);
 	}
 
 	/*
@@ -84,7 +79,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public Event getEvent(int eventId) throws NoSuchEventException {
 		this.validateEvent(eventId);
-		return this.events.get(eventId);
+		return super.getItem(eventId);
 	}
 
 	/*
@@ -95,20 +90,20 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
 		ArrayList<Event> filteredAndSortedEvents = new ArrayList<Event>();
-		filteredAndSortedEvents.addAll(this.events.values());
+		filteredAndSortedEvents.addAll(super.getItems());
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
 	}
 
 	private void validateEvent(int eventId) throws NoSuchEventException {
-		if (!EventExists(eventId)) {
+		if (!eventExists(eventId)) {
 			throw new NoSuchEventException(eventId);
 		}
 	}
 
-	private boolean EventExists(int eventId) {
-		return this.events.containsKey(eventId);
+	private boolean eventExists(int eventId) {
+		return (super.getItem(eventId) != null);
 	}
 
 	private void validateDate(GregorianCalendar date)
@@ -120,14 +115,9 @@ public class ConcreteTimeline implements Timeline {
 
 	private boolean dateBeforeCreation(GregorianCalendar date) {
 		try {
-			return date.before(this.getEvent(CREATION_EVENT_ID).getDate());
+			return date.before(this.getEvent(SerializerCollector.FIRST_ID).getDate());
 		} catch (NoSuchEventException e) {
 			throw new RuntimeException("Fatal error: creation not found");
 		}
 	}
-
-	private void updateNextEventId() {
-		this.nextEventId = this.nextEventId + 1;
-	}
-
 }
