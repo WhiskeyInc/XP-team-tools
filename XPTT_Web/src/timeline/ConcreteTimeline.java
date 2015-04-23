@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.TimeZone;
 
-import util.serialization.Serializable;
-import util.serialization.SerializerCollector;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
+import util.serialization.Serializable;
+import util.serialization.SerializerCollector;
 import filtering.Filter;
 
 /**

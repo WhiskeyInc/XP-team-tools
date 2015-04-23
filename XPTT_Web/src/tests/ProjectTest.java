@@ -1,14 +1,13 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
-import model.project.ProjectsManager;
+import model.project.ProjectsCollector;
 
 import org.junit.Test;
 
 import timeline.Timeline;
-import util.serialization.SerializerCollector;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
@@ -16,7 +15,7 @@ import boards.taskBoard.ProjectTaskManager;
 
 public class ProjectTest {
 
-	private Project project = new Project(new ConcreteProjectFactory());
+	private Project project = new Project("ciao", new ConcreteProjectFactory());
 
 	@Test
 	public void test01() throws Exception {
@@ -38,7 +37,7 @@ public class ProjectTest {
 
 	@Test
 	public void test03() throws Exception {
-		Project other = new Project(new ConcreteProjectFactory());
+		Project other = new Project("nome", new ConcreteProjectFactory());
 		other.getUserStoriesManager().addUserStory(
 				new UserStory("Test", new ProjectTaskManager(
 						new ConcreteTaskManager(), project.getManager())));
@@ -47,16 +46,16 @@ public class ProjectTest {
 
 	@Test
 	public void test04() throws Exception {
-		ProjectsManager manager = new ProjectsManager();
+		ProjectsCollector manager = new ProjectsCollector();
 		manager.addProject(project);
 		assertEquals(project, manager.getProject(project.getId()));
 	}
 	
 	@Test
 	public void test05() throws Exception {
-		ProjectsManager manager = new ProjectsManager();
+		ProjectsCollector manager = new ProjectsCollector();
 		manager.addProject(project);
-		manager.addProject(new Project(new ConcreteProjectFactory()));
+		manager.addProject(new Project(null, new ConcreteProjectFactory()));
 		manager.deleteProject(project.getId());
 		assertEquals(1, manager.getProjects().size());
 	}

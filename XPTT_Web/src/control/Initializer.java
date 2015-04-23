@@ -9,7 +9,7 @@ import model.TeamComponent;
 import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
-import model.project.ProjectsManager;
+import model.project.ProjectsCollector;
 
 /**
  * Servlet implementation class Initializer
@@ -22,8 +22,8 @@ public class Initializer extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 
-		ProjectsManager projects = new ProjectsManager();
-		Project project = new Project(new ConcreteProjectFactory());
+		ProjectsCollector projects = new ProjectsCollector();
+		Project project = new Project("default", new ConcreteProjectFactory());
 		projects.addProject(project);
 		super.getServletContext().setAttribute("currentProject", project);
 		super.getServletContext().setAttribute("projects", projects);

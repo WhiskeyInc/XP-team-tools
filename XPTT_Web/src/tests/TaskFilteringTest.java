@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.TimeZone;
 
-import model.ConcreteTeamManager;
 import model.ConcreteProjectSettings;
-import model.TeamComponent;
+import model.ConcreteTeamManager;
 import model.ProjectManager;
+import model.TeamComponent;
 
 import org.junit.Test;
 
@@ -17,9 +17,9 @@ import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.ProjectTaskManager;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
-import boards.taskBoard.ProjectTaskManager;
 import filtering.TargetFilter;
 import filtering.checkers.DevelopersTaskChecker;
 import filtering.checkers.StateTaskChecker;

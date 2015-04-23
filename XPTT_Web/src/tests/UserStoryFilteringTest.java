@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.TimeZone;
 
-import model.ConcreteTeamManager;
 import model.ConcreteProjectSettings;
+import model.ConcreteTeamManager;
 import model.ProjectManager;
 
 import org.junit.Test;

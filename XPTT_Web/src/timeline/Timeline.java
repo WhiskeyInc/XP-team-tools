@@ -3,10 +3,10 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import util.serialization.Serializable;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
+import util.serialization.Serializable;
 import filtering.Filter;
 
 /**

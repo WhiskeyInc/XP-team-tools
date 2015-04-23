@@ -12,9 +12,11 @@ public class Project extends Serializable{
 	private UserStoriesManager userStoriesmanager;
 	private ProjectManager projectManager;
 	private ProjectSettings settings;
+	private String name;
 
-	public Project(ProjectFactory factory) {
+	public Project(String name, ProjectFactory factory) {
 		super();
+		this.name = name;
 		this.timeline = factory.createTimeline();
 		this.projectManager = factory.createManager();
 		this.userStoriesmanager = factory.createUserStoriesManager();
@@ -35,5 +37,10 @@ public class Project extends Serializable{
 
 	public ProjectSettings getSettings() {
 		return this.settings;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

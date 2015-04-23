@@ -16,7 +16,6 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
-import util.serialization.SerializerCollector;
 import filtering.NoFilter;
 
 public class TimelineTest {

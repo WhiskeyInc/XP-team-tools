@@ -3,8 +3,8 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import util.serialization.Serializable;
 import model.exceptions.UnEditableEventException;
+import util.serialization.Serializable;
 
 /**
  * This class represent an event which has five characteristics: an

@@ -14,7 +14,7 @@ import util.serialization.SerializerCollector;
  * @see SerializerCollector
  *
  */
-public class ProjectsManager extends SerializerCollector<Project> {
+public class ProjectsCollector extends SerializerCollector<Project> {
 
 	/**
 	 * Adds a project to the collection

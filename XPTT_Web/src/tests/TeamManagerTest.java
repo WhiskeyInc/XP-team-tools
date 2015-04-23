@@ -7,10 +7,10 @@ import static org.junit.Assert.fail;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import model.ConcreteTeamManager;
 import model.ConcreteProjectSettings;
-import model.TeamComponent;
+import model.ConcreteTeamManager;
 import model.ProjectManager;
+import model.TeamComponent;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
@@ -25,9 +25,9 @@ import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
+import boards.taskBoard.ProjectTaskManager;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
-import boards.taskBoard.ProjectTaskManager;
 
 public class TeamManagerTest {
 
