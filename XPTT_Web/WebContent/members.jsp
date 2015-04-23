@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="model.TeamSettings" import="java.util.*"%>
-<%@page import="model.Member"%>
+<%@page import="model.ProjectSettings" import="java.util.*"%>
+<%@page import="model.TeamComponent"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +64,7 @@
 
 				<ul class="list-group" id="contact-list">
 					<%
-						for (Member member : getMembersList(application)) {
+						for (TeamComponent member : getMembersList(application)) {
 					%>
 					<li class="list-group-item">
 						<div class="col-xs-12 col-sm-3">
@@ -125,10 +125,10 @@
 </body>
 </html>
 
-<%!private ArrayList<Member> getMembersList(ServletContext application) {
-		TeamSettings settings = (TeamSettings) application
+<%!private ArrayList<TeamComponent> getMembersList(ServletContext application) {
+		ProjectSettings settings = (ProjectSettings) application
 				.getAttribute("settings");
-		ArrayList<Member> list = settings.getTeamMembers();
+		ArrayList<TeamComponent> list = settings.getTeamMembers();
 		Collections.sort(list);
 		return list;
 	}%>

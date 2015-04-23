@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class SerializerCollector<T extends Serializable> {
 
-	protected static final int FIRST_ID = 0;
+	public static final int FIRST_ID = 0;
 
 	private HashMap<Integer, T> items = new HashMap<Integer, T>();
 	private int nextEventId = FIRST_ID;

@@ -2,9 +2,10 @@ package model.project;
 
 import model.ProjectManager;
 import timeline.Timeline;
+import util.serialization.Serializable;
 import boards.UserStoryBoard.UserStoriesManager;
 
-public class Project {
+public class Project extends Serializable{
 
 	private Timeline timeline;
 	private UserStoriesManager userStoriesmanager;

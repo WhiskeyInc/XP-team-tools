@@ -16,6 +16,7 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
+import util.serialization.SerializerCollector;
 import filtering.NoFilter;
 
 public class TimelineTest {
@@ -40,7 +41,7 @@ public class TimelineTest {
 			NoSuchEventException, UnEditableEventException {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
 				22, 13, 13, 13), true));
-		timeline.deleteEvent(1);
+		timeline.deleteEvent(2);
 		assertEquals(1, timeline.getEventsNumber());
 	}
 
