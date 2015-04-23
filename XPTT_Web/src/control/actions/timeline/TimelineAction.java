@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.project.Project;
 import timeline.Timeline;
 import control.HttpAction;
 
@@ -17,8 +18,8 @@ public abstract class TimelineAction implements HttpAction {
 	}
 
 	protected Timeline getTimeline(HttpServletRequest request) {
-		Timeline timeline = (Timeline) request.getServletContext()
-				.getAttribute("timeline");
+		Timeline timeline = ((Project) request.getServletContext()
+				.getAttribute("currentProject")).getTimeline();
 		return timeline;
 	}
 }

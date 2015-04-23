@@ -1,7 +1,9 @@
+<%@page import="model.project.ProjectsManager"%>
 <%@page import="filtering.Filter"%>
 <%@page import="com.sun.media.sound.InvalidDataException"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.*"%>
+<%@page import="model.project.*"%>
 <%@page import="filtering.*"%>
 <%@page import="timeline.*"%>
 <%@page import="java.text.NumberFormat"%>
@@ -192,8 +194,8 @@
 
 <%!private ArrayList<Event> getEventsList(HttpServletRequest request) {
 		ArrayList<Event> eventList = new ArrayList<Event>();
-		Timeline timeline = (Timeline) request.getServletContext()
-				.getAttribute("timeline");
+		Timeline timeline = ((Project) request.getServletContext()
+				.getAttribute("currentProject")).getTimeline();
 		Collections.sort(eventList);
 		return eventList = timeline.getEvents(getEventFilter(request));
 	}

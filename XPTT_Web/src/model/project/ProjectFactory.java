@@ -2,6 +2,7 @@ package model.project;
 
 import boards.UserStoryBoard.UserStoriesManager;
 import model.ProjectManager;
+import model.ProjectSettings;
 import timeline.Timeline;
 
 /**
@@ -18,4 +19,6 @@ public interface ProjectFactory {
 	public ProjectManager createManager();
 
 	public UserStoriesManager createUserStoriesManager();
+
+	public ProjectSettings createSettings();
 }

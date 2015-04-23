@@ -1,3 +1,4 @@
+<%@page import="model.project.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="model.ProjectSettings" import="java.util.*"%>
@@ -126,8 +127,8 @@
 </html>
 
 <%!private ArrayList<TeamComponent> getMembersList(ServletContext application) {
-		ProjectSettings settings = (ProjectSettings) application
-				.getAttribute("settings");
+		Project project = (Project) application.getAttribute("currentProject");
+		ProjectSettings settings = project.getSettings();
 		ArrayList<TeamComponent> list = settings.getTeamMembers();
 		Collections.sort(list);
 		return list;
