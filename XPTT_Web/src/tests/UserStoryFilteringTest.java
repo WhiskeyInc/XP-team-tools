@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.TimeZone;
 
 import model.ConcreteTeamManager;
-import model.ConcreteTeamSettings;
-import model.TeamManager;
+import model.ConcreteProjectSettings;
+import model.ProjectManager;
 
 import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
-import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
@@ -22,10 +22,10 @@ import filtering.checkers.StateUserStoryChecker;
 
 public class UserStoryFilteringTest {
 
-	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
-	private TeamManager teammanager = new ConcreteTeamManager(settings,
+	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
+	private ProjectManager teammanager = new ConcreteTeamManager(settings,
 			new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome")));
-	private UserStoriesManager userStoriesBoard = new TeamUserStoriesManager(
+	private UserStoriesManager userStoriesBoard = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teammanager);
 
 	@Test

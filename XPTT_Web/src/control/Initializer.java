@@ -7,9 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import model.ConcreteTeamManager;
-import model.ConcreteTeamSettings;
-import model.Member;
-import model.TeamManager;
+import model.ConcreteProjectSettings;
+import model.TeamComponent;
+import model.ProjectManager;
 import model.exceptions.NameAlreadyInUseException;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
@@ -26,17 +26,17 @@ public class Initializer extends HttpServlet {
 		super.init();
 		Timeline timeline = new ConcreteTimeline(
 				TimeZone.getTimeZone("Europe/Rome"));
-		ConcreteTeamSettings settings = new ConcreteTeamSettings();
-		TeamManager manager = new ConcreteTeamManager(settings, timeline);
+		ConcreteProjectSettings settings = new ConcreteProjectSettings();
+		ProjectManager manager = new ConcreteTeamManager(settings, timeline);
 		settings.setManager(manager);
 		super.getServletContext().setAttribute("timeline", timeline);
 		super.getServletContext().setAttribute("settings", settings);
 		super.getServletContext().setAttribute("manager", manager);
 		try {
-			settings.addTeamMember(new Member("Simone", "Colucci",
-					"Design Patterns Analyst"), new Member("Emanuele",
-					"Fabbiani", "JUnit Tester"), new Member("Alessandro",
-					"Incremona", "Open Source Responsable"), new Member(
+			settings.addTeamMember(new TeamComponent("Simone", "Colucci",
+					"Design Patterns Analyst"), new TeamComponent("Emanuele",
+					"Fabbiani", "JUnit Tester"), new TeamComponent("Alessandro",
+					"Incremona", "Open Source Responsable"), new TeamComponent(
 					"Andrea", "Aschei", "Components Analyst"));
 		} catch (NameAlreadyInUseException e) {
 			e.printStackTrace();

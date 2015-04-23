@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.TimeZone;
 
 import model.ConcreteTeamManager;
-import model.ConcreteTeamSettings;
-import model.Member;
-import model.TeamManager;
+import model.ConcreteProjectSettings;
+import model.TeamComponent;
+import model.ProjectManager;
 
 import org.junit.Test;
 
@@ -16,24 +16,24 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
-import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.TaskManager;
-import boards.taskBoard.TeamTaskManager;
+import boards.taskBoard.ProjectTaskManager;
 import filtering.NoFilter;
 
 public class TimelineIntegrationTest {
 
-	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
+	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	private Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"));
-	private TeamManager teamManager = new ConcreteTeamManager(settings,
+	private ProjectManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
-	private TaskManager taskManager = new TeamTaskManager(
+	private TaskManager taskManager = new ProjectTaskManager(
 			new ConcreteTaskManager(), teamManager);
-	private UserStoriesManager userStoriesManager = new TeamUserStoriesManager(
+	private UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teamManager);
 
 	@Test
@@ -76,8 +76,8 @@ public class TimelineIntegrationTest {
 	@Test
 	public void developersAdditionCreateswEvent() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember(new Member("Simo", "Colucci", "DP"), new Member(
-				"Lele", "Fabbiani", "Test"), new Member("Ale", "Incre",
+		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"), new TeamComponent(
+				"Lele", "Fabbiani", "Test"), new TeamComponent("Ale", "Incre",
 				"OpenSource"));
 		taskManager.addTask("timeline");
 		taskManager.addDevelopersToTask("timeline", "Simo Colucci",
@@ -123,7 +123,7 @@ public class TimelineIntegrationTest {
 		settings.setManager(teamManager);
 		settings.setPossibleTasksStates("TODO", "DONE");
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
-		settings.addTeamMember(new Member("Simo", "Colucci", "DP"), new Member(
+		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"), new TeamComponent(
 				"Lele", "Fabbiani", "Test"));
 
 		Event creation = timeline.getEvent(0);

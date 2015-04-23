@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import model.ConcreteTeamManager;
-import model.ConcreteTeamSettings;
-import model.Member;
-import model.TeamManager;
+import model.ConcreteProjectSettings;
+import model.TeamComponent;
+import model.ProjectManager;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
@@ -21,23 +21,23 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
-import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
-import boards.taskBoard.TeamTaskManager;
+import boards.taskBoard.ProjectTaskManager;
 
 public class TeamManagerTest {
 
-	private ConcreteTeamSettings settings = new ConcreteTeamSettings();
+	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	private Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
-	private TeamManager teamManager = new ConcreteTeamManager(settings,
+	private ProjectManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
-	private TaskManager taskBoard = new TeamTaskManager(
+	private TaskManager taskBoard = new ProjectTaskManager(
 			new ConcreteTaskManager(), teamManager);
-	private UserStoriesManager userStoriesBoard = new TeamUserStoriesManager(
+	private UserStoriesManager userStoriesBoard = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teamManager);
 
 	@Test
@@ -66,8 +66,8 @@ public class TeamManagerTest {
 	@Test
 	public void developersAddedTest() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember(new Member("Al", "I", "Boh"), new Member("Lele",
-				"F", "Tutto"), new Member("Boh", "BohBoh", "niente"));
+		settings.addTeamMember(new TeamComponent("Al", "I", "Boh"), new TeamComponent("Lele",
+				"F", "Tutto"), new TeamComponent("Boh", "BohBoh", "niente"));
 		teamManager.developersAdded(new Task("Timeline"), "Lele F", "Ale I");
 		timeline.addEvent(new Event("Evento nuovo", new GregorianCalendar(2050,
 				11, 15, 22, 22, 22), true));
@@ -193,7 +193,7 @@ public class TeamManagerTest {
 	public void participantAdditionFailsWhenInvalidParticipant()
 			throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember(new Member("Simone", "nonHoVoglia", "DP"));
+		settings.addTeamMember(new TeamComponent("Simone", "nonHoVoglia", "DP"));
 		try {
 			taskBoard.addDevelopersToTask("Timeline", "ziobrando");
 			fail();

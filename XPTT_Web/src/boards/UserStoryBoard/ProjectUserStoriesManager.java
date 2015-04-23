@@ -2,7 +2,7 @@ package boards.UserStoryBoard;
 
 import java.util.ArrayList;
 
-import model.TeamManager;
+import model.ProjectManager;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
@@ -13,17 +13,17 @@ import filtering.Filter;
  * A DP Decorator oriented implementation of {@link UserStoriesManager}
  * interface. This class encapsulates a concrete implementation of that
  * interface but adds team functionalities, like parameters validation (over
- * {@link TeamManager} rules) and event notification
+ * {@link ProjectManager} rules) and event notification
  * 
  * @author simone, lele, usk, incre
- * @see {@link UserStoriesManager}, {@link TeamManager}
+ * @see {@link UserStoriesManager}, {@link ProjectManager}
  * @since 1.0
  *
  */
-public class TeamUserStoriesManager implements UserStoriesManager {
+public class ProjectUserStoriesManager implements UserStoriesManager {
 
 	private UserStoriesManager userStoriesManager;
-	private TeamManager teamManager;
+	private ProjectManager teamManager;
 
 	/**
 	 * Creates a new istance of this class
@@ -32,11 +32,11 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	 *            : the concrete implementation of {@link UserStoriesManager} to
 	 *            encapsulate
 	 * @param teamManager
-	 *            : the {@link TeamManager} istance that will implement team
+	 *            : the {@link ProjectManager} istance that will implement team
 	 *            functionalities
 	 */
-	public TeamUserStoriesManager(UserStoriesManager userStoriesManager,
-			TeamManager teamManager) {
+	public ProjectUserStoriesManager(UserStoriesManager userStoriesManager,
+			ProjectManager teamManager) {
 		super();
 		this.userStoriesManager = userStoriesManager;
 		this.teamManager = teamManager;
@@ -68,9 +68,6 @@ public class TeamUserStoriesManager implements UserStoriesManager {
 	@Override
 	public void changeStoryPriority(String storyName, int targetPriority)
 			throws NoSuchUserStoryException, InvalidPriorityException {
-		if (!this.teamManager.isValidUserStoryPriority(targetPriority)) {
-			throw new InvalidPriorityException(targetPriority);
-		}
 		userStoriesManager.changeStoryPriority(storyName, targetPriority);
 		teamManager.userStoryPriorityChanged(this.getUserStory(storyName),
 				targetPriority);

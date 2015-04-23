@@ -10,21 +10,45 @@ import timeline.Timeline;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.Task;
 
-public class ConcreteTeamManager implements TeamManager {
+/**
+ * This implementation of {@link ProjectManager} interface provides project
+ * events notification through an instance of {@link Timeline} and data control
+ * over an implementation of {@link ProjectSettings} interface
+ * 
+ * @author simone
+ *
+ */
+public class ConcreteTeamManager implements ProjectManager {
 
 	private Timeline timeline;
 	private TimeZone locale = TimeZone.getTimeZone("Europe/Rome");
-	private TeamSettings settings;
+	private ProjectSettings settings;
 
-	public ConcreteTeamManager(TeamSettings settings, Timeline timeline) {
+	/**
+	 * Creates a new instance of this class
+	 * 
+	 * @param settings
+	 *            : the {@link ProjectSettings} to use for data consistency
+	 * @param timeline
+	 *            : the {@link Timeline} object through wich notify some events
+	 *            related to the project
+	 */
+	public ConcreteTeamManager(ProjectSettings settings, Timeline timeline) {
 		this.settings = settings;
 		this.timeline = timeline;
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#taskAdded(boards.taskBoard.Task)
+	 */
 	public void taskAdded(Task task) {
 		try {
-			Event event = new AutomaticEvent("Created task: " + task.toString(), TimeZone.getTimeZone("Europe/Rome"));
+			Event event = new AutomaticEvent(
+					"Created task: " + task.toString(),
+					TimeZone.getTimeZone("Europe/Rome"));
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -33,9 +57,15 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#taskDeleted(boards.taskBoard.Task)
+	 */
 	public void taskDeleted(Task task) {
 		try {
-			Event event = new AutomaticEvent("Deleted task: " + task.toString(), locale);
+			Event event = new AutomaticEvent(
+					"Deleted task: " + task.toString(), locale);
 			event.addParticipants(task.getDevelopers());
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -44,6 +74,12 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#taskStateChanged(boards.taskBoard.Task,
+	 * java.lang.String)
+	 */
 	public void taskStateChanged(Task task, String newState) {
 		try {
 			Event event = new AutomaticEvent("Changed state of task "
@@ -56,6 +92,12 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#developersAdded(boards.taskBoard.Task,
+	 * java.lang.String[])
+	 */
 	public void developersAdded(Task task, String... developers) {
 		String developerNames = "";
 		for (String developer : developers) {
@@ -132,15 +174,21 @@ public class ConcreteTeamManager implements TeamManager {
 			throwAutomaticEventDateRunTimeException();
 		}
 	}
-	
+
 	@Override
-	public void membersAdded(Member[] members) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#membersAdded(model.TeamComponent[])
+	 */
+	public void membersAdded(TeamComponent[] members) {
 		try {
 			ArrayList<String> membersList = new ArrayList<String>();
-			for (Member member : members) {
+			for (TeamComponent member : members) {
 				membersList.add(member.toString());
 			}
-			Event event = new AutomaticEvent("Added members to the team", locale);
+			Event event = new AutomaticEvent("Added members to the team",
+					locale);
 			event.addParticipants(membersList);
 			timeline.addEvent(event);
 		} catch (InvalidDateException e) {
@@ -149,27 +197,37 @@ public class ConcreteTeamManager implements TeamManager {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#isValidMember(java.lang.String)
+	 */
 	public boolean isValidMember(String member) {
 		ArrayList<String> list = new ArrayList<String>();
-		for (Member memberObject : settings.getTeamMembers()) {
+		for (TeamComponent memberObject : settings.getTeamMembers()) {
 			list.add(memberObject.toString());
 		}
 		return list.contains(member);
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#isValidTaskState(java.lang.String)
+	 */
 	public boolean isValidTaskState(String state) {
 		return settings.getPossibleTaskStates().contains(state);
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.ProjectManager#isValidUserStoryState(java.lang.String)
+	 */
 	public boolean isValidUserStoryState(String state) {
 		return settings.getPossibleUserStoryStates().contains(state);
-	}
-
-	@Override
-	public boolean isValidUserStoryPriority(int priority) {
-		return settings.isValidUserStoryPriority(priority);
 	}
 
 	private void throwAutomaticEventDateRunTimeException() {

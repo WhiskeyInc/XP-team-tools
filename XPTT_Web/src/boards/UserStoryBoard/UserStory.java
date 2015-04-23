@@ -1,6 +1,6 @@
 package boards.UserStoryBoard;
 
-
+import model.exceptions.InvalidPriorityException;
 import model.exceptions.NameAlreadyInUseException;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
@@ -16,7 +16,7 @@ public class UserStory implements Comparable<UserStory> {
 
 	public final static int MINPRIORITY = 0;
 	public final static int MAXPRIORITY = 10;
-	
+
 	private String title;
 	private String description;
 	private String state;
@@ -29,8 +29,8 @@ public class UserStory implements Comparable<UserStory> {
 	 * @param title
 	 *            : a string to identify the story
 	 * @param taskManager
-	 * 			  : an implementation of TaskManager interface, so that we can add, remove and
-	 *              edit task from this story
+	 *            : an implementation of TaskManager interface, so that we can
+	 *            add, remove and edit task from this story
 	 */
 	public UserStory(String title, TaskManager taskManager) {
 		this.state = "TODO";
@@ -49,8 +49,8 @@ public class UserStory implements Comparable<UserStory> {
 	 *            : a short string description to make story's details more
 	 *            clear
 	 * @param taskManager
-	 * 			  : an implementation of TaskManager interface, so that we can add, remove and
-	 *              edit task from this story
+	 *            : an implementation of TaskManager interface, so that we can
+	 *            add, remove and edit task from this story
 	 */
 	public UserStory(String title, String description, TaskManager taskManager) {
 		this.state = "TODO";
@@ -60,7 +60,6 @@ public class UserStory implements Comparable<UserStory> {
 		this.taskManager = taskManager;
 	}
 
-	
 	/**
 	 * Returns a description for this story
 	 * 
@@ -116,8 +115,13 @@ public class UserStory implements Comparable<UserStory> {
 	 * 
 	 * @param priority
 	 *            : a string representing the priority level
+	 * @throws InvalidPriorityException
+	 *             : if the new priority os out of range
 	 */
-	public void setPriority(int priority) {
+	public void setPriority(int priority) throws InvalidPriorityException {
+		if (!isValidUserStoryPriority(priority)) {
+			throw new InvalidPriorityException(priority);
+		}
 		this.priority = priority;
 	}
 
@@ -171,6 +175,15 @@ public class UserStory implements Comparable<UserStory> {
 
 	@Override
 	public int compareTo(UserStory otheruserstory) {
-		return ((Integer)otheruserstory.getPriority()).compareTo(this.getPriority());
+		return ((Integer) otheruserstory.getPriority()).compareTo(this
+				.getPriority());
+	}
+
+	private boolean isValidUserStoryPriority(int priority) {
+		if ((priority >= boards.UserStoryBoard.UserStory.MINPRIORITY)
+				&& (priority <= boards.UserStoryBoard.UserStory.MAXPRIORITY)) {
+			return true;
+		}
+		return false;
 	}
 }

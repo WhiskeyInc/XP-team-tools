@@ -5,35 +5,35 @@ import static org.junit.Assert.assertEquals;
 import java.util.TimeZone;
 
 import model.ConcreteTeamManager;
-import model.ConcreteTeamSettings;
-import model.Member;
-import model.TeamManager;
+import model.ConcreteProjectSettings;
+import model.TeamComponent;
+import model.ProjectManager;
 
 import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
-import boards.UserStoryBoard.TeamUserStoriesManager;
+import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
-import boards.taskBoard.TeamTaskManager;
+import boards.taskBoard.ProjectTaskManager;
 import filtering.TargetFilter;
 import filtering.checkers.DevelopersTaskChecker;
 import filtering.checkers.StateTaskChecker;
 
 public class TaskFilteringTest {
 
-	ConcreteTeamSettings settings = new ConcreteTeamSettings();
+	ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	ConcreteTaskManager taskBoard = new ConcreteTaskManager();
 	Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
 	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
-	TeamManager manager = new ConcreteTeamManager(settings, timeline);
-	UserStoriesManager userStoriesManager = new TeamUserStoriesManager(
+	ProjectManager manager = new ConcreteTeamManager(settings, timeline);
+	UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
 			userStoriesBoard, manager);
-	TaskManager teamTaskManager = new TeamTaskManager(taskBoard, manager);
+	TaskManager teamTaskManager = new ProjectTaskManager(taskBoard, manager);
 
 	@Test
 	public void StateTaskFilterTest() throws Exception {
@@ -68,8 +68,8 @@ public class TaskFilteringTest {
 	@Test
 	public void DeveloperTaskFilterTest() throws Exception {
 		settings.setManager(manager);
-		settings.addTeamMember(new Member("Simone", "C", "DP"));
-		settings.addTeamMember(new Member("Lele", "Fabs", "Tester"), new Member("Al", "Incre", "OS"));
+		settings.addTeamMember(new TeamComponent("Simone", "C", "DP"));
+		settings.addTeamMember(new TeamComponent("Lele", "Fabs", "Tester"), new TeamComponent("Al", "Incre", "OS"));
 		teamTaskManager.addTask("Filtro");
 		teamTaskManager.addTask("Bacheca");
 		teamTaskManager.addTask("Nessun Partecipante");
