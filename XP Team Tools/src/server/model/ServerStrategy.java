@@ -5,20 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A general server with the possibility to add services, it needs a client
  * manager to manage all the connecting clients
  * Implementation of the "design pattern strategy"
- * @author nicola, Alberto
- *
+ * 
+ * @author Nicola, Alberto
  */
 public class ServerStrategy extends AbstractServer {
 
 	private HashMap<Integer, IService> services = new HashMap<Integer, IService>();
-
-	//private HashMap<String, List<Socket>> clientMap;
 
 	private Socket clientSocket;
 	private ClientsManager clientsManager;
@@ -28,10 +25,7 @@ public class ServerStrategy extends AbstractServer {
 	
 	public ServerStrategy(ClientsManager clientsManager) {
 		super();
-
 		this.clientsManager = clientsManager;
-
-		//clientMap = clientsManager.getMap();
 	}
 
 	@Override
@@ -60,7 +54,16 @@ public class ServerStrategy extends AbstractServer {
 	}
 
 	private String getLine(BufferedReader in) throws IOException {
-		return in.readLine();
+		String t = "";
+	
+		try {
+			t = in.readLine();
+		} catch (Exception e) {
+			clientsManager.removeClient(clientSocket);
+			e.printStackTrace();
+		}
+		
+		return t;
 	}
 
 	private void setUpStream() throws IOException {
@@ -90,7 +93,6 @@ public class ServerStrategy extends AbstractServer {
 
 						}
 					} catch (Exception e) {
-//						clientMap.remove(clientMap.get("Prova"));
 						e.printStackTrace();
 					}
 				}
@@ -100,8 +102,13 @@ public class ServerStrategy extends AbstractServer {
 		return runnable;
 	}
 
-	public void addService(int timer, IService service) {
-		services.put(timer, service);
+	/**
+	 * Adds a servire to the server
+	 * @param code Code of the service, is one of the {@link JsonParser} constants
+	 * @param service Implementation of the servise to add
+	 */
+	public void addService(int code, IService service) {
+		services.put(code, service);
 	}
 
 }

@@ -16,7 +16,7 @@ import string.formatter.Formatter;
  * and with the purpose to work with them propagating messages and bringing
  * messages to align connected clients
  * 
- * @author nicola
+ * @author Nicola
  *
  */
 public class ClientsManager {
@@ -31,6 +31,12 @@ public class ClientsManager {
 		this.recover = recover;
 	}
 
+	/**
+	 * Handles all the operations to do when a new client connects to the Server
+	 * @param clientSocket Socket of the client connecting
+	 * @param teamName Name of his team
+	 * @throws IOException
+	 */
 	public void handleClient(Socket clientSocket, String teamName)
 			throws IOException {
 
@@ -92,15 +98,29 @@ public class ClientsManager {
 		return sentMessages;
 	}
 
-	public HashMap<String, List<Socket>> getMap() {
-		return clientMap;
-	}
-
+	/**
+	 * It propagates a message to all the clients of a team
+	 * @param message Message to propagate
+	 * @param teamName Team
+	 * @throws IOException
+	 */
 	public void propagateMessageToTeamClients(String message, String teamName)
 			throws IOException {
 		List<Socket> clientSocList = clientMap.get(teamName);
 		for (Socket socket : clientSocList) {
 			propagateMessage(message, socket, teamName);
+		}
+	}
+
+	/**
+	 * It removes a specified client from every team conversation he's inside
+	 * @param clientToRemove
+	 */
+	public void removeClient(Socket clientToRemove) {
+		for (HashMap.Entry<String, List<Socket>> entry : clientMap.entrySet())
+		{
+			List<Socket> clients = entry.getValue();
+			clients.remove(clientToRemove);
 		}
 	}
 

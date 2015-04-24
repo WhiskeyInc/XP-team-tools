@@ -6,7 +6,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  * General service served from the server
- * @author nicola
+ * @author Nicola
  */
 public interface IService {
 

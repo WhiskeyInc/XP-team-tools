@@ -27,13 +27,7 @@ public class TimerService implements IService {
 		this.clientManager = clientManager;
 	}
 
-	/**
-	 * 
-	 * It starts the timer making a division by groups (the timer is
-	 * synchronized only with members of the same team)
-	 * 
-	 * @param teamName
-	 */
+	
 	@Override
 	public void doAction(String line) throws IOException,
 			ParseException {
@@ -53,7 +47,10 @@ public class TimerService implements IService {
 		startTimer(teamName);
 	}
 
-	
+	/**
+	 * It starts the timer making a division by groups (the timer is
+	 * synchronized only with members of the same team)
+	 */
 	private void startTimer(final String teamName) {
 
 		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {
