@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import server.db.IDBConnection;
 import server.utils.auth.Authenticate;
@@ -23,16 +24,21 @@ import string.formatter.Formatter;
  * @author Nicola, koelio
  *
  */
-public class ClientsManager {
+public class ClientsManagerAuth {
 
 	private HashMap<String, List<Socket>> clientMap = new HashMap<String, List<Socket>>();
 	private IMessageRecover recover;
+	private IDBConnection connection;
+	private Authenticate auth = new Authenticate();
+	private String nickname;
+	private String pwd;
 
 	public static final int NUM_OF_MESSAGES = 10;
 
-	public ClientsManager(IMessageRecover recover) {
+	public ClientsManagerAuth(IMessageRecover recover, IDBConnection connection) {
 		super();
 		this.recover = recover;
+		this.connection = connection;
 	}
 
 	/**
@@ -44,13 +50,24 @@ public class ClientsManager {
 	 * @param teamName
 	 *            Name of his team
 	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 *             relates to authentication methods in {@link Authenticate}
+	 *             TODO to be handled
+	 * @throws SQLException
+	 *             relates to {@link IDBConnection} when a connection through
+	 *             JDBC is established TODO to be handled
 	 */
 	public void handleClient(Socket clientSocket, String teamName)
-			throws IOException {
+			throws IOException, NoSuchAlgorithmException, SQLException {
 
-		
+		if (authenticate(nickname, pwd)) {
 			updateClientsMap(clientSocket, teamName);
-	
+		} else {
+			// throw new IOException("The user " + nickname
+			// + "does not exist or invalid password");
+			System.out.println("Utente non autenticato!");
+		}
+
 		try {
 			alignClient(clientSocket, teamName);
 		} catch (NoMessagesException e) {
@@ -135,6 +152,26 @@ public class ClientsManager {
 			List<Socket> clients = entry.getValue();
 			clients.remove(clientToRemove);
 		}
+	}
+
+	private boolean authenticate(String nickname, String pwd)
+			throws IOException, NoSuchAlgorithmException, SQLException { // TODO
+
+		boolean autheniticated = auth.authenticate(connection.getConnection(),
+				nickname, pwd);
+
+		return autheniticated;
+	}
+
+	public void setAuth(String authData) {
+		StringTokenizer tok = new StringTokenizer(authData, "\t");
+		// System.out.println(tok.nextToken());
+		// System.out.println(tok.nextToken());
+		// authData[0]= " ";
+		// authData[1]= " ";
+		nickname = tok.nextToken();
+		pwd = tok.nextToken();
+
 	}
 
 }

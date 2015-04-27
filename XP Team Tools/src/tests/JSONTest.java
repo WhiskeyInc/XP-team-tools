@@ -1,14 +1,15 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import client.model.JsonMaker;
 import server.model.JsonParser;
+import client.model.JsonMaker;
 
 public class JSONTest {
 

@@ -1,0 +1,31 @@
+****************************************
+HOW TO USE THE AUTHENTICATION PROCEDURES
+****************************************
+
+1.  Add to your classpath the mysql-connector*.jar
+	and sun.misc.BASE64Decoder.jar included in the libraries folder.
+	(There should be no dependency errors at this point).
+
+2.  Run up a MySQL server, although other servers might work.
+
+3.  You have to create a database named extreme01 or set a different one 
+	in the Main. Also other params can be configured in there. 
+	For ur comfort you can download the dump of the extreme01 db I have created
+	for running tests (test.auth.*Auth1,2 etc): http://bit.ly/1b7KoUi or in files folder.
+	
+4.	However you named your database, there must be a TABLE named CREDENTIAL
+	with 5 COLUMNS: USER, PASSWORD, SALT, DATUM, COMMENTS (I put datum and comments
+	just for fun).
+	
+5.  You don't have to create the table manually, just run CreateTableMain.
+
+6.  In order to be able to authenticate you need to "register" a new user, to put a new row:
+	To create a new user modify the related parameters in CreateUserMainTest and run it.
+	It automatically hashes your data and writes it onto the DB.
+
+7.	Finally, you can run ServerMainAuth and ClientMainAuth 1 or 2 and test the communication.
+
+	P.S. All the files ending with *Auth are needed to make it work, thus when 
+	editing code take in mind this is the latest version of the app.
+*****************************************
+	Have fun.

@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 /**
  * A general server with the possibility to add services, it needs a client
@@ -13,16 +16,16 @@ import java.util.HashMap;
  * 
  * @author Nicola, Alberto
  */
-public class ServerStrategy extends AbstractServer {
+public class ServerStrategyAuth extends AbstractServer {
 
 	private HashMap<Integer, IService> services = new HashMap<Integer, IService>();
 
 	private Socket clientSocket;
-	private ClientsManager clientsManager;
+	private ClientsManagerAuth clientsManager;
 
 	private BufferedReader in;
 
-	public ServerStrategy(ClientsManager clientsManager) {
+	public ServerStrategyAuth(ClientsManagerAuth clientsManager) {
 		super();
 		this.clientsManager = clientsManager;
 	}
@@ -36,9 +39,16 @@ public class ServerStrategy extends AbstractServer {
 
 				clientSocket = serverSocket.accept();
 				setUpStream();
-			
+				try {
+					clientsManager.setAuth(getAuthData());
 					clientsManager.handleClient(clientSocket, getTeamName());
-				
+				} catch (NoSuchAlgorithmException | SQLException e) {
+					// TODO Auto-generated catch block
+					System.err
+							.println("Problem about handling clients (getAuth stuff)");
+					e.printStackTrace();
+				}
+
 				Runnable runnable = generateRunnable();
 				Thread thread = new Thread(runnable);
 				thread.start();
@@ -50,8 +60,11 @@ public class ServerStrategy extends AbstractServer {
 	}
 
 	private String getTeamName() throws IOException {
-		return getLine(in);
-		// TODO
+		return getLine(in); // TODO
+	}
+
+	private String getAuthData() throws IOException {
+		return getLine(in); // TODO come sopra
 	}
 
 	private String getLine(BufferedReader in) throws IOException {

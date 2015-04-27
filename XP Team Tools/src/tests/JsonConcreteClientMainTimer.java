@@ -32,7 +32,7 @@ public class JsonConcreteClientMainTimer {
 
 		final AbstractClient client = new ConcreteClient("NicAbstract", "Prova2",
 				chatUI, timerUI);
-		client.openStreams("192.168.1.13", 9999);
+		client.openStreams("localhost", 9999);
 		Runnable runnable = new Runnable() {
 
 			@Override
