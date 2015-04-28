@@ -1,7 +1,10 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,28 +47,17 @@ public class UserListUI extends JPanel {
 		}
 		JScrollPane pane = new JScrollPane(panel1);
 		super.add(pane);
+		
 		button.setFont(new Font("TimesRoman", Font.BOLD, 13));
-        button.setSize(getMinimumSize());
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				selectedNicknames.clear();
-				for (int i = 0; i < box.size(); i++) {
-					if (box.get(i).isSelected()) {
-						selectedNicknames.add(nicknames.get(i));
-					}
-				}
-				
-				//only for testing
-				System.out.println("Gli utenti selezionati sono "+selectedNicknames);
-			}
-		});
+		
 		super.add(button);
 
 	}
 
+	public void setButtonAction(ActionListener listener){
+		button.addActionListener(listener);
+	}
+	
 	public ArrayList<JCheckBox> getBox() {
 		return box;
 	}
