@@ -17,10 +17,24 @@
 				.getAttribute("projects")).getProjects()) {
 	%>
 	<p>
-		<%=project.toString()%>
+		<%=project.toString()+" "%>
+		<%=project.getId()%>
 	</p>
 	<%
 		}
 	%>
+	<form action="ProjectSetter" method="post">
+		<input type="text" name="id" placeholder="Id"> <input
+			type="submit" value="Set as current">			
+	</form>
+		<%
+			Project project = (Project) session.getAttribute("currentProject");
+			if(project==null){
+				project= (Project) application.getAttribute("defaultProject");
+			}
+			%>
+	<p>
+		<%=project.toString()%>
+	</p>
 </body>
 </html>

@@ -29,6 +29,7 @@ public class ProjectAdder extends HttpServlet {
 				.getServletContext().getAttribute("projects");
 		projects.addProject(new Project(request.getParameter("name"),
 				new ConcreteProjectFactory()));
+		response.sendRedirect("projects.jsp");
 	}
 
 }
