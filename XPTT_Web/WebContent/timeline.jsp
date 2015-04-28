@@ -193,11 +193,11 @@
 </html>
 
 <%!private ArrayList<Event> getEventsList(HttpServletRequest request) {
-		ArrayList<Event> eventList = new ArrayList<Event>();
-		Timeline timeline = ((Project) request.getServletContext()
-				.getAttribute("currentProject")).getTimeline();
-		Collections.sort(eventList);
-		return eventList = timeline.getEvents(getEventFilter(request));
+		Project currentProject =(Project) request.getSession().getAttribute("currentProject");
+		if(currentProject == null){
+			currentProject =(Project) request.getServletContext().getAttribute("defaultProject");
+		}
+		return currentProject.getTimeline().getEvents(getEventFilter(request));
 	}
 
 	private String getFormattedDate(Event event) {

@@ -28,7 +28,7 @@ public class Initializer extends HttpServlet {
 		super.getServletContext().setAttribute("defaultProject", project);
 		super.getServletContext().setAttribute("projects", projects);
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) ((Project) super
-				.getServletContext().getAttribute("currentProject"))
+				.getServletContext().getAttribute("defaultProject"))
 				.getSettings();
 		settings.setManager(project.getManager());
 		try {

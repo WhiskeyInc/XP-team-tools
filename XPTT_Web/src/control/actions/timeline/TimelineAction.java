@@ -18,8 +18,10 @@ public abstract class TimelineAction implements HttpAction {
 	}
 
 	protected Timeline getTimeline(HttpServletRequest request) {
-		Timeline timeline = ((Project) request.getServletContext()
-				.getAttribute("currentProject")).getTimeline();
-		return timeline;
+		Project currentProject =(Project) request.getSession().getAttribute("currentProject");
+		if(currentProject == null){
+			currentProject =(Project) request.getServletContext().getAttribute("defaultProject");
+		}
+		return currentProject.getTimeline();
 	}
 }
