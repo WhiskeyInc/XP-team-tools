@@ -3,13 +3,13 @@ package server.events.tests;
 import java.util.ArrayList;
 
 import server.events.ISendEvent;
-import server.events.Sender;
+import server.events.SendPost;
 
-public class EventSenderTest {
+public class EventSendPostTestMain {
 	
 	public static void main(String[] args) {
 		
-		ISendEvent sender = new Sender("localhost",9000);
+		ISendEvent sender = new SendPost("http://localhost:9998/requests");
 		
 		ArrayList<String> participants = new ArrayList<String>();
 		participants.add("Mario");
@@ -18,7 +18,7 @@ public class EventSenderTest {
 		participants.add("Ermenegildo");
 		
 		sender.sendEventCreation("bo", participants);
-		
+
 	}
 
 }

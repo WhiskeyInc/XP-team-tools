@@ -3,68 +3,41 @@ package server.events.tests;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Socket;
+import java.io.OutputStream;
 
-import server.model.AbstractServer;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 /**
  * Class to simulate the second server to who we communicate the events
  * 
  * @author Nicola
  */
-public class SimulationServer extends AbstractServer {
+public class SimulationServer implements HttpHandler {
 
-	private Socket clientSocket;
+	@Override
+	public void handle(HttpExchange ex) throws IOException {
 
-	public SimulationServer() {
-		super();
-	}
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				ex.getRequestBody()));
 
-	/**
-	 * It listen the arrival of clients and handle it, only printing the stream
-	 */
-	public void listenClients() {
-
-		try {
-			while (true) {
-				clientSocket = serverSocket.accept();
-
-				Runnable runnable = getRunnable();
-				Thread thread = new Thread(runnable);
-				thread.start();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		System.out.println("Data received from "
+				+ ex.getRemoteAddress().getHostName() + ":"
+				+ ex.getRemoteAddress().getPort() + " ->");
+		
+		String data = "";	
+		String temp = reader.readLine();
+		while (temp != null) {
+			data += temp;
+			temp = reader.readLine();
 		}
-	}
+		System.out.println(data);
 
-	private Runnable getRunnable() {
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						String line = getLine();
-						if (line != null) {
-							System.out.println(line); // TODO
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
-		};
-		return runnable;
-	}
-
-	private String getLine() throws IOException {
-		String line;
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				clientSocket.getInputStream()));
-		line = in.readLine();
-		return line;
+		String response = "Thank you for the data, beibi";
+		ex.sendResponseHeaders(200, response.length());
+		OutputStream os = ex.getResponseBody();
+		os.write(response.getBytes());
+		os.close();
 	}
 
 }
