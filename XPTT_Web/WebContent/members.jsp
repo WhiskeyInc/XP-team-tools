@@ -65,7 +65,7 @@
 
 				<ul class="list-group" id="contact-list">
 					<%
-						for (TeamComponent member : getMembersList(application)) {
+						for (TeamComponent member : getMembersList(request)) {
 					%>
 					<li class="list-group-item">
 						<div class="col-xs-12 col-sm-3">
@@ -126,8 +126,13 @@
 </body>
 </html>
 
-<%!private ArrayList<TeamComponent> getMembersList(ServletContext application) {
-		Project project = (Project) application.getAttribute("currentProject");
+<%!private ArrayList<TeamComponent> getMembersList(HttpServletRequest request) {
+		Project project = (Project) request.getSession().getAttribute(
+				"currentProject");
+		if (project == null) {
+			project = (Project) request.getServletContext().getAttribute(
+					"defaultProject");
+		}
 		ProjectSettings settings = project.getSettings();
 		ArrayList<TeamComponent> list = settings.getTeamMembers();
 		Collections.sort(list);
