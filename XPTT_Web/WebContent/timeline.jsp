@@ -1,6 +1,5 @@
 <%@page import="model.project.ProjectsCollector"%>
 <%@page import="filtering.Filter"%>
-<%@page import="com.sun.media.sound.InvalidDataException"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="model.project.*"%>
