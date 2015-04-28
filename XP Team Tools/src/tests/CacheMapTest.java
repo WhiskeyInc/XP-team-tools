@@ -6,13 +6,14 @@ import org.junit.Test;
 
 import server.model.CacheMap;
 import server.model.NoMessagesException;
+import server.utils.Logger;
 
 public class CacheMapTest {
 
 	@Test
 	public void test() throws NoMessagesException {
 
-		CacheMap cache = new CacheMap();
+		CacheMap cache = new CacheMap(new Logger());
 		int numOfMessages = 5;
 		int totMessages = 10;
 

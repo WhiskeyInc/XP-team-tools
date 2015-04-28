@@ -6,11 +6,12 @@ import server.model.ClientsManager;
 import server.model.JsonParser;
 import server.model.ServerStrategy;
 import server.model.TimerService;
+import server.utils.Logger;
 
 public class StrategyServerMain {
 	public static void main(String[] args) {
 		
-		CacheMap cache = new CacheMap();
+		CacheMap cache = new CacheMap(new Logger());
 		
 		ClientsManager clientsManager = new ClientsManager(cache);
 		

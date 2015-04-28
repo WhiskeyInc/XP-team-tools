@@ -8,11 +8,12 @@ import server.model.ClientsManagerAuth;
 import server.model.JsonParser;
 import server.model.ServerStrategyAuth;
 import server.model.TimerServiceAuth;
+import server.utils.Logger;
 
 public class ServerMainAuth1 {
 	public static void main(String[] args) {
 
-		CacheMap cache = new CacheMap();
+		CacheMap cache = new CacheMap(new Logger());
 		IDBConnection db = new DBConnection();
 
 		try {
@@ -25,7 +26,8 @@ public class ServerMainAuth1 {
 
 		ServerStrategyAuth server = new ServerStrategyAuth(clientsManager);
 
-		server.addService(JsonParser.TIMER, new TimerServiceAuth(clientsManager));
+		server.addService(JsonParser.TIMER,
+				new TimerServiceAuth(clientsManager));
 		server.addService(JsonParser.CHAT, new ChatServiceAuth(clientsManager,
 				cache));
 

@@ -21,16 +21,12 @@ import string.formatter.Formatter;
  *
  */
 
-public class FilesWriter {
+public class Logger implements ILogger {
 
 	private Map<String, ArrayList<String>> mapMessageList;
 
-	public FilesWriter(CacheMap cache) {
-		this.mapMessageList = cache.getMessages();
-	}
-
 	/**
-	 * Writes messages on the database
+	 * Writes messages onto the database
 	 */
 	public void writeDatabase() {
 		try {

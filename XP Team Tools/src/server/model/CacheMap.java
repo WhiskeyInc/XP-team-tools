@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import server.utils.FilesWriter;
+import server.utils.ILogger;
 
 /**
- * A class that manages the map of messages 
+ * A class that manages the map of messages
  * 
  * @author alberto
  *
@@ -15,8 +15,14 @@ import server.utils.FilesWriter;
 public class CacheMap implements IChatStorer, IMessageRecover {
 
 	private Map<String, ArrayList<String>> mapMessageList = new HashMap<String, ArrayList<String>>();
-	private FilesWriter database = new FilesWriter(this);
-	
+	private ILogger log;
+
+	public CacheMap(ILogger log) {
+		super();
+		this.log = log;
+		log.setMap(mapMessageList);
+	}
+
 	@Override
 	public void storeMessage(String teamName, String message) {
 		if (mapMessageList.containsKey(teamName)) {
@@ -63,16 +69,16 @@ public class CacheMap implements IChatStorer, IMessageRecover {
 
 	@Override
 	public int getNumOfMessages(String teamName) throws NoMessagesException {
-		if(mapMessageList.get(teamName) == null)
+		if (mapMessageList.get(teamName) == null)
 			throw new NoMessagesException("No messages");
-		
+
 		return mapMessageList.get(teamName).size();
 	}
-	
+
 	/**
 	 * It writes messages on team's Database
 	 */
-	public void writeData(){
-		database.writeDatabase();
+	public void writeData() {
+		log.writeDatabase();
 	}
 }

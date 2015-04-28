@@ -3,10 +3,11 @@ package tests;
 import server.model.AbstractServer;
 import server.model.CacheMap;
 import server.model.JsonServer;
+import server.utils.Logger;
 
 public class JsonServerMain {
 	public static void main(String[] args) {
-		CacheMap cache = new CacheMap();
+		CacheMap cache = new CacheMap(new Logger());
 		
 		AbstractServer server = new JsonServer(cache, cache);
 		

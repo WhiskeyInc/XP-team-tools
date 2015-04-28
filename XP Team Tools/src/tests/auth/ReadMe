@@ -20,7 +20,7 @@ HOW TO USE THE AUTHENTICATION PROCEDURES
 5.  You don't have to create the table manually, just run CreateTableMain.
 
 6.  In order to be able to authenticate you need to "register" a new user, to put a new row:
-	To create a new user modify the related parameters in CreateUserMainTest and run it.
+	to create a new user modify the related parameters in CreateUserMainTest and run it.
 	It automatically hashes your data and writes it onto the DB.
 
 7.	Finally, you can run ServerMainAuth and ClientMainAuth 1 or 2 and test the communication.
