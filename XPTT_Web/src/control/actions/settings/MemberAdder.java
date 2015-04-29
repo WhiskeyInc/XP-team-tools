@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.ConcreteProjectSettings;
 import model.TeamComponent;
 
-public class MemberAdder extends SettingsAction {
+public class MemberAdder extends ProjectSettingsAction {
 
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)

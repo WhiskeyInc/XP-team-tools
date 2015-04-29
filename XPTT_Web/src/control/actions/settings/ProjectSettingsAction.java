@@ -4,13 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.ProjectSettings;
 import model.project.Project;
-import control.actions.AdministrationAction;
+import control.HttpAction;
+import control.services.LoginService;
 
-public abstract class SettingsAction extends AdministrationAction {
+public abstract class ProjectSettingsAction implements HttpAction {
 
 	protected ProjectSettings getSettings(HttpServletRequest request)
 			throws AccessDeniedException {
-		if (super.autenticateUser(request)) {
+		if (LoginService .autenticateUser(request)) {
 			Project project = (Project) request.getSession().getAttribute(
 					"currentProject");
 			if (project == null) {
