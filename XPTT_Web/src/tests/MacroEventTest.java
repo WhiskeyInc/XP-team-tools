@@ -1,11 +1,13 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import model.exceptions.InvalidDateException;
+import model.exceptions.UnEditableEventException;
 
 import org.junit.Test;
 
@@ -20,6 +22,7 @@ public class MacroEventTest {
 			TimeZone.getTimeZone("Europe/Rome"));
 
 	@Test
+	@SuppressWarnings("unused")
 	public void constructorTest() {
 		try {
 			MacroEvent macroEvent = new MacroEvent("First xTrEAM release",
@@ -41,9 +44,7 @@ public class MacroEventTest {
 	
 	@Test
 	public void creationTest() throws Exception {
-		MacroEvent macroEvent = new MacroEvent("First xTrEAM release",
-				new GregorianCalendar(2020, 4, 23), new GregorianCalendar(2020, 5,
-						2), timeline);
+		MacroEvent macroEvent = createEvent();
 		assertEquals(1, macroEvent.getEventsNumber());
 		assertEquals(ConcreteTimeline.DEFAULT_CREATION_EVENT, macroEvent
 				.getEvent(SerializerCollector.FIRST_ID).toString());
@@ -51,9 +52,7 @@ public class MacroEventTest {
 
 	@Test
 	public void dateTest() throws InvalidDateException {
-		MacroEvent macroEvent = new MacroEvent("First xTrEAM release",
-				new GregorianCalendar(2020, 4, 23), new GregorianCalendar(2020, 5,
-						2), timeline);
+		MacroEvent macroEvent = createEvent();
 		try {
 			macroEvent.addEvent(new Event("Compleanno Luca",
 					new GregorianCalendar(2020, 5, 1)));
@@ -75,5 +74,26 @@ public class MacroEventTest {
 		} catch (InvalidDateException e) {
 			assertEquals(1, 1);
 		}
+	}
+	
+	@Test
+	public void unEditableMicroEventTest() throws Exception {
+		MacroEvent macroEvent = this.createEvent();
+		macroEvent.addEvent(new Event("Compleanno Simo", new GregorianCalendar(
+				2020, 4, 25)));
+		try {
+			macroEvent.moveEvent(1, new GregorianCalendar(
+					2020, 5, 1));
+			fail();
+		} catch (UnEditableEventException e) {
+			assertEquals(1, 1);
+		}
+	}
+
+	private MacroEvent createEvent() throws InvalidDateException {
+		MacroEvent macroEvent = new MacroEvent("First xTrEAM release",
+				new GregorianCalendar(2020, 4, 23), new GregorianCalendar(2020, 5,
+						2), timeline);
+		return macroEvent;
 	}
 }

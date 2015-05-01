@@ -16,7 +16,7 @@ public class MacroEvent extends Event implements Timeline {
 
 	public MacroEvent(String name, GregorianCalendar fromDate,
 			GregorianCalendar toDate, Timeline timeline) throws InvalidDateException {
-		super(name, toDate, false);
+		super(name, toDate, true);
 		this.timeline = timeline;
 		this.validateFromDate(fromDate);
 		this.fromDate = fromDate;
@@ -26,7 +26,8 @@ public class MacroEvent extends Event implements Timeline {
 
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
-		validateEvent(event);
+		validateDate(event.getDate());
+		event.setUneditable();
 		this.timeline.addEvent(event);
 	}
 
@@ -58,14 +59,14 @@ public class MacroEvent extends Event implements Timeline {
 		return this.timeline.getEventsNumber();
 	}
 	
-	private void validateEvent(Event event) throws InvalidDateException {
-		if (isValidDate(event)) {
-			throw new InvalidDateException(event.getDate());
+	private void validateDate(GregorianCalendar date) throws InvalidDateException {
+		if (isValidDate(date)) {
+			throw new InvalidDateException(date);
 		}
 	}
 
-	private boolean isValidDate(Event event) {
-		return !(event.getDate().after(this.fromDate) && event.getDate().before(
+	private boolean isValidDate(GregorianCalendar date) {
+		return !(date.after(this.fromDate) && date.before(
 				this.toDate));
 	}
 	

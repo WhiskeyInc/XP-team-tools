@@ -41,7 +41,7 @@ public class TimelineIntegrationTest {
 		taskManager.addTask("Nuovo task", "Integrare task in timeline");
 		assertEquals(2, timeline.getEventsNumber());
 		assertEquals("Created task: Nuovo task",
-				timeline.getEvents(new NoFilter<Event>()).get(0).toString());
+				timeline.getEvents(new NoFilter<Event>()).get(1).toString());
 	}
 
 	@Test

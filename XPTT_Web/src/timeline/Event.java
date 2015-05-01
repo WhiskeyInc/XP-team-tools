@@ -144,4 +144,9 @@ public class Event extends Serializable implements Comparable<Event> {
 	public String toString() {
 		return this.name;
 	}
+	
+	public void setUneditable() {
+		this.editable = false;
+	}
+
 }

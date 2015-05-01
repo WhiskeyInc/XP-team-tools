@@ -40,7 +40,7 @@ public class TimelineTest {
 			NoSuchEventException, UnEditableEventException {
 		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
 				22, 13, 13, 13), true));
-		timeline.deleteEvent(2);
+		timeline.deleteEvent(1);
 		assertEquals(1, timeline.getEventsNumber());
 	}
 
