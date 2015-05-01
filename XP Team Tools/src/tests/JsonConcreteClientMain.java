@@ -5,12 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import string.formatter.Formatter;
+import protocol.JsonMaker;
 import ui.ChatUITestable;
 import ui.TimerUI;
 import client.model.AbstractClient;
 import client.model.ConcreteClient;
-import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -21,12 +20,11 @@ import client.model.JsonMaker;
  */
 public class JsonConcreteClientMain {
 	public static void main(String[] args) {
-		
 
 		final ChatUITestable chatUI = new ChatUITestable();
-		
-		
-		final AbstractClient client = new ConcreteClient("Alb", "TeamFere", chatUI, new TimerUI());
+
+		final AbstractClient client = new ConcreteClient("Alb", "TeamFere",
+				chatUI, new TimerUI());
 		client.openStreams("koelio.no-ip.org", 9999);
 		Runnable runnable = new Runnable() {
 
@@ -45,14 +43,15 @@ public class JsonConcreteClientMain {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
+//				client.sendMessageToServer(JsonMaker.newChatRequest(
+//						teamName, (String[])null));
 				chatUI.setMessageText(null);
 			}
 		});
 
 		Thread thread = new Thread(runnable);
 		thread.start();
-		
+
 		JFrame frame = new JFrame();
 		frame.setSize(400, 500);
 		frame.getContentPane().add(chatUI);

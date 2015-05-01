@@ -5,12 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import string.formatter.Formatter;
+import protocol.JsonMaker;
 import timer.TimerFormatter;
 import ui.ChatUIObserver;
 import ui.TimerUIObserver;
 import ui.UIObserver;
-import client.model.JsonMaker;
 import client.model.ObservableClient;
 
 /**
@@ -48,10 +47,9 @@ public class JsonObserverClientMainTimer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(
-						teamName,
-						Formatter.formatNickname(client.getNickname())
-								+ chatUI.getMessage()));
+//				client.sendMessageToServer(JsonMaker.newChatRequest(
+//						teamName,
+//						(String[])null));
 				chatUI.emptyMessageArea();
 			}
 		});
@@ -79,10 +77,9 @@ public class JsonObserverClientMainTimer {
 
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					e.consume();
-					client.sendMessageToServer(JsonMaker.chatRequest(
-							teamName,
-							Formatter.formatNickname(client.getNickname())
-									+ chatUI.getMessage()));
+//					client.sendMessageToServer(JsonMaker.newChatRequest(
+//							teamName,
+//							(String[])null));
 					chatUI.emptyMessageArea();
 					//chat.getMessageArea().setCaretPosition(0);
 				}

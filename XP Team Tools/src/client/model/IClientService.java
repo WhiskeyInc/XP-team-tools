@@ -10,9 +10,9 @@ import java.util.Observer;
 
 public interface IClientService {
 
-	public abstract void setAttribute(String attribute);
+	public abstract void setAttribute(String request);
 
-	public abstract String getAttribute();
+	public abstract String[] getAttribute();
 	
 	public abstract void addObserver(Observer observer);
 

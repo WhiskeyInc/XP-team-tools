@@ -5,14 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import string.formatter.Formatter;
+import protocol.JsonMaker;
 import timer.TimerFormatter;
 import ui.ChatUI;
 import ui.TimerUI;
 import ui.UI;
 import client.model.AbstractClient;
 import client.model.ConcreteClient;
-import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -50,10 +49,9 @@ public class JsonConcreteClientMainTimer1 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(
-						teamName,
-						Formatter.formatNickname(client.getNickname())
-								+ chatUI.getMessage()));
+//				client.sendMessageToServer(JsonMaker.newChatRequest(
+//						teamName,
+//						(String[])null));
 				chatUI.emptyMessageArea();
 			}
 		});
@@ -81,10 +79,9 @@ public class JsonConcreteClientMainTimer1 {
 
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					e.consume();
-					client.sendMessageToServer(JsonMaker.chatRequest(
-							teamName,
-							Formatter.formatNickname(client.getNickname())
-									+ chatUI.getMessage()));
+//					client.sendMessageToServer(JsonMaker.newChatRequest(
+//							teamName,
+//							(String[])null));
 					chatUI.emptyMessageArea();
 					//chat.getMessageArea().setCaretPosition(0);
 				}

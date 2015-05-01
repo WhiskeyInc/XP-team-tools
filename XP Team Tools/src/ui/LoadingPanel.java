@@ -1,7 +1,6 @@
 package ui;
 
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;

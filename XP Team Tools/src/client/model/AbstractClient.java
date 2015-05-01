@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 

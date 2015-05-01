@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.HashMap;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 import string.formatter.Formatter;
 
 /**

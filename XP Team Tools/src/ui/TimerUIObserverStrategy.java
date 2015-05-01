@@ -124,7 +124,7 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		setTimer(service.getAttribute());
+		setTimer(service.getAttribute()[0]);
 		if(!service.getAttribute().equals(TimerUIObserverStrategy.ENDTIMER)) {
 			setTimerEditable(false);
 		}

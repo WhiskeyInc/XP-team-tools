@@ -41,6 +41,7 @@ public class CacheList implements IChatStorer, IMessageRecover{
 	public int getNumOfMessages(String teamName) throws NoMessagesException {
 		return messageList.size();
 	}
+
 	
 
 }

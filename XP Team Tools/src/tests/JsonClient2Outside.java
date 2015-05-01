@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import string.formatter.Formatter;
+import protocol.JsonMaker;
 import ui.ChatUITestable;
 import client.model.Client2;
-import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -43,7 +42,8 @@ public class JsonClient2Outside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
+		//		client.sendMessageToServer(JsonMaker.newChatRequest(
+	//					teamName, (String[]) null));
 			}
 		});
 		JFrame frame = new JFrame();

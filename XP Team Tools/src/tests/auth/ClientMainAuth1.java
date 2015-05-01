@@ -5,17 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import ui.ChatUIObserverStrategyAuth;
 import ui.TimerUIObserverStrategy;
-import ui.UIObserverStrategyAuth;
 import client.model.IClientService;
 import client.model.JsonMaker;
 import client.model.SetMessageService;
 import client.model.SetTimeStampService;
-import client.model.StrategyClientAuth;
 
 public class ClientMainAuth1 {
 	public static void main(String[] args) {

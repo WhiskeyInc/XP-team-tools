@@ -17,6 +17,12 @@ public class CacheMap implements IChatStorer, IMessageRecover {
 	private Map<String, ArrayList<String>> mapMessageList = new HashMap<String, ArrayList<String>>();
 	private ILogger log;
 
+	
+	
+	public CacheMap() {
+		super();
+	}
+
 	public CacheMap(ILogger log) {
 		super();
 		this.log = log;

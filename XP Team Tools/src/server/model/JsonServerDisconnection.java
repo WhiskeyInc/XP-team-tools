@@ -16,9 +16,10 @@ import java.util.Map;
 
 import javax.swing.Timer;
 
+import protocol.JsonMaker;
+import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import client.model.JsonMaker;
 
 /**
  * 

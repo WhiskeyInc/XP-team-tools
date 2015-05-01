@@ -3,10 +3,9 @@ package tests;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import string.formatter.Formatter;
+import protocol.JsonMaker;
 import ui.ChatUITestable;
 import client.model.Client2;
-import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2
@@ -35,15 +34,16 @@ public class JsonClientMainDifferentTeam2 {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		final String teamName = client.getTeamName();
-		client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + "Io sono Pavlo"));
-
+//		client.sendMessageToServer(JsonMaker.newChatRequest(
+//				teamName, (String[])null));
 
 		final ChatUITestable chatUI = new ChatUITestable();
 		chatUI.setButtonAction(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.sendMessageToServer(JsonMaker.chatRequest(teamName, Formatter.formatNickname(client.getNickname()) + chatUI.getMessage()));
+//				client.sendMessageToServer(JsonMaker.newChatRequest(
+//						teamName, (String[])null));
 			}
 		});
 		chatUI.setMessageText("E' vero, meglio che strisci tu Incre");

@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.SocketException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import server.db.IDBConnection;
-import server.utils.auth.Authenticate;
 import string.formatter.Formatter;
 
 /**

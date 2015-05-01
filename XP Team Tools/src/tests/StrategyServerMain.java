@@ -1,25 +1,38 @@
 package tests;
 
-import server.model.CacheMap;
+import protocol.JsonMaker;
+import protocol.JsonParser;
+import server.model.AddTeamMembService;
 import server.model.ChatService;
-import server.model.ClientsManager;
-import server.model.JsonParser;
-import server.model.ServerStrategy;
-import server.model.TimerService;
-import server.utils.Logger;
+import server.model.ChatsManager;
+import server.model.NewChatService;
+import server.model.NewTeamService;
+import server.model.ServerStrategy1_1;
+import server.model.TeamsManager;
+import server.model.TimerService1_1;
+import server.model.TimersManager;
 
 public class StrategyServerMain {
 	public static void main(String[] args) {
+
+		ChatsManager chatsManager = ChatsManager.getInstance();
+		TimersManager timersManager = TimersManager.getInstance();
+		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager);
+
+		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager, timersManager, server.getClientsManager()));
+		server.addService(JsonParser.CHAT, new ChatService(chatsManager, server.getClientsManager()));
+		server.addService(
+				Integer.parseInt(JsonMaker.ADD_TEAM_MEMB),
+				new AddTeamMembService(TeamsManager.getInstance(), ChatsManager
+						.getInstance(), server.getClientsManager()));
+		server.addService(Integer.parseInt(JsonMaker.NEW_CHAT),
+				new NewChatService(ChatsManager.getInstance(), server.getClientsManager()));
+		server.addService(
+				Integer.parseInt(JsonMaker.NEW_TEAM),
+				new NewTeamService(TeamsManager.getInstance(), ChatsManager
+						.getInstance(), server.getClientsManager()));
 		
-		CacheMap cache = new CacheMap(new Logger());
-		
-		ClientsManager clientsManager = new ClientsManager(cache);
-		
-		ServerStrategy server = new ServerStrategy(clientsManager);
-		
-		server.addService(JsonParser.TIMER, new TimerService(clientsManager));
-		server.addService(JsonParser.CHAT, new ChatService(clientsManager, cache));
-		
+
 		try {
 			server.openPort(9999);
 		} catch (Exception e) {
@@ -28,5 +41,5 @@ public class StrategyServerMain {
 		}
 		server.listenClients();
 	}
-	
+
 }

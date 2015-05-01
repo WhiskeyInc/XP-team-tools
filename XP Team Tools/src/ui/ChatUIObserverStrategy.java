@@ -213,6 +213,6 @@ public class ChatUIObserverStrategy extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		appendChatAreaText(Formatter.appendNewLine(clientService.getAttribute()));
+		appendChatAreaText(Formatter.appendNewLine(clientService.getAttribute()[0]));
 	}
 }

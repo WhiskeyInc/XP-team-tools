@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 
 import org.json.simple.parser.ParseException;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 
 public class Formatter {
 

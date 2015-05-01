@@ -4,22 +4,22 @@ import java.util.Observable;
 
 import org.json.simple.parser.ParseException;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 
 public class SetMessageService extends Observable implements IClientService {
 
-	private String currentMessage="";
+	private String[] currentMessage = new String[1];
 	
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#setAttribute(java.lang.String)
 	 */
 	@Override
-	public void setAttribute(String attribute) {
+	public void setAttribute(String request) {
 		String[] lines;
 		try {
 			lines = JsonParser
-					.parseChatRequest(attribute);
-			currentMessage = lines[1];
+					.parseChatRequest(request);
+			currentMessage[0] = lines[1];
 			update();
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class SetMessageService extends Observable implements IClientService {
 	 * @see client.model.IClientService#getCurrentMessageString()
 	 */
 	@Override
-	public String getAttribute() {
+	public String[] getAttribute() {
 		return currentMessage;
 	}
 	private void update() {

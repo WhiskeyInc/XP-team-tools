@@ -4,18 +4,18 @@ import java.util.Observable;
 
 import org.json.simple.parser.ParseException;
 
-import server.model.JsonParser;
+import protocol.JsonParser;
 import timer.TimerFormatter;
 
 public class SetTimeStampService extends Observable implements IClientService {
 
-	private String currentTimestamp = "00:10";
+	private String[] currentTimestamp = new String[1];
 
 	@Override
-	public void setAttribute(String attribute) {
+	public void setAttribute(String request) {
 		try {
-			String[] lines = JsonParser.parseTimerRequest(attribute);
-			currentTimestamp = TimerFormatter.getDisplay(
+			String[] lines = JsonParser.parseTimerRequest(request);
+			currentTimestamp[0] = TimerFormatter.getDisplay(
 					Integer.parseInt(lines[1]), Integer.parseInt(lines[2]));
 			update();
 		} catch (NumberFormatException e) {
@@ -26,7 +26,7 @@ public class SetTimeStampService extends Observable implements IClientService {
 	}
 
 	@Override
-	public String getAttribute() {
+	public String[] getAttribute() {
 		return currentTimestamp;
 	}
 
