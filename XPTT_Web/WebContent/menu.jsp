@@ -33,6 +33,7 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li <%=page("Home", request)%>><a href="home.jsp">Home</a></li>
+				<li <%=page("Projects", request)%>><a href="projects.jsp">Projects</a></li>
 				<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
 				<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
 			</ul>

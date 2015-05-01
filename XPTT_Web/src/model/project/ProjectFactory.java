@@ -1,9 +1,9 @@
 package model.project;
 
-import boards.UserStoryBoard.UserStoriesManager;
 import model.ProjectManager;
 import model.ProjectSettings;
 import timeline.Timeline;
+import boards.UserStoryBoard.UserStoriesManager;
 
 /**
  * ProjectFactory interface provides DP Abstract Factory oriented methods to

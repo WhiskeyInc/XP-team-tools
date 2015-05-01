@@ -15,7 +15,7 @@ import boards.taskBoard.ProjectTaskManager;
 
 public class ProjectTest {
 
-	private Project project = new Project("ciao", new ConcreteProjectFactory());
+	private Project project = new Project("ciao", new ConcreteProjectFactory(), null);
 
 	@Test
 	public void test01() throws Exception {
@@ -37,7 +37,7 @@ public class ProjectTest {
 
 	@Test
 	public void test03() throws Exception {
-		Project other = new Project("nome", new ConcreteProjectFactory());
+		Project other = new Project("nome", new ConcreteProjectFactory(), null);
 		other.getUserStoriesManager().addUserStory(
 				new UserStory("Test", new ProjectTaskManager(
 						new ConcreteTaskManager(), project.getManager())));
@@ -55,7 +55,7 @@ public class ProjectTest {
 	public void test05() throws Exception {
 		ProjectsCollector manager = new ProjectsCollector();
 		manager.addProject(project);
-		manager.addProject(new Project(null, new ConcreteProjectFactory()));
+		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
 		manager.deleteProject(project.getId());
 		assertEquals(1, manager.getProjects().size());
 	}

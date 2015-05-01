@@ -23,7 +23,7 @@ public class Initializer extends HttpServlet {
 		super.init();
 
 		ProjectsCollector projects = new ProjectsCollector();
-		Project project = new Project("default", new ConcreteProjectFactory());
+		Project project = new Project("General", new ConcreteProjectFactory(), "Everything related to your team.");
 		projects.addProject(project);
 		super.getServletContext().setAttribute("defaultProject", project);
 		super.getServletContext().setAttribute("projects", projects);
