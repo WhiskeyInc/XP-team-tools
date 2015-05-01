@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import control.actions.projects.ProjectAdder;
 import control.actions.projects.ProjectSelector;
-import control.actions.timeline.EventAdder;
-import control.actions.timeline.EventDeleter;
-import control.actions.timeline.EventMover;
-import control.actions.timeline.EventParticipantAdder;
 
 /**
  * Servlet implementation class ProjectsController

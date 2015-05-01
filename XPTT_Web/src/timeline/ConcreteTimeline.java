@@ -29,7 +29,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	/**
 	 * The name of the event matching with this object's creation itself
 	 */
-	public static final String CREATION_EVENT = "creation";
+	public static final String DEFAULT_CREATION_EVENT = "creation";
 
 	/**
 	 * Creates a new instance of this class. When created, it will be
@@ -38,9 +38,10 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	public ConcreteTimeline(TimeZone locale) {
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
 				.getInstance(locale);
-		Event event = new Event(CREATION_EVENT, creationDate, false);
+		Event event = new Event(DEFAULT_CREATION_EVENT, creationDate, false);
 		super.addItem(event);
 	}
+	
 
 	/*
 	 * (non-Javadoc)

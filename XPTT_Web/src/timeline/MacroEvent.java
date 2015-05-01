@@ -11,15 +11,22 @@ import filtering.Filter;
 public class MacroEvent extends Event implements Timeline {
 
 	private Timeline timeline;
+	private GregorianCalendar fromDate;
+	private GregorianCalendar toDate;
 
 	public MacroEvent(String name, GregorianCalendar fromDate,
-			GregorianCalendar toDate, Timeline timeline) {
+			GregorianCalendar toDate, Timeline timeline) throws InvalidDateException {
 		super(name, toDate, false);
 		this.timeline = timeline;
+		this.validateFromDate(fromDate);
+		this.fromDate = fromDate;
+		this.validateToDate(toDate);
+		this.toDate = toDate;
 	}
 
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
+		validateEvent(event);
 		this.timeline.addEvent(event);
 	}
 
@@ -49,5 +56,30 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	public int getEventsNumber() {
 		return this.timeline.getEventsNumber();
+	}
+	
+	private void validateEvent(Event event) throws InvalidDateException {
+		if (isValidDate(event)) {
+			throw new InvalidDateException(event.getDate());
+		}
+	}
+
+	private boolean isValidDate(Event event) {
+		return !(event.getDate().after(this.fromDate) && event.getDate().before(
+				this.toDate));
+	}
+	
+	private void validateFromDate(GregorianCalendar fromDate)
+			throws InvalidDateException {
+		if(fromDate.before(GregorianCalendar.getInstance())){
+			throw new InvalidDateException(fromDate);
+		}
+	}
+	
+	private void validateToDate(GregorianCalendar toDate) throws InvalidDateException {
+		if(toDate.before(this.fromDate)){
+			throw new InvalidDateException(fromDate);
+		}
+		
 	}
 }
