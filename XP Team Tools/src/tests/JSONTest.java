@@ -1,20 +1,21 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import server.model.JsonParser;
-import client.model.JsonMaker;
+import protocol.JsonMaker;
+import protocol.JsonParser;
+import client.model.ClientDetails;
 
 public class JSONTest {
 
 	private static final int TIMER = 2;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void JSONTest1() {
 
@@ -34,40 +35,93 @@ public class JSONTest {
 	}
 
 	@Test
-	public void JsonParserTest() throws Exception {
-		
-		
-		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30);
+	public void chatRequestTest() throws Exception {
 
-//		JSONObject json = new JSONObject();
-//		json.put(JsonParser.REQ, TIMER);
-//		json.put(JsonParser.MINUTES, 26);
-//		json.put(JsonParser.SECONDS, 30);
+		String jsonString = JsonMaker.chatRequest("Ciao", "2");
+
+		if (JsonParser.getRequest(jsonString) == Integer
+				.parseInt(JsonMaker.CHAT)) {
+
+			String[] vett = JsonParser.parseChatRequest(jsonString);
+
+			assertEquals("Ciao", vett[1]);
+			assertEquals(2, Integer.parseInt(vett[0]));
+		} else {
+			fail();
+		}
+	}
+
+	@Test
+	public void timerRequestTest() throws Exception {
+		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30);
 
 		if (JsonParser.getRequest(jsonString) == JsonParser.TIMER) {
 
 			String[] vett = JsonParser.parseTimerRequest(jsonString);
-			
+
 			assertEquals("LuBardo", vett[0]);
 			assertEquals(26, Integer.parseInt(vett[1]));
 			assertEquals(30, Integer.parseInt(vett[2]));
 		} else {
 			fail();
 		}
-		jsonString = JsonMaker.chatRequest("LuBardo", "Ciao");
-		
-		
-		if (JsonParser.getRequest(jsonString) == JsonParser.CHAT) {
-
-			String[] vett = JsonParser.parseChatRequest(jsonString);
-			
-			assertEquals("LuBardo", vett[0]);
-			assertEquals("Ciao", vett[1]);
-		} else {
-			fail();
-		}
-		
-
 	}
+
+//	@Test
+//	public void newChatRequestTest() throws Exception {
+//		String jsonString = JsonMaker.newChatRequest("LuBardo", "Roberto");
+//
+//		if (JsonParser.getRequest(jsonString) == Integer
+//				.parseInt(JsonMaker.NEW_CHAT)) {
+//
+//			String[] vett = JsonParser.parseNewChatRequest(jsonString);
+//
+//			assertEquals("LuBardo", vett[0]);
+//			assertEquals("Roberto", vett[1]);
+//		} else {
+//			fail();
+//		}
+//
+//		jsonString = JsonMaker.newChatRequest("LuBardo", "Roberto", "Mario");
+//
+//		if (JsonParser.getRequest(jsonString) == Integer
+//				.parseInt(JsonMaker.NEW_CHAT)) {
+//
+//			String[] vett = JsonParser.parseNewChatRequest(jsonString);
+//
+//			assertEquals("LuBardo", vett[0]);
+//			assertEquals("Roberto", vett[1]);
+//			assertEquals("Mario", vett[2]);
+//		} else {
+//			fail();
+//		}
+//	}
+	
+
+	
+	@Test
+	public void connectToServerReqTest() throws Exception {
+		ClientDetails det = new ClientDetails("Alb", "Test");
+		ClientDetails det1 = JsonParser.parseConnectToServerRequest(JsonMaker.connectToServerRequest(det));
+		assertEquals(det, det1);
+	}
+	
+	@Test
+	public void chatIndexRequestTest() throws Exception {
+		assertEquals(2, JsonParser.parseChatIndexRequest(JsonMaker.chatIndexRequest(2)));
+	}
+	
+	@Test
+	public void confirmTest() throws Exception {
+		assertTrue(JsonParser.parseConfirm(JsonMaker.confirm()));
+	}
+	
+	@Test
+	public void addTeamMembReqTest() throws Exception {
+		ClientDetails det =  new ClientDetails("Alb", "Test");
+		
+		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker.addTeamMemb(det)));
+	}
+	
 
 }
