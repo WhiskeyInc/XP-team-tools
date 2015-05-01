@@ -53,7 +53,7 @@ public class ChatUI extends JPanel{
 		super.setLayout(layout);
 		
 		setTopButPaneConstraints(lim);
-		Dimension dim = new Dimension(200, 50);
+		Dimension dim = new Dimension(100, 50);
 		setTopButPaneDim(dim);
 		// for example : topButPanel.add(new JButton());
 		super.add(topButPanel, lim);
