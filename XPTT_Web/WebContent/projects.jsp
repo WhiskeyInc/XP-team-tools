@@ -37,28 +37,46 @@
 	<div class="container">
 		<div class="row">
 			<%
+				int i = 0;
 				for (Project project : getProjects(request)) {
+					String color = "primary";
+					if (project.equals(getCurrentProject(request))) {
+						color = "success";
+					}
 			%>
 			<div
 				class="col-xs-12 col-sm-6 col-md-4 col-lg-3 top-margin-exception">
-				<div class="offer offer-radius offer-primary">
+				<div class="offer offer-radius offer-<%=color%>">
 					<div class="shape">
-						<div class="shape-text">top</div>
+						<div class="shape-text"
+							onclick="document.getElementById('projectSelector<%=i%>').submit()">
+							<a href="#">GO</a>
+						</div>
 					</div>
 					<div class="offer-content">
 						<h3 class="lead"><%=project.toString()%></h3>
 						<p>
-							<%=project.getDescription()%>
-						</p>
+							<%=project.getDescription()%></p>
+						<!-- Project Selector -->
+						<form id="projectSelector<%=i%>" action="ProjectsController"
+							method="post">
+							<input type="hidden" name="action" value="selection"> <input
+								type="hidden" name="id" value="<%=project.getId()%>">
+						</form>
+
+
 					</div>
 				</div>
 			</div>
 			<%
+				i++;
 				}
 			%>
 		</div>
 		<div class="row">
-			<form role="form" id="projectAdder" class="contact-form">
+			<form role="form" id="projectAdder" class="contact-form"
+				action="ProjectsController" method="post">
+				<input type="hidden" name="action" value="addition">
 				<div class="row">
 					<div class="col-md-offset-2 col-md-8">
 						<div class="form-group">
@@ -101,4 +119,14 @@
 		ProjectsCollector collector = (ProjectsCollector) request
 				.getServletContext().getAttribute("projects");
 		return collector.getProjects();
+	}%>
+
+<%!private Project getCurrentProject(HttpServletRequest request) {
+		Project project = (Project) request.getSession().getAttribute(
+				"currentProject");
+		if (project == null) {
+			project = (Project) request.getServletContext().getAttribute(
+					"defaultProject");
+		}
+		return project;
 	}%>

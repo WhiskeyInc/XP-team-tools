@@ -21,7 +21,12 @@
 	-ms-transform: rotate(30deg); /* IE 9 */
 	-o-transform: rotate(360deg); /* Opera 10.5 */
 	-webkit-transform: rotate(46deg); /* Safari and Chrome */
-	transform: rotate(46deg);
+	transform: rotate(46deg); 
+}
+
+.shape-text > a, a:hover{
+	color: #fff !important;
+	text-decoration: none !important; 
 }
 
 .offer {

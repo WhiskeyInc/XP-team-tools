@@ -20,7 +20,7 @@ public class ProjectAdder extends ProjectAction {
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ProjectsCollector projects = super.getProjects(request);
-		projects.addProject(new Project(request.getParameter("name"),
+		projects.addProject(new Project(request.getParameter("projectName"),
 				new ConcreteProjectFactory(), request.getParameter("description")));
 		super.redirect(response);
 	}

@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
@@ -58,6 +58,12 @@ public class ProjectTest {
 		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
 		manager.deleteProject(project.getId());
 		assertEquals(1, manager.getProjects().size());
+	}
+	
+	@Test
+	public void test06() throws Exception {
+		Project project1 = new Project("uno", new ConcreteProjectFactory(), "unouno");
+		System.out.println(project1.equals(project));
 	}
 
 }
