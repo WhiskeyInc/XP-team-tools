@@ -47,6 +47,7 @@ public class ChatUIObserverStrategy extends JPanel implements Observer{
 		createChatArea();
 		messageArea.setLineWrap(true);
 		messageArea.requestFocus();
+		messageArea.setWrapStyleWord(true);
 		messageArea.setFont(new Font("TimesRoman", Font.ITALIC, 13));
 		messageArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
 		         null, "Write a message",
@@ -138,6 +139,7 @@ public class ChatUIObserverStrategy extends JPanel implements Observer{
 		chatArea = new JTextArea();
 		chatArea.setEditable(false);
 		chatArea.setLineWrap(true);
+		messageArea.setWrapStyleWord(true);
 		chatArea.setBackground(new Color(248, 244, 255));
 		chatArea.setFont(new Font("TimesRoman", Font.ITALIC, 16));
 		chatArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(

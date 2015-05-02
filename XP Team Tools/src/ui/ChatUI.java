@@ -142,6 +142,7 @@ public class ChatUI extends JPanel{
 		DefaultCaret caret = (DefaultCaret)chatArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 	}
+	
 	/**
 	 * Set the chat area text
 	 * @param text
