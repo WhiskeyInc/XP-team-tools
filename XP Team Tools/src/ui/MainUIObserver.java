@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -8,9 +10,13 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
+import string.formatter.Formatter;
 import client.model.IClientService;
 import client.model.MessageObservable;
 import client.model.SetMembsService;
@@ -33,6 +39,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	private final UserListUI userListUI;
 	private SetMembsService setTeamMembs;
 	private JPanel mainPanel;
+	private StrategyClient1_1 client;
 	//setMessage = 0
 	//setTimeStamp = 1
 	//newChat = 2
@@ -40,31 +47,55 @@ public class MainUIObserver extends JFrame implements Observer {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
+		this.client = client;
 		this.chatUI = new ChatUIObserverStrategy1((MessageObservable)services[0].getAttribute(index), client);
 		this.timerUI = new TimerUIObserverStrategy((MessageObservable)services[1].getAttribute(index));
 		this.userListUI = new UserListUI();
-		super.setSize(650, 650);
+		super.setSize(720, 700);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridBagLayout());
 		//It works like a listener
 		NewChatLauncher newChatLauncher = new NewChatLauncher(services[2], client, services[0], services[1]);
+		JLabel logLabel = new JLabel("Logged as "+Formatter.formatNickname(client.getNickname()));
+		logLabel.setFont(new Font("TimesRoman", Font.BOLD, 18));
+		logLabel.setForeground(Color.RED);
+		logLabel.setBackground(Color.white);
+		logLabel.setBorder((BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Log-in panel",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   )));
 		GridBagConstraints lim = new GridBagConstraints();
 		lim.gridx = 0;
+		lim.gridy = 0;
+		lim.insets = new Insets(5, 10, 0, 10);
+		mainPanel.add(logLabel, lim);
+		lim = new GridBagConstraints();
+		lim.gridx = 1;
 		lim.gridy = 1;
 		mainPanel.add(chatUI, lim);
 		lim = new GridBagConstraints();
-		lim.gridx = 0;
+		lim.gridx = 1;
 		lim.gridy = 0;
 		lim.insets = new Insets(10, 10, 10, 10);
 		mainPanel.add(timerUI, lim);
 		lim = new GridBagConstraints();
-		lim.gridx = 1;
-		lim.gridy = 0;
-		lim.insets = new Insets(5, 10, 5, 10);
+		lim.gridx = 0;
+		lim.gridy = 1;
+		lim.insets = new Insets(0, 10, 5, 10);
+		lim.gridheight = 2;
 		mainPanel.add(userListUI, lim);
+		mainPanel.setBackground(new Color(235, 234, 243));
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
+		super.getContentPane().setBackground(Color.black);
 		super.getContentPane().add(mainPanel);
 		super.setVisible(true);
+		
+		setMembersList(nicksFilter(client));
+		refresh();
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -93,9 +124,10 @@ public class MainUIObserver extends JFrame implements Observer {
 		mainPanel.remove(userListUI);
 		userListUI.setNicknames(nicks);
 		GridBagConstraints lim = new GridBagConstraints();
-		lim.insets = new Insets(10, 30, 10, 10);
-		lim.gridx = 1;
-		lim.gridy = 0;
+		lim.insets = new Insets(0, 30, 10, 10);
+		lim.gridx = 0;
+		lim.gridy = 1;
+		lim.gridheight = 2;
 		mainPanel.add(userListUI, lim);
 		super.getContentPane().add(mainPanel);
 	}
@@ -111,88 +143,27 @@ public class MainUIObserver extends JFrame implements Observer {
 		super.revalidate();
 	//	super.repaint();
 	}
+	
+	private String[] nicksFilter(StrategyClient1_1 client) {
+		String[] membs = setTeamMembs.getMembs();
+		String[] membsWithoutMe = new String[membs.length-1];
+		int i = 0;
+		for (String nick : membs) {
+			if(!nick.equals(client.getNickname())) {
+				membsWithoutMe[i] = nick;
+				i++;
+			}
+		}
+		return membsWithoutMe;
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		
-	//	if(o instanceof SetMembsService) {
 			System.out.println("******************************** " + MainUIObserver.class );
-			setMembersList(setTeamMembs.getMembs());
+			setMembersList(nicksFilter(client));
 			refresh();
-			//NEL BOTTONE TODO
-//		} else {
-//			Runnable runnable = new Runnable() {
-//				
-//				@Override
-//				public void run() {
-//					final String nickname = Formatter.formatNickname(client.getNickname());
-////					IClientService serviceMessage = new SetMessageService();
-////					IClientService serviceTimeStamp = new SetTimeStampService();
-//					UIObserverStrategy1 ui = new UIObserverStrategy1(setMessage, setTimeStamp, client);
-//					final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
-//					final TimerUIObserverStrategy timerUI = ui.getTimerUI();
-//					
-//					
-//					final int index = Integer.parseInt(setNewChatService.getMembs(null)[0]);
-//					client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the team -", ""+index));
-//					
-//					System.err.println("L' indice della chat è : " + index + " ["+ MainUIObserver.class + "]");
-//					//Controlla conferma data dal server in caso è fallito l'add...
-//					
-//
-//					
-//					final String teamName = client.getTeamName();
-//					ui.setChatUI(new ActionListener() {
-//
-//						@Override
-//						public void actionPerformed(ActionEvent e) {
-//							client.sendMessageToServer(JsonMaker.chatRequest(
-//									teamName,
-//									client.getNickname()));
-//							chatUI.emptyMessageArea();
-//						}
-//					});
-//					
-//					
-//					final String indexString = String.valueOf(index);
-//					
-//					ui.setTimerUI(new ActionListener() {
-//
-//						@Override
-//						public void actionPerformed(ActionEvent e) {
-//							if (timerUI.isTimeStampValid(timerUI.getTimeStamp())) {
-//								int[] time = TimerFormatter.getMinSec(timerUI
-//										.getTimeStamp());
-//								timerUI.setTimerEditable(false);// TODO se è connesso...
-//								client.sendMessageToServer(JsonMaker.timerRequest(indexString,
-//										time[0], time[1]));
-//							}
-//						}
-//					});
-//
-//					chatUI.setEnterListener(new KeyListener() {
-//						@Override
-//						public void keyTyped(KeyEvent e) {}
-//						@Override
-//						public void keyReleased(KeyEvent e) {}
-//						@Override
-//						public void keyPressed(KeyEvent e) {
-//
-//							if(e.getKeyCode() == KeyEvent.VK_ENTER){
-//								e.consume();
-//								client.sendMessageToServer(JsonMaker.chatRequest(
-//										
-//										nickname + chatUI.getMessage()	, ""+index));
-//								chatUI.emptyMessageArea();
-//								//chat.getMessageArea().setCaretPosition(0);
-//							}
-//						}
-//					});
-//				}
-//			};
-//			Thread thread = new Thread(runnable);
-//			thread.start();
-//		}
+
 	}
 
 }

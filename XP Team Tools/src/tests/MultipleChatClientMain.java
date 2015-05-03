@@ -103,7 +103,7 @@ public class MultipleChatClientMain {
 				chatUI.emptyMessageArea();
 			}
 		});
-		final String nickname = Formatter.formatNickname(client.getNickname());
+		final String formattedNickname = Formatter.formatNickname(client.getNickname());
 
 		ui.setTimerUI(new ActionListener() {
 
@@ -123,16 +123,17 @@ public class MultipleChatClientMain {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("//////////////////// " + MultipleChatClientMain.class);
 				listUI.getListOfSelectedNicknames().clear();
 				for (int i = 0; i < listUI.getBox().size(); i++) {
 					if (listUI.getBox().get(i).isSelected()) {
 						listUI.getListOfSelectedNicknames().add(listUI.getNicknames()[i]);
 					}
 				}
-				ClientDetails[] det = new ClientDetails[listUI.getListOfSelectedNicknames().size()];
-				for (int i = 0; i < det.length; i++) {
-					det[i] = new ClientDetails(listUI.getSelectedNicknames()[i], client.getTeamName());
+				//NB: il primo è sempre chi la richiede
+				ClientDetails[] det = new ClientDetails[listUI.getListOfSelectedNicknames().size() + 1];
+				det[0] = new ClientDetails(client.getNickname(), teamName);
+				for (int i = 1; i < det.length; i++) {
+					det[i] = new ClientDetails(listUI.getSelectedNicknames()[i-1], teamName);
 				}
 				client.sendMessageToServer(JsonMaker.newChatRequest(det));
 				String response = client.waitServerResponse();
@@ -150,7 +151,7 @@ public class MultipleChatClientMain {
 					final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 					final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 					
-					client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the team -", ""+index));
+					client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the chat -", ""+index));
 					
 					System.err.println("L' indice della chat è : " + index + " ["+ MainUIObserver.class + "]");
 					//Controlla conferma data dal server in caso è fallito l'add...
@@ -228,7 +229,7 @@ public class MultipleChatClientMain {
 					e.consume();
 					client.sendMessageToServer(JsonMaker.chatRequest(
 
-					nickname + chatUI.getMessage(), "" + index));
+					formattedNickname + chatUI.getMessage(), "" + index));
 					chatUI.emptyMessageArea();
 					// chat.getMessageArea().setCaretPosition(0);
 				}

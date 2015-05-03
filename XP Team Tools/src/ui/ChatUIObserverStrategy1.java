@@ -57,6 +57,14 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		      ),
 		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
 		   ));
+		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Chat panel",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
 		JScrollPane messagePane = createVerticalJScrollPane();
 		
 		GridBagLayout layout = new GridBagLayout();
@@ -89,12 +97,14 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		JScrollPane chatPane = new JScrollPane(chatArea);
 		chatPane.setMinimumSize(dim);
 		chatPane.setPreferredSize(dim);
+		chatPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		return chatPane;
 	}
 	private JScrollPane createVerticalJScrollPane() {
 		JScrollPane messagePane = new JScrollPane(messageArea,
 		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		messagePane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		return messagePane;
 	}
 	private void setSendMessageButtonProperties(Dimension dim) {

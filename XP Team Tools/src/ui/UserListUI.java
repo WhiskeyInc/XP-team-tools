@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,11 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
 
 public class UserListUI extends JPanel {
 
@@ -22,18 +25,29 @@ public class UserListUI extends JPanel {
 
 	private ArrayList<JCheckBox> box = new ArrayList<JCheckBox>();
 	private String[] nicknames;
-	private JButton button = new JButton("Start chat");
+	private JPanel nicksPanel = new JPanel();
+	private JButton button = new JButton("Start new chat");
 	private ArrayList<String> selectedNicknames = new ArrayList<String>();
 
 	public UserListUI() {
-		super.setBackground(new Color(228, 243, 243));
+		super.setBackground(new Color(244, 249, 228));
 		super.setLayout(new GridBagLayout());
+		super.setPreferredSize(new Dimension(250, 400));
+		super.setMinimumSize(new Dimension(250, 400));
+		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Team Members panel",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
 		GridBagConstraints lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 0;
 		JLabel label = new JLabel("Team members");
-		label.setFont(new Font("TimesRoman", Font.BOLD, 20));
-		lim.insets = new Insets(5, 20, 5, 5);
+		label.setFont(new Font("TimesRoman", Font.BOLD, 16));
+		lim.insets = new Insets(10, 5, 5, 5);
 		super.add(label, lim);
 
 	}
@@ -75,19 +89,18 @@ public class UserListUI extends JPanel {
 	public void setNicknames(String[] nicknames) {
 		this.nicknames = nicknames;
 		int size = nicknames.length;
-		JPanel panel1 = new JPanel();
-		panel1.setLayout(new GridLayout(size,1));
-		super.removeAll();
+		nicksPanel.removeAll();
+		nicksPanel.setLayout(new GridLayout(size,1));
 		//Spostare su un altro pannello...
-		super.setLayout(new GridBagLayout());
-		GridBagConstraints lim = new GridBagConstraints();
-		lim.gridx = 0;
-		lim.gridy = 0;
-		JLabel label = new JLabel("Team members");
-		label.setFont(new Font("TimesRoman", Font.BOLD, 20));
-		lim.insets = new Insets(10, 10, 10, 10);
-		super.add(label, lim);
-		// fino a qua
+//		super.setLayout(new GridBagLayout());
+//		GridBagConstraints lim = new GridBagConstraints();
+//		lim.gridx = 0;
+//		lim.gridy = 0;
+//		JLabel label = new JLabel("Team members");
+//		label.setFont(new Font("TimesRoman", Font.BOLD, 16));
+//		lim.insets = new Insets(5, 5, 5, 5);
+//		super.add(label, lim);
+//		// fino a qua
 		box.clear();
 		for (int i = 0; i < size; i++) {
 			box.add(new JCheckBox(nicknames[i]));
@@ -103,19 +116,25 @@ public class UserListUI extends JPanel {
 					}
 				}
 			});
-			panel1.add(box.get(i));
+			nicksPanel.add(box.get(i));
 		}
-		JScrollPane pane = new JScrollPane(panel1);
-		lim = new GridBagConstraints();
+		JScrollPane pane = new JScrollPane(nicksPanel);
+//		pane.setPreferredSize(new Dimension(170, 300));
+//		pane.setMinimumSize(new Dimension(170, 300));
+		GridBagConstraints lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 1;
-		lim.insets = new Insets(5, 5, 5, 5);
+		lim.insets = new Insets(5, 5, 5, 2);
+		lim.weighty = 1f;
 		super.add(pane, lim);
 		lim = new GridBagConstraints();
-		lim.gridx = 1;
-		lim.gridy = 1;
-		lim.insets = new Insets(5, 5, 5, 5);
-		button.setFont(new Font("TimesRoman", Font.BOLD, 13));
+		lim.gridx = 0;
+		lim.gridy = 2;
+		lim.insets = new Insets(5, 2, 5, 5);
+		lim.weighty = 1f;
+		button.setFont(new Font("TimesRoman", Font.BOLD, 10));
+		button.setPreferredSize(new Dimension(170, 40));
+		button.setMinimumSize(new Dimension(170, 40));
 		
 		super.add(button, lim);
 	}

@@ -87,6 +87,14 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 		lim.gridx = 0;
 		lim.gridy = 1;
 		super.add(startButton, lim);
+		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Tomatoes panel",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
 	}
 
 	public void setButtonTimerListener(ActionListener actionListener) {
