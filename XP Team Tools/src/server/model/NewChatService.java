@@ -57,8 +57,11 @@ public class NewChatService implements IService {
 			}
 		} else {
 			chatsManager.add(chatMokeUp);
-			for (int i = 0; i < details.length; i++) {
-				propagateMessageRunTime(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[i], chatMokeUp);
+			//NB IL primo deve essere chi la richiede.
+			System.err.println("Il primo che la richiede è : " + details[0].getNickname() + " indice " + (chatsManager.size()-1));
+			propagateMessageResponse(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[0], chatMokeUp);
+			for (int i = 1; i < details.length; i++) {
+				propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[i], chatMokeUp);
 			}
 		}
 	}
@@ -92,13 +95,13 @@ public class NewChatService implements IService {
 		}
 	}
 	
-	public void propagateMessageRunTime(String message, ClientDetails details,
+	public void propagateMessageResponse(String message, ClientDetails details,
 			Chat chat) throws IOException {
 		ClientConnectionDetails conDet = clientsManager1.get(details);
 		try {
 			if (conDet.isOnline()) {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-						conDet.getRealTimeSocket().getOutputStream()));
+						conDet.getRequestSocket().getOutputStream()));
 				out.write(Formatter.appendNewLine(message));
 				out.flush();
 			}

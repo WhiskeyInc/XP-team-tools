@@ -25,6 +25,8 @@ public class StrategyClient1_1 {
 	private DataOutputStream os;
 	private DataInputStream is;
 	private HashMap<Integer, IClientService> services = new HashMap<Integer, IClientService>();
+	private SetMembsService membsService;
+
 
 	public StrategyClient1_1() {
 		super();
@@ -106,6 +108,8 @@ public class StrategyClient1_1 {
 						System.out.println("qua dentro " + service + " "
 								+ StrategyClient1_1.class);
 						service.setAttribute(read);
+					} else {
+						membsService.setMembs(read);
 					}
 				}
 			}
@@ -160,5 +164,10 @@ public class StrategyClient1_1 {
 
 	public void addService(int id, IClientService service) {
 		services.put(id, service);
+	}
+	
+
+	public void setMembsService(SetMembsService membsService) {
+		this.membsService = membsService;
 	}
 }

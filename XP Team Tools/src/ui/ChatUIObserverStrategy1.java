@@ -20,7 +20,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
 import string.formatter.Formatter;
-import client.model.IClientService;
+import client.model.MessageObservable;
 import client.model.StrategyClient1_1;
 /**
  * The UI of the chat, it extend JPanel
@@ -39,12 +39,12 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 	protected JTextArea messageArea = new JTextArea();
 	
 	private StrategyClient1_1 client;
-	private IClientService clientService;
+	private MessageObservable messageObs;
 	
-	public ChatUIObserverStrategy1(IClientService clientService, StrategyClient1_1 client) {
+	public ChatUIObserverStrategy1(MessageObservable messageObs, StrategyClient1_1 client) {
 		this.client = client;
-		this.clientService = clientService;
-		clientService.addObserver(this);
+		this.messageObs = messageObs;
+		messageObs.addObserver(this);
 		createChatArea();
 		messageArea.setLineWrap(true);
 		messageArea.requestFocus();
@@ -214,6 +214,6 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		appendChatAreaText(Formatter.appendNewLine(clientService.getAttribute()[0]));
+		appendChatAreaText(Formatter.appendNewLine(messageObs.getMessage()));
 	}
 }

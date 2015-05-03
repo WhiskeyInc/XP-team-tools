@@ -1,26 +1,31 @@
 package client.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
 
-public class SetMessageService extends Observable implements IClientService {
+public class SetMessageService implements IClientService {
 
-	private String[] currentMessage = new String[1];
+	private Map<Integer, MessageObservable> obsMap = new HashMap<Integer, MessageObservable>();
 	
-	/* (non-Javadoc)
-	 * @see client.model.IClientService#setAttribute(java.lang.String)
-	 */
 	@Override
 	public void setAttribute(String request) {
 		String[] lines;
 		try {
 			lines = JsonParser
 					.parseChatRequest(request);
-			currentMessage[0] = lines[1];
-			update();
+			int index = Integer.parseInt(lines[0]);
+			System.out.println(request+" index = "+ index + " " + SetMessageService.class);
+			if (obsMap.containsKey(index)) {
+				obsMap.get(index).setMessage(lines[1]);
+			} else {
+				obsMap.put(index, new MessageObservable(lines[1]));
+			}
+		//	update();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -28,15 +33,21 @@ public class SetMessageService extends Observable implements IClientService {
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#getCurrentMessageString()
 	 */
+
 	@Override
-	public String[] getAttribute() {
-		return currentMessage;
-	}
-	private void update() {
-		setChanged();
-		notifyObservers();
+	public Observable getAttribute(int index) {
+		if(!obsMap.containsKey(index)) {
+			obsMap.put(index, new MessageObservable(""));
+		} 
+		
+		return obsMap.get(index);
 	}
 	
+//	private void update() {
+//		setChanged();
+//		notifyObservers();
+//	}
+//	
 	
 
 }

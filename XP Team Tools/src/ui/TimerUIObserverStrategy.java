@@ -19,7 +19,7 @@ import javax.swing.event.DocumentListener;
 
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
-import client.model.IClientService;
+import client.model.MessageObservable;
 
 public class TimerUIObserverStrategy extends JPanel implements Observer{
 
@@ -32,13 +32,12 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 	private JButton startButton;
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
-	private IClientService service;
-
-	public TimerUIObserverStrategy(IClientService service) {
+	private MessageObservable messageObs;
+	
+	public TimerUIObserverStrategy(MessageObservable messageObs) {
 		super();
-		
-		this.service = service;
-		service.addObserver(this);
+		this.messageObs = messageObs;
+		messageObs.addObserver(this);
 		
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();
@@ -124,8 +123,8 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		setTimer(service.getAttribute()[0]);
-		if(!service.getAttribute().equals(TimerUIObserverStrategy.ENDTIMER)) {
+		setTimer(messageObs.getMessage());
+		if(!messageObs.getMessage().equals(TimerUIObserverStrategy.ENDTIMER)) {
 			setTimerEditable(false);
 		}
 	}

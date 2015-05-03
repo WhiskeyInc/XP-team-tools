@@ -1,6 +1,7 @@
 package client.model;
 
-import java.util.Observer;
+import java.util.Observable;
+
 
 /**
  *  Abtraction for generic client' s service
@@ -12,8 +13,7 @@ public interface IClientService {
 
 	public abstract void setAttribute(String request);
 
-	public abstract String[] getAttribute();
+	public abstract Observable getAttribute(int index);
 	
-	public abstract void addObserver(Observer observer);
 
 }

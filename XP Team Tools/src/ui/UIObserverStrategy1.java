@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import client.model.IClientService;
+import client.model.MessageObservable;
 import client.model.StrategyClient1_1;
 
 /**
@@ -28,11 +29,11 @@ public class UIObserverStrategy1 extends JFrame {
 	private final TimerUIObserverStrategy timerUI;
 
 	public UIObserverStrategy1(IClientService setMessage,
-			IClientService setTimeStamp, StrategyClient1_1 client) {
+			IClientService setTimeStamp, StrategyClient1_1 client, int index) {
 		super();
 
-		this.chatUI = new ChatUIObserverStrategy1(setMessage, client);
-		this.timerUI = new TimerUIObserverStrategy(setTimeStamp);
+		this.chatUI = new ChatUIObserverStrategy1((MessageObservable) setMessage.getAttribute(index), client);
+		this.timerUI = new TimerUIObserverStrategy((MessageObservable)setTimeStamp.getAttribute(index));
 
 		super.setSize(400, 650);
 		JPanel panel = new JPanel();

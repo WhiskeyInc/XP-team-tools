@@ -14,6 +14,7 @@ import ui.TimerUIObserverStrategy;
 import ui.UIObserverStrategy1;
 import client.model.ClientConnectionDetails;
 import client.model.IClientService;
+import client.model.SetMembsService;
 import client.model.SetMessageService;
 import client.model.SetTimeStampService;
 import client.model.StrategyClient1_1;
@@ -30,12 +31,17 @@ public class StrategyClientMain2 {
 		
 		IClientService serviceMessage = new SetMessageService();
 		IClientService serviceTimeStamp = new SetTimeStampService();
+		SetMembsService serviceTeamMembs = new SetMembsService();
+
 	//	IClientService chatIndexService = new ChatIndexService();
 //		IClientService confirmService = new ConfirmService();
 //		ClientChatIndexManager indexManager = new ClientChatIndexManager(chatIndexService);
+		
 		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Luke", "Prova"));
 		client.addService(JsonParser.CHAT, serviceMessage);
 		client.addService(JsonParser.TIMER, serviceTimeStamp);
+		client.setMembsService(serviceTeamMembs);
+
 //		client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), chatIndexService);
 //		client.addService(Integer.parseInt(JsonMaker.CONFIRM), confirmService);
 
@@ -72,15 +78,15 @@ public class StrategyClientMain2 {
 //		index = indexManager.getIndex();
 //		System.err.println("L' indice della chat è : " + index + " ["+ StrategyClient.class + "]");
 		final String nickname = Formatter.formatNickname(client.getNickname());
-
-		UIObserverStrategy1 ui = new UIObserverStrategy1(serviceMessage, serviceTimeStamp, client);
+		client.sendMessageToServer(JsonMaker.addTeamMemb(client.getClientDetails()));
+		final int index = JsonParser.parseChatIndexRequest(client.waitServerResponse());
+		client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the team -", ""+index));
+		UIObserverStrategy1 ui = new UIObserverStrategy1(serviceMessage, serviceTimeStamp, client, index);
 		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 		
 		
-		client.sendMessageToServer(JsonMaker.addTeamMemb(client.getClientDetails()));
-		final int index = JsonParser.parseChatIndexRequest(client.waitServerResponse());
-		client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the team -", ""+index));
+		
 		
 		System.err.println("L' indice della chat è : " + index + " ["+ StrategyClient1_1.class + "]");
 		//Controlla conferma data dal server in caso è fallito l'add...

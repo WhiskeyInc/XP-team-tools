@@ -122,6 +122,7 @@ public class JsonParser {
 	
 	public static String[] parseTeamMembsRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
+		System.err.println(s+  " " + JsonParser.class);
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
 		int size = idList.size();

@@ -46,7 +46,7 @@ public class AddTeamMembService implements IService {
 		for (int i = 0; i < membs.length; i++) {
 			propagateMessageFirstChan(JsonMaker.teamMembsRequest(membs), new ClientDetails(membs[i], teamName), chat);
 		}
-		
+		//NB bloccante se uso il wait
 		propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), det, chat);
 	}
 

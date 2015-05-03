@@ -8,19 +8,17 @@ import protocol.JsonParser;
 /**
  * It' s a Client' s feature to store the actual members of the team.
  * Extends {@link Observable} to change in real time the members list.
- * Implements  {@link IClientService}
  * @author alberto
  *
  */
-public class SetMembsService extends Observable implements IClientService {
+public class SetMembsService extends Observable {
 
 	private String[] membs;
 	
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#setAttribute(java.lang.String)
 	 */
-	@Override
-	public void setAttribute(String request) {
+	public void setMembs(String request) {
 		try {
 			membs = JsonParser
 					.parseTeamMembsRequest(request);
@@ -35,8 +33,7 @@ public class SetMembsService extends Observable implements IClientService {
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#getCurrentMessageString()
 	 */
-	@Override
-	public String[] getAttribute() {
+	public String[] getMembs() {
 		return membs;
 	}
 	private void update() {
