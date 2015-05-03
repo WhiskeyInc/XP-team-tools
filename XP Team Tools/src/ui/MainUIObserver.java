@@ -43,7 +43,7 @@ public class MainUIObserver extends JFrame implements Observer {
 		this.chatUI = new ChatUIObserverStrategy1((MessageObservable)services[0].getAttribute(index), client);
 		this.timerUI = new TimerUIObserverStrategy((MessageObservable)services[1].getAttribute(index));
 		this.userListUI = new UserListUI();
-		super.setSize(600, 650);
+		super.setSize(650, 650);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridBagLayout());
 		//It works like a listener
@@ -60,6 +60,7 @@ public class MainUIObserver extends JFrame implements Observer {
 		lim = new GridBagConstraints();
 		lim.gridx = 1;
 		lim.gridy = 0;
+		lim.insets = new Insets(5, 10, 5, 10);
 		mainPanel.add(userListUI, lim);
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
 		super.getContentPane().add(mainPanel);

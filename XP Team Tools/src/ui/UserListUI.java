@@ -2,13 +2,17 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -22,6 +26,15 @@ public class UserListUI extends JPanel {
 	private ArrayList<String> selectedNicknames = new ArrayList<String>();
 
 	public UserListUI() {
+		super.setBackground(new Color(228, 243, 243));
+		super.setLayout(new GridBagLayout());
+		GridBagConstraints lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 0;
+		JLabel label = new JLabel("Team members");
+		label.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		lim.insets = new Insets(5, 20, 5, 5);
+		super.add(label, lim);
 
 	}
 	
@@ -65,6 +78,16 @@ public class UserListUI extends JPanel {
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(size,1));
 		super.removeAll();
+		//Spostare su un altro pannello...
+		super.setLayout(new GridBagLayout());
+		GridBagConstraints lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 0;
+		JLabel label = new JLabel("Team members");
+		label.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		lim.insets = new Insets(10, 10, 10, 10);
+		super.add(label, lim);
+		// fino a qua
 		box.clear();
 		for (int i = 0; i < size; i++) {
 			box.add(new JCheckBox(nicknames[i]));
@@ -83,11 +106,18 @@ public class UserListUI extends JPanel {
 			panel1.add(box.get(i));
 		}
 		JScrollPane pane = new JScrollPane(panel1);
-		super.add(pane);
-		
+		lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 1;
+		lim.insets = new Insets(5, 5, 5, 5);
+		super.add(pane, lim);
+		lim = new GridBagConstraints();
+		lim.gridx = 1;
+		lim.gridy = 1;
+		lim.insets = new Insets(5, 5, 5, 5);
 		button.setFont(new Font("TimesRoman", Font.BOLD, 13));
 		
-		super.add(button);
+		super.add(button, lim);
 	}
 	
 	public JButton getButton() {
