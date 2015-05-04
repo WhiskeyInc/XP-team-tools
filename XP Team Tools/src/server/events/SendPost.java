@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import client.model.JsonMaker;
 
-public class SendPost implements ISendEvent {
+public class SendPost implements IEventActionRequest {
 
 	private String url;
 
@@ -19,10 +19,11 @@ public class SendPost implements ISendEvent {
 	}
 
 	@Override
-	public void sendEventCreation(String eventName,
+	public void sendEventAction(String eventAction, String eventName,
 			ArrayList<String> participants) {
 
-		String json = JsonMaker.eventCommunication(eventName, participants);
+		String json = JsonMaker.eventCommunication(eventAction, eventName,
+				participants);
 
 		try {
 			sendPost(url, json);
@@ -48,7 +49,7 @@ public class SendPost implements ISendEvent {
 		wr.flush();
 		wr.close();
 
-		// Get response 
+		// Get response
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'POST' request to URL : " + url);
 		System.out.println("Post parameters : " + data);

@@ -3,7 +3,6 @@ package tests;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import protocol.JsonMaker;
 import ui.ChatUITestable;
 import client.model.Client2;
 

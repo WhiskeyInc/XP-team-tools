@@ -9,12 +9,12 @@ import java.util.ArrayList;
  * 
  * @author Nicola
  */
-public interface ISendEvent {
+public interface IEventActionRequest {
 
 	/**
 	 * Function to send the event to a server
 	 * @return
 	 */
-	public void sendEventCreation(String eventName, ArrayList<String> participants);
+	public void sendEventAction(String eventAction, String eventName, ArrayList<String> participants);
 
 }

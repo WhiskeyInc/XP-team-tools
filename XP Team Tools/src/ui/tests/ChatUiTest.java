@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import org.junit.Test;
 
 import ui.ChatUITestable;

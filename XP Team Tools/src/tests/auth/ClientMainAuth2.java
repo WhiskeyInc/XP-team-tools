@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import server.model.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 import ui.ChatUIObserverStrategyAuth;

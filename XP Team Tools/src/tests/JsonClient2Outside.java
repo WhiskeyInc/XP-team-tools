@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import protocol.JsonMaker;
 import ui.ChatUITestable;
 import client.model.Client2;
 

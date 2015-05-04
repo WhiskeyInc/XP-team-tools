@@ -1,9 +1,6 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import java.util.Iterator;
-import java.util.Set;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

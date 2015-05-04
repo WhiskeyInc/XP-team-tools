@@ -21,7 +21,8 @@ public class JsonMaker {
 	public static final String MESSAGE = "message";
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
-
+	
+	public static final String EVENT_ACTION = "action";
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
 	
@@ -65,12 +66,13 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String eventCommunication(String eventName, ArrayList<String> participants) {
+	public static String eventCommunication(String eventAction, String eventName, ArrayList<String> participants) {
 		
 		JSONObject json = new JSONObject();
 		
+		json.put(EVENT_ACTION, eventAction);
 		json.put(EVENT_NAME, eventName);
-		
+				
 		JSONArray array = new JSONArray();
 		array.addAll(participants);
 		json.put(PARTICIPANTS, array);

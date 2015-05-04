@@ -17,9 +17,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import client.model.ObservableClient;
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
+import client.model.ObservableClient;
 
 public class TimerUIObserver extends JPanel implements Observer{
 

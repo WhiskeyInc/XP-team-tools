@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 /**
  * A general server with the possibility to add services, it needs a client
