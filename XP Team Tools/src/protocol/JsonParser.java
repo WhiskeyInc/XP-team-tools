@@ -62,10 +62,12 @@ public class JsonParser {
 		return Integer.parseInt((String)json.get(JsonMaker.INDEX));
 	}
 	
-	public static boolean parseConfirm(String s) throws ParseException {
+	public static ClientDetails parseDisconnectRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
-		return json.get(JsonMaker.CONFIRM_STRING).equals(JsonMaker.CONFIRM_STRING);
+		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
+		return det;
 	}
 	
 	
@@ -143,7 +145,5 @@ public class JsonParser {
 		JSONObject json = (JSONObject) parser.parse(s);
 		return Integer.parseInt((String) json.get(REQ));
 	}
-	
-	
 
 }

@@ -23,7 +23,7 @@ public class JsonMaker {
 	public static final String ADD_TEAM_MEMB = "5";
 	public static final String CHAT_INDEX = "6";
 	public static final String CONNECT_SERVER = "7";
-	public static final String CONFIRM = "8";
+	public static final String DISCONNECT = "8";
 	public static final String TEAM_MEMBS = "9";
 	public static final String NEW_UI = "10";
 	public static final String EVENT = "11";
@@ -150,10 +150,13 @@ public class JsonMaker {
 	
 	
 	@SuppressWarnings("unchecked")
-	public static String confirm() {
+	public static String disconnect(ClientDetails det) {
 		JSONObject json = new JSONObject();
-		json.put(REQ, CONFIRM);
-		json.put(CONFIRM_STRING, CONFIRM_STRING);
+		json.put(REQ, DISCONNECT);
+		JSONArray detArray = new JSONArray();
+		detArray.add(det.getNickname());
+		detArray.add(det.getTeamName());
+		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
 	
