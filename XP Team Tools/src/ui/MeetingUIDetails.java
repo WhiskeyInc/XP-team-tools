@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,6 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.qt.datapicker.DatePicker;
@@ -27,7 +28,7 @@ public class MeetingUIDetails extends JPanel {
 
 	private ObservingTextField dateField = new ObservingTextField();
 	private JButton btn = new JButton("Pick Date");
-	private JTextArea description = new JTextArea();
+	private JTextField description = new JTextField("");
 	private JButton createButton = new JButton("Create Event");
 	
 	private JPanel p1 = new JPanel();
@@ -40,8 +41,7 @@ public class MeetingUIDetails extends JPanel {
 		add(p1);
 		add(p2);
 		add(p3);
-		
-		p1.setLayout(new GridLayout(2,2));
+	
 		
 		p1.add(new JLabel("Select a date:"));
 		p1.add(new JLabel(""));
@@ -63,11 +63,10 @@ public class MeetingUIDetails extends JPanel {
 			};
 		});
 		
-		p2.setLayout(new GridLayout(2,2));
 		p2.add(new JLabel("Description:"));
+		description.setPreferredSize(new Dimension(300, 50));
 		p2.add(description);
 		
-		p3.setLayout(new GridLayout(1,1));
 		p3.add(createButton);
 		
 	}
