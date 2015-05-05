@@ -22,6 +22,7 @@ public class MeetingUIMain {
 				final JFrame detailsFrame = FramesUtils.createFrame("Insert meeting details", 500, 250);
 			    detailsFrame.setLocationRelativeTo(null);
 			    detailsFrame.setVisible(true);  
+			    detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				final MeetingUIDetails ask = new MeetingUIDetails();
 				detailsFrame.getContentPane().add(ask);
 				

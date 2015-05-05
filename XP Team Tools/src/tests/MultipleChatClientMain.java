@@ -5,15 +5,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JFrame;
+
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 import ui.ChatUIObserverStrategy1;
 import ui.MainUIObserver;
+import ui.MeetingUIDetails;
 import ui.TimerUIObserverStrategy;
 import ui.UIObserverStrategy1;
 import ui.UserListUI;
+import ui.tests.FramesUtils;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 import client.model.IClientService;
@@ -105,6 +109,31 @@ public class MultipleChatClientMain {
 		});
 		final String formattedNickname = Formatter.formatNickname(client.getNickname());
 
+		
+		ui.setMeetingButtonAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final JFrame detailsFrame = FramesUtils.createFrame("Insert meeting details", 500, 250);
+			    detailsFrame.setLocationRelativeTo(null);
+			    detailsFrame.setVisible(true);  
+				final MeetingUIDetails ask = new MeetingUIDetails();
+				detailsFrame.getContentPane().add(ask);
+				detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				ask.setCreateButtonListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						//TODO send event informations
+						System.out.println("Date: " + ask.getDate());
+						System.out.println("Description: " + ask.getDescrtiption());
+						detailsFrame.dispose();
+					}
+				});
+			
+			}
+		});
+		
 		ui.setTimerUI(new ActionListener() {
 
 			@Override

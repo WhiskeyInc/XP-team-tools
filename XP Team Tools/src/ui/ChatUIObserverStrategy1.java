@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -35,6 +36,7 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel topButPanel = new JPanel();
 	protected JButton sendMessage = new JButton("SEND");
+	protected JGradientButton meetingButton = new JGradientButton("+ Schedule a Meeting");
 	private JTextArea chatArea;
 	protected JTextArea messageArea = new JTextArea();
 	
@@ -74,7 +76,11 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		setTopButPaneConstraints(lim);
 		Dimension dim = new Dimension(200, 50);
 		setTopButPaneDim(dim);
-		// for example : topButPanel.add(new JButton());
+		
+		meetingButton.setColor(Color.YELLOW);
+		topButPanel.setLayout(new BorderLayout());
+		topButPanel.add(meetingButton, BorderLayout.CENTER);
+		
 		super.add(topButPanel, lim);
 		
 		setChatPaneConstraints(lim);
@@ -220,6 +226,14 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 	 */
 	public JPanel getTopButPanel() {
 		return topButPanel;
+	}
+	
+	/**
+	 * Set the ActionListener of the sendMessage button
+	 * @param actionListener
+	 */
+	public void setButtonMeeting(ActionListener actionListener) {
+		meetingButton.addActionListener(actionListener);
 	}
 	
 	@Override

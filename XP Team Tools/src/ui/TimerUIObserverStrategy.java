@@ -10,7 +10,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -29,7 +28,7 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField timerArea;
-	private JButton startButton;
+	private JGradientButton startButton;
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
 	private MessageObservable messageObs;
@@ -73,8 +72,8 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 		timerArea.setText("00:10");
 		dim = new Dimension();
 		dim.setSize(200, 40);
-		startButton = new JButton("Start");
-		startButton.setBackground(Color.GREEN);
+		startButton = new JGradientButton("Start");
+		startButton.setColor(Color.GREEN);
 		startButton.setPreferredSize(dim);
 		startButton.setMinimumSize(dim);
 		GridBagLayout layout = new GridBagLayout();
