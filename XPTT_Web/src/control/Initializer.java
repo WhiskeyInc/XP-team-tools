@@ -1,5 +1,7 @@
 package control;
 
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,8 @@ public class Initializer extends HttpServlet {
 		super.init();
 
 		ProjectsCollector projects = new ProjectsCollector();
-		Project project = new Project("General", new ConcreteProjectFactory(), "Everything related to your team.");
+		Project project = new Project("General", new ConcreteProjectFactory(),
+				"Everything related to your team.");
 		projects.addProject(project);
 		super.getServletContext().setAttribute("defaultProject", project);
 		super.getServletContext().setAttribute("projects", projects);
@@ -40,5 +43,21 @@ public class Initializer extends HttpServlet {
 		} catch (NameAlreadyInUseException e) {
 			e.printStackTrace();
 		}
+
+		HashMap<String, String> registeredUsers = new HashMap<String, String>();
+		HashMap<String, String> registeredUsersPass = new HashMap<String, String>();
+		registeredUsers.put("alessandroincremona", "Alessandro Incremona");
+		registeredUsers.put("simonecolucci", "Simone Colucci");
+		registeredUsers.put("emanuelefabbiani", "Emanuele Fabbiani");
+		registeredUsers.put("andreaaschei", "Andrea Aschei");
+		registeredUsersPass.put("alessandroincremona", "alessandro");
+		registeredUsersPass.put("simonecolucci", "simone");
+		registeredUsersPass.put("emanuelefabbiani", "emanuele");
+		registeredUsersPass.put("andreaaschei", "andrea");
+
+		super.getServletContext().setAttribute("registeredUsers",
+				registeredUsers);
+		super.getServletContext().setAttribute("registeredUsersPass",
+				registeredUsersPass);
 	}
 }
