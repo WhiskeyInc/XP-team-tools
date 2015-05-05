@@ -48,6 +48,7 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		this.messageObs = messageObs;
 		messageObs.addObserver(this);
 		createChatArea();
+		messageArea.setWrapStyleWord(true);
 		messageArea.setLineWrap(true);
 		messageArea.requestFocus();
 		messageArea.setFont(new Font("TimesRoman", Font.ITALIC, 13));
@@ -76,6 +77,7 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		setTopButPaneConstraints(lim);
 		Dimension dim = new Dimension(200, 50);
 		setTopButPaneDim(dim);
+		
 		
 		meetingButton.setColor(Color.YELLOW);
 		topButPanel.setLayout(new BorderLayout());
@@ -156,6 +158,7 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 		chatArea.setEditable(false);
 		chatArea.setLineWrap(true);
 		chatArea.setBackground(new Color(248, 244, 255));
+		chatArea.setWrapStyleWord(true);
 		chatArea.setFont(new Font("TimesRoman", Font.ITALIC, 16));
 		chatArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
 		         null, client.getTeamName(),

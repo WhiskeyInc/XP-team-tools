@@ -2,11 +2,15 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,8 +18,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import protocol.JsonMaker;
 import string.formatter.Formatter;
 import client.model.IClientService;
 import client.model.MessageObservable;
@@ -43,7 +49,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	//setMessage = 0
 	//setTimeStamp = 1
 	//newChat = 2
-	public MainUIObserver(IClientService[] services, SetMembsService setTeamMembs, StrategyClient1_1 client, int index) {
+	public MainUIObserver(final IClientService[] services, SetMembsService setTeamMembs, final StrategyClient1_1 client, int index) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
@@ -51,11 +57,32 @@ public class MainUIObserver extends JFrame implements Observer {
 		this.chatUI = new ChatUIObserverStrategy1((MessageObservable)services[0].getAttribute(index), client);
 		this.timerUI = new TimerUIObserverStrategy((MessageObservable)services[1].getAttribute(index));
 		this.userListUI = new UserListUI();
-		super.setSize(720, 700);
+		super.addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent windowEvent) {
+		        client.sendMessageToServer(JsonMaker.disconnect(client.getClientDetails()));
+		        System.exit(0);
+		    }
+		});
+		System.err.println(EventQueue.isDispatchThread() +" " + MainUIObserver.class);
+
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridBagLayout());
 		//It works like a listener
-		NewChatLauncher newChatLauncher = new NewChatLauncher(services[2], client, services[0], services[1]);
+		Runnable runnable = new Runnable() {
+			
+			@Override
+			public void run() {
+				NewChatLauncher newChatListener = new NewChatLauncher(services[2], client, services[0], services[1]);
+				
+			}
+		};
+		try {
+			SwingUtilities.invokeAndWait(runnable);
+		} catch (InvocationTargetException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JLabel logLabel = new JLabel("Logged as "+Formatter.formatNickname(client.getNickname()));
 		logLabel.setFont(new Font("TimesRoman", Font.BOLD, 18));
 		logLabel.setForeground(Color.RED);
@@ -97,6 +124,8 @@ public class MainUIObserver extends JFrame implements Observer {
 		setMembersList(nicksFilter(client));
 		refresh();
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.pack();
+
 	}
 	
 	public void setMeetingButtonAction(ActionListener actionListener) {

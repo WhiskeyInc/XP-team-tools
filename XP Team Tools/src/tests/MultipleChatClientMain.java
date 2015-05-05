@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -107,7 +108,6 @@ public class MultipleChatClientMain {
 		});
 		final String formattedNickname = Formatter.formatNickname(client.getNickname());
 
-		
 		ui.setTimerUI(new ActionListener() {
 
 			@Override
@@ -126,12 +126,14 @@ public class MultipleChatClientMain {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.err.println(EventQueue.isDispatchThread() +" " + MultipleChatClientMain.class);
 				listUI.getListOfSelectedNicknames().clear();
 				for (int i = 0; i < listUI.getBox().size(); i++) {
 					if (listUI.getBox().get(i).isSelected()) {
 						listUI.getListOfSelectedNicknames().add(listUI.getNicknames()[i]);
 					}
 				}
+				listUI.deselectAll();
 				//NB: il primo è sempre chi la richiede
 				ClientDetails[] det = new ClientDetails[listUI.getListOfSelectedNicknames().size() + 1];
 				det[0] = new ClientDetails(client.getNickname(), teamName);
@@ -143,10 +145,10 @@ public class MultipleChatClientMain {
 
 				final int index = JsonParser.parseChatIndexRequest(response);
 				System.err.println(index+ " "+ MultipleChatClientMain.class);
-				Runnable runnable = new Runnable() {
-				
-				@Override
-				public void run() {
+//				Runnable runnable = new Runnable() {
+//				
+//				@Override
+//				public void run() {
 					final String nickname = Formatter.formatNickname(client.getNickname());
 //					IClientService serviceMessage = new SetMessageService();
 //					IClientService serviceTimeStamp = new SetTimeStampService();
@@ -208,10 +210,10 @@ public class MultipleChatClientMain {
 							}
 						}
 					});
-				}
-			};
-			Thread thread = new Thread(runnable);
-			thread.start();
+			//	}
+			//};
+//			Thread thread = new Thread(runnable);
+//			thread.start();
 
 			}
 		});
@@ -252,8 +254,5 @@ public class MultipleChatClientMain {
 			}
 		});
 		
-	}
-	
-
-	
+	}	
 }
