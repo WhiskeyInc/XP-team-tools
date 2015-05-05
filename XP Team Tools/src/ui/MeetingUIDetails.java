@@ -1,10 +1,8 @@
 package ui;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.plaf.ScrollBarUI;
 
 import com.qt.datapicker.DatePicker;
 
@@ -81,7 +80,7 @@ public class MeetingUIDetails extends JPanel {
 		pane.setPreferredSize(new Dimension(300, 65));
 		pane.setMinimumSize(new Dimension(300, 65));
 		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
+		pane.getVerticalScrollBar().setUI(new MyScrollbarUI());
 		p2.add(pane);
 		p3.add(createButton);
 		
