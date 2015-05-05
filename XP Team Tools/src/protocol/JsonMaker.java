@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import client.model.ClientDetails;
 
@@ -188,7 +186,7 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String manualEventCommunication(String eventName, String date) {
+	public static String manualEventCommunication(String eventName, String date, ArrayList<String> participants) {
 		
 		JSONObject json = new JSONObject();
 		
@@ -197,6 +195,12 @@ public class JsonMaker {
 		json.put(EVENT_ACTION, "addManualEvent");
 		json.put(EVENT_NAME, eventName);
 		json.put(EVENT_DATE, date);
+		
+		if(participants != null){
+			JSONArray array = new JSONArray();
+			array.addAll(participants);
+			json.put(PARTICIPANTS, array);
+		}	
 		
 		return json.toString();
 	}
@@ -208,7 +212,7 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String automaticEventCommunication(String eventName) {
+	public static String automaticEventCommunication(String eventName, ArrayList<String> participants) {
 		
 		JSONObject json = new JSONObject();
 		
@@ -217,19 +221,12 @@ public class JsonMaker {
 		json.put(EVENT_ACTION, "addAutomaticEvent");
 		json.put(EVENT_NAME, eventName);
 		
-		return json.toString();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static String addParticipantsToEventJson(String str, ArrayList<String> participants) throws ParseException{
-		JSONParser parser = new JSONParser();
-		JSONObject json = (JSONObject) parser.parse(str);
-		
 		if(participants != null){
 			JSONArray array = new JSONArray();
 			array.addAll(participants);
 			json.put(PARTICIPANTS, array);
 		}	
+		
 		return json.toString();
 	}
 

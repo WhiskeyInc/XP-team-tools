@@ -7,8 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.json.simple.parser.ParseException;
-
 import protocol.JsonMaker;
 
 public class SendPost implements IEventActionRequest {
@@ -24,13 +22,7 @@ public class SendPost implements IEventActionRequest {
 	public void sendEventAction(String eventAction, String eventName,
 			ArrayList<String> participants) {
 
-		String json = JsonMaker.manualEventCommunication(eventName, "dataa");
-		try {
-			json = JsonMaker.addParticipantsToEventJson(json, participants);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		String json = JsonMaker.manualEventCommunication(eventName, "data",participants);
 		
 		try {
 			sendPost(url, json);

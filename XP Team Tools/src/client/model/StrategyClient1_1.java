@@ -28,6 +28,7 @@ public class StrategyClient1_1 {
 	private SetMembsService membsService;
 
 
+
 	public StrategyClient1_1() {
 		super();
 
@@ -169,5 +170,9 @@ public class StrategyClient1_1 {
 
 	public void setMembsService(SetMembsService membsService) {
 		this.membsService = membsService;
+	}
+
+	public SetMembsService getMembsService() {
+		return membsService;
 	}
 }

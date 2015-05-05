@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
-import protocol.JsonMaker;
 import server.events.IEventActionRequest;
 /**
  * It allow the server to add a Team
@@ -22,14 +21,9 @@ public class EventService implements IService{
 
 	@Override
 	public void doAction(String line) throws IOException, ParseException {
-		//line è il json ricevuto dal client
 		
-		//gli aggiungo i partecipanti
-		String newJson;
-		newJson = JsonMaker.addParticipantsToEventJson(line, null);
-		
-		//e lo giro all'altro server
-		eventSender.sendEventAction(newJson);
+		//line è il json ricevuto dal client: lo giro all'altro server
+		eventSender.sendEventAction(line);
 	}
 	
 
