@@ -29,10 +29,10 @@ public class SignInService extends AccountAction implements HttpAction {
 				registeredUsers);
 
 		if (result) {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("timeline.jsp");
 			return;
 		} else {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("home.jsp"); //TODO: modificare in modo più furbo
 			return;
 		}
 	}

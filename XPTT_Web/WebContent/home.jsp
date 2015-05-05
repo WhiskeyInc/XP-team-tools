@@ -18,8 +18,6 @@
 <!--GOOGLE FONT -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
-<!-- Projects -->
-<link href="css/projects.css" rel="stylesheet" />
 <!-- custom CSS  -->
 <link href="css/style.css" rel="stylesheet" />
 <!-- form CSS  -->
@@ -27,7 +25,7 @@
 <!-- validator CSS  -->
 <link href="css/validator.css" rel="stylesheet" />
 </head>
-<body link="red">
+<body>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Home" />
 	</jsp:include>
@@ -84,23 +82,25 @@
 		</div>
 	</div>
 
-
-	<h1 align="center">
-		<strong>x T r E A M</strong>
-	</h1>
-	<h4 align="center">The ToolBox you have ever looked for</h4>
-	<div align="center">
-		<img class="img img-responsive img-rounded" width="600" vspace="30"
-			src="img/home.jpg">
-	</div>
-	<div class="row">
-		<div class="col-md-offset-2 col-md-8">
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary"
-				data-toggle="modal" data-target="#loginModal">
-				Sign in
-			</button>
-			<button type="button" class="btn btn-primary btn-xl">Sign Up</button>
+	<div class="container">
+		<h1 align="center">
+			<strong>x T r E A M</strong>
+		</h1>
+		<h4 align="center">The ToolBox you have ever looked for</h4>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<img class="img img-responsive img-rounded" src="img/home.jpg">
+			</div>
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-xl" data-toggle="modal"
+					data-target="#loginModal">Sign in</button>
+				<button type="button" class="btn btn-primary btn-xl">Sign
+					Up</button>
+			</div>
 		</div>
 	</div>
 	<footer class="footer">
@@ -115,12 +115,10 @@
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
-	<!-- <script src="js/bootstrap.js"></script> commented because of issues about modals-->
-	<!-- Adding a form when required -->
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Validate a form field when required -->
-	<!-- <script src="js/validator.js"></script>
-	<script src="js/projectForm.js"></script> -->
+	<script src="js/validator.js"></script>
+	<script src="js/login.js"></script> 
 
 </body>
 </html>
