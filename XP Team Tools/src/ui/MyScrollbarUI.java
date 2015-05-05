@@ -13,8 +13,8 @@ public class MyScrollbarUI extends BasicScrollBarUI {
 
         public MyScrollbarUI(){
             try {
-                upArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-arrow-up-icon.png"));
-                downArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-arrow-down-icon.png"));
+                upArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/fatcow/farm-fresh/16/bullet-arrow-up-icon.png"));
+                downArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/fatcow/farm-fresh/16/bullet-arrow-down-icon.png"));
                 rightArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-arrow-right-icon.png"));
                 leftArrow = new ImageIcon(new java.net.URL("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-arrow-left-icon.png"));
             } catch (java.net.MalformedURLException ex) {
