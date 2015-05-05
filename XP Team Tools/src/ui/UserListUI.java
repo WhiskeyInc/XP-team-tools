@@ -31,6 +31,7 @@ public class UserListUI extends JPanel {
 
 	public UserListUI() {
 		super.setBackground(new Color(244, 249, 228));
+		super.setBackground(new Color(248, 244, 255));
 		super.setLayout(new GridBagLayout());
 		super.setPreferredSize(new Dimension(250, 400));
 		super.setMinimumSize(new Dimension(250, 400));
