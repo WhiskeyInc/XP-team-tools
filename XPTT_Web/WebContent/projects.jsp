@@ -124,7 +124,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary pll-right"
+				<button type="button" class="btn btn-primary pull-right"
 					data-toggle="modal" data-target="#projectAdderModal">
 					<i class="fa fa-plus fa-fw"></i> Add a new project
 				</button>

@@ -18,10 +18,14 @@
 <!--GOOGLE FONT -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
-<!-- Timeline -->
-<link href="css/timeline.css" rel="stylesheet" />
-<!-- custom CSS here -->
+<!-- Projects -->
+<link href="css/projects.css" rel="stylesheet" />
+<!-- custom CSS  -->
 <link href="css/style.css" rel="stylesheet" />
+<!-- form CSS  -->
+<link href="css/projectForm.css" rel="stylesheet" />
+<!-- validator CSS  -->
+<link href="css/validator.css" rel="stylesheet" />
 </head>
 <body link="red">
 	<jsp:include page="menu.jsp"><jsp:param name="page"
@@ -31,17 +35,73 @@
 	<br>
 	<br>
 
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Sign in.</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<form role="form" id="signIn" class="contact-form" action="login"
+							method="post">
+							<input type="hidden" name="action" value="login">
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="userId"
+											autocomplete="off" id="userId" placeholder="User">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="password" class="form-control" name="password"
+											autocomplete="off" id="password" placeholder="Password">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Sign in</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<h1 align="center">
 		<strong>x T r E A M</strong>
 	</h1>
 	<h4 align="center">The ToolBox you have ever looked for</h4>
 	<div align="center">
 		<img class="img img-responsive img-rounded" width="600" vspace="30"
-			src="http://www.extendcode.com/images/main_ex.jpg">
+			src="img/home.jpg">
 	</div>
-	<div align="center">
-		<a class="btn btn-primary btn-xl">Sign Up</a> &nbsp;&nbsp;<a
-			class="btn btn-default btn-xl">Sign In</a>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary"
+				data-toggle="modal" data-target="#loginModal">
+				Sign in
+			</button>
+			<button type="button" class="btn btn-primary btn-xl">Sign Up</button>
+		</div>
 	</div>
 	<footer class="footer">
 		<div class="container">
@@ -51,5 +111,16 @@
 			</div>
 		</div>
 	</footer>
+
+	<!--Core JavaScript file  -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<!--bootstrap JavaScript file  -->
+	<!-- <script src="js/bootstrap.js"></script> commented because of issues about modals-->
+	<!-- Adding a form when required -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Validate a form field when required -->
+	<!-- <script src="js/validator.js"></script>
+	<script src="js/projectForm.js"></script> -->
+
 </body>
 </html>

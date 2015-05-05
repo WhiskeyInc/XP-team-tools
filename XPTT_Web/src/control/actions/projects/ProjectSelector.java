@@ -21,7 +21,6 @@ public class ProjectSelector extends ProjectAction {
 		ProjectsCollector projects = super.getProjects(request);
 		Project project = projects.getProject(getId(request));
 		request.getSession().setAttribute("currentProject", project);
-		System.err.println(getId(request));
 		super.redirect(response);
 	}
 
