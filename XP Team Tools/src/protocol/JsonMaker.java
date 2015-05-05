@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import client.model.ClientDetails;
 
@@ -26,6 +28,7 @@ public class JsonMaker {
 	public static final String CONFIRM = "8";
 	public static final String TEAM_MEMBS = "9";
 	public static final String NEW_UI = "10";
+	public static final String EVENT = "11";
 	
 	public static final String REQ = "request";
 	public static final String TEAM_NAME = "team name";
@@ -42,6 +45,7 @@ public class JsonMaker {
 	public static final String EVENT_ACTION = "action";
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
+	public static final String EVENT_DATE = "date";
 
 
 	@SuppressWarnings("unchecked")
@@ -179,22 +183,53 @@ public class JsonMaker {
 	
 	@SuppressWarnings("unchecked")
 	/**
-	 * creates an event json to communicate to the second server
+	 * creates an event json of a manual event to communicate it to the second server
 	 * @param eventName
 	 * @param participants
 	 * @return
 	 */
-	public static String eventCommunication(String eventAction, String eventName, ArrayList<String> participants) {
+	public static String manualEventCommunication(String eventName, String date) {
 		
 		JSONObject json = new JSONObject();
 		
-		json.put(EVENT_ACTION, eventAction);
+		json.put(REQ, EVENT);
+
+		json.put(EVENT_ACTION, "addManualEvent");
 		json.put(EVENT_NAME, eventName);
-				
-		JSONArray array = new JSONArray();
-		array.addAll(participants);
-		json.put(PARTICIPANTS, array);
+		json.put(EVENT_DATE, date);
 		
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	/**
+	 * creates an event json of an automatic event to communicate it to the second server
+	 * @param eventName
+	 * @param participants
+	 * @return
+	 */
+	public static String automaticEventCommunication(String eventName) {
+		
+		JSONObject json = new JSONObject();
+		
+		json.put(REQ, EVENT);
+		
+		json.put(EVENT_ACTION, "addAutomaticEvent");
+		json.put(EVENT_NAME, eventName);
+		
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String addParticipantsToEventJson(String str, ArrayList<String> participants) throws ParseException{
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(str);
+		
+		if(participants != null){
+			JSONArray array = new JSONArray();
+			array.addAll(participants);
+			json.put(PARTICIPANTS, array);
+		}	
 		return json.toString();
 	}
 

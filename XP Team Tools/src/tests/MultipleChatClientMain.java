@@ -108,16 +108,6 @@ public class MultipleChatClientMain {
 		final String formattedNickname = Formatter.formatNickname(client.getNickname());
 
 		
-		ui.setMeetingButtonAction(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				final MeetingUIDetails ask = new MeetingUIDetails();
-				EventCreationController eventContr = new EventCreationController(ask);
-				ask.setCreateButtonListener(eventContr);
-			}
-		});
-		
 		ui.setTimerUI(new ActionListener() {
 
 			@Override
@@ -248,6 +238,22 @@ public class MultipleChatClientMain {
 				}
 			}
 		});
+		
+		
+		
+		ui.setMeetingButtonAction(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				final MeetingUIDetails ask = new MeetingUIDetails();
+				EventCreationController eventContr = new EventCreationController(ask, client);
+				ask.setCreateButtonListener(eventContr);
+			}
+		});
+		
 	}
+	
+
+	
 }

@@ -9,7 +9,7 @@ public class EventSendPostTestMain {
 	
 	public static void main(String[] args) {
 		
-		IEventActionRequest sender = new SendPost("http://localhost:8080/XPTT_Web/JSONAcceptor");
+		IEventActionRequest sender = new SendPost("http://localhost:9998/requests");
 		
 		ArrayList<String> participants = new ArrayList<String>();
 		participants.add("Mario");

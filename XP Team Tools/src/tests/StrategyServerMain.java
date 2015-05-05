@@ -2,9 +2,11 @@ package tests;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.events.SendPost;
 import server.model.AddTeamMembService;
 import server.model.ChatService;
 import server.model.ChatsManager;
+import server.model.EventService;
 import server.model.NewChatService;
 import server.model.NewTeamService;
 import server.model.ServerStrategy1_1;
@@ -31,6 +33,9 @@ public class StrategyServerMain {
 				Integer.parseInt(JsonMaker.NEW_TEAM),
 				new NewTeamService(TeamsManager.getInstance(), ChatsManager
 						.getInstance(), server.getClientsManager()));
+		server.addService(
+				Integer.parseInt(JsonMaker.EVENT),
+				new EventService(new SendPost("http://localhost:9998/requests")));
 		
 
 		try {

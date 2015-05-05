@@ -23,6 +23,11 @@ public class JsonParser {
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
 
+	public static final String EVENT_ACTION = "action";
+	public static final String EVENT_NAME = "event_name";
+	public static final String PARTICIPANTS = "participants";
+
+
 	public static ClientDetails[] parseNewChatRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -138,5 +143,7 @@ public class JsonParser {
 		JSONObject json = (JSONObject) parser.parse(s);
 		return Integer.parseInt((String) json.get(REQ));
 	}
+	
+	
 
 }

@@ -12,9 +12,15 @@ import java.util.ArrayList;
 public interface IEventActionRequest {
 
 	/**
-	 * Function to send the event to a server
+	 * Function to send the event to a server, from the details
 	 * @return
 	 */
 	public void sendEventAction(String eventAction, String eventName, ArrayList<String> participants);
+
+	/**
+	 * Function to send the event to a server, from the json
+	 * @return
+	 */
+	public void sendEventAction(String json);
 
 }
