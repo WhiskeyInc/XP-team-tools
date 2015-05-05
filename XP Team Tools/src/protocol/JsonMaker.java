@@ -1,5 +1,7 @@
 package protocol;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -36,6 +38,10 @@ public class JsonMaker {
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
 	public static final String CONFIRM_STRING = "ok";
+	
+	public static final String EVENT_ACTION = "action";
+	public static final String EVENT_NAME = "event_name";
+	public static final String PARTICIPANTS = "participants";
 
 
 	@SuppressWarnings("unchecked")
@@ -166,6 +172,29 @@ public class JsonMaker {
 		JSONObject json = new JSONObject();
 		json.put(REQ, NEW_UI);
 		json.put(INDEX, String.valueOf(chatIndex));
+		return json.toString();
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	/**
+	 * creates an event json to communicate to the second server
+	 * @param eventName
+	 * @param participants
+	 * @return
+	 */
+	public static String eventCommunication(String eventAction, String eventName, ArrayList<String> participants) {
+		
+		JSONObject json = new JSONObject();
+		
+		json.put(EVENT_ACTION, eventAction);
+		json.put(EVENT_NAME, eventName);
+				
+		JSONArray array = new JSONArray();
+		array.addAll(participants);
+		json.put(PARTICIPANTS, array);
+		
 		return json.toString();
 	}
 

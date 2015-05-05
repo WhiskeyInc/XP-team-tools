@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import protocol.JsonMaker;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
 import ui.ChatUI;
@@ -12,7 +13,6 @@ import ui.TimerUI;
 import ui.UI;
 import client.model.AbstractClient;
 import client.model.ConcreteClient;
-import client.model.JsonMaker;
 
 /**
  * This class, with clientMain and serverMain, tests the communication between 2

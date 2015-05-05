@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import client.model.JsonMaker;
+import protocol.JsonMaker;
 
 public class SendPost implements IEventActionRequest {
 

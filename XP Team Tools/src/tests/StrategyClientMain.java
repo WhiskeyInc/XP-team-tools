@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
@@ -12,7 +13,6 @@ import ui.ChatUIObserverStrategy;
 import ui.TimerUIObserverStrategy;
 import ui.UIObserverStrategy;
 import client.model.IClientService;
-import client.model.JsonMaker;
 import client.model.SetMessageService;
 import client.model.SetTimeStampService;
 import client.model.StrategyClient;

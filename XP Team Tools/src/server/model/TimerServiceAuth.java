@@ -10,8 +10,9 @@ import javax.swing.Timer;
 
 import org.json.simple.parser.ParseException;
 
+import protocol.JsonMaker;
+import protocol.JsonParser;
 import timer.TimerFormatter;
-import client.model.JsonMaker;
 
 public class TimerServiceAuth implements IService {
 

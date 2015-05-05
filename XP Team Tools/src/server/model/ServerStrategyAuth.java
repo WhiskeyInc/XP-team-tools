@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import protocol.JsonParser;
+
 /**
  * A general server with the possibility to add services, it needs a client
  * manager to manage all the connecting clients Implementation of the
