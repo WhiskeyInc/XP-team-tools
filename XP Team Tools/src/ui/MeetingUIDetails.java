@@ -1,7 +1,10 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,10 +14,14 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import com.qt.datapicker.DatePicker;
 
@@ -28,7 +35,7 @@ public class MeetingUIDetails extends JPanel {
 
 	private ObservingTextField dateField = new ObservingTextField();
 	private JButton btn = new JButton("Pick Date");
-	private JTextField description = new JTextField("");
+	private JTextArea description = new JTextArea("");
 	private JButton createButton = new JButton("Create Event");
 	
 	private JPanel p1 = new JPanel();
@@ -38,10 +45,7 @@ public class MeetingUIDetails extends JPanel {
 	public MeetingUIDetails() {
 		super();
 		setLayout(new GridLayout(3, 1));
-		add(p1);
-		add(p2);
-		add(p3);
-	
+		
 		
 		p1.add(new JLabel("Select a date:"));
 		p1.add(new JLabel(""));
@@ -49,6 +53,8 @@ public class MeetingUIDetails extends JPanel {
 		dateField.setColumns(10);
 		dateField.setText("");
 		dateField.setToolTipText("Date format: dd/mm/yy");
+		dateField.setEditable(false);
+		dateField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		p1.add(dateField);
 		final Locale locale = getLocale(null);
 		p1.add(btn);
@@ -64,10 +70,25 @@ public class MeetingUIDetails extends JPanel {
 		});
 		
 		p2.add(new JLabel("Description:"));
-		description.setPreferredSize(new Dimension(300, 50));
-		p2.add(description);
+		description.setLineWrap(true);
+		description.requestFocus();
+		description.setWrapStyleWord(true);
+		description.setFont(new Font("TimesRoman", Font.ITALIC, 13));
 		
+		description.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		JScrollPane pane = new JScrollPane(description, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		pane.setPreferredSize(new Dimension(300, 65));
+		pane.setMinimumSize(new Dimension(300, 65));
+		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		p2.add(pane);
 		p3.add(createButton);
+		
+		add(p1);
+		add(p2);
+		add(p3);
+	
 		
 	}
 	
