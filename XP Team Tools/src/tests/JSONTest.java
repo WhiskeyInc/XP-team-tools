@@ -1,8 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -114,8 +112,9 @@ public class JSONTest {
 	}
 	
 	@Test
-	public void confirmTest() throws Exception {
-		assertTrue(JsonParser.parseConfirm(JsonMaker.confirm()));
+	public void disconnectTest() throws Exception {
+		ClientDetails clientDetails = new ClientDetails("Alb", "Test");
+		assertEquals(clientDetails, JsonParser.parseDisconnectRequest(JsonMaker.disconnect(clientDetails)));
 	}
 	
 	@Test
