@@ -15,14 +15,24 @@ public abstract class AccountAction implements HttpAction {
 		super();
 	}
 
-	public boolean isregistered(String userId, String password,
+	public void signUpAuthenticate(String userId, String password,
 			HashMap<String, String> registeredUsersPass,
-			HashMap<String, String> registeredUsers) {
-		boolean valid = checkUserId(userId, registeredUsersPass);
-		if (valid == true) {
-			valid = checkPassword(userId, password, registeredUsersPass);
+			HashMap<String, String> registeredUsers) throws Exception {
+		if (checkUserId(userId, registeredUsersPass)) {
+			throw new Exception();
 		}
-		return valid;
+	}
+
+	public void signInAuthenticate(String userId, String password,
+			HashMap<String, String> registeredUsersPass,
+			HashMap<String, String> registeredUsers) throws Exception {
+		if (checkUserId(userId, registeredUsersPass)) {
+			if (!checkPassword(userId, password, registeredUsersPass)) {
+				throw new Exception();
+			}
+		} else {
+			throw new Exception();
+		}
 	}
 
 	private boolean checkPassword(String userId, String password,
@@ -42,7 +52,7 @@ public abstract class AccountAction implements HttpAction {
 	}
 
 	@Override
-	public abstract void perform(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException;
-	
+	public abstract void perform(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException;
+
 }

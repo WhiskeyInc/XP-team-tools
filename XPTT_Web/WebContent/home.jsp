@@ -33,6 +33,8 @@
 	<br>
 	<br>
 
+	
+
 	<!-- Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -138,6 +140,30 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+
+   <div class="col-md-offset-2 col-md-0 col-sm-0 top-margin-exception"
+		id="error">
+		<%
+			Exception exception = (Exception) session.getAttribute("exception");
+	        String errorMessage = "Invalid User ID or Password!";
+			if (exception != null) {
+		%>
+		<br>
+		<div class='alert alert-danger alert-dismissible' role="alert">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong><i class="fa fa-exclamation-triangle"></i> Warning </strong>:
+			Cannot perform action.
+			<%=errorMessage%>
+		</div>
+		<%
+			session.removeAttribute("exception");
+			}
+		%>
 	</div>
 
 

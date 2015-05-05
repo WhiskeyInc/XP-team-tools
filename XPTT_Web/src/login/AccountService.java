@@ -37,7 +37,6 @@ public class AccountService extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		this.actions.get(request.getParameter("action")).perform(request,
 				response);
 

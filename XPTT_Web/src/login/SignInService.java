@@ -14,7 +14,7 @@ public class SignInService extends AccountAction implements HttpAction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException{
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
@@ -24,18 +24,13 @@ public class SignInService extends AccountAction implements HttpAction {
 				.getServletContext().getAttribute("registeredUsersPass");
 		registeredUsers = (HashMap<String, String>) request.getServletContext()
 				.getAttribute("registeredUsers");
-
-		boolean result = isregistered(userId, password, registeredUsersPass,
-				registeredUsers);
-
-		if (result) {
+		try {
+			signInAuthenticate(userId, password, registeredUsersPass,
+					registeredUsers);
 			response.sendRedirect("timeline.jsp");
-			return;
-		} else {
-			response.sendRedirect("home.jsp"); //TODO: modificare in modo più furbo
-			return;
+		} catch (Exception e) {
+			request.getSession().setAttribute("exception", e);
+			response.sendRedirect("home.jsp");
 		}
 	}
-
-	
 }
