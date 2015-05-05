@@ -82,6 +82,65 @@
 		</div>
 	</div>
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Sign up!</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<form role="form" id="signUp" class="contact-form" action="login"
+							method="post">
+							<input type="hidden" name="action" value="register">
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="userName"
+											autocomplete="off" id="userName" placeholder="UserName">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="userId"
+											autocomplete="off" id="userId" placeholder="UserId">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="password" class="form-control" name="password"
+											autocomplete="off" id="password" placeholder="Password">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Sign up</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div class="container">
 		<h1 align="center">
 			<strong>x T r E A M</strong>
@@ -92,14 +151,15 @@
 				<img class="img img-responsive img-rounded" src="img/home.jpg">
 			</div>
 		</div>
-		<br><br>
+		<br>
+		<br>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-xl" data-toggle="modal"
-					data-target="#loginModal">Sign in</button>
-				<button type="button" class="btn btn-primary btn-xl">Sign
-					Up</button>
+				<button type="button" class="btn btn-primary btn-xl"
+					data-toggle="modal" data-target="#loginModal">Sign in</button>
+				<button type="button" class="btn btn-primary btn-xl"
+					data-toggle="modal" data-target="#registerModal">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -118,7 +178,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Validate a form field when required -->
 	<script src="js/validator.js"></script>
-	<script src="js/login.js"></script> 
+	<script src="js/login.js"></script>
 
 </body>
 </html>

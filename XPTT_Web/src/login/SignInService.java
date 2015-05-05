@@ -25,7 +25,7 @@ public class SignInService extends AccountAction implements HttpAction {
 		registeredUsers = (HashMap<String, String>) request.getServletContext()
 				.getAttribute("registeredUsers");
 
-		boolean result = authenticate(userId, password, registeredUsersPass,
+		boolean result = isregistered(userId, password, registeredUsersPass,
 				registeredUsers);
 
 		if (result) {

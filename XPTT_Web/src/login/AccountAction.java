@@ -15,7 +15,7 @@ public abstract class AccountAction implements HttpAction {
 		super();
 	}
 
-	public boolean authenticate(String userId, String password,
+	public boolean isregistered(String userId, String password,
 			HashMap<String, String> registeredUsersPass,
 			HashMap<String, String> registeredUsers) {
 		boolean valid = checkUserId(userId, registeredUsersPass);

@@ -32,6 +32,7 @@ public class AccountService extends HttpServlet {
 
 	private void initializeMap() {
 		actions.put("login", new SignInService());
+		actions.put("register", new SignUpService());
 	}
 
 	protected void doPost(HttpServletRequest request,
