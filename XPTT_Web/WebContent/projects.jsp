@@ -31,6 +31,56 @@
 <link href="css/validator.css" rel="stylesheet" />
 </head>
 <body>
+
+	<!-- Modal -->
+	<div class="modal fade" id="projectAdderModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add a new project.</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<form role="form" id="projectAdder" class="contact-form"
+							action="ProjectsController" method="post">
+							<input type="hidden" name="action" value="addition">
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="projectName"
+											autocomplete="off" id="projectName" placeholder="Name">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<textarea class="form-control textarea" rows="3"
+											name="description" id="description" placeholder="Description"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Add the
+											project</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Projects" />
 	</jsp:include>
@@ -63,8 +113,6 @@
 							<input type="hidden" name="action" value="selection"> <input
 								type="hidden" name="id" value="<%=project.getId()%>">
 						</form>
-
-
 					</div>
 				</div>
 			</div>
@@ -74,38 +122,19 @@
 			%>
 		</div>
 		<div class="row">
-			<form role="form" id="projectAdder" class="contact-form"
-				action="ProjectsController" method="post">
-				<input type="hidden" name="action" value="addition">
-				<div class="row">
-					<div class="col-md-offset-2 col-md-8">
-						<div class="form-group">
-							<input type="text" class="form-control" name="projectName"
-								autocomplete="off" id="projectName" placeholder="Name">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-2 col-md-8">
-						<div class="form-group">
-							<textarea class="form-control textarea" rows="3"
-								name="description" id="description" placeholder="Description"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-2 col-md-8">
-						<button type="submit" class="btn btn-primary pull-right">Add
-							the project</button>
-					</div>
-				</div>
-			</form>
+			<div class="col-md-8">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary pll-right"
+					data-toggle="modal" data-target="#projectAdderModal">
+					<i class="fa fa-plus fa-fw"></i> Add a new project
+				</button>
+			</div>
 		</div>
 	</div>
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
-	<script src="js/bootstrap.js"></script>
+	<!-- <script src="js/bootstrap.js"></script> commented because of issues about modals-->
 	<!-- Adding a form when required -->
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Validate a form field when required -->
