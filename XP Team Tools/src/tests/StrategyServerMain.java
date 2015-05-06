@@ -35,7 +35,7 @@ public class StrategyServerMain {
 						.getInstance(), server.getClientsManager()));
 		server.addService(
 				Integer.parseInt(JsonMaker.EVENT),
-				new EventService(new SendPost("http://localhost:9998/requests")));
+				new EventService(new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor")));
 		
 
 		try {

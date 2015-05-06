@@ -44,8 +44,8 @@ public class JsonMaker {
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
 	public static final String EVENT_DATE = "date";
-	public static final String ADD_EVENT = "addEvent"; // Non ancora implementato!
-	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; // La servelt riconosce solo questa!
+	public static final String ADD_EVENT = "addEvent"; // La servlet riconosce solo questa!
+	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; // Non ancora implementato!
 	
 
 	@SuppressWarnings("unchecked")
@@ -210,6 +210,7 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of an automatic event to communicate it to the second server

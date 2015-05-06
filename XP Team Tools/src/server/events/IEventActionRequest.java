@@ -15,7 +15,7 @@ public interface IEventActionRequest {
 	 * Function to send the event to a server, from the details
 	 * @return
 	 */
-	public void sendEventAction(String eventAction, String eventName, ArrayList<String> participants);
+	public void sendEventAction(String eventName, ArrayList<String> participants);
 
 	/**
 	 * Function to send the event to a server, from the json

@@ -19,18 +19,18 @@ public class SendPost implements IEventActionRequest {
 	}
 
 	@Override
-	public void sendEventAction(String eventAction, String eventName,
-			ArrayList<String> participants) {
+	public void sendEventAction(String eventName, ArrayList<String> participants) {
 
-		String json = JsonMaker.automaticEventCommunication(eventName, participants);
-		
+		String json = JsonMaker.manualEventCommunication(eventName,
+				"bo", participants);
+
 		try {
 			sendPost(url, json);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void sendEventAction(String json) {
 		try {

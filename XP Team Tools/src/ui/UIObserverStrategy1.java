@@ -79,6 +79,10 @@ public class UIObserverStrategy1 extends JFrame {
 
 		// super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public void setMeetingButtonAction(ActionListener actionListener) {
+		chatUI.setButtonMeeting(actionListener);
+	}
 
 	public void setChatUI(ActionListener actionListener) {
 		chatUI.setButtonAction(actionListener);

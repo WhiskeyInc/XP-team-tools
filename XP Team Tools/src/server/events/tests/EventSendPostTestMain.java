@@ -9,15 +9,15 @@ public class EventSendPostTestMain {
 	
 	public static void main(String[] args) {
 		
-		IEventActionRequest sender = new SendPost("http://localhost:8080/XPTT_Web/JSONAcceptor");
+		IEventActionRequest sender = new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
 		
 		ArrayList<String> participants = new ArrayList<String>();
-		participants.add("Mario");
+		participants.add("Mariiiiiiiiiiiiiiiiiiiiiiiiiiiio");
 		participants.add("Luigi");
 		participants.add("Bardo");
 		participants.add("Ermenegildo");
 		
-		sender.sendEventAction("addEvent", "boh", participants);
+		sender.sendEventAction( "boh", participants);
 
 	}
 
