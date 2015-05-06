@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.SocketException;
-import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 
@@ -47,18 +46,27 @@ public class NewChatService implements IService {
 		}
 		if (chatsManager.has(chatMokeUp)) {
 			Chat realChat = chatsManager.get(chatsManager.indexOf(chatMokeUp));
-			ArrayList<ClientDetails> list = realChat.getAttendantsDetails();
-			for (ClientDetails details1 : list) {
+			propagateMessageResponse(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[0], realChat);
+			for (int i = 1; i < details.length; i++) {
+				propagateMessage(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[i], realChat);
+			}
+//			try {
+//				Thread.sleep(3000);
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+			for (int i = 0; i < details.length; i++) {
 				try {
-					alignClient(details1, realChat);
+					alignClient(details[i], realChat);
 				} catch (NoMessagesException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} else {
 			chatsManager.add(chatMokeUp);
 			//NB IL primo deve essere chi la richiede.
-			System.err.println("Il primo che la richiede è : " + details[0].getNickname() + " indice " + (chatsManager.size()-1));
 			propagateMessageResponse(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[0], chatMokeUp);
 			for (int i = 1; i < details.length; i++) {
 				propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[i], chatMokeUp);
@@ -68,6 +76,8 @@ public class NewChatService implements IService {
 
 	private void alignClient(ClientDetails details, Chat chat)
 			throws NoMessagesException, IOException {
+
+		//poi allineo
 		String[] messages = chat.recoverLastMessages(NUM_OF_MESSAGES);
 		for (int i = 0; i < messages.length; i++) {
 			propagateMessage(messages[i], details, chat);
