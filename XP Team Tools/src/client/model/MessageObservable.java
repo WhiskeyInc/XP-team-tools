@@ -14,6 +14,7 @@ public class MessageObservable extends Observable {
 
 	public void setMessage(String message) {
 		this.message = message;
+		waitObserver();
 		update();
 	}
 	
@@ -25,5 +26,10 @@ public class MessageObservable extends Observable {
 	public String getMessage() {
 		return message;
 	}
-
+	//Crucial for the solution adopted to catch the server alignment
+	private void waitObserver() {
+		while(countObservers() == 0) {
+			//wait
+		}
+	}
 }

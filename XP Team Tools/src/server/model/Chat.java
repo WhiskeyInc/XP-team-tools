@@ -50,10 +50,18 @@ public class Chat {
 
 	public String[] recoverLastMessages(int numOfMessages)
 			throws NoMessagesException {
+		int size = messageList.size();
+		if(size < numOfMessages) {
+			String[] messages = new String[size];
+			for (int i = 0; i < messages.length; i++) {
+				messages[i] = messageList.get(i);
+			}
+			return messages;
+
+		}
 		String[] messages = new String[numOfMessages];
 
 		for (int i = 0; i < numOfMessages; i++) {
-			int size = messageList.size();
 			messages[i] = messageList.get(size - numOfMessages + i);
 		}
 
@@ -92,7 +100,6 @@ public class Chat {
 			if (attendantsDetails.size() == ((Chat) obj).attendantsDetails
 					.size()) {
 				for (int i = 0; i < attendantsDetails.size(); i++) {
-					System.out.println("size = " + attendantsDetails.size());
 					if (!attendantsDetails
 							.get(i)
 							.getNickname()

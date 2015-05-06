@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
@@ -241,6 +243,24 @@ public class ChatUIObserverStrategy1 extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		appendChatAreaText(Formatter.appendNewLine(messageObs.getMessage()));
+		//NB garbage collector sarà contento?
+		//TODO pensare a qualche altra soluzione
+		Runnable runnable = new Runnable() {
+			
+			@Override
+			public void run() {
+				appendChatAreaText(Formatter.appendNewLine(messageObs.getMessage()));
+			}
+		};
+		try {
+			SwingUtilities.invokeAndWait(runnable);
+		} catch (InvocationTargetException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeObservers() {
+		messageObs.deleteObservers();
 	}
 }

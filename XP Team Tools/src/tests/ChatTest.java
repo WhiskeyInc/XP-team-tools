@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,6 @@ public class ChatTest {
 
 	 }
 	 
-
 	
 	@Test
 	public void equalsTest() throws Exception {
@@ -31,6 +30,27 @@ public class ChatTest {
 		chat2.addAttendant(new ClientDetails("Test1", "A"));
 		
 		assertTrue(chat.equals(chat2));
+	}
+	
+	@Test
+	public void recoverTest() throws Exception {
+		String[] mex1 = new String[2];
+		mex1[0] = "Ciao";
+		mex1[1] = "Hei";
+		chat.addMessage(mex1[0]);
+		chat.addMessage(mex1[1]);
+		String[] mess = chat.recoverLastMessages(5);
+		assertArrayEquals(mex1, mess);
+		
+		String[] mex2 = new String[4];
+		mex2[0] = "Ciao";
+		mex2[1] = "Hei";
+		mex2[2] = "a";
+		mex2[3] = "b";
+		
+		mess = chat.recoverLastMessages(2);
+		assertArrayEquals(mex1, mess);
+
 	}
 
 }

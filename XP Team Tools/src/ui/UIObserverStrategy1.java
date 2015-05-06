@@ -1,12 +1,12 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,8 +33,9 @@ public class UIObserverStrategy1 extends JFrame {
 
 	public UIObserverStrategy1(final IClientService setMessage,
 			final IClientService setTimeStamp, final StrategyClient1_1 client,
-			final int index) {
+			 int index) {
 		super();
+		
 		chatUI = new ChatUIObserverStrategy1(
 				(MessageObservable) setMessage.getAttribute(index),
 				client);
@@ -61,6 +62,13 @@ public class UIObserverStrategy1 extends JFrame {
 				getContentPane().add(panel);
 				setVisible(true);
 				pack();
+				//It is necessary to guarantee the method waitObservers of MessageObservable class
+				addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosing(WindowEvent windowEvent) {
+						chatUI.removeObservers();
+					}
+				});
 			}
 		};
 

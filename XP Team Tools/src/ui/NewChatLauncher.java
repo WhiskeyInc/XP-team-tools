@@ -1,11 +1,15 @@
 package ui;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.SwingUtilities;
 
 import protocol.JsonMaker;
 import string.formatter.Formatter;
@@ -43,13 +47,15 @@ public class NewChatLauncher implements Observer {
 						.getNickname());
 				// IClientService serviceMessage = new SetMessageService();
 				// IClientService serviceTimeStamp = new SetTimeStampService();
+				System.err.println(EventQueue.isDispatchThread() + " " + NewChatLauncher.class);
+
 				UIObserverStrategy1 ui = new UIObserverStrategy1(
 						serviceMessage, serviceTimeStamp, client, index);
 				final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 				final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 
 				client.sendMessageToServer(JsonMaker.chatRequest(
-						"- " + client.getNickname() + " added to the team -",
+						"- " + client.getNickname() + " added to the chat -",
 						"" + index));
 
 				System.err.println("L' indice della chat è : " + index + " ["
@@ -108,8 +114,14 @@ public class NewChatLauncher implements Observer {
 				});
 			}
 		};
-		Thread thread = new Thread(runnable);
-		thread.start();
+		try {
+			SwingUtilities.invokeAndWait(runnable);
+		} catch (InvocationTargetException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.err.println("Sono il thread " + Thread.currentThread().getName()
+				+ " - L'EDT ha aggiornato la GUI :-)");
 
 	}
 

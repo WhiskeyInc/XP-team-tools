@@ -11,11 +11,10 @@ import string.formatter.Formatter;
 import timer.TimerFormatter;
 import ui.ChatUIObserverStrategy1;
 import ui.MainUIObserver;
+import ui.NewChatWorker;
 import ui.TimerUIObserverStrategy;
-import ui.UIObserverStrategy1;
 import ui.UserListUI;
 import client.model.ClientConnectionDetails;
-import client.model.ClientDetails;
 import client.model.IClientService;
 import client.model.SetMembsService;
 import client.model.SetMessageService;
@@ -127,93 +126,8 @@ public class StrategyClientMain3 {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listUI.getListOfSelectedNicknames().clear();
-				for (int i = 0; i < listUI.getBox().size(); i++) {
-					if (listUI.getBox().get(i).isSelected()) {
-						listUI.getListOfSelectedNicknames().add(listUI.getNicknames()[i]);
-					}
-				}
-				//NB: il primo è sempre chi la richiede
-				ClientDetails[] det = new ClientDetails[listUI.getListOfSelectedNicknames().size() + 1];
-				det[0] = new ClientDetails(client.getNickname(), teamName);
-				for (int i = 1; i < det.length; i++) {
-					det[i] = new ClientDetails(listUI.getSelectedNicknames()[i-1], teamName);
-				}
-				client.sendMessageToServer(JsonMaker.newChatRequest(det));
-				String response = client.waitServerResponse();
-
-				final int index = JsonParser.parseChatIndexRequest(response);
-				System.err.println(index+ " "+ MultipleChatClientMain.class);
-				Runnable runnable = new Runnable() {
-				
-				@Override
-				public void run() {
-					final String nickname = Formatter.formatNickname(client.getNickname());
-//					IClientService serviceMessage = new SetMessageService();
-//					IClientService serviceTimeStamp = new SetTimeStampService();
-					UIObserverStrategy1 ui = new UIObserverStrategy1(services[0], services[1], client, index);
-					final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
-					final TimerUIObserverStrategy timerUI = ui.getTimerUI();
-					
-					client.sendMessageToServer(JsonMaker.chatRequest("- " +client.getNickname() + " added to the chat -", ""+index));
-					
-					System.err.println("L' indice della chat è : " + index + " ["+ MainUIObserver.class + "]");
-					//Controlla conferma data dal server in caso è fallito l'add...
-					
-
-					
-					final String teamName = client.getTeamName();
-					ui.setChatUI(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							client.sendMessageToServer(JsonMaker.chatRequest(
-									teamName,
-									client.getNickname()));
-							chatUI.emptyMessageArea();
-						}
-					});
-					
-					
-					final String indexString = String.valueOf(index);
-					
-					ui.setTimerUI(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							if (timerUI.isTimeStampValid(timerUI.getTimeStamp())) {
-								int[] time = TimerFormatter.getMinSec(timerUI
-										.getTimeStamp());
-								timerUI.setTimerEditable(false);// TODO se è connesso...
-								client.sendMessageToServer(JsonMaker.timerRequest(indexString,
-										time[0], time[1]));
-							}
-						}
-					});
-
-					chatUI.setEnterListener(new KeyListener() {
-						@Override
-						public void keyTyped(KeyEvent e) {}
-						@Override
-						public void keyReleased(KeyEvent e) {}
-						@Override
-						public void keyPressed(KeyEvent e) {
-
-							if(e.getKeyCode() == KeyEvent.VK_ENTER){
-								e.consume();
-								client.sendMessageToServer(JsonMaker.chatRequest(
-										
-										nickname + chatUI.getMessage()	, ""+index));
-								chatUI.emptyMessageArea();
-								//chat.getMessageArea().setCaretPosition(0);
-							}
-						}
-					});
-				}
-			};
-			Thread thread = new Thread(runnable);
-			thread.start();
-
+				NewChatWorker newChatWorker = new NewChatWorker(listUI, client, services);
+				newChatWorker.execute();
 			}
 		});
 		

@@ -68,7 +68,7 @@ public class StrategyClientMain1 {
 		System.err.println("L' indice della chat è : " + index + " ["
 				+ StrategyClient1_1.class + "]");
 		UIObserverStrategy1 ui = new UIObserverStrategy1(serviceMessage,
-				serviceTimeStamp, client);
+				serviceTimeStamp, client, index);
 		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 
