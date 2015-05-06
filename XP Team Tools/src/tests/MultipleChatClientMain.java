@@ -49,7 +49,7 @@ public class MultipleChatClientMain {
 		// ClientChatIndexManager indexManager = new
 		// ClientChatIndexManager(chatIndexService);
 		final StrategyClient1_1 client = new StrategyClient1_1(
-				new ClientConnectionDetails("Alb", "Prova"));
+				new ClientConnectionDetails("Pav", "Prova", "Pav123"));
 		client.addService(JsonParser.CHAT, services[0]);
 		client.addService(JsonParser.TIMER, services[1]);
 		client.setMembsService(serviceTeamMembs);

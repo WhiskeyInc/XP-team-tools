@@ -12,7 +12,7 @@ public class ClientTests {
 	@Test
 	public void ClientDetailsTest() throws Exception {
 		String nickname = "Alb";
-		ClientDetails detail = new ClientDetails(nickname, "TeamName");
+		ClientDetails detail = new ClientDetails(nickname, "TeamName", null);
 		assertEquals("Alb", detail.getNickname());
 		
 	}

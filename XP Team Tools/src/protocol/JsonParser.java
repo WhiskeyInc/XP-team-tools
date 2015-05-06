@@ -35,7 +35,7 @@ public class JsonParser {
 		ClientDetails[] vet = new ClientDetails[size];
 		for (int i = 0; i < size; i++) {
 			JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT+i);
-			vet[i] = new ClientDetails((String)idList.get(0), (String)idList.get(1));
+			vet[i] = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
 		}
 		
 		return vet;
@@ -45,7 +45,7 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), (String)idList.get(2));
 		
 		return det;
 	}
@@ -66,7 +66,8 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
+		//TODO check if parseDisconnectRequests is actually using the third argument that is the password
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
 		return det;
 	}
 	
@@ -122,7 +123,7 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
 		
 		return det;
 	}

@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
+import server.db.DBConnection;
+import server.db.IDBConnection;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
@@ -29,13 +33,14 @@ public class ServerStrategy1_1 extends AbstractServer {
 	private Socket requestSocket;
 
 	private ChatsManager chatsManager;
-	private ClientsManager2 clientsManager1 = new ClientsManager2();
+	private ClientsManager2 clientsManager1;
 	private BufferedReader in;
 
 	
-	public ServerStrategy1_1(ChatsManager chatsManager) {
+	public ServerStrategy1_1(ChatsManager chatsManager, IDBConnection db) {
 		super();
 		this.chatsManager = chatsManager;
+		clientsManager1 = new ClientsManager2(db);
 	}
 
 	@Override
@@ -61,11 +66,16 @@ public class ServerStrategy1_1 extends AbstractServer {
 		//		try {
 					try {
 						ClientDetails det = JsonParser.parseConnectToServerRequest(getLine(in));
-						ClientConnectionDetails cDet = new ClientConnectionDetails(det.getNickname(), det.getTeamName());
+						ClientConnectionDetails cDet = new ClientConnectionDetails(det.getNickname(), det.getTeamName(), det.getPwd());
 						cDet.setOnline(true);
 						cDet.setRealTimeSocket(clientSocket);
 						cDet.setRequestSocket(requestSocket);
-						clientsManager1.registerClient(cDet);
+						try {
+							clientsManager1.registerClient(cDet);
+						} catch (NoSuchAlgorithmException | SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
 					} catch (ParseException e) {
 						e.printStackTrace();

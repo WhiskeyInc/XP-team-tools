@@ -19,7 +19,7 @@ public class StrategyServerMain {
 
 		ChatsManager chatsManager = ChatsManager.getInstance();
 		TimersManager timersManager = TimersManager.getInstance();
-		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager);
+		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager, null);
 
 		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager, timersManager, server.getClientsManager()));
 		server.addService(JsonParser.CHAT, new ChatService(chatsManager, server.getClientsManager()));

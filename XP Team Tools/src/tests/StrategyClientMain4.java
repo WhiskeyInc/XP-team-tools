@@ -35,7 +35,7 @@ public class StrategyClientMain4 {
 		// ClientChatIndexManager indexManager = new
 		// ClientChatIndexManager(chatIndexService);
 		final StrategyClient1_1 client = new StrategyClient1_1(
-				new ClientConnectionDetails("Alb", "Test"));
+				new ClientConnectionDetails("Alb", "Test", "Alb123"));
 		client.addService(JsonParser.CHAT, serviceMessage);
 		client.addService(JsonParser.TIMER, serviceTimeStamp);
 		// client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX),

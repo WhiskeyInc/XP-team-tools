@@ -42,7 +42,7 @@ public class StrategyClientMain3 {
 //		IClientService confirmService = new ConfirmService();
 //		ClientChatIndexManager indexManager = new ClientChatIndexManager(chatIndexService);
 		
-		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Karl", "Prova"));
+		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Nic", "Prova", "Nic123"));
 		client.addService(JsonParser.CHAT, services[0]);
 		client.addService(JsonParser.TIMER, services[1]);
 		client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), services[2]);

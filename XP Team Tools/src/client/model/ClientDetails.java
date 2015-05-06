@@ -19,12 +19,14 @@ public class ClientDetails implements Comparable<ClientDetails> {
 
 	protected String nickname;
 	protected String teamName;
+	protected String pwd;
 	private List<Integer> chatIndexList = new ArrayList<Integer>();
 	
-	public ClientDetails(String nickname, String teamName) {
+	public ClientDetails(String nickname, String teamName, String pwd) {
 		super();
 		this.nickname = nickname;
 		this.teamName = teamName;
+		this.pwd = pwd;
 	}
 	
 	public String getNickname() {
@@ -51,6 +53,10 @@ public class ClientDetails implements Comparable<ClientDetails> {
 		return nickname.compareTo(o.getNickname());
 	}
 	
+	public String getPwd() {
+		return pwd;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ClientDetails)) {

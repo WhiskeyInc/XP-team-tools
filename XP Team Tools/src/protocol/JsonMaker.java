@@ -81,6 +81,7 @@ public class JsonMaker {
 		JSONArray detArray = new JSONArray();
 		detArray.add(details.getNickname());
 		detArray.add(details.getTeamName());
+		detArray.add(details.getPwd());
 		json.put(REQ, CONNECT_SERVER);
 		json.put(ATTENDANT, detArray);
 		return json.toString();
@@ -210,7 +211,6 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
-	@Deprecated
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of an automatic event to communicate it to the second server

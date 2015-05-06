@@ -16,8 +16,8 @@ public class ClientConnectionTest {
 		String nickname = "Alb";
 		String teamName = "Prova";
 		
-		ClientConnectionDetails conDet = new ClientConnectionDetails(nickname, teamName);
-		ClientDetails det = new ClientDetails(nickname, teamName);
+		ClientConnectionDetails conDet = new ClientConnectionDetails(nickname, teamName, null);
+		ClientDetails det = new ClientDetails(nickname, teamName, null);
 		assertTrue(conDet.equals(det));
 		
 	}
@@ -27,8 +27,8 @@ public class ClientConnectionTest {
 		String nickname = "Alb";
 		String teamName = "Prova";
 		
-		ClientConnectionDetails conDet = new ClientConnectionDetails(nickname, teamName);
-		ClientConnectionDetails det = new ClientConnectionDetails(nickname, "Test");
+		ClientConnectionDetails conDet = new ClientConnectionDetails(nickname, teamName, null);
+		ClientConnectionDetails det = new ClientConnectionDetails(nickname, "Test", null);
 		
 		assertFalse(conDet.equals(det));
 	}

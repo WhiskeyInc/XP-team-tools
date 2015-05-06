@@ -2,6 +2,8 @@ package tests;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.db.DBConnection;
+import server.db.IDBConnection;
 import server.events.SendPost;
 import server.model.AddTeamMembService;
 import server.model.ChatService;
@@ -17,9 +19,17 @@ import server.model.TimersManager;
 public class StrategyServerMain1 {
 	public static void main(String[] args) {
 
+		IDBConnection db = new DBConnection();
+
+		try {
+			db.connect("alemonta", "protgamba", 3306, "52.74.20.119", "extreme01");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		ChatsManager chatsManager = ChatsManager.getInstance();
 		TimersManager timersManager = TimersManager.getInstance();
-		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager);
+		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager, db);
 
 		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager, timersManager, server.getClientsManager()));
 		server.addService(JsonParser.CHAT, new ChatService(chatsManager, server.getClientsManager()));

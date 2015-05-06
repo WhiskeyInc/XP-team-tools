@@ -23,11 +23,11 @@ public class ChatTest {
 	
 	@Test
 	public void equalsTest() throws Exception {
-		chat.addAttendant(new ClientDetails("Test", "B"));
-		chat.addAttendant(new ClientDetails("Test1", "A"));
+		chat.addAttendant(new ClientDetails("Test", "B", null));
+		chat.addAttendant(new ClientDetails("Test1", "A", null));
 		
-		chat2.addAttendant(new ClientDetails("Test", "B"));
-		chat2.addAttendant(new ClientDetails("Test1", "A"));
+		chat2.addAttendant(new ClientDetails("Test", "B", null));
+		chat2.addAttendant(new ClientDetails("Test1", "A", null));
 		
 		assertTrue(chat.equals(chat2));
 	}

@@ -26,7 +26,8 @@ public class Logger implements ILogger {
 	private Map<String, ArrayList<String>> mapMessageList;
 
 	/**
-	 * Writes messages onto the database
+	 * Writes messages onto the database.
+	 * Need to be improved as not to rewrite, but append new messages. TODO
 	 */
 	public void writeDatabase() {
 		try {

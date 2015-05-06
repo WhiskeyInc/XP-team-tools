@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * It wrap the dynamic client's attributes as sockets and the client' s
+ * It wraps the dynamic client's attributes as sockets and the client' s
  * status[online-offline]. It extends {@link ClientDetails}.
- * It handle two sockets, one for the real time channel [for example an istant-chat]
+ * It handles two sockets, one for the real time channel [for example an istant-chat]
  * one used waiting the Server response.
  * 
  * This class override the equals method, returning true if and only if
@@ -18,8 +18,8 @@ import java.net.Socket;
  */
 public class ClientConnectionDetails extends ClientDetails {
 
-	public ClientConnectionDetails(String nickname, String teamName) {
-		super(nickname, teamName);
+	public ClientConnectionDetails(String nickname, String teamName, String pwd) {
+		super(nickname, teamName, pwd);
 	}
 
 	private Socket realTimesocket;

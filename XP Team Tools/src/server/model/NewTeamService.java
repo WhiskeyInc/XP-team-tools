@@ -36,7 +36,7 @@ public class NewTeamService implements IService{
 	public void doAction(String line) throws IOException, ParseException {
 		String[] vet = JsonParser.parseNewTeamRequest(line);
 		Team team = new Team(vet[0]);
-		ClientDetails details = new ClientDetails(vet[1], vet[0]);
+		ClientDetails details = new ClientDetails(vet[1], vet[0], null);
 		team.addMember(vet[1]);
 		teamsManager.add(team);
 		Chat chat = new Chat(vet[0]);

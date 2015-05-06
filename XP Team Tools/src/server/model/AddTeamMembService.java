@@ -44,7 +44,7 @@ public class AddTeamMembService implements IService {
 		Team team = teamManager.get(teamManager.indexOf(teamName));
 		String[] membs = team.getMembers();
 		for (int i = 0; i < membs.length; i++) {
-			propagateMessageFirstChan(JsonMaker.teamMembsRequest(membs), new ClientDetails(membs[i], teamName), chat);
+			propagateMessageFirstChan(JsonMaker.teamMembsRequest(membs), new ClientDetails(membs[i], teamName, null), chat);
 		}
 		//NB bloccante se uso il wait
 		propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), det, chat);
@@ -55,7 +55,7 @@ public class AddTeamMembService implements IService {
 		String[] membs = team.getMembers();
 		Chat chat = new Chat(teamName);
 		for (int i = 0; i < membs.length; i++) {
-			chat.addAttendant(new ClientDetails(membs[i], teamName));
+			chat.addAttendant(new ClientDetails(membs[i], teamName, null));
 		}
 		return chat;
 	}

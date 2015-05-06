@@ -23,14 +23,14 @@ public class ClientsManagerTest {
 	@Test
 	public void clientManagerTest() throws UnknownHostException, IOException {
 		ClientsManager2 manager = new ClientsManager2();
-		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test");
+		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test", null);
 		conDet.setRealTimeSocket(new Socket("localhost", 9999));
 		manager.registerClient(conDet);
 		conDet.setRealTimeSocket(new Socket("localhost", 9999));
 		
 		assertEquals(1, manager.size());
 		
-		ClientDetails det = new ClientDetails("Alb", "Test");
+		ClientDetails det = new ClientDetails("Alb", "Test", null);
 		ClientConnectionDetails conDe2 = manager.get(det);
 		
 		assertTrue(conDe2.getRealTimeSocket().equals(conDet.getRealTimeSocket()));
