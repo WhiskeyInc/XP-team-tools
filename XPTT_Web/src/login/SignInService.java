@@ -7,30 +7,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import control.HttpAction;
+public class SignInService extends AccountAction {
 
-public class SignInService extends AccountAction implements HttpAction {
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException{
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-
-		HashMap<String, String> registeredUsersPass = new HashMap<String, String>();
-		HashMap<String, String> registeredUsers = new HashMap<String, String>();
-		registeredUsersPass = (HashMap<String, String>) request
-				.getServletContext().getAttribute("registeredUsersPass");
-		registeredUsers = (HashMap<String, String>) request.getServletContext()
-				.getAttribute("registeredUsers");
-		try {
-			signInAuthenticate(userId, password, registeredUsersPass,
-					registeredUsers);
-			response.sendRedirect("timeline.jsp");
-		} catch (Exception e) {
-			request.getSession().setAttribute("exception", e);
-			response.sendRedirect("home.jsp");
+			throws ServletException, IOException {
+		String userName = super.getUserName(request);
+		String password = super.getPassword(request);
+		HashMap<String, String> users = super.getUsers(request);
+		if (users.containsKey(userName)) {
+			if (users.get(userName).equals(password)) {
+				doLogin(userName);
+			}
 		}
+		else {
+			request.getSession().setAttribute("exception",
+					new Exception("Invalid user name or password"));
+		}
+		super.forward(response);
+	}
+
+	private void doLogin(String userName) {
+		System.out.println(userName);
 	}
 }

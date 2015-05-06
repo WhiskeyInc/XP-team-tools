@@ -33,7 +33,7 @@
 	<br>
 	<br>
 
-	
+
 
 	<!-- Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
@@ -45,7 +45,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Sign in.</h4>
+					<h4 class="modal-title" id="myModalLabel">Welcome back!</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -55,8 +55,8 @@
 							<div class="row">
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
-										<input type="text" class="form-control" name="userId"
-											autocomplete="off" id="userId" placeholder="User">
+										<input type="text" class="form-control" name="userName"
+											autocomplete="off" id="userId" placeholder="User Name">
 									</div>
 								</div>
 							</div>
@@ -95,7 +95,8 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Sign up!</h4>
+					<h4 class="modal-title" id="myModalLabel">Get a free acoount
+						in less than a minute!</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -106,15 +107,7 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="userName"
-											autocomplete="off" id="userName" placeholder="UserName">
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-offset-2 col-md-8">
-									<div class="form-group">
-										<input type="text" class="form-control" name="userId"
-											autocomplete="off" id="userId" placeholder="UserId">
+											autocomplete="off" id="userName" placeholder="User Name">
 									</div>
 								</div>
 							</div>
@@ -143,11 +136,11 @@
 	</div>
 
 
-   <div class="col-md-offset-2 col-md-0 col-sm-0 top-margin-exception"
+	<div class="col-md-offset-2 col-md-0 col-sm-0 top-margin-exception"
 		id="error">
 		<%
 			Exception exception = (Exception) session.getAttribute("exception");
-	        String errorMessage = "Invalid User ID or Password!";
+			String errorMessage = "Invalid User ID or Password!";
 			if (exception != null) {
 		%>
 		<br>
@@ -177,8 +170,7 @@
 				<img class="img img-responsive img-rounded" src="img/home.jpg">
 			</div>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<!-- Button trigger modal -->

@@ -3,7 +3,6 @@ package login;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,48 +10,22 @@ import control.HttpAction;
 
 public abstract class AccountAction implements HttpAction {
 
-	public AccountAction() {
-		super();
+	@SuppressWarnings("unchecked")
+	protected HashMap<String, String> getUsers(HttpServletRequest request) {
+		return (HashMap<String, String>) request.getServletContext()
+				.getAttribute("users");
 	}
 
-	public void signUpAuthenticate(String userId, String password,
-			HashMap<String, String> registeredUsersPass,
-			HashMap<String, String> registeredUsers) throws Exception {
-		if (checkUserId(userId, registeredUsersPass)) {
-			throw new Exception();
-		}
+	protected String getUserName(HttpServletRequest request) {
+		return request.getParameter("userName");
+	}
+	
+	protected String getPassword(HttpServletRequest request) {
+		return request.getParameter("password");
 	}
 
-	public void signInAuthenticate(String userId, String password,
-			HashMap<String, String> registeredUsersPass,
-			HashMap<String, String> registeredUsers) throws Exception {
-		if (checkUserId(userId, registeredUsersPass)) {
-			if (!checkPassword(userId, password, registeredUsersPass)) {
-				throw new Exception();
-			}
-		} else {
-			throw new Exception();
-		}
+	protected void forward(HttpServletResponse response) throws IOException {
+		response.sendRedirect("home.jsp");
 	}
-
-	private boolean checkPassword(String userId, String password,
-			HashMap<String, String> registeredUsersPass) {
-		if (registeredUsersPass.get(userId).compareTo(password) == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean checkUserId(String userId,
-			HashMap<String, String> registeredUsersPass) {
-		if (!registeredUsersPass.containsKey(userId)) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public abstract void perform(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException;
 
 }

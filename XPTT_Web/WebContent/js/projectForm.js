@@ -16,14 +16,14 @@ $(document)
 											projectName : {
 												validators : {
 													notEmpty : {
-														message : 'The name is required and cannot be empty'
+														message : 'A name is required and cannot be empty'
 													}
 												}
 											},
 											description : {
 												validators : {
 													notEmpty : {
-														message : 'The description is required and cannot be empty'
+														message : 'A description is required and cannot be empty'
 													}
 												}
 											}

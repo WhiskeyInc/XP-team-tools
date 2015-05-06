@@ -43,21 +43,7 @@ public class Initializer extends HttpServlet {
 		} catch (NameAlreadyInUseException e) {
 			e.printStackTrace();
 		}
-
-		HashMap<String, String> registeredUsers = new HashMap<String, String>();
-		HashMap<String, String> registeredUsersPass = new HashMap<String, String>();
-		registeredUsers.put("alessandroincremona", "Alessandro Incremona");
-		registeredUsers.put("simonecolucci", "Simone Colucci");
-		registeredUsers.put("emanuelefabbiani", "Emanuele Fabbiani");
-		registeredUsers.put("andreaaschei", "Andrea Aschei");
-		registeredUsersPass.put("alessandroincremona", "alessandro");
-		registeredUsersPass.put("simonecolucci", "simone");
-		registeredUsersPass.put("emanuelefabbiani", "emanuele");
-		registeredUsersPass.put("andreaaschei", "andrea");
-
-		super.getServletContext().setAttribute("registeredUsers",
-				registeredUsers);
-		super.getServletContext().setAttribute("registeredUsersPass",
-				registeredUsersPass);
+		
+		super.getServletContext().setAttribute("users", new HashMap<String, String>());
 	}
 }
