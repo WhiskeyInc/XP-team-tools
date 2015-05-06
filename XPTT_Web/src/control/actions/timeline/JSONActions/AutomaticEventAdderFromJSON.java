@@ -21,7 +21,7 @@ import timeline.Timeline;
 import control.HttpAction;
 import control.actions.timeline.TimelineAction;
 
-public class EventAdderFromJSON extends TimelineAction implements HttpAction {
+public class AutomaticEventAdderFromJSON extends TimelineAction implements HttpAction {
 
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)

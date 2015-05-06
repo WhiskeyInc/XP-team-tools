@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import control.actions.timeline.JSONActions.EventAdderFromJSON;
+import control.actions.timeline.JSONActions.AutomaticEventAdderFromJSON;
 
 /**
  * Servlet implementation class EventAdderFormChat
@@ -30,7 +30,7 @@ public class JSONAcceptor extends HttpServlet {
 	}
 
 	private void initializeMap() {
-		this.actions.put("addEvent", new EventAdderFromJSON());
+		this.actions.put("addAutomaticEvent", new AutomaticEventAdderFromJSON());
 	}
 
 	/**
