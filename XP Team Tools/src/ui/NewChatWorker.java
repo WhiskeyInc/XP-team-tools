@@ -39,7 +39,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 		String teamName = client.getTeamName();
 		listUI.getListOfSelectedNicknames().clear();
 		for (int i = 0; i < listUI.getLabels().size(); i++) {
-			if (listUI.getLabels().get(i).getForeground().equals(Color.BLACK)) {
+			if (listUI.getLabels().get(i).getForeground().equals(Color.BLUE)) {
 				listUI.getListOfSelectedNicknames().add(
 						listUI.getNicknames()[i]);
 			}

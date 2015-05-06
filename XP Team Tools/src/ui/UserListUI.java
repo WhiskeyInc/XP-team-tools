@@ -89,6 +89,7 @@ public class UserListUI extends JPanel {
 		this.nicknames = nicknames;
 		int size = nicknames.length;
 		nicksPanel.removeAll();
+		nicksPanel.setBackground(new Color(244, 249, 228));
 		nicksPanel.setLayout(new GridLayout(size*2 + 1,1));
 		//Spostare su un altro pannello...
 //		super.setLayout(new GridBagLayout());
