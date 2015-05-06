@@ -22,7 +22,7 @@ public class SendPost implements IEventActionRequest {
 	public void sendEventAction(String eventAction, String eventName,
 			ArrayList<String> participants) {
 
-		String json = JsonMaker.manualEventCommunication(eventName, "data",participants);
+		String json = JsonMaker.automaticEventCommunication(eventName, participants);
 		
 		try {
 			sendPost(url, json);

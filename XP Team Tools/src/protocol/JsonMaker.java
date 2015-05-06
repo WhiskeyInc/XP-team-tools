@@ -44,7 +44,9 @@ public class JsonMaker {
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
 	public static final String EVENT_DATE = "date";
-
+	public static final String ADD_EVENT = "addEvent"; // Non ancora implementato!
+	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; // La servelt riconosce solo questa!
+	
 
 	@SuppressWarnings("unchecked")
 	/**
@@ -195,7 +197,7 @@ public class JsonMaker {
 		
 		json.put(REQ, EVENT);
 
-		json.put(EVENT_ACTION, "addManualEvent");
+		json.put(EVENT_ACTION, ADD_EVENT);
 		json.put(EVENT_NAME, eventName);
 		json.put(EVENT_DATE, date);
 		
@@ -221,7 +223,7 @@ public class JsonMaker {
 		
 		json.put(REQ, EVENT);
 		
-		json.put(EVENT_ACTION, "addAutomaticEvent");
+		json.put(EVENT_ACTION, ADD_AUTOMATIC_EVENT);
 		json.put(EVENT_NAME, eventName);
 		
 		if(participants != null){
