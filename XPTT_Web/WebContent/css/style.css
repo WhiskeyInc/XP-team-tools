@@ -15,6 +15,7 @@ body {
 	font-size: 15px;
 	/* Margin bottom by footer height */
 	margin-bottom: 60px;
+	background-size: cover;
 }
 
 html {
@@ -87,4 +88,10 @@ p {
 .last-updated{
 	color: #ccc;
 	float:right;
+}
+
+.hello-user{
+	color:#fff;
+	float: right;
+	padding-top: 14px;
 }

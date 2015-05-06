@@ -24,26 +24,31 @@ public class Initializer extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 
-		ProjectsCollector projects = new ProjectsCollector();
-		Project project = new Project("General", new ConcreteProjectFactory(),
-				"Everything related to your team.");
-		projects.addProject(project);
-		super.getServletContext().setAttribute("defaultProject", project);
-		super.getServletContext().setAttribute("projects", projects);
-		ConcreteProjectSettings settings = (ConcreteProjectSettings) ((Project) super
-				.getServletContext().getAttribute("defaultProject"))
-				.getSettings();
-		settings.setManager(project.getManager());
-		try {
-			settings.addTeamMember(new TeamComponent("Simone", "Colucci",
-					"Design Patterns Analyst"), new TeamComponent("Emanuele",
-					"Fabbiani", "JUnit Tester"), new TeamComponent(
-					"Alessandro", "Incremona", "Open Source Responsable"),
-					new TeamComponent("Andrea", "Aschei", "Components Analyst"));
-		} catch (NameAlreadyInUseException e) {
-			e.printStackTrace();
-		}
-		
-		super.getServletContext().setAttribute("users", new HashMap<String, String>());
+		// ProjectsCollector projects = new ProjectsCollector();
+		// Project project = new Project("General", new
+		// ConcreteProjectFactory(),
+		// "Everything related to your team.");
+		// projects.addProject(project);
+		// super.getServletContext().setAttribute("defaultProject", project);
+		// super.getServletContext().setAttribute("projects", projects);
+		// ConcreteProjectSettings settings = (ConcreteProjectSettings)
+		// ((Project) super
+		// .getServletContext().getAttribute("defaultProject"))
+		// .getSettings();
+		// settings.setManager(project.getManager());
+		// try {
+		// settings.addTeamMember(new TeamComponent("Simone", "Colucci",
+		// "Design Patterns Analyst"), new TeamComponent("Emanuele",
+		// "Fabbiani", "JUnit Tester"), new TeamComponent(
+		// "Alessandro", "Incremona", "Open Source Responsable"),
+		// new TeamComponent("Andrea", "Aschei", "Components Analyst"));
+		// } catch (NameAlreadyInUseException e) {
+		// e.printStackTrace();
+		// }
+
+		super.getServletContext().setAttribute("environments",
+				new HashMap<String, ProjectsCollector>());
+		super.getServletContext().setAttribute("users",
+				new HashMap<String, String>());
 	}
 }

@@ -32,7 +32,7 @@
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
 </head>
-<body>
+<body background="img/sfondo.jpg">
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Timeline" />
 	</jsp:include>

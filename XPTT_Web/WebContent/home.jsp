@@ -25,7 +25,7 @@
 <!-- validator CSS  -->
 <link href="css/validator.css" rel="stylesheet" />
 </head>
-<body>
+<body background="img/sfondo.jpg">
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Home" />
 	</jsp:include>
@@ -165,19 +165,21 @@
 			<strong>x T r E A M</strong>
 		</h1>
 		<h4 align="center">The ToolBox you have ever looked for</h4>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<img class="img img-responsive img-rounded" src="img/home.jpg">
 			</div>
-		</div>
+		</div> -->
 		<br> <br>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-xl"
-					data-toggle="modal" data-target="#loginModal">Sign in</button>
-				<button type="button" class="btn btn-primary btn-xl"
-					data-toggle="modal" data-target="#registerModal">Sign Up</button>
+				<div align="center">
+					<button type="button" class="btn btn-primary btn-xl"
+						data-toggle="modal" data-target="#loginModal">Sign in</button>
+					<button type="button" class="btn btn-default btn-xl"
+						data-toggle="modal" data-target="#registerModal">Sign Up</button>
+				</div>
 			</div>
 		</div>
 	</div>

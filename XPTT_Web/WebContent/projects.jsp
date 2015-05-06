@@ -1,6 +1,6 @@
 <%@page import="model.project.ProjectsCollector"%>
 <%@page import="model.ProjectManager"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="model.project.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -30,7 +30,7 @@
 <!-- validator CSS  -->
 <link href="css/validator.css" rel="stylesheet" />
 </head>
-<body>
+<body background="img/sfondo.jpg">
 
 	<!-- Modal -->
 	<div class="modal fade" id="projectAdderModal" tabindex="-1"
@@ -145,9 +145,12 @@
 </html>
 
 <%!private ArrayList<Project> getProjects(HttpServletRequest request) {
-		ProjectsCollector collector = (ProjectsCollector) request
-				.getServletContext().getAttribute("projects");
-		return collector.getProjects();
+	@SuppressWarnings("unchecked")
+	HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
+			.getServletContext().getAttribute("environments");
+	String currentUser = (String) request.getSession().getAttribute(
+			"currentUser");
+	return environments.get(currentUser).getProjects();
 	}%>
 
 <%!private Project getCurrentProject(HttpServletRequest request) {

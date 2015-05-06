@@ -17,17 +17,16 @@ public class SignInService extends AccountAction {
 		HashMap<String, String> users = super.getUsers(request);
 		if (users.containsKey(userName)) {
 			if (users.get(userName).equals(password)) {
-				doLogin(userName);
+				doLogin(userName, request);
 			}
-		}
-		else {
+		} else {
 			request.getSession().setAttribute("exception",
 					new Exception("Invalid user name or password"));
+			super.forward(response);
 		}
-		super.forward(response);
 	}
 
-	private void doLogin(String userName) {
-		System.out.println(userName);
+	private void doLogin(String userName, HttpServletRequest request) {
+		request.getSession().setAttribute("currentUser", userName);
 	}
 }

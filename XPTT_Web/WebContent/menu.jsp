@@ -19,28 +19,39 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="home.jsp">xTrEAM</a>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="home.jsp">xTrEAM</a>
+			</div>
+			<!-- Collect the nav links for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li <%=page("Home", request)%>><a href="home.jsp">Home</a></li>
+					<li <%=page("Projects", request)%>><a href="projects.jsp">Projects</a></li>
+					<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
+					<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
+				</ul>
+				<div class="hello-user">
+					<%
+						if ("ciao" != null) {
+					%>
+					Welcome back,
+					<%=getCurrentUser(request)%>
+					<%
+						}
+					%>
+				</div>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
-		<!-- Collect the nav links for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
-				<li <%=page("Home", request)%>><a href="home.jsp">Home</a></li>
-				<li <%=page("Projects", request)%>><a href="projects.jsp">Projects</a></li>
-				<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
-				<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav>
+		<!-- /.container -->
+	</nav>
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
@@ -52,4 +63,8 @@
 			return "class =  \"active\"";
 		}
 		return "";
+	}
+
+	private String getCurrentUser(HttpServletRequest request) {
+		return (String) request.getSession().getAttribute("currentUser");
 	}%>
