@@ -1,5 +1,6 @@
 package ui.tests;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +23,8 @@ public class UserListUiMain {
 		nicknames[4] = "Fra Nicolai";
 		
 		
-		final UserListUI Ui = new UserListUI(nicknames);
+		final UserListUI Ui = new UserListUI();
+		Ui.setNicknames(nicknames);
 		JPanel panel = new JPanel();
 		panel.add(Ui);
 		Ui.setButtonAction(new ActionListener() {
@@ -31,10 +33,12 @@ public class UserListUiMain {
 			public void actionPerformed(ActionEvent e) {
 
 				Ui.getListOfSelectedNicknames().clear();
-				for (int i = 0; i < Ui.getBox().size(); i++) {
-					if (Ui.getBox().get(i).isSelected()) {
+				for (int i = 0; i < Ui.getNicknames().length; i++) {
+					if (Ui.getLabels().get(i).getForeground().equals(Color.BLUE)) {
 						Ui.getListOfSelectedNicknames().add(Ui.getNicknames()[i]);
+						
 					}
+					Ui.getLabels().get(i).setForeground(Color.BLACK);
 				}
 				
 				
