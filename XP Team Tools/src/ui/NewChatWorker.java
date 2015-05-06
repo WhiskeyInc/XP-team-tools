@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -37,8 +38,8 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 	protected Integer doInBackground() throws Exception {
 		String teamName = client.getTeamName();
 		listUI.getListOfSelectedNicknames().clear();
-		for (int i = 0; i < listUI.getBox().size(); i++) {
-			if (listUI.getBox().get(i).isSelected()) {
+		for (int i = 0; i < listUI.getLabels().size(); i++) {
+			if (listUI.getLabels().get(i).getForeground().equals(Color.BLACK)) {
 				listUI.getListOfSelectedNicknames().add(
 						listUI.getNicknames()[i]);
 			}

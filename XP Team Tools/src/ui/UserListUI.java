@@ -175,5 +175,11 @@ public class UserListUI extends JPanel {
 	public ArrayList<JLabel> getLabels() {
 		return labels;
 	}
+	
+	public void deselectAll(){
+		for (int i = 0; i < labels.size(); i++) {
+			labels.get(i).setForeground(Color.BLACK);
+		}
+	}
 
 }
