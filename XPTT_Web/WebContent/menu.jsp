@@ -27,13 +27,12 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="home.jsp">xTrEAM</a>
+				<a class="navbar-brand" href="home">xTrEAM</a>
 			</div>
 			<!-- Collect the nav links for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li <%=page("Home", request)%>><a href="home.jsp">Home</a></li>
-					<li <%=page("Projects", request)%>><a href="projects.jsp">Projects</a></li>
+					<li <%=page("Home", request)%>><a href="home">Home</a></li>
 					<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
 					<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
 				</ul>

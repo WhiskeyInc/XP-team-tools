@@ -11,7 +11,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>xTrEAM - Projects</title>
+<title>xTrEAM - Home</title>
 <!--icon shortcut  -->
 <link href="img/favicon.ico" rel="shortcut icon">
 <!-- Bootstrap core CSS -->
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
-			value="Projects" />
+			value="Home" />
 	</jsp:include>
 	<div class="container">
 		<div class="row">
