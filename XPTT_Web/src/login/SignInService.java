@@ -17,22 +17,23 @@ public class SignInService extends AccountAction {
 		String userName = super.getUserName(request);
 		String password = super.getPassword(request);
 		HashMap<String, String> users = super.getUsers(request);
-		boolean success = false;
 		if (users.containsKey(userName)) {
 			if (users.get(userName).equals(password)) {
 				doLogin(userName, request);
-				success = true;
+			}
+			else {
+				handleFailure(request,"Invalid password!");
 			}
 		}
-		if (!success) {
-			handleFailure(request);
+		else {
+			handleFailure(request,"Invalid user name!");
 		}
 		super.forward(response);
 	}
 
-	private void handleFailure(HttpServletRequest request) {
+	private void handleFailure(HttpServletRequest request, String errormessage) {
 		request.getSession().setAttribute("exception",
-				new Exception("Invalid user name or password"));
+				new Exception(errormessage));
 	}
 
 	private void doLogin(String userName, HttpServletRequest request) {
