@@ -33,19 +33,15 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<li <%=page("Home", request)%>><a href="home">Home</a></li>
+					<%
+						if (request.getSession().getAttribute("currentUser") != null) {
+					%>
 					<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
 					<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
-				</ul>
-				<div class="hello-user">
-					<%
-						if (getCurrentUser(request) != null) {
-					%>
-					Welcome back,
-					<%=getCurrentUser(request)%>
 					<%
 						}
 					%>
-				</div>
+				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -62,8 +58,4 @@
 			return "class =  \"active\"";
 		}
 		return "";
-	}
-
-	private String getCurrentUser(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute("currentUser");
 	}%>

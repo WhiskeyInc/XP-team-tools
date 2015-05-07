@@ -7,6 +7,7 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import filtering.Filter;
+import filtering.NoFilter;
 
 /**
  * MacroEvent is a particular extension of {@link Event} superclass that can
@@ -54,8 +55,20 @@ public class MacroEvent extends Event implements Timeline {
 	}
 
 	@Override
+	public void setDate(GregorianCalendar newDate)
+			throws UnEditableEventException, InvalidDateException {
+		GregorianCalendar oldDate = super.getDate();
+		super.setDate(newDate);
+		if (!checkValidity()) {
+			super.setDate(oldDate);
+			throw new InvalidDateException(newDate);
+		}
+	}
+
+	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#addEvent(timeline.Event)
 	 */
 	public void addEvent(Event event) throws InvalidDateException {
@@ -67,6 +80,7 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#deleteEvent(int)
 	 */
 	public void deleteEvent(int eventId) throws NoSuchEventException,
@@ -77,6 +91,7 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#moveEvent(int, java.util.GregorianCalendar)
 	 */
 	public void moveEvent(int eventId, GregorianCalendar newDate)
@@ -88,6 +103,7 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEvent(int)
 	 */
 	public Event getEvent(int eventId) throws NoSuchEventException {
@@ -97,6 +113,7 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEvents(filtering.Filter)
 	 */
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
@@ -106,6 +123,7 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see timeline.Timeline#getEventsNumber()
 	 */
 	public int getEventsNumber() {
@@ -136,5 +154,14 @@ public class MacroEvent extends Event implements Timeline {
 			throw new InvalidDateException(fromDate);
 		}
 
+	}
+
+	private boolean checkValidity() {
+		for (Event event : this.getEvents(new NoFilter<Event>())) {
+			if (event.getDate().after(this.getDate())) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

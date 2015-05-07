@@ -25,7 +25,7 @@ public abstract class AccountAction implements HttpAction {
 	}
 
 	protected void forward(HttpServletResponse response) throws IOException {
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("home");
 	}
 
 }

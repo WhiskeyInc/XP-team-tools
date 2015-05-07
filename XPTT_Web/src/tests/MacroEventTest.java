@@ -1,7 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -87,6 +86,24 @@ public class MacroEventTest {
 			fail();
 		} catch (UnEditableEventException e) {
 			assertEquals(1, 1);
+		}
+	}
+	
+	@Test
+	public void dateChangingSuccess() throws Exception{
+		MacroEvent macroEvent = this.createEvent();
+		macroEvent.addEvent(new Event("1", new GregorianCalendar(2020, 4, 28)));
+		macroEvent.setDate(new GregorianCalendar(2020, 5, 10));
+	}
+	
+	@Test
+	public void dateChangingFailure() throws Exception {
+		MacroEvent macroEvent = this.createEvent();
+		macroEvent.addEvent(new Event("1", new GregorianCalendar(2020, 4, 28)));
+		try {
+			macroEvent.setDate(new GregorianCalendar(2020, 4, 27));
+			fail();
+		} catch (InvalidDateException e) {
 		}
 	}
 

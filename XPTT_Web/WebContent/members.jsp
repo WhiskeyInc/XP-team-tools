@@ -116,14 +116,7 @@
 		</form>
 
 	</div>
-	<footer class="footer">
-		<div class="container">
-			xTrEAM - Provided by Whiskey Inc
-			<div class="last-updated">
-				<script src="js/last_update.js"></script>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
 

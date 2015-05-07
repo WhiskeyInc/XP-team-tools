@@ -171,14 +171,7 @@
 	<!-- /.container -->
 	<br>
 	<br>
-	<footer class="footer">
-		<div class="container">
-			xTrEAM - Provided by Whiskey Inc
-			<div class="last-updated">
-				<script src="js/last_update.js"></script>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>

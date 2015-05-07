@@ -136,7 +136,7 @@
 	</div>
 
 
-	<div class="col-md-offset-2 col-md-0 col-sm-0 top-margin-exception"
+	<div class="col-md-offset-2 col-md-0 col-sm-9 top-margin-exception"
 		id="error">
 		<%
 			Exception exception = (Exception) session.getAttribute("exception");
@@ -150,7 +150,7 @@
 			</button>
 			<strong><i class="fa fa-exclamation-triangle"></i> Warning </strong>:
 			Cannot perform action.
-			<%=exception.toString()%>
+			<%=exception.getMessage()%>
 		</div>
 		<%
 			session.removeAttribute("exception");
@@ -183,14 +183,7 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container">
-			xTrEAM - Provided by Whiskey Inc
-			<div class="last-updated">
-				<script src="js/last_update.js"></script>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>

@@ -3,6 +3,7 @@ package timeline;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import model.exceptions.InvalidDateException;
 import model.exceptions.UnEditableEventException;
 import util.serialization.Serializable;
 
@@ -108,7 +109,7 @@ public class Event extends Serializable implements Comparable<Event> {
 	 * @see {@link Event#isEditable()}
 	 */
 	public void setDate(GregorianCalendar newDate)
-			throws UnEditableEventException {
+			throws UnEditableEventException, InvalidDateException {
 		if (!isEditable()) {
 			throw new UnEditableEventException(this.name);
 		}
@@ -144,7 +145,7 @@ public class Event extends Serializable implements Comparable<Event> {
 	public String toString() {
 		return this.name;
 	}
-	
+
 	public void setUneditable() {
 		this.editable = false;
 	}
