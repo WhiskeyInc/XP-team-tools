@@ -56,7 +56,7 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="userName"
-											autocomplete="off" id="userId" placeholder="User Name">
+											autocomplete="off" id="userName" placeholder="User Name">
 									</div>
 								</div>
 							</div>
