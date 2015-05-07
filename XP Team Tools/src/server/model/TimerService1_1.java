@@ -65,6 +65,8 @@ public class TimerService1_1 implements IService {
 
 				if (totalMillis == 0 && timersManager.hasTimerKey(index)) {
 					timersManager.getTimer(index).stop();
+					
+					//TODO send automatic event of the end of the tomato
 				}
 
 				int[] vet = TimerFormatter.getTimeStamp(totalMillis);

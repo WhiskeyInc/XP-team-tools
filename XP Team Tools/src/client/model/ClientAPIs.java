@@ -50,8 +50,9 @@ public class ClientAPIs{
 		}
 
 		
-		public void manualEvent(String eventName, String date, ArrayList<String> participants) {
-			client.sendMessageToServer(JsonMaker.manualEventRequest(eventName, date, participants));
+		public void manualEvent(String eventName, ArrayList<String> participants, String year, String month, String day,
+				String hour, String minute) {
+			client.sendMessageToServer(JsonMaker.manualEventRequest(eventName, participants, year, month, day, hour, minute));
 		}
 		
 		

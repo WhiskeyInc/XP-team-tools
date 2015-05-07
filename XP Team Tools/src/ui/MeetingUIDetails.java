@@ -9,8 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,7 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.plaf.ScrollBarUI;
 
 import com.qt.datapicker.DatePicker;
 
@@ -33,29 +34,32 @@ public class MeetingUIDetails extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private ObservingTextField dateField = new ObservingTextField();
+	private JTextField hourField = new JTextField();
 	private JButton btn = new JButton("Pick Date");
-	private JTextArea description = new JTextArea("");
+	private JTextArea name = new JTextArea("");
 	private JButton createButton = new JButton("Create Event");
 	
 	private JPanel p1 = new JPanel();
 	private JPanel p2 = new JPanel();
 	private JPanel p3 = new JPanel();
+	private JPanel p4 = new JPanel();
 	
 	public MeetingUIDetails() {
 		super();
-		setLayout(new GridLayout(3, 1));
+		setLayout(new GridLayout(4, 1));
 		
 		
-		p1.add(new JLabel("Select a date:"));
-		p1.add(new JLabel(""));
-
+		p1.add(new JLabel("Date:      "));
+		
 		dateField.setColumns(10);
 		dateField.setText("");
 		dateField.setToolTipText("Date format: dd/mm/yy");
 		dateField.setEditable(false);
 		dateField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		p1.add(dateField);
 		final Locale locale = getLocale(null);
+		
+		p1.add(dateField);
+		p1.add(new JLabel("       "));
 		p1.add(btn);
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,25 +72,36 @@ public class MeetingUIDetails extends JPanel {
 			};
 		});
 		
-		p2.add(new JLabel("Description:"));
-		description.setLineWrap(true);
-		description.requestFocus();
-		description.setWrapStyleWord(true);
-		description.setFont(new Font("TimesRoman", Font.ITALIC, 13));
+		p2.add(new JLabel("Hour:     "));
+		p2.add(new JLabel(""));
+		hourField.setColumns(10);
+		hourField.setText("");
+		hourField.setToolTipText("Hour format: hh:mm");
+		hourField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		p2.add(hourField);
+		p2.add(new JLabel("                                  "));
 		
-		description.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		JScrollPane pane = new JScrollPane(description, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		
+		p3.add(new JLabel("Agenda:"));
+		name.setLineWrap(true);
+		name.requestFocus();
+		name.setWrapStyleWord(true);
+		name.setFont(new Font("TimesRoman", Font.ITALIC, 13));
+		
+		name.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		JScrollPane pane = new JScrollPane(name, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		pane.setPreferredSize(new Dimension(300, 65));
 		pane.setMinimumSize(new Dimension(300, 65));
 		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		pane.getVerticalScrollBar().setUI(new MyScrollbarUI());
-		p2.add(pane);
-		p3.add(createButton);
+		p3.add(pane);
+		p4.add(createButton);
 		
 		add(p1);
 		add(p2);
 		add(p3);
+		add(p4);
 	
 		
 	}
@@ -102,12 +117,37 @@ public class MeetingUIDetails extends JPanel {
 			return Locale.ITALY;
 	}
 
-	public String getDate() {
-		return dateField.getText();
+	public String getYear() throws NoSuchElementException{
+		StringTokenizer tok = new StringTokenizer(dateField.getText(),"/");
+		tok.nextToken();
+		tok.nextToken();
+		return tok.nextToken();
+	}
+	
+	public String getMonth() throws NoSuchElementException{
+		StringTokenizer tok = new StringTokenizer(dateField.getText(),"/");
+		tok.nextToken();
+		return tok.nextToken();
+	}
+	
+	public String getDay() throws NoSuchElementException{
+		StringTokenizer tok = new StringTokenizer(dateField.getText(),"/");
+		return tok.nextToken();
+	}
+	
+	public String getMinute() throws NoSuchElementException{
+		StringTokenizer tok = new StringTokenizer(hourField.getText(),":");
+		tok.nextToken();
+		return tok.nextToken();
+	}
+	
+	public String getHour() throws NoSuchElementException{
+		StringTokenizer tok = new StringTokenizer(hourField.getText(),":");
+		return tok.nextToken();
 	}
 
-	public String getDescrtiption() {
-		return description.getText();
+	public String getName() {
+		return name.getText();
 	}
 
 }

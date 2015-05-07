@@ -18,10 +18,8 @@ import ui.MainUIObserver;
 import ui.MeetingUIDetails;
 import ui.NewChatWorker;
 import ui.TimerUIObserverStrategy;
-import ui.UIObserverStrategy1;
 import ui.UserListUI;
 import client.model.ClientConnectionDetails;
-import client.model.ClientDetails;
 import client.model.IClientService;
 import client.model.SetMembsService;
 import client.model.SetMessageService;
@@ -83,7 +81,7 @@ public class MultipleChatClientMain {
 				.waitServerResponse());
 		System.err.println("L' indice della chat è : " + index + " ["
 				+ StrategyClient1_1.class + "]");
-		client.sendMessageToServer(JsonMaker.addTeamMemb(client
+		client.sendMessageToServer(JsonMaker.addTeamMembRequest(client
 				.getClientDetails()));
 		client.waitServerResponse();
 		final String indexString = String.valueOf(index);

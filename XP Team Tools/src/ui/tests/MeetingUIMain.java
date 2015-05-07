@@ -19,7 +19,7 @@ public class MeetingUIMain {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				final JFrame detailsFrame = FramesUtils.createFrame("Insert meeting details", 500, 250);
+				final JFrame detailsFrame = FramesUtils.createFrame("Insert meeting details", 450, 330);
 			    detailsFrame.setLocationRelativeTo(null);
 			    detailsFrame.setVisible(true);  
 			    detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -30,9 +30,10 @@ public class MeetingUIMain {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						//TODO send event informations
-						System.out.println("Date: " + ask.getDate());
-						System.out.println("Description: " + ask.getDescrtiption());
+						
+						System.out.println("Date: " + ask.getDay()+"/"+ask.getMonth()+"/"+ask.getYear());
+						System.out.println("Hour: " + ask.getHour()+":"+ask.getMinute());
+						System.out.println("Name: " + ask.getName());
 						detailsFrame.dispose();
 					}
 				});
