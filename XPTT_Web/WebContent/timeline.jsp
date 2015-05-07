@@ -192,10 +192,8 @@
 </html>
 
 <%!private ArrayList<Event> getEventsList(HttpServletRequest request) {
-		Project currentProject =(Project) request.getSession().getAttribute("currentProject");
-		if(currentProject == null){
-			currentProject =(Project) request.getServletContext().getAttribute("defaultProject");
-		}
+		Project currentProject = (Project) request.getSession().getAttribute(
+				"currentProject");
 		return currentProject.getTimeline().getEvents(getEventFilter(request));
 	}
 

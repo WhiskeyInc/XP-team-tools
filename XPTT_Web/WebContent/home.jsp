@@ -140,7 +140,6 @@
 		id="error">
 		<%
 			Exception exception = (Exception) session.getAttribute("exception");
-			String errorMessage = "Invalid User ID or Password!";
 			if (exception != null) {
 		%>
 		<br>
@@ -151,7 +150,7 @@
 			</button>
 			<strong><i class="fa fa-exclamation-triangle"></i> Warning </strong>:
 			Cannot perform action.
-			<%=errorMessage%>
+			<%=exception.toString()%>
 		</div>
 		<%
 			session.removeAttribute("exception");

@@ -33,10 +33,10 @@ public class SignUpService extends AccountAction {
 		if (users.containsKey(userName)) {
 			request.getSession().setAttribute("exception",
 					new NameAlreadyInUseException(userName));
+			super.forward(response);
 		} else {
 			doRegister(request, response);
 		}
-		super.forward(response);
 	}
 
 	private void doRegister(HttpServletRequest request,

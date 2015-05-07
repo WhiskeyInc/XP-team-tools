@@ -124,13 +124,21 @@
 		<div class="row">
 			<div class="col-md-8">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary"
-					data-toggle="modal" data-target="#projectAdderModal">
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#projectAdderModal">
 					<i class="fa fa-plus fa-fw"></i> Add a new project
 				</button>
 			</div>
 		</div>
 	</div>
+	<footer class="footer">
+		<div class="container">
+			xTrEAM - Provided by Whiskey Inc
+			<div class="last-updated">
+				<script src="js/last_update.js"></script>
+			</div>
+		</div>
+	</footer>
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
@@ -145,20 +153,16 @@
 </html>
 
 <%!private ArrayList<Project> getProjects(HttpServletRequest request) {
-	@SuppressWarnings("unchecked")
-	HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
-			.getServletContext().getAttribute("environments");
-	String currentUser = (String) request.getSession().getAttribute(
-			"currentUser");
-	return environments.get(currentUser).getProjects();
+		@SuppressWarnings("unchecked")
+		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
+				.getServletContext().getAttribute("environments");
+		String currentUser = (String) request.getSession().getAttribute(
+				"currentUser");
+		return environments.get(currentUser).getProjects();
 	}%>
 
 <%!private Project getCurrentProject(HttpServletRequest request) {
 		Project project = (Project) request.getSession().getAttribute(
 				"currentProject");
-		if (project == null) {
-			project = (Project) request.getServletContext().getAttribute(
-					"defaultProject");
-		}
 		return project;
 	}%>

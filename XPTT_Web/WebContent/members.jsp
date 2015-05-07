@@ -1,7 +1,8 @@
+<%@page import="model.project.ProjectsCollector"%>
 <%@page import="model.project.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="model.ProjectSettings" import="java.util.*"%>
+<%@page import="model.*" import="java.util.*"%>
 <%@page import="model.TeamComponent"%>
 <!DOCTYPE html>
 <html>
@@ -129,10 +130,6 @@
 <%!private ArrayList<TeamComponent> getMembersList(HttpServletRequest request) {
 		Project project = (Project) request.getSession().getAttribute(
 				"currentProject");
-		if (project == null) {
-			project = (Project) request.getServletContext().getAttribute(
-					"defaultProject");
-		}
 		ProjectSettings settings = project.getSettings();
 		ArrayList<TeamComponent> list = settings.getTeamMembers();
 		Collections.sort(list);

@@ -39,7 +39,7 @@
 				</ul>
 				<div class="hello-user">
 					<%
-						if ("ciao" != null) {
+						if (getCurrentUser(request) != null) {
 					%>
 					Welcome back,
 					<%=getCurrentUser(request)%>
