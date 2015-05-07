@@ -30,7 +30,7 @@
 <!-- validator CSS  -->
 <link href="css/validator.css" rel="stylesheet" />
 </head>
-<body background="img/sfondo.jpg">
+<body>
 
 	<!-- Modal -->
 	<div class="modal fade" id="projectAdderModal" tabindex="-1"

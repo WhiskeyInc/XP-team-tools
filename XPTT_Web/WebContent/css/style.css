@@ -10,12 +10,14 @@ Author: http://binarytheme.com
     GENERAL STYLES
 ==================================================*/
 body {
-	background-color: #99CCFF;
-	font-family: 'Open Sans', sans-serif;
+	background-image: url("../img/sfondo.jpg");
 	font-size: 15px;
 	/* Margin bottom by footer height */
 	margin-bottom: 60px;
 	background-size: cover;
+	background-attachment: fixed;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
 }
 
 html {
@@ -67,7 +69,7 @@ h1 {
 	font-size: 10.1rem;
 }
 
-h2{
+h2 {
 	font-size: 2.1rem;
 }
 

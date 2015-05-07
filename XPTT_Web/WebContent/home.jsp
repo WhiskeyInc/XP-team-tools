@@ -25,7 +25,7 @@
 <!-- validator CSS  -->
 <link href="css/validator.css" rel="stylesheet" />
 </head>
-<body background="img/sfondo.jpg">
+<body>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Home" />
 	</jsp:include>

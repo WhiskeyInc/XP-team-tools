@@ -32,7 +32,7 @@
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
 </head>
-<body background="img/sfondo.jpg">
+<body>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Timeline" />
 	</jsp:include>
@@ -50,7 +50,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<strong><i class="fa fa-exclamation-triangle"></i> Warning
+				<strong><i class="fa fa-fw fa-exclamation-triangle"></i> Warning
 				</strong>: Cannot perform action.
 				<%=exception.getMessage()%>
 			</div>
@@ -104,15 +104,15 @@
 								<div class="btn-group btn-group-sm" role="group">
 									<button class="btn btn-danger"
 										onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-										<i class="fa fa-trash-o"></i> Delete
+										<i class="fa fa-fw fa-trash-o"></i> Delete
 									</button>
 									<button class="btn btn-warning"
 										onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-										<i class="fa fa-clock-o"></i> Move
+										<i class="fa fa-fw fa-clock-o"></i> Move
 									</button>
 									<button class="btn btn-success"
 										onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-										<i class="fa fa-user-plus"></i> Add Participant
+										<i class="fa fa-fw fa-user-plus"></i> Add Participant
 									</button>
 								</div>
 								<%
@@ -120,7 +120,8 @@
 								%>
 								<button class="btn btn-primary pull-right btn-sm" type="button"
 									data-toggle="collapse" data-target="#microEvents<%=i%>">
-									See more...</button>
+									<i class="fa fa-fw fa-angle-double-down"></i> See more...
+								</button>
 								<%
 									}
 										}
@@ -175,15 +176,15 @@
 											<div class="btn-group btn-group-sm" role="group">
 												<button class="btn btn-danger"
 													onclick="showDeleteConfirmForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
-													<i class="fa fa-trash-o"></i> Delete
+													<i class="fa fa-fw fa-trash-o"></i> Delete
 												</button>
 												<button class="btn btn-warning"
 													onclick="showDateModificationForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
-													<i class="fa fa-clock-o"></i> Move
+													<i class="fa fa-fw fa-clock-o"></i> Move
 												</button>
 												<button class="btn btn-success"
 													onclick="showParticipantAdditionForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
-													<i class="fa fa-user-plus"></i> Add Participant
+													<i class="fa fa-fw fa-user-plus"></i> Add Participant
 												</button>
 											</div>
 											<%
@@ -219,7 +220,7 @@
 			<div class="btn-group-md">
 				<button type="button" class="btn btn-primary"
 					onclick="showEventAdditionForm('adder')">
-					<i class="fa fa-plus"></i> Add a new Event
+					<i class="fa fa-fw fa-plus"></i> Add a new Event
 				</button>
 				<div class="btn-group dropup">
 					<button type="button" class="btn btn-primary dropdown-toggle"
@@ -228,17 +229,17 @@
 					</button>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" onclick="showEventNameFilteringForm('adder')"><i
-								class="fa fa-check-square-o"></i> Name</a></li>
+								class="fa fa-fw fa-check-square-o"></i> Name</a></li>
 						<li><a href="#"
 							onclick="showEventParticipantFilteringForm('adder')"><i
-								class="fa fa-group"></i> Participant</a></li>
+								class="fa fa-fw fa-group"></i> Participant</a></li>
 						<li><a href="#"
 							onclick="showPeriodEventFilteringForm('adder')"><i
-								class="fa fa-calendar-o"></i> Date</a></li>
+								class="fa fa-fw fa-calendar-o"></i> Date</a></li>
 						<li class="divider"></li>
 						<li><a href="#"
 							onclick="document.getElementById('SetNoFilter').submit()"><i
-								class="fa fa-trash"></i> Remove filter</a></li>
+								class="fa fa-fw fa-trash"></i> Remove filter</a></li>
 					</ul>
 				</div>
 			</div>

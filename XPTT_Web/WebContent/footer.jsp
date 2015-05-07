@@ -17,9 +17,8 @@
 				<%
 					if (getCurrentUser(request) != null) {
 				%>
-				<%=getHelloUser(getCurrentUser(request))%>&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-default btn-xs" onclick="logOut()">Sign
-					Out</button>
+				<%=getHelloUser(getCurrentUser(request))%>&nbsp;&nbsp;&nbsp; <a
+					href="#"><i class="fa fa-sign-out" onclick="logOut()"></i></a>
 				<%
 					}
 				%>
@@ -27,7 +26,7 @@
 		</div>
 	</footer>
 	<form action="login" method="post" id="logOut">
-	<input type="hidden" name="action" value="logout">
+		<input type="hidden" name="action" value="logout">
 	</form>
 </body>
 <script type="text/javascript">
@@ -39,14 +38,14 @@
 <%!private String getCurrentUser(HttpServletRequest request) {
 		return (String) request.getSession().getAttribute("currentUser");
 	}
-	private String getHelloUser(String user){
+
+	private String getHelloUser(String user) {
 		String[] greetings = new String[5];
-		greetings[0] = "Welcome back, "+user;
-		greetings[1] = "We missed you, "+user;
-		greetings[2] = "We like you, "+user;
-		greetings[3] = "Let's do some work, "+user+"!";
-		greetings[4] = "Thank God you're back, "+user+"!";
+		greetings[0] = "Welcome back, " + user;
+		greetings[1] = "We missed you, " + user;
+		greetings[2] = "We like you, " + user;
+		greetings[3] = "Let's do some work, " + user + "!";
+		greetings[4] = "Thank God you're back, " + user + "!";
 		Random randomIndex = new Random();
 		return greetings[randomIndex.nextInt(5)];
-	}
-%>
+	}%>
