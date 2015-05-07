@@ -18,6 +18,10 @@ import java.net.Socket;
  */
 public class ClientConnectionDetails extends ClientDetails {
 
+	public ClientConnectionDetails(String nickname, String teamName) {
+		super(nickname, teamName);
+	}
+	
 	public ClientConnectionDetails(String nickname, String teamName, String pwd) {
 		super(nickname, teamName, pwd);
 	}

@@ -22,6 +22,12 @@ public class ClientDetails implements Comparable<ClientDetails> {
 	protected String pwd;
 	private List<Integer> chatIndexList = new ArrayList<Integer>();
 	
+	public ClientDetails(String nickname, String teamName) {
+		super();
+		this.nickname = nickname;
+		this.teamName = teamName;
+	}
+	
 	public ClientDetails(String nickname, String teamName, String pwd) {
 		super();
 		this.nickname = nickname;
