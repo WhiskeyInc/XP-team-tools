@@ -163,7 +163,7 @@
 		<h1 align="center">
 			<strong>x T r E A M</strong>
 		</h1>
-		<h4 align="center">The ToolBox you have ever looked for</h4>
+		<h2 align="center">Everything you need to be eXtreme</h2>
 		<!-- <div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<img class="img img-responsive img-rounded" src="img/home.jpg">
@@ -176,6 +176,7 @@
 				<div align="center">
 					<button type="button" class="btn btn-primary btn-xl"
 						data-toggle="modal" data-target="#loginModal">Sign in</button>
+					&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-xl"
 						data-toggle="modal" data-target="#registerModal">Sign Up</button>
 				</div>
