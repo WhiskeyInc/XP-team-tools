@@ -185,10 +185,6 @@
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 
-	<!--Core JavaScript file  -->
-	<script src="js/jquery-1.10.2.js"></script>
-	<!--bootstrap JavaScript file  -->
-	<script src="js/bootstrap.min.js"></script>
 	<!-- Validate a form field when required -->
 	<script src="js/validator.js"></script>
 	<script src="js/login.js"></script>

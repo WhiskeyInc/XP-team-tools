@@ -61,73 +61,156 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
-				<div>
-					<ul class="timeline">
-						<li class="time-label"><span class="bg-black">Our
-								Activities </span> <br /> <br /></li>
+				<ul class="timeline">
+					<li class="time-label"><span class="bg-black">Our
+							Activities </span> <br /> <br /></li>
 
-						<%
-							int i = 1;
-							for (Event event : this.getEventsList(request)) {
-						%>
+					<%
+						int i = 1;
+						for (Event event : this.getEventsList(request)) {
+					%>
 
-						<li><i class="fa fa-clock-o bg-blue"></i>
-							<div class="timeline-item">
-								<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(event)%></span>
+					<li><i class="fa fa-clock-o bg-blue"></i>
+						<div class="timeline-item">
+							<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(event)%></span>
+							<%
+								if (!event.isEditable()) {
+							%>
+							<h3 class="timeline-header text-blue">
+								<%=event.toString()%>
+							</h3>
+							<%
+								} else {
+							%>
+							<h3 class="timeline-header">
+								<%=event.toString()%>
+							</h3>
+							<%
+								}
+							%>
+							<div class="timeline-body">
 								<%
-									if (!event.isEditable()) {
+									for (String participant : event.getParticipants()) {
 								%>
-								<h3 class="timeline-header text-blue">
-									<%=event.toString()%>
-								</h3>
-								<%
-									} else {
-								%>
-								<h3 class="timeline-header">
-									<%=event.toString()%>
-								</h3>
+								<%=participant%>&nbsp;&nbsp;
 								<%
 									}
 								%>
-								<div class="timeline-body">
-									<%
-										for (String participant : event.getParticipants()) {
-									%>
-									<%=participant%>&nbsp;&nbsp;
-									<%
-										}
-									%>
+							</div>
+							<div class='timeline-footer' id="timelineItem<%=i%>">
+								<%
+									if (event.isEditable()) {
+								%>
+								<div class="btn-group btn-group-sm" role="group">
+									<button class="btn btn-danger"
+										onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
+										<i class="fa fa-trash-o"></i> Delete
+									</button>
+									<button class="btn btn-warning"
+										onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
+										<i class="fa fa-clock-o"></i> Move
+									</button>
+									<button class="btn btn-success"
+										onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
+										<i class="fa fa-user-plus"></i> Add Participant
+									</button>
 								</div>
-								<div class='timeline-footer' id="timelineItem<%=i%>">
-									<%
-										if (event.isEditable()) {
-									%>
-									<div class="btn-group btn-group-sm" role="group">
-										<button class="btn btn-danger"
-											onclick="showDeleteConfirmForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-											<i class="fa fa-trash-o"></i> Delete
-										</button>
-										<button class="btn btn-warning"
-											onclick="showDateModificationForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-											<i class="fa fa-clock-o"></i> Move
-										</button>
-										<button class="btn btn-success"
-											onclick="showParticipantAdditionForm('timelineItem<%=i%>', '<%=event.getId()%>' )">
-											<i class="fa fa-user-plus"></i> Add Participant
-										</button>
-									</div>
-									<%
+								<%
+									if (event instanceof MacroEvent) {
+								%>
+								<button class="btn btn-primary pull-right btn-sm" type="button"
+									data-toggle="collapse" data-target="#microEvents<%=i%>">
+									See more...</button>
+								<%
+									}
 										}
-									%>
-								</div>
-							</div></li>
-						<%
+								%>
+							</div>
+						</div></li>
+					<%
+						if (event instanceof MacroEvent) {
+					%>
+					<li class="timeline-item ">
+						<div class="col-md-offset-1 col-md-10 col-sm-12 collapse"
+							id="microEvents<%=i%>">
+							<ul class="timeline">
+
+								<%
+									int j = 1;
+											for (Event microEvent : ((MacroEvent) event)
+													.getEvents(new NoFilter<Event>())) {
+								%>
+
+								<li><i class="fa fa-clock-o bg-blue"></i>
+									<div class="timeline-item">
+										<span class="time"><i class="fa fa-clock-o"></i><%="    " + this.getFormattedDate(microEvent)%></span>
+										<%
+											if (!microEvent.isEditable()) {
+										%>
+										<h3 class="timeline-header text-blue">
+											<%=microEvent.toString()%>
+										</h3>
+										<%
+											} else {
+										%>
+										<h3 class="timeline-header">
+											<%=microEvent.toString()%>
+										</h3>
+										<%
+											}
+										%>
+										<div class="timeline-body">
+											<%
+												for (String participant : microEvent.getParticipants()) {
+											%>
+											<%=participant%>&nbsp;&nbsp;
+											<%
+												}
+											%>
+										</div>
+										<div class='timeline-footer' id="timelineItem<%=i + "" + j%>">
+											<%
+												if (microEvent.isEditable()) {
+											%>
+											<div class="btn-group btn-group-sm" role="group">
+												<button class="btn btn-danger"
+													onclick="showDeleteConfirmForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
+													<i class="fa fa-trash-o"></i> Delete
+												</button>
+												<button class="btn btn-warning"
+													onclick="showDateModificationForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
+													<i class="fa fa-clock-o"></i> Move
+												</button>
+												<button class="btn btn-success"
+													onclick="showParticipantAdditionForm('timelineItem<%=i + "" + j%>', '<%=microEvent.getId()%>' )">
+													<i class="fa fa-user-plus"></i> Add Participant
+												</button>
+											</div>
+											<%
+												}
+											%>
+										</div>
+									</div></li>
+								<%
+									j++;
+
+											}
+								%>
+								<li><i class="fa fa-flag-checkered"></i></li>
+							</ul>
+						</div>
+					</li>
+
+					<%
+						}
 							i++;
-							}
-						%>
-						<li><i class="fa fa-flag-checkered"></i></li>
-					</ul>
-				</div>
+						}
+					%>
+
+
+
+					<li><i class="fa fa-flag-checkered"></i></li>
+				</ul>
 			</div>
 
 		</div>
@@ -172,13 +255,6 @@
 	<br>
 	<br>
 	<jsp:include page="footer.jsp"></jsp:include>
-
-	<!--Core JavaScript file  -->
-	<script src="js/jquery-1.10.2.js"></script>
-	<!--bootstrap JavaScript file  -->
-	<script src="js/bootstrap.js"></script>
-	<!-- Adding a form when required -->
-	<script src="js/bootstrap.min.js"></script>
 	<!-- Adding a form when required -->
 	<script src="js/formAdder.js" type="text/javascript"></script>
 </body>

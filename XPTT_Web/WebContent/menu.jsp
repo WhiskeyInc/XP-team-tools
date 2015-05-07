@@ -50,7 +50,7 @@
 	<!--Core JavaScript file  -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!--bootstrap JavaScript file  -->
-	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 <%!private String page(String pageName, HttpServletRequest request) {
