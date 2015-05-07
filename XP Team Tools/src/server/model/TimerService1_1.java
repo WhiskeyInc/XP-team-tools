@@ -2,10 +2,7 @@ package server.model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.SocketException;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -14,26 +11,23 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import string.formatter.Formatter;
 import timer.TimerFormatter;
-import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
 public class TimerService1_1 implements IService {
 
 	private ChatsManager chatsManager;
 	private TimersManager timersManager;
-	private ClientsManager2 clientsManager1;
+	private MessagePropagator messagePropagator;
 	public static final int TOTAL_MILLIS = 1000;
-
-	public TimerService1_1(ChatsManager chatsManager, TimersManager timersManager,
-			ClientsManager2 clientsManager1) {
+	
+	public TimerService1_1(ChatsManager chatsManager,
+			TimersManager timersManager, MessagePropagator messagePropagator) {
 		super();
 		this.chatsManager = chatsManager;
 		this.timersManager = timersManager;
-		this.clientsManager1 = clientsManager1;
+		this.messagePropagator = messagePropagator;
 	}
-
 
 	/**
 	 * 
@@ -61,7 +55,6 @@ public class TimerService1_1 implements IService {
 		startTimer(index);
 	}
 
-	
 	private void startTimer(final int index) {
 
 		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {
@@ -82,19 +75,12 @@ public class TimerService1_1 implements IService {
 				ArrayList<ClientDetails> list = chat.getAttendantsDetails();
 				for (ClientDetails details : list) {
 					try {
-						propagateMessage(lineTimer, details);
+						messagePropagator.propagateMessage(lineTimer, details);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-//				try {
-//					chatsManager.propagateMessage(lineTimer,
-//							index);
-//				} catch (IOException e1) {
-//					e1.printStackTrace();
-//				}
-
 				timersManager.replaceMillis(index, totalMillis - TOTAL_MILLIS);
 
 			}
@@ -110,27 +96,4 @@ public class TimerService1_1 implements IService {
 		timersManager.getTimer(index).start();
 	}
 	
-	private void propagateMessage(String message, ClientDetails details)
-			throws IOException {
-		ClientConnectionDetails conDet = clientsManager1.get(details);
-		System.out.println(clientsManager1.size()+" "+ TimerService1_1.class);
-		try {
-			// TODO Salvare qui...
-			if (conDet.isOnline()) {
-				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-						conDet.getRealTimeSocket().getOutputStream()));
-				out.write(Formatter.appendNewLine(message));
-				out.flush();
-			}
-		} catch (SocketException e) {
-			//TODO
-//			Chat chat = chatsManager.get(id);
-//			int index = chat.indexOf(conDet.getSocket());
-//			if (index != -1) {
-//				chat.getAttendantsDetails().get(index).setOnline(false);
-//			} else {
-//				System.err.println("Error, index = " + index);
-//			}
-		}
-	}
 }

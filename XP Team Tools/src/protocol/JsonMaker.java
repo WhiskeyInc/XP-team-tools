@@ -48,6 +48,7 @@ public class JsonMaker {
 	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; // Non ancora implementato!
 	
 
+
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates a chat request for the server
@@ -81,7 +82,6 @@ public class JsonMaker {
 		JSONArray detArray = new JSONArray();
 		detArray.add(details.getNickname());
 		detArray.add(details.getTeamName());
-		detArray.add(details.getPwd());
 		json.put(REQ, CONNECT_SERVER);
 		json.put(ATTENDANT, detArray);
 		return json.toString();
@@ -140,7 +140,7 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String addTeamMemb(ClientDetails details) {
+	public static String addTeamMembRequest(ClientDetails details) {
 
 		JSONObject json = new JSONObject();
 		JSONArray detArray = new JSONArray();
@@ -153,7 +153,7 @@ public class JsonMaker {
 	
 	
 	@SuppressWarnings("unchecked")
-	public static String disconnect(ClientDetails det) {
+	public static String disconnectRequest(ClientDetails det) {
 		JSONObject json = new JSONObject();
 		json.put(REQ, DISCONNECT);
 		JSONArray detArray = new JSONArray();
@@ -175,13 +175,13 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static String createNewUiRequest(int chatIndex) {
-		JSONObject json = new JSONObject();
-		json.put(REQ, NEW_UI);
-		json.put(INDEX, String.valueOf(chatIndex));
-		return json.toString();
-	}
+//	@SuppressWarnings("unchecked")
+//	public static String createNewUiRequest(int chatIndex) {
+//		JSONObject json = new JSONObject();
+//		json.put(REQ, NEW_UI);
+//		json.put(INDEX, String.valueOf(chatIndex));
+//		return json.toString();
+//	}
 	
 	
 	
@@ -192,7 +192,7 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String manualEventCommunication(String eventName, String date, ArrayList<String> participants) {
+	public static String manualEventRequest(String eventName, String date, ArrayList<String> participants) {
 		
 		JSONObject json = new JSONObject();
 		
@@ -218,7 +218,7 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String automaticEventCommunication(String eventName, ArrayList<String> participants) {
+	public static String automaticEventRequest(String eventName, ArrayList<String> participants) {
 		
 		JSONObject json = new JSONObject();
 		

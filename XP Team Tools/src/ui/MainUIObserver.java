@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,7 +9,6 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -65,7 +63,7 @@ public class MainUIObserver extends JFrame implements Observer {
 		super.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent windowEvent) {
-				client.sendMessageToServer(JsonMaker.disconnect(client
+				client.sendMessageToServer(JsonMaker.disconnectRequest(client
 						.getClientDetails()));
 				System.exit(0);
 			}
@@ -194,12 +192,8 @@ public class MainUIObserver extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
-		System.out.println("******************************** "
-				+ MainUIObserver.class);
 		setMembersList(nicksFilter(client));
 		refresh();
-
 	}
 
 }

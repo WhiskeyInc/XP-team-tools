@@ -12,7 +12,7 @@ import javax.swing.SwingWorker;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
-import tests.MultipleChatClientMain;
+import tests.MultipleChatClientMainO;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 import client.model.IClientService;
@@ -61,7 +61,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 		int index = JsonParser
 				.parseChatIndexRequest(response);
 		System.err.println(index + " "
-				+ MultipleChatClientMain.class);
+				+ MultipleChatClientMainO.class);
 		
 		return index;
 	}

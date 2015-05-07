@@ -1,16 +1,11 @@
 package server.model;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.SocketException;
 
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import string.formatter.Formatter;
-import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 /**
  * This service [{@link IService}] allow the server to create a new chat.
@@ -22,17 +17,16 @@ import client.model.ClientDetails;
 public class NewChatService implements IService {
 
 	private ChatsManager chatsManager;
-	private ClientsManager2 clientsManager1;
+	private MessagePropagator messagePropagator;
 	/**
 	 * The messages that a client recover immediately
 	 */
 	public static final int NUM_OF_MESSAGES = 10;
 
-
-	public NewChatService(ChatsManager chatsManager, ClientsManager2 clientsManager1) {
+	public NewChatService(ChatsManager chatsManager, MessagePropagator messagePropagator) {
 		super();
 		this.chatsManager = chatsManager;
-		this.clientsManager1 = clientsManager1;
+		this.messagePropagator = messagePropagator;
 	}
 
 	@Override
@@ -46,16 +40,14 @@ public class NewChatService implements IService {
 		}
 		if (chatsManager.has(chatMokeUp)) {
 			Chat realChat = chatsManager.get(chatsManager.indexOf(chatMokeUp));
-			propagateMessageResponse(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[0], realChat);
+			messagePropagator.setPropagator(new RequestPropagator());
+			messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[0]);
+			
+			messagePropagator.setPropagator(new RealTimePropagator());
 			for (int i = 1; i < details.length; i++) {
-				propagateMessage(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[i], realChat);
+				messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[i]);
 			}
-//			try {
-//				Thread.sleep(3000);
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+
 			for (int i = 0; i < details.length; i++) {
 				try {
 					alignClient(details[i], realChat);
@@ -67,9 +59,11 @@ public class NewChatService implements IService {
 		} else {
 			chatsManager.add(chatMokeUp);
 			//NB IL primo deve essere chi la richiede.
-			propagateMessageResponse(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[0], chatMokeUp);
+			messagePropagator.setPropagator(new RequestPropagator());
+			messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[0]);
+			messagePropagator.setPropagator(new RealTimePropagator());
 			for (int i = 1; i < details.length; i++) {
-				propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[i], chatMokeUp);
+				messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details[i]);
 			}
 		}
 	}
@@ -80,64 +74,7 @@ public class NewChatService implements IService {
 		//poi allineo
 		String[] messages = chat.recoverLastMessages(NUM_OF_MESSAGES);
 		for (int i = 0; i < messages.length; i++) {
-			propagateMessage(messages[i], details, chat);
+			messagePropagator.propagateMessage(messages[i], details);
 		}
 	}
-
-	public void propagateMessage(String message, ClientDetails details,
-			Chat chat) throws IOException {
-		ClientConnectionDetails conDet = clientsManager1.get(details);
-		try {
-			if (conDet.isOnline()) {
-				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-						conDet.getRealTimeSocket().getOutputStream()));
-				out.write(Formatter.appendNewLine(message));
-				out.flush();
-			}
-		} catch (SocketException e) {
-			//TODO
-//			int index = chat.indexOf(conDet.getSocket());
-//			if (index != -1) {
-//				chat.getAttendantsDetails().get(index).setOnline(false);
-//			} else {
-//				System.err.println("Error, index = " + index);
-//			}
-		}
-	}
-	
-	public void propagateMessageResponse(String message, ClientDetails details,
-			Chat chat) throws IOException {
-		ClientConnectionDetails conDet = clientsManager1.get(details);
-		try {
-			if (conDet.isOnline()) {
-				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-						conDet.getRequestSocket().getOutputStream()));
-				out.write(Formatter.appendNewLine(message));
-				out.flush();
-			}
-		} catch (SocketException e) {
-			//TODO
-//			int index = chat.indexOf(conDet.getSocket());
-//			if (index != -1) {
-//				chat.getAttendantsDetails().get(index).setOnline(false);
-//			} else {
-//				System.err.println("Error, index = " + index);
-//			}
-		}
-	}
-
-	// TODO
-//	private String[] recoverMessages(String teamName)
-//			throws NoMessagesException {
-//		int numOfMessages = NUM_OF_MESSAGES;
-//		String[] sentMessages;
-//
-//		if (recover.getNumOfMessages(teamName) < numOfMessages) {
-//			numOfMessages = recover.getNumOfMessages(teamName);
-//		}
-//		sentMessages = recover.recoverLastMessages(teamName, numOfMessages);
-//
-//		return sentMessages;
-//	}
-
 }
