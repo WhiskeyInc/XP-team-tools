@@ -54,7 +54,7 @@ public class Initializer extends HttpServlet {
 		}
 		testCollector.addProject(project);
 		environments.put("admin", testCollector);
-		super.getServletContext().setAttribute("pendingProjects", environments);
+		super.getServletContext().setAttribute("pendingProjects", pendingProjects);
 		super.getServletContext().setAttribute("environments", environments);
 		super.getServletContext().setAttribute("users", users);
 
