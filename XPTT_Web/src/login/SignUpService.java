@@ -39,17 +39,19 @@ public class SignUpService extends AccountAction {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void doRegister(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		users.put(userName, password);
 		ProjectsCollector projectsCollector = new ProjectsCollector();
-		@SuppressWarnings("unchecked")
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
-		projectsCollector
-				.addProject(new Project("General",
-						new ConcreteProjectFactory(),
-						"Everything related to your team"));
+		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
+				.getServletContext().getAttribute("pendingProjects");
+		projectsCollector.addProject(new Project("General",
+				new ConcreteProjectFactory(),
+				"Everything related to your account"));
+		pendingProjects.put(userName, new ProjectsCollector());
 		environments.put(userName, projectsCollector);
 		SignInService signIn = new SignInService();
 		signIn.perform(request, response);

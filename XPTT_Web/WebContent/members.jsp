@@ -28,6 +28,7 @@
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Members" />
 	</jsp:include>
+
 	<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin-exception"
 		id="error">
 		<%
@@ -93,23 +94,76 @@
 		</div>
 		<div class="col-sm-3 col-md-offset-1">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-fw fa-user"></i> Search for new members
+				<div class="panel-heading" align="center">
+					<i class="fa fa-fw fa-user"></i> <strong>Search for new
+						members</strong>
 				</div>
 				<div class="panel-body">
 					<ul class="members">
 						<%
 			if (getAvailableMembers(request) != null) {
+				int i=0;
 				for (String availableMember : getAvailableMembers(request)) {
 						%>
+
+						<!-- Modal for invitation -->
+						<div class="modal fade" id="memberModal<%=i %>" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											Send an invitation to
+											<%=availableMember %></h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<form role="form" id="invitation" class="contact-form"
+												action="SettingsController" method="post">
+												<input type="hidden" name="action" value="projectInvitation">
+												<div class="row">
+													<div class="col-md-offset-2 col-md-8">
+														<div class="form-group">
+															<input type="text" class="form-control" name="role"
+																autocomplete="off" id="role"
+																placeholder="Role in the development"> <input
+																type="hidden" name="user"
+																value="<%=availableMember %>">
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-offset-2 col-md-8">
+														<div class="form-group">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-primary">Invite
+																to the project</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<li class="left clearfix">
 							<div class="member-body clearfix">
 								<div class="header">
 									<strong class="primary-font"><%=availableMember%></strong>
+									<button class="pull-right" type="button" class="btn"
+										data-toggle="modal" data-target="#memberModal<%=i%>">Invite</button>
 								</div>
 							</div>
 						</li>
 						<%
+						i++;
 				}
 				request.getSession().removeAttribute("membersList");
 			}

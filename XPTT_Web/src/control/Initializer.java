@@ -31,6 +31,7 @@ public class Initializer extends HttpServlet {
 		HashMap<String, String> users = new HashMap<String, String>();
 		users.put("admin", "1789");
 		HashMap<String, ProjectsCollector> environments = new HashMap<String, ProjectsCollector>();
+		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
 		ProjectsCollector testCollector = new ProjectsCollector();
 		Project project = new Project("test", new ConcreteProjectFactory(), "");
 		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault());
@@ -53,7 +54,7 @@ public class Initializer extends HttpServlet {
 		}
 		testCollector.addProject(project);
 		environments.put("admin", testCollector);
-
+		super.getServletContext().setAttribute("pendingProjects", environments);
 		super.getServletContext().setAttribute("environments", environments);
 		super.getServletContext().setAttribute("users", users);
 
