@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import control.actions.settings.MemberAdder;
+import control.actions.settings.MemberSearcher;
 
 /**
  * Servlet implementation class TimelineController
@@ -30,6 +31,7 @@ public class SettingsController extends HttpServlet {
 
 	private void initializeMap() {
 		this.actions.put("memberAddition", new MemberAdder());
+		this.actions.put("search", new MemberSearcher());
 	}
 
 	/**

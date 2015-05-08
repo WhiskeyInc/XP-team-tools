@@ -20,10 +20,11 @@
 	rel='stylesheet' type='text/css'>
 <!-- Members -->
 <link href="css/members.css" rel="stylesheet" />
+<link href="css/user-search.css" rel="stylesheet" />
 <!-- custom CSS here -->
 <link href="css/style.css" rel="stylesheet" />
 </head>
-<body background="img/sfondo.jpg">
+<body>
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Members" />
 	</jsp:include>
@@ -48,8 +49,8 @@
 			}
 		%>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-offset-3 col-sm-6 top-margin">
+	<div class="row top-margin">
+		<div class="col-xs-12 col-sm-offset-1 col-sm-6 top-margin">
 			<div class="panel panel-default">
 				<div class="row" style="display: none;">
 					<div class="col-xs-12">
@@ -90,33 +91,51 @@
 				</ul>
 			</div>
 		</div>
-	</div>
-	<div align="center">
-		<form class="form-inline" action="SettingsController" method="post"
-			role="form">
-			<div class="form-group">
-				<input name="name" type="text" class="form-control" id="Name"
-					placeholder="First name">
+		<div class="col-sm-3 col-md-offset-1">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-fw fa-user"></i> Search for new members
+				</div>
+				<div class="panel-body">
+					<ul class="members">
+						<%
+			if (getAvailableMembers(request) != null) {
+				for (String availableMember : getAvailableMembers(request)) {
+						%>
+						<li class="left clearfix">
+							<div class="member-body clearfix">
+								<div class="header">
+									<strong class="primary-font"><%=availableMember%></strong>
+								</div>
+							</div>
+						</li>
+						<%
+				}
+				request.getSession().removeAttribute("membersList");
+			}
+				%>
+					</ul>
+				</div>
+				<div class="panel-footer">
+					<form action="SettingsController" method="post" class="search-form">
+						<div class="form-group has-feedback">
+							<label for="search" class="sr-only">Search</label> <input
+								type="hidden" name="action" value="search"><input
+								type="text" class="form-control" name="search" id="search"
+								placeholder="search"> <span
+								class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="form-group">
-				<input name="surname" type="text" class="form-control" id="Surname"
-					placeholder="Last name">
-			</div>
-			<div class="form-group">
-				<input name="role" type="text" class="form-control" id="Role"
-					placeholder="Role">
-			</div>
-			<div class="form-group">
-				<input name="password" type="password" class="form-control"
-					id="password" placeholder="Password">
-			</div>
-			<input type="hidden" name="action" value="memberAddition">
-			<button type="submit" class="btn btn-primary btn-xl">Add to
-				the team</button>
-		</form>
-
+		</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		function submit() {
+			document.getElementById('searcher').submit();
+		}
+	</script>
 </body>
 </html>
 
@@ -127,4 +146,11 @@
 		ArrayList<TeamComponent> list = settings.getTeamMembers();
 		Collections.sort(list);
 		return list;
+	}
+
+	private ArrayList<String> getAvailableMembers(HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
+		ArrayList<String> availableMembers = (ArrayList<String>) request
+				.getSession().getAttribute("membersList");
+		return availableMembers;
 	}%>
