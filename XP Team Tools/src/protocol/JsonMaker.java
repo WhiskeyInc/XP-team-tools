@@ -47,14 +47,12 @@ public class JsonMaker {
 	public static final String EVENT_MONTH = "month";
 	public static final String EVENT_DAY = "day";
 	public static final String EVENT_HOUR = "hour";
-	public static final String EVENT_MINUTE = "minute";
+	public static final String EVENT_MINUTE = "min";
 	
 	
-	public static final String ADD_EVENT = "addEvent"; // La servlet riconosce
-														// solo questa!
-	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; // Non
-																			// ancora
-																			// implementato!
+	public static final String ADD_EVENT = "addEvent"; 
+	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; 
+	public static final String USER = "user";
 
 
 	@SuppressWarnings("unchecked")
@@ -189,14 +187,15 @@ public class JsonMaker {
 //		return json.toString();
 //	}
 
-	@SuppressWarnings("unchecked")
+	
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
 	 * @param eventName
 	 * @param participants
 	 * @return
 	 */
-	public static String manualEventRequest(String eventName,
+	@SuppressWarnings("unchecked")
+	public static String manualEventRequest(String user, String eventName,
 			ArrayList<String> participants, String year, String month, String day,
 			String hour, String minute) {
 
@@ -204,6 +203,7 @@ public class JsonMaker {
 
 		json.put(REQ, EVENT);
 
+		json.put(USER, user);
 		json.put(EVENT_ACTION, ADD_EVENT);
 		json.put(EVENT_NAME, eventName);
 		json.put(EVENT_YEAR, year);
@@ -229,13 +229,13 @@ public class JsonMaker {
 	 * @param participants
 	 * @return
 	 */
-	public static String automaticEventRequest(String eventName,
+	public static String automaticEventRequest(String user, String eventName,
 			ArrayList<String> participants) {
 
 		JSONObject json = new JSONObject();
 
 		json.put(REQ, EVENT);
-
+		json.put(USER, user);
 		json.put(EVENT_ACTION, ADD_AUTOMATIC_EVENT);
 		json.put(EVENT_NAME, eventName);
 
