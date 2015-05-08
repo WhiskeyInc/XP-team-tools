@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
 import protocol.JsonMaker;
@@ -44,6 +46,8 @@ public class MainUIObserver extends JFrame implements Observer {
 	private SetMembsService setTeamMembs;
 	private JPanel mainPanel;
 	private StrategyClient1_1 client;
+	private LoadingPanel lp = new LoadingPanel("Loading");
+	private JPanel loadingPanel = new JPanel();
 
 	// setMessage = 0
 	// setTimeStamp = 1
@@ -196,4 +200,28 @@ public class MainUIObserver extends JFrame implements Observer {
 		refresh();
 	}
 
+	public void insertLoadingPanel(){
+		loadingPanel.add(lp);
+		Timer timer1 = new Timer(1000, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(lp.getLabelText().contains("...")){
+					lp.setLabelText("Loading");
+				}
+				lp.setLabelText(lp.getLabelText()+".");
+				getContentPane().add(loadingPanel);
+				setVisible(true);
+			}
+		});
+		
+		timer1.start();
+		
+		setVisible(true);
+	}
+	
+	public void removeLoadingPanel(){
+		getContentPane().add(mainPanel);
+		setVisible(true);
+	}
 }
