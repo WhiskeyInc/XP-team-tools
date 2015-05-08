@@ -49,14 +49,21 @@ public class JSONAcceptor extends HttpServlet {
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject json = (JSONObject) parser.parse(firstLine);
-			System.err.println((String) json.get("action"));
+			this.checkUserName(response, json);
 			return (String) json.get("action");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block //Gestire con codice di
-			// fallimento???
-			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return null;
+			
 		}
-		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void checkUserName(HttpServletResponse response, JSONObject json) throws IOException{
+		HashMap<String, String> users = (HashMap<String, String>) super.getServletContext().getAttribute("users");
+		String toBeChecked = (String) json.get("user");
+		if (!users.containsKey(toBeChecked)) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}		
 	}
 }
