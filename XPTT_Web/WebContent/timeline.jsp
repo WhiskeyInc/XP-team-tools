@@ -37,6 +37,91 @@
 			value="Timeline" />
 	</jsp:include>
 
+	<!-- Modal -->
+	<div class="modal fade" id="eventAdderModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add a new event to
+						your timeline</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<form role="form" id="eventAdder" class="contact-form"
+							action="TimelineController" method="post">
+							<input type="hidden" name="action" value="addition">
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="eventName"
+											autocomplete="on" id="eventName" placeholder="Name">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<div class='input-group' id='eventDate'>
+											<input type='text' class='form-control' name='eventDay'
+												placeholder='dd' maxlength='2'> <span
+												class='input-group-addon'>/</span> <input type='text'
+												class='form-control' name='eventMonth' placeholder='mm'
+												maxlength='2'> <span class='input-group-addon'>/</span>
+											<input type='text' class='form-control' name='eventYear'
+												placeholder='yy' maxlength='4'> <span
+												class='input-group-addon'>@</span> <input type='text'
+												class='form-control' name='eventHour' placeholder='h'
+												maxlength='2'> <span class='input-group-addon'>:</span>
+											<input type='text' class='form-control' name='eventMin'
+												placeholder='m' maxlength='2'>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" style="display: none;" id="secondDate">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<div class='input-group' id='eventDate2'>
+											<input type='text' class='form-control' name='toEventDay'
+												placeholder='dd' maxlength='2'> <span
+												class='input-group-addon'>/</span> <input type='text'
+												class='form-control' name='toEventMonth' placeholder='mm'
+												maxlength='2'> <span class='input-group-addon'>/</span>
+											<input type='text' class='form-control' name='toEventYear'
+												placeholder='yy' maxlength='4'> <span
+												class='input-group-addon'>@</span> <input type='text'
+												class='form-control' name='toEventHour' placeholder='h'
+												maxlength='2'> <span class='input-group-addon'>:</span>
+											<input type='text' class='form-control' name='toEventMin'
+												placeholder='m' maxlength='2'>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Add to
+											the timeline</button>
+										<label class="pull-right"><input type="checkbox"
+											name="macro" id="macro">Milestone</label>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin-exception"
 			id="error">
@@ -50,8 +135,8 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<strong><i class="fa fa-fw fa-exclamation-triangle"></i> Warning
-				</strong>: Cannot perform action.
+				<strong><i class="fa fa-fw fa-exclamation-triangle"></i>
+					Warning </strong>: Cannot perform action.
 				<%=exception.getMessage()%>
 			</div>
 			<%
@@ -218,8 +303,8 @@
 		<br> <br>
 		<div class="col-md-offset-2 col-md-8 col-sm-12">
 			<div class="btn-group-md">
-				<button type="button" class="btn btn-primary"
-					onclick="showEventAdditionForm('adder')">
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#eventAdderModal">
 					<i class="fa fa-fw fa-plus"></i> Add a new Event
 				</button>
 				<div class="btn-group dropup">
@@ -258,6 +343,8 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!-- Adding a form when required -->
 	<script src="js/formAdder.js" type="text/javascript"></script>
+	<!-- Toggle elements -->
+	<script src="js/toggler.js" type="text/javascript"></script>
 </body>
 </html>
 

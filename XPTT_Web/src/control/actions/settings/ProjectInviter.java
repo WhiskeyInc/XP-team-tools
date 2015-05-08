@@ -20,12 +20,14 @@ public class ProjectInviter implements HttpAction {
 		String invitedUser = request.getParameter("user");
 		Project currentProject = (Project) request.getSession().getAttribute(
 				"currentProject");
-		System.out.println(invitedUser + " invited to " + currentProject);
+		System.out.println(invitedUser + " will be invited to "
+				+ currentProject + " [" + currentProject.getId() + " ]");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("pendingProjects");
 		ProjectsCollector projects = pendingProjects.get(invitedUser);
 		projects.addProject(currentProject);
-		System.out.println(invitedUser + " invited to " + currentProject);
+		System.out.println(invitedUser + " invited to " + currentProject + " ["
+				+ currentProject.getId() + "]");
 		response.sendRedirect("members.jsp");
 	}
 }
