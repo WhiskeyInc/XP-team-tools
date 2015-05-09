@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,7 +23,7 @@ public class CopyOfUI extends JFrame{
 
 	private final ChatUITestable chatUI = new ChatUITestable();
 	private final TimerUI timerUI = new TimerUI();
-	private UserListUI userListUI = new UserListUI();
+	private UserListUIBox userListUI = new UserListUIBox();
 	private JPanel mainPanel;
 	
 	public CopyOfUI() {

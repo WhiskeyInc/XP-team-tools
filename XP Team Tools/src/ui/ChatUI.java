@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 /**
@@ -82,8 +83,8 @@ public class ChatUI extends JPanel{
 	}
 	private JScrollPane createVerticalJScrollPane() {
 		JScrollPane messagePane = new JScrollPane(messageArea,
-		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-		JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		return messagePane;
 	}
 	private void setSendMessageButtonProperties(Dimension dim) {

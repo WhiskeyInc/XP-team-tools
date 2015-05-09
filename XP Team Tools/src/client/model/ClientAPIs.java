@@ -49,7 +49,7 @@ public class ClientAPIs{
 			client.sendMessageToServer(JsonMaker.teamMembsRequest(nicks));
 		}
 
-		
+
 		public void manualEvent(String eventName, ArrayList<String> participants, String year, String month, String day,
 				String hour, String minute) {
 			client.sendMessageToServer(JsonMaker.manualEventRequest(eventName, participants, year, month, day, hour, minute));

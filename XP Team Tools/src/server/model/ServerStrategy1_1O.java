@@ -29,7 +29,7 @@ public class ServerStrategy1_1O extends AbstractServer {
 	private Socket requestSocket;
 
 	private ChatsManager chatsManager;
-	private ClientsManager2 clientsManager1 = new ClientsManager2();
+	private ClientsManager2O clientsManager1 = new ClientsManager2O();
 	private BufferedReader in;
 
 	
@@ -131,7 +131,7 @@ public class ServerStrategy1_1O extends AbstractServer {
 	public void addService(int request, IService service) {
 		services.put(request, service);
 	}
-	public ClientsManager2 getClientsManager() {
+	public ClientsManager2O getClientsManager() {
 		return clientsManager1;
 	}
 

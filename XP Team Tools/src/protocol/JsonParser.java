@@ -35,7 +35,7 @@ public class JsonParser {
 		ClientDetails[] vet = new ClientDetails[size];
 		for (int i = 0; i < size; i++) {
 			JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT+i);
-			vet[i] = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
+			vet[i] = new ClientDetails((String)idList.get(0), (String)idList.get(1));
 		}
 		
 		return vet;
@@ -45,7 +45,7 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), (String)idList.get(2));
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), (String) idList.get(2));
 		
 		return det;
 	}
@@ -67,7 +67,7 @@ public class JsonParser {
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
 		//TODO check if parseDisconnectRequests is actually using the third argument that is the password
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
 		return det;
 	}
 	
@@ -123,14 +123,13 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1), null);
+		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
 		
 		return det;
 	}
 	
 	public static String[] parseTeamMembsRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
-		System.err.println(s+  " " + JsonParser.class);
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
 		int size = idList.size();
@@ -140,6 +139,12 @@ public class JsonParser {
 		}
 		return membs;
 	}
+	
+//	public static Team[] parseTeamsRequest(String s) throws ParseException {
+//		JSONParser parser = new JSONParser();
+//		
+//	}
+	
 	
 	public static int getRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();

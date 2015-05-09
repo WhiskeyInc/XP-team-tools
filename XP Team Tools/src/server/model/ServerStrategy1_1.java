@@ -11,7 +11,6 @@ import java.util.HashMap;
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
-import server.db.DBConnection;
 import server.db.IDBConnection;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;

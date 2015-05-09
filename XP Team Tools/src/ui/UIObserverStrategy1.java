@@ -16,6 +16,7 @@ import javax.swing.Timer;
 
 import client.model.IClientService;
 import client.model.MessageObservable;
+import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
 /**
@@ -38,7 +39,7 @@ public class UIObserverStrategy1 extends JFrame {
 	
 	public UIObserverStrategy1(final IClientService setMessage,
 			final IClientService setTimeStamp, final StrategyClient1_1 client,
-			 int index) {
+			 final int index) {
 		super();
 		
 		chatUI = new ChatUIObserverStrategy1(
@@ -50,7 +51,9 @@ public class UIObserverStrategy1 extends JFrame {
 
 			@Override
 			public void run() {
-		
+			
+
+				JPanel panel = new JPanel();
 				panel.setLayout(new GridBagLayout());
 				GridBagConstraints lim = new GridBagConstraints();
 				lim.gridx = 0;
@@ -70,6 +73,7 @@ public class UIObserverStrategy1 extends JFrame {
 					@Override
 					public void windowClosing(WindowEvent windowEvent) {
 						chatUI.removeObservers();
+						SessionManager.getInstance().setChatClosed(index);
 					}
 				});
 			}

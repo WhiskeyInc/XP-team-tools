@@ -137,4 +137,5 @@ public class StrategyClient {
 	public void addService(int id, IClientService service) {
 		services.put(id, service);
 	}
+	
 }

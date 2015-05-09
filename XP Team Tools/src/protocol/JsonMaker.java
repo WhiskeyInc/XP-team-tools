@@ -27,7 +27,9 @@ public class JsonMaker {
 	public static final String TEAM_MEMBS = "9";
 	public static final String NEW_UI = "10";
 	public static final String EVENT = "11";
+	public static final String TEAMS = "12";
 
+	
 	public static final String REQ = "request";
 	public static final String TEAM_NAME = "team name";
 	public static final String MESSAGE = "message";
@@ -38,8 +40,9 @@ public class JsonMaker {
 	public static final String TEAM_MEMB = "team memb";
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
-	public static final String CONFIRM_STRING = "ok";
+	public static final String NICKNAME = "nickname";
 
+	
 	public static final String EVENT_ACTION = "action";
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
@@ -66,16 +69,16 @@ public class JsonMaker {
 		JSONObject json = new JSONObject();
 		json.put(REQ, NEW_CHAT);
 		JSONArray detArray;
-
+		
 		for (int i = 0; i < details.length; i++) {
 			detArray = new JSONArray();
 			detArray.add(details[i].getNickname());
 			detArray.add(details[i].getTeamName());
-			json.put(ATTENDANT + i, detArray);
+			json.put(ATTENDANT+i, detArray);
 		}
 		return json.toString();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	/**
 	 * Api for the first connection to the Server
@@ -88,11 +91,12 @@ public class JsonMaker {
 		JSONArray detArray = new JSONArray();
 		detArray.add(details.getNickname());
 		detArray.add(details.getTeamName());
+		detArray.add(details.getPwd());
 		json.put(REQ, CONNECT_SERVER);
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	/**
 	 * Protocol's Api to require to the server the index of the chat
@@ -106,6 +110,7 @@ public class JsonMaker {
 		json.put(INDEX, String.valueOf(chatIndex));
 		return json.toString();
 	}
+
 
 	@SuppressWarnings("unchecked")
 	public static String chatRequest(String message, String chatId) {
@@ -134,7 +139,7 @@ public class JsonMaker {
 		json.put(SECONDS, seconds);
 		return json.toString();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static String newTeamRequest(String teamName, String teamCreatorNick) {
 		JSONObject json = new JSONObject();
@@ -143,7 +148,7 @@ public class JsonMaker {
 		json.put(TEAM_NAME, teamName);
 		return json.toString();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static String addTeamMembRequest(ClientDetails details) {
 
@@ -155,7 +160,8 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-
+	
+	
 	@SuppressWarnings("unchecked")
 	public static String disconnectRequest(ClientDetails det) {
 		JSONObject json = new JSONObject();
@@ -166,7 +172,7 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static String teamMembsRequest(String[] nicks) {
 		JSONObject json = new JSONObject();
@@ -178,7 +184,7 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-
+	
 //	@SuppressWarnings("unchecked")
 //	public static String createNewUiRequest(int chatIndex) {
 //		JSONObject json = new JSONObject();
@@ -186,21 +192,22 @@ public class JsonMaker {
 //		json.put(INDEX, String.valueOf(chatIndex));
 //		return json.toString();
 //	}
-
 	
+	
+	
+	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
 	 * @param eventName
 	 * @param participants
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static String manualEventRequest(String user, String eventName,
 			ArrayList<String> participants, String year, String month, String day,
 			String hour, String minute) {
 
 		JSONObject json = new JSONObject();
-
+		
 		json.put(REQ, EVENT);
 
 		json.put(USER, user);
@@ -216,8 +223,8 @@ public class JsonMaker {
 			JSONArray array = new JSONArray();
 			array.addAll(participants);
 			json.put(PARTICIPANTS, array);
-		}
-
+		}	
+		
 		return json.toString();
 	}
 
@@ -243,8 +250,17 @@ public class JsonMaker {
 			JSONArray array = new JSONArray();
 			array.addAll(participants);
 			json.put(PARTICIPANTS, array);
-		}
-
+		}	
+		
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String teamsRequest(String nickname) {
+		JSONObject json = new JSONObject();
+		json.put(REQ, TEAMS);
+		json.put(NICKNAME, nickname);
+		
 		return json.toString();
 	}
 

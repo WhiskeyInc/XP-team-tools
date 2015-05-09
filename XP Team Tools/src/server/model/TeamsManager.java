@@ -74,6 +74,8 @@ public class TeamsManager {
 		return teamList.size();
 	}
 	
+	//get
+	
 	public static TeamsManager getInstance() {
 		return instance;
 	}

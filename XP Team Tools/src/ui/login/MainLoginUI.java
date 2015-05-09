@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,7 +26,7 @@ public class MainLoginUI extends JFrame{
 	
 	
 
-	private final LoginUITestable loginUI = new LoginUITestable();
+	private final LoginUI loginUI = new LoginUI();
 	
 	
 	public MainLoginUI() {
@@ -49,15 +47,12 @@ public class MainLoginUI extends JFrame{
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
 		super.getContentPane().add(panel);
 		super.setVisible(true);
-		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
 	}
 
-	public void setLoginUI(ActionListener actionListener) {
-		loginUI.setButtonAction(actionListener);
-	}
 		
 	
-	public LoginUI getChatUI() {
+	public LoginUI getLoginUI() {
 		return loginUI;
 	}
 

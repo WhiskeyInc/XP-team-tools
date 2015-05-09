@@ -30,10 +30,9 @@ public class MeetingUIMain {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
-						System.out.println("Date: " + ask.getDay()+"/"+ask.getMonth()+"/"+ask.getYear());
-						System.out.println("Hour: " + ask.getHour()+":"+ask.getMinute());
-						System.out.println("Name: " + ask.getName());
+						//TODO send event informations
+//						System.out.println("Date: " + ask.getDate());
+//						System.out.println("Description: " + ask.getDescrtiption());
 						detailsFrame.dispose();
 					}
 				});

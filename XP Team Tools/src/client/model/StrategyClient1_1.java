@@ -28,7 +28,6 @@ public class StrategyClient1_1 {
 	private SetMembsService membsService;
 
 
-
 	public StrategyClient1_1() {
 		super();
 

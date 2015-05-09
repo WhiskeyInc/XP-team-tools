@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 import org.junit.Test;
 
-import server.model.ClientsManager2;
+import server.model.ClientsManager2O;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
@@ -22,15 +22,15 @@ public class ClientsManagerTest {
 	 */
 	@Test
 	public void clientManagerTest() throws UnknownHostException, IOException {
-		ClientsManager2 manager = new ClientsManager2();
-		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test", null);
+		ClientsManager2O manager = new ClientsManager2O();
+		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test");
 		conDet.setRealTimeSocket(new Socket("localhost", 9999));
 		manager.registerClient(conDet);
 		conDet.setRealTimeSocket(new Socket("localhost", 9999));
 		
 		assertEquals(1, manager.size());
 		
-		ClientDetails det = new ClientDetails("Alb", "Test", null);
+		ClientDetails det = new ClientDetails("Alb", "Test");
 		ClientConnectionDetails conDe2 = manager.get(det);
 		
 		assertTrue(conDe2.getRealTimeSocket().equals(conDet.getRealTimeSocket()));

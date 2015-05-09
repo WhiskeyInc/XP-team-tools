@@ -1,8 +1,11 @@
 package ui.tests;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import ui.TeamListUI;
 import client.model.ClientConnectionDetails;
 import client.model.StrategyClient1_1;
-import ui.TeamListUI;
 
 
 public class TeamListUIMain {
@@ -14,7 +17,27 @@ public class TeamListUIMain {
 		teams[2] = "NonSoComeChiamarti";
 		teams[3] = "XPProgrammers";
 		
-		TeamListUI listUI = new TeamListUI(client, teams);
+		
+		final String[] teams1 = new String[5];
+		teams1[0] = "LeFere";
+		teams1[1] = "Frades";
+		teams1[2] = "NonSoComeChiamarti";
+		teams1[3] = "XPProgrammers";
+		teams1[4] = "JavaProg";
+		
+		
+		final TeamListUI listUI = new TeamListUI(client, teams);
+		
+		listUI.setCreateListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listUI.removeTeamPanel();
+				listUI.fillTeamPane(teams1);
+				listUI.refresh();
+			}
+		});
+		
 		
 	}
 

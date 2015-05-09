@@ -34,6 +34,7 @@ public class TeamListUI extends JFrame {
 	private JButton createTeam = new JButton("Create");
 	private JScrollPane teamPane;
 	private JPanel mainPanel;
+	private JTextField teamName;
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +44,6 @@ public class TeamListUI extends JFrame {
 		addLoggedLabel();
 		addLogoutBtn();
 		fillTeamPane(teams);
-
-		addTeamPanel();
 		addNewTeamPanel();
 		super.add(mainPanel);
 		pack();
@@ -108,7 +107,7 @@ public class TeamListUI extends JFrame {
 				.createEmptyBorder(1, 1, 1, 1))));
 		newTeamPanel.setLayout(new GridBagLayout());
 
-		JTextField teamName = new JTextField();
+		teamName = new JTextField();
 		teamName.setPreferredSize(new Dimension(100, 20));
 		teamName.setMinimumSize(new Dimension(100, 20));
 		lim = new GridBagConstraints();
@@ -130,9 +129,7 @@ public class TeamListUI extends JFrame {
 	}
 
 	public void fillTeamPane(String[] teams) {
-//		super.getContentPane().remove(mainPanel);
-//		mainPanel.remove(teamPane);
-//		teamPane.removeAll();
+
 		JPanel panel = new JPanel();
 		panel.setBorder((BorderFactory.createCompoundBorder(BorderFactory
 				.createTitledBorder(null, "Teams Panel",
@@ -185,21 +182,28 @@ public class TeamListUI extends JFrame {
 		}
 		
 		teamPane = new JScrollPane(panel);
-//		addTeamPanel();
-//		super.getContentPane().add(mainPanel);
-//		refresh();
-//		pack();
+		addTeamPanel();
 	}
 
 	public void setCreateListener(ActionListener createListener) {
 		createTeam.addActionListener(createListener);
 	}
 
+	public void removeTeamPanel() {
+		super.getContentPane().remove(teamPane);
+	}
+	
 	public void refresh() {
+
 		// super.getContentPane().invalidate();
 		super.getContentPane().revalidate();
 		// super.getContentPane().repaint();
 		super.revalidate();
 		// super.repaint();
+	}
+	
+	public String getTeamName() {
+		//TODO, checkare la validità
+		return teamName.getText();
 	}
 }

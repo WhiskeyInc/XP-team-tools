@@ -62,6 +62,7 @@ public class MeetingUIDetails extends JPanel {
 		p1.add(new JLabel("       "));
 		p1.add(btn);
 		btn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				// instantiate the DatePicker
 				DatePicker dp = new DatePicker(dateField, locale);
@@ -146,6 +147,7 @@ public class MeetingUIDetails extends JPanel {
 		return tok.nextToken();
 	}
 
+	@Override
 	public String getName() {
 		return name.getText();
 	}
@@ -156,6 +158,7 @@ class ObservingTextField extends JTextField implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void update(Observable o, Object arg) {
 		Calendar calendar = (Calendar) arg;
 		DatePicker dp = (DatePicker) o;

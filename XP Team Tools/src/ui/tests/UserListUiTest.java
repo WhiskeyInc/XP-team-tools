@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ui.UserListUI;
+import ui.UserListUIBox;
 
 public class UserListUiTest {
 
@@ -13,7 +13,7 @@ public class UserListUiTest {
 	public void test01() {
 		String[] nicks = new String[1];
 		nicks[0] = "Cesare";
-		UserListUI Ui = new UserListUI(nicks);
+		UserListUIBox Ui = new UserListUIBox(nicks);
 		assertArrayEquals(Ui.getNicknames(), nicks);
 		assertEquals(Ui.getNicknames()[0], "Cesare");
 		
@@ -24,7 +24,7 @@ public class UserListUiTest {
 	public void test02() {
 		String[] nicknames = new String[1];
 		nicknames[0] = "Cesare";
-		UserListUI Ui = new UserListUI(nicknames);
+		UserListUIBox Ui = new UserListUIBox(nicknames);
 		Ui.getBox().get(0).doClick();
 		assertEquals(Ui.getBox().get(0).isSelected(), true);
 	}
@@ -35,7 +35,7 @@ public class UserListUiTest {
 		nicknames[0] = "Cesare";
 		nicknames[1] = "Alessia Montanini";
 		nicknames[2] = "Defo";
-		UserListUI Ui = new UserListUI(nicknames);
+		UserListUIBox Ui = new UserListUIBox(nicknames);
 		Ui.getBox().get(0).doClick();
 		Ui.getBox().get(2).doClick();
 		Ui.getButton().doClick();

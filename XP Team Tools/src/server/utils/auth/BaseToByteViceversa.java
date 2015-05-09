@@ -2,8 +2,8 @@ package server.utils.auth;
 
 import java.io.IOException;
 
-import Decoder.BASE64Decoder;
-import Decoder.BASE64Encoder;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * Using sun.misc BASE64 Decoder, the two methods decode and encode the digest

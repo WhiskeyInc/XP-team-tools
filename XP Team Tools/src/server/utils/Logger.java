@@ -29,6 +29,7 @@ public class Logger implements ILogger {
 	 * Writes messages onto the database.
 	 * Need to be improved as not to rewrite, but append new messages. TODO
 	 */
+	@Override
 	public void writeDatabase() {
 		try {
 
@@ -53,6 +54,7 @@ public class Logger implements ILogger {
 		}
 	}
 
+	@Override
 	public void setMap(Map<String, ArrayList<String>> m) {
 		this.mapMessageList = m;
 	}

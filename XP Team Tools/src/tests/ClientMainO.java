@@ -21,6 +21,7 @@ import ui.TimerUIObserverStrategy;
 import ui.UserListUI;
 import client.model.ClientConnectionDetails;
 import client.model.IClientService;
+import client.model.SessionManager;
 import client.model.SetMembsService;
 import client.model.SetMessageService;
 import client.model.SetNewChatService;
@@ -34,7 +35,7 @@ import client.model.StrategyClient1_1;
  * @author alberto
  *
  */
-public class MultipleChatClientMain {
+public class ClientMainO {
 	public static void main(String[] args) {
 
 		final IClientService[] services = new IClientService[3];
@@ -42,12 +43,9 @@ public class MultipleChatClientMain {
 		services[1] = new SetTimeStampService();
 		final SetMembsService serviceTeamMembs = new SetMembsService();
 		services[2] = new SetNewChatService();
-		// IClientService chatIndexService = new ChatIndexService();
-		// IClientService confirmService = new ConfirmService();
-		// ClientChatIndexManager indexManager = new
-		// ClientChatIndexManager(chatIndexService);
+
 		final StrategyClient1_1 client = new StrategyClient1_1(
-				new ClientConnectionDetails("Pav", "Prova", "Pav123"));
+				new ClientConnectionDetails("Alb", "Prova"));
 		client.addService(JsonParser.CHAT, services[0]);
 		client.addService(JsonParser.TIMER, services[1]);
 		client.setMembsService(serviceTeamMembs);
@@ -94,9 +92,9 @@ public class MultipleChatClientMain {
 			public void run() {
 				MainUIObserver ui = new MainUIObserver(services,
 						serviceTeamMembs, client, index);
-		
+
 				System.err.println(EventQueue.isDispatchThread() + " "
-						+ MultipleChatClientMain.class);
+						+ ClientMainO.class);
 				final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 				final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 				final UserListUI listUI = ui.getUserListUI();
@@ -132,8 +130,23 @@ public class MultipleChatClientMain {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						NewChatWorker newChatWorker = new NewChatWorker(listUI, client, services);
-						newChatWorker.execute();
+						SessionManager sessionManager = SessionManager
+								.getInstance();
+						if (sessionManager.hasChat(index)) {
+							if (!sessionManager.isChatOpen(index)) {
+								NewChatWorker newChatWorker = new NewChatWorker(
+										listUI, client, services);
+								newChatWorker.execute();
+							} else {
+								listUI.deselectAll();
+							}
+						} else {
+							sessionManager.registerChatOpening(index);
+							NewChatWorker newChatWorker = new NewChatWorker(
+									listUI, client, services);
+							newChatWorker.execute();
+						}
+
 					}
 				});
 

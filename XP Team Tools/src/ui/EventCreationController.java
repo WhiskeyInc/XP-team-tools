@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import protocol.JsonMaker;
 import ui.tests.FramesUtils;
@@ -26,7 +27,7 @@ public class EventCreationController implements ActionListener {
 		detailsFrame.setLocationRelativeTo(null);
 		detailsFrame.setVisible(true);
 		detailsFrame.getContentPane().add(ask);
-		detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		detailsFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 	}
 

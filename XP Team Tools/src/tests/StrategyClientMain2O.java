@@ -32,12 +32,12 @@ public class StrategyClientMain2O {
 		IClientService serviceMessage = new SetMessageService();
 		IClientService serviceTimeStamp = new SetTimeStampService();
 		SetMembsService serviceTeamMembs = new SetMembsService();
-
+		
 	//	IClientService chatIndexService = new ChatIndexService();
 //		IClientService confirmService = new ConfirmService();
 //		ClientChatIndexManager indexManager = new ClientChatIndexManager(chatIndexService);
 		
-		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Luke", "Prova"));
+		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Nic", "Prova", "Nic123"));
 		client.addService(JsonParser.CHAT, serviceMessage);
 		client.addService(JsonParser.TIMER, serviceTimeStamp);
 		client.setMembsService(serviceTeamMembs);

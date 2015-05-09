@@ -101,7 +101,7 @@ public class JSONTest {
 	
 	@Test
 	public void connectToServerReqTest() throws Exception {
-		ClientDetails det = new ClientDetails("Alb", "Test", null);
+		ClientDetails det = new ClientDetails("Alb", "Test");
 		ClientDetails det1 = JsonParser.parseConnectToServerRequest(JsonMaker.connectToServerRequest(det));
 		assertEquals(det, det1);
 	}
@@ -114,14 +114,14 @@ public class JSONTest {
 	@Test
 	public void disconnectTest() throws Exception {
 		ClientDetails clientDetails = new ClientDetails("Alb", "Test");
-		assertEquals(clientDetails, JsonParser.parseDisconnectRequest(JsonMaker.disconnect(clientDetails)));
+		assertEquals(clientDetails, JsonParser.parseDisconnectRequest(JsonMaker.disconnectRequest(clientDetails)));
 	}
 	
 	@Test
 	public void addTeamMembReqTest() throws Exception {
-		ClientDetails det =  new ClientDetails("Alb", "Test", null);
+		ClientDetails det =  new ClientDetails("Alb", "Test");
 		
-		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker.addTeamMemb(det)));
+		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker.addTeamMembRequest(det)));
 	}
 	
 

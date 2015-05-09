@@ -25,6 +25,7 @@ import protocol.JsonMaker;
 import string.formatter.Formatter;
 import client.model.IClientService;
 import client.model.MessageObservable;
+import client.model.SessionManager;
 import client.model.SetMembsService;
 import client.model.StrategyClient1_1;
 
@@ -80,8 +81,8 @@ public class MainUIObserver extends JFrame implements Observer {
 
 			@Override
 			public void run() {
-				NewChatLauncher newChatListener = new NewChatLauncher(
-						services[2], client, services[0], services[1]);
+				NewChatInviteLauncher newChatListener = new NewChatInviteLauncher(
+						services[2], client, services[0], services[1], SessionManager.getInstance());
 
 			}
 		};

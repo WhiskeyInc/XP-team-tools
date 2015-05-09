@@ -24,7 +24,6 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 	private StrategyClient1_1 client;
 	private IClientService[] services;
 	
-	
 	public NewChatWorker(UserListUI listUI, StrategyClient1_1 client,
 			IClientService[] services) {
 		super();

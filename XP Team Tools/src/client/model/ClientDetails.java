@@ -34,7 +34,7 @@ public class ClientDetails implements Comparable<ClientDetails> {
 		this.teamName = teamName;
 		this.pwd = pwd;
 	}
-	
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -62,7 +62,7 @@ public class ClientDetails implements Comparable<ClientDetails> {
 	public String getPwd() {
 		return pwd;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ClientDetails)) {
