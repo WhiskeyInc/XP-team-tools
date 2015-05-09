@@ -50,8 +50,7 @@
 									<button class="btn btn-danger btn-xs fa fa-trash-o"></button>
 								</div>
 							</div></li>
-
-						<li class="list-danger"><i class=" fa fa-ellipsis-v"></i>
+						<li class="list-danger"><i class=" fa fa-ellipsis-v"></i> <br>
 							<div class="task-title">
 								<span class="task-title-sp">TaskBoard - a component in
 									which the user can see a "todo list"...</span> <span
@@ -62,7 +61,7 @@
 									<button class="btn btn-danger btn-xs fa fa-trash-o"></button>
 								</div>
 							</div></li>
-						<li class="list-success"><i class=" fa fa-ellipsis-v"></i>
+						<li class="list-success"><i class=" fa fa-ellipsis-v"></i> <br>
 							<div class="task-title">
 								<span class="task-title-sp">UserStoryBoard - a component
 									that shows to the team all the...</span> <span
@@ -76,8 +75,8 @@
 					</ul>
 				</div>
 				<div class=" add-task-row">
-					<a class="btn btn-success btn-sm pull-left" href="">Add
-						New Tasks</a>
+					<a class="btn btn-success btn-sm pull-left" href="">Add New
+						Tasks</a>
 				</div>
 				<div class="btn-group dropup">
 					<button type="button" class="btn btn-success btn-sm pull-left"
@@ -87,12 +86,10 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="" onclick=""><i
 								class="fa fa-fw fa-check-square-o"></i> State</a></li>
-						<li><a href=""
-							onclick=""><i
-								class="fa fa-fw fa-group"></i> Developer</a></li>
-						<li><a href=""
-							onclick=""><i
-								class="fa fa-fw fa-trash"></i> Remove filter</a></li>
+						<li><a href="" onclick=""><i class="fa fa-fw fa-group"></i>
+								Developer</a></li>
+						<li><a href="" onclick=""><i class="fa fa-fw fa-trash"></i>
+								Remove filter</a></li>
 					</ul>
 				</div>
 			</div>
