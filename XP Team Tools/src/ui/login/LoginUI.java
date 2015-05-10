@@ -26,6 +26,7 @@ public class LoginUI extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton sendLogin = new JButton("Login");
+	private JButton register = new JButton("Register");
 
 	private JLabel userLabel = new JLabel("Username:");
 	private JTextField loginField = new JTextField(20);
@@ -66,19 +67,32 @@ public class LoginUI extends JPanel {
 		lim.gridy = 1;
 		lim.insets = new Insets(0, 10, 0, 20);
 		super.add(pwdField, lim);
-		sendLogin.setMinimumSize(new Dimension(324, 25));
-		sendLogin.setPreferredSize(new Dimension(324, 25));
+		
+		sendLogin.setMinimumSize(new Dimension(145, 25));
+		sendLogin.setPreferredSize(new Dimension(145, 25));
+		register.setMinimumSize(new Dimension(145, 25));
+		register.setPreferredSize(new Dimension(145, 25));
 
 		lim = new GridBagConstraints();
 		lim.gridx = 1;
 		lim.gridy = 2;
-		lim.insets = new Insets(0, 10, 30, 20);
+		lim.insets = new Insets(5, 0, 30, 170);
 		super.add(sendLogin, lim);
+		
+		lim = new GridBagConstraints();
+		lim.gridx = 1;
+		lim.gridy = 2;
+		lim.insets = new Insets(5, 170, 30, 30);
+		super.add(register, lim);
 		
 	}
 	
 	public void setLoginListener(ActionListener actionListener) {
 		sendLogin.addActionListener(actionListener);
+	}
+	
+	public void setRegisterListener(ActionListener actionListener) {
+		register.addActionListener(actionListener);
 	}
 	
 	public String getLoginNick() {

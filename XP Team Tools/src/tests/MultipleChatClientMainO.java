@@ -201,6 +201,14 @@ public class MultipleChatClientMainO {
 			}
 		});
        
-		
+		login.setRegisterListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Pagina di Registrazione
+				System.out.println("Apro pagina di registrazione nuovo utente");
+				
+			}
+		});
 	}
 }
