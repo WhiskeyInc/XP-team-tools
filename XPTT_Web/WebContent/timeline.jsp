@@ -33,6 +33,7 @@
 <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
+
 	<jsp:include page="menu.jsp"><jsp:param name="page"
 			value="Timeline" />
 	</jsp:include>
@@ -372,6 +373,7 @@
 		return day + " " + month + " " + year + ", " + hour + ":" + min;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Filter<Event> getEventFilter(HttpServletRequest request) {
 		Filter<Event> filter = (Filter<Event>) request.getSession()
 				.getAttribute("filter");

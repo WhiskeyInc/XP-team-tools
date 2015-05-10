@@ -8,7 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
+import boards.UserStoryBoard.UserStory;
+import boards.taskBoard.ConcreteTaskManager;
 import model.exceptions.InvalidDateException;
+import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
@@ -34,6 +37,14 @@ public class Initializer extends HttpServlet {
 		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
 		ProjectsCollector testCollector = new ProjectsCollector();
 		Project project = new Project("test", new ConcreteProjectFactory(), "");
+		// Add a user story to test jsp page.
+		UserStory story = new UserStory("TestSory", "ciao", new ConcreteTaskManager());
+		try {
+			project.getUserStoriesManager().addUserStory(story);
+		} catch (NameAlreadyInUseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault());
 		MacroEvent test;
 		try {

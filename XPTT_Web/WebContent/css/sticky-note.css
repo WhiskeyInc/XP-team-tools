@@ -1,31 +1,43 @@
 @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
-* { box-sizing:border-box; }
-body { background:url(http://subtlepatterns.com/patterns/little_pluses.png) #cacaca; margin:30px; }
 
-textarea  { 
-	display:block;
-	padding:25px 25px 40px;
-	margin:0 auto 20px auto;
-	float:left
-	width:350px;
-	height:250px;   
-	font:20px 'Gloria Hallelujah', cursive; 
-	line-height:1.5;
-	border:0;
-	border-radius:3px;
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: url(http://subtlepatterns.com/patterns/little_pluses.png)
+		#cacaca;
+	margin: 30px;
+}
+
+.sticky {
+	display: block;
+	padding: 25px 25px 40px;
+	margin: 0 auto 20px auto;
+	float: left width:350px;
+	height: 250px;
+	font: 20px 'Gloria Hallelujah', cursive;
+	line-height: 1.5;
+	border: 0;
+	border-radius: 3px;
 	background: -webkit-linear-gradient(#F9EFAF, #F7E98D);
 	background: -moz-linear-gradient(#F9EFAF, #F7E98D);
 	background: -o-linear-gradient(#F9EFAF, #F7E98D);
 	background: -ms-linear-gradient(#F9EFAF, #F7E98D);
 	background: linear-gradient(#F9EFAF, #F7E98D);
-	box-shadow:0 4px 6px rgba(0,0,0,0.1);
-	overflow:hidden;
-	transition:box-shadow 0.5s ease;
-	font-smoothing:subpixel-antialiased;
-	max-width:520px;
-	max-height:250px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: box-shadow 0.5s ease;
+	font-smoothing: subpixel-antialiased;
+	max-width: 520px;
+	max-height: 250px;
 }
 
-textarea:hover { box-shadow:0 5px 8px rgba(0,0,0,0.15); }
-textarea:focus { box-shadow:0 5px 12px rgba(0,0,0,0.2); outline:none; }
+textarea:hover {
+	box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+}
 
+textarea:focus {
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+	outline: none;
+}
