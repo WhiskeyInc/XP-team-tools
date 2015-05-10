@@ -55,7 +55,8 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="title"
-											autocomplete="on" id="title" placeholder="Title" autofocus="autofocus">
+											autocomplete="on" id="title" placeholder="Title"
+											autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -85,27 +86,31 @@
 	</div>
 
 	<div class="container">
-		<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
+		<div class="col-md-12 col-sm-12 top-margin">
 			<br> <br> <br> <br>
 			<!-- brutto! -->
 			<%
 				for (UserStory story : this.getUserStories(request)) {
 			%>
-			<div class="row">
-				<textarea class="sticky"><%=story.toString()%>: <%=story.getDescription()%></textarea>
+			<div class="col-md-4 col-sm-6">
+				<div class="row">
+					<textarea class="sticky"><%=story.toString()%>: <%=story.getDescription()%></textarea>
+				</div>
+
 			</div>
 			<%
 				}
 			%>
-		</div>
 
-		<div class="row">
-			<div class="col-md-8">
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#USAdderModal">
-					<i class="fa fa-plus fa-fw"></i> Add a new story
-				</button>
+
+			<div class="row">
+				<div class="col-md-8">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#USAdderModal">
+						<i class="fa fa-plus fa-fw"></i> Add a new story
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
