@@ -56,7 +56,8 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="userName"
-											autocomplete="off" id="userName" placeholder="User Name">
+											autocomplete="off" id="userName" placeholder="User Name"
+											autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -95,7 +96,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Get a free acoount
+					<h4 class="modal-title" id="myModalLabel">Get a free account
 						in less than a minute!</h4>
 				</div>
 				<div class="modal-body">
@@ -107,7 +108,8 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="userName"
-											autocomplete="off" id="userName" placeholder="User Name">
+											autocomplete="off" id="userName" placeholder="User Name"
+											autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -188,6 +190,7 @@
 	<!-- Validate a form field when required -->
 	<script src="js/validator.js"></script>
 	<script src="js/login.js"></script>
+	<script src="js/autofocus.js" type="text/javascript"></script>
 
 </body>
 </html>

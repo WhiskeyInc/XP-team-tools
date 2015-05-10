@@ -60,7 +60,8 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="eventName"
-											autocomplete="on" id="eventName" placeholder="Name">
+											autocomplete="on" id="eventName" placeholder="Name"
+											autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -346,6 +347,7 @@
 	<script src="js/formAdder.js" type="text/javascript"></script>
 	<!-- Toggle elements -->
 	<script src="js/toggler.js" type="text/javascript"></script>
+	<script src="js/autofocus.js" type="text/javascript"></script>
 </body>
 </html>
 

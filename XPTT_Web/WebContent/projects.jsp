@@ -53,7 +53,8 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<input type="text" class="form-control" name="projectName"
-											autocomplete="off" id="projectName" placeholder="Name">
+											autocomplete="off" id="projectName" placeholder="Name"
+											autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -141,6 +142,7 @@
 	<!-- Validate a form field when required -->
 	<script src="js/validator.js"></script>
 	<script src="js/projectForm.js"></script>
+	<script src="js/autofocus.js" type="text/javascript"></script>
 
 </body>
 </html>

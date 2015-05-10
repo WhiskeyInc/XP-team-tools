@@ -54,8 +54,8 @@
 							<div class="row">
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
-										<input type="text" class="form-control" name="USTitle"
-											autocomplete="on" id="USTitle" placeholder="Title">
+										<input type="text" class="form-control" name="title"
+											autocomplete="on" id="title" placeholder="Title" autofocus="autofocus">
 									</div>
 								</div>
 							</div>
@@ -86,10 +86,7 @@
 
 	<div class="container">
 		<div class="col-md-offset-2 col-md-8 col-sm-12 top-margin">
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br>
 			<!-- brutto! -->
 			<%
 				for (UserStory story : this.getUserStories(request)) {
@@ -101,10 +98,25 @@
 				}
 			%>
 		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#USAdderModal">
+					<i class="fa fa-plus fa-fw"></i> Add a new story
+				</button>
+			</div>
+		</div>
 	</div>
-	
+
 	<jsp:include page="footer.jsp"></jsp:include>
-		
+
+	<!-- Validate a form field when required -->
+	<script src="js/validator.js"></script>
+	<script src="js/USValidator.js" type="text/javascript"></script>
+	<script src="js/autofocus.js" type="text/javascript"></script>
+
 </body>
 </html>
 
