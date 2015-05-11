@@ -87,21 +87,59 @@
 
 	<div class="container">
 		<div class="col-md-12 col-sm-12 top-margin">
-			<br> <br> <br> <br>
-			<!-- brutto! -->
-			<%
-				for (UserStory story : this.getUserStories(request)) {
-			%>
 			<div class="col-md-4 col-sm-6">
 				<div class="row">
-					<textarea class="sticky"><%=story.toString()%>: <%=story.getDescription()%></textarea>
+					<h2 align="center">TODO</h2>
 				</div>
-
 			</div>
-			<%
-				}
-			%>
+			<div class="col-md-4 col-sm-6">
+				<div class="row">
+					<h2 align="center">IN PROGRESS</h2>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="row">
+					<h2 align="center">DONE</h2>
+				</div>
+			</div>
 
+			<!-- brutto! -->
+
+			<div class="row">
+				<div class="col col-md-4">
+					<%
+						for (UserStory story : getUserStories(request)) {
+							if (story.getState().equals("TODO")) {
+					%>
+					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<%
+						}
+						}
+					%>
+				</div>
+				<div class="col col-md-4 col-md-offeset-4">
+					<%
+						for (UserStory story : getUserStories(request)) {
+							if (story.getState().equals("IN PROGRESS")) {
+					%>
+					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<%
+						}
+						}
+					%>
+				</div>
+				<div class="col col-md-4 col-md-offeset-8">
+					<%
+						for (UserStory story : getUserStories(request)) {
+							if (story.getState().equals("DONE")) {
+					%>
+					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<%
+						}
+						}
+					%>
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="col-md-8">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
+import model.ConcreteProjectSettings;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
@@ -37,10 +38,19 @@ public class Initializer extends HttpServlet {
 		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
 		ProjectsCollector testCollector = new ProjectsCollector();
 		Project project = new Project("test", new ConcreteProjectFactory(), "");
+		ConcreteProjectSettings settings = (ConcreteProjectSettings) project.getSettings();
+		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
 		// Add a user story to test jsp page.
-		UserStory story = new UserStory("TestSory", "ciao", new ConcreteTaskManager());
+		UserStory story = new UserStory("TestStory", "ciao", new ConcreteTaskManager());
+		story.moveToState("TODO");
+		UserStory story1 = new UserStory("TestStory2", "ciao", new ConcreteTaskManager());
+		story1.moveToState("DONE");
+		UserStory story2 = new UserStory("TestSory3", "ciao", new ConcreteTaskManager());
+		story2.moveToState("DONE");
 		try {
 			project.getUserStoriesManager().addUserStory(story);
+			project.getUserStoriesManager().addUserStory(story1);
+			project.getUserStoriesManager().addUserStory(story2);
 		} catch (NameAlreadyInUseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
