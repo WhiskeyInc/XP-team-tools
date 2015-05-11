@@ -22,10 +22,10 @@ import util.serialization.Serializable;
  */
 public class Event extends Serializable implements Comparable<Event> {
 
-	private ArrayList<String> participants = new ArrayList<String>();
-	private GregorianCalendar date;
-	private String name;
-	private boolean editable = true;
+	protected ArrayList<String> participants = new ArrayList<String>();
+	protected GregorianCalendar date;
+	protected String name;
+	protected boolean editable = true;
 
 	/**
 	 * Creates an Event and assigns it a name and a date. Default value is

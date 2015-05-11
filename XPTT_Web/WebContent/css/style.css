@@ -25,6 +25,10 @@ html {
 	min-height: 100%;
 }
 
+.navbar, .footer{
+	background-color: rgba(0,0,0,0.7);
+}
+
 .nav a {
 	color: #ffffff !important;
 }
@@ -97,7 +101,6 @@ p {
 	font-weight: 400;
 	color: #ffffff;
 	padding: 10px;
-	background-color: #222;
 }
 
 .last-updated {
@@ -108,4 +111,14 @@ p {
 .hello-user {
 	color: #fff;
 	float: right;
+}
+
+.error500{
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	letter-spacing: -2px;
+	text-shadow: 7px 7px 10px rgba(0, 0, 0, 0.5);
+	margin-top: 2rem;
+	font-size: 2.5rem;
 }

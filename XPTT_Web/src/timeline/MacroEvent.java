@@ -26,7 +26,6 @@ public class MacroEvent extends Event implements Timeline {
 
 	private Timeline timeline;
 	private GregorianCalendar fromDate;
-	private GregorianCalendar toDate;
 
 	/**
 	 * Creates a new instance of this class
@@ -51,7 +50,7 @@ public class MacroEvent extends Event implements Timeline {
 		this.validateFromDate(fromDate);
 		this.fromDate = fromDate;
 		this.validateToDate(toDate);
-		this.toDate = toDate;
+		super.date = toDate;
 	}
 
 	@Override
@@ -138,7 +137,7 @@ public class MacroEvent extends Event implements Timeline {
 	}
 
 	private boolean isValidDate(GregorianCalendar date) {
-		return !(date.after(this.fromDate) && date.before(this.toDate));
+		return !(date.after(this.fromDate) && date.before(super.date));
 	}
 
 	private void validateFromDate(GregorianCalendar fromDate)
@@ -157,6 +156,9 @@ public class MacroEvent extends Event implements Timeline {
 	}
 
 	private boolean checkValidity() {
+		if (super.date.before(this.fromDate)) {
+			return false;
+		}
 		for (Event event : this.getEvents(new NoFilter<Event>())) {
 			if (event.getDate().after(this.getDate())) {
 				return false;

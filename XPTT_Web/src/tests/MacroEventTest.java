@@ -106,6 +106,16 @@ public class MacroEventTest {
 		} catch (InvalidDateException e) {
 		}
 	}
+	
+	@Test
+	public void dateChangingFailure2() throws Exception {
+		MacroEvent macroEvent = createEvent();
+		try {
+			macroEvent.setDate(new GregorianCalendar(2019, 4, 23));	
+			fail();
+		} catch (InvalidDateException exception) {
+		}
+	}
 
 	private MacroEvent createEvent() throws InvalidDateException {
 		MacroEvent macroEvent = new MacroEvent("First xTrEAM release",

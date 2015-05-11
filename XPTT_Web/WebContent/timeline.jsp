@@ -69,6 +69,26 @@
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">
 										<div class='input-group' id='eventDate'>
+											<input type='text' class='form-control' name='fromEventDay'
+												placeholder='dd' maxlength='2'> <span
+												class='input-group-addon'>/</span> <input type='text'
+												class='form-control' name='fromEventMonth' placeholder='mm'
+												maxlength='2'> <span class='input-group-addon'>/</span>
+											<input type='text' class='form-control' name='fromEventYear'
+												placeholder='yy' maxlength='4'> <span
+												class='input-group-addon'>@</span> <input type='text'
+												class='form-control' name='fromEventHour' placeholder='h'
+												maxlength='2'> <span class='input-group-addon'>:</span>
+											<input type='text' class='form-control' name='fromEventMin'
+												placeholder='m' maxlength='2'>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row" style="display: none;" id="secondDate">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<div class='input-group' id='eventDate2'>
 											<input type='text' class='form-control' name='eventDay'
 												placeholder='dd' maxlength='2'> <span
 												class='input-group-addon'>/</span> <input type='text'
@@ -80,26 +100,6 @@
 												class='form-control' name='eventHour' placeholder='h'
 												maxlength='2'> <span class='input-group-addon'>:</span>
 											<input type='text' class='form-control' name='eventMin'
-												placeholder='m' maxlength='2'>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row" style="display: none;" id="secondDate">
-								<div class="col-md-offset-2 col-md-8">
-									<div class="form-group">
-										<div class='input-group' id='eventDate2'>
-											<input type='text' class='form-control' name='toEventDay'
-												placeholder='dd' maxlength='2'> <span
-												class='input-group-addon'>/</span> <input type='text'
-												class='form-control' name='toEventMonth' placeholder='mm'
-												maxlength='2'> <span class='input-group-addon'>/</span>
-											<input type='text' class='form-control' name='toEventYear'
-												placeholder='yy' maxlength='4'> <span
-												class='input-group-addon'>@</span> <input type='text'
-												class='form-control' name='toEventHour' placeholder='h'
-												maxlength='2'> <span class='input-group-addon'>:</span>
-											<input type='text' class='form-control' name='toEventMin'
 												placeholder='m' maxlength='2'>
 										</div>
 									</div>
