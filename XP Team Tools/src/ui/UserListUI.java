@@ -47,7 +47,7 @@ public class UserListUI extends JPanel {
 		GridBagConstraints lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 0;
-		JLabel label = new JLabel("Team members");
+		JLabel label = new JLabel("Other team members");
 		label.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		lim.insets = new Insets(10, 5, 5, 5);
 		super.add(label, lim);

@@ -1,9 +1,12 @@
 package ui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -22,6 +25,12 @@ public class MyScrollbarUI extends BasicScrollBarUI {
             }        
         }
 
+        @Override
+        protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+        // TODO Auto-generated method stub
+        super.paintTrack(g, c, trackBounds);
+        }
+        
         @Override
         protected JButton createDecreaseButton(int orientation) {
             JButton decreaseButton = new JButton(getAppropriateIcon(orientation)){
