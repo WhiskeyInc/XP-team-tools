@@ -6,26 +6,25 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
 /**
- * It' s a Client' s feature to store the actual members of the team.
- * Extends {@link Observable} to change in real time the members list.
+ * It' s a Client' s feature to get the actual teams of the user.
+ * Extends {@link Observable} to change in real time the teams list.
  * @author alberto
  *
  */
-public class SetMembsService extends Observable implements IListService{
+public class SetListOfTeamsService extends Observable implements IListService {
 
-	private String[] membs;
+	private String[] teams;
 	
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#setAttribute(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see client.model.IListServices#setMembs(java.lang.String)
+	 */
+	@Override
 	public void setMembs(String request) {
 		try {
-			membs = JsonParser
-					.parseTeamMembsRequest(request);
-			System.err.println(request + SetMembsService.class);
-//			for (int i = 0; i < membs.length; i++) {
-//				System.out.println(membs[i] + " " + SetMembsService.class);
-//			}
+			teams = JsonParser.parseListOfTeamsRequest(request);
 			update();
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -34,9 +33,14 @@ public class SetMembsService extends Observable implements IListService{
 	/* (non-Javadoc)
 	 * @see client.model.IClientService#getCurrentMessageString()
 	 */
+	/* (non-Javadoc)
+	 * @see client.model.IListServices#getMembs()
+	 */
+	@Override
 	public String[] getMembs() {
-		return membs;
+		return teams;
 	}
+	
 	private void update() {
 		setChanged();
 		notifyObservers();

@@ -57,7 +57,7 @@ public class StrategyClientMain3O {
 				client.addService(JsonParser.CHAT, services[0]);
 				client.addService(JsonParser.TIMER, services[1]);
 				client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), services[2]);
-				client.setMembsService(serviceTeamMembs);
+				//client.setMembsService(serviceTeamMembs);
 
 //				client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), chatIndexService);
 //				client.addService(Integer.parseInt(JsonMaker.CONFIRM), confirmService);

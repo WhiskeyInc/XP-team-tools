@@ -28,6 +28,8 @@ public class JsonMaker {
 	public static final String NEW_UI = "10";
 	public static final String EVENT = "11";
 	public static final String TEAMS = "12";
+	public static final String MAKE_TEAMS_LIST = "13";
+	
 
 	
 	public static final String REQ = "request";
@@ -256,12 +258,26 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String teamsRequest(String nickname) {
+	public static String teamsListRequest(String nickname) {
 		JSONObject json = new JSONObject();
 		json.put(REQ, TEAMS);
 		json.put(NICKNAME, nickname);
 		
 		return json.toString();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static String makeListOfTeams(String[] teamsNames) {
+
+		JSONObject json = new JSONObject();
+		JSONArray detArray = new JSONArray();
+		for (int i = 0; i < teamsNames.length; i++) {
+			detArray.add(teamsNames[i]);
+		}
+		json.put(REQ, MAKE_TEAMS_LIST);
+		json.put(ATTENDANT, detArray);
+		return json.toString();
+	}
+	
 
 }

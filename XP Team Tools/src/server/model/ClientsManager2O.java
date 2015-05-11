@@ -37,7 +37,7 @@ public class ClientsManager2O {
 	/**
 	 * It returns the {@link ClientConnectionDetails} that has the same team name
 	 * and the same nickname of the {@link ClientDetails} passed as parameter.
-	 * If it' isn' t the match, returns null
+	 * If it isn' t the match, returns null
 	 * @param  {@link ClientDetails}}
 	 * @return
 	 */

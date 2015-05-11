@@ -40,7 +40,7 @@ public class StrategyClientMain2O {
 		final StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("Nic", "Prova", "Nic123"));
 		client.addService(JsonParser.CHAT, serviceMessage);
 		client.addService(JsonParser.TIMER, serviceTimeStamp);
-		client.setMembsService(serviceTeamMembs);
+		//client.setMembsService(serviceTeamMembs);
 
 //		client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), chatIndexService);
 //		client.addService(Integer.parseInt(JsonMaker.CONFIRM), confirmService);

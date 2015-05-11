@@ -25,7 +25,7 @@ public class StrategyClient1_1 {
 	private DataOutputStream os;
 	private DataInputStream is;
 	private HashMap<Integer, IClientService> services = new HashMap<Integer, IClientService>();
-	private SetMembsService membsService;
+	private HashMap<Integer, IListService> listServices = new HashMap<Integer, IListService>();
 
 
 	public StrategyClient1_1() {
@@ -51,6 +51,7 @@ public class StrategyClient1_1 {
 
 			clientDetails.setRealTimeSocket(new Socket(hostName, port));
 			clientDetails.setRequestSocket(new Socket(hostName, port));
+			clientDetails.setOnline(true);
 			os = new DataOutputStream(clientDetails.getRealTimeSocket()
 					.getOutputStream());
 			is = new DataInputStream(clientDetails.getRealTimeSocket().getInputStream());
@@ -101,15 +102,17 @@ public class StrategyClient1_1 {
 				String read = input.readLine();
 				if (read != null) {
 					System.out.println(read + " " + StrategyClient1_1.class);
-					IClientService service = services.get(JsonParser
-							.getRequest(read));
+					int requestCode = JsonParser
+							.getRequest(read);
+					IClientService service = services.get(requestCode);
 					// TODO controllare se service non c'è... gestire
 					if (service != null) {
 						System.out.println("qua dentro " + service + " "
 								+ StrategyClient1_1.class);
 						service.setAttribute(read);
 					} else {
-						membsService.setMembs(read);
+						IListService listService = listServices.get(requestCode);
+						listService.setMembs(read);
 					}
 				}
 			}
@@ -166,12 +169,7 @@ public class StrategyClient1_1 {
 		services.put(id, service);
 	}
 	
-
-	public void setMembsService(SetMembsService membsService) {
-		this.membsService = membsService;
-	}
-
-	public SetMembsService getMembsService() {
-		return membsService;
+	public void addListService(int id, IListService service) {
+		listServices.put(id, service);
 	}
 }

@@ -35,6 +35,7 @@ public class TeamListUIMain {
 				listUI.removeTeamPanel();
 				listUI.fillTeamPane(teams1);
 				listUI.refresh();
+				//listUI.setLabelListener();
 			}
 		});
 		

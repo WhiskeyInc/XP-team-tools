@@ -30,7 +30,7 @@ public class ClientConnectionTest {
 		ClientConnectionDetails conDet = new ClientConnectionDetails(nickname, teamName, null);
 		ClientConnectionDetails det = new ClientConnectionDetails(nickname, "Test", null);
 		
-		assertFalse(conDet.equals(det));
+		assertTrue(conDet.equals(det));
 	}
 
 }

@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -14,8 +14,12 @@ public class ClientDetailsTest {
 		ClientDetails det1 = new ClientDetails("Alb", "Prova", null);
 		ClientDetails det2 = new ClientDetails("Alb", "Test", null);
 		
-		assertFalse(det1.equals(det2));
+		assertTrue(det1.equals(det2));
 		
+		ClientDetails det3 = new ClientDetails("Alb1", "Test1", null);
+
+		assertFalse(det1.equals(det3));
+
 		
 	}
 

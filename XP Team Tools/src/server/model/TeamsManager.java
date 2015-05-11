@@ -1,5 +1,6 @@
 package server.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,8 +74,16 @@ public class TeamsManager {
 	public int size() {
 		return teamList.size();
 	}
-	
-	//get
+	//TODO test and javadoc
+	public Team[] getTeamsByNickname(String nickname) {
+		ArrayList<Team> teams = new ArrayList<Team>();
+		for (Team team : teamList) {
+			if(team.hasMember(nickname)) {
+				teams.add(team);
+			}
+		}
+		return teams.toArray(new Team[teams.size()]);
+	}
 	
 	public static TeamsManager getInstance() {
 		return instance;

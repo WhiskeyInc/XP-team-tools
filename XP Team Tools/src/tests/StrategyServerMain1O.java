@@ -9,6 +9,7 @@ import server.model.AddTeamMembService;
 import server.model.ChatService;
 import server.model.ChatsManager;
 import server.model.DisconnectService;
+import server.model.ListOfTeamsService;
 import server.model.EventService;
 import server.model.MessagePropagator;
 import server.model.NewChatService;
@@ -22,38 +23,32 @@ import server.model.TimersManager;
 
 public class StrategyServerMain1O {
 	public static void main(String[] args) {
-
+		
+		
 		IDBConnection db = new DBConnection();
-
+		
 		try {
-			db.connect("alemonta", "protgamba", 3306, "52.74.20.119",
-					"extreme01");
+			db.connect("alemonta", "protgamba", 3306, "52.74.20.119", "extreme01");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 
 		ChatsManager chatsManager = ChatsManager.getInstance();
 		TimersManager timersManager = TimersManager.getInstance();
 		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager, db);
 
-		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager,
-				timersManager, new MessagePropagator(
-						server.getClientsManager(), new RealTimePropagator())));
-		server.addService(JsonParser.CHAT, new ChatService(chatsManager,
-				new MessagePropagator(server.getClientsManager(),
-						new RealTimePropagator())));
+
+		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager, timersManager, new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
+		server.addService(JsonParser.CHAT, new ChatService(chatsManager, new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
 		server.addService(
 				Integer.parseInt(JsonMaker.ADD_TEAM_MEMB),
 				new AddTeamMembService(TeamsManager.getInstance(), ChatsManager
-						.getInstance(), new MessagePropagator(server
-						.getClientsManager(), new RealTimePropagator())));
+						.getInstance(), new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
 		server.addService(Integer.parseInt(JsonMaker.NEW_CHAT),
-				new NewChatService(ChatsManager.getInstance(),
-						new MessagePropagator(server.getClientsManager(),
-								new RealTimePropagator())));
-		server.addService(
-				Integer.parseInt(JsonMaker.NEW_TEAM),
+				new NewChatService(ChatsManager.getInstance(), new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
+		server.addService(Integer.parseInt(JsonMaker.NEW_TEAM),
 				new NewTeamService(TeamsManager.getInstance(), ChatsManager
 						.getInstance(), new MessagePropagator(server
 						.getClientsManager(), new RequestPropagator())));
@@ -64,7 +59,8 @@ public class StrategyServerMain1O {
 				new EventService(
 						new SendPost(
 								"http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor")));
-
+		server.addService(Integer.parseInt(JsonMaker.TEAMS), new ListOfTeamsService(TeamsManager.getInstance(), new MessagePropagator(server.getClientsManager(), new RequestPropagator()) ));
+		
 		try {
 			server.openPort(9999);
 		} catch (Exception e) {

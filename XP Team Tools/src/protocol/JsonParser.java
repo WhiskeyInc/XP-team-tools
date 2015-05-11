@@ -140,16 +140,29 @@ public class JsonParser {
 		return membs;
 	}
 	
-//	public static Team[] parseTeamsRequest(String s) throws ParseException {
-//		JSONParser parser = new JSONParser();
-//		
-//	}
+	public static String parseTeamsListRequest(String s) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(s);
+		return (String) json.get(JsonMaker.NICKNAME);
+	}
 	
 	
 	public static int getRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		return Integer.parseInt((String) json.get(REQ));
+	}
+	
+	public static String[] parseListOfTeamsRequest(String s) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(s);
+		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
+		int size = idList.size();
+		String[] teams = new String[size];
+		for (int i = 0; i < size; i++) {
+			teams[i] = (String) idList.get(i);
+		}
+		return teams;
 	}
 
 }

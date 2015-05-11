@@ -43,8 +43,8 @@ public class AddTeamMembService implements IService {
 			messagePropagator.propagateMessage(JsonMaker.teamMembsRequest(membs), new ClientDetails(membs[i], teamName));
 		}
 		// NB bloccante se uso il wait
-		messagePropagator.setPropagator(new RequestPropagator());
-		messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size() - 1), det);
+		//messagePropagator.setPropagator(new RequestPropagator());
+	//messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size() - 1), det);
 	}
 
 	private Chat rebuildChat(String teamName) {

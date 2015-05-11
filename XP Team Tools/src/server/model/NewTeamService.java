@@ -37,6 +37,7 @@ public class NewTeamService implements IService{
 		Chat chat = new Chat(vet[0]);
 		chat.addAttendant(details);
 		chatsManager.add(chat);
+		team.setChatIndex(chatsManager.indexOf(chat));
 		messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size()-1), details);
 	}
 

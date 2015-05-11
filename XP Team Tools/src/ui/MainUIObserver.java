@@ -24,9 +24,9 @@ import javax.swing.border.TitledBorder;
 import protocol.JsonMaker;
 import string.formatter.Formatter;
 import client.model.IClientService;
+import client.model.IListService;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.SetMembsService;
 import client.model.StrategyClient1_1;
 
 /**
@@ -44,7 +44,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	private final ChatUIObserverStrategy1 chatUI;
 	private final TimerUIObserverStrategy timerUI;
 	private final UserListUI userListUI;
-	private SetMembsService setTeamMembs;
+	private IListService setTeamMembs;
 	private JPanel mainPanel;
 	private StrategyClient1_1 client;
 	private LoadingPanel lp = new LoadingPanel("Loading");
@@ -54,8 +54,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	// setTimeStamp = 1
 	// newChat = 2
 	public MainUIObserver(final IClientService[] services,
-			SetMembsService setTeamMembs, final StrategyClient1_1 client,
-			int index) {
+			IListService setTeamMembs, final StrategyClient1_1 client, int index) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
@@ -82,7 +81,8 @@ public class MainUIObserver extends JFrame implements Observer {
 			@Override
 			public void run() {
 				NewChatInviteLauncher newChatListener = new NewChatInviteLauncher(
-						services[2], client, services[0], services[1], SessionManager.getInstance());
+						services[2], client, services[0], services[1],
+						SessionManager.getInstance());
 
 			}
 		};
@@ -158,16 +158,18 @@ public class MainUIObserver extends JFrame implements Observer {
 	}
 
 	public void setMembersList(String[] nicks) {
-		super.getContentPane().remove(mainPanel);
-		mainPanel.remove(userListUI);
-		userListUI.setNicknames(nicks);
-		GridBagConstraints lim = new GridBagConstraints();
-		lim.insets = new Insets(0, 30, 10, 10);
-		lim.gridx = 0;
-		lim.gridy = 1;
-		lim.gridheight = 2;
-		mainPanel.add(userListUI, lim);
-		super.getContentPane().add(mainPanel);
+		if (nicks != null) {
+			super.getContentPane().remove(mainPanel);
+			mainPanel.remove(userListUI);
+			userListUI.setNicknames(nicks);
+			GridBagConstraints lim = new GridBagConstraints();
+			lim.insets = new Insets(0, 30, 10, 10);
+			lim.gridx = 0;
+			lim.gridy = 1;
+			lim.gridheight = 2;
+			mainPanel.add(userListUI, lim);
+			super.getContentPane().add(mainPanel);
+		}
 	}
 
 	public UserListUI getUserListUI() {
@@ -184,15 +186,24 @@ public class MainUIObserver extends JFrame implements Observer {
 
 	private String[] nicksFilter(StrategyClient1_1 client) {
 		String[] membs = setTeamMembs.getMembs();
-		String[] membsWithoutMe = new String[membs.length - 1];
-		int i = 0;
-		for (String nick : membs) {
-			if (!nick.equals(client.getNickname())) {
-				membsWithoutMe[i] = nick;
-				i++;
+		if (membs != null) {
+			String[] membsWithoutMe = new String[membs.length - 1];
+			// if (membsWithoutMe != null) {
+			int i = 0;
+			for (String nick : membs) {
+				System.out.println(nick + " " + MainUIObserver.class);
+				if (!nick.equals(client.getNickname())) {
+					membsWithoutMe[i] = nick;
+					i++;
+				}
 			}
+			return membsWithoutMe;
+
+			// }
+		} else {
+			System.err.println("membs è null");
 		}
-		return membsWithoutMe;
+		return null;
 	}
 
 	@Override
@@ -201,27 +212,27 @@ public class MainUIObserver extends JFrame implements Observer {
 		refresh();
 	}
 
-	public void insertLoadingPanel(){
+	public void insertLoadingPanel() {
 		loadingPanel.add(lp);
 		Timer timer1 = new Timer(1000, new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(lp.getLabelText().contains("...")){
+				if (lp.getLabelText().contains("...")) {
 					lp.setLabelText("Loading");
 				}
-				lp.setLabelText(lp.getLabelText()+".");
+				lp.setLabelText(lp.getLabelText() + ".");
 				getContentPane().add(loadingPanel);
 				setVisible(true);
 			}
 		});
-		
+
 		timer1.start();
-		
+
 		setVisible(true);
 	}
-	
-	public void removeLoadingPanel(){
+
+	public void removeLoadingPanel() {
 		getContentPane().add(mainPanel);
 		setVisible(true);
 	}

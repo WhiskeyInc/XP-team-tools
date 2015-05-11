@@ -40,11 +40,13 @@ public class MessagePropagator {
 	public void propagateMessage(String message, ClientDetails details) throws IOException {
 		ClientConnectionDetails conDet = clientsManager.get(details);
 		try {
-			if (conDet.isOnline()) {
+			if (conDet != null && conDet.isOnline()) {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 						propagator.getSocket(conDet).getOutputStream()));
 				out.write(Formatter.appendNewLine(message));
 				out.flush();
+			} else {
+				System.err.println("Condet is "+ conDet);
 			}
 		} catch (SocketException e) {
 			propagator.handleSuddenDisconnection(conDet);

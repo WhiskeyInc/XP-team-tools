@@ -76,7 +76,7 @@ public class ClientConnectionDetails extends ClientDetails {
 			return false;
 		}
 		ClientDetails det = (ClientDetails) obj;
-		if (teamName.equals(det.teamName) && nickname.equals(det.nickname)) {
+		if (nickname.equals(det.nickname)) {
 			return true;
 		}
 		return false;

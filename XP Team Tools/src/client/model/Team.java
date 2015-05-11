@@ -18,6 +18,7 @@ public class Team {
 
 	private String name;
 	private Set<String> membersSet = new TreeSet<String>();
+	private int chatIndex;
 
 	public Team(String name) {
 		this.name = name;
@@ -55,6 +56,23 @@ public class Team {
 
 	public void remove(String memberNick) {
 		membersSet.remove(memberNick);
+	}
+	//TODO to be tested
+	public boolean hasMember(String memberNick) {
+		Iterator<String> iter = membersSet.iterator();
+		while(iter.hasNext()) {
+			if(iter.next().equals(memberNick)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getChatIndex() {
+		return chatIndex;
+	}
+	public void setChatIndex(int chatIndex) {
+		this.chatIndex = chatIndex;
 	}
 
 }

@@ -79,13 +79,6 @@ public class ServerStrategy1_1 extends AbstractServer {
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-					
-					//clientsManager.handleClient(details);
-			//	} catch (ParseException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-
 				Runnable runnable = generateRunnable();
 				Thread thread = new Thread(runnable);
 				thread.start();
