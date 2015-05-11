@@ -19,22 +19,29 @@ public class ClientsManagerTest {
 	 * Server must run
 	 * @throws IOException 
 	 * @throws UnknownHostException 
-	 */
+//	 */
+//	@Test
+//	public void clientManagerTest() throws UnknownHostException, IOException {
+//		ClientsManager2O manager = new ClientsManager2O();
+//		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test");
+//		conDet.setRealTimeSocket(new Socket("localhost", 9999));
+//		manager.registerClient(conDet);
+//		conDet.setRealTimeSocket(new Socket("localhost", 9999));
+//		
+//		assertEquals(1, manager.size());
+//		
+//		ClientDetails det = new ClientDetails("Alb", "Test");
+//		ClientConnectionDetails conDe2 = manager.get(det);
+//		
+//		assertTrue(conDe2.getRealTimeSocket().equals(conDet.getRealTimeSocket()));
+//	}
+
 	@Test
-	public void clientManagerTest() throws UnknownHostException, IOException {
+	public void containsTest() throws Exception {
 		ClientsManager2O manager = new ClientsManager2O();
 		ClientConnectionDetails conDet = new ClientConnectionDetails("Alb", "Test");
-		conDet.setRealTimeSocket(new Socket("localhost", 9999));
 		manager.registerClient(conDet);
-		conDet.setRealTimeSocket(new Socket("localhost", 9999));
-		
-		assertEquals(1, manager.size());
-		
-		ClientDetails det = new ClientDetails("Alb", "Test");
-		ClientConnectionDetails conDe2 = manager.get(det);
-		
-		assertTrue(conDe2.getRealTimeSocket().equals(conDet.getRealTimeSocket()));
-		
-	}
+		assertTrue(manager.contains(new ClientConnectionDetails("Alb", "Test")));
 
+	}
 }

@@ -17,6 +17,7 @@ import server.model.NewTeamService;
 import server.model.RealTimePropagator;
 import server.model.RequestPropagator;
 import server.model.ServerStrategy1_1;
+import server.model.TeamMembsService;
 import server.model.TeamsManager;
 import server.model.TimerService1_1;
 import server.model.TimersManager;
@@ -60,6 +61,7 @@ public class StrategyServerMain1O {
 						new SendPost(
 								"http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor")));
 		server.addService(Integer.parseInt(JsonMaker.TEAMS), new ListOfTeamsService(TeamsManager.getInstance(), new MessagePropagator(server.getClientsManager(), new RequestPropagator()) ));
+		server.addService(Integer.parseInt(JsonMaker.TEAM_MEMBS), new TeamMembsService(TeamsManager.getInstance(), new MessagePropagator(server.getClientsManager(), new RequestPropagator())));
 		
 		try {
 			server.openPort(9999);

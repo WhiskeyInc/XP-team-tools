@@ -21,7 +21,7 @@ public class SetMembsService extends Observable implements IListService{
 	public void setMembs(String request) {
 		try {
 			membs = JsonParser
-					.parseTeamMembsRequest(request);
+					.parseMakeTeamMembs(request);
 			System.err.println(request + SetMembsService.class);
 //			for (int i = 0; i < membs.length; i++) {
 //				System.out.println(membs[i] + " " + SetMembsService.class);

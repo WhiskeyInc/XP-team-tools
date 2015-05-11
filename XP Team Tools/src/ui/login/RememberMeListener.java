@@ -5,8 +5,6 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JCheckBox;
 
-import server.utils.SessionSaver;
-
 public class RememberMeListener implements ItemListener {
 
 	private JCheckBox saveCheck;

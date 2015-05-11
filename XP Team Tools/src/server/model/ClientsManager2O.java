@@ -56,5 +56,19 @@ public class ClientsManager2O {
 		return clients.size();
 	}
 	
+	public Set<ClientConnectionDetails> getClients() {
+		return clients;
+	}
+	
+	public boolean contains(ClientConnectionDetails conDet) {
+		Iterator<ClientConnectionDetails> iter = clients.iterator();
+		while (iter.hasNext()) {
+			if(iter.next().getNickname().equals(conDet.getNickname())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 
 }

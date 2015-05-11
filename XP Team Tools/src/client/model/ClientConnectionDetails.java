@@ -50,6 +50,7 @@ public class ClientConnectionDetails extends ClientDetails {
 	 * @param online
 	 */
 	public void setOnline(boolean online) {
+		System.err.println("Sto settando a online? " + online);
 		this.online = online;
 	}
 	
@@ -73,12 +74,18 @@ public class ClientConnectionDetails extends ClientDetails {
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ClientConnectionDetails)
 				&& !(obj instanceof ClientDetails)) {
+			System.out.println("eq1 "+ ClientConnectionDetails.class);
+
 			return false;
 		}
 		ClientDetails det = (ClientDetails) obj;
 		if (nickname.equals(det.nickname)) {
+			System.out.println("eq2 "+ ClientConnectionDetails.class);
+
 			return true;
 		}
+		System.out.println("eq3 "+ ClientConnectionDetails.class);
+
 		return false;
 	}
 }

@@ -56,6 +56,8 @@ public class ClientDetails implements Comparable<ClientDetails> {
 
 	@Override
 	public int compareTo(ClientDetails o) {
+		System.out.println("eq4 "+ ClientDetails.class);
+
 		return nickname.compareTo(o.getNickname());
 	}
 	
@@ -66,12 +68,18 @@ public class ClientDetails implements Comparable<ClientDetails> {
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ClientDetails)) {
+			System.out.println("eq4 "+ ClientDetails.class);
+
 			return false;
 		}
 		ClientDetails det = (ClientDetails) obj;
 		if(nickname.equals(det.nickname)) {
+			System.out.println("eq5 "+ ClientDetails.class);
+
 			return true;
 		}
+		System.out.println("eq6 "+ ClientDetails.class);
+
 		return false;
 	}
 

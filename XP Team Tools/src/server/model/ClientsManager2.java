@@ -38,7 +38,7 @@ public class ClientsManager2 {
 	}
 
 	/**
-	 * Register a client. If a client is already registed, this method only
+	 * Register a client. If a client is already registered, this method only
 	 * refresh his dynamic attributes as sockets
 	 * 
 	 * @param client
@@ -52,7 +52,7 @@ public class ClientsManager2 {
 
 			System.out.println("Sto registrando " + client.getNickname() + " "
 					+ client.getTeamName() + ClientsManager2.class);
-			if (clients.contains(client)) {
+			if (has(client)) {
 				clients.remove(client);
 				System.out.println("L ho rimosso " + ClientsManager2.class);
 				clients.add(client);
@@ -65,6 +65,9 @@ public class ClientsManager2 {
 			// + "does not exist or invalid password");
 			System.err.println("Utente non autenticato!");
 		}
+	}
+	public Set<ClientConnectionDetails> getClients() {
+		return clients;
 	}
 
 	/**
@@ -108,6 +111,16 @@ public class ClientsManager2 {
 
 	public int size() {
 		return clients.size();
+	}
+	
+	public boolean has(ClientConnectionDetails conDet) {
+		Iterator<ClientConnectionDetails> iter = clients.iterator();
+		while (iter.hasNext()) {
+			if(iter.next().getNickname().equals(conDet.getNickname())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

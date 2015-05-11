@@ -128,7 +128,7 @@ public class JsonParser {
 		return det;
 	}
 	
-	public static String[] parseTeamMembsRequest(String s) throws ParseException {
+	public static String[] parseMakeTeamMembs(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
@@ -139,7 +139,12 @@ public class JsonParser {
 		}
 		return membs;
 	}
-	
+	public static ClientDetails parseTeamMembsRequest(String s) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(s);
+		return new ClientDetails((String)json.get(JsonMaker.NICKNAME), (String)json.get(JsonMaker.TEAM_NAME));
+	}
+
 	public static String parseTeamsListRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);

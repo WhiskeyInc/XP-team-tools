@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="sounds"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="libraries/json-simple-1.1.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-oracle"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libraries/DatePicker-V0.99-2006.09.01.jar"/>
 	<classpathentry kind="lib" path="libraries/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="lib" path="libraries/sun.misc.BASE64Decoder.jar"/>

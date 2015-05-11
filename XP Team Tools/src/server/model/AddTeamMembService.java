@@ -40,7 +40,7 @@ public class AddTeamMembService implements IService {
 		String[] membs = team.getMembers();
 		messagePropagator.setPropagator(new RealTimePropagator());
 		for (int i = 0; i < membs.length; i++) {
-			messagePropagator.propagateMessage(JsonMaker.teamMembsRequest(membs), new ClientDetails(membs[i], teamName));
+			messagePropagator.propagateMessage(JsonMaker.makeTeamMembs(membs), new ClientDetails(membs[i], teamName));
 		}
 		// NB bloccante se uso il wait
 		//messagePropagator.setPropagator(new RequestPropagator());

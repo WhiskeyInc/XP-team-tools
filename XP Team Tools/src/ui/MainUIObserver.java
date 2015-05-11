@@ -54,7 +54,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	// setTimeStamp = 1
 	// newChat = 2
 	public MainUIObserver(final IClientService[] services,
-			IListService setTeamMembs, final StrategyClient1_1 client, int index) {
+			IListService setTeamMembs, final StrategyClient1_1 client, int index, String[] teamMembs) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
@@ -126,7 +126,7 @@ public class MainUIObserver extends JFrame implements Observer {
 		super.getContentPane().add(mainPanel);
 		super.setVisible(true);
 
-		setMembersList(nicksFilter(client));
+		setMembersList(teamMembs);
 		refresh();
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.pack();

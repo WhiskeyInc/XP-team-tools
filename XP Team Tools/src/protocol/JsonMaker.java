@@ -176,7 +176,7 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String teamMembsRequest(String[] nicks) {
+	public static String makeTeamMembs(String[] nicks) {
 		JSONObject json = new JSONObject();
 		JSONArray detArray = new JSONArray();
 		for (String nick : nicks) {
@@ -186,6 +186,30 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
+	
+
+	@SuppressWarnings("unchecked")
+	public static String teamMembsRequest(String nickname, String teamName) {
+		JSONObject json = new JSONObject();
+		json.put(REQ, TEAM_MEMBS);
+		json.put(NICKNAME, nickname);
+		json.put(TEAM_NAME, teamName);
+		return json.toString();
+	}
+	
+//	@SuppressWarnings("unchecked")
+//	public static String makeListOfTeamMembs(String[] teamsNames) {
+//
+//		JSONObject json = new JSONObject();
+//		JSONArray detArray = new JSONArray();
+//		for (int i = 0; i < teamsNames.length; i++) {
+//			detArray.add(teamsNames[i]);
+//		}
+//		json.put(REQ, );
+//		json.put(ATTENDANT, detArray);
+//		return json.toString();
+//	}
+
 	
 //	@SuppressWarnings("unchecked")
 //	public static String createNewUiRequest(int chatIndex) {
@@ -278,6 +302,4 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-	
-
 }

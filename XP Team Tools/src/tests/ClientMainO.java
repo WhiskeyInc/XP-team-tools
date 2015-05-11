@@ -48,7 +48,7 @@ public class ClientMainO {
 				new ClientConnectionDetails("Alb", "Prova"));
 		client.addService(JsonParser.CHAT, services[0]);
 		client.addService(JsonParser.TIMER, services[1]);
-		client.setMembsService(serviceTeamMembs);
+		//client.setMembsService(serviceTeamMembs);
 		client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX), services[2]);
 		// client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX),
 		// chatIndexService);
@@ -90,6 +90,7 @@ public class ClientMainO {
 
 			@Override
 			public void run() {
+				client.sendMessageToServer(JsonMaker.makeTeamMembs(nicks));
 				MainUIObserver ui = new MainUIObserver(services,
 						serviceTeamMembs, client, index);
 

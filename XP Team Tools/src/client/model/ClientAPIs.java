@@ -46,7 +46,7 @@ public class ClientAPIs{
 		}
 		
 		public void teamMembs(String[] nicks) {
-			client.sendMessageToServer(JsonMaker.teamMembsRequest(nicks));
+			client.sendMessageToServer(JsonMaker.makeTeamMembs(nicks));
 		}
 
 
