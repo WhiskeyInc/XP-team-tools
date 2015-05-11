@@ -1,0 +1,13 @@
+1)	Every client to use the system needs an account, then can login and use the XP team tools application
+
+2)	Every client can start a private conversation with one or more other members of his team
+	
+3)	From every chat (group chats and private chats) the users can schedule a new meeting on the timeline
+	
+4)	The end of a "tomato" schedules an automatic event on the timeline
+
+
+5) 	A client doesn't need to insert user and password every time, the application can remember it	TODO
+
+6)	An user can register on the XP team tools system	TODO
+

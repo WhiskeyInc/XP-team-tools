@@ -30,4 +30,4 @@ English:	(// team informations)
 	// Developers: Alberto
 	// Details: The server receives the messages storing them, then a client when it connects it asks for the messages sent in his offline period and the server sends them
 
-4)	From the team-chat can born a timeline event TODO
+4)	From the team-chat create a timeline event TODO
