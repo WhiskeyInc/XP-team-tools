@@ -39,7 +39,7 @@ public class MessagePropagator {
 	//Template method
 	public void propagateMessage(String message, ClientDetails details) throws IOException {
 		ClientConnectionDetails conDet = clientsManager.get(details);
-		System.out.println(conDet.getNickname() + " " + MessagePropagator.class);
+		//System.out.println(conDet.getNickname() + " " + MessagePropagator.class);
 		try {
 			if (conDet != null && conDet.isOnline()) {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(

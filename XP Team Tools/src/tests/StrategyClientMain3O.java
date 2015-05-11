@@ -128,7 +128,7 @@ public class StrategyClientMain3O {
 									.getTimeStamp());
 							timerUI.setTimerEditable(false);// TODO se è connesso...
 							client.sendMessageToServer(JsonMaker.timerRequest(indexString,
-									time[0], time[1]));
+									time[0], time[1], null));
 						}
 					}
 				});

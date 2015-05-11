@@ -41,8 +41,19 @@ public class StrategyServerMain1O {
 		ServerStrategy1_1 server = new ServerStrategy1_1(chatsManager, db);
 
 
-		server.addService(JsonParser.TIMER, new TimerService1_1(chatsManager, timersManager, new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
-		server.addService(JsonParser.CHAT, new ChatService(chatsManager, new MessagePropagator(server.getClientsManager(), new RealTimePropagator())));
+		server.addService(
+				JsonParser.TIMER,
+				new TimerService1_1(
+						chatsManager,
+						timersManager,
+						new MessagePropagator(server.getClientsManager(),
+								new RealTimePropagator()),
+						new SendPost(
+								"http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor")));
+		server.addService(JsonParser.CHAT, new ChatService(chatsManager,
+				new MessagePropagator(server.getClientsManager(),
+						new RealTimePropagator())));
+
 		server.addService(
 				Integer.parseInt(JsonMaker.ADD_TEAM_MEMB),
 				new AddTeamMembService(TeamsManager.getInstance(), ChatsManager

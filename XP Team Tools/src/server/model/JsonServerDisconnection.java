@@ -237,7 +237,7 @@ public class JsonServerDisconnection extends AbstractServer {
 				try {
 					int[] vet = TimerFormatter.getTimeStamp(totalMillis);
 					String lineTimer = JsonMaker.timerRequest(teamName, vet[0],
-							vet[1]); // minuti, secondi
+							vet[1], null); // minuti, secondi
 					propagateMessageToTeamClients(lineTimer, teamName);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

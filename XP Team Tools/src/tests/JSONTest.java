@@ -53,7 +53,7 @@ public class JSONTest {
 
 	@Test
 	public void timerRequestTest() throws Exception {
-		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30);
+		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30, null);
 
 		if (JsonParser.getRequest(jsonString) == JsonParser.TIMER) {
 

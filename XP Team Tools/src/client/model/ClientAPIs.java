@@ -28,7 +28,7 @@ public class ClientAPIs{
 		}
 
 		public void timer(String chatIndex, int minutes, int seconds) {
-			client.sendMessageToServer(JsonMaker.timerRequest(chatIndex, minutes, seconds));
+			client.sendMessageToServer(JsonMaker.timerRequest(chatIndex, minutes, seconds, null));
 		}
 
 		

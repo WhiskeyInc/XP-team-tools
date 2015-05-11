@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import org.json.simple.parser.ParseException;
+
 import protocol.JsonMaker;
+import protocol.JsonParser;
 import ui.tests.FramesUtils;
 import client.model.StrategyClient1_1;
 
@@ -34,17 +37,29 @@ public class EventCreationController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		String[] membs = client.getMembsService().getMembs();
+		client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+		String jsonMembs = client.waitServerResponse();
+		
+		String[] membs;
 		ArrayList<String> participants = new ArrayList<String>();
-		for (int i = 0; i < membs.length; i++) {
-			participants.add(membs[i]);
+		try {
+			membs = JsonParser.parseMakeTeamMembs(jsonMembs);
+			for (int i = 0; i < membs.length; i++) {
+				participants.add(membs[i]);
+			}
+			// add myself member
+			participants.add(client.getNickname());
+		} catch (ParseException e1) {
+			e1.printStackTrace();
 		}
-
+		
+		int year = Integer.parseInt(ask.getYear()) + 2000;
+		
 		client.sendMessageToServer(JsonMaker.manualEventRequest("admin", 
-				ask.getName(), participants, ask.getYear(), ask.getMonth(),
+				ask.getName(), participants, String.valueOf(year), ask.getMonth(),
 				ask.getDay(), ask.getHour(), ask.getMinute()));
 
-		System.out.println("Date: " + ask.getDay()+"/"+ask.getMonth()+"/"+ask.getYear());
+		System.out.println("Date: " + ask.getDay()+"/"+ask.getMonth()+"/"+ String.valueOf(year));
 		System.out.println("Hour: " + ask.getHour()+":"+ask.getMinute());
 		System.out.println("Name: " + ask.getName());
 		detailsFrame.dispose();

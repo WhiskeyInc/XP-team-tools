@@ -132,13 +132,20 @@ public class JsonMaker {
 	 * @param minutes
 	 * @param seconds
 	 */
-	public static String timerRequest(String chatIndex, int minutes, int seconds) {
+	public static String timerRequest(String chatIndex, int minutes, int seconds, ArrayList<String> participants) {
 
 		JSONObject json = new JSONObject();
 		json.put(REQ, TIMER);
 		json.put(CHAT_INDEX, chatIndex);
 		json.put(MINUTES, minutes);
 		json.put(SECONDS, seconds);
+		
+		JSONArray array = new JSONArray();
+		if (participants != null) {
+			array.addAll(participants);
+		}	
+		json.put(PARTICIPANTS, array);
+		
 		return json.toString();
 	}
 	

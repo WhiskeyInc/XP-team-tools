@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -274,9 +275,26 @@ public class TeamListUI extends JFrame {
 										timerUI.setTimerEditable(false);// TODO
 																		// se è
 																		// connesso...
-										client.sendMessageToServer(JsonMaker
-												.timerRequest(indexString,
-														time[0], time[1]));
+										
+										client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+										String jsonMembs = client.waitServerResponse();
+										
+										String[] membs;
+										ArrayList<String> participants = new ArrayList<String>();
+										try {
+											membs = JsonParser.parseMakeTeamMembs(jsonMembs);
+											for (int i = 0; i < membs.length; i++) {
+												participants.add(membs[i]);
+											}
+											// add myself member
+											participants.add(client.getNickname());
+										} catch (ParseException e1) {
+											e1.printStackTrace();
+										}
+										
+										client.sendMessageToServer(JsonMaker.timerRequest(
+												indexString, time[0], time[1], participants));
+									
 									}
 								}
 							});

@@ -111,7 +111,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 														// connesso...
 						client.sendMessageToServer(JsonMaker
 								.timerRequest(indexString, time[0],
-										time[1]));
+										time[1], null));
 					}
 				}
 			});

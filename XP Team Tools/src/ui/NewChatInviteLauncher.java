@@ -92,7 +92,7 @@ public class NewChatInviteLauncher implements Observer {
 					timerUI.setTimerEditable(false);// TODO se è
 													// connesso...
 					client.sendMessageToServer(JsonMaker.timerRequest(
-							indexString, time[0], time[1]));
+							indexString, time[0], time[1], null));
 				}
 			}
 		});

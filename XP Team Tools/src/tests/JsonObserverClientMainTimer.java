@@ -62,7 +62,7 @@ public class JsonObserverClientMainTimer {
 							.getTimeStamp());
 					timerUI.setTimerEditable(false);// TODO se è connesso...
 					client.sendMessageToServer(JsonMaker.timerRequest(teamName,
-							time[0], time[1]));
+							time[0], time[1], null));
 				}
 			}
 		});

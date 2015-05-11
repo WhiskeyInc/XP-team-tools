@@ -102,10 +102,25 @@ public class JsonParser {
 	public static String[] parseTimerRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
-		String[] timerVet = new String[3];
+		
+		String[] timerVet;
+		JSONArray participants = (JSONArray) json.get(PARTICIPANTS);
+		if(participants!=null){
+			timerVet = new String[ participants.size() + 3 ];
+		}else{
+			timerVet = new String[3];
+		}
+		 
 		timerVet[0] = (String) json.get(JsonMaker.CHAT_INDEX);
 		timerVet[1] = json.get(MINUTES).toString();
 		timerVet[2] = json.get(SECONDS).toString();
+		
+		if(participants.size() > 0){
+			for (int i = 3; i < participants.size() + 3; i++) {
+				timerVet[i] = (String) participants.get(i - 3);
+			}
+		}
+		
 		return timerVet;
 	}
 	

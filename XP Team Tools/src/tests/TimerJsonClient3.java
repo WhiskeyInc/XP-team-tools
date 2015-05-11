@@ -23,7 +23,7 @@ public class TimerJsonClient3 {
 		Thread thread = new Thread(runnable);
 		thread.start();
 		final String teamName = client.getTeamName();
-		client.sendMessageToServer(JsonMaker.timerRequest(teamName, 0, 15));
+		client.sendMessageToServer(JsonMaker.timerRequest(teamName, 0, 15, null));
 
 
 	}

@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.events.IEventActionRequest;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 
@@ -19,14 +20,17 @@ public class TimerService1_1 implements IService {
 	private ChatsManager chatsManager;
 	private TimersManager timersManager;
 	private MessagePropagator messagePropagator;
+	private IEventActionRequest eventSender;
+
 	public static final int TOTAL_MILLIS = 1000;
 	
 	public TimerService1_1(ChatsManager chatsManager,
-			TimersManager timersManager, MessagePropagator messagePropagator) {
+			TimersManager timersManager, MessagePropagator messagePropagator, IEventActionRequest eventSender) {
 		super();
 		this.chatsManager = chatsManager;
 		this.timersManager = timersManager;
 		this.messagePropagator = messagePropagator;
+		this.eventSender = eventSender;
 	}
 
 	/**
@@ -45,6 +49,12 @@ public class TimerService1_1 implements IService {
 		int index = Integer.parseInt(indexString);
 		int minutes = Integer.parseInt(timerLines[1]);
 		int seconds = Integer.parseInt(timerLines[2]);
+		
+		ArrayList<String> participants = new ArrayList<String>();
+		for (int i = 3; i < timerLines.length; i++) {
+			participants.add(timerLines[i]);
+		}
+		
 		if (timersManager.hasMillisKey(index)) {
 			timersManager.replaceMillis(index,
 					TimerFormatter.getMillis(minutes, seconds));
@@ -52,10 +62,10 @@ public class TimerService1_1 implements IService {
 			timersManager.putMillis(index, TimerFormatter.getMillis(minutes, seconds));
 		}
 
-		startTimer(index);
+		startTimer(index,participants);
 	}
 
-	private void startTimer(final int index) {
+	private void startTimer(final int index, final ArrayList<String> participants) {
 
 		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {
 
@@ -66,12 +76,12 @@ public class TimerService1_1 implements IService {
 				if (totalMillis == 0 && timersManager.hasTimerKey(index)) {
 					timersManager.getTimer(index).stop();
 					
-					//TODO send automatic event of the end of the tomato
+					eventSender.sendAutomaticEventAction("admin", "Finished Tomato", participants);
 				}
 
 				int[] vet = TimerFormatter.getTimeStamp(totalMillis);
 				String lineTimer = JsonMaker.timerRequest(String.valueOf(index), vet[0],
-						vet[1]); // minuti, secondi
+						vet[1], participants); // minuti, secondi
 
 				Chat chat = chatsManager.get(index);
 				ArrayList<ClientDetails> list = chat.getAttendantsDetails();
