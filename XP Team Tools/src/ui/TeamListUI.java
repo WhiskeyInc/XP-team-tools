@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import org.json.simple.parser.ParseException;
+
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
@@ -213,9 +215,9 @@ public class TeamListUI extends JFrame {
 					
 					//client.waitServerResponse();
 					final String indexString = String.valueOf(index);
-					client.sendMessageToServer(JsonMaker.chatRequest(
-							"- " + client.getNickname() + " has created "
-									+ client.getTeamName() + " -", indexString));
+//					client.sendMessageToServer(JsonMaker.chatRequest(
+//							"- " + client.getNickname() + " has created "
+//									+ client.getTeamName() + " -", indexString));
 					if (client.getNickname().equals("Alb")) {
 						client.sendMessageToServer(JsonMaker
 								.addTeamMembRequest(client.getClientDetails()));
@@ -227,8 +229,17 @@ public class TeamListUI extends JFrame {
 
 						@Override
 						public void run() {
+							client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+							String response = client.waitServerResponse();
+							String[] membs = null;
+							try {
+								membs = JsonParser.parseMakeTeamMembs(response);
+							} catch (ParseException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							MainUIObserver ui = new MainUIObserver(services,
-									serviceTeamMembs, client, index);
+									serviceTeamMembs, client, index, membs);
 
 							System.err.println(EventQueue.isDispatchThread()
 									+ " " + MultipleChatClientMainO.class);
