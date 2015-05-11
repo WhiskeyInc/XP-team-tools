@@ -12,24 +12,24 @@ import java.util.ArrayList;
 public interface IEventActionRequest {
 
 	/**
-	 * Function to send the event to a server, from the details
-	 * 
-	 * @return
+	 * Function to propagate the event to the second server, from the client's json
+	 * @param json
 	 */
-	public void sendEventAction(String user, String eventName,
+	public void propagateClientEvent(String json);
+	
+	
+	/**
+	 * Function to send an automatic event to the second server
+	 * @param user
+	 * @param eventName
+	 * @param participants
+	 */
+	public void sendAutomaticEventAction(String user, String eventName,
 			ArrayList<String> participants);
 
+	
 	/**
-	 * Function to send the event to a server, from the json
-	 * 
-	 * @return
-	 */
-	public void sendEventAction(String json);
-
-	/**
-	 * Function to send a manual event to another server, from the the
-	 * parameters
-	 * 
+	 * Function to send a manual event to another server
 	 * @param user
 	 * @param eventName
 	 * @param participants

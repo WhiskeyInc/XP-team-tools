@@ -19,7 +19,7 @@ public class SendPost implements IEventActionRequest {
 	}
 
 	@Override
-	public void sendEventAction(String user, String eventName,
+	public void sendAutomaticEventAction(String user, String eventName,
 			ArrayList<String> participants) {
 
 		String json = JsonMaker.automaticEventRequest(user, eventName,
@@ -47,7 +47,7 @@ public class SendPost implements IEventActionRequest {
 	}
 
 	@Override
-	public void sendEventAction(String json) {
+	public void propagateClientEvent(String json) {
 		try {
 			sendPost(url, json);
 		} catch (Exception e) {
@@ -55,6 +55,9 @@ public class SendPost implements IEventActionRequest {
 		}
 	}
 
+	
+	
+	
 	private void sendPost(String url, String data) throws Exception {
 
 		URL obj = new URL(url);
@@ -77,19 +80,25 @@ public class SendPost implements IEventActionRequest {
 		System.out.println("\nSending 'POST' request to URL : " + url);
 		System.out.println("Post parameters : " + data);
 		System.out.println("Response Code : " + responseCode);
-		System.out.println("Response Message : ");
+		
+		if(responseCode != 500){
+			System.out.println("Response Message : ");
+	
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			
+			// Print response message
+			System.out.println(response.toString());
+		}else{
+			System.out.println("Error in the second server");
 		}
-		in.close();
-
-		// Print response message
-		System.out.println(response.toString());
+		
 	}
 }

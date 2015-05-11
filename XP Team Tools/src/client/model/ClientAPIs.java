@@ -52,12 +52,12 @@ public class ClientAPIs{
 
 		public void manualEvent(String eventName, ArrayList<String> participants, String year, String month, String day,
 				String hour, String minute) {
-			client.sendMessageToServer(JsonMaker.manualEventRequest(eventName, participants, year, month, day, hour, minute));
+			client.sendMessageToServer(JsonMaker.manualEventRequest("admin", eventName, participants, year, month, day, hour, minute));
 		}
 		
 		
 		public void automaticEvent(String eventName, ArrayList<String> participants) {
-			client.sendMessageToServer(JsonMaker.automaticEventRequest(eventName, participants));
+			client.sendMessageToServer(JsonMaker.automaticEventRequest("admin", eventName, participants));
 		}
 
 	}

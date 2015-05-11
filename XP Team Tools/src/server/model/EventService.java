@@ -23,7 +23,7 @@ public class EventService implements IService{
 	public void doAction(String line) throws IOException, ParseException {
 		
 		//line è il json ricevuto dal client: lo giro all'altro server
-		eventSender.sendEventAction(line);
+		eventSender.propagateClientEvent(line);
 	}
 	
 

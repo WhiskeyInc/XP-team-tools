@@ -10,7 +10,7 @@ public class EventSendPostTestMain {
 	public static void main(String[] args) {
 
 		IEventActionRequest sender = new SendPost(
-				"http://localhost:8080/XPTT_Web/JSONAcceptor");
+				"http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
 
 		ArrayList<String> participants = new ArrayList<String>();
 		participants.add("Don Lele");
@@ -18,7 +18,8 @@ public class EventSendPostTestMain {
 		participants.add("Simo");
 		participants.add("Digio");
 
-		sender.sendEventAction("admin", "communicationTest", participants);
+		sender.sendAutomaticEventAction("admin", "communicationTest", participants);
+		
 		sender.sendManualEventAction("admin", "communicationTestManual",
 				participants, "2050", "2", "12", "12", "12");
 

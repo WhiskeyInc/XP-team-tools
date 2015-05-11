@@ -40,7 +40,7 @@ public class EventCreationController implements ActionListener {
 			participants.add(membs[i]);
 		}
 
-		client.sendMessageToServer(JsonMaker.manualEventRequest(
+		client.sendMessageToServer(JsonMaker.manualEventRequest("admin", 
 				ask.getName(), participants, ask.getYear(), ask.getMonth(),
 				ask.getDay(), ask.getHour(), ask.getMinute()));
 
