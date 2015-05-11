@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -17,18 +20,17 @@ import ui.TimerUI;
  *
  */
 
-public class MainLoginUI extends JFrame{
+public class MainLoginUI extends JFrame implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 
 	private final LoginUI loginUI = new LoginUI();
+	private final RegUI regUI = new RegUI();
 	
-	
+
 	public MainLoginUI() {
 		super();
 		super.setSize(400, 650);
@@ -38,22 +40,43 @@ public class MainLoginUI extends JFrame{
 		lim.gridx = 0;
 		lim.gridy = 1;
 		panel.add(loginUI, lim);
+		
+		lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 1;
+		panel.add(regUI, lim);
+		
 		lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 0;
 		lim.insets = new Insets(10, 10, 10, 10);
-//		lim.anchor = GridBagConstraints.ABOVE_BASELINE;
-		
+		// lim.anchor = GridBagConstraints.ABOVE_BASELINE;
+
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
 		super.getContentPane().add(panel);
 		super.setVisible(true);
 		pack();
 	}
 
-		
-	
 	public LoginUI getLoginUI() {
 		return loginUI;
 	}
 
+	public RegUI getRegUI() {
+		return regUI;
+	}
+
+	public void refresh() {
+		// super.getContentPane().invalidate();
+		super.getContentPane().revalidate();
+		// super.getContentPane().repaint();
+		super.revalidate();
+		// super.repaint();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		refresh();
+	}
+	
 }
