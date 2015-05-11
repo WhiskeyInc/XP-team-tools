@@ -12,7 +12,8 @@ public class CreateTableMain {
 		IDBConnection db = new DBConnection();
 
 		try {
-			db.connect("root", "", 3307, "localhost", "extreme01");
+			db.connect("alemonta", "protgamba", 3306, "52.74.20.119",
+					"extreme01");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

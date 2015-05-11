@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +18,7 @@ import ui.TimerUI;
  *
  */
 
-public class MainLoginUI extends JFrame implements Observer {
+public class MainLoginUI extends JFrame {
 
 	/**
 	 * 
@@ -29,7 +27,6 @@ public class MainLoginUI extends JFrame implements Observer {
 
 	private final LoginUI loginUI = new LoginUI();
 	private final RegUI regUI = new RegUI();
-	
 
 	public MainLoginUI() {
 		super();
@@ -40,12 +37,12 @@ public class MainLoginUI extends JFrame implements Observer {
 		lim.gridx = 0;
 		lim.gridy = 1;
 		panel.add(loginUI, lim);
-		
+
 		lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 1;
 		panel.add(regUI, lim);
-		
+
 		lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 0;
@@ -74,9 +71,10 @@ public class MainLoginUI extends JFrame implements Observer {
 		// super.repaint();
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		refresh();
-	}
-	
+	// @Override
+	// public void update(Observable o, Object arg) {
+	// refresh();
+	// //salva credenziali
+	// }
+
 }
