@@ -65,12 +65,12 @@ public class MultipleChatClientMainO {
 		});
 
 		login.setLoginListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				final StrategyClient1_1 client = new StrategyClient1_1(
-						new ClientConnectionDetails(login.getLoginNick(), null,
-								login.getPass()));
+						new ClientConnectionDetails(login.getLoginNick(),
+								null, login.getPass()));
 
 				client.openStreams("localhost", 9999);
 				Runnable runnable = new Runnable() {
@@ -90,31 +90,30 @@ public class MultipleChatClientMainO {
 
 				Thread thread = new Thread(runnable);
 				thread.start();
-				client.sendMessageToServer(JsonMaker.teamsListRequest(client
-						.getNickname()));
+				System.out.println("here " + MultipleChatClientMainO.class);
+				client.sendMessageToServer(JsonMaker.teamsListRequest(client.getNickname()));
+				System.out.println("here1 " + MultipleChatClientMainO.class);
+
 				String response = client.waitServerResponse();
+				System.out.println("here2 " + MultipleChatClientMainO.class);
+
 				String[] teams;
 				try {
-					teams = JsonParser.parseTeamMembsRequest(response);
+					teams = JsonParser.parseMakeTeamMembs(response);
 					final TeamListUI teamListUI = new TeamListUI(client, teams);
 					teamListUI.setCreateListener(new ActionListener() {
-
+						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							client.sendMessageToServer(JsonMaker
-									.newTeamRequest(teamListUI.getTeamName(),
-											client.getNickname()));
-							final int index = JsonParser
-									.parseChatIndexRequest(client
-											.waitServerResponse());
-							client.sendMessageToServer(JsonMaker
-									.teamsListRequest(client.getNickname()));
+							client.sendMessageToServer(JsonMaker.newTeamRequest(
+									teamListUI.getTeamName(), client.getNickname()));
+							final int index = JsonParser.parseChatIndexRequest(client
+									.waitServerResponse());
+							client.sendMessageToServer(JsonMaker.teamsListRequest(client.getNickname()));
 							teamListUI.setIndex(index);
 							teamListUI.removeTeamPanel();
 							try {
-								teamListUI.fillTeamPane(JsonParser
-										.parseListOfTeamsRequest(client
-												.waitServerResponse()));
+								teamListUI.fillTeamPane(JsonParser.parseListOfTeamsRequest(client.waitServerResponse()));
 							} catch (ParseException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
