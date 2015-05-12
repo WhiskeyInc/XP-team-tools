@@ -45,6 +45,20 @@ $(document)
 											validating : 'glyphicon glyphicon-refresh'
 										},
 										fields : {
+											name : {
+												validators : {
+													notEmpty : {
+														message : 'The name is required and cannot be empty'
+													},
+												}
+											},
+											lastName : {
+												validators : {
+													notEmpty : {
+														message : 'The last name is required and cannot be empty'
+													},
+												}
+											},
 											userName : {
 												validators : {
 													notEmpty : {
