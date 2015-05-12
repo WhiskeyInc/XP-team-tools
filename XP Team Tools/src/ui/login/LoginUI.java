@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,6 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import server.utils.ISessionSaver;
+import server.utils.SessionSaver;
 
 /**
  * The UI of the login, it extends JPanel To be corrected set up TODO
@@ -36,6 +42,7 @@ public class LoginUI extends JPanel {
 	private JPasswordField pwdField = new JPasswordField(20);
 
 	private JCheckBox saveCheck = new JCheckBox("Remembre Me");
+	private ISessionSaver sessionSaver;
 
 	public LoginUI() {
 		setLayout(new GridBagLayout());
@@ -80,19 +87,23 @@ public class LoginUI extends JPanel {
 
 		lim = new GridBagConstraints();
 		lim.gridx = 1;
-		lim.gridy = 2;
+		lim.gridy = 3;
 		lim.insets = new Insets(5, 0, 30, 170);
 		super.add(sendLogin, lim);
 
 		lim = new GridBagConstraints();
 		lim.gridx = 1;
-		lim.gridy = 2;
+		lim.gridy = 3;
 		lim.insets = new Insets(5, 170, 30, 30);
 		super.add(register, lim);
 
+		lim = new GridBagConstraints();
+		lim.gridx = 1;
+		lim.gridy = 2;
+		// lim.insets = new Insets(5, 170, 30, 30);
+		super.add(saveCheck, lim);
+
 		saveCheck.setSelected(true);
-		RememberMeListener saveListener = new RememberMeListener(
-				saveCheck);
 
 	}
 
@@ -117,4 +128,38 @@ public class LoginUI extends JPanel {
 		return String.valueOf(pwdField.getPassword());
 	}
 
+	public void setLoginNick(String user) {
+		userField.setText(user);
+	}
+
+	public void setPass(String pwd) {
+		pwdField.setText(pwd);
+	}
+
+	public void setSessionSaver(ISessionSaver sessionSaver) {
+		this.sessionSaver = sessionSaver;
+	}
+	
+	public ISessionSaver getSessionSaver() {
+		return this.sessionSaver;
+	}
+
+	// TODO dubbio: se lasciare questa responsabilità qui o trasferirla
+	public void getCheckStatus() throws NoSuchAlgorithmException,
+			UnsupportedEncodingException, IOException {
+		if (saveCheck.isSelected()) {
+			sessionSaver.saveSession();
+			// System.out.println("da getCheckStatus TRUE" + getLoginNick());
+
+		} else {
+			sessionSaver.deleteSession();
+		}
+	}
+
+	public boolean checkSession() throws IOException {
+		if(!(sessionSaver.getSessionValues() == null)){
+			return true;
+		}
+		return false;
+	}
 }
