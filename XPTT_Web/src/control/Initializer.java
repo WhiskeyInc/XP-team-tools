@@ -8,11 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
-import boards.UserStoryBoard.UserStory;
-import boards.taskBoard.ConcreteTaskManager;
 import model.ConcreteProjectSettings;
 import model.exceptions.InvalidDateException;
-import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
@@ -20,6 +17,8 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.MacroEvent;
 import timeline.Timeline;
+import boards.UserStoryBoard.UserStory;
+import boards.taskBoard.ConcreteTaskManager;
 
 /**
  * Servlet implementation class Initializer

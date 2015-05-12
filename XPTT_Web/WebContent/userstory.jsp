@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="filtering.NoFilter"%>
 <%@page import="filtering.Filter"%>
 <%@page import="model.project.Project"%>
@@ -111,7 +112,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("TODO")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}
@@ -122,7 +123,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("IN PROGRESS")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}
@@ -133,7 +134,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("DONE")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + ": " + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}
@@ -141,15 +142,42 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row" id="controlForm">
 				<div class="col-md-8">
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#USAdderModal">
-						<i class="fa fa-plus fa-fw"></i> Add a new story
-					</button>
+					<div class="btn-group-md">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#USAdderModal">
+							<i class="fa fa-plus fa-fw"></i> Add a new story
+						</button>
+						<div class="btn-group dropup">
+							<button type="button" class="btn btn-primary dropdown-toggle"
+								data-toggle="dropdown" aria-expanded="false">
+								Filter by... <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#controlForm" onclick="showUSNameFilteringForm('adder')"><i
+										class="fa fa-fw fa-check-square-o"></i> Name</a></li>
+								<li><a href="#controlForm" onclick="showUSStateFilteringForm('adder')"><i
+										class="fa fa-fw fa-flag-checkered"></i> State</a></li>
+								<li class="divider"></li>
+								<li><a href="#"
+									onclick="document.getElementById('SetNoFilter').submit()"><i
+										class="fa fa-fw fa-trash"></i> Remove filter</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-8 col-sm-12" id="adder"></div>
+			</div>
+			<form id="SetNoFilter" action="FilteringController" method="post"
+				role="form">
+				<div class="form-group">
+					<input type="hidden" name="action" value="noFilterUserStory">
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -159,21 +187,23 @@
 	<script src="js/validator.js"></script>
 	<script src="js/USValidator.js" type="text/javascript"></script>
 	<script src="js/autofocus.js" type="text/javascript"></script>
-
+	<script src="js/formAdder.js" type="text/javascript"></script>
+	<%request.getSession().setAttribute("filter", new NoFilter<UserStory>());%>
 </body>
 </html>
 
 <%!private ArrayList<UserStory> getUserStories(HttpServletRequest request) {
 		Project currentProject = (Project) request.getSession().getAttribute(
 				"currentProject");
-		return currentProject.getUserStoriesManager().getUserStories(
-				this.getUserStoryFilter(request));
+		ArrayList<UserStory> list = currentProject.getUserStoriesManager()
+				.getUserStories(this.getUserStoryFilter(request));
+		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	private Filter<UserStory> getUserStoryFilter(HttpServletRequest request) {
 		Filter<UserStory> filter = (Filter<UserStory>) request.getSession()
-				.getAttribute("USFilter");
+				.getAttribute("filter");
 		if (filter == null) {
 			filter = new NoFilter<UserStory>();
 		}

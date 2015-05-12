@@ -201,3 +201,24 @@ function showPeriodEventFilteringForm(divName) {
 		formDisplayed = true;
 	}
 }
+
+function showUSNameFilteringForm(divName) {
+	if (formDisplayed == false) {
+		var newdiv = document.createElement('div');
+		newdiv.innerHTML = "<br>"
+				+ "<form action='FilteringController' method='post' role='form'>"
+				+ "<div class='form-group'>"
+				+ "<label for='USName'>Search user story which contains:</label>"
+				+ "<div class='input-group'>"
+				+ "<input id='title' type='text' class='form-control' name='title' placeholder='Name'>"
+				+ "</div>"
+				+ "</div>"
+				+ "<input type='hidden' name='action' value='nameUserStoryFilter'>"
+				+ "<div class='btn-group btn-group-xl' role='group'>"
+				+ "<button class='btn btn-primary' type='submit'>Search</button>"
+				+ "<button class='btn btn-success' type='button' onclick='history.go(0)'>Back</button>"
+				+ "</div>" + "</form>";
+		document.getElementById(divName).appendChild(newdiv);
+		formDisplayed = true;
+	}
+}

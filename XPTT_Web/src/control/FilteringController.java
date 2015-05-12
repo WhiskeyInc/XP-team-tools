@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import boards.UserStoryBoard.UserStory;
 import timeline.Event;
 import control.actions.filtering.NoFilterGenerator;
 import control.actions.filtering.events.EventPeriodFilterGenerator;
 import control.actions.filtering.events.NameEventCheckerGenerator;
 import control.actions.filtering.events.ParticipantEventCheckerGenerator;
+import control.actions.filtering.userStories.NameUserStoryCheckerGenerator;
 
 /**
  * Servlet implementation class TimelineController
@@ -37,6 +39,8 @@ public class FilteringController extends HttpServlet {
 		this.actions.put("nameEventFilter", new NameEventCheckerGenerator());
 		this.actions.put("participantEventFilter", new ParticipantEventCheckerGenerator());
 		this.actions.put("periodEventFilter", new EventPeriodFilterGenerator());
+		this.actions.put("noFilterUserStory", new NoFilterGenerator<UserStory>("userstory.jsp"));
+		this.actions.put("nameUserStoryFilter", new NameUserStoryCheckerGenerator());		
 	}
 
 	/**

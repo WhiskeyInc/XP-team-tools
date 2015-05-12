@@ -303,41 +303,44 @@
 
 		</div>
 		<br> <br>
-		<div class="col-md-offset-2 col-md-8 col-sm-12">
-			<div class="btn-group-md">
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#eventAdderModal">
-					<i class="fa fa-fw fa-plus"></i> Add a new Event
-				</button>
-				<div class="btn-group dropup">
-					<button type="button" class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false">
-						Filter by... <span class="caret"></span>
+		<div class="row" id="controlForm" >
+			<div class="col-md-offset-2 col-md-8 col-sm-12">
+				<div class="btn-group-md">
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#eventAdderModal">
+						<i class="fa fa-fw fa-plus"></i> Add a new Event
 					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#" onclick="showEventNameFilteringForm('adder')"><i
-								class="fa fa-fw fa-check-square-o"></i> Name</a></li>
-						<li><a href="#"
-							onclick="showEventParticipantFilteringForm('adder')"><i
-								class="fa fa-fw fa-group"></i> Participant</a></li>
-						<li><a href="#"
-							onclick="showPeriodEventFilteringForm('adder')"><i
-								class="fa fa-fw fa-calendar-o"></i> Date</a></li>
-						<li class="divider"></li>
-						<li><a href="#"
-							onclick="document.getElementById('SetNoFilter').submit()"><i
-								class="fa fa-fw fa-trash"></i> Remove filter</a></li>
-					</ul>
+					<div class="btn-group dropup">
+						<button type="button" class="btn btn-primary dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false">
+							Filter by... <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#controlForm"
+								onclick="showEventNameFilteringForm('adder')"><i
+									class="fa fa-fw fa-check-square-o"></i> Name</a></li>
+							<li><a href="#controlForm"
+								onclick="showEventParticipantFilteringForm('adder')"><i
+									class="fa fa-fw fa-group"></i> Participant</a></li>
+							<li><a href="#controlForm"
+								onclick="showPeriodEventFilteringForm('adder')"><i
+									class="fa fa-fw fa-calendar-o"></i> Date</a></li>
+							<li class="divider"></li>
+							<li><a href="#"
+								onclick="document.getElementById('SetNoFilter').submit()"><i
+									class="fa fa-fw fa-trash"></i> Remove filter</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
+			<form id="SetNoFilter" action="FilteringController" method="post"
+				role="form">
+				<div class="form-group">
+					<input type="hidden" name="action" value="noFilterEvent">
+				</div>
+			</form>
+			<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder"></div>
 		</div>
-		<form id="SetNoFilter" action="FilteringController" method="post"
-			role="form">
-			<div class="form-group">
-				<input type="hidden" name="action" value="noFilterEvent">
-			</div>
-		</form>
-		<div class="col-md-offset-2 col-md-8 col-sm-12" id="adder"></div>
 	</div>
 	<!-- /.container -->
 	<br>
@@ -348,6 +351,9 @@
 	<!-- Toggle elements -->
 	<script src="js/toggler.js" type="text/javascript"></script>
 	<script src="js/autofocus.js" type="text/javascript"></script>
+	<%
+		request.getSession().setAttribute("filter", new NoFilter<Event>());
+	%>
 </body>
 </html>
 
