@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class SessionManager {
 
-	private Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
-	private static SessionManager instance = new SessionManager();
+	private volatile Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
+	private volatile static SessionManager instance = new SessionManager();
 	
 	private SessionManager() {
 		super();
@@ -45,7 +45,7 @@ public class SessionManager {
 		return chatOpenMap.containsKey(indexId);
 	}
 	
-	public static SessionManager getInstance() {
+	public synchronized static SessionManager getInstance() {
 		return instance;
 	}
 	

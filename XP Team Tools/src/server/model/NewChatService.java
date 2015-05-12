@@ -47,15 +47,14 @@ public class NewChatService implements IService {
 			for (int i = 1; i < details.length; i++) {
 				messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.indexOf(realChat)), details[i]);
 			}
-
-			for (int i = 0; i < details.length; i++) {
-				try {
-					alignClient(details[i], realChat);
-				} catch (NoMessagesException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try {
+				alignClient(details[0], realChat);
+			} catch (NoMessagesException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.err.println("Eccezione in " + NewChatService.class);
 			}
+
 		} else {
 			chatsManager.add(chatMokeUp);
 			//NB IL primo deve essere chi la richiede.
