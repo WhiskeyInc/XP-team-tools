@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
@@ -71,18 +74,27 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 	protected void done() {
 		try {
 			final int index = get();
+
 			SessionManager sessionManager = SessionManager
 					.getInstance();
 			if (sessionManager.hasChat(index)) {
 				if (!sessionManager.isChatOpen(index)) {
+					System.out.println("Lancio la ui perche ho la chat chiusa " + NewChatWorker.class );
 					launchUI(index);
+					sessionManager.registerChatOpening(index);
 				} else {
+					SessionManager.getInstance().emptyChatUI(index);
+
+					sessionManager.requireFocusForUIAt(index);
 					listUI.deselectAll();
 				}
 			} else {
 				sessionManager
 						.registerChatOpening(index);
+				System.out.println("Lancio la ui perche non ho la chat " + NewChatWorker.class );
 				launchUI(index);
+				sessionManager.registerChatOpening(index);
+
 			}
 			
 			
@@ -105,6 +117,9 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 				.getNickname());
 		UIObserverStrategy1 ui = new UIObserverStrategy1(
 				services[0], services[1], client, index);
+		ui.requestFocus();
+		ui.toFront();
+		SessionManager.getInstance().registerUI(index, ui);
 		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
 		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
 //			client.sendMessageToServer(JsonMaker.chatRequest(

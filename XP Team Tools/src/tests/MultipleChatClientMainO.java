@@ -70,7 +70,7 @@ public class MultipleChatClientMainO {
 						new ClientConnectionDetails(login.getLoginNick(), null,
 								login.getPass()));
 
-				client.openStreams("52.74.20.119", 9999);
+				client.openStreams("localhost", 9999);
 				Runnable runnable = new Runnable() {
 
 					@Override

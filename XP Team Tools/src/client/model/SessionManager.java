@@ -3,10 +3,18 @@ package client.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import ui.ChatUIObserverStrategy1;
+import ui.UIObserverStrategy1;
+
 public class SessionManager {
 
-	private volatile Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
-	private volatile static SessionManager instance = new SessionManager();
+	private  Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
+	private  static SessionManager instance = new SessionManager();
+	private volatile Map<Integer, UIObserverStrategy1> uiMap = new HashMap<Integer, UIObserverStrategy1>();
+	
+	//NB deve essere uguale a quella in NewChatService
+	public static final int NUM_OF_MESSAGES = 10;
+
 	
 	private SessionManager() {
 		super();
@@ -45,7 +53,34 @@ public class SessionManager {
 		return chatOpenMap.containsKey(indexId);
 	}
 	
-	public synchronized static SessionManager getInstance() {
+	public void requireFocusForUIAt(int index) {
+		uiMap.get(index).toFront();
+		uiMap.get(index).requestFocus();
+	}
+	
+	public void registerUI(int index, UIObserverStrategy1 ui) {
+		uiMap.put(index, ui);
+	}
+	//Temporary solution: nb it is "server-unsafe" and it make visible the changes
+	//TODO bufferize la classe chat e aggiungere tipo un metodo flush()
+	public void emptyChatUI(int index) {
+		if(uiMap.containsKey(index)) {
+			ChatUIObserverStrategy1 ui = uiMap.get(index).getChatUI();
+			String text = ui.getChatAreaText();
+			String[] textSplitted = text.split("\n");
+			String newText = "";
+			int len = textSplitted.length/2;
+			if(len > NUM_OF_MESSAGES) {
+				len = NUM_OF_MESSAGES;
+			}
+			for (int i = 0; i < len; i++) {
+				newText += textSplitted[i] + "\n";
+			}
+			ui.setChatAreaText(newText);
+		}
+	}
+	
+	public  static SessionManager getInstance() {
 		return instance;
 	}
 	
