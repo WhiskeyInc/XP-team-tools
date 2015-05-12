@@ -114,6 +114,7 @@ public class TimerUIObserverStrategy extends JPanel implements Observer{
 
 	public void setTimerEditable(boolean isEditable) {
 		timerArea.setEnabled(isEditable);
+		startButton.setEnabled(isEditable);
 	}
 
 	public boolean isTimeStampValid(String timeStamp) {
