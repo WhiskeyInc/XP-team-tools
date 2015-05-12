@@ -19,6 +19,7 @@ public class SessionManager {
 
 
 	public void registerChatOpening(int indexId) {
+		System.err.println(indexId + " " + SessionManager.class);
 		if (!chatOpenMap.containsKey(indexId)) {
 			chatOpenMap.put(indexId, true);
 		} else {
@@ -34,10 +35,13 @@ public class SessionManager {
 	}
 
 	public void setChatClosed(int indexId) {
+		System.err.println("Sto chiudendo la chat indice " + indexId);
 		chatOpenMap.put(indexId, false);
 	}
 	
 	public boolean hasChat(int indexId) {
+		System.err.println(indexId + " has " + SessionManager.class);
+
 		return chatOpenMap.containsKey(indexId);
 	}
 	

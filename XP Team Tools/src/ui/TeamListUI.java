@@ -53,7 +53,7 @@ public class TeamListUI extends JFrame {
 	private JScrollPane teamPane;
 	private JPanel mainPanel;
 	private JTextField teamName;
-	private int index;
+	private volatile int index;
 
 	private static final long serialVersionUID = 1L;
 
@@ -303,24 +303,9 @@ public class TeamListUI extends JFrame {
 
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									SessionManager sessionManager = SessionManager
-											.getInstance();
-									if (sessionManager.hasChat(index)) {
-										if (!sessionManager.isChatOpen(index)) {
-											NewChatWorker newChatWorker = new NewChatWorker(
-													listUI, client, services);
-											newChatWorker.execute();
-										} else {
-											listUI.deselectAll();
-										}
-									} else {
-										sessionManager
-												.registerChatOpening(index);
-										NewChatWorker newChatWorker = new NewChatWorker(
-												listUI, client, services);
-										newChatWorker.execute();
-									}
-
+									NewChatWorker newChatWorker = new NewChatWorker(
+											listUI, client, services);
+									newChatWorker.execute();
 								}
 							});
 

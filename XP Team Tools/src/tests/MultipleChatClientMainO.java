@@ -1,7 +1,5 @@
 package tests;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -33,10 +31,6 @@ public class MultipleChatClientMainO {
 	public static void main(String[] args) {
 
 		final MainLoginUI ui = new MainLoginUI();
-
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		ui.setLocation((int) (dim.getWidth() - ui.getWidth()) / 2,
-				(int) (dim.getHeight() - ui.getHeight()) / 2);
 
 		final LoginUI login = ui.getLoginUI();
 		ISessionSaver sessionSaver;

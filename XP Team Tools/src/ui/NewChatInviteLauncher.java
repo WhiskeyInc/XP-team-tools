@@ -47,6 +47,7 @@ public class NewChatInviteLauncher implements Observer {
 			public void run() {
 				// IClientService serviceTimeStamp = new SetTimeStampService();
 				System.err.println(EventQueue.isDispatchThread() + " " + NewChatInviteLauncher.class);
+				System.err.println(index + " " + NewChatInviteLauncher.class);
 				if(sessionManager.hasChat(index)) {
 					if(!sessionManager.isChatOpen(index)) {
 						launchUI();
