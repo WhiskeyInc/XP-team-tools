@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import model.ConcreteProjectSettings;
+import model.TeamComponent;
 import model.exceptions.InvalidDateException;
+import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
@@ -47,6 +49,10 @@ public class Initializer extends HttpServlet {
 				"A debugger for this very application");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();
+		try {
+			settings.addTeamMember(new TeamComponent("admin", "", "owner"));
+		} catch (NameAlreadyInUseException e2) {
+		}
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
 		UserStory story1 = new UserStory("Più di un Progetto",
 				PROJECTS_STORY_DESCRIPTION, new ConcreteTaskManager());

@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.ConcreteProjectSettings;
+import model.TeamComponent;
 import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
@@ -48,9 +50,16 @@ public class SignUpService extends AccountAction {
 				.getServletContext().getAttribute("environments");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("pendingProjects");
-		projectsCollector.addProject(new Project("General",
-				new ConcreteProjectFactory(),
-				"Everything related to your account"));
+		Project project = new Project("General", new ConcreteProjectFactory(),
+				"Everything related to your account");
+		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
+				.getSettings();
+		try {
+			settings.addTeamMember(new TeamComponent(userName, "", "owner"));
+		} catch (NameAlreadyInUseException e) {
+			System.out.println("ciao");
+		}
+		projectsCollector.addProject(project);
 		pendingProjects.put(userName, new ProjectsCollector());
 		environments.put(userName, projectsCollector);
 		SignInService signIn = new SignInService();
