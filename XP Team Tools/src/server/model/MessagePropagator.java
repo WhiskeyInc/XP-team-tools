@@ -21,7 +21,7 @@ import client.model.ClientDetails;
 
 public class MessagePropagator {
 
-	private ClientsManager2 clientsManager;
+	private volatile ClientsManager2 clientsManager;
 	private IPropagator propagator;
 	
 	public MessagePropagator(ClientsManager2 clientsManager,
@@ -39,13 +39,22 @@ public class MessagePropagator {
 	//Template method
 	public void propagateMessage(String message, ClientDetails details) throws IOException {
 		ClientConnectionDetails conDet = clientsManager.get(details);
-		//System.out.println(conDet.getNickname() + " " + MessagePropagator.class);
+	//	System.out.println("Request socket: " + conDet.getRequestSocket().getLocalAddress()+ " " + conDet.getRequestSocket().getPort()+ " " + MessagePropagator.class);
+//		Iterator<ClientConnectionDetails> iter = clientsManager.getClients().iterator();
+//		while(iter.hasNext()) {
+//			System.err.println(iter.next().getNickname() + " " + MessagePropagator.class);
+//
+//		}		System.err.println(clientsManager.size() + " SIZE " + MessagePropagator.class);
+		
+
 		try {
-			if (conDet != null && conDet.isOnline()) {
+			if (conDet != null && conDet.isOnline() == true) {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 						propagator.getSocket(conDet).getOutputStream()));
 				out.write(Formatter.appendNewLine(message));
+				
 				out.flush();
+				System.out.println(MessagePropagator.class + " ***********+");
 			}
 //			} else {
 //				System.err.println("Condet is "+ conDet + " " + conDet.isOnline());

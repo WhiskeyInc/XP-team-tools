@@ -16,8 +16,8 @@ import client.model.ClientDetails;
  */
 public class NewChatService implements IService {
 
-	private ChatsManager chatsManager;
-	private MessagePropagator messagePropagator;
+	private volatile ChatsManager chatsManager;
+	private volatile MessagePropagator messagePropagator;
 	/**
 	 * The messages that a client recover immediately
 	 */

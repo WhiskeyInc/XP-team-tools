@@ -7,11 +7,11 @@ import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
-import server.db.IDBConnection;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
@@ -31,15 +31,13 @@ public class ServerStrategy1_1 extends AbstractServer {
 	private Socket clientSocket;
 	private Socket requestSocket;
 
-	private ChatsManager chatsManager;
-	private ClientsManager2 clientsManager1;
+	private volatile ClientsManager2 clientsManager1;
 	private BufferedReader in;
-
 	
-	public ServerStrategy1_1(ChatsManager chatsManager, IDBConnection db) {
+	public ServerStrategy1_1(ClientsManager2 clientsManager1) {
 		super();
-		this.chatsManager = chatsManager;
-		clientsManager1 = new ClientsManager2(db);
+		this.clientsManager1 = clientsManager1;
+		
 	}
 
 	@Override
@@ -75,6 +73,12 @@ public class ServerStrategy1_1 extends AbstractServer {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						Iterator<ClientConnectionDetails> iter = clientsManager1.getClients().iterator();
+						while(iter.hasNext()) {
+							System.err.println(iter.next().getNickname() + " " + ServerStrategy1_1.class);
+
+						}
+						System.err.println(clientsManager1.size() + " SIZE " + ServerStrategy1_1.class);
 
 					} catch (ParseException e) {
 						e.printStackTrace();
@@ -133,7 +137,7 @@ public class ServerStrategy1_1 extends AbstractServer {
 	public void addService(int request, IService service) {
 		services.put(request, service);
 	}
-	public ClientsManager2 getClientsManager() {
+	public synchronized ClientsManager2 getClientsManager() {
 		return clientsManager1;
 	}
 

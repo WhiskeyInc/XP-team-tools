@@ -12,9 +12,9 @@ import client.model.Team;
 //TODO se estendo qualcosa che ha teamManager?
 public class AddTeamMembService implements IService {
 
-	private TeamsManager teamManager;
-	private ChatsManager chatsManager;
-	private MessagePropagator messagePropagator;
+	private volatile TeamsManager teamManager;
+	private volatile ChatsManager chatsManager;
+	private volatile MessagePropagator messagePropagator;
 
 	public AddTeamMembService(TeamsManager teamManager,
 			ChatsManager chatsManager, MessagePropagator messagePropagator) {

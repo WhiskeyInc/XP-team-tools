@@ -10,8 +10,8 @@ import client.model.ClientDetails;
 
 public class ChatService implements IService {
 
-	private ChatsManager chatsManager;
-	private MessagePropagator messagePropagator;
+	private volatile ChatsManager chatsManager;
+	private volatile MessagePropagator messagePropagator;
 	private int id;
 
 	public ChatService(ChatsManager chatsManager,

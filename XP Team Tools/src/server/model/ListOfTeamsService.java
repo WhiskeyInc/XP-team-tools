@@ -11,8 +11,8 @@ import client.model.Team;
 
 public class ListOfTeamsService implements IService {
 
-	private TeamsManager teamsManager;
-	private MessagePropagator messagePropagator;
+	private volatile TeamsManager teamsManager;
+	private volatile MessagePropagator messagePropagator;
 
 	public ListOfTeamsService(TeamsManager teamsManager,
 			MessagePropagator messagePropagator) {

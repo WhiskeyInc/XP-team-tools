@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import server.db.DBConnection;
 import server.db.IDBConnection;
 import server.utils.auth.Authenticate;
 import client.model.ClientConnectionDetails;
@@ -24,19 +25,20 @@ import client.model.ClientDetails;
 // team...
 public class ClientsManager2 {
 
-	private IDBConnection connection;
-	private Authenticate auth = new Authenticate();
-	private Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
+	private volatile IDBConnection db;
+	private  volatile Authenticate auth = new Authenticate();
+	private volatile Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
+	private static volatile ClientsManager2 instance = new ClientsManager2();
 
 	// NB: non treeSet, penso abbia la documentazione sbagliata, cioè nel
 	// contains chiama il compareTo,
 	// non l' equals
-
-	public ClientsManager2(IDBConnection connection) {
-		super();
-		this.connection = connection;
+	private ClientsManager2() {
+		db = new DBConnection();
 	}
 
+	
+	
 	/**
 	 * Register a client. If a client is already registered, this method only
 	 * refresh his dynamic attributes as sockets
@@ -46,14 +48,14 @@ public class ClientsManager2 {
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void registerClient(ClientConnectionDetails client)
+	public synchronized void  registerClient(ClientConnectionDetails client)
 			throws NoSuchAlgorithmException, IOException, SQLException {
 		if (authenticate(client.getNickname(), client.getPwd())) {
 
 			System.out.println("Sto registrando " + client.getNickname() + " "
 					+ client.getTeamName() + ClientsManager2.class);
 			if (has(client)) {
-				clients.remove(client);
+				remove(client);
 				System.out.println("L ho rimosso " + ClientsManager2.class);
 				clients.add(client);
 			} else {
@@ -66,6 +68,8 @@ public class ClientsManager2 {
 			System.err.println("Utente non autenticato!");
 		}
 	}
+	
+	
 	public Set<ClientConnectionDetails> getClients() {
 		return clients;
 	}
@@ -78,7 +82,7 @@ public class ClientsManager2 {
 	 * @param {@link ClientDetails}
 	 * @return
 	 */
-	public ClientConnectionDetails get(ClientDetails det) {
+	public synchronized ClientConnectionDetails get(ClientDetails det) {
 		Iterator<ClientConnectionDetails> iter = clients.iterator();
 		while (iter.hasNext()) {
 			ClientConnectionDetails conDet = iter.next();
@@ -103,7 +107,7 @@ public class ClientsManager2 {
 	private boolean authenticate(String nickname, String pwd)
 			throws IOException, NoSuchAlgorithmException, SQLException { // TODO
 
-		boolean autheniticated = auth.authenticate(connection.getConnection(),
+		boolean autheniticated = auth.authenticate(db.getConnection(),
 				nickname, pwd);
 
 		return autheniticated;
@@ -123,4 +127,29 @@ public class ClientsManager2 {
 		return false;
 	}
 
+	public synchronized static ClientsManager2 getInstance() {
+		return instance;
+	}
+	
+	public void connectToDB() {
+		try {
+			db.connect("alemonta", "protgamba", 3306, "52.74.20.119", "extreme01");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	public void remove(ClientConnectionDetails conDet) {
+		Set<ClientConnectionDetails> clientsTmp = new HashSet<ClientConnectionDetails>();
+		
+		Iterator<ClientConnectionDetails> iter = clients.iterator();
+		while (iter.hasNext()) {
+			ClientConnectionDetails det = iter.next();
+			if(!det.getNickname().equals(conDet.getNickname())) {
+				clientsTmp.add(det);
+			}
+		}
+		clients = clientsTmp;
+	}
 }

@@ -14,9 +14,9 @@ import client.model.Team;
  */
 public class TeamsManager {
 	
-	private List<Team> teamList = new LinkedList<Team>();
+	private volatile List<Team> teamList = new LinkedList<Team>();
 
-	private static TeamsManager instance = new TeamsManager();
+	private volatile static TeamsManager instance = new TeamsManager();
 
 	private TeamsManager() {
 	}
@@ -85,7 +85,7 @@ public class TeamsManager {
 		return teams.toArray(new Team[teams.size()]);
 	}
 	
-	public static TeamsManager getInstance() {
+	public synchronized static TeamsManager getInstance() {
 		return instance;
 	}
 

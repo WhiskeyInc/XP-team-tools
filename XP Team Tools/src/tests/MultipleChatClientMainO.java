@@ -29,11 +29,6 @@ public class MultipleChatClientMainO {
 	public static void main(String[] args) {
 
 		final MainLoginUI ui = new MainLoginUI();
-
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		ui.setLocation((int) (dim.getWidth() - ui.getWidth()) / 2,
-				(int) (dim.getHeight() - ui.getHeight()) / 2);
-
 		final LoginUI login = ui.getLoginUI();
 
 		final RegUI reg = ui.getRegUI();

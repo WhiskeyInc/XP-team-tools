@@ -9,7 +9,7 @@ import client.model.ClientDetails;
 
 public class DisconnectService implements IService{
 
-	private ClientsManager2 clientsManager;
+	private volatile ClientsManager2 clientsManager;
 	
 	public DisconnectService(ClientsManager2 clientsManager) {
 		super();

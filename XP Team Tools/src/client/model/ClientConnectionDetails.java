@@ -26,9 +26,9 @@ public class ClientConnectionDetails extends ClientDetails {
 		super(nickname, teamName, pwd);
 	}
 
-	private Socket realTimesocket;
-	private Socket requestSocket;
-	private boolean online;
+	private volatile Socket realTimesocket;
+	private volatile Socket requestSocket;
+	private volatile boolean online;
 
 	
 	/**
@@ -74,18 +74,12 @@ public class ClientConnectionDetails extends ClientDetails {
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ClientConnectionDetails)
 				&& !(obj instanceof ClientDetails)) {
-			System.out.println("eq1 "+ ClientConnectionDetails.class);
-
 			return false;
 		}
 		ClientDetails det = (ClientDetails) obj;
 		if (nickname.equals(det.nickname)) {
-			System.out.println("eq2 "+ ClientConnectionDetails.class);
-
 			return true;
 		}
-		System.out.println("eq3 "+ ClientConnectionDetails.class);
-
 		return false;
 	}
 }

@@ -15,9 +15,9 @@ import client.model.Team;
  */
 public class NewTeamService implements IService{
 
-	private TeamsManager teamsManager;
-	private ChatsManager chatsManager;
-	private MessagePropagator messagePropagator;
+	private volatile TeamsManager teamsManager;
+	private volatile ChatsManager chatsManager;
+	private volatile MessagePropagator messagePropagator;
 
 	public NewTeamService(TeamsManager teamsManager, ChatsManager chatsManager,
 			MessagePropagator messagePropagator) {

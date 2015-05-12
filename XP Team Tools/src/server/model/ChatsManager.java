@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class ChatsManager {
 
-	private List<Chat> completeChatList = new LinkedList<Chat>();
+	private volatile List<Chat> completeChatList = new LinkedList<Chat>();
 
-	private static ChatsManager instance = new ChatsManager();
+	private volatile static ChatsManager instance = new ChatsManager();
 
 	private ChatsManager() {
 	}
@@ -56,7 +56,7 @@ public class ChatsManager {
 		return completeChatList.size();
 	}
 	
-	public static ChatsManager getInstance() {
+	public synchronized static ChatsManager getInstance() {
 		return instance;
 	}
 
