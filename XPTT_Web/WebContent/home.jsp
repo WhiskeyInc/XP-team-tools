@@ -177,7 +177,7 @@
 				<!-- Button trigger modal -->
 				<div align="center">
 					<button type="button" class="btn btn-primary btn-xl"
-						data-toggle="modal" data-target="#loginModal">Sign in</button>
+						data-toggle="modal" data-target="#loginModal">Sign In</button>
 					&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-xl"
 						data-toggle="modal" data-target="#registerModal">Sign Up</button>

@@ -36,9 +36,12 @@
 					<%
 						if (request.getSession().getAttribute("currentUser") != null) {
 					%>
-					<li <%=page("Members", request)%>><a href="members.jsp">Members</a></li>
+					<li <%=page("Members", request)%>><a href="members.jsp">Team</a></li>
+
+					<li <%=page("UserStory", request)%>><a href="userstory.jsp">User
+							Stories</a></li>
+
 					<li <%=page("Timeline", request)%>><a href="timeline.jsp">Timeline</a></li>
-					<li <%=page("UserStory", request)%>><a href="userstory.jsp">User Stories</a></li>
 					<%-- <li <%=page("Tasks", request)%>><a href="taskpage.jsp">Tasks</a></li> --%>
 					<%
 						}

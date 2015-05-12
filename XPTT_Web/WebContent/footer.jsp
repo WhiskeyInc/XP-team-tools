@@ -17,8 +17,10 @@
 				<%
 					if (getCurrentUser(request) != null) {
 				%>
-				<%=getHelloUser(getCurrentUser(request))%>&nbsp;&nbsp;&nbsp; <a
-					href="#"><i class="fa fa-sign-out" onclick="logOut()"></i></a>
+				<%=getHelloUser(getCurrentUser(request))%>&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-default btn-xs" onclick="logOut()">
+					<div style="padding: 1px;"></div>Sign Out &nbsp;<i class="fa fa-fw fa-sign-out"></i>
+				</button>
 				<%
 					}
 				%>
