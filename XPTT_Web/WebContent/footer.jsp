@@ -1,3 +1,5 @@
+<%@page import="model.TeamComponent"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,7 +21,8 @@
 				%>
 				<%=getHelloUser(getCurrentUser(request))%>&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-default btn-xs" onclick="logOut()">
-					<div style="padding: 1px;"></div>Sign Out &nbsp;<i class="fa fa-fw fa-sign-out"></i>
+					<div style="padding: 1px;"></div>
+					Sign Out &nbsp;<i class="fa fa-fw fa-sign-out"></i>
 				</button>
 				<%
 					}
@@ -37,8 +40,20 @@
 	}
 </script>
 </html>
-<%!private String getCurrentUser(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute("currentUser");
+<%!@SuppressWarnings("unchecked")
+	private String getCurrentUser(HttpServletRequest request) {
+	System.out.println("1");
+		String user = (String) request.getSession().getAttribute("currentUser");
+		System.out.println("2");
+		if (user != null) {
+			System.out.println("3");
+			HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
+					.getServletContext().getAttribute("usersInfo");
+			System.out.println("4");
+			return usersInfo.get(user).getFirstName();
+		}
+		System.out.println("5");
+		return null;
 	}
 
 	private String getHelloUser(String user) {

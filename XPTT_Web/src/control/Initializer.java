@@ -49,8 +49,9 @@ public class Initializer extends HttpServlet {
 				"A debugger for this very application");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();
+		TeamComponent teamComponent = new TeamComponent("admin", "", "owner");
 		try {
-			settings.addTeamMember(new TeamComponent("admin", "", "owner"));
+			settings.addTeamMember(teamComponent);
 		} catch (NameAlreadyInUseException e2) {
 		}
 		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS", "DONE");
@@ -75,7 +76,7 @@ public class Initializer extends HttpServlet {
 		UserStory story7 = new UserStory("Pagina di informazioni",
 				INFO_STORY_DESCRIPTION, new ConcreteTaskManager());
 		story7.moveToState("TODO");
-		
+
 		try {
 			project.getUserStoriesManager().addUserStory(story1);
 			project.getUserStoriesManager().addUserStory(story2);
@@ -85,22 +86,23 @@ public class Initializer extends HttpServlet {
 			project.getUserStoriesManager().addUserStory(story6);
 			project.getUserStoriesManager().addUserStory(story7);
 			story1.setPriority(UserStory.MAXPRIORITY);
-			story2.setPriority(UserStory.MAXPRIORITY-1);
-			story3.setPriority(UserStory.MAXPRIORITY-2);
-			story4.setPriority(UserStory.MAXPRIORITY-2);
-			story5.setPriority(UserStory.MAXPRIORITY-5);
+			story2.setPriority(UserStory.MAXPRIORITY - 1);
+			story3.setPriority(UserStory.MAXPRIORITY - 2);
+			story4.setPriority(UserStory.MAXPRIORITY - 2);
+			story5.setPriority(UserStory.MAXPRIORITY - 5);
 			story6.setPriority(UserStory.MINPRIORITY);
 			story7.setPriority(UserStory.MINPRIORITY);
-			
+
 		} catch (Exception e1) {
 		}
 		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault());
 		MacroEvent macro;
 		try {
-			macro = new MacroEvent("Third Release", new GregorianCalendar(2015, 5, 13, 9,
-					0), new GregorianCalendar(2015, 5, 26, 11, 00), timeline);
-			macro.addEvent(new Event("Deploy Online",
-					new GregorianCalendar(2015, 5, 26, 10, 00)));
+			macro = new MacroEvent("Third Release", new GregorianCalendar(2015,
+					5, 13, 9, 0), new GregorianCalendar(2015, 5, 26, 11, 00),
+					timeline);
+			macro.addEvent(new Event("Deploy Online", new GregorianCalendar(
+					2015, 5, 26, 10, 00)));
 			macro.addEvent(new Event("Ending Project Party",
 					new GregorianCalendar(2015, 5, 25, 00, 00)));
 			project.getTimeline().addEvent(macro);
@@ -112,6 +114,8 @@ public class Initializer extends HttpServlet {
 				pendingProjects);
 		super.getServletContext().setAttribute("environments", environments);
 		super.getServletContext().setAttribute("users", users);
-
+		HashMap<String, TeamComponent> info = new HashMap<String, TeamComponent>();
+		info.put("admin", teamComponent);
+		super.getServletContext().setAttribute("usersInfo", info);
 	}
 }

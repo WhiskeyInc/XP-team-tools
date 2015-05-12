@@ -104,6 +104,25 @@
 						<form role="form" id="signUp" class="contact-form" action="login"
 							method="post">
 							<input type="hidden" name="action" value="register">
+
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="name"
+											autocomplete="off" id="name" placeholder="Name"
+											autofocus="autofocus">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control" name="lastName"
+											autocomplete="off" id="lastName" placeholder="Last Name"
+											autofocus="autofocus">
+									</div>
+								</div>
+							</div>
 							<div class="row">
 								<div class="col-md-offset-2 col-md-8">
 									<div class="form-group">

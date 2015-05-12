@@ -54,14 +54,20 @@ public class SignUpService extends AccountAction {
 				"Everything related to your account");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();
-		try {
-			settings.addTeamMember(new TeamComponent(userName, "", "owner"));
-		} catch (NameAlreadyInUseException e) {
-			System.out.println("ciao");
-		}
 		projectsCollector.addProject(project);
 		pendingProjects.put(userName, new ProjectsCollector());
 		environments.put(userName, projectsCollector);
+		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
+				.getServletContext().getAttribute("usersInfo");
+		TeamComponent teamComponent = new TeamComponent(
+				request.getParameter("name"), request.getParameter("lastName"),
+				"Developer");
+		usersInfo.put(userName, teamComponent);
+		// TODO: role?
+		try {
+			settings.addTeamMember(teamComponent);
+		} catch (NameAlreadyInUseException e) {
+		}
 		SignInService signIn = new SignInService();
 		signIn.perform(request, response);
 	}

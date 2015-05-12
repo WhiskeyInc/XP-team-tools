@@ -1,6 +1,7 @@
 package control.actions.projects;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,10 @@ public class ProjectAdder extends ProjectAction {
 
 	private TeamComponent getTeamComponent(HttpServletRequest request) {
 		String username = (String) request.getSession().getAttribute("currentUser");
-		return new TeamComponent(username , "", "Owner");
+		@SuppressWarnings("unchecked")
+		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
+				.getServletContext().getAttribute("usersInfo");
+		return usersInfo.get(username);
 	}
 	
 
