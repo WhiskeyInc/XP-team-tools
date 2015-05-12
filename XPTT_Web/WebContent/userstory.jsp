@@ -112,7 +112,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("TODO")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}
@@ -123,7 +123,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("IN PROGRESS")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}
@@ -134,7 +134,7 @@
 						for (UserStory story : getUserStories(request)) {
 							if (story.getState().equals("DONE")) {
 					%>
-					<textarea class="sticky"><%=story.toString() + "\n" + story.getDescription()%></textarea>
+					<textarea class="sticky"><%=story.toString() + "\n\n" + story.getDescription()%></textarea>
 					<%
 						}
 						}

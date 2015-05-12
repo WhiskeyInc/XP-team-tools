@@ -31,6 +31,7 @@ body {
 	font-smoothing: subpixel-antialiased;
 	max-width: 520px;
 	max-height: 250px;
+	overflow-y: scroll; 
 }
 
 textarea:hover {
