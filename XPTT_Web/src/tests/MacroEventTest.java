@@ -13,12 +13,13 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.MacroEvent;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
+import util.serialization.SerializerCollector;
 
 public class MacroEventTest {
 
 	ConcreteTimeline timeline = new ConcreteTimeline(
-			TimeZone.getTimeZone("Europe/Rome"), new LocalUniquenessSerializer() );
+			TimeZone.getTimeZone("Europe/Rome"), new LocalIdentifiabilitySerializer() );
 
 	@Test
 	@SuppressWarnings("unused")
@@ -46,7 +47,7 @@ public class MacroEventTest {
 		MacroEvent macroEvent = createEvent();
 		assertEquals(1, macroEvent.getEventsNumber());
 		assertEquals(ConcreteTimeline.DEFAULT_CREATION_EVENT, macroEvent
-				.getEvent(LocalUniquenessSerializer.FIRST_ID).toString());
+				.getEvent(SerializerCollector.FIRST_ID).toString());
 	}
 
 	@Test

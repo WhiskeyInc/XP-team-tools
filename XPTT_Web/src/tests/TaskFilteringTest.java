@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -31,7 +31,7 @@ public class TaskFilteringTest {
 	ConcreteTaskManager taskBoard = new ConcreteTaskManager();
 	Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"),
-			new LocalUniquenessSerializer());
+			new LocalIdentifiabilitySerializer());
 	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
 	ProjectManager manager = new ConcreteTeamManager(settings, timeline);
 	UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(

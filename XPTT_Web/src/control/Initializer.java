@@ -20,7 +20,7 @@ import timeline.Event;
 import timeline.MacroEvent;
 import timeline.Timeline;
 import util.serialization.GlobalUniquenessSerializer;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 
@@ -99,7 +99,7 @@ public class Initializer extends HttpServlet {
 		} catch (Exception e1) {
 		}
 		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault(),
-				new LocalUniquenessSerializer());
+				new LocalIdentifiabilitySerializer());
 		MacroEvent macro;
 		try {
 			macro = new MacroEvent("Third Release", new GregorianCalendar(2015,

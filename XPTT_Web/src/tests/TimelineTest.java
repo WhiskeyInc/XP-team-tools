@@ -16,14 +16,14 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import filtering.NoFilter;
 
 public class TimelineTest {
 
 	Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"),
-			new LocalUniquenessSerializer());
+			new LocalIdentifiabilitySerializer());
 
 	@Test
 	public void timelineCreationTest() {

@@ -20,7 +20,7 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -35,7 +35,7 @@ public class TeamManagerTest {
 	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	private Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"),
-			new LocalUniquenessSerializer());
+			new LocalIdentifiabilitySerializer());
 	private ProjectManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskBoard = new ProjectTaskManager(

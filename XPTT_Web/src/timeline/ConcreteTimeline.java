@@ -10,17 +10,17 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import util.serialization.Serializable;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import util.serialization.SerializerCollector;
 import filtering.Filter;
 
 /**
  * This implementation of {@link Timeline} interface provides uniqueness control
  * for the events to be collected. This is guaranteed by the inherited methods
- * of {@link LocalUniquenessSerializer} this.serializerclass.
+ * of {@link LocalIdentifiabilitySerializer} this.serializerclass.
  * 
  * @author simone
- * @see Event, {@link Timeline}, {@link LocalUniquenessSerializer},
+ * @see Event, {@link Timeline}, {@link LocalIdentifiabilitySerializer},
  *      {@link Serializable}
  *
  */
@@ -143,7 +143,7 @@ public class ConcreteTimeline implements Timeline {
 
 	private boolean dateBeforeCreation(GregorianCalendar date) {
 		try {
-			return date.before(this.getEvent(LocalUniquenessSerializer.FIRST_ID)
+			return date.before(this.getEvent(SerializerCollector.FIRST_ID)
 					.getDate());
 		} catch (NoSuchEventException e) {
 			throw new RuntimeException("Fatal error: creation not found");

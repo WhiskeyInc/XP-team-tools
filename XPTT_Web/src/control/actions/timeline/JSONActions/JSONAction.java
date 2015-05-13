@@ -17,7 +17,7 @@ import org.json.simple.parser.ParseException;
 
 import timeline.Event;
 import timeline.Timeline;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.SerializerCollector;
 import control.HttpAction;
 
 public abstract class JSONAction implements HttpAction {
@@ -32,7 +32,7 @@ public abstract class JSONAction implements HttpAction {
 				.getServletContext().getAttribute("environments");
 		String user = this.getFieldFromJson(json, "user");
 		ProjectsCollector collector = environviments.get(user);
-		Timeline timeline = collector.getProject(LocalUniquenessSerializer.FIRST_ID)
+		Timeline timeline = collector.getProject(SerializerCollector.FIRST_ID)
 				.getTimeline();
 		return timeline;
 	}

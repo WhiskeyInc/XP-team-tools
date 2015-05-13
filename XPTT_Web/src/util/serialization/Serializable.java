@@ -1,10 +1,10 @@
 package util.serialization;
 
 /**
- * Serializable class represents any subclass of {@link Object} that can
- * represented by an unique integer identifier
+ * Serializable class represents any object that can uniquely identified by an
+ * integer identifier
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  *
  */
 public class Serializable {
@@ -29,14 +29,5 @@ public class Serializable {
 	 */
 	public int getId() {
 		return this.id;
-	}
-	
-	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return super.toString()+" [id:"+this.id+"]";
 	}
 }

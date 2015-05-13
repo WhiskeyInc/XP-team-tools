@@ -1,8 +1,18 @@
 package util.serialization;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class GlobalUniquenessSerializer extends LocalUniquenessSerializer {
+/**
+ * This DP Singleton oriented implementation of {@link SerializerCollector}
+ * interface provides the same behavior of
+ * {@link LocalIdentifiabilitySerializer} but uses static access to object in
+ * order to ensure global identifiability for collected {@link Serializable}
+ * instaces
+ * 
+ * @author simone, lele, incre, andre
+ *
+ */
+public class GlobalUniquenessSerializer extends LocalIdentifiabilitySerializer {
 
 	private static GlobalUniquenessSerializer instance;
 
@@ -10,6 +20,12 @@ public class GlobalUniquenessSerializer extends LocalUniquenessSerializer {
 		super();
 	}
 
+	/**
+	 * Returns the static instance of this object, to be used for items
+	 * collection
+	 * 
+	 * @return
+	 */
 	public static GlobalUniquenessSerializer getInstance() {
 		if (instance != null) {
 			return instance;
@@ -35,7 +51,7 @@ public class GlobalUniquenessSerializer extends LocalUniquenessSerializer {
 	 * 
 	 * @see util.serialization.LocalUniquenessSerializer#getItems()
 	 */
-	public ArrayList<Serializable> getItems() {
+	public List<Serializable> getItems() {
 		return super.getItems();
 	}
 

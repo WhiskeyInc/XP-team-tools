@@ -3,17 +3,17 @@ package model.project;
 import java.util.ArrayList;
 
 import util.serialization.Serializable;
-import util.serialization.LocalUniquenessSerializer;
+import util.serialization.LocalIdentifiabilitySerializer;
 import util.serialization.SerializerCollector;
 
 /**
  * ProjectsManager class provides simple methods to manage a collection of
  * {@link Project} instances. It provides item addition, deletion and picking.
  * Moreover, to ensure data uniqueness, it also extends
- * {@link LocalUniquenessSerializer} this.serializerclass
+ * {@link LocalIdentifiabilitySerializer} this.serializerclass
  * 
  * @author simone
- * @see LocalUniquenessSerializer
+ * @see LocalIdentifiabilitySerializer
  *
  */
 public class ProjectsCollector {

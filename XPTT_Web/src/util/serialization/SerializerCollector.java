@@ -1,8 +1,21 @@
 package util.serialization;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public interface SerializerCollector{
+/**
+ * SerializerCollector interface provides simple methods to handle a collection
+ * of {@link Serializable} instances
+ * 
+ * @author simone
+ * @see Serializable
+ *
+ */
+public interface SerializerCollector {
+
+	/**
+	 * The integer identifier of the very first item collected in this object
+	 */
+	public static final int FIRST_ID = 0;
 
 	/**
 	 * Provides addition to the collection, including serialization
@@ -15,15 +28,15 @@ public interface SerializerCollector{
 	/**
 	 * Returns a list containing the whole set of items collected
 	 * 
-	 * @return: an {@link ArrayList} containing every item
+	 * @return: a {@link List} containing every item
 	 */
-	public ArrayList<Serializable> getItems();
+	public List<Serializable> getItems();
 
 	/**
-	 * Provides a simple method to access an item by its id
+	 * Provides a simple method to access an item by its identifier
 	 * 
 	 * @param id
-	 *            : the unique identifier for the desired item
+	 *            : the identifier for the desired item
 	 * @return: the item whose id matches with the parameter. If no such item
 	 *          can be found, the return value is null
 	 */
@@ -33,7 +46,7 @@ public interface SerializerCollector{
 	 * Provides a simple way to delete an item from this collection.
 	 * 
 	 * @param id
-	 *            : the unique identifier for the item to delete
+	 *            : the identifier for the item to delete
 	 */
 	public void deleteItem(int id);
 

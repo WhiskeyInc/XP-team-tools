@@ -2,23 +2,26 @@ package util.serialization;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * This class can represent a collector of {@link Serializable} object. It
- * provides basic operations and id uniqueness control
+ * This implementation of {@link SerializerCollector} interface provides proper
+ * behavior to all inherited methods and control for identifiability. This
+ * control works properlyonly if the collected objects refer to one
+ * single instance of {@link SerializerCollector}. Which means that when one
+ * {@link Serializable} intance happens to be collected in two or more different
+ * collectos, that may result in a identifiability failure.
  * 
- * @author simone
- *
- * @param <T>: the {@link Serializable} instances to collect
+ * @author simone, lele, incre, andre
  */
-public class LocalUniquenessSerializer implements SerializerCollector {
-
-	public static final int FIRST_ID = 0;
+public class LocalIdentifiabilitySerializer implements SerializerCollector {
 
 	private HashMap<Integer, Serializable> items = new HashMap<Integer, Serializable>();
 	private int nextEventId = FIRST_ID;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see util.serialization.SerializerCollectorr#addItem(T)
 	 */
 	@Override
@@ -28,17 +31,21 @@ public class LocalUniquenessSerializer implements SerializerCollector {
 		nextEventId++;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see util.serialization.SerializerCollectorr#getItems()
 	 */
 	@Override
-	public ArrayList<Serializable> getItems() {
+	public List<Serializable> getItems() {
 		ArrayList<Serializable> list = new ArrayList<Serializable>();
 		list.addAll(items.values());
 		return list;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see util.serialization.SerializerCollectorr#getItem(int)
 	 */
 	@Override
@@ -46,7 +53,9 @@ public class LocalUniquenessSerializer implements SerializerCollector {
 		return items.get(id);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see util.serialization.SerializerCollectorr#deleteItem(int)
 	 */
 	@Override
