@@ -139,7 +139,7 @@
 				</button>
 				<strong><i class="fa fa-fw fa-exclamation-triangle"></i>
 					Warning </strong>: Cannot perform action.
-				<%=exception.getMessage()%>
+				<%exception.printStackTrace();%>
 			</div>
 			<%
 				session.removeAttribute("exception");

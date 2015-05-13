@@ -2,19 +2,27 @@ package model.project;
 
 import java.util.ArrayList;
 
+import util.serialization.Serializable;
+import util.serialization.LocalUniquenessSerializer;
 import util.serialization.SerializerCollector;
 
 /**
  * ProjectsManager class provides simple methods to manage a collection of
  * {@link Project} instances. It provides item addition, deletion and picking.
  * Moreover, to ensure data uniqueness, it also extends
- * {@link SerializerCollector} superclass
+ * {@link LocalUniquenessSerializer} this.serializerclass
  * 
  * @author simone
- * @see SerializerCollector
+ * @see LocalUniquenessSerializer
  *
  */
-public class ProjectsCollector extends SerializerCollector<Project> {
+public class ProjectsCollector {
+
+	private SerializerCollector serializer;
+
+	public ProjectsCollector(SerializerCollector serializer) {
+		this.serializer = serializer;
+	}
 
 	/**
 	 * Adds a project to the collection
@@ -22,7 +30,7 @@ public class ProjectsCollector extends SerializerCollector<Project> {
 	 * @param project
 	 */
 	public void addProject(Project project) {
-		super.addItem(project);
+		this.serializer.addItem(project);
 	}
 
 	/**
@@ -33,7 +41,7 @@ public class ProjectsCollector extends SerializerCollector<Project> {
 	 * @return: the corresponding instance of {@link Project}
 	 */
 	public Project getProject(int id) {
-		return super.getItem(id);
+		return (Project) this.serializer.getItem(id);
 	}
 
 	/**
@@ -43,7 +51,7 @@ public class ProjectsCollector extends SerializerCollector<Project> {
 	 *            : an integer that uniquely identify the project
 	 */
 	public void deleteProject(int id) {
-		super.deleteItem(id);
+		this.serializer.deleteItem(id);
 	}
 
 	/**
@@ -52,7 +60,11 @@ public class ProjectsCollector extends SerializerCollector<Project> {
 	 * @return: an {@link ArrayList} containing each project
 	 */
 	public ArrayList<Project> getProjects() {
-		return super.getItems();
+		ArrayList<Project> list = new ArrayList<Project>();
+		for (Serializable item : this.serializer.getItems()) {
+			list.add((Project) item);
+		}
+		return list;
 	}
 
 }

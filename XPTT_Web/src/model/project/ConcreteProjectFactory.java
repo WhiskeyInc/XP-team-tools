@@ -8,6 +8,7 @@ import model.ProjectManager;
 import model.ProjectSettings;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -15,7 +16,7 @@ import boards.UserStoryBoard.UserStoriesManager;
 public class ConcreteProjectFactory implements ProjectFactory {
 
 	private Timeline timeline = new ConcreteTimeline(
-			TimeZone.getTimeZone("Europe/Rome"));
+			TimeZone.getTimeZone("Europe/Rome"), new LocalUniquenessSerializer() );
 	private ProjectSettings settings = new ConcreteProjectSettings();
 	private ProjectManager projectManager = new ConcreteTeamManager(settings,
 			timeline);

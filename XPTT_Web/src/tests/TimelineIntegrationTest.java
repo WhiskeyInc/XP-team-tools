@@ -15,6 +15,7 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -28,7 +29,8 @@ public class TimelineIntegrationTest {
 
 	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	private Timeline timeline = new ConcreteTimeline(
-			TimeZone.getTimeZone("Europe/Rome"));
+			TimeZone.getTimeZone("Europe/Rome"),
+			new LocalUniquenessSerializer());
 	private ProjectManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskManager = new ProjectTaskManager(
@@ -76,9 +78,9 @@ public class TimelineIntegrationTest {
 	@Test
 	public void developersAdditionCreateswEvent() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"), new TeamComponent(
-				"Lele", "Fabbiani", "Test"), new TeamComponent("Ale", "Incre",
-				"OpenSource"));
+		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"),
+				new TeamComponent("Lele", "Fabbiani", "Test"),
+				new TeamComponent("Ale", "Incre", "OpenSource"));
 		taskManager.addTask("timeline");
 		taskManager.addDevelopersToTask("timeline", "Simo Colucci",
 				"Lele Fabbiani", "Ale Incre");
@@ -123,8 +125,8 @@ public class TimelineIntegrationTest {
 		settings.setManager(teamManager);
 		settings.setPossibleTasksStates("TODO", "DONE");
 		settings.setPossibleUserStoriesStates("TODO", "DONE");
-		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"), new TeamComponent(
-				"Lele", "Fabbiani", "Test"));
+		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"),
+				new TeamComponent("Lele", "Fabbiani", "Test"));
 
 		Event creation = timeline.getEvent(0);
 		assertTrue(!creation.isEditable());

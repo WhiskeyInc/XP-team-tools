@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.MacroEvent;
+import util.serialization.LocalUniquenessSerializer;
 
 public class EventAdder extends DateHandlerAction {
 
@@ -40,10 +41,12 @@ public class EventAdder extends DateHandlerAction {
 								.generateEventDate(request), true));
 			} else {
 				super.getTimeline(request).addEvent(
-						new MacroEvent(eventName, this.generatefromEventDate(request), super
+						new MacroEvent(eventName, this
+								.generatefromEventDate(request), super
 								.generateEventDate(request),
 								new ConcreteTimeline(TimeZone
-										.getTimeZone("Europe/Rome"))));
+										.getTimeZone("Europe/Rome"),
+										new LocalUniquenessSerializer())));
 			}
 		} catch (Exception e) {
 			request.getSession().setAttribute("exception", e);

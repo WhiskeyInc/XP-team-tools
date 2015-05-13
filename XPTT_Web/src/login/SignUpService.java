@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.serialization.GlobalUniquenessSerializer;
 import model.ConcreteProjectSettings;
 import model.TeamComponent;
 import model.exceptions.NameAlreadyInUseException;
@@ -45,7 +46,8 @@ public class SignUpService extends AccountAction {
 	private void doRegister(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		users.put(userName, password);
-		ProjectsCollector projectsCollector = new ProjectsCollector();
+		ProjectsCollector projectsCollector = new ProjectsCollector(
+				GlobalUniquenessSerializer.getInstance());
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
@@ -55,7 +57,8 @@ public class SignUpService extends AccountAction {
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();
 		projectsCollector.addProject(project);
-		pendingProjects.put(userName, new ProjectsCollector());
+		pendingProjects.put(userName, new ProjectsCollector(
+				GlobalUniquenessSerializer.getInstance()));
 		environments.put(userName, projectsCollector);
 		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
 				.getServletContext().getAttribute("usersInfo");

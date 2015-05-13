@@ -20,6 +20,7 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -32,7 +33,9 @@ import boards.taskBoard.TaskManager;
 public class TeamManagerTest {
 
 	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
-	private Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
+	private Timeline timeline = new ConcreteTimeline(
+			TimeZone.getTimeZone("Europe/Rome"),
+			new LocalUniquenessSerializer());
 	private ProjectManager teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskBoard = new ProjectTaskManager(
@@ -66,14 +69,15 @@ public class TeamManagerTest {
 	@Test
 	public void developersAddedTest() throws Exception {
 		settings.setManager(teamManager);
-		settings.addTeamMember(new TeamComponent("Al", "I", "Boh"), new TeamComponent("Lele",
-				"F", "Tutto"), new TeamComponent("Boh", "BohBoh", "niente"));
+		settings.addTeamMember(new TeamComponent("Al", "I", "Boh"),
+				new TeamComponent("Lele", "F", "Tutto"), new TeamComponent(
+						"Boh", "BohBoh", "niente"));
 		teamManager.developersAdded(new Task("Timeline"), "Lele F", "Ale I");
 		timeline.addEvent(new Event("Evento nuovo", new GregorianCalendar(2050,
 				11, 15, 22, 22, 22), true));
 		assertEquals(4, timeline.getEventsNumber());
-		assertEquals("Developers added to task Timeline: Lele F Ale I ", timeline
-				.getEvent(2).toString());
+		assertEquals("Developers added to task Timeline: Lele F Ale I ",
+				timeline.getEvent(2).toString());
 		assertEquals("Evento nuovo", timeline.getEvent(3).toString());
 	}
 

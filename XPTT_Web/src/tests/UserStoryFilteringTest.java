@@ -11,6 +11,7 @@ import model.ProjectManager;
 import org.junit.Test;
 
 import timeline.ConcreteTimeline;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -24,7 +25,8 @@ public class UserStoryFilteringTest {
 
 	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	private ProjectManager teammanager = new ConcreteTeamManager(settings,
-			new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome")));
+			new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"),
+					new LocalUniquenessSerializer()));
 	private UserStoriesManager userStoriesBoard = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teammanager);
 

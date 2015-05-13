@@ -13,6 +13,7 @@ import org.junit.Test;
 import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
+import util.serialization.LocalUniquenessSerializer;
 import filtering.TargetFilter;
 import filtering.checkers.NameEventChecker;
 import filtering.checkers.ParticipantsEventChecker;
@@ -20,7 +21,9 @@ import filtering.checkers.PeriodEventChecker;
 
 public class EventFilteringTests {
 
-	Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
+	Timeline timeline = new ConcreteTimeline(
+			TimeZone.getTimeZone("Europe/Rome"),
+			new LocalUniquenessSerializer());
 
 	@Test
 	public void DateEventFilterTest() throws InvalidDateException {
@@ -68,10 +71,10 @@ public class EventFilteringTests {
 
 	@Test
 	public void NameEventFilterTest() throws InvalidDateException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02, 20,
-				23, 3, 50), true));
-		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020, 01,
-				10, 23, 3, 50), true));
+		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
+				20, 23, 3, 50), true));
+		timeline.addEvent(new Event("OtherEvent", new GregorianCalendar(2020,
+				01, 10, 23, 3, 50), true));
 		timeline.addEvent(new Event("SomeEvent somewhere...",
 				new GregorianCalendar(2020, 02, 20, 23, 3, 50), true));
 		assertEquals(

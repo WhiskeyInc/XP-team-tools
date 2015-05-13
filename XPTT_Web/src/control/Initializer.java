@@ -19,6 +19,8 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.MacroEvent;
 import timeline.Timeline;
+import util.serialization.GlobalUniquenessSerializer;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 
@@ -44,7 +46,8 @@ public class Initializer extends HttpServlet {
 		users.put("admin", "1789");
 		HashMap<String, ProjectsCollector> environments = new HashMap<String, ProjectsCollector>();
 		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
-		ProjectsCollector testCollector = new ProjectsCollector();
+		ProjectsCollector testCollector = new ProjectsCollector(
+				GlobalUniquenessSerializer.getInstance());
 		Project project = new Project("xTrEAM", new ConcreteProjectFactory(),
 				"A debugger for this very application");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
@@ -95,7 +98,8 @@ public class Initializer extends HttpServlet {
 
 		} catch (Exception e1) {
 		}
-		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault());
+		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault(),
+				new LocalUniquenessSerializer());
 		MacroEvent macro;
 		try {
 			macro = new MacroEvent("Third Release", new GregorianCalendar(2015,

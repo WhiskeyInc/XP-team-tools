@@ -23,7 +23,7 @@ public class ProjectInviter implements HttpAction {
 		System.out.println(invitedUser + " will be invited to "
 				+ currentProject + " [" + currentProject.getId() + " ]");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
-				.getServletContext().getAttribute("pendingProjects");
+				.getServletContext().getAttribute("environments");
 		ProjectsCollector projects = pendingProjects.get(invitedUser);
 		projects.addProject(currentProject);
 		System.out.println(invitedUser + " invited to " + currentProject + " ["

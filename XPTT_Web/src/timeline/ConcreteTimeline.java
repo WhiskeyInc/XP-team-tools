@@ -10,38 +10,39 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import util.serialization.Serializable;
+import util.serialization.LocalUniquenessSerializer;
 import util.serialization.SerializerCollector;
 import filtering.Filter;
 
 /**
  * This implementation of {@link Timeline} interface provides uniqueness control
  * for the events to be collected. This is guaranteed by the inherited methods
- * of {@link SerializerCollector} superclass.
+ * of {@link LocalUniquenessSerializer} this.serializerclass.
  * 
  * @author simone
- * @see Event, {@link Timeline}, {@link SerializerCollector},
+ * @see Event, {@link Timeline}, {@link LocalUniquenessSerializer},
  *      {@link Serializable}
  *
  */
-public class ConcreteTimeline extends SerializerCollector<Event> implements
-		Timeline {
+public class ConcreteTimeline implements Timeline {
 
 	/**
 	 * The name of the event matching with this object's creation itself
 	 */
 	public static final String DEFAULT_CREATION_EVENT = "creation";
+	private SerializerCollector serializer;
 
 	/**
 	 * Creates a new instance of this class. When created, it will be
 	 * automatically added and event to take note of this creation itself
 	 */
-	public ConcreteTimeline(TimeZone locale) {
+	public ConcreteTimeline(TimeZone locale, SerializerCollector serializer) {
+		this.serializer = serializer;
 		GregorianCalendar creationDate = (GregorianCalendar) Calendar
 				.getInstance(locale);
 		Event event = new Event(DEFAULT_CREATION_EVENT, creationDate, false);
-		super.addItem(event);
+		this.serializer.addItem(event);
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -50,7 +51,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	 */
 	@Override
 	public int getEventsNumber() {
-		return super.getItems().size();
+		return this.serializer.getItems().size();
 	}
 
 	/*
@@ -61,7 +62,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
 		validateDate(event.getDate());
-		super.addItem(event);
+		this.serializer.addItem(event);
 	}
 
 	/*
@@ -73,9 +74,9 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	public void deleteEvent(int eventId) throws NoSuchEventException,
 			UnEditableEventException {
 		this.validateEvent(eventId);
-		Event event = super.getItem(eventId);
+		Event event = (Event) this.serializer.getItem(eventId);
 		if (event.isEditable()) {
-			super.deleteItem(eventId);
+			this.serializer.deleteItem(eventId);
 			return;
 		}
 		throw new UnEditableEventException(event.toString());
@@ -93,7 +94,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 			InvalidDateException {
 		this.validateDate(newDate);
 		this.validateEvent(eventId);
-		super.getItem(eventId).setDate(newDate);
+		((Event) this.serializer.getItem(eventId)).setDate(newDate);
 	}
 
 	/*
@@ -104,7 +105,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	@Override
 	public Event getEvent(int eventId) throws NoSuchEventException {
 		this.validateEvent(eventId);
-		return super.getItem(eventId);
+		return (Event) this.serializer.getItem(eventId);
 	}
 
 	/*
@@ -115,7 +116,9 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	@Override
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
 		ArrayList<Event> filteredAndSortedEvents = new ArrayList<Event>();
-		filteredAndSortedEvents.addAll(super.getItems());
+		for (Serializable item : this.serializer.getItems()) {
+			filteredAndSortedEvents.add((Event) item);
+		}
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
 		Collections.sort(filteredAndSortedEvents);
 		return filteredAndSortedEvents;
@@ -128,7 +131,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 	}
 
 	private boolean eventExists(int eventId) {
-		return (super.getItem(eventId) != null);
+		return (this.serializer.getItem(eventId) != null);
 	}
 
 	private void validateDate(GregorianCalendar date)
@@ -140,7 +143,7 @@ public class ConcreteTimeline extends SerializerCollector<Event> implements
 
 	private boolean dateBeforeCreation(GregorianCalendar date) {
 		try {
-			return date.before(this.getEvent(SerializerCollector.FIRST_ID)
+			return date.before(this.getEvent(LocalUniquenessSerializer.FIRST_ID)
 					.getDate());
 		} catch (NoSuchEventException e) {
 			throw new RuntimeException("Fatal error: creation not found");

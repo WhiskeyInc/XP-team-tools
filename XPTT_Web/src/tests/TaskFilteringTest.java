@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
+import util.serialization.LocalUniquenessSerializer;
 import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
@@ -28,7 +29,9 @@ public class TaskFilteringTest {
 
 	ConcreteProjectSettings settings = new ConcreteProjectSettings();
 	ConcreteTaskManager taskBoard = new ConcreteTaskManager();
-	Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"));
+	Timeline timeline = new ConcreteTimeline(
+			TimeZone.getTimeZone("Europe/Rome"),
+			new LocalUniquenessSerializer());
 	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
 	ProjectManager manager = new ConcreteTeamManager(settings, timeline);
 	UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
@@ -69,7 +72,8 @@ public class TaskFilteringTest {
 	public void DeveloperTaskFilterTest() throws Exception {
 		settings.setManager(manager);
 		settings.addTeamMember(new TeamComponent("Simone", "C", "DP"));
-		settings.addTeamMember(new TeamComponent("Lele", "Fabs", "Tester"), new TeamComponent("Al", "Incre", "OS"));
+		settings.addTeamMember(new TeamComponent("Lele", "Fabs", "Tester"),
+				new TeamComponent("Al", "Incre", "OS"));
 		teamTaskManager.addTask("Filtro");
 		teamTaskManager.addTask("Bacheca");
 		teamTaskManager.addTask("Nessun Partecipante");
