@@ -10,24 +10,23 @@ import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
 import util.serialization.Serializable;
-import util.serialization.LocalIdentifiabilitySerializer;
 import util.serialization.SerializerCollector;
 import filtering.Filter;
 
 /**
  * This implementation of {@link Timeline} interface provides uniqueness control
- * for the events to be collected. This is guaranteed by the inherited methods
- * of {@link LocalIdentifiabilitySerializer} this.serializerclass.
+ * for the events to be collected. This is guaranteed by using
+ * {@link SerializerCollector} interface to perform events storage
  * 
- * @author simone
- * @see Event, {@link Timeline}, {@link LocalIdentifiabilitySerializer},
+ * @author simone, lele, incre, andre
+ * @see Event, {@link Timeline}, {@link SerializerCollector},
  *      {@link Serializable}
  *
  */
 public class ConcreteTimeline implements Timeline {
 
 	/**
-	 * The name of the event matching with this object's creation itself
+	 * The name of the event matching with this object's creation
 	 */
 	public static final String DEFAULT_CREATION_EVENT = "creation";
 	private SerializerCollector serializer;

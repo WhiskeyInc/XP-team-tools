@@ -1,8 +1,10 @@
-package timeline;
+package timeline.events;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import timeline.Event;
+import timeline.Timeline;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;

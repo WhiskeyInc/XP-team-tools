@@ -11,9 +11,9 @@ import model.exceptions.InvalidDateException;
 
 import org.json.simple.JSONObject;
 
-import timeline.AutomaticEvent;
 import timeline.Event;
 import timeline.Timeline;
+import timeline.events.AutomaticEvent;
 
 public class AutomaticEventAdderFromJSON extends JSONAction {
 

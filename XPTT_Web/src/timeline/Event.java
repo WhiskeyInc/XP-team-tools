@@ -8,13 +8,13 @@ import model.exceptions.UnEditableEventException;
 import util.serialization.Serializable;
 
 /**
- * This class represent an event which has five characteristics: an
- * id(exclusive), a name (mandatory), a date, stored with the precision of a
- * second, a list of participant and a flag which indicates whether its date can
- * be changed or not. The default values for this flag is TRUE: it means the
- * date can be modified if not differently specified in the constructor. Event
- * class implements {@link Comparable} interface to provide sorting operations,
- * and extends {@link Serializable} superclass to accept serialization
+ * This class represent an event which has five characteristics: an id
+ * (exclusive), a name (mandatory), a date, stored with the precision of a
+ * second, a list of participant and a flag which indicates whether it's
+ * editable or not. The default value for this flag is TRUE: it means the evente
+ * can be modified if not differently specified in the constructor. Event class
+ * implements {@link Comparable} interface to provide sorting operations, and
+ * extends {@link Serializable} superclass to accept serialization
  * 
  * @author lele, simo, ale, andre
  * @see Serializable
@@ -126,6 +126,13 @@ public class Event extends Serializable implements Comparable<Event> {
 		return this.editable;
 	}
 
+	/**
+	 * Sets this event to be uneditable from now on
+	 */
+	public void setUneditable() {
+		this.editable = false;
+	}
+
 	@Override
 	/*
 	 * (non-Javadoc)
@@ -145,9 +152,4 @@ public class Event extends Serializable implements Comparable<Event> {
 	public String toString() {
 		return this.name;
 	}
-
-	public void setUneditable() {
-		this.editable = false;
-	}
-
 }

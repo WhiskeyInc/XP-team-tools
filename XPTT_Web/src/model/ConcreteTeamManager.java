@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.TimeZone;
 
 import model.exceptions.InvalidDateException;
-import timeline.AutomaticEvent;
 import timeline.Event;
 import timeline.Timeline;
+import timeline.events.AutomaticEvent;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.Task;
 

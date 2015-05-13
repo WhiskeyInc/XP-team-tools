@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import timeline.ConcreteTimeline;
 import timeline.Event;
-import timeline.MacroEvent;
+import timeline.events.MacroEvent;
 import util.serialization.LocalIdentifiabilitySerializer;
 
 public class EventAdder extends DateHandlerAction {

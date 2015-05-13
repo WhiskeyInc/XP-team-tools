@@ -16,7 +16,7 @@ import filtering.Filter;
  * interface. Since {@link Event} extends {@link Serializable} the access to a
  * collected event is made by its identifier
  * 
- * @author simone
+ * @author simone, lele, andre, incre
  * @see Event
  *
  */

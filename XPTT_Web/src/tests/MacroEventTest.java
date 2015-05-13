@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import timeline.ConcreteTimeline;
 import timeline.Event;
-import timeline.MacroEvent;
+import timeline.events.MacroEvent;
 import util.serialization.LocalIdentifiabilitySerializer;
 import util.serialization.SerializerCollector;
 

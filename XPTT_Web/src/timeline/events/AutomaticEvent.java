@@ -1,14 +1,16 @@
-package timeline;
+package timeline.events;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import timeline.Event;
+
 /**
  * AutomaticEvent class represents a particular event that happens to be created
- * automatically.
+ * automatically. Since that, the only relevant information is about its title
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  * @see Event
  *
  */
