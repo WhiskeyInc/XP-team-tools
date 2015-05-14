@@ -19,6 +19,12 @@ import client.model.MessageObservable;
 import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
+/**
+ * A class that launchs the UI for the private chat when it receives a notification 
+ * from the Observable object @MessageObservable
+ * 
+ *
+ */
 public class NewChatInviteLauncher implements Observer {
 
 	private StrategyClient1_1 client;
@@ -45,7 +51,6 @@ public class NewChatInviteLauncher implements Observer {
 
 			@Override
 			public void run() {
-				// IClientService serviceTimeStamp = new SetTimeStampService();
 				System.err.println(index+ " "+ NewChatInviteLauncher.class);
 				System.err.println(EventQueue.isDispatchThread() + " " + NewChatInviteLauncher.class);
 				System.err.println(index + " " + NewChatInviteLauncher.class);
@@ -63,12 +68,12 @@ public class NewChatInviteLauncher implements Observer {
 	private void launchUI() {
 		final String nickname = Formatter.formatNickname(client
 				.getNickname());
-		UIObserverStrategy1 ui = new UIObserverStrategy1(
+		PrivateChaTimerUi ui = new PrivateChaTimerUi(
 				serviceMessage, serviceTimeStamp, client, index);
 		final ChatUI chatUI = ui.getChatUI();
 		final TimerUI timerUI = ui.getTimerUI();
 		System.err.println("L' indice della chat è : " + index + " ["
-				+ MainUIObserver.class + "]");
+				+ ChaTimerUI.class + "]");
 		// Controlla conferma data dal server in caso è fallito l'add...
 
 		final String teamName = client.getTeamName();
@@ -126,11 +131,7 @@ public class NewChatInviteLauncher implements Observer {
 try {
 	SwingUtilities.invokeAndWait(runnable);
 } catch (InvocationTargetException | InterruptedException e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-System.err.println("Sono il thread " + Thread.currentThread().getName()
-		+ " - L'EDT ha aggiornato la GUI :-)");
-
 	}
 }

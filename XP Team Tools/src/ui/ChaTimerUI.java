@@ -30,11 +30,13 @@ import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
 /**
- * The UI of the chat: it's composed of a @ChatUI and a @TimerUI
+ * The main UI: it's composed of a @ChatUI and a @TimerUI
+ * 
+ * @author : Alberto, Alessandro
  * 
  */
 
-public class MainUIObserver extends JFrame implements Observer {
+public class ChaTimerUI extends JFrame implements Observer {
 
 	/**
 	 * 
@@ -51,7 +53,7 @@ public class MainUIObserver extends JFrame implements Observer {
 	private JPanel loadingPanel = new JPanel();
 
 	
-	public MainUIObserver(final IClientService[] services,
+	public ChaTimerUI(final IClientService[] services,
 			IListService setTeamMembs, final StrategyClient1_1 client, int index, String[] teamMembs) {
 		super();
 		this.setTeamMembs = setTeamMembs;
@@ -175,18 +177,14 @@ public class MainUIObserver extends JFrame implements Observer {
 	}
 
 	public void refresh() {
-		// super.getContentPane().invalidate();
 		super.getContentPane().revalidate();
-		// super.getContentPane().repaint();
 		super.revalidate();
-		// super.repaint();
 	}
 
 	private String[] nicksFilter(StrategyClient1_1 client) {
 		String[] membs = setTeamMembs.getMembs();
 		if (membs != null) {
 			String[] membsWithoutMe = new String[membs.length - 1];
-			// if (membsWithoutMe != null) {
 			int i = 0;
 			for (String nick : membs) {
 				if (!nick.equals(client.getNickname())) {
@@ -196,7 +194,6 @@ public class MainUIObserver extends JFrame implements Observer {
 			}
 			return membsWithoutMe;
 
-			// }
 		} else {
 		}
 		return null;

@@ -20,11 +20,13 @@ import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
 /**
- * A part of UI of the chat: it's made of a @ChatUI and a @TimerUI
+ * The UI for private chats, which is shown when a user select a list of team-members and
+ * starts the chat
+ * 
  * 
  */
 
-public class UIObserverStrategy1 extends JFrame {
+public class PrivateChaTimerUi extends JFrame {
 
 	/**
 	 * 
@@ -37,7 +39,7 @@ public class UIObserverStrategy1 extends JFrame {
 	private JPanel panel = new JPanel();
 	private JPanel loadingPanel = new JPanel();
 	
-	public UIObserverStrategy1(final IClientService setMessage,
+	public PrivateChaTimerUi(final IClientService setMessage,
 			final IClientService setTimeStamp, final StrategyClient1_1 client,
 			 final int index) {
 		super();

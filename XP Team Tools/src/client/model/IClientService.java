@@ -4,7 +4,7 @@ import java.util.Observable;
 
 
 /**
- *  Abtraction for generic client' s service
+ *  Abstraction for generic client' s service
  * @author alberto
  *
  */

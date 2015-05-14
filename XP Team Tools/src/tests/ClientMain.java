@@ -36,7 +36,7 @@ import client.model.StrategyClient1_1;
  *
  *
  */
-public class MultipleChatClientMain {
+public class ClientMain {
 	public static void main(String[] args) {
 
 		final MainLoginUI ui = new MainLoginUI();

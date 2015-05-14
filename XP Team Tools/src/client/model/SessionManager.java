@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.ChatUI;
-import ui.UIObserverStrategy1;
+import ui.ChaTimerUI;
+import ui.PrivateChaTimerUi;
 
 public class SessionManager {
 
 	private  Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
 	private  static SessionManager instance = new SessionManager();
-	private volatile Map<Integer, UIObserverStrategy1> uiMap = new HashMap<Integer, UIObserverStrategy1>();
+	private volatile Map<Integer, PrivateChaTimerUi> uiMap = new HashMap<Integer, PrivateChaTimerUi>();
 	
-	//NB deve essere uguale a quella in NewChatService
 	public static final int NUM_OF_MESSAGES = 10;
 
 	
@@ -20,7 +20,6 @@ public class SessionManager {
 		super();
 	}
 	
-	// only for test multiples client on the same pc
 	public SessionManager(Map<Integer, Boolean> chatOpenMap) {
 		super();
 	}
@@ -58,9 +57,10 @@ public class SessionManager {
 		uiMap.get(index).requestFocus();
 	}
 	
-	public void registerUI(int index, UIObserverStrategy1 ui) {
+	public void registerUI(int index, PrivateChaTimerUi ui) {
 		uiMap.put(index, ui);
 	}
+	
 	//Temporary solution: nb it is "server-unsafe" and it make visible the changes
 	//TODO bufferize la classe chat e aggiungere tipo un metodo flush()
 	public void emptyChatUI(int index) {

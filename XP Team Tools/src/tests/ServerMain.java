@@ -21,7 +21,7 @@ import server.model.TeamsManager;
 import server.model.TimerService1_1;
 import server.model.TimersManager;
 
-public class StrategyServerMain1O {
+public class ServerMain {
 	public static void main(String[] args) {
 		
 

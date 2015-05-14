@@ -29,7 +29,7 @@ import org.json.simple.parser.ParseException;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
-import tests.MultipleChatClientMain;
+import tests.ClientMain;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 import client.model.IClientService;
@@ -239,11 +239,11 @@ public class TeamListUI extends JFrame {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							MainUIObserver ui = new MainUIObserver(services,
+							ChaTimerUI ui = new ChaTimerUI(services,
 									serviceTeamMembs, client, index, membs);
 
 							System.err.println(EventQueue.isDispatchThread()
-									+ " " + MultipleChatClientMain.class);
+									+ " " + ClientMain.class);
 							final ChatUI chatUI = ui
 									.getChatUI();
 							final TimerUI timerUI = ui

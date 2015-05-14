@@ -3,8 +3,7 @@ package client.model;
 import java.util.Observable;
 
 /**
- * This class manages the message (i.e. the countdown) shown on display of @TimerUI, by using the 
- * update method, informs the Observer (TimerUI) that the message is changed
+ * This Observable class notify the Observer that the message is changed
  * 
  *
  */
