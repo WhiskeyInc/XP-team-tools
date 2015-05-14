@@ -14,9 +14,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * The UI of the login, it extends JPanel To be corrected set up TODO
+ * The UI of the login
  * 
- * @author koelio
+ * @author pavlo
  *
  */
 public class RegUI extends JPanel {

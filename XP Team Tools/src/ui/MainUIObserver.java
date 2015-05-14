@@ -30,7 +30,7 @@ import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
 /**
- * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUI}
+ * The UI of the chat: it's composed of a @ChatUI and a @TimerUI
  * 
  */
 
@@ -41,8 +41,8 @@ public class MainUIObserver extends JFrame implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final ChatUIObserverStrategy1 chatUI;
-	private final TimerUIObserverStrategy timerUI;
+	private final ChatUI chatUI;
+	private final TimerUI timerUI;
 	private final UserListUI userListUI;
 	private IListService setTeamMembs;
 	private JPanel mainPanel;
@@ -50,18 +50,16 @@ public class MainUIObserver extends JFrame implements Observer {
 	private LoadingPanel lp = new LoadingPanel("Loading");
 	private JPanel loadingPanel = new JPanel();
 
-	// setMessage = 0
-	// setTimeStamp = 1
-	// newChat = 2
+	
 	public MainUIObserver(final IClientService[] services,
 			IListService setTeamMembs, final StrategyClient1_1 client, int index, String[] teamMembs) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
 		this.client = client;
-		this.chatUI = new ChatUIObserverStrategy1(
+		this.chatUI = new ChatUI(
 				(MessageObservable) services[0].getAttribute(index), client);
-		this.timerUI = new TimerUIObserverStrategy(
+		this.timerUI = new TimerUI(
 				(MessageObservable) services[1].getAttribute(index));
 		this.userListUI = new UserListUI();
 		super.addWindowListener(new WindowAdapter() {
@@ -149,11 +147,11 @@ public class MainUIObserver extends JFrame implements Observer {
 		userListUI.setButtonAction(actionListener);
 	}
 
-	public TimerUIObserverStrategy getTimerUI() {
+	public TimerUI getTimerUI() {
 		return timerUI;
 	}
 
-	public ChatUIObserverStrategy1 getChatUI() {
+	public ChatUI getChatUI() {
 		return chatUI;
 	}
 
@@ -191,7 +189,6 @@ public class MainUIObserver extends JFrame implements Observer {
 			// if (membsWithoutMe != null) {
 			int i = 0;
 			for (String nick : membs) {
-				System.out.println(nick + " " + MainUIObserver.class);
 				if (!nick.equals(client.getNickname())) {
 					membsWithoutMe[i] = nick;
 					i++;
@@ -201,7 +198,6 @@ public class MainUIObserver extends JFrame implements Observer {
 
 			// }
 		} else {
-			System.err.println("membs è null");
 		}
 		return null;
 	}

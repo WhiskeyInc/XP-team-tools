@@ -15,6 +15,15 @@ import server.events.IEventActionRequest;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 
+/**
+ * This class makes the Timer Service concrete, by overriding the abstract method doAction in @IService:
+ * it starts the timer making a division by groups (the timer is synchronized only with members of the 
+ * same team)
+ * 
+ * 
+ * @author 
+ *
+ */
 public class TimerService1_1 implements IService {
 
 	private ChatsManager chatsManager;
@@ -33,13 +42,6 @@ public class TimerService1_1 implements IService {
 		this.eventSender = eventSender;
 	}
 
-	/**
-	 * 
-	 * It starts the timer making a division by groups (the timer is
-	 * synchronized only with members of the same team)
-	 * 
-	 * @param teamName
-	 */
 	@Override
 	public void doAction(String request) throws IOException,
 			ParseException {

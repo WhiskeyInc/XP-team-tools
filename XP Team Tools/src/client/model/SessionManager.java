@@ -3,7 +3,7 @@ package client.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import ui.ChatUIObserverStrategy1;
+import ui.ChatUI;
 import ui.UIObserverStrategy1;
 
 public class SessionManager {
@@ -65,7 +65,7 @@ public class SessionManager {
 	//TODO bufferize la classe chat e aggiungere tipo un metodo flush()
 	public void emptyChatUI(int index) {
 		if(uiMap.containsKey(index)) {
-			ChatUIObserverStrategy1 ui = uiMap.get(index).getChatUI();
+			ChatUI ui = uiMap.get(index).getChatUI();
 			String text = ui.getChatAreaText();
 			String[] textSplitted = text.split("\n");
 			String newText = "";

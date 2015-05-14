@@ -5,6 +5,12 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+/**
+ * A class which concrete methods which allows the connection to database 
+ * 
+ * @author
+ *
+ */
 public class DBConnection implements IDBConnection {
 
 	private final MysqlDataSource dataSource;

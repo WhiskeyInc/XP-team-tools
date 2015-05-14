@@ -87,16 +87,6 @@ public class UserListUIBox extends JPanel {
 		int size = nicknames.length;
 		nicksPanel.removeAll();
 		nicksPanel.setLayout(new GridLayout(size, 1));
-		// Spostare su un altro pannello...
-		// super.setLayout(new GridBagLayout());
-		// GridBagConstraints lim = new GridBagConstraints();
-		// lim.gridx = 0;
-		// lim.gridy = 0;
-		// JLabel label = new JLabel("Team members");
-		// label.setFont(new Font("TimesRoman", Font.BOLD, 16));
-		// lim.insets = new Insets(5, 5, 5, 5);
-		// super.add(label, lim);
-		// // fino a qua
 		box.clear();
 		for (int i = 0; i < size; i++) {
 			box.add(new JCheckBox(nicknames[i]));

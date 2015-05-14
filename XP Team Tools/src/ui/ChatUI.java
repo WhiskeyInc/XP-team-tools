@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -7,6 +8,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,14 +18,22 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.ScrollBarUI;
 import javax.swing.text.DefaultCaret;
+
+import string.formatter.Formatter;
+import client.model.MessageObservable;
+import client.model.StrategyClient1_1;
 /**
- * The UI of the chat, it extend JPanel
+ * The UI of the chat, it includes a TextArea where it's possible write actions and 
+ * an other TextArea where sent messages are displayed (this class is an Observer)
+ * 
  * @author alberto
  *
  */
-public class ChatUI extends JPanel{
+public class ChatUI extends JPanel implements Observer{
 
 	/**
 	 * 
@@ -29,18 +41,32 @@ public class ChatUI extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JPanel topButPanel = new JPanel();
 	protected JButton sendMessage = new JButton("SEND");
+	protected JGradientButton meetingButton = new JGradientButton("+ Schedule a Meeting");
 	private JTextArea chatArea;
 	protected JTextArea messageArea = new JTextArea();
 	
+	private StrategyClient1_1 client;
+	private MessageObservable messageObs;
 	
-	public ChatUI() {
+	public ChatUI(MessageObservable messageObs, StrategyClient1_1 client) {
+		this.client = client;
+		this.messageObs = messageObs;
+		messageObs.addObserver(this);
 		createChatArea();
+		messageArea.setWrapStyleWord(true);
 		messageArea.setLineWrap(true);
 		messageArea.requestFocus();
-		messageArea.setWrapStyleWord(true);
 		messageArea.setFont(new Font("TimesRoman", Font.ITALIC, 13));
 		messageArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
 		         null, "Write a message",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
+		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Chat panel",
 		         TitledBorder.DEFAULT_JUSTIFICATION,
 		         TitledBorder.DEFAULT_POSITION,
 		         new java.awt.Font("Verdana", 1, 8)
@@ -54,9 +80,14 @@ public class ChatUI extends JPanel{
 		super.setLayout(layout);
 		
 		setTopButPaneConstraints(lim);
-		Dimension dim = new Dimension(100, 50);
+		Dimension dim = new Dimension(200, 50);
 		setTopButPaneDim(dim);
-		// for example : topButPanel.add(new JButton());
+		
+		
+		meetingButton.setColor(Color.YELLOW);
+		topButPanel.setLayout(new BorderLayout());
+		topButPanel.add(meetingButton, BorderLayout.CENTER);
+		
 		super.add(topButPanel, lim);
 		
 		setChatPaneConstraints(lim);
@@ -79,12 +110,17 @@ public class ChatUI extends JPanel{
 		JScrollPane chatPane = new JScrollPane(chatArea);
 		chatPane.setMinimumSize(dim);
 		chatPane.setPreferredSize(dim);
+		chatPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		chatPane.getVerticalScrollBar().setUI(new MyScrollbarUI());
 		return chatPane;
 	}
 	private JScrollPane createVerticalJScrollPane() {
 		JScrollPane messagePane = new JScrollPane(messageArea,
 		ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		messagePane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		messagePane.getVerticalScrollBar().setUI(new MyScrollbarUI());
+	
 		return messagePane;
 	}
 	private void setSendMessageButtonProperties(Dimension dim) {
@@ -129,11 +165,11 @@ public class ChatUI extends JPanel{
 		chatArea = new JTextArea();
 		chatArea.setEditable(false);
 		chatArea.setLineWrap(true);
-		chatArea.setWrapStyleWord(true);
 		chatArea.setBackground(new Color(248, 244, 255));
+		chatArea.setWrapStyleWord(true);
 		chatArea.setFont(new Font("TimesRoman", Font.ITALIC, 16));
 		chatArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
-		         null, "Team's Chat",
+		         null, client.getTeamName(),
 		         TitledBorder.DEFAULT_JUSTIFICATION,
 		         TitledBorder.DEFAULT_POSITION,
 		         new Font("Verdana", 1, 11)
@@ -143,7 +179,6 @@ public class ChatUI extends JPanel{
 		DefaultCaret caret = (DefaultCaret)chatArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 	}
-	
 	/**
 	 * Set the chat area text
 	 * @param text
@@ -202,5 +237,36 @@ public class ChatUI extends JPanel{
 	 */
 	public JPanel getTopButPanel() {
 		return topButPanel;
+	}
+	
+	/**
+	 * Set the ActionListener of the sendMessage button
+	 * @param actionListener
+	 */
+	public void setButtonMeeting(ActionListener actionListener) {
+		meetingButton.addActionListener(actionListener);
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		//NB garbage collector sarà contento?
+		//TODO pensare a qualche altra soluzione
+		Runnable runnable = new Runnable() {
+			
+			@Override
+			public void run() {
+				appendChatAreaText(Formatter.appendNewLine(messageObs.getMessage()));
+			}
+		};
+		try {
+			SwingUtilities.invokeAndWait(runnable);
+		} catch (InvocationTargetException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeObservers() {
+		messageObs.deleteObservers();
 	}
 }

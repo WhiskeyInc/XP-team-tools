@@ -26,7 +26,7 @@ import javax.swing.ScrollPaneConstants;
 import com.qt.datapicker.DatePicker;
 
 /**
- * Class to ask details of a meeting to the user, made using the DatePicker library
+ * Class to ask details of a meeting to the user, made using DatePicker library
  * @author Nicola
  */
 public class MeetingUIDetails extends JPanel {
@@ -66,7 +66,6 @@ public class MeetingUIDetails extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// instantiate the DatePicker
 				DatePicker dp = new DatePicker(dateField, locale);
-				// previously selected date
 				Date selectedDate = dp.parseDate(dateField.getText());
 				dp.setSelectedDate(selectedDate);
 				dp.start(dateField);
@@ -162,7 +161,6 @@ class ObservingTextField extends JTextField implements Observer {
 	public void update(Observable o, Object arg) {
 		Calendar calendar = (Calendar) arg;
 		DatePicker dp = (DatePicker) o;
-		//System.out.println("picked=" + dp.formatDate(calendar));
 		setText(dp.formatDate(calendar));
 	}
 }

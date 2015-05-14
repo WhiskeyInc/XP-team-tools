@@ -9,8 +9,8 @@ import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import ui.ChatUIObserverStrategy1;
-import ui.TimerUIObserverStrategy;
+import ui.ChatUI;
+import ui.TimerUI;
 import ui.UIObserverStrategy1;
 import client.model.ClientConnectionDetails;
 import client.model.IClientService;
@@ -70,8 +70,8 @@ public class StrategyClientMain4O {
 				+ StrategyClient1_1.class + "]");
 		UIObserverStrategy1 ui = new UIObserverStrategy1(serviceMessage,
 				serviceTimeStamp, client, index);
-		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
-		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
+		final ChatUI chatUI = ui.getChatUI();
+		final TimerUI timerUI = ui.getTimerUI();
 
 		client.sendMessageToServer(JsonMaker.addTeamMembRequest(client
 				.getClientDetails()));

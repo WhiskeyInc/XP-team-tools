@@ -10,11 +10,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.ChatUI;
-import ui.TimerUI;
-
 /**
- * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUI}
+ *
  * 
  * @author Alberto
  *
@@ -49,7 +46,6 @@ public class MainLoginUI extends JFrame {
 		lim.gridx = 0;
 		lim.gridy = 0;
 		lim.insets = new Insets(10, 10, 10, 10);
-		// lim.anchor = GridBagConstraints.ABOVE_BASELINE;
 
 		super.getContentPane().setLayout(new BorderLayout(50, 10));
 		super.getContentPane().add(panel);
@@ -69,17 +65,8 @@ public class MainLoginUI extends JFrame {
 	}
 
 	public void refresh() {
-		// super.getContentPane().invalidate();
 		super.getContentPane().revalidate();
-		// super.getContentPane().repaint();
 		super.revalidate();
-		// super.repaint();
 	}
-
-	// @Override
-	// public void update(Observable o, Object arg) {
-	// refresh();
-	// //salva credenziali
-	// }
 
 }

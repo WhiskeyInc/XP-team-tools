@@ -22,9 +22,10 @@ import server.utils.ISessionSaver;
 import server.utils.SessionSaver;
 
 /**
- * The UI of the login, it extends JPanel To be corrected set up TODO
+ * The UI of the login, that allows to insert username and password and has a useful feature, i.e,
+ * the possibility to memorize username and password for the next access
  * 
- * @author koelio
+ * @author pavlo
  *
  */
 public class LoginUI extends JPanel {
@@ -100,7 +101,6 @@ public class LoginUI extends JPanel {
 		lim = new GridBagConstraints();
 		lim.gridx = 1;
 		lim.gridy = 2;
-		// lim.insets = new Insets(5, 170, 30, 30);
 		super.add(saveCheck, lim);
 
 		saveCheck.setSelected(true);
@@ -144,12 +144,10 @@ public class LoginUI extends JPanel {
 		return this.sessionSaver;
 	}
 
-	// TODO dubbio: se lasciare questa responsabilità qui o trasferirla
 	public void getCheckStatus() throws NoSuchAlgorithmException,
 			UnsupportedEncodingException, IOException {
 		if (saveCheck.isSelected()) {
 			sessionSaver.saveSession();
-			// System.out.println("da getCheckStatus TRUE" + getLoginNick());
 
 		} else {
 			sessionSaver.deleteSession();

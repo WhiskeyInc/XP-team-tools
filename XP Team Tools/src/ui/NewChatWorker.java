@@ -15,7 +15,7 @@ import javax.swing.SwingWorker;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
-import tests.MultipleChatClientMainO;
+import tests.MultipleChatClientMain;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 import client.model.IClientService;
@@ -65,7 +65,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 				.parseChatIndexRequest(response);		
 
 		System.err.println(index + " "
-				+ MultipleChatClientMainO.class);
+				+ MultipleChatClientMain.class);
 		
 		return index;
 	}
@@ -120,8 +120,8 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 		ui.requestFocus();
 		ui.toFront();
 		SessionManager.getInstance().registerUI(index, ui);
-		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
-		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
+		final ChatUI chatUI = ui.getChatUI();
+		final TimerUI timerUI = ui.getTimerUI();
 //			client.sendMessageToServer(JsonMaker.chatRequest(
 //					"- " + client.getNickname()
 //							+ " added to the chat -", "" + index));

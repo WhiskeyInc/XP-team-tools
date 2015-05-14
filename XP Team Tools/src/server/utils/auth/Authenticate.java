@@ -9,14 +9,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
+/**
+ * A class for the authentication of a client who requires the connection 
+ * 
+ * @author
+ *
+ */
 public class Authenticate {
 
 	private final static int ITERATION_NUMBER = 1000;
 	private Hash hasher = new Hash();
 
+	/**
+	 * Authenticates the user and the validation of database through a series of controls 
+	 * @param con
+	 * @param login
+	 * @param password
+	 * @return true if the authentication is OK, false otherwise
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException
+	 */
 	public boolean authenticate(Connection con, String login, String password)
 			throws SQLException, NoSuchAlgorithmException {
-		//boolean authenticated = false;
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -39,13 +54,11 @@ public class Authenticate {
 			if (rs.next()) {
 				digest = rs.getString("PASSWORD");
 				salt = rs.getString("SALT");
-				// database validation
 				if (digest == null || salt == null) {
 					throw new SQLException(
 							"Database inconsistant Salt or Digested Password altered");
 				}
-				if (rs.next()) { // Should not append, because login is the
-									// primary key
+				if (rs.next()) { 
 					throw new SQLException(
 							"Database inconsistent two CREDENTIALS with the same USER");
 				}
@@ -58,7 +71,7 @@ public class Authenticate {
 			byte[] bDigest = BaseToByteViceversa.base64ToByte(digest);
 			byte[] bSalt = BaseToByteViceversa.base64ToByte(salt);
 
-			// Compute the new DIGEST
+			
 			byte[] proposedDigest = hasher.getHash(ITERATION_NUMBER, password,
 					bSalt);
 
@@ -73,7 +86,7 @@ public class Authenticate {
 	}
 
 	/**
-	 * Useful for new deployments, to be moved TODO
+	 * Useful for new deployments
 	 * 
 	 * @param con
 	 * @throws SQLException

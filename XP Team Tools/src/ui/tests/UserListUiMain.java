@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ui.FramesUtils;
 import ui.UserListUIBox;
 
 

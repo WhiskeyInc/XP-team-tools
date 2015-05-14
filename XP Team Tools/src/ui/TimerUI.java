@@ -6,9 +6,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -17,30 +18,30 @@ import javax.swing.event.DocumentListener;
 
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
-
-
-/**
- * 
- * The UI of the timer: it includes a display that shows the countdown and a button for
- * timer's start
- * 
- * @author alessandro B, Alberto
- *
- */
-public class TimerUI extends JPanel {
-
-	/**
+import client.model.MessageObservable;
+/** 
+	 * The UI of the timer: it includes a display that shows the countdown and a button for
+	 * timer's start, this class is an Observer of @MessageObservable 
 	 * 
+	 * @author alessandro B, Alberto
+	 *
 	 */
-	private static final long serialVersionUID = 1L;
+public class TimerUI extends JPanel implements Observer{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JTextField timerArea;
-	private JButton startButton;
+	private JGradientButton startButton;
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
-
-	public TimerUI() {
+	private MessageObservable messageObs;
+	
+	public TimerUI(MessageObservable messageObs) {
 		super();
+		this.messageObs = messageObs;
+		messageObs.addObserver(this);
+		
 		timerArea = new JTextField();
 		Dimension dim = new Dimension();
 		dim.setSize(200, 120);
@@ -75,8 +76,8 @@ public class TimerUI extends JPanel {
 		timerArea.setText("00:10");
 		dim = new Dimension();
 		dim.setSize(200, 40);
-		startButton = new JButton("Start");
-		startButton.setBackground(Color.GREEN);
+		startButton = new JGradientButton("Start");
+		startButton.setColor(Color.GREEN);
 		startButton.setPreferredSize(dim);
 		startButton.setMinimumSize(dim);
 		GridBagLayout layout = new GridBagLayout();
@@ -89,6 +90,14 @@ public class TimerUI extends JPanel {
 		lim.gridx = 0;
 		lim.gridy = 1;
 		super.add(startButton, lim);
+		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
+		         null, "Tomatoes panel",
+		         TitledBorder.DEFAULT_JUSTIFICATION,
+		         TitledBorder.DEFAULT_POSITION,
+		         new java.awt.Font("Verdana", 1, 8)
+		      ),
+		      BorderFactory.createEmptyBorder(1, 1, 1, 1)
+		   ));
 	}
 
 	public void setButtonTimerListener(ActionListener actionListener) {
@@ -107,21 +116,41 @@ public class TimerUI extends JPanel {
 		return timerArea.getText();
 	}
 
+	/**
+	 * allows the user to set the countdown
+	 * @param isEditable
+	 */
 	public void setTimerEditable(boolean isEditable) {
 		timerArea.setEnabled(isEditable);
+		startButton.setEnabled(isEditable);
 	}
 
+	/**
+	 * checks if a valid Time Stamp has been insert
+	 * @param timeStamp
+	 * @return
+	 */
 	public boolean isTimeStampValid(String timeStamp) {
 		return TimerFormatter.isTimeStampValid(timeStamp);
 	}
 
 	/**
-	 * plays an alarm when the time is over
+	 * plays a sound alarm when the countdown's end is reached
 	 */
 	private void alertEndTimer() {
 		if (timerArea.getText().equals(ENDTIMER)) {
 			player.playSong();
 			setTimerEditable(true);
+			setButtomTimerClickable(true);
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		setTimer(messageObs.getMessage());
+		if(!messageObs.getMessage().equals(TimerUI.ENDTIMER)) {
+			setTimerEditable(false);
 		}
 	}
 

@@ -11,9 +11,15 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import ui.tests.FramesUtils;
 import client.model.StrategyClient1_1;
 
+/**
+ * 
+ * A class that manages the creation of an event, it's an implementation of ActionListener and, when an event
+ * is created, sends a message to the server with the details of the event and the members who will 
+ * take part to the event
+ *
+ */
 public class EventCreationController implements ActionListener {
 
 	private MeetingUIDetails ask = new MeetingUIDetails();
@@ -47,7 +53,6 @@ public class EventCreationController implements ActionListener {
 			for (int i = 0; i < membs.length; i++) {
 				participants.add(membs[i]);
 			}
-			// add myself member
 			participants.add(client.getNickname());
 		} catch (ParseException e1) {
 			e1.printStackTrace();

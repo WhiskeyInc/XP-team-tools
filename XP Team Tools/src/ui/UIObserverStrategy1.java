@@ -20,7 +20,7 @@ import client.model.SessionManager;
 import client.model.StrategyClient1_1;
 
 /**
- * The UI of the chat: it's composed of a {@link ChatUI} and a {@link TimerUI}
+ * A part of UI of the chat: it's made of a @ChatUI and a @TimerUI
  * 
  */
 
@@ -31,8 +31,8 @@ public class UIObserverStrategy1 extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ChatUIObserverStrategy1 chatUI;
-	private TimerUIObserverStrategy timerUI;
+	private ChatUI chatUI;
+	private TimerUI timerUI;
 	private LoadingPanel lp = new LoadingPanel("Loading");
 	private JPanel panel = new JPanel();
 	private JPanel loadingPanel = new JPanel();
@@ -42,10 +42,10 @@ public class UIObserverStrategy1 extends JFrame {
 			 final int index) {
 		super();
 		
-		chatUI = new ChatUIObserverStrategy1(
+		chatUI = new ChatUI(
 				(MessageObservable) setMessage.getAttribute(index),
 				client);
-		timerUI = new TimerUIObserverStrategy(
+		timerUI = new TimerUI(
 				(MessageObservable) setTimeStamp.getAttribute(index));
 		Runnable runnable = new Runnable() {
 
@@ -81,10 +81,6 @@ public class UIObserverStrategy1 extends JFrame {
 
 		SwingUtilities.invokeLater(runnable);
 
-		// System.err.println(EventQueue.isDispatchThread() + " " +
-		// UIObserverStrategy1.class);
-
-		// super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void setMeetingButtonAction(ActionListener actionListener) {
@@ -99,11 +95,11 @@ public class UIObserverStrategy1 extends JFrame {
 		timerUI.setButtonTimerListener(actionListener);
 	}
 
-	public TimerUIObserverStrategy getTimerUI() {
+	public TimerUI getTimerUI() {
 		return timerUI;
 	}
 
-	public ChatUIObserverStrategy1 getChatUI() {
+	public ChatUI getChatUI() {
 		return chatUI;
 	}
 	

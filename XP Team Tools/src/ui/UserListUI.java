@@ -20,6 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+/**
+ * A UI that shows the nicknames of other team members. Nicknames are shown as selectable @JLabel and 
+ * if the user clicks on the name, the JLabel change color (in this way, it's easier to identify which 
+ * team members have been selected). Furthermore, thanks to @MouseListener, the cursor changes when 
+ * the selectable nickname's area is entered
+ * 
+ * @author alessandro
+ *
+ */
 public class UserListUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -84,23 +93,19 @@ public class UserListUI extends JPanel {
 		}
 		return sel;
 	}
-	//TODO javadoc
+	
+	/**
+	 * Sets nicknames by creating a JLabel for each nicknames and by implementing a @MouseListener that
+	 * specify how cursor change
+	 * 
+	 * @param nicknames to be setted
+	 */
 	public void setNicknames(String[] nicknames) {
 		this.nicknames = nicknames;
 		int size = nicknames.length;
 		nicksPanel.removeAll();
 		nicksPanel.setBackground(new Color(244, 249, 228));
 		nicksPanel.setLayout(new GridLayout(size*2 + 1,1));
-		//Spostare su un altro pannello...
-//		super.setLayout(new GridBagLayout());
-//		GridBagConstraints lim = new GridBagConstraints();
-//		lim.gridx = 0;
-//		lim.gridy = 0;
-//		JLabel label = new JLabel("Team members");
-//		label.setFont(new Font("TimesRoman", Font.BOLD, 16));
-//		lim.insets = new Insets(5, 5, 5, 5);
-//		super.add(label, lim);
-//		// fino a qua
 		nicksPanel.add(new JLabel());
 		for(int index = 0; index< size;index++){
 			final int i = index;
@@ -149,8 +154,6 @@ public class UserListUI extends JPanel {
 		}
 		
 		JScrollPane pane = new JScrollPane(nicksPanel);
-//		pane.setPreferredSize(new Dimension(170, 300));
-//		pane.setMinimumSize(new Dimension(170, 300));
 		GridBagConstraints lim = new GridBagConstraints();
 		lim.gridx = 0;
 		lim.gridy = 1;
@@ -173,10 +176,17 @@ public class UserListUI extends JPanel {
 		return button;
 	}
 	
+	/**
+	 * 
+	 * @return an array list of JLabels, i.e., all the nicknames 
+	 */
 	public ArrayList<JLabel> getLabels() {
 		return labels;
 	}
 	
+	/**
+	 * deselect all nicknames (i.e. changing the JLabel foreground to black)
+	 */
 	public void deselectAll(){
 		for (int i = 0; i < labels.size(); i++) {
 			labels.get(i).setForeground(Color.BLACK);

@@ -46,6 +46,7 @@ public class NewChatInviteLauncher implements Observer {
 			@Override
 			public void run() {
 				// IClientService serviceTimeStamp = new SetTimeStampService();
+				System.err.println(index+ " "+ NewChatInviteLauncher.class);
 				System.err.println(EventQueue.isDispatchThread() + " " + NewChatInviteLauncher.class);
 				System.err.println(index + " " + NewChatInviteLauncher.class);
 				if(sessionManager.hasChat(index)) {
@@ -64,8 +65,8 @@ public class NewChatInviteLauncher implements Observer {
 				.getNickname());
 		UIObserverStrategy1 ui = new UIObserverStrategy1(
 				serviceMessage, serviceTimeStamp, client, index);
-		final ChatUIObserverStrategy1 chatUI = ui.getChatUI();
-		final TimerUIObserverStrategy timerUI = ui.getTimerUI();
+		final ChatUI chatUI = ui.getChatUI();
+		final TimerUI timerUI = ui.getTimerUI();
 		System.err.println("L' indice della chat è : " + index + " ["
 				+ MainUIObserver.class + "]");
 		// Controlla conferma data dal server in caso è fallito l'add...

@@ -10,6 +10,12 @@ import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+/**
+ * A class for the customization of scrollbars, it takes arrow icons from Internet and then 
+ * replace the old arrows of the scrollbar by overriding methods of @BasicScrollBarUI
+ * @author alessandro
+ *
+ */
 public class MyScrollbarUI extends BasicScrollBarUI {
 
         private ImageIcon downArrow, upArrow, leftArrow, rightArrow;

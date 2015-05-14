@@ -32,7 +32,7 @@ public class RememberMeListener implements ItemListener {
 				e1.printStackTrace();
 			}
 		} else {
-			//sessionSaver.deleteSession();
+			
 		}
 
 	}

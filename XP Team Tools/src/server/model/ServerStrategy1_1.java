@@ -16,17 +16,15 @@ import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
 /**
- * A general server with the possibility to add services, it needs a client
+ * A generic server with the possibility to add services, it needs a client
  * manager to manage all the connecting clients
- * Implementation of the "design pattern strategy"
+ * Implementation of the design pattern "strategy"
  * @author nicola, Alberto
  *
  */
 public class ServerStrategy1_1 extends AbstractServer {
 
 	private HashMap<Integer, IService> services = new HashMap<Integer, IService>();
-
-	//private HashMap<String, List<Socket>> clientMap;
 
 	private Socket clientSocket;
 	private Socket requestSocket;
@@ -52,15 +50,9 @@ public class ServerStrategy1_1 extends AbstractServer {
 				System.out.println("Chat socket: " + clientSocket.getLocalAddress()+ " " + clientSocket.getPort()+ " " + ServerStrategy1_1.class);
 				System.out.println("Request socket: " + requestSocket.getLocalAddress()+ " " + requestSocket.getPort()+ " " + ServerStrategy1_1.class);
 
-				//TODO gestire se non sono dello stesso client(tipo se le socket hanno due ip diversi...
+				
 				setUpStream();
-				//TODO devo allineare il client con tutte le chat
-				// Oppure faccio l'allineamento solo quando ricevo una richiesta di
-				//chat
-				//potrei fare: ricevo una nuova richiesta di chat ogni volta che spunto 
-				// e tocco il bottone, poi vedo se quell' id è già contenuto allora allineo
-				// altrimento creo nuova chat
-		//		try {
+				
 					try {
 						ClientDetails det = JsonParser.parseConnectToServerRequest(getLine(in));
 						ClientConnectionDetails cDet = new ClientConnectionDetails(det.getNickname(), det.getTeamName(), det.getPwd());
@@ -134,9 +126,15 @@ public class ServerStrategy1_1 extends AbstractServer {
 		return runnable;
 	}
 
+	/**
+	 * add a new Service to this server
+	 * @param request the key of the service
+	 * @param service a @IService
+	 */
 	public void addService(int request, IService service) {
 		services.put(request, service);
 	}
+	
 	public synchronized ClientsManager2 getClientsManager() {
 		return clientsManager1;
 	}

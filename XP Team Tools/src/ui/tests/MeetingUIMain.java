@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import ui.FramesUtils;
 import ui.MeetingUIButton;
 import ui.MeetingUIDetails;
 
@@ -30,9 +31,6 @@ public class MeetingUIMain {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						//TODO send event informations
-//						System.out.println("Date: " + ask.getDate());
-//						System.out.println("Description: " + ask.getDescrtiption());
 						detailsFrame.dispose();
 					}
 				});

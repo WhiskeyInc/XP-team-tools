@@ -21,13 +21,22 @@ import client.model.ClientConnectionDetails;
 import client.model.StrategyClient1_1;
 
 /**
- * This class, with clientMain and serverMain, tests the communication between 2
- * Clients and 1 Server
+ * This test shows the ultimate version of the chat: if the server is running,
+ * the login panel it's shown; after the login, it's possible to select (or create)
+ * the team from the team panel: in this way, appears a series of panels which contains
+ * all the functionalities of our project:
+ * -timer with adjustable countdown (synchronized with other members of the chat)
+ * -team members panel, with the nicknames of other team members, thanks to which it's possible
+ *  select certain team members and start private chats
+ * -schedule a meeting with the addition of meeting details
+ * -chat service
  * 
- * @author alberto
+ *
+ * 
+ *
  *
  */
-public class MultipleChatClientMainO {
+public class MultipleChatClientMain {
 	public static void main(String[] args) {
 
 		final MainLoginUI ui = new MainLoginUI();
@@ -88,14 +97,9 @@ public class MultipleChatClientMainO {
 
 				Thread thread = new Thread(runnable);
 				thread.start();
-				System.out.println("here " + MultipleChatClientMainO.class);
 				client.sendMessageToServer(JsonMaker.teamsListRequest(client
 						.getNickname()));
-				System.out.println("here1 " + MultipleChatClientMainO.class);
-
 				String response = client.waitServerResponse();
-				System.out.println("here2 " + MultipleChatClientMainO.class);
-
 				String[] teams;
 				try {
 					teams = JsonParser.parseMakeTeamMembs(response);
@@ -174,9 +178,7 @@ public class MultipleChatClientMainO {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					System.out
-							.println("Fai la stessa cosa del setLoginButton ");
-					// TODO estrarre tutto il launcher della chat
+					
 				}
 
 			}

@@ -2,6 +2,12 @@ package client.model;
 
 import java.util.Observable;
 
+/**
+ * This class manages the message (i.e. the countdown) shown on display of @TimerUI, by using the 
+ * update method, informs the Observer (TimerUI) that the message is changed
+ * 
+ *
+ */
 public class MessageObservable extends Observable {
 
 	private String message;
@@ -26,10 +32,14 @@ public class MessageObservable extends Observable {
 	public String getMessage() {
 		return message;
 	}
-	//Crucial for the solution adopted to catch the server alignment
+	
+	/**
+	 * Enters in a no-end cycle if there are no more Observer: in this way, the update operation
+	 * takes place only if there's at least one Observer
+	 */
 	private void waitObserver() {
 		while(countObservers() == 0) {
-			//wait
+			
 		}
 	}
 }

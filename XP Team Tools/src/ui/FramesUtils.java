@@ -1,16 +1,16 @@
-package ui.tests;
+package ui;
 
 import javax.swing.JFrame;
 
 /**
- * Classe di utilità Frame
+ * Utility class that creates a JFrame
  * @author alberto
  *
  */
 public class FramesUtils {
 
 	/**
-	 * Crea un JFrame
+	 * creates a JFrame
 	 * @param title
 	 * @param dimX
 	 * @param dimY

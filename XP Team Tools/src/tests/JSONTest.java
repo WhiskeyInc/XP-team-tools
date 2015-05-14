@@ -67,35 +67,6 @@ public class JSONTest {
 		}
 	}
 
-//	@Test
-//	public void newChatRequestTest() throws Exception {
-//		String jsonString = JsonMaker.newChatRequest("LuBardo", "Roberto");
-//
-//		if (JsonParser.getRequest(jsonString) == Integer
-//				.parseInt(JsonMaker.NEW_CHAT)) {
-//
-//			String[] vett = JsonParser.parseNewChatRequest(jsonString);
-//
-//			assertEquals("LuBardo", vett[0]);
-//			assertEquals("Roberto", vett[1]);
-//		} else {
-//			fail();
-//		}
-//
-//		jsonString = JsonMaker.newChatRequest("LuBardo", "Roberto", "Mario");
-//
-//		if (JsonParser.getRequest(jsonString) == Integer
-//				.parseInt(JsonMaker.NEW_CHAT)) {
-//
-//			String[] vett = JsonParser.parseNewChatRequest(jsonString);
-//
-//			assertEquals("LuBardo", vett[0]);
-//			assertEquals("Roberto", vett[1]);
-//			assertEquals("Mario", vett[2]);
-//		} else {
-//			fail();
-//		}
-//	}
 	
 
 	

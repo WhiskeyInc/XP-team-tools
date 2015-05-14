@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import ui.FramesUtils;
 import ui.LoadingPanel;
 
 public class LoadingPanelTest {
@@ -37,7 +38,6 @@ public class LoadingPanelTest {
 				frame.setVisible(true);
 			}
 		});
-		//for testing, after 3 seconds, a loading operation is required
 		timer1.setInitialDelay(3000);
 		
 		timer1.start();

@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+
 public class LoadingPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;

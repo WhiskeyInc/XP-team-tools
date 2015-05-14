@@ -21,23 +21,18 @@ import client.model.ClientDetails;
  *
  */
 
-// No sigleton to improve performances: poi ne mettiamo tipo uno per ogni
-// team...
+
 public class ClientsManager2 {
 
 	private volatile IDBConnection db;
 	private  volatile Authenticate auth = new Authenticate();
 	private volatile Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
 	private static volatile ClientsManager2 instance = new ClientsManager2();
-
-	// NB: non treeSet, penso abbia la documentazione sbagliata, cioè nel
-	// contains chiama il compareTo,
-	// non l' equals
+	
 	private ClientsManager2() {
 		db = new DBConnection();
 	}
 
-	
 	
 	/**
 	 * Register a client. If a client is already registered, this method only
@@ -77,7 +72,7 @@ public class ClientsManager2 {
 	/**
 	 * It returns the {@link ClientConnectionDetails} that has the same team
 	 * name and the same nickname of the {@link ClientDetails} passed as
-	 * parameter. If it' isn' t the match, returns null
+	 * parameter. If there isn't the match, returns null
 	 * 
 	 * @param {@link ClientDetails}
 	 * @return
@@ -93,16 +88,6 @@ public class ClientsManager2 {
 		return null;
 	}
 
-	/**
-	 *  Checks the permissions of the client to connect.
-	 *  
-	 * @param nickname
-	 * @param pwd
-	 * @return
-	 * @throws IOException
-	 * @throws NoSuchAlgorithmException
-	 * @throws SQLException
-	 */
 	
 	private boolean authenticate(String nickname, String pwd)
 			throws IOException, NoSuchAlgorithmException, SQLException { // TODO
@@ -130,7 +115,9 @@ public class ClientsManager2 {
 	public synchronized static ClientsManager2 getInstance() {
 		return instance;
 	}
-	
+	/**
+	 * Performs the connection to database 
+	 */
 	public void connectToDB() {
 		try {
 			db.connect("alemonta", "protgamba", 3306, "52.74.20.119", "extreme01");

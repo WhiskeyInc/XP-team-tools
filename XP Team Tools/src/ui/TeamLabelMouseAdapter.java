@@ -21,8 +21,7 @@ public abstract class TeamLabelMouseAdapter extends MouseAdapter {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-//		Cursor cursor = Cursor.getDefaultCursor();
-//		cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
+
 		setCursorOut();
 		teamLabel.setFont(original);
 

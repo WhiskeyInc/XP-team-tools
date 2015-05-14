@@ -21,6 +21,10 @@ public class ChatsManager {
 	private ChatsManager() {
 	}
 
+	/**
+	 * Adds a chat to the complete Chat List
+	 * @param chat
+	 */
 	public void add(Chat chat) {
 		if (!has(chat)) {
 			System.out.println("Aggiungo chat " + ChatsManager.class);
@@ -28,6 +32,11 @@ public class ChatsManager {
 		}
 	}
 
+	/**
+	 * Checks if the chat list contains the required chat
+	 * @param chat
+	 * @return
+	 */
 	public boolean has(Chat chat) {
 		return completeChatList.contains(chat);
 	}
@@ -37,7 +46,7 @@ public class ChatsManager {
 	}
 
 	/**
-	 * Used as key
+	 * Return the index of a chat, used as a key
 	 * 
 	 * @param chat
 	 * @return
