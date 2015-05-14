@@ -5,6 +5,7 @@
 <%@page import="model.project.*"%>
 <%@page import="filtering.*"%>
 <%@page import="timeline.*"%>
+<%@page import="timeline.events.*"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

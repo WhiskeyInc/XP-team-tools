@@ -42,6 +42,9 @@ public class Project extends Serializable{
 	}
 	
 	@Override
+	/*
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.name;
 	}

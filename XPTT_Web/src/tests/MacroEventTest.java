@@ -93,14 +93,14 @@ public class MacroEventTest {
 	@Test
 	public void dateChangingSuccess() throws Exception{
 		MacroEvent macroEvent = this.createEvent();
-		macroEvent.addEvent(new Event("1", new GregorianCalendar(2020, 4, 28)));
+		macroEvent.addEvent(new Event("test", new GregorianCalendar(2020, 4, 28)));
 		macroEvent.setDate(new GregorianCalendar(2020, 5, 10));
 	}
 	
 	@Test
 	public void dateChangingFailure() throws Exception {
 		MacroEvent macroEvent = this.createEvent();
-		macroEvent.addEvent(new Event("1", new GregorianCalendar(2020, 4, 28)));
+		macroEvent.addEvent(new Event("test", new GregorianCalendar(2020, 4, 28)));
 		try {
 			macroEvent.setDate(new GregorianCalendar(2020, 4, 27));
 			fail();

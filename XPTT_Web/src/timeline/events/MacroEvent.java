@@ -18,8 +18,8 @@ import filtering.NoFilter;
  * occuring in a specified time range. Within this range, other minor events can
  * happen, and they are therefore collected in the macro event object itself.
  * Since this class performs any required operation to manage a collection of
- * Event instances, it does implement {@link Timeline} interface to encourage
- * polimorfism
+ * {@link Event} instances, it does implement {@link Timeline} interface to
+ * encourage polimorfism
  * 
  * @author simone, lele, incre, andrea
  *
@@ -37,7 +37,9 @@ public class MacroEvent extends Event implements Timeline {
 	 * @param fromDate
 	 *            : the start of the time range
 	 * @param toDate
-	 *            : the end of the time range
+	 *            : the end of the time range. This date will be considered as
+	 *            the puntual time location for sorting operations and will be
+	 *            equivalent to calling {@link Event#getDate()} on super class
 	 * @param timeline
 	 *            : the concrete instance of {@link Timeline} interface to
 	 *            perform collection
@@ -58,12 +60,8 @@ public class MacroEvent extends Event implements Timeline {
 	@Override
 	public void setDate(GregorianCalendar newDate)
 			throws UnEditableEventException, InvalidDateException {
-		GregorianCalendar oldDate = super.getDate();
-		super.setDate(newDate);
-		if (!checkValidity()) {
-			super.setDate(oldDate);
-			throw new InvalidDateException(newDate);
-		}
+		this.validateToDate(newDate);
+		doMove(newDate);
 	}
 
 	@Override
@@ -131,6 +129,16 @@ public class MacroEvent extends Event implements Timeline {
 		return this.timeline.getEventsNumber();
 	}
 
+	private void doMove(GregorianCalendar newDate)
+			throws UnEditableEventException, InvalidDateException {
+		GregorianCalendar oldDate = super.getDate();
+		super.setDate(newDate);
+		if (!checkValidity()) {
+			super.setDate(oldDate);
+			throw new InvalidDateException(newDate);
+		}
+	}
+
 	private void validateDate(GregorianCalendar date)
 			throws InvalidDateException {
 		if (isValidDate(date)) {
@@ -158,11 +166,8 @@ public class MacroEvent extends Event implements Timeline {
 	}
 
 	private boolean checkValidity() {
-		if (super.date.before(this.fromDate)) {
-			return false;
-		}
 		for (Event event : this.getEvents(new NoFilter<Event>())) {
-			if (event.getDate().after(this.getDate())) {
+			if (event.getDate().after(super.getDate())) {
 				return false;
 			}
 		}

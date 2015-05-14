@@ -33,7 +33,9 @@ public class ConcreteTimeline implements Timeline {
 
 	/**
 	 * Creates a new instance of this class. When created, it will be
-	 * automatically added and event to take note of this creation itself
+	 * automatically added and event to take note of this creation itself. This
+	 * event's name will always be
+	 * {@link ConcreteTimeline#DEFAULT_CREATION_EVENT}
 	 */
 	public ConcreteTimeline(TimeZone locale, SerializerCollector serializer) {
 		this.serializer = serializer;
