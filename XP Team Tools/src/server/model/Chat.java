@@ -11,7 +11,7 @@ import client.model.ClientDetails;
  * @author alberto
  *
  */
-public class Chat {
+public class Chat implements IMessageRecover{
 
 	private String teamName;
 	private ArrayList<ClientDetails> attendantsDetails = new ArrayList<ClientDetails>();
@@ -47,10 +47,22 @@ public class Chat {
 	public boolean has(ClientDetails details) {
 		return attendantsDetails.contains(details);
 	}
-
+	
+	public boolean remove(ClientDetails details) {
+		return attendantsDetails.remove(details);
+	}
+	
+	public void removeAllAttendants() {
+		attendantsDetails.clear();
+	}
+	
+	@Override
 	public String[] recoverLastMessages(int numOfMessages)
 			throws NoMessagesException {
 		int size = messageList.size();
+		if(size == 0) {
+			throw new NoMessagesException("No messages available");
+		}
 		if(size < numOfMessages) {
 			String[] messages = new String[size];
 			for (int i = 0; i < messages.length; i++) {
@@ -67,29 +79,10 @@ public class Chat {
 
 		return messages;
 	}
-
-	public int getNumOfMessages() {
-		return messageList.size();
+	
+	public void emptyMessages() {
+		messageList.clear();
 	}
-
-
-	/**
-	 * It returns the index of the @param socket. If it'isn't, this method
-	 * returns -1
-	 * 
-	 * @param socket
-	 * @return
-	 */
-	// public int indexOf(Socket socket) {
-	// int i = 0;
-	// for (ClientDetails clientDetails : attendantsDetails) {
-	// if (socket.equals(clientDetails.getSocket())) {
-	// return i;
-	// }
-	// i++;
-	// }
-	// return -1;
-	// }
 
 	@Override
 	public boolean equals(Object obj) {

@@ -65,6 +65,10 @@ public class ClientDetails implements Comparable<ClientDetails> {
 		return pwd;
 	}
 	
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ClientDetails)) {

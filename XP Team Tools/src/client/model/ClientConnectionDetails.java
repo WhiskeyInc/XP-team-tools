@@ -6,7 +6,7 @@ import java.net.Socket;
 /**
  * It wraps the dynamic client's attributes as sockets and the client' s
  * status[online-offline]. It extends {@link ClientDetails}.
- * It handles two sockets, one for the real time channel [for example an istant-chat]
+ * It handles two sockets, one for the real time channel [for example an instant-chat]
  * one used waiting the Server response.
  * 
  * This class override the equals method, returning true if and only if

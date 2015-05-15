@@ -23,6 +23,30 @@ public class TeamTest {
 		
 		assertEquals(2, team.getMembers().length);
 		assertEquals(member2, team.getMembers()[1]);
+		
+		team = new Team("LeFere");
+		assertEquals("LeFere", team.getName());
+		team.addMember("Alb");
+		team.addMember("Alb");
+		String[] st = team.getMembers();
+		for (int i = 0; i < st.length; i++) {
+			assertEquals("Alb", st[i]);
+
+		}
+		assertEquals(1, st.length);
+		team.addMember("Fra");
+		String[] vet1 = team.getMembers();
+		String name = vet1[0];
+		assertEquals("Alb", name);
+		String name1 = vet1[1];
+		assertEquals("Fra", name1);
+		assertEquals(2,vet1.length);
+		
+		team.remove(name);
+		team.remove(name1);
+		String vet[] = team.getMembers();
+		
+		assertEquals(0, vet.length);
 	}
 	
 	@Test

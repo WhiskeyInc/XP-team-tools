@@ -8,8 +8,6 @@ import protocol.JsonParser;
 
 public class Formatter {
 
-	public static String SECRET_CODE = "@#1";
-
 	/**
 	 * Basic format with only the nickname
 	 * 
@@ -66,27 +64,6 @@ public class Formatter {
 		}
 		
 		return "Pomordoro!";// to be handled in case of timer parse case
-	}
-
-	/**
-	 * Format the message adding at the start some particular chars that allow
-	 * to distinguish it
-	 * 
-	 * @param message
-	 * @return
-	 */
-
-	public static String markMessage(String message) {
-		return message + SECRET_CODE;
-	}
-
-	/**
-	 * Removes the secret code previously saved
-	 * @param message
-	 * @return
-	 */
-	public static String removeSecretCode(String message) {
-		return message.substring(0, message.length() - SECRET_CODE.length());
 	}
 
 	/**

@@ -21,19 +21,18 @@ import client.model.ClientDetails;
  *
  */
 
-
 public class ClientsManager2 {
 
-	private volatile IDBConnection db;
-	private  volatile Authenticate auth = new Authenticate();
+	private IDBConnection db;
+	private Authenticate auth = new Authenticate();
 	private volatile Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
 	private static volatile ClientsManager2 instance = new ClientsManager2();
-	
+	private boolean testModeEnabled = false;
+
 	private ClientsManager2() {
 		db = new DBConnection();
 	}
 
-	
 	/**
 	 * Register a client. If a client is already registered, this method only
 	 * refresh his dynamic attributes as sockets
@@ -43,28 +42,36 @@ public class ClientsManager2 {
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public synchronized void  registerClient(ClientConnectionDetails client)
+	public synchronized void registerClient(ClientConnectionDetails client)
 			throws NoSuchAlgorithmException, IOException, SQLException {
-		if (authenticate(client.getNickname(), client.getPwd())) {
+		if (!isTestModeEnabled()) {
+			if (authenticate(client.getNickname(), client.getPwd())) {
 
-			System.out.println("Sto registrando " + client.getNickname() + " "
-					+ client.getTeamName() + ClientsManager2.class);
-			if (has(client)) {
-				remove(client);
-				System.out.println("L ho rimosso " + ClientsManager2.class);
-				clients.add(client);
+				System.out.println("Sto registrando " + client.getNickname()
+						+ " " + client.getTeamName() + ClientsManager2.class);
+				recordClient(client);
+
 			} else {
-				clients.add(client);
+				// TODO throw new IOException("The user " + nickname
+				// + "does not exist or invalid password");
+				System.err.println("Utente non autenticato!");
 			}
-			
+
 		} else {
-			// TODO throw new IOException("The user " + nickname
-			// + "does not exist or invalid password");
-			System.err.println("Utente non autenticato!");
+			recordClient(client);
 		}
 	}
-	
-	
+
+	private void recordClient(ClientConnectionDetails client) {
+		if (has(client)) {
+			remove(client);
+			System.out.println("L ho rimosso " + ClientsManager2.class);
+			clients.add(client);
+		} else {
+			clients.add(client);
+		}
+	}
+
 	public Set<ClientConnectionDetails> getClients() {
 		return clients;
 	}
@@ -88,7 +95,6 @@ public class ClientsManager2 {
 		return null;
 	}
 
-	
 	private boolean authenticate(String nickname, String pwd)
 			throws IOException, NoSuchAlgorithmException, SQLException { // TODO
 
@@ -101,11 +107,11 @@ public class ClientsManager2 {
 	public int size() {
 		return clients.size();
 	}
-	
+
 	public boolean has(ClientConnectionDetails conDet) {
 		Iterator<ClientConnectionDetails> iter = clients.iterator();
 		while (iter.hasNext()) {
-			if(iter.next().getNickname().equals(conDet.getNickname())) {
+			if (iter.next().getNickname().equals(conDet.getNickname())) {
 				return true;
 			}
 		}
@@ -115,28 +121,38 @@ public class ClientsManager2 {
 	public synchronized static ClientsManager2 getInstance() {
 		return instance;
 	}
+
 	/**
-	 * Performs the connection to database 
+	 * Performs the connection to database
 	 */
 	public void connectToDB() {
 		try {
-			db.connect("alemonta", "protgamba", 3306, "52.74.20.119", "extreme01");
+			db.connect("alemonta", "protgamba", 3306, "52.74.20.119",
+					"extreme01");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
-	
+
 	public void remove(ClientConnectionDetails conDet) {
 		Set<ClientConnectionDetails> clientsTmp = new HashSet<ClientConnectionDetails>();
-		
+
 		Iterator<ClientConnectionDetails> iter = clients.iterator();
 		while (iter.hasNext()) {
 			ClientConnectionDetails det = iter.next();
-			if(!det.getNickname().equals(conDet.getNickname())) {
+			if (!det.getNickname().equals(conDet.getNickname())) {
 				clientsTmp.add(det);
 			}
 		}
 		clients = clientsTmp;
+	}
+
+	public void setTestModeEnabled(boolean testModeEnabled) {
+		this.testModeEnabled = testModeEnabled;
+	}
+
+	public boolean isTestModeEnabled() {
+		return testModeEnabled;
 	}
 }

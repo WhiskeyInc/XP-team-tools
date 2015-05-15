@@ -67,11 +67,11 @@ public class NewChatService implements IService {
 		}
 	}
 
-	private void alignClient(ClientDetails details, Chat chat)
+	private void alignClient(ClientDetails details, IMessageRecover recoverer)
 			throws NoMessagesException, IOException {
 
 		//poi allineo
-		String[] messages = chat.recoverLastMessages(NUM_OF_MESSAGES);
+		String[] messages = recoverer.recoverLastMessages(NUM_OF_MESSAGES);
 		for (int i = 0; i < messages.length; i++) {
 			messagePropagator.propagateMessage(messages[i], details);
 		}

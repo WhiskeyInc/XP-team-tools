@@ -1,7 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -20,6 +19,16 @@ public class ClientConnectionTest {
 		ClientDetails det = new ClientDetails(nickname, teamName, null);
 		assertTrue(conDet.equals(det));
 		
+		det.setPwd("PASSWORD");
+		assertTrue(conDet.equals(det));
+		
+		conDet = new ClientConnectionDetails(nickname, teamName + "b");
+		assertTrue(conDet.equals(det));
+		
+		conDet = new ClientConnectionDetails(nickname + "b", teamName);
+		assertFalse(conDet.equals(det));
+
+		
 	}
 	
 	@Test
@@ -31,6 +40,10 @@ public class ClientConnectionTest {
 		ClientConnectionDetails det = new ClientConnectionDetails(nickname, "Test", null);
 		
 		assertTrue(conDet.equals(det));
+		
+		det = new ClientConnectionDetails(nickname + "F", teamName);
+		assertFalse(conDet.equals(det));
+		
 	}
 
 }

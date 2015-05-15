@@ -19,7 +19,8 @@ public class ClientDetailsTest {
 		ClientDetails det3 = new ClientDetails("Alb1", "Test1", null);
 
 		assertFalse(det1.equals(det3));
-
+		det3 = new ClientDetails("Alb1", "Test", null);
+		assertFalse(det2.equals(det3));
 		
 	}
 

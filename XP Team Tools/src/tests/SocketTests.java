@@ -4,16 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import server.model.AbstractServer;
-import server.model.TestableServerRecover;
+import server.model.ServerStrategy1_1;
 
 public class SocketTests {
 
 	
 	@Test
 	public void openPortTest() throws Exception {
-		AbstractServer server = new TestableServerRecover();
-
+		ServerStrategy1_1 server = new ServerStrategy1_1(null);
 		server.openPort(9999);
 		assertTrue(!server.isPortClosed());
 		// Deve chiudersi, altrimenti per il prossimo test resta aperta
@@ -24,7 +22,7 @@ public class SocketTests {
 	@Test
 	public void closePortTest() throws Exception {
 
-		AbstractServer server = new TestableServerRecover();
+		ServerStrategy1_1 server = new ServerStrategy1_1(null);
 		server.openPort(9999);
 		server.closePort();
 		assertTrue(server.isPortClosed());

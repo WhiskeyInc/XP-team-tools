@@ -19,20 +19,8 @@ public interface IMessageRecover {
 	 * @throws NoMessagesException
 	 *             TODO
 	 */
-	public abstract String[] recoverLastMessages(String teamName,
-			int numOfMessages) throws NoMessagesException;
+	public abstract String[] recoverLastMessages(int numOfMessages) throws NoMessagesException;
 
 	
-	/**
-	 * Gives the number of messages in a conversation
-	 * 
-	 * @param teamName
-	 *            TODO
-	 * @return Number of messages
-	 * @throws NoMessagesException
-	 *             TODO
-	 */
-	public abstract int getNumOfMessages(String teamName)
-			throws NoMessagesException;
 
 }
