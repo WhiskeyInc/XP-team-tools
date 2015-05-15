@@ -2,6 +2,7 @@ package login;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,8 @@ public class SignUpService extends AccountAction {
 				.getServletContext().getAttribute("environments");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("pendingProjects");
-		Project project = new Project("General", new ConcreteProjectFactory(),
+		Project project = new Project("General", new ConcreteProjectFactory(
+				TimeZone.getTimeZone("Europe/Rome")),
 				"Everything related to your account");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();

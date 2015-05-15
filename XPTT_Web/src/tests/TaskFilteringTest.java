@@ -6,7 +6,7 @@ import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
 import model.ConcreteTeamManager;
-import model.ProjectManager;
+import model.Notifier;
 import model.TeamComponent;
 
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class TaskFilteringTest {
 			TimeZone.getTimeZone("Europe/Rome"),
 			new LocalIdentifiabilitySerializer());
 	UserStoriesManager userStoriesBoard = new ConcreteUserStoriesManager();
-	ProjectManager manager = new ConcreteTeamManager(settings, timeline);
+	Notifier manager = new ConcreteTeamManager(settings, timeline);
 	UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
 			userStoriesBoard, manager);
 	TaskManager teamTaskManager = new ProjectTaskManager(taskBoard, manager);

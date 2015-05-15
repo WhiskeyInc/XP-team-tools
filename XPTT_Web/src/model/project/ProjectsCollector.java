@@ -3,23 +3,28 @@ package model.project;
 import java.util.ArrayList;
 
 import util.serialization.Serializable;
-import util.serialization.LocalIdentifiabilitySerializer;
 import util.serialization.SerializerCollector;
 
 /**
  * ProjectsManager class provides simple methods to manage a collection of
  * {@link Project} instances. It provides item addition, deletion and picking.
- * Moreover, to ensure data uniqueness, it also extends
- * {@link LocalIdentifiabilitySerializer} this.serializerclass
+ * Moreover, to ensure data identifiability, it also uses a
+ * {@link SerializerCollector} instance to manage the storage
  * 
- * @author simone
- * @see LocalIdentifiabilitySerializer
+ * @author simone, lele, incre, andre
+ * @see SerializerCollector, {@link Project}
  *
  */
 public class ProjectsCollector {
 
 	private SerializerCollector serializer;
 
+	/**
+	 * Creates a new instance of this class
+	 * 
+	 * @param serializer
+	 *            : the serializer to be used for data identifiability
+	 */
 	public ProjectsCollector(SerializerCollector serializer) {
 		this.serializer = serializer;
 	}
@@ -28,6 +33,7 @@ public class ProjectsCollector {
 	 * Adds a project to the collection
 	 * 
 	 * @param project
+	 *            : the project to add to the collection
 	 */
 	public void addProject(Project project) {
 		this.serializer.addItem(project);

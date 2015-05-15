@@ -4,7 +4,7 @@ import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
 import model.ConcreteTeamManager;
-import model.ProjectManager;
+import model.Notifier;
 import model.ProjectSettings;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
@@ -13,13 +13,37 @@ import boards.UserStoryBoard.ConcreteUserStoriesManager;
 import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 
+/**
+ * ConcreteProjectFactory provides implemetation for each method specified in
+ * {@link ProjectFactory}, building an integrated system able to write in the
+ * project's {@link Timeline} instance an event for each occuring change. This
+ * is performed through DP Mediator oriented architecture: too apply this
+ * structure to other components, in order to perform such integration, just get
+ * the mediator's instace by calling
+ * {@link ConcreteProjectFactory#createNotifier()}
+ * 
+ * @author simone, lele, incre, andre
+ *
+ */
 public class ConcreteProjectFactory implements ProjectFactory {
 
-	private Timeline timeline = new ConcreteTimeline(
-			TimeZone.getTimeZone("Europe/Rome"), new LocalIdentifiabilitySerializer() );
+	private TimeZone timezone;
+	private Timeline timeline = new ConcreteTimeline(timezone,
+			new LocalIdentifiabilitySerializer());
 	private ProjectSettings settings = new ConcreteProjectSettings();
-	private ProjectManager projectManager = new ConcreteTeamManager(settings,
+	private Notifier projectManager = new ConcreteTeamManager(settings,
 			timeline);
+
+	/**
+	 * Creates a new instance of this class
+	 * 
+	 * @param timezone
+	 *            : the {@link TimeZone} to be used for time references
+	 */
+	public ConcreteProjectFactory(TimeZone timezone) {
+		super();
+		this.timezone = timezone;
+	}
 
 	@Override
 	/*
@@ -37,7 +61,7 @@ public class ConcreteProjectFactory implements ProjectFactory {
 	 * 
 	 * @see model.project.ProjectFactory#createManager()
 	 */
-	public ProjectManager createManager() {
+	public Notifier createNotifier() {
 		return projectManager;
 	}
 
@@ -53,6 +77,11 @@ public class ConcreteProjectFactory implements ProjectFactory {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.project.ProjectFactory#createSettings()
+	 */
 	public ProjectSettings createSettings() {
 		return this.settings;
 	}

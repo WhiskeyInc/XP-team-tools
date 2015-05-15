@@ -10,10 +10,10 @@ import boards.taskBoard.Task;
  * This implementation of {@link ProjectSettings} interface provides
  * implementation for each inherited method, but also adds mehods to change
  * settings. In order to notify these changes, this class can use an instance of
- * {@link ProjectManager} to communicate with other project elements
+ * {@link Notifier} to communicate with other project elements
  * 
  * @author simone
- * @see ProjectManager
+ * @see Notifier
  *
  */
 public class ConcreteProjectSettings implements ProjectSettings {
@@ -21,7 +21,7 @@ public class ConcreteProjectSettings implements ProjectSettings {
 	private ArrayList<TeamComponent> teamMembers = new ArrayList<TeamComponent>();
 	private ArrayList<String> possibleTasksStates = new ArrayList<String>();
 	private ArrayList<String> possibleUserStoriesStates = new ArrayList<String>();
-	private ProjectManager manager;
+	private Notifier manager;
 
 	/**
 	 * Sets the available states for an instance of {@link Task}
@@ -48,12 +48,12 @@ public class ConcreteProjectSettings implements ProjectSettings {
 	}
 
 	/**
-	 * Sets the {@link ProjectManager} to use for settings changes notifications
+	 * Sets the {@link Notifier} to use for settings changes notifications
 	 * 
 	 * @param manager
-	 *            : the instance of {@link ProjectManager} to use for notifications
+	 *            : the instance of {@link Notifier} to use for notifications
 	 */
-	public void setManager(ProjectManager manager) {
+	public void setManager(Notifier manager) {
 		this.manager = manager;
 	}
 

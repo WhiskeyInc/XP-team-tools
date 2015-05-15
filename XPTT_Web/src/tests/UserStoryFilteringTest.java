@@ -6,7 +6,7 @@ import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
 import model.ConcreteTeamManager;
-import model.ProjectManager;
+import model.Notifier;
 
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ import filtering.checkers.StateUserStoryChecker;
 public class UserStoryFilteringTest {
 
 	private ConcreteProjectSettings settings = new ConcreteProjectSettings();
-	private ProjectManager teammanager = new ConcreteTeamManager(settings,
+	private Notifier teammanager = new ConcreteTeamManager(settings,
 			new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"),
 					new LocalIdentifiabilitySerializer()));
 	private UserStoriesManager userStoriesBoard = new ProjectUserStoriesManager(

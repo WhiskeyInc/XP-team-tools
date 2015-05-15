@@ -11,14 +11,14 @@ import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.Task;
 
 /**
- * This implementation of {@link ProjectManager} interface provides project
+ * This implementation of {@link Notifier} interface provides project
  * events notification through an instance of {@link Timeline} and data control
  * over an implementation of {@link ProjectSettings} interface
  * 
  * @author simone
  *
  */
-public class ConcreteTeamManager implements ProjectManager {
+public class ConcreteTeamManager implements Notifier {
 
 	private Timeline timeline;
 	private TimeZone locale = TimeZone.getTimeZone("Europe/Rome");

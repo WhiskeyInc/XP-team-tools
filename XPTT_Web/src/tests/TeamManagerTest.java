@@ -9,7 +9,7 @@ import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
 import model.ConcreteTeamManager;
-import model.ProjectManager;
+import model.Notifier;
 import model.TeamComponent;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
@@ -36,7 +36,7 @@ public class TeamManagerTest {
 	private Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"),
 			new LocalIdentifiabilitySerializer());
-	private ProjectManager teamManager = new ConcreteTeamManager(settings,
+	private Notifier teamManager = new ConcreteTeamManager(settings,
 			timeline);
 	private TaskManager taskBoard = new ProjectTaskManager(
 			new ConcreteTaskManager(), teamManager);

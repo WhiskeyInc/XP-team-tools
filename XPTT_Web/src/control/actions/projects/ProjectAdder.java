@@ -2,6 +2,7 @@ package control.actions.projects;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,14 +20,19 @@ public class ProjectAdder extends ProjectAction {
 	@Override
 	/*
 	 * (non-Javadoc)
-	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 * 
+	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
 	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ProjectsCollector projects = super.getProjects(request);
-		Project project = new Project(request.getParameter("projectName"),
-				new ConcreteProjectFactory(), request.getParameter("description"));
-		ConcreteProjectSettings settings = (ConcreteProjectSettings) project.getSettings();
+		Project project = new Project(
+				request.getParameter("projectName"),
+				new ConcreteProjectFactory(TimeZone.getTimeZone("Europe/Rome")),
+				request.getParameter("description"));
+		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
+				.getSettings();
 		try {
 			settings.addTeamMember(getTeamComponent(request));
 		} catch (NameAlreadyInUseException e) {
@@ -36,12 +42,12 @@ public class ProjectAdder extends ProjectAction {
 	}
 
 	private TeamComponent getTeamComponent(HttpServletRequest request) {
-		String username = (String) request.getSession().getAttribute("currentUser");
+		String username = (String) request.getSession().getAttribute(
+				"currentUser");
 		@SuppressWarnings("unchecked")
 		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
 				.getServletContext().getAttribute("usersInfo");
 		return usersInfo.get(username);
 	}
-	
 
 }

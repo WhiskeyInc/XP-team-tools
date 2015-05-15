@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.util.TimeZone;
+
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
@@ -16,7 +19,8 @@ import boards.taskBoard.ProjectTaskManager;
 
 public class ProjectTest {
 
-	private Project project = new Project("ciao", new ConcreteProjectFactory(), null);
+	private Project project = new Project("ciao", new ConcreteProjectFactory(
+			TimeZone.getTimeZone("Europe/Rome")), null);
 
 	@Test
 	public void test01() throws Exception {
@@ -38,7 +42,8 @@ public class ProjectTest {
 
 	@Test
 	public void test03() throws Exception {
-		Project other = new Project("nome", new ConcreteProjectFactory(), null);
+		Project other = new Project("nome", new ConcreteProjectFactory(
+				TimeZone.getTimeZone("Europe/Rome")), null);
 		other.getUserStoriesManager().addUserStory(
 				new UserStory("Test", new ProjectTaskManager(
 						new ConcreteTaskManager(), project.getManager())));
@@ -47,23 +52,27 @@ public class ProjectTest {
 
 	@Test
 	public void test04() throws Exception {
-		ProjectsCollector manager = new ProjectsCollector(GlobalUniquenessSerializer.getInstance());
+		ProjectsCollector manager = new ProjectsCollector(
+				GlobalUniquenessSerializer.getInstance());
 		manager.addProject(project);
 		assertEquals(project, manager.getProject(project.getId()));
 	}
-	
+
 	@Test
 	public void test05() throws Exception {
-		ProjectsCollector manager = new ProjectsCollector(GlobalUniquenessSerializer.getInstance());
+		ProjectsCollector manager = new ProjectsCollector(
+				GlobalUniquenessSerializer.getInstance());
 		manager.addProject(project);
-		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
+		manager.addProject(new Project(null, new ConcreteProjectFactory(
+				TimeZone.getTimeZone("Europe/Rome")), null));
 		manager.deleteProject(project.getId());
 		assertEquals(1, manager.getProjects().size());
 	}
-	
+
 	@Test
 	public void test06() throws Exception {
-		Project project1 = new Project("uno", new ConcreteProjectFactory(), "unouno");
+		Project project1 = new Project("uno", new ConcreteProjectFactory(
+				TimeZone.getTimeZone("Europe/Rome")), "unouno");
 		System.out.println(project1.equals(project));
 	}
 

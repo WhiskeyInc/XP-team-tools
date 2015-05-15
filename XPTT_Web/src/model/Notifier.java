@@ -11,7 +11,7 @@ import boards.taskBoard.Task;
  * @author simone
  *
  */
-public interface ProjectManager {
+public interface Notifier {
 
 	/**
 	 * Notifies the system that a user story has been created for this project
