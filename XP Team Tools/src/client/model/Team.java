@@ -57,7 +57,7 @@ public class Team {
 	public void remove(String memberNick) {
 		membersSet.remove(memberNick);
 	}
-	//TODO to be tested
+	
 	public boolean hasMember(String memberNick) {
 		Iterator<String> iter = membersSet.iterator();
 		while(iter.hasNext()) {

@@ -7,6 +7,14 @@ import ui.ChatUI;
 import ui.ChaTimerUI;
 import ui.PrivateChaTimerUi;
 
+/**
+ * This class manages the various chat's sessions, by storing in map the state of chats (every chat 
+ * has a unique index with value true = active session, false = closed session) and registering the UI of
+ * different private chats
+ * 
+ * @author alberto
+ *
+ */
 public class SessionManager {
 
 	private  Map<Integer, Boolean> chatOpenMap = new HashMap<Integer, Boolean>();
@@ -25,8 +33,11 @@ public class SessionManager {
 	}
 
 
+	/**
+	 * Stores in a map the state of a chat
+	 * @param indexId a unique Id associated to a chat
+	 */
 	public void registerChatOpening(int indexId) {
-		System.err.println(indexId + " " + SessionManager.class);
 		if (!chatOpenMap.containsKey(indexId)) {
 			chatOpenMap.put(indexId, true);
 		} else {
@@ -42,12 +53,10 @@ public class SessionManager {
 	}
 
 	public void setChatClosed(int indexId) {
-		System.err.println("Sto chiudendo la chat indice " + indexId);
 		chatOpenMap.put(indexId, false);
 	}
 	
 	public boolean hasChat(int indexId) {
-		System.err.println(indexId + " has " + SessionManager.class);
 
 		return chatOpenMap.containsKey(indexId);
 	}
@@ -57,12 +66,16 @@ public class SessionManager {
 		uiMap.get(index).requestFocus();
 	}
 	
+	/**
+	 * Register in a map of private chat UI the UI of a private chat 
+	 * @param index index of private chat
+	 * @param ui ui of a private chat
+	 */
 	public void registerUI(int index, PrivateChaTimerUi ui) {
 		uiMap.put(index, ui);
 	}
 	
-	//Temporary solution: nb it is "server-unsafe" and it make visible the changes
-	//TODO bufferize la classe chat e aggiungere tipo un metodo flush()
+	
 	public void emptyChatUI(int index) {
 		if(uiMap.containsKey(index)) {
 			ChatUI ui = uiMap.get(index).getChatUI();

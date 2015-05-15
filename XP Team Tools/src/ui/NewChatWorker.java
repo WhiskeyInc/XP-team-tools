@@ -18,17 +18,17 @@ import string.formatter.Formatter;
 import tests.ClientMain;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
-import client.model.IClientService;
 import client.model.SessionManager;
-import client.model.StrategyClient1_1;
+import client.model.Client;
+import client.model.service.IClientService;
 
 public class NewChatWorker extends SwingWorker<Integer, Void>{
 
 	private UserListUI listUI;
-	private StrategyClient1_1 client;
+	private Client client;
 	private IClientService[] services;
 	
-	public NewChatWorker(UserListUI listUI, StrategyClient1_1 client,
+	public NewChatWorker(UserListUI listUI, Client client,
 			IClientService[] services) {
 		super();
 		this.listUI = listUI;

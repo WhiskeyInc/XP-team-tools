@@ -1,4 +1,4 @@
-package client.model;
+package client.model.teams;
 
 import java.util.Observable;
 
@@ -15,25 +15,19 @@ public class SetMembsService extends Observable implements IListService{
 
 	private String[] membs;
 	
-	/* (non-Javadoc)
-	 * @see client.model.IClientService#setAttribute(java.lang.String)
-	 */
+	@Override
 	public void setMembs(String request) {
 		try {
 			membs = JsonParser
 					.parseMakeTeamMembs(request);
 			System.err.println(request + SetMembsService.class);
-//			for (int i = 0; i < membs.length; i++) {
-//				System.out.println(membs[i] + " " + SetMembsService.class);
-//			}
+
 			update();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
-	/* (non-Javadoc)
-	 * @see client.model.IClientService#getCurrentMessageString()
-	 */
+	
 	public String[] getMembs() {
 		return membs;
 	}

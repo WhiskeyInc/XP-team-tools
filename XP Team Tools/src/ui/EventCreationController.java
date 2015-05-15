@@ -11,7 +11,7 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import client.model.StrategyClient1_1;
+import client.model.Client;
 
 /**
  * 
@@ -24,10 +24,10 @@ public class EventCreationController implements ActionListener {
 
 	private MeetingUIDetails ask = new MeetingUIDetails();
 	private JFrame detailsFrame;
-	private StrategyClient1_1 client;
+	private Client client;
 
 	public EventCreationController(MeetingUIDetails ask,
-			StrategyClient1_1 client) {
+			Client client) {
 		super();
 		this.ask = ask;
 		this.client = client;

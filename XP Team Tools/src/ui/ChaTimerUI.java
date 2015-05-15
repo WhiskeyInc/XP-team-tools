@@ -23,11 +23,11 @@ import javax.swing.border.TitledBorder;
 
 import protocol.JsonMaker;
 import string.formatter.Formatter;
-import client.model.IClientService;
-import client.model.IListService;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.StrategyClient1_1;
+import client.model.Client;
+import client.model.service.IClientService;
+import client.model.teams.IListService;
 
 /**
  * The main UI: it's composed of a @ChatUI and a @TimerUI
@@ -48,13 +48,13 @@ public class ChaTimerUI extends JFrame implements Observer {
 	private final UserListUI userListUI;
 	private IListService setTeamMembs;
 	private JPanel mainPanel;
-	private StrategyClient1_1 client;
+	private Client client;
 	private LoadingPanel lp = new LoadingPanel("Loading");
 	private JPanel loadingPanel = new JPanel();
 
 	
 	public ChaTimerUI(final IClientService[] services,
-			IListService setTeamMembs, final StrategyClient1_1 client, int index, String[] teamMembs) {
+			IListService setTeamMembs, final Client client, int index, String[] teamMembs) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
@@ -181,7 +181,7 @@ public class ChaTimerUI extends JFrame implements Observer {
 		super.revalidate();
 	}
 
-	private String[] nicksFilter(StrategyClient1_1 client) {
+	private String[] nicksFilter(Client client) {
 		String[] membs = setTeamMembs.getMembs();
 		if (membs != null) {
 			String[] membsWithoutMe = new String[membs.length - 1];

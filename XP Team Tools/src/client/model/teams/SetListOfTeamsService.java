@@ -1,4 +1,4 @@
-package client.model;
+package client.model.teams;
 
 import java.util.Observable;
 
@@ -15,12 +15,6 @@ public class SetListOfTeamsService extends Observable implements IListService {
 
 	private String[] teams;
 	
-	/* (non-Javadoc)
-	 * @see client.model.IClientService#setAttribute(java.lang.String)
-	 */
-	/* (non-Javadoc)
-	 * @see client.model.IListServices#setMembs(java.lang.String)
-	 */
 	@Override
 	public void setMembs(String request) {
 		try {
@@ -30,12 +24,7 @@ public class SetListOfTeamsService extends Observable implements IListService {
 			e.printStackTrace();
 		}
 	}
-	/* (non-Javadoc)
-	 * @see client.model.IClientService#getCurrentMessageString()
-	 */
-	/* (non-Javadoc)
-	 * @see client.model.IListServices#getMembs()
-	 */
+	
 	@Override
 	public String[] getMembs() {
 		return teams;

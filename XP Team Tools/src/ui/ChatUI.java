@@ -25,7 +25,7 @@ import javax.swing.text.DefaultCaret;
 
 import string.formatter.Formatter;
 import client.model.MessageObservable;
-import client.model.StrategyClient1_1;
+import client.model.Client;
 /**
  * The UI of the chat, it includes a TextArea where it's possible write actions and 
  * an other TextArea where sent messages are displayed (this class is an Observer)
@@ -45,10 +45,10 @@ public class ChatUI extends JPanel implements Observer{
 	private JTextArea chatArea;
 	protected JTextArea messageArea = new JTextArea();
 	
-	private StrategyClient1_1 client;
+	private Client client;
 	private MessageObservable messageObs;
 	
-	public ChatUI(MessageObservable messageObs, StrategyClient1_1 client) {
+	public ChatUI(MessageObservable messageObs, Client client) {
 		this.client = client;
 		this.messageObs = messageObs;
 		messageObs.addObserver(this);

@@ -18,18 +18,19 @@ import ui.login.LoginUI;
 import ui.login.MainLoginUI;
 import ui.login.RegUI;
 import client.model.ClientConnectionDetails;
-import client.model.StrategyClient1_1;
+import client.model.Client;
 
 /**
  * This test shows the ultimate version of the chat: if the server is running,
  * the login panel it's shown; after the login, it's possible to select (or create)
  * the team from the team panel: in this way, appears a series of panels which contains
  * all the functionalities of our project:
+ * -chat service
  * -timer with adjustable countdown (synchronized with other members of the chat)
  * -team members panel, with the nicknames of other team members, thanks to which it's possible
  *  select certain team members and start private chats
  * -schedule a meeting with the addition of meeting details
- * -chat service
+ * 
  * 
  *
  * 
@@ -75,7 +76,7 @@ public class ClientMain {
 					e2.printStackTrace();
 				}
 
-				final StrategyClient1_1 client = new StrategyClient1_1(
+				final Client client = new Client(
 						new ClientConnectionDetails(login.getLoginNick(), null,
 								login.getPass()));
 

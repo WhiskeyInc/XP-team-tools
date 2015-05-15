@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import client.model.IClientService;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.StrategyClient1_1;
+import client.model.Client;
+import client.model.service.IClientService;
 
 /**
  * The UI for private chats, which is shown when a user select a list of team-members and
@@ -40,7 +40,7 @@ public class PrivateChaTimerUi extends JFrame {
 	private JPanel loadingPanel = new JPanel();
 	
 	public PrivateChaTimerUi(final IClientService setMessage,
-			final IClientService setTimeStamp, final StrategyClient1_1 client,
+			final IClientService setTimeStamp, final Client client,
 			 final int index) {
 		super();
 		

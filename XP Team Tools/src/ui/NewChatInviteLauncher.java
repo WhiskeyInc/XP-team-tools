@@ -14,10 +14,10 @@ import javax.swing.SwingUtilities;
 import protocol.JsonMaker;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
-import client.model.IClientService;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.StrategyClient1_1;
+import client.model.Client;
+import client.model.service.IClientService;
 
 /**
  * A class that launchs the UI for the private chat when it receives a notification 
@@ -27,13 +27,13 @@ import client.model.StrategyClient1_1;
  */
 public class NewChatInviteLauncher implements Observer {
 
-	private StrategyClient1_1 client;
+	private Client client;
 	private IClientService serviceMessage;
 	private IClientService serviceTimeStamp;
 	private MessageObservable mObs;
 	private SessionManager sessionManager;
 
-	public NewChatInviteLauncher(IClientService newChat, StrategyClient1_1 client,
+	public NewChatInviteLauncher(IClientService newChat, Client client,
 			IClientService serviceMessage, IClientService serviceTimeStamp, SessionManager sessionManager) {
 		super();
 		this.client = client;

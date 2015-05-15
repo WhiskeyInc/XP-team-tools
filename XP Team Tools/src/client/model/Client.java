@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.HashMap;
 
+import client.model.service.IClientService;
+import client.model.teams.IListService;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
@@ -15,11 +17,11 @@ import string.formatter.Formatter;
 /**
  * A client of the chat system, it sends and receives messages of one or more
  * conversations (chats) It is configurable adding implementation of
- * IClientService
+ * @IClientService and @IListService
  * 
  * @author Alberto
  */
-public class StrategyClient1_1 {
+public class Client {
 
 	private ClientConnectionDetails clientDetails;
 	private DataOutputStream os;
@@ -28,12 +30,12 @@ public class StrategyClient1_1 {
 	private HashMap<Integer, IListService> listServices = new HashMap<Integer, IListService>();
 
 
-	public StrategyClient1_1() {
+	public Client() {
 		super();
 
 	}
 
-	public StrategyClient1_1(ClientConnectionDetails clientDetails) {
+	public Client(ClientConnectionDetails clientDetails) {
 		super();
 		this.clientDetails = clientDetails;
 	}
@@ -56,11 +58,6 @@ public class StrategyClient1_1 {
 					.getOutputStream());
 			is = new DataInputStream(clientDetails.getRealTimeSocket().getInputStream());
 			sendMessageToServer(JsonMaker.connectToServerRequest(clientDetails));
-			// os.writeBytes(Formatter.appendNewLine(JsonMaker.newChatRequest(
-			// clientDetails.getTeamName(), clientDetails.getNickname())));
-			// //invio il teamName perchè mi voglo allineare solo con la
-			// //chat di team inizialmente
-			// os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,8 +73,6 @@ public class StrategyClient1_1 {
 		message = Formatter.appendNewLine(message);
 		if (clientDetails.getRealTimeSocket() != null && os != null && is != null) {
 			try {
-				// os.writeBytes(Formatter.markMessage(teamName));
-				// os.writeBytes(Formatter.formatNickname(nickname));
 				os.writeBytes(message);
 				os.flush();
 			} catch (Exception e) {
@@ -101,14 +96,10 @@ public class StrategyClient1_1 {
 			while (true) {
 				String read = input.readLine();
 				if (read != null) {
-					System.out.println(read + " " + StrategyClient1_1.class);
 					int requestCode = JsonParser
 							.getRequest(read);
 					IClientService service = services.get(requestCode);
-					// TODO controllare se service non c'è... gestire
 					if (service != null) {
-						System.out.println("qua dentro " + service + " "
-								+ StrategyClient1_1.class);
 						service.setAttribute(read);
 					} else {
 						IListService listService = listServices.get(requestCode);

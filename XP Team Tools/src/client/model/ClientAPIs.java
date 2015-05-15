@@ -6,9 +6,9 @@ import protocol.JsonMaker;
 
 public class ClientAPIs{
 	
-	private StrategyClient1_1 client;
+	private Client client;
 
-		public ClientAPIs(StrategyClient1_1 client) {
+		public ClientAPIs(Client client) {
 			super();
 			this.client = client;
 		}

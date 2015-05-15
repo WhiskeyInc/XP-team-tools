@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 
 import ui.TeamListUI;
 import client.model.ClientConnectionDetails;
-import client.model.StrategyClient1_1;
+import client.model.Client;
 
 
 public class TeamListUIMain {
 	public static void main(String[] args) {
-		StrategyClient1_1 client = new StrategyClient1_1(new ClientConnectionDetails("ALB", "BO"));
+		Client client = new Client(new ClientConnectionDetails("ALB", "BO"));
 		String[] teams = new String[4];
 		teams[0] = "LeFere";
 		teams[1] = "Frades";

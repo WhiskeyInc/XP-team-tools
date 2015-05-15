@@ -1,8 +1,9 @@
-package client.model;
+package client.model.teams;
 
 import java.util.Observer;
 /**
  * Abstraction of services that handle list of parameters used by clients
+ * 
  * @author alberto
  *
  */

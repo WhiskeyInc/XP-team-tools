@@ -1,10 +1,14 @@
-package client.model;
+package client.model.service;
 
 import java.util.Observable;
 
+import client.model.MessageObservable;
 import protocol.JsonParser;
 /**
- * TODO dovrei creare la nuova UI o rimandare a qualcosa che la crea
+ * 
+ * This class implements the service of a new chat's creation, by introducing a index that 
+ * identifies univocally the chat
+ * 
  * @author alberto
  *
  */

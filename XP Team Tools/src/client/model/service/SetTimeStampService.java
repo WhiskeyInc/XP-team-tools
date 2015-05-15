@@ -1,4 +1,4 @@
-package client.model;
+package client.model.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,9 +6,21 @@ import java.util.Observable;
 
 import org.json.simple.parser.ParseException;
 
+import client.model.MessageObservable;
 import protocol.JsonParser;
 import timer.TimerFormatter;
 
+/**
+ * This class implements the Time Stamp Service, i.e., it stores in a map of observable messages
+ * the time stamp to be shown on display (every message/time stamp is associated to only one chat).
+ * Moreover, it's possible to get this message (if no timer request have been made up to this time,
+ * the initial timestamp is set to default value of 10:00)
+ * 
+ * 
+ * 
+ * @author alberto
+ *
+ */
 public class SetTimeStampService implements IClientService {
 
 	private Map<Integer, MessageObservable> obsMap = new HashMap<Integer, MessageObservable>();
@@ -28,7 +40,7 @@ public class SetTimeStampService implements IClientService {
 				obsMap.put(index, new MessageObservable(TimerFormatter.getDisplay(
 						Integer.parseInt(lines[1]), Integer.parseInt(lines[2]))));
 			}
-		//	update();
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -44,8 +56,4 @@ public class SetTimeStampService implements IClientService {
 
 	}
 
-//	private void update() {
-//		setChanged();
-//		notifyObservers();
-//	}
 }

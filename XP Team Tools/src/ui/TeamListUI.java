@@ -32,22 +32,22 @@ import string.formatter.Formatter;
 import tests.ClientMain;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
-import client.model.IClientService;
-import client.model.IListService;
 import client.model.SessionManager;
-import client.model.SetListOfTeamsService;
-import client.model.SetMembsService;
-import client.model.SetMessageService;
-import client.model.SetNewChatService;
-import client.model.SetTimeStampService;
-import client.model.StrategyClient1_1;
+import client.model.Client;
+import client.model.service.IClientService;
+import client.model.service.SetMessageService;
+import client.model.service.SetNewChatService;
+import client.model.service.SetTimeStampService;
+import client.model.teams.IListService;
+import client.model.teams.SetListOfTeamsService;
+import client.model.teams.SetMembsService;
 
 public class TeamListUI extends JFrame {
 
 	/**
 	 * 
 	 */
-	private StrategyClient1_1 client;
+	private Client client;
 	private JButton logout = new JButton("Logout");
 	private JButton createTeam = new JButton("Create");
 	private JScrollPane teamPane;
@@ -57,7 +57,7 @@ public class TeamListUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public TeamListUI(StrategyClient1_1 client, String[] teams) {
+	public TeamListUI(Client client, String[] teams) {
 		this.client = client;
 		mainPanel = new JPanel(new GridBagLayout());
 		addLoggedLabel();
@@ -212,7 +212,7 @@ public class TeamListUI extends JFrame {
 //TODO
 					
 					System.err.println("L' indice della chat è : " + index
-							+ " [" + StrategyClient1_1.class + "]");
+							+ " [" + Client.class + "]");
 					
 					//client.waitServerResponse();
 					final String indexString = String.valueOf(index);
