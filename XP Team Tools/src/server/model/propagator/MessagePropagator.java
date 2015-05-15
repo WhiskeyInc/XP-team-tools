@@ -1,4 +1,4 @@
-package server.model;
+package server.model.propagator;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -21,17 +21,17 @@ import client.model.ClientDetails;
 
 public class MessagePropagator {
 
-	private volatile ClientsManager2 clientsManager;
+	private volatile ClientsManager clientsManager;
 	private IPropagator propagator;
 	
-	public MessagePropagator(ClientsManager2 clientsManager,
+	public MessagePropagator(ClientsManager clientsManager,
 			IPropagator propagator) {
 		super();
 		this.clientsManager = clientsManager;
 		this.propagator = propagator;
 	}
 
-	public MessagePropagator(ClientsManager2 clientsManager) {
+	public MessagePropagator(ClientsManager clientsManager) {
 		super();
 		this.clientsManager = clientsManager;
 	}

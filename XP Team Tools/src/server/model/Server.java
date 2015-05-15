@@ -12,6 +12,8 @@ import java.util.Iterator;
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
+import server.model.propagator.ClientsManager;
+import server.model.services.IService;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
@@ -22,17 +24,17 @@ import client.model.ClientDetails;
  * @author nicola, Alberto
  *
  */
-public class ServerStrategy1_1 extends AbstractServer {
+public class Server extends AbstractServer {
 
 	private HashMap<Integer, IService> services = new HashMap<Integer, IService>();
 
 	private Socket clientSocket;
 	private Socket requestSocket;
 
-	private volatile ClientsManager2 clientsManager1;
+	private volatile ClientsManager clientsManager1;
 	private BufferedReader in;
 	
-	public ServerStrategy1_1(ClientsManager2 clientsManager1) {
+	public Server(ClientsManager clientsManager1) {
 		super();
 		this.clientsManager1 = clientsManager1;
 		
@@ -47,8 +49,8 @@ public class ServerStrategy1_1 extends AbstractServer {
 
 				clientSocket = serverSocket.accept();
 				requestSocket = serverSocket.accept();
-				System.out.println("Chat socket: " + clientSocket.getLocalAddress()+ " " + clientSocket.getPort()+ " " + ServerStrategy1_1.class);
-				System.out.println("Request socket: " + requestSocket.getLocalAddress()+ " " + requestSocket.getPort()+ " " + ServerStrategy1_1.class);
+				System.out.println("Chat socket: " + clientSocket.getLocalAddress()+ " " + clientSocket.getPort()+ " " + Server.class);
+				System.out.println("Request socket: " + requestSocket.getLocalAddress()+ " " + requestSocket.getPort()+ " " + Server.class);
 
 				
 				setUpStream();
@@ -67,10 +69,10 @@ public class ServerStrategy1_1 extends AbstractServer {
 						}
 						Iterator<ClientConnectionDetails> iter = clientsManager1.getClients().iterator();
 						while(iter.hasNext()) {
-							System.err.println(iter.next().getNickname() + " " + ServerStrategy1_1.class);
+							System.err.println(iter.next().getNickname() + " " + Server.class);
 
 						}
-						System.err.println(clientsManager1.size() + " SIZE " + ServerStrategy1_1.class);
+						System.err.println(clientsManager1.size() + " SIZE " + Server.class);
 
 					} catch (ParseException e) {
 						e.printStackTrace();
@@ -111,7 +113,7 @@ public class ServerStrategy1_1 extends AbstractServer {
 							// TODO controllare se service non c'è... gestire
 							if (service != null) {
 								service.doAction(line);
-								System.out.println(service + " " + ServerStrategy1_1.class);
+								System.out.println(service + " " + Server.class);
 							}
 
 						}
@@ -135,7 +137,7 @@ public class ServerStrategy1_1 extends AbstractServer {
 		services.put(request, service);
 	}
 	
-	public synchronized ClientsManager2 getClientsManager() {
+	public synchronized ClientsManager getClientsManager() {
 		return clientsManager1;
 	}
 

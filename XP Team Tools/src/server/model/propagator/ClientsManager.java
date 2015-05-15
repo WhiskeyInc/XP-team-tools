@@ -1,4 +1,4 @@
-package server.model;
+package server.model.propagator;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -21,15 +21,15 @@ import client.model.ClientDetails;
  *
  */
 
-public class ClientsManager2 {
+public class ClientsManager {
 
 	private IDBConnection db;
 	private Authenticate auth = new Authenticate();
 	private volatile Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
-	private static volatile ClientsManager2 instance = new ClientsManager2();
+	private static volatile ClientsManager instance = new ClientsManager();
 	private boolean testModeEnabled = false;
 
-	private ClientsManager2() {
+	private ClientsManager() {
 		db = new DBConnection();
 	}
 
@@ -48,7 +48,7 @@ public class ClientsManager2 {
 			if (authenticate(client.getNickname(), client.getPwd())) {
 
 				System.out.println("Sto registrando " + client.getNickname()
-						+ " " + client.getTeamName() + ClientsManager2.class);
+						+ " " + client.getTeamName() + ClientsManager.class);
 				recordClient(client);
 
 			} else {
@@ -65,7 +65,7 @@ public class ClientsManager2 {
 	private void recordClient(ClientConnectionDetails client) {
 		if (has(client)) {
 			remove(client);
-			System.out.println("L ho rimosso " + ClientsManager2.class);
+			System.out.println("L ho rimosso " + ClientsManager.class);
 			clients.add(client);
 		} else {
 			clients.add(client);
@@ -118,7 +118,7 @@ public class ClientsManager2 {
 		return false;
 	}
 
-	public synchronized static ClientsManager2 getInstance() {
+	public synchronized static ClientsManager getInstance() {
 		return instance;
 	}
 

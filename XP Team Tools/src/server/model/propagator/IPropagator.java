@@ -1,4 +1,4 @@
-package server.model;
+package server.model.propagator;
 
 import java.net.Socket;
 

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="server.model.TimerService1_1" project="XP Team Tools" 
-    file="/XP Team Tools/src/server/model/TimerService1_1.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="server.model.services.timer.TimerService" project="XP Team Tools" 
+    file="/XP Team Tools/src/server/model/services/timer/TimerService.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="389" y="78"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="server.model.ChatService" project="XP Team Tools" 
-    file="/XP Team Tools/src/server/model/ChatService.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="server.model.services.chat.ChatService" project="XP Team Tools" 
+    file="/XP Team Tools/src/server/model/services/chat/ChatService.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="530" y="71"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
@@ -22,8 +22,8 @@
   <class id="3" language="java" name="server.model.ServerStrategy1_1O" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/ServerStrategy1_1O.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="66" width="150" x="30" y="56"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
@@ -31,8 +31,8 @@
   <class id="4" language="java" name="server.model.CacheMap" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/CacheMap.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="761" y="125"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
@@ -40,17 +40,17 @@
   <class id="5" language="java" name="server.model.AbstractServer" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/AbstractServer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="148" y="-78"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="6" language="java" name="server.model.IService" project="XP Team Tools" 
-    file="/XP Team Tools/src/server/model/IService.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="6" language="java" name="server.model.services.IService" project="XP Team Tools" 
+    file="/XP Team Tools/src/server/model/services/IService.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="521" y="-92"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
@@ -58,51 +58,55 @@
   <interface id="7" language="java" name="server.model.IChatStorer" project="XP Team Tools" 
     file="/XP Team Tools/src/server/model/IChatStorer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="712" y="15"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="8" language="java" name="server.model.IMessageRecover" project="XP Team Tools" 
-    file="/XP Team Tools/src/server/model/IMessageRecover.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="8" language="java" name="server.model.recover.IMessageRecover" project="XP Team Tools" 
+    file="/XP Team Tools/src/server/model/recover/IMessageRecover.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="622" y="263"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <realization id="9">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <realization id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="11">    
+  <association id="9">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="12" name="services"/>      
-      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+      <attribute id="10" name="services">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="12">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="13">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
   <realization id="14">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="8"/>  
   </realization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <realization id="16">    
+  <realization id="15">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-    accessors="true" visibility="true">    
+    sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
     <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  

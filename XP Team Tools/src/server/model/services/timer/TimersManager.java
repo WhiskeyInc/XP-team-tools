@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.timer;
 
 import java.util.HashMap;
 import java.util.Map;

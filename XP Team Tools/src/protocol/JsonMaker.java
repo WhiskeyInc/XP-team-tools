@@ -8,7 +8,9 @@ import org.json.simple.JSONObject;
 import client.model.ClientDetails;
 
 /**
- * 
+ * This class creates the different requests that will be sent to the server using JSONObject, i.e., 
+ * collections of name/value pairs. All the methods of this class return a String representation 
+ * of the istance of JSONObject
  * 
  * @author alberto
  *
@@ -62,7 +64,7 @@ public class JsonMaker {
 
 	@SuppressWarnings("unchecked")
 	/**
-	 * creates a chat request for the server
+	 * creates a new chat request for the server
 	 * @param teamName
 	 * @param message
 	 */
@@ -149,6 +151,12 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	/**
+	 * 
+	 * @param teamName
+	 * @param teamCreatorNick
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static String newTeamRequest(String teamName, String teamCreatorNick) {
 		JSONObject json = new JSONObject();
@@ -204,30 +212,6 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public static String makeListOfTeamMembs(String[] teamsNames) {
-//
-//		JSONObject json = new JSONObject();
-//		JSONArray detArray = new JSONArray();
-//		for (int i = 0; i < teamsNames.length; i++) {
-//			detArray.add(teamsNames[i]);
-//		}
-//		json.put(REQ, );
-//		json.put(ATTENDANT, detArray);
-//		return json.toString();
-//	}
-
-	
-//	@SuppressWarnings("unchecked")
-//	public static String createNewUiRequest(int chatIndex) {
-//		JSONObject json = new JSONObject();
-//		json.put(REQ, NEW_UI);
-//		json.put(INDEX, String.valueOf(chatIndex));
-//		return json.toString();
-//	}
-	
-	
-	
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
@@ -261,7 +245,6 @@ public class JsonMaker {
 		return json.toString();
 	}
 
-	// lele's server still doesn't handle
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of an automatic event to communicate it to the second server

@@ -1,4 +1,4 @@
-package server.model;
+package server.model.recover;
 
 public class NoMessagesException extends Exception {
 	

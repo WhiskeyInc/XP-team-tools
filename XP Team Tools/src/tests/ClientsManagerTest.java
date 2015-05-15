@@ -5,18 +5,18 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.model.ClientsManager2;
+import server.model.propagator.ClientsManager;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
 public class ClientsManagerTest {
 
-	private ClientsManager2 clientsManager;
+	private ClientsManager clientsManager;
 	private ClientConnectionDetails conDet;
 	
 	@Before
 	public void setUp() {
-		clientsManager = ClientsManager2.getInstance();
+		clientsManager = ClientsManager.getInstance();
 		clientsManager.setTestModeEnabled(true);
 		conDet = new ClientConnectionDetails("Alb", "Test", "Alb123");
 	}

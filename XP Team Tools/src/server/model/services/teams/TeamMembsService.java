@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.teams;
 
 import java.io.IOException;
 
@@ -6,6 +6,8 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.model.propagator.MessagePropagator;
+import server.model.services.IService;
 import client.model.ClientDetails;
 import client.model.Team;
 

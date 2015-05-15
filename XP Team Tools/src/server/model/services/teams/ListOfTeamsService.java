@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.teams;
 
 import java.io.IOException;
 
@@ -6,6 +6,8 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.model.propagator.MessagePropagator;
+import server.model.services.IService;
 import client.model.ClientDetails;
 import client.model.Team;
 
@@ -27,7 +29,6 @@ public class ListOfTeamsService implements IService {
 		String nick = JsonParser.parseTeamsListRequest(line);
 		ClientDetails det = new ClientDetails(nick, null);
 		Team[] teams = teamsManager.getTeamsByNickname(nick);
-		//prendo il team perchè forse potrei aver bisogno di altre cose
 		String[] teamsNames = new String[teams.length];
 		
 		for (int i = 0; i < teams.length; i++) {

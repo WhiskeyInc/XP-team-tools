@@ -1,17 +1,18 @@
-package server.model;
+package server.model.services;
 
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
+import server.model.propagator.ClientsManager;
 import client.model.ClientDetails;
 
 public class DisconnectService implements IService{
 
-	private volatile ClientsManager2 clientsManager;
+	private volatile ClientsManager clientsManager;
 	
-	public DisconnectService(ClientsManager2 clientsManager) {
+	public DisconnectService(ClientsManager clientsManager) {
 		super();
 		this.clientsManager = clientsManager;
 	}

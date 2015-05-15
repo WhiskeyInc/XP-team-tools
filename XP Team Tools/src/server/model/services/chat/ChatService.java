@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.chat;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
+import server.model.propagator.MessagePropagator;
+import server.model.recover.Chat;
+import server.model.services.IService;
 import client.model.ClientDetails;
 
 /**

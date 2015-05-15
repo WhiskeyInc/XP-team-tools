@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.model.Chat;
-import server.model.NoMessagesException;
+import server.model.recover.Chat;
+import server.model.recover.NoMessagesException;
 import client.model.ClientDetails;
 
 public class ChatTest {

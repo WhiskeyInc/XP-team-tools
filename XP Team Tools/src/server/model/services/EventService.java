@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services;
 
 import java.io.IOException;
 
@@ -6,8 +6,7 @@ import org.json.simple.parser.ParseException;
 
 import server.events.IEventActionRequest;
 /**
- * It allow the server to add a Team
- * @author alberto
+ * 
  *
  */
 public class EventService implements IService{
@@ -22,7 +21,6 @@ public class EventService implements IService{
 	@Override
 	public void doAction(String line) throws IOException, ParseException {
 		
-		//line è il json ricevuto dal client: lo giro all'altro server
 		eventSender.propagateClientEvent(line);
 	}
 	

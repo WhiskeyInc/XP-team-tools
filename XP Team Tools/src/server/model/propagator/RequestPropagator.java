@@ -1,7 +1,8 @@
-package server.model;
+package server.model.propagator;
 
 import java.net.Socket;
 
+import server.model.propagator.IPropagator;
 import client.model.ClientConnectionDetails;
 
 public class RequestPropagator  implements IPropagator{

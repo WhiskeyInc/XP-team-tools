@@ -8,7 +8,7 @@ import org.json.simple.parser.ParseException;
 import client.model.ClientDetails;
 
 /**
- * It parse the requests sent to the server
+ * This class parses the requests sent to the server
  * 
  * @author alberto
  *
@@ -66,7 +66,6 @@ public class JsonParser {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
-		//TODO check if parseDisconnectRequests is actually using the third argument that is the password
 		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
 		return det;
 	}

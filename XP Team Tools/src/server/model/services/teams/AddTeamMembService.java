@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.teams;
 
 import java.io.IOException;
 
@@ -6,10 +6,15 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.model.propagator.MessagePropagator;
+import server.model.propagator.RealTimePropagator;
+import server.model.recover.Chat;
+import server.model.services.IService;
+import server.model.services.chat.ChatsManager;
 import client.model.ClientDetails;
 import client.model.Team;
 
-//TODO se estendo qualcosa che ha teamManager?
+
 public class AddTeamMembService implements IService {
 
 	private volatile TeamsManager teamManager;
@@ -42,9 +47,6 @@ public class AddTeamMembService implements IService {
 		for (int i = 0; i < membs.length; i++) {
 			messagePropagator.propagateMessage(JsonMaker.makeTeamMembs(membs), new ClientDetails(membs[i], teamName));
 		}
-		// NB bloccante se uso il wait
-		//messagePropagator.setPropagator(new RequestPropagator());
-	//messagePropagator.propagateMessage(JsonMaker.chatIndexRequest(chatsManager.size() - 1), det);
 	}
 
 	private Chat rebuildChat(String teamName) {

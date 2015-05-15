@@ -9,6 +9,12 @@ import java.util.ArrayList;
 
 import protocol.JsonMaker;
 
+/**
+ * Implementation of @IEventActionRequest
+ * 
+ * @author nicola
+ *
+ */
 public class SendPost implements IEventActionRequest {
 
 	private String url;

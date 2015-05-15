@@ -1,7 +1,9 @@
-package server.model;
+package server.model.services.chat;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import server.model.recover.Chat;
 
 /**
  * The ChatsManager is a singleton manager of the Chats.

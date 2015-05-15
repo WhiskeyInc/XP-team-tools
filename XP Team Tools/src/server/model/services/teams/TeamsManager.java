@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.teams;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -74,7 +74,7 @@ public class TeamsManager {
 	public int size() {
 		return teamList.size();
 	}
-	//TODO test and javadoc
+	
 	public Team[] getTeamsByNickname(String nickname) {
 		ArrayList<Team> teams = new ArrayList<Team>();
 		for (Team team : teamList) {

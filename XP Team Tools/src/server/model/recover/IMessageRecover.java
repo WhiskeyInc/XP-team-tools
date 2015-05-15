@@ -1,8 +1,9 @@
-package server.model;
+package server.model.recover;
+
 
 /**
  * Interface recovering the messages of the main conversation from the server
- * organisation [still doesn't handle many conversations]
+ * organisation 
  * 
  * @author alberto
  */

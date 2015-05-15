@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.chat;
 
 import java.io.IOException;
 
@@ -6,6 +6,13 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.model.propagator.MessagePropagator;
+import server.model.propagator.RealTimePropagator;
+import server.model.propagator.RequestPropagator;
+import server.model.recover.Chat;
+import server.model.recover.IMessageRecover;
+import server.model.recover.NoMessagesException;
+import server.model.services.IService;
 import client.model.ClientDetails;
 /**
  * This service [{@link IService}] allow the server to create a new chat.
@@ -19,7 +26,7 @@ public class NewChatService implements IService {
 	private volatile ChatsManager chatsManager;
 	private volatile MessagePropagator messagePropagator;
 	/**
-	 * The messages that a client recover immediately
+	 * The messages that a client recovers immediately
 	 */
 	public static final int NUM_OF_MESSAGES = 10;
 
@@ -50,8 +57,6 @@ public class NewChatService implements IService {
 			try {
 				alignClient(details[0], realChat);
 			} catch (NoMessagesException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
 				System.err.println("Eccezione in " + NewChatService.class);
 			}
 
@@ -70,7 +75,6 @@ public class NewChatService implements IService {
 	private void alignClient(ClientDetails details, IMessageRecover recoverer)
 			throws NoMessagesException, IOException {
 
-		//poi allineo
 		String[] messages = recoverer.recoverLastMessages(NUM_OF_MESSAGES);
 		for (int i = 0; i < messages.length; i++) {
 			messagePropagator.propagateMessage(messages[i], details);

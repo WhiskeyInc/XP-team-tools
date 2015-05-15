@@ -1,4 +1,4 @@
-package server.model;
+package server.model.services.timer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +12,10 @@ import org.json.simple.parser.ParseException;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import server.events.IEventActionRequest;
+import server.model.propagator.MessagePropagator;
+import server.model.recover.Chat;
+import server.model.services.IService;
+import server.model.services.chat.ChatsManager;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
 
@@ -21,10 +25,10 @@ import client.model.ClientDetails;
  * same team)
  * 
  * 
- * @author 
+ * @author Alberto, Alessandro
  *
  */
-public class TimerService1_1 implements IService {
+public class TimerService implements IService {
 
 	private ChatsManager chatsManager;
 	private TimersManager timersManager;
@@ -33,7 +37,7 @@ public class TimerService1_1 implements IService {
 
 	public static final int TOTAL_MILLIS = 1000;
 	
-	public TimerService1_1(ChatsManager chatsManager,
+	public TimerService(ChatsManager chatsManager,
 			TimersManager timersManager, MessagePropagator messagePropagator, IEventActionRequest eventSender) {
 		super();
 		this.chatsManager = chatsManager;
