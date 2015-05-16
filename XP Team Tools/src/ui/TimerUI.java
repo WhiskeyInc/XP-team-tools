@@ -5,11 +5,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -18,6 +22,7 @@ import javax.swing.event.DocumentListener;
 
 import sounds.SoundPlayer;
 import timer.TimerFormatter;
+import client.model.MacroEvents;
 import client.model.MessageObservable;
 /** 
 	 * The UI of the timer: it includes a display that shows the countdown and a button for
@@ -28,18 +33,21 @@ import client.model.MessageObservable;
 	 */
 public class TimerUI extends JPanel implements Observer{
 
-	
 	private static final long serialVersionUID = 1L;
+	
 	
 	private JTextField timerArea;
 	private JGradientButton startButton;
+	private JComboBox<String> choiseList;
 	public static final String ENDTIMER = "00:00";
 	private SoundPlayer player = new SoundPlayer("sounds/cannon.wav");
 	private MessageObservable messageObs;
+	private MacroEvents events;
 	
-	public TimerUI(MessageObservable messageObs) {
+	public TimerUI(MessageObservable messageObs, MacroEvents events) {
 		super();
 		this.messageObs = messageObs;
+		this.events = events;
 		messageObs.addObserver(this);
 		
 		timerArea = new JTextField();
@@ -90,6 +98,21 @@ public class TimerUI extends JPanel implements Observer{
 		lim.gridx = 0;
 		lim.gridy = 1;
 		super.add(startButton, lim);
+		
+		
+		choiseList = new JComboBox<String>();
+		ArrayList<String> arr = events.getNames();
+		for (String string : arr) {
+			choiseList.addItem(string);
+		}
+		
+		choiseList.setPreferredSize(new Dimension(200,30));
+		lim = new GridBagConstraints();
+		lim.gridx = 0;
+		lim.gridy = 2;
+		lim.insets = new Insets(10, 0,0,0);
+		super.add(choiseList,lim);
+		
 		super.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder(
 		         null, "Tomatoes panel",
 		         TitledBorder.DEFAULT_JUSTIFICATION,
@@ -115,7 +138,7 @@ public class TimerUI extends JPanel implements Observer{
 	public String getTimeStamp() {
 		return timerArea.getText();
 	}
-
+	
 	/**
 	 * allows the user to set the countdown
 	 * @param isEditable
@@ -133,6 +156,17 @@ public class TimerUI extends JPanel implements Observer{
 	public boolean isTimeStampValid(String timeStamp) {
 		return TimerFormatter.isTimeStampValid(timeStamp);
 	}
+	
+	/**
+	 * Set enabled/disabled the combo box of tomato choises
+	 */
+	public void setChoisesComboEnabled(boolean enabled){
+		choiseList.setEnabled(enabled);
+	}
+	
+	public String getChosenCombo(){
+		return (String) choiseList.getSelectedItem();
+	}
 
 	/**
 	 * plays a sound alarm when the countdown's end is reached
@@ -142,16 +176,25 @@ public class TimerUI extends JPanel implements Observer{
 			player.playSong();
 			setTimerEditable(true);
 			setButtomTimerClickable(true);
+			setChoisesComboEnabled(true);
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		setTimer(messageObs.getMessage());
-		if(!messageObs.getMessage().equals(TimerUI.ENDTIMER)) {
+		String message = messageObs.getMessage();
+		StringTokenizer tok = new StringTokenizer(message,":");
+		String time = tok.nextToken() + ":" + tok.nextToken();
+		setTimer(time);
+		if(!time.equals(TimerUI.ENDTIMER)) {
 			setTimerEditable(false);
+			setChoisesComboEnabled(false);
 		}
+		
+		String name = events.getNameFromId((String) tok.nextToken());
+		choiseList.setSelectedItem(name);
+		
 	}
 
 }

@@ -31,6 +31,7 @@ public class JsonMaker {
 	public static final String EVENT = "11";
 	public static final String TEAMS = "12";
 	public static final String MAKE_TEAMS_LIST = "13";
+	public static final String MACRO_EVENT = "14";
 	
 
 	
@@ -56,10 +57,17 @@ public class JsonMaker {
 	public static final String EVENT_HOUR = "hour";
 	public static final String EVENT_MINUTE = "min";
 	
-	
 	public static final String ADD_EVENT = "addEvent"; 
 	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; 
 	public static final String USER = "user";
+	
+	public static final String MACRO_EVENT_REQUEST_ACTION = "macro_event_request";
+	public static final String MACRO_EVENT_USER = "user";
+	public static final String MACRO_EVENT_RESPONSE_ACTION = "macro_event_response";
+	public static final String MACRO_EVENT_IDS = "ids";
+	public static final String MACRO_EVENT_NAMES = "names";
+	public static final String MACRO_EVENT_ID = "id";
+	
 
 
 	@SuppressWarnings("unchecked")
@@ -134,13 +142,14 @@ public class JsonMaker {
 	 * @param minutes
 	 * @param seconds
 	 */
-	public static String timerRequest(String chatIndex, int minutes, int seconds, ArrayList<String> participants) {
+	public static String timerRequest(String chatIndex, int minutes, int seconds, ArrayList<String> participants, String id) {
 
 		JSONObject json = new JSONObject();
 		json.put(REQ, TIMER);
 		json.put(CHAT_INDEX, chatIndex);
 		json.put(MINUTES, minutes);
 		json.put(SECONDS, seconds);
+		json.put(MACRO_EVENT_ID, id);
 		
 		JSONArray array = new JSONArray();
 		if (participants != null) {
@@ -212,6 +221,31 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public static String teamsListRequest(String nickname) {
+		JSONObject json = new JSONObject();
+		json.put(REQ, TEAMS);
+		json.put(NICKNAME, nickname);
+		
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String makeListOfTeams(String[] teamsNames) {
+
+		JSONObject json = new JSONObject();
+		JSONArray detArray = new JSONArray();
+		for (int i = 0; i < teamsNames.length; i++) {
+			detArray.add(teamsNames[i]);
+		}
+		json.put(REQ, MAKE_TEAMS_LIST);
+		json.put(ATTENDANT, detArray);
+		return json.toString();
+	}
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
@@ -250,10 +284,11 @@ public class JsonMaker {
 	 * creates an event json of an automatic event to communicate it to the second server
 	 * @param eventName
 	 * @param participants
+	 * @param id
 	 * @return
 	 */
 	public static String automaticEventRequest(String user, String eventName,
-			ArrayList<String> participants) {
+			ArrayList<String> participants, String id) {
 
 		JSONObject json = new JSONObject();
 
@@ -261,6 +296,7 @@ public class JsonMaker {
 		json.put(USER, user);
 		json.put(EVENT_ACTION, ADD_AUTOMATIC_EVENT);
 		json.put(EVENT_NAME, eventName);
+		json.put(MACRO_EVENT_ID, id);
 
 		if (participants != null) {
 			JSONArray array = new JSONArray();
@@ -272,24 +308,15 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String teamsListRequest(String nickname) {
+	public static String requestMacroEventsList(String user) {
+
 		JSONObject json = new JSONObject();
-		json.put(REQ, TEAMS);
-		json.put(NICKNAME, nickname);
+
+		json.put(REQ, MACRO_EVENT);
+		json.put(USER, user);
+		json.put(EVENT_ACTION, MACRO_EVENT_REQUEST_ACTION);
 		
 		return json.toString();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static String makeListOfTeams(String[] teamsNames) {
-
-		JSONObject json = new JSONObject();
-		JSONArray detArray = new JSONArray();
-		for (int i = 0; i < teamsNames.length; i++) {
-			detArray.add(teamsNames[i]);
-		}
-		json.put(REQ, MAKE_TEAMS_LIST);
-		json.put(ATTENDANT, detArray);
-		return json.toString();
-	}
 }

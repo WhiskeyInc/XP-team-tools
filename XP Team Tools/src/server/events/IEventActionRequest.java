@@ -15,7 +15,7 @@ public interface IEventActionRequest {
 	 * Function to propagate the event to the second server, from the client's json
 	 * @param json
 	 */
-	public void propagateClientEvent(String json);
+	public String sendJson(String json);
 	
 	
 	/**
@@ -25,7 +25,7 @@ public interface IEventActionRequest {
 	 * @param participants
 	 */
 	public void sendAutomaticEventAction(String user, String eventName,
-			ArrayList<String> participants);
+			ArrayList<String> participants, String id);
 
 	
 	/**

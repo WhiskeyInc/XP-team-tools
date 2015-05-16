@@ -18,7 +18,7 @@ public class EventSendPostTestMain {
 		participants.add("Simo");
 		participants.add("Digio");
 
-		sender.sendAutomaticEventAction("admin", "communicationTest", participants);
+		sender.sendAutomaticEventAction("admin", "communicationTest", participants, "id");
 		
 		sender.sendManualEventAction("admin", "communicationTestManual",
 				participants, "2050", "2", "12", "12", "12");

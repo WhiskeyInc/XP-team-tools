@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+import client.model.Client;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.Client;
 import client.model.service.IClientService;
 
 /**
@@ -48,7 +48,7 @@ public class PrivateChaTimerUi extends JFrame {
 				(MessageObservable) setMessage.getAttribute(index),
 				client);
 		timerUI = new TimerUI(
-				(MessageObservable) setTimeStamp.getAttribute(index));
+				(MessageObservable) setTimeStamp.getAttribute(index),null);		//TODO handle macro events like group chat
 		Runnable runnable = new Runnable() {
 
 			@Override

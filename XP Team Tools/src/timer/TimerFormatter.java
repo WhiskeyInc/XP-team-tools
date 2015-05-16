@@ -30,9 +30,9 @@ public class TimerFormatter {
 	 * 
 	 * @param minute
 	 * @param second
-	 * @return a string with the display og the timer
+	 * @return a string with the display of the timer
 	 */
-	public static String getDisplay(int minute, int second) {
+	public static String getDisplay(int minute, int second, String name) {
 		String display = "";
 		if (minute < 10 && second < 10)
 			display = "0" + String.valueOf(minute) + ":0"
@@ -44,7 +44,7 @@ public class TimerFormatter {
 					+ String.valueOf(second);
 		if (minute >= 10 && second >= 10)
 			display = String.valueOf(minute) + ":" + String.valueOf(second);
-		return display;
+		return display + ":" + name;
 	}
 	
 	public static long getMillis(int minutes, int seconds) {

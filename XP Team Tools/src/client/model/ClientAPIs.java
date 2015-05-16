@@ -27,8 +27,8 @@ public class ClientAPIs{
 			client.sendMessageToServer(JsonMaker.chatRequest(message, chatId));
 		}
 
-		public void timer(String chatIndex, int minutes, int seconds) {
-			client.sendMessageToServer(JsonMaker.timerRequest(chatIndex, minutes, seconds, null));
+		public void timer(String chatIndex, int minutes, int seconds, String id) {
+			client.sendMessageToServer(JsonMaker.timerRequest(chatIndex, minutes, seconds, null, id));
 		}
 
 		
@@ -56,8 +56,8 @@ public class ClientAPIs{
 		}
 		
 		
-		public void automaticEvent(String eventName, ArrayList<String> participants) {
-			client.sendMessageToServer(JsonMaker.automaticEventRequest("admin", eventName, participants));
+		public void automaticEvent(String eventName, ArrayList<String> participants, String id) {
+			client.sendMessageToServer(JsonMaker.automaticEventRequest("admin", eventName, participants, id));
 		}
 
 	}

@@ -55,9 +55,10 @@ public class TimerService implements IService {
 		int index = Integer.parseInt(indexString);
 		int minutes = Integer.parseInt(timerLines[1]);
 		int seconds = Integer.parseInt(timerLines[2]);
+		String idMacroEvent = timerLines[3];
 		
 		ArrayList<String> participants = new ArrayList<String>();
-		for (int i = 3; i < timerLines.length; i++) {
+		for (int i = 4; i < timerLines.length; i++) {
 			participants.add(timerLines[i]);
 		}
 		
@@ -68,10 +69,10 @@ public class TimerService implements IService {
 			timersManager.putMillis(index, TimerFormatter.getMillis(minutes, seconds));
 		}
 
-		startTimer(index,participants);
+		startTimer(index,participants,idMacroEvent);
 	}
 
-	private void startTimer(final int index, final ArrayList<String> participants) {
+	private void startTimer(final int index, final ArrayList<String> participants, final String idMacroEvent) {
 
 		final Timer timer = new Timer(TOTAL_MILLIS, new ActionListener() {
 
@@ -82,12 +83,12 @@ public class TimerService implements IService {
 				if (totalMillis == 0 && timersManager.hasTimerKey(index)) {
 					timersManager.getTimer(index).stop();
 					
-					eventSender.sendAutomaticEventAction("admin", "Finished Tomato", participants);
+					eventSender.sendAutomaticEventAction("admin", "Finished Tomato", participants, idMacroEvent);
 				}
 
 				int[] vet = TimerFormatter.getTimeStamp(totalMillis);
 				String lineTimer = JsonMaker.timerRequest(String.valueOf(index), vet[0],
-						vet[1], participants); // minuti, secondi
+						vet[1], participants, idMacroEvent); // minuti, secondi
 
 				Chat chat = chatsManager.get(index);
 				ArrayList<ClientDetails> list = chat.getAttendantsDetails();

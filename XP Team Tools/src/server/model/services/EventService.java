@@ -21,7 +21,7 @@ public class EventService implements IService{
 	@Override
 	public void doAction(String line) throws IOException, ParseException {
 		
-		eventSender.propagateClientEvent(line);
+		eventSender.sendJson(line);
 	}
 	
 

@@ -23,9 +23,10 @@ import javax.swing.border.TitledBorder;
 
 import protocol.JsonMaker;
 import string.formatter.Formatter;
+import client.model.Client;
+import client.model.MacroEvents;
 import client.model.MessageObservable;
 import client.model.SessionManager;
-import client.model.Client;
 import client.model.service.IClientService;
 import client.model.teams.IListService;
 
@@ -54,7 +55,7 @@ public class ChaTimerUI extends JFrame implements Observer {
 
 	
 	public ChaTimerUI(final IClientService[] services,
-			IListService setTeamMembs, final Client client, int index, String[] teamMembs) {
+			IListService setTeamMembs, final Client client, int index, String[] teamMembs, MacroEvents events) {
 		super();
 		this.setTeamMembs = setTeamMembs;
 		setTeamMembs.addObserver(this);
@@ -62,7 +63,7 @@ public class ChaTimerUI extends JFrame implements Observer {
 		this.chatUI = new ChatUI(
 				(MessageObservable) services[0].getAttribute(index), client);
 		this.timerUI = new TimerUI(
-				(MessageObservable) services[1].getAttribute(index));
+				(MessageObservable) services[1].getAttribute(index), events);
 		this.userListUI = new UserListUI();
 		super.addWindowListener(new WindowAdapter() {
 			@Override

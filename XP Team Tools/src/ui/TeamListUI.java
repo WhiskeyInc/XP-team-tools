@@ -28,12 +28,13 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
+import server.events.SendPost;
 import string.formatter.Formatter;
 import tests.ClientMain;
 import timer.TimerFormatter;
-import client.model.ClientDetails;
-import client.model.SessionManager;
 import client.model.Client;
+import client.model.ClientDetails;
+import client.model.MacroEvents;
 import client.model.service.IClientService;
 import client.model.service.SetMessageService;
 import client.model.service.SetNewChatService;
@@ -236,11 +237,24 @@ public class TeamListUI extends JFrame {
 							try {
 								membs = JsonParser.parseMakeTeamMembs(response);
 							} catch (ParseException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							
+							
+							SendPost sender = new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
+							String message = JsonMaker.requestMacroEventsList("admin");
+										
+							String answer = sender.sendJson(message);
+							
+							//TODO test the request for the events to the other server
+							//TODO remove later fake answer:
+							
+							answer = "{\"request\": \"14\",\"action\": \"macro_event_response\",\"user\": \"admin\",\"ids\": [\"001\",\"002\",\"003\"],\"names\": [\"Incre programma tutto il dì\",\"Ciao LELE\",\"Martin fera\"]}";
+							
+							final MacroEvents events = JsonParser.parseMacroEventsResponse(answer);
+							
 							ChaTimerUI ui = new ChaTimerUI(services,
-									serviceTeamMembs, client, index, membs);
+									serviceTeamMembs, client, index, membs, events);
 
 							System.err.println(EventQueue.isDispatchThread()
 									+ " " + ClientMain.class);
@@ -292,8 +306,12 @@ public class TeamListUI extends JFrame {
 											e1.printStackTrace();
 										}
 										
+										timerUI.setChoisesComboEnabled(false);
+										
+										String chosenId = events.getIdFromName(timerUI.getChosenCombo());
+										
 										client.sendMessageToServer(JsonMaker.timerRequest(
-												indexString, time[0], time[1], participants));
+												indexString, time[0], time[1], participants, chosenId));
 									
 									}
 								}

@@ -35,10 +35,10 @@ public class SetTimeStampService implements IClientService {
 			int index = Integer.parseInt(lines[0]);
 			if (obsMap.containsKey(index)) {
 				obsMap.get(index).setMessage(TimerFormatter.getDisplay(
-						Integer.parseInt(lines[1]), Integer.parseInt(lines[2])));
+						Integer.parseInt(lines[1]), Integer.parseInt(lines[2]), lines[3]));
 			} else {
 				obsMap.put(index, new MessageObservable(TimerFormatter.getDisplay(
-						Integer.parseInt(lines[1]), Integer.parseInt(lines[2]))));
+						Integer.parseInt(lines[1]), Integer.parseInt(lines[2]), lines[3])));
 			}
 			
 		} catch (ParseException e) {
@@ -49,7 +49,7 @@ public class SetTimeStampService implements IClientService {
 	@Override
 	public Observable getAttribute(int index) {
 		if(!obsMap.containsKey(index)) {
-			obsMap.put(index, new MessageObservable("00:10"));
+			obsMap.put(index, new MessageObservable("00:10:niente"));
 		} 
 		
 		return obsMap.get(index);

@@ -5,9 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
@@ -17,9 +14,9 @@ import protocol.JsonParser;
 import string.formatter.Formatter;
 import tests.ClientMain;
 import timer.TimerFormatter;
+import client.model.Client;
 import client.model.ClientDetails;
 import client.model.SessionManager;
-import client.model.Client;
 import client.model.service.IClientService;
 
 public class NewChatWorker extends SwingWorker<Integer, Void>{
@@ -157,7 +154,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 													// connesso...
 					client.sendMessageToServer(JsonMaker
 							.timerRequest(indexString, time[0],
-									time[1], null));
+									time[1], null, ""));
 				}
 			}
 		});

@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import client.model.ClientDetails;
+import client.model.MacroEvents;
 
 /**
  * This class parses the requests sent to the server
@@ -105,18 +106,19 @@ public class JsonParser {
 		String[] timerVet;
 		JSONArray participants = (JSONArray) json.get(PARTICIPANTS);
 		if(participants!=null){
-			timerVet = new String[ participants.size() + 3 ];
+			timerVet = new String[ participants.size() + 4 ];
 		}else{
-			timerVet = new String[3];
+			timerVet = new String[4];
 		}
 		 
 		timerVet[0] = (String) json.get(JsonMaker.CHAT_INDEX);
 		timerVet[1] = json.get(MINUTES).toString();
 		timerVet[2] = json.get(SECONDS).toString();
+		timerVet[3] = json.get(JsonMaker.MACRO_EVENT_ID).toString();
 		
 		if(participants.size() > 0){
-			for (int i = 3; i < participants.size() + 3; i++) {
-				timerVet[i] = (String) participants.get(i - 3);
+			for (int i = 4; i < participants.size() + 4; i++) {
+				timerVet[i] = (String) participants.get(i - 4);
 			}
 		}
 		
@@ -182,6 +184,33 @@ public class JsonParser {
 			teams[i] = (String) idList.get(i);
 		}
 		return teams;
+	}
+	
+	
+	public static MacroEvents parseMacroEventsResponse(String s) {
+		JSONParser parser = new JSONParser();
+		JSONObject json;
+		
+		MacroEvents events = new MacroEvents();
+		
+		try {
+			json = (JSONObject) parser.parse(s);
+		
+			//String user = (String) json.get(JsonMaker.MACRO_EVENT_USER);
+
+			JSONArray idList = (JSONArray) json.get(JsonMaker.MACRO_EVENT_IDS);
+			JSONArray nameList = (JSONArray) json.get(JsonMaker.MACRO_EVENT_NAMES);
+			int size = idList.size();
+			for (int i = 0; i < size; i++) {
+				events.addEvent( (String) idList.get(i) , (String) nameList.get(i));
+			}
+		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return events;
 	}
 
 }

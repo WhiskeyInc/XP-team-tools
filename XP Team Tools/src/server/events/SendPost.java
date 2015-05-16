@@ -26,10 +26,10 @@ public class SendPost implements IEventActionRequest {
 
 	@Override
 	public void sendAutomaticEventAction(String user, String eventName,
-			ArrayList<String> participants) {
+			ArrayList<String> participants, String id) {
 
 		String json = JsonMaker.automaticEventRequest(user, eventName,
-				participants);
+				participants, id);
 
 		try {
 			sendPost(url, json);
@@ -53,18 +53,17 @@ public class SendPost implements IEventActionRequest {
 	}
 
 	@Override
-	public void propagateClientEvent(String json) {
+	public String sendJson(String json) {
 		try {
-			sendPost(url, json);
+			return sendPost(url, json);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return "Error";
 	}
 
 	
-	
-	
-	private void sendPost(String url, String data) throws Exception {
+	private String sendPost(String url, String data) throws Exception {
 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -87,6 +86,7 @@ public class SendPost implements IEventActionRequest {
 		System.out.println("Post parameters : " + data);
 		System.out.println("Response Code : " + responseCode);
 		
+		String answer = "No Answer";
 		if(responseCode != 500){
 			System.out.println("Response Message : ");
 	
@@ -100,11 +100,13 @@ public class SendPost implements IEventActionRequest {
 			}
 			in.close();
 			
+			answer = response.toString();
 			// Print response message
 			System.out.println(response.toString());
 		}else{
 			System.out.println("Error in the second server");
 		}
 		
+		return answer;
 	}
 }
