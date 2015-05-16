@@ -11,13 +11,13 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import server.events.IEventActionRequest;
 import server.model.propagator.MessagePropagator;
 import server.model.recover.Chat;
 import server.model.services.IService;
 import server.model.services.chat.ChatsManager;
 import timer.TimerFormatter;
 import client.model.ClientDetails;
+import events.IEventActionRequest;
 
 /**
  * This class makes the Timer Service concrete, by overriding the abstract method doAction in @IService:

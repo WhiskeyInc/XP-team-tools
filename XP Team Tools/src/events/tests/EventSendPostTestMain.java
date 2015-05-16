@@ -1,9 +1,9 @@
-package server.events.tests;
+package events.tests;
 
 import java.util.ArrayList;
 
-import server.events.IEventActionRequest;
-import server.events.SendPost;
+import events.IEventActionRequest;
+import events.SendPost;
 
 public class EventSendPostTestMain {
 

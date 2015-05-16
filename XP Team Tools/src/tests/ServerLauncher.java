@@ -1,8 +1,8 @@
 package tests;
 
+import events.SendPost;
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import server.events.SendPost;
 import server.model.Server;
 import server.model.propagator.ClientsManager;
 import server.model.propagator.MessagePropagator;

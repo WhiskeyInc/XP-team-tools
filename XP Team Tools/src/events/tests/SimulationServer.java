@@ -1,4 +1,4 @@
-package server.events.tests;
+package events.tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;

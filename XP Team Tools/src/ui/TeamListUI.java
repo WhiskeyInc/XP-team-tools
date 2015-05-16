@@ -28,7 +28,6 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import server.events.SendPost;
 import string.formatter.Formatter;
 import tests.ClientMain;
 import timer.TimerFormatter;
@@ -42,6 +41,7 @@ import client.model.service.SetTimeStampService;
 import client.model.teams.IListService;
 import client.model.teams.SetListOfTeamsService;
 import client.model.teams.SetMembsService;
+import events.SendPost;
 
 public class TeamListUI extends JFrame {
 

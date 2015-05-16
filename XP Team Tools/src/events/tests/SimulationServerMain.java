@@ -1,4 +1,4 @@
-package server.events.tests;
+package events.tests;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
