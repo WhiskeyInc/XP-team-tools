@@ -6,18 +6,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.SwingUtilities;
 
+import org.json.simple.parser.ParseException;
+
 import protocol.JsonMaker;
+import protocol.JsonParser;
 import string.formatter.Formatter;
 import timer.TimerFormatter;
+import client.model.MacroEvents;
 import client.model.MessageObservable;
 import client.model.SessionManager;
 import client.model.Client;
 import client.model.service.IClientService;
+import events.SendPost;
 
 /**
  * A class that launchs the UI for the private chat when it receives a notification 
@@ -68,8 +74,23 @@ public class NewChatInviteLauncher implements Observer {
 	private void launchUI() {
 		final String nickname = Formatter.formatNickname(client
 				.getNickname());
+		
+		// looks for the list of macro events
+		SendPost sender = new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
+		String message = JsonMaker.requestMacroEventsList("admin");
+					
+		String answer = sender.sendJson(message);
+		
+		//TODO test the request for the events to the other server
+		//TODO remove later fake answer:
+		
+		answer = "{\"request\": \"14\",\"action\": \"macro_event_response\",\"user\": \"admin\",\"ids\": [\"001\",\"002\",\"003\"],\"names\": [\"Incre programma tutto il dì\",\"Ciao LELE\",\"Martin fera\"]}";
+		
+		final MacroEvents events = JsonParser.parseMacroEventsResponse(answer);
+
+				
 		PrivateChaTimerUi ui = new PrivateChaTimerUi(
-				serviceMessage, serviceTimeStamp, client, index);
+				serviceMessage, serviceTimeStamp, client, index, events);
 		final ChatUI chatUI = ui.getChatUI();
 		final TimerUI timerUI = ui.getTimerUI();
 		System.err.println("L' indice della chat è : " + index + " ["
@@ -98,8 +119,31 @@ public class NewChatInviteLauncher implements Observer {
 							.getTimeStamp());
 					timerUI.setTimerEditable(false);// TODO se è
 													// connesso...
+					
+					
+					client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+					String jsonMembs = client.waitServerResponse();
+					
+					String[] membs;
+					ArrayList<String> participants = new ArrayList<String>();
+					try {
+						membs = JsonParser.parseMakeTeamMembs(jsonMembs);
+						for (int i = 0; i < membs.length; i++) {
+							participants.add(membs[i]);
+						}
+						// add myself member
+						participants.add(client.getNickname());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					
+					timerUI.setChoisesComboEnabled(false);
+					
+					String chosenId = events.getIdFromName(timerUI.getChosenCombo());
+					
 					client.sendMessageToServer(JsonMaker.timerRequest(
-							indexString, time[0], time[1], null, ""));
+							indexString, time[0], time[1], participants, chosenId));
+					
 				}
 			}
 		});

@@ -5,9 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
+
+import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
@@ -16,8 +19,10 @@ import tests.ClientMain;
 import timer.TimerFormatter;
 import client.model.Client;
 import client.model.ClientDetails;
+import client.model.MacroEvents;
 import client.model.SessionManager;
 import client.model.service.IClientService;
+import events.SendPost;
 
 public class NewChatWorker extends SwingWorker<Integer, Void>{
 
@@ -112,8 +117,24 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 	private void launchUI(final int index) {
 		final String nickname = Formatter.formatNickname(client
 				.getNickname());
+		
+		
+		// looks for the list of macro events
+		SendPost sender = new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
+		String message = JsonMaker.requestMacroEventsList("admin");
+					
+		String answer = sender.sendJson(message);
+		
+		//TODO test the request for the events to the other server
+		//TODO remove later fake answer:
+		
+		answer = "{\"request\": \"14\",\"action\": \"macro_event_response\",\"user\": \"admin\",\"ids\": [\"001\",\"002\",\"003\"],\"names\": [\"Incre programma tutto il dì\",\"Ciao LELE\",\"Martin fera\"]}";
+		
+		final MacroEvents events = JsonParser.parseMacroEventsResponse(answer);
+
+		
 		PrivateChaTimerUi ui = new PrivateChaTimerUi(
-				services[0], services[1], client, index);
+				services[0], services[1], client, index, events);
 		ui.requestFocus();
 		ui.toFront();
 		SessionManager.getInstance().registerUI(index, ui);
@@ -139,7 +160,8 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 				chatUI.emptyMessageArea();
 			}
 		});
-
+		
+		
 		final String indexString = String.valueOf(index);
 
 		ui.setTimerUI(new ActionListener() {
@@ -152,9 +174,31 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 							.getMinSec(timerUI.getTimeStamp());
 					timerUI.setTimerEditable(false);// TODO se è
 													// connesso...
-					client.sendMessageToServer(JsonMaker
-							.timerRequest(indexString, time[0],
-									time[1], null, ""));
+					
+					
+					client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+					String jsonMembs = client.waitServerResponse();
+					
+					String[] membs;
+					ArrayList<String> participants = new ArrayList<String>();
+					try {
+						membs = JsonParser.parseMakeTeamMembs(jsonMembs);
+						for (int i = 0; i < membs.length; i++) {
+							participants.add(membs[i]);
+						}
+						// add myself member
+						participants.add(client.getNickname());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					
+					timerUI.setChoisesComboEnabled(false);
+					
+					String chosenId = events.getIdFromName(timerUI.getChosenCombo());
+					
+					client.sendMessageToServer(JsonMaker.timerRequest(
+							indexString, time[0], time[1], participants, chosenId));
+					
 				}
 			}
 		});
