@@ -2,7 +2,6 @@ package control.actions.projects;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +28,7 @@ public class ProjectAdder extends ProjectAction {
 		ProjectsCollector projects = super.getProjects(request);
 		Project project = new Project(
 				request.getParameter("projectName"),
-				new ConcreteProjectFactory(TimeZone.getTimeZone("Europe/Rome")),
+				new ConcreteProjectFactory(),
 				request.getParameter("description"));
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();

@@ -48,8 +48,7 @@ public class Initializer extends HttpServlet {
 		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
 		ProjectsCollector testCollector = new ProjectsCollector(
 				GlobalUniquenessSerializer.getInstance());
-		Project project = new Project("xTrEAM", new ConcreteProjectFactory(
-				TimeZone.getTimeZone("Europe/Rome")),
+		Project project = new Project("xTrEAM", new ConcreteProjectFactory(),
 				"A debugger for this very application");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();

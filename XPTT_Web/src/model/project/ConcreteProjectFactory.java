@@ -27,8 +27,8 @@ import boards.UserStoryBoard.UserStoriesManager;
  */
 public class ConcreteProjectFactory implements ProjectFactory {
 
-	private TimeZone timezone;
-	private Timeline timeline = new ConcreteTimeline(timezone,
+	
+	private Timeline timeline = new ConcreteTimeline(TimeZone.getDefault(),
 			new LocalIdentifiabilitySerializer());
 	private ProjectSettings settings = new ConcreteProjectSettings();
 	private Notifier projectManager = new ConcreteTeamManager(settings,
@@ -40,9 +40,8 @@ public class ConcreteProjectFactory implements ProjectFactory {
 	 * @param timezone
 	 *            : the {@link TimeZone} to be used for time references
 	 */
-	public ConcreteProjectFactory(TimeZone timezone) {
+	public ConcreteProjectFactory() {
 		super();
-		this.timezone = timezone;
 	}
 
 	@Override

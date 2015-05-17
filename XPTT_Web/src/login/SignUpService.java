@@ -2,19 +2,18 @@ package login;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.serialization.GlobalUniquenessSerializer;
 import model.ConcreteProjectSettings;
 import model.TeamComponent;
 import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
+import util.serialization.GlobalUniquenessSerializer;
 
 public class SignUpService extends AccountAction {
 
@@ -53,8 +52,7 @@ public class SignUpService extends AccountAction {
 				.getServletContext().getAttribute("environments");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("pendingProjects");
-		Project project = new Project("General", new ConcreteProjectFactory(
-				TimeZone.getTimeZone("Europe/Rome")),
+		Project project = new Project("General", new ConcreteProjectFactory(),
 				"Everything related to your account");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();

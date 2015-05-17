@@ -38,7 +38,8 @@ public class TimelineIntegrationTest {
 	private UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teamManager);
 
-	@Test
+	//The following test sometimes fails, sometimes doesn't
+	@Test 
 	public void taskAdditionCreatesEvent() throws Exception {
 		taskManager.addTask("Nuovo task", "Integrare task in timeline");
 		assertEquals(2, timeline.getEventsNumber());
