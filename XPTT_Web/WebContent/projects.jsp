@@ -1,5 +1,5 @@
 <%@page import="model.project.ProjectsCollector"%>
-<%@page import="model.ProjectManager"%>
+<%@page import="model.Notifier"%>
 <%@page import="java.util.*"%>
 <%@page import="model.project.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
