@@ -75,7 +75,6 @@ public class NewChatInviteLauncher implements Observer {
 		final String nickname = Formatter.formatNickname(client
 				.getNickname());
 		
-		// looks for the list of macro events
 		SendPost sender = new SendPost("http://xtream-whiskeyinc.rhcloud.com/XPTT_Web/JSONAcceptor");
 		String message = JsonMaker.requestMacroEventsList("admin");
 					
@@ -93,8 +92,6 @@ public class NewChatInviteLauncher implements Observer {
 				serviceMessage, serviceTimeStamp, client, index, events);
 		final ChatUI chatUI = ui.getChatUI();
 		final TimerUI timerUI = ui.getTimerUI();
-		System.err.println("L' indice della chat è : " + index + " ["
-				+ ChaTimerUI.class + "]");
 		// Controlla conferma data dal server in caso è fallito l'add...
 
 		final String teamName = client.getTeamName();
@@ -166,7 +163,7 @@ public class NewChatInviteLauncher implements Observer {
 
 					nickname + chatUI.getMessage(), "" + index));
 					chatUI.emptyMessageArea();
-					// chat.getMessageArea().setCaretPosition(0);
+					
 				}
 			}
 		});

@@ -11,6 +11,13 @@ import server.model.services.IService;
 import client.model.ClientDetails;
 import client.model.Team;
 
+/**
+ * An implementation of IService that gets the list of teams and then propagates this
+ * information thanks to @MessagePropagator
+ * 
+ * @author alberto
+ *
+ */
 public class ListOfTeamsService implements IService {
 
 	private volatile TeamsManager teamsManager;

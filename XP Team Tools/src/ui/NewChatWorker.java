@@ -24,6 +24,12 @@ import client.model.SessionManager;
 import client.model.service.IClientService;
 import events.SendPost;
 
+/**
+ * A class that launchs the UI after the user has selected the team in @TeamListUI
+ * 
+ * @author alberto
+ *
+ */
 public class NewChatWorker extends SwingWorker<Integer, Void>{
 
 	private UserListUI listUI;
@@ -66,8 +72,6 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 		int index = JsonParser
 				.parseChatIndexRequest(response);		
 
-		System.err.println(index + " "
-				+ ClientMain.class);
 		
 		return index;
 	}
@@ -81,7 +85,6 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 					.getInstance();
 			if (sessionManager.hasChat(index)) {
 				if (!sessionManager.isChatOpen(index)) {
-					System.out.println("Lancio la ui perche ho la chat chiusa " + NewChatWorker.class );
 					launchUI(index);
 					sessionManager.registerChatOpening(index);
 				} else {
@@ -93,7 +96,6 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 			} else {
 				sessionManager
 						.registerChatOpening(index);
-				System.out.println("Lancio la ui perche non ho la chat " + NewChatWorker.class );
 				launchUI(index);
 				sessionManager.registerChatOpening(index);
 
@@ -144,10 +146,7 @@ public class NewChatWorker extends SwingWorker<Integer, Void>{
 //					"- " + client.getNickname()
 //							+ " added to the chat -", "" + index));
 
-		System.err.println("L' indice della chat è : " + index
-				+ " [" + NewChatWorker.class + "]");
-		// Controlla conferma data dal server in caso è fallito
-		// l'add...
+		
 
 		final String teamName = client.getTeamName();
 		ui.setChatUI(new ActionListener() {

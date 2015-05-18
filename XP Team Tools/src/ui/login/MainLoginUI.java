@@ -11,7 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * the main UI for the login, it's an extension of @JFrame a sort of "container"
+ * of @LoginUI and @RegUI
  * 
  * @author Alberto
  *
@@ -64,6 +65,10 @@ public class MainLoginUI extends JFrame {
 		return regUI;
 	}
 
+	/**
+	 * the JFrame is "refreshed" by calling revalidate method 
+	 * 
+	 */
 	public void refresh() {
 		super.getContentPane().revalidate();
 		super.revalidate();

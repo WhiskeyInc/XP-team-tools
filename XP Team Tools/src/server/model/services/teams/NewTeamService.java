@@ -13,7 +13,7 @@ import server.model.services.chat.ChatsManager;
 import client.model.ClientDetails;
 import client.model.Team;
 /**
- * It allow the server to add a Team
+ * It allows the server to add a Team
  * @author alberto
  *
  */

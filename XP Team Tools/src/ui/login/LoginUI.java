@@ -23,8 +23,9 @@ import server.utils.SessionSaver;
 
 /**
  * The UI of the login, that allows to insert username and password and has a useful feature, i.e,
- * the possibility to memorize username and password for the next access
- * 
+ * the possibility to memorize username and password for the next access. If the user is not registered
+ * yet, there's a "Register" button, too.
+ *
  * @author pavlo
  *
  */
@@ -144,6 +145,12 @@ public class LoginUI extends JPanel {
 		return this.sessionSaver;
 	}
 
+	/**
+	 * if the user selects "remembre me", this session is saved
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
 	public void getCheckStatus() throws NoSuchAlgorithmException,
 			UnsupportedEncodingException, IOException {
 		if (saveCheck.isSelected()) {
@@ -154,6 +161,11 @@ public class LoginUI extends JPanel {
 		}
 	}
 
+	/**
+	 * Checks if a previous session is saved
+	 * @return true if this session is saved
+	 * @throws IOException
+	 */
 	public boolean checkSession() throws IOException {
 		if(!(sessionSaver.getSessionValues() == null)){
 			return true;

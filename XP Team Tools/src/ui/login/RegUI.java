@@ -14,7 +14,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * The UI of the login
+ * The UI of the registration's panel, where a user can perform his registration,
+ * after he has added username and password (the password is required twice for a 
+ * better control)
  * 
  * @author pavlo
  *
@@ -121,6 +123,11 @@ public class RegUI extends JPanel {
 		return loginField.getText();
 	}
 
+	/**
+	 * this method returns the password that the user has written in the first
+	 * password's field and ensure that the user writes the same password in the
+	 * second password's field
+	 */
 	public String getPass() {
 		return String.valueOf(pwdField.getPassword());
 	}

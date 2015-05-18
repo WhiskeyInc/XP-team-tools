@@ -182,6 +182,12 @@ public class ChaTimerUI extends JFrame implements Observer {
 		super.revalidate();
 	}
 
+	/**
+	 * Filters the nicknames of a team and returns the list of nicknames without
+	 * the user himself
+	 * @param client
+	 * @return
+	 */
 	private String[] nicksFilter(Client client) {
 		String[] membs = setTeamMembs.getMembs();
 		if (membs != null) {

@@ -43,6 +43,12 @@ import client.model.teams.SetListOfTeamsService;
 import client.model.teams.SetMembsService;
 import events.SendPost;
 
+/**
+ * The UI shown after the login operation: this UI allows the user to create a new team
+ * or select a team that already exists and sign in 
+ * 
+ *
+ */
 public class TeamListUI extends JFrame {
 
 	/**
@@ -211,9 +217,6 @@ public class TeamListUI extends JFrame {
 					// confirmService);
 					//
 //TODO
-					
-					System.err.println("L' indice della chat è : " + index
-							+ " [" + Client.class + "]");
 					
 					//client.waitServerResponse();
 					final String indexString = String.valueOf(index);

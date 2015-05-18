@@ -9,6 +9,14 @@ import javax.swing.JCheckBox;
 
 import server.utils.ISessionSaver;
 
+/**
+ * This class it's an implementation of @ItemListener and it's used for store 
+ * a session, by overriding the itemStateChanged method: if the user has selected
+ * the "Remembre me" box, the session is saved
+ * 
+ * @author pavlo
+ *
+ */
 public class RememberMeListener implements ItemListener {
 
 	private JCheckBox saveCheck;
@@ -28,7 +36,7 @@ public class RememberMeListener implements ItemListener {
 				sessionSaver.saveSession();
 				System.out.println("Ciaooo");
 			} catch (NoSuchAlgorithmException | IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		} else {

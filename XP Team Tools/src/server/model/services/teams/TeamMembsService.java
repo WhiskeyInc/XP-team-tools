@@ -10,7 +10,12 @@ import server.model.propagator.MessagePropagator;
 import server.model.services.IService;
 import client.model.ClientDetails;
 import client.model.Team;
-
+/**
+ * An implementation of IService that gets the memebers of the team and then propagates this
+ * information thanks to @MessagePropagator
+ * 
+ *
+ */
 public class TeamMembsService implements IService{
 
 	private volatile TeamsManager teamsManager;

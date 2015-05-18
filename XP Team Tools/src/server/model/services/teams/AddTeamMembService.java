@@ -14,7 +14,12 @@ import server.model.services.chat.ChatsManager;
 import client.model.ClientDetails;
 import client.model.Team;
 
-
+/**
+ * Implementation of IService that allows to add a new member of team
+ * 
+ * @author alberto
+ *
+ */
 public class AddTeamMembService implements IService {
 
 	private volatile TeamsManager teamManager;
@@ -35,10 +40,7 @@ public class AddTeamMembService implements IService {
 		String teamName = det.getTeamName();
 		Chat chat = rebuildChat(teamName);
 		teamManager.addTeamMemb(teamName, det.getNickname());
-		System.out.println("Size = " + teamManager.size()
-				+ AddTeamMembService.class);
-		System.out.println("Size singleton "
-				+ TeamsManager.getInstance().size() + AddTeamMembService.class);
+		
 		chatsManager.get(chatsManager.indexOf(chat)).addAttendant(det);
 
 		Team team = teamManager.get(teamManager.indexOf(teamName));

@@ -8,6 +8,12 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 
+/**
+ * a class that extends MouseAdapter: it implements MouseAdapter's methods that
+ * set a specific behaviour for the mouse related to teamsName's Labels
+ * 
+ *
+ */
 public abstract class TeamLabelMouseAdapter extends MouseAdapter {
 	
 	private JLabel teamLabel;
@@ -42,6 +48,7 @@ public abstract class TeamLabelMouseAdapter extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		launch();
 	}
+	
 	public abstract void setCursorIn();
 	public abstract void setCursorOut();
 	public abstract void launch();

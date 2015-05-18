@@ -66,41 +66,20 @@ public class ClientMain {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				try {
-					login.getSessionSaver().setSessionValues(login.getLoginNick(),
-							login.getPass());
+				saveSession(login);
 
-					login.getCheckStatus();
-				} catch (NoSuchAlgorithmException | IOException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-
-				final Client client = new Client(
-						new ClientConnectionDetails(login.getLoginNick(), null,
-								login.getPass()));
-
-				client.openStreams("localhost", 9999);
-				Runnable runnable = new Runnable() {
-
-					@Override
-					public void run() {
-						try {
-
-							client.readFromSocket();
-
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				};
-
-				Thread thread = new Thread(runnable);
-				thread.start();
+				final Client client = clientConnection(login);
+				
 				client.sendMessageToServer(JsonMaker.teamsListRequest(client
 						.getNickname()));
 				String response = client.waitServerResponse();
+				
+				teamSelection(client, response);
+
+				ui.dispose();
+			}
+
+			private void teamSelection(final Client client, String response) {
 				String[] teams;
 				try {
 					teams = JsonParser.parseMakeTeamMembs(response);
@@ -135,8 +114,44 @@ public class ClientMain {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
 
-				ui.dispose();
+			private Client clientConnection(final LoginUI login) {
+				final Client client = new Client(
+						new ClientConnectionDetails(login.getLoginNick(), null,
+								login.getPass()));
+
+				client.openStreams("localhost", 9999);
+				Runnable runnable = new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+
+							client.readFromSocket();
+
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				};
+
+				Thread thread = new Thread(runnable);
+				thread.start();
+				return client;
+			}
+
+			private void saveSession(final LoginUI login) {
+				try {
+					login.getSessionSaver().setSessionValues(login.getLoginNick(),
+							login.getPass());
+
+					login.getCheckStatus();
+				} catch (NoSuchAlgorithmException | IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 			}
 		});
 

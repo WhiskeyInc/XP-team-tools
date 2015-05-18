@@ -10,6 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The UI of Registration Confirmation
+ * 
+ * @author pavlo
+ *
+ */
 public class RegConfirmationUI extends JPanel{//TODO 
 	
 	private static final long serialVersionUID = 1L;

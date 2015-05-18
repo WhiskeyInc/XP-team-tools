@@ -36,10 +36,7 @@ public class Formatter {
 
 				String[] lines = JsonParser.parseChatRequest(rawmessage);
 				String message = lines[1];
-				// System.out.println(message); //prints not parsed message,
-				// testing purposes
-				StringTokenizer tok = new StringTokenizer(message, "[]:");
-
+			    StringTokenizer tok = new StringTokenizer(message, "[]:");
 				String sender = tok.nextToken();
 				String msg;
 				if (tok.hasMoreTokens()) {
