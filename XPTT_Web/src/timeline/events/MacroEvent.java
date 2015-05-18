@@ -58,6 +58,10 @@ public class MacroEvent extends Event implements Timeline {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see timeline.Event#setDate(java.util.GregorianCalendar)
+	 */
 	public void setDate(GregorianCalendar newDate)
 			throws UnEditableEventException, InvalidDateException {
 		this.validateToDate(newDate);

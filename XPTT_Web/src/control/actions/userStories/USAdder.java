@@ -1,4 +1,4 @@
-package control;
+package control.actions.userStories;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import control.HttpAction;
 import model.exceptions.NameAlreadyInUseException;
 import model.project.Project;
 import boards.UserStoryBoard.UserStory;

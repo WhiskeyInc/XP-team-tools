@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 import control.actions.timeline.JSONActions.AutomaticEventAdderFromJSON;
 import control.actions.timeline.JSONActions.EventAdderFromJSON;
+import control.actions.timeline.JSONActions.MacroEventsListDealer;
 
 /**
  * Servlet implementation class EventAdderFormChat
@@ -33,6 +34,7 @@ public class JSONAcceptor extends HttpServlet {
 	private void initializeMap() {
 		this.actions.put("addAutomaticEvent", new AutomaticEventAdderFromJSON());
 		this.actions.put("addEvent", new EventAdderFromJSON());
+		this.actions.put("macroEventsRequest", new MacroEventsListDealer());		
 	}
 
 	/**
@@ -55,8 +57,7 @@ public class JSONAcceptor extends HttpServlet {
 			return (String) json.get("action");
 		} catch (ParseException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			return null;
-			
+			return null;	
 		}
 	}
 	
