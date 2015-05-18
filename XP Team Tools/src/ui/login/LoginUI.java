@@ -19,7 +19,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import server.utils.ISessionSaver;
-import server.utils.SessionSaver;
 
 /**
  * The UI of the login, that allows to insert username and password and has a useful feature, i.e,

@@ -1,8 +1,6 @@
-package tests;
+package tests.JUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +21,16 @@ public class ChatsManagerTest {
 	
 	@Test
 	public void addChatTest() throws Exception {
+		chatsManager.removeAll();
 		Chat chat = new Chat("Prova");
 		chatsManager.add(chat);
-		assertEquals(chatsManager.size(), 1);
+		assertEquals(1, chatsManager.size());
 		
 		chatsManager.add(chat);
-		assertEquals(chatsManager.size(), 1);
+		assertEquals(1, chatsManager.size());
 
 		chat.addAttendant(new ClientDetails("Bo", "Test"));
-		assertEquals(chatsManager.size(), 1);
+		assertEquals(1, chatsManager.size());
 		
 	}
 	
@@ -47,6 +46,18 @@ public class ChatsManagerTest {
 		chat1.addAttendant(new ClientDetails("F", "f"));
 		assertFalse(chatsManager.has(chat1));
 
+	}
+	
+	@Test
+	public void getTest() throws Exception {
+		chatsManager.removeAll();
+		Chat chat = new Chat("Test");
+		chatsManager.add(chat);
+		int index = chatsManager.indexOf(chat);
+		assertEquals(0, index);
+		assertEquals(chat, chatsManager.get(index));
+		
+		
 	}
 
 }

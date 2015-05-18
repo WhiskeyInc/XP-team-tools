@@ -71,6 +71,10 @@ public class TeamsManager {
 		teamList.get(indexOf(teamName)).addMember(teamMemb);
 	}
 
+	public void removeAll() {
+		teamList.clear();
+	}
+	
 	public int size() {
 		return teamList.size();
 	}

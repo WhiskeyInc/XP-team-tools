@@ -10,7 +10,7 @@ import client.model.ClientDetails;
 /**
  * This class creates the different requests that will be sent to the server using JSONObject, i.e., 
  * collections of name/value pairs. All the methods of this class return a String representation 
- * of the istance of JSONObject
+ * of the instance of JSONObject
  * 
  * 
  * @author alberto

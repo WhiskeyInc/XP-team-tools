@@ -15,7 +15,6 @@ import org.json.simple.parser.ParseException;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
-import tests.ClientMain;
 import timer.TimerFormatter;
 import client.model.Client;
 import client.model.ClientDetails;
@@ -25,7 +24,9 @@ import client.model.service.IClientService;
 import events.SendPost;
 
 /**
- * A class that launchs the UI after the user has selected the team in @TeamListUI
+ * A class that launches the UI after the user has selected the new private chat in @TeamListUI
+ * It extends {@link SwingWorker} SwingWorker class. In this way the EDT takes care only of the
+ * Swing 's elements
  * 
  * @author alberto
  *
