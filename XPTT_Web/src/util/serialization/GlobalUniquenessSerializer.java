@@ -26,11 +26,12 @@ public class GlobalUniquenessSerializer extends LocalIdentifiabilitySerializer {
 	 * 
 	 * @return
 	 */
+	//TODO: ma siamo sicuri che il singleton si faccia così?? By Lele to Simo
 	public static GlobalUniquenessSerializer getInstance() {
-		if (instance != null) {
-			return instance;
+		if (instance == null) {
+			instance = new GlobalUniquenessSerializer();
 		}
-		return new GlobalUniquenessSerializer();
+		return instance;
 	}
 
 	@Override

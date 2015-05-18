@@ -33,6 +33,7 @@ public class AutomaticEventAdderFromJSON extends JSONAction {
 			MacroEvent macroEvent = (MacroEvent) timeline.getEvent(id);
 			macroEvent.addEvent(event);			
 		} catch (InvalidDateException | NoSuchEventException e) {
+			System.err.println(e.getMessage());
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
