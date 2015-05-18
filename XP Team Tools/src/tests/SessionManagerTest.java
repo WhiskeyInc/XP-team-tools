@@ -20,8 +20,6 @@ public class SessionManagerTest {
 		sessionManager.setChatClosed(0);
 		assertFalse(sessionManager.isChatOpen(0));
 		
-
-		
 	}
 
 }

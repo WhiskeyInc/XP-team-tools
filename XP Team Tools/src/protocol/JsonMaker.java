@@ -12,6 +12,7 @@ import client.model.ClientDetails;
  * collections of name/value pairs. All the methods of this class return a String representation 
  * of the istance of JSONObject
  * 
+ * 
  * @author alberto
  *
  */
@@ -220,32 +221,7 @@ public class JsonMaker {
 		json.put(TEAM_NAME, teamName);
 		return json.toString();
 	}
-	
-	
-	@SuppressWarnings("unchecked")
-	public static String teamsListRequest(String nickname) {
-		JSONObject json = new JSONObject();
-		json.put(REQ, TEAMS);
-		json.put(NICKNAME, nickname);
-		
-		return json.toString();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static String makeListOfTeams(String[] teamsNames) {
 
-		JSONObject json = new JSONObject();
-		JSONArray detArray = new JSONArray();
-		for (int i = 0; i < teamsNames.length; i++) {
-			detArray.add(teamsNames[i]);
-		}
-		json.put(REQ, MAKE_TEAMS_LIST);
-		json.put(ATTENDANT, detArray);
-		return json.toString();
-	}
-	
-	
-	
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
@@ -308,6 +284,15 @@ public class JsonMaker {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public static String teamsListRequest(String nickname) {
+		JSONObject json = new JSONObject();
+		json.put(REQ, TEAMS);
+		json.put(NICKNAME, nickname);
+		
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public static String requestMacroEventsList(String user) {
 
 		JSONObject json = new JSONObject();
@@ -319,4 +304,16 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static String makeListOfTeams(String[] teamsNames) {
+
+		JSONObject json = new JSONObject();
+		JSONArray detArray = new JSONArray();
+		for (int i = 0; i < teamsNames.length; i++) {
+			detArray.add(teamsNames[i]);
+		}
+		json.put(REQ, MAKE_TEAMS_LIST);
+		json.put(ATTENDANT, detArray);
+		return json.toString();
+	}
 }

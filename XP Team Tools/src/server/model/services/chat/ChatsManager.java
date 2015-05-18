@@ -62,6 +62,10 @@ public class ChatsManager {
 			completeChatList.remove(indexOf(chat));
 		}
 	}
+	
+	public void removeAll() {
+		completeChatList.clear();
+	}
 
 	public int size() {
 		return completeChatList.size();

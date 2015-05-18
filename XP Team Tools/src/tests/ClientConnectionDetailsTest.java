@@ -7,7 +7,7 @@ import org.junit.Test;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
-public class ClientConnectionTest {
+public class ClientConnectionDetailsTest {
 
 	@Test
 	public void equalsClientDetailTest() {

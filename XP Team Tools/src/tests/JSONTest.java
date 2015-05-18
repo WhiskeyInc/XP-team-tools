@@ -67,9 +67,6 @@ public class JSONTest {
 			fail();
 		}
 	}
-
-	
-
 	
 	@Test
 	public void connectToServerReqTest() throws Exception {
@@ -94,6 +91,54 @@ public class JSONTest {
 		ClientDetails det =  new ClientDetails("Alb", "Test");
 		
 		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker.addTeamMembRequest(det)));
+	}
+	
+	@Test
+	public void makeListOfTeamReqTest() throws Exception {
+		String[] teams = new String[3];
+		teams[0] = "Test1";
+		teams[1] = "Test2";
+		teams[2] = "Test3";
+		assertArrayEquals(teams, JsonParser.parseMakeTeamMembs(JsonMaker.makeListOfTeams(teams)));
+	}
+	
+	@Test
+	public void newChatReqTest() throws Exception {
+		ClientDetails[] det = new ClientDetails[3];
+		det[0] = new ClientDetails("A", "tA");
+		det[1] = new ClientDetails("B", "tB");
+		det[2] = new ClientDetails("C", "tC");
+		assertArrayEquals(det, JsonParser.parseNewChatRequest(JsonMaker.newChatRequest(det)));
+	}
+	
+	@Test
+	public void newTeamReqTest() throws Exception {
+		String[] s = new String[2];
+		s[0] = "Test";
+		s[1] = "Tester";
+		assertArrayEquals(s, JsonParser.parseNewTeamRequest(JsonMaker.newTeamRequest(s[0], s[1])));
+	}
+	
+	@Test
+	public void teamMembsReqTest() throws Exception {
+		ClientDetails det = new ClientDetails("Me", "Test");
+		assertEquals(det, JsonParser.parseTeamMembsRequest(JsonMaker.teamMembsRequest(det.getNickname(), det.getTeamName())));	
+	}
+	
+	@Test
+	public void teamListReqTest() throws Exception {
+		String name = "Me";
+		assertEquals(name, JsonParser.parseTeamsListRequest(JsonMaker.teamsListRequest(name)));
+	}
+	
+	@Test
+	public void manualEventReqTest() throws Exception {
+		//TODO
+	}
+	
+	@Test
+	public void automaticEventReqTest() throws Exception {
+		//TODO
 	}
 	
 
