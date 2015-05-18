@@ -80,13 +80,7 @@ public class NewChatInviteLauncher implements Observer {
 					
 		String answer = sender.sendJson(message);
 		
-		//TODO test the request for the events to the other server
-		//TODO remove later fake answer:
-		
-		answer = "{\"request\": \"14\",\"action\": \"macro_event_response\",\"user\": \"admin\",\"ids\": [\"001\",\"002\",\"003\"],\"names\": [\"Incre programma tutto il dì\",\"Ciao LELE\",\"Martin fera\"]}";
-		
 		final MacroEvents events = JsonParser.parseMacroEventsResponse(answer);
-
 				
 		PrivateChaTimerUi ui = new PrivateChaTimerUi(
 				serviceMessage, serviceTimeStamp, client, index, events);
