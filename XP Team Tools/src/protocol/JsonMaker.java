@@ -62,7 +62,7 @@ public class JsonMaker {
 	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; 
 	public static final String USER = "user";
 	
-	public static final String MACRO_EVENT_REQUEST_ACTION = "macro_event_request";
+	public static final String MACRO_EVENT_REQUEST_ACTION = "macroEventsRequest";
 	public static final String MACRO_EVENT_USER = "user";
 	public static final String MACRO_EVENT_RESPONSE_ACTION = "macro_event_response";
 	public static final String MACRO_EVENT_IDS = "ids";

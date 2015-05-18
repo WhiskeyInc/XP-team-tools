@@ -202,7 +202,7 @@ public class JsonParser {
 			JSONArray nameList = (JSONArray) json.get(JsonMaker.MACRO_EVENT_NAMES);
 			int size = idList.size();
 			for (int i = 0; i < size; i++) {
-				events.addEvent( (String) idList.get(i) , (String) nameList.get(i));
+				events.addEvent( (String) idList.get(i).toString(), (String) nameList.get(i));
 			}
 		
 		} catch (ParseException e) {
