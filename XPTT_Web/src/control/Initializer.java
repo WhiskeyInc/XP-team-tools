@@ -102,8 +102,7 @@ public class Initializer extends HttpServlet {
 				new LocalIdentifiabilitySerializer());
 		MacroEvent macro;
 		try {
-			macro = new MacroEvent("Third Release", new GregorianCalendar(2015,
-					5, 13, 9, 0), new GregorianCalendar(2015, 5, 26, 11, 00),
+			macro = new MacroEvent("Third Release", (GregorianCalendar) GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Rome")), new GregorianCalendar(2015, 5, 26, 11, 00),
 					timeline);
 			macro.addEvent(new Event("Deploy Online", new GregorianCalendar(
 					2015, 5, 26, 10, 00)));
