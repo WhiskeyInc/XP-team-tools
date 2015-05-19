@@ -1,6 +1,10 @@
 package tests.JUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,6 +14,7 @@ import org.junit.Test;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import client.model.ClientDetails;
+import client.model.MacroEvents;
 
 public class JSONTest {
 
@@ -29,7 +34,6 @@ public class JSONTest {
 			JSONObject json1 = (JSONObject) parser.parse(json.toString());
 			assertEquals(json1.get("richiesta"), (long) 2);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -53,7 +57,8 @@ public class JSONTest {
 
 	@Test
 	public void timerRequestTest() throws Exception {
-		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30, null, "id");
+		String jsonString = JsonMaker.timerRequest("LuBardo", 26, 30, null,
+				"id");
 
 		if (JsonParser.getRequest(jsonString) == JsonParser.TIMER) {
 
@@ -67,79 +72,130 @@ public class JSONTest {
 			fail();
 		}
 	}
-	
+
 	@Test
 	public void connectToServerReqTest() throws Exception {
 		ClientDetails det = new ClientDetails("Alb", "Test");
-		ClientDetails det1 = JsonParser.parseConnectToServerRequest(JsonMaker.connectToServerRequest(det));
+		ClientDetails det1 = JsonParser.parseConnectToServerRequest(JsonMaker
+				.connectToServerRequest(det));
 		assertEquals(det, det1);
 	}
-	
+
 	@Test
 	public void chatIndexRequestTest() throws Exception {
-		assertEquals(2, JsonParser.parseChatIndexRequest(JsonMaker.chatIndexRequest(2)));
+		assertEquals(2,
+				JsonParser.parseChatIndexRequest(JsonMaker.chatIndexRequest(2)));
 	}
-	
+
 	@Test
 	public void disconnectTest() throws Exception {
 		ClientDetails clientDetails = new ClientDetails("Alb", "Test");
-		assertEquals(clientDetails, JsonParser.parseDisconnectRequest(JsonMaker.disconnectRequest(clientDetails)));
+		assertEquals(clientDetails, JsonParser.parseDisconnectRequest(JsonMaker
+				.disconnectRequest(clientDetails)));
 	}
-	
+
 	@Test
 	public void addTeamMembReqTest() throws Exception {
-		ClientDetails det =  new ClientDetails("Alb", "Test");
-		
-		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker.addTeamMembRequest(det)));
+		ClientDetails det = new ClientDetails("Alb", "Test");
+
+		assertEquals(det, JsonParser.parseAddTeamMembRequest(JsonMaker
+				.addTeamMembRequest(det)));
 	}
-	
+
 	@Test
 	public void makeListOfTeamReqTest() throws Exception {
 		String[] teams = new String[3];
 		teams[0] = "Test1";
 		teams[1] = "Test2";
 		teams[2] = "Test3";
-		assertArrayEquals(teams, JsonParser.parseMakeTeamMembs(JsonMaker.makeListOfTeams(teams)));
+		assertArrayEquals(teams,
+				JsonParser.parseMakeTeamMembs(JsonMaker.makeListOfTeams(teams)));
 	}
-	
+
 	@Test
 	public void newChatReqTest() throws Exception {
 		ClientDetails[] det = new ClientDetails[3];
 		det[0] = new ClientDetails("A", "tA");
 		det[1] = new ClientDetails("B", "tB");
 		det[2] = new ClientDetails("C", "tC");
-		assertArrayEquals(det, JsonParser.parseNewChatRequest(JsonMaker.newChatRequest(det)));
+		assertArrayEquals(det,
+				JsonParser.parseNewChatRequest(JsonMaker.newChatRequest(det)));
 	}
-	
+
 	@Test
 	public void newTeamReqTest() throws Exception {
 		String[] s = new String[2];
 		s[0] = "Test";
 		s[1] = "Tester";
-		assertArrayEquals(s, JsonParser.parseNewTeamRequest(JsonMaker.newTeamRequest(s[0], s[1])));
+		assertArrayEquals(s, JsonParser.parseNewTeamRequest(JsonMaker
+				.newTeamRequest(s[0], s[1])));
 	}
-	
+
 	@Test
 	public void teamMembsReqTest() throws Exception {
 		ClientDetails det = new ClientDetails("Me", "Test");
-		assertEquals(det, JsonParser.parseTeamMembsRequest(JsonMaker.teamMembsRequest(det.getNickname(), det.getTeamName())));	
+		assertEquals(
+				det,
+				JsonParser.parseTeamMembsRequest(JsonMaker.teamMembsRequest(
+						det.getNickname(), det.getTeamName())));
 	}
-	
+
 	@Test
 	public void teamListReqTest() throws Exception {
 		String name = "Me";
-		assertEquals(name, JsonParser.parseTeamsListRequest(JsonMaker.teamsListRequest(name)));
+		assertEquals(name, JsonParser.parseTeamsListRequest(JsonMaker
+				.teamsListRequest(name)));
 	}
-	
+
 	@Test
 	public void manualEventReqTest() throws Exception {
-		//TODO
+		ArrayList<String> participants = new ArrayList<String>();
+		participants.add("Don Lele");
+		participants.add("Nick the German");
+		participants.add("Simo");
+		participants.add("Digio");
+
+		// sender.sendAutomaticEventAction("admin", "communicationTest",
+		// participants, "id");
+
+		String json = JsonMaker.manualEventRequest("admin",
+				"communicationTestManual", participants, "2050", "2", "12",
+				"12", "12");
+		assertEquals(
+				"{\"request\":\"11\",\"min\":\"12\",\"month\":\"2\",\"hour\":\"12\",\"year\":\"2050\",\"action\":\"addEvent\",\"event_name\":\"communicationTestManual\",\"user\":\"admin\",\"day\":\"12\",\"participants\":[\"Don Lele\",\"Nick the German\",\"Simo\",\"Digio\"]}",
+				json);
 	}
-	
+
 	@Test
 	public void automaticEventReqTest() throws Exception {
-		//TODO
-	}
-	
+		ArrayList<String> participants = new ArrayList<String>();
+		participants.add("Don Lele");
+		participants.add("Nick the German");
+		participants.add("Simo");
+		participants.add("Digio");
+		String json = JsonMaker.automaticEventRequest("admin",
+				"communicationTest", participants, "id");
 
+		assertEquals(
+				"{\"request\":\"11\",\"action\":\"addAutomaticEvent\",\"event_name\":\"communicationTest\",\"id\":\"id\",\"user\":\"admin\",\"participants\":[\"Don Lele\",\"Nick the German\",\"Simo\",\"Digio\"]}",
+				json);
+	}
+
+	@Test
+	public void requestMacroEventsListTest() throws Exception {
+
+		String json = JsonMaker.requestMacroEventsList("admin");
+		assertEquals(
+				"{\"request\":\"14\",\"action\":\"macroEventsRequest\",\"user\":\"admin\"}",
+				json);
+	}
+
+	@Test
+	public void replyMacroEventsListTest() throws Exception {
+
+		MacroEvents ev = JsonParser
+				.parseMacroEventsResponse("{\"ids\":[8],\"names\":[\"Third Release\"],\"action\":\"macro_event_response\",\"user\":\"admin\"}");
+		
+		assertEquals(ev.getNames().get(0), "Third Release");
+	}
 }
