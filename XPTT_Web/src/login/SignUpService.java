@@ -13,7 +13,7 @@ import model.exceptions.NameAlreadyInUseException;
 import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
-import util.serialization.GlobalUniquenessSerializer;
+import util.serialization.GlobalIdentifiabilitySerializer;
 
 public class SignUpService extends AccountAction {
 
@@ -47,7 +47,7 @@ public class SignUpService extends AccountAction {
 			HttpServletResponse response) throws ServletException, IOException {
 		users.put(userName, password);
 		ProjectsCollector projectsCollector = new ProjectsCollector(
-				GlobalUniquenessSerializer.getInstance());
+				GlobalIdentifiabilitySerializer.getInstance());
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
 		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
@@ -58,7 +58,7 @@ public class SignUpService extends AccountAction {
 				.getSettings();
 		projectsCollector.addProject(project);
 		pendingProjects.put(userName, new ProjectsCollector(
-				GlobalUniquenessSerializer.getInstance()));
+				GlobalIdentifiabilitySerializer.getInstance()));
 		environments.put(userName, projectsCollector);
 		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
 				.getServletContext().getAttribute("usersInfo");

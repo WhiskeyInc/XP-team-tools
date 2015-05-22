@@ -8,7 +8,7 @@ import model.project.ProjectsCollector;
 import org.junit.Test;
 
 import timeline.Timeline;
-import util.serialization.GlobalUniquenessSerializer;
+import util.serialization.GlobalIdentifiabilitySerializer;
 import boards.UserStoryBoard.UserStoriesManager;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
@@ -49,7 +49,7 @@ public class ProjectTest {
 	@Test
 	public void test04() throws Exception {
 		ProjectsCollector manager = new ProjectsCollector(
-				GlobalUniquenessSerializer.getInstance());
+				GlobalIdentifiabilitySerializer.getInstance());
 		manager.addProject(project);
 		assertEquals(project, manager.getProject(project.getId()));
 	}
@@ -57,7 +57,7 @@ public class ProjectTest {
 	@Test
 	public void test05() throws Exception {
 		ProjectsCollector manager = new ProjectsCollector(
-				GlobalUniquenessSerializer.getInstance());
+				GlobalIdentifiabilitySerializer.getInstance());
 		manager.addProject(project);
 		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
 		manager.deleteProject(project.getId());

@@ -4,21 +4,21 @@ import java.util.List;
 
 /**
  * SerializerCollector interface provides simple methods to handle a collection
- * of {@link Serializable} instances
+ * of {@link Serializable} instances, making them univocally identifiable.
  * 
- * @author simone
+ * @author simone, lele, andre, incre
  * @see Serializable
  *
  */
 public interface SerializerCollector {
 
 	/**
-	 * The integer identifier of the very first item collected in this object
+	 * The integer identifier of the very first item collected in this object.
 	 */
 	public static final int FIRST_ID = 0;
 
 	/**
-	 * Provides addition to the collection, including serialization
+	 * Provides addition to the collection, including serialization.
 	 * 
 	 * @param item
 	 *            : the {@link Serializable} item to add
@@ -26,14 +26,14 @@ public interface SerializerCollector {
 	public void addItem(Serializable item);
 
 	/**
-	 * Returns a list containing the whole set of items collected
+	 * Returns a list containing the whole set of items collected.
 	 * 
 	 * @return: a {@link List} containing every item
 	 */
 	public List<Serializable> getItems();
 
 	/**
-	 * Provides a simple method to access an item by its identifier
+	 * Provides a simple method to access an item by its identifier.
 	 * 
 	 * @param id
 	 *            : the identifier for the desired item

@@ -19,7 +19,7 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
 import timeline.events.MacroEvent;
-import util.serialization.GlobalUniquenessSerializer;
+import util.serialization.GlobalIdentifiabilitySerializer;
 import util.serialization.LocalIdentifiabilitySerializer;
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
@@ -47,7 +47,7 @@ public class Initializer extends HttpServlet {
 		HashMap<String, ProjectsCollector> environments = new HashMap<String, ProjectsCollector>();
 		HashMap<String, ProjectsCollector> pendingProjects = new HashMap<String, ProjectsCollector>();
 		ProjectsCollector testCollector = new ProjectsCollector(
-				GlobalUniquenessSerializer.getInstance());
+				GlobalIdentifiabilitySerializer.getInstance());
 		Project project = new Project("xTrEAM", new ConcreteProjectFactory(),
 				"A debugger for this very application");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project

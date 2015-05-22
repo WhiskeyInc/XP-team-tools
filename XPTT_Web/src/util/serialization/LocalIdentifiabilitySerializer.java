@@ -8,9 +8,10 @@ import java.util.List;
  * This implementation of {@link SerializerCollector} interface provides proper
  * behavior to all inherited methods and control for identifiability. This
  * control works properly only if the collected objects refer to one
- * single instance of {@link SerializerCollector}. Which means that when one
- * {@link Serializable} intance happens to be collected in two or more different
+ * single instance of this class. Which means that when one
+ * {@link Serializable} instance happens to be collected in two or more different
  * collectors, that may result in a identifiability failure.
+ * @see {@link SerializerCollector}
  * 
  * @author simone, lele, incre, andre
  */
