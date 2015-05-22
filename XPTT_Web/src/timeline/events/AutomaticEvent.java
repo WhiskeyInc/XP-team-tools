@@ -8,7 +8,7 @@ import timeline.Event;
 
 /**
  * AutomaticEvent class represents a particular event that happens to be created
- * automatically. Since that, the only relevant information is about its title
+ * automatically. Since that, the only relevant information is about its title.
  * 
  * @author simone, lele, incre, andre
  * @see Event

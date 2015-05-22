@@ -15,11 +15,11 @@ import filtering.NoFilter;
  * MacroEvent is a particular extension of {@link Event} superclass that can
  * collect itself multiple inner events, using an instance of {@link Timeline}
  * interface. A macro event is meant to represent a large number of situations
- * occuring in a specified time range. Within this range, other minor events can
+ * occurring in a specified time range. Within this range, other minor events can
  * happen, and they are therefore collected in the macro event object itself.
  * Since this class performs any required operation to manage a collection of
- * {@link Event} instances, it does implement {@link Timeline} interface to
- * encourage polimorfism
+ * {@link Event} instances, it does implement {@link Timeline} interface. 
+ * @see {@link Timeline}, {@link Event}
  * 
  * @author simone, lele, incre, andrea
  *
@@ -38,7 +38,7 @@ public class MacroEvent extends Event implements Timeline {
 	 *            : the start of the time range
 	 * @param toDate
 	 *            : the end of the time range. This date will be considered as
-	 *            the puntual time location for sorting operations and will be
+	 *            the punctual time location for sorting operations and will be
 	 *            equivalent to calling {@link Event#getDate()} on super class
 	 * @param timeline
 	 *            : the concrete instance of {@link Timeline} interface to
