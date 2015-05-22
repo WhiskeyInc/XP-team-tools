@@ -9,7 +9,7 @@ import filtering.Checker;
  * each target developer is working on it. If just one target developer is not
  * working on it, the task is indeed considered invalid
  * 
- * @author simone, lele, incre, usk
+ * @author simone, lele, incre, andre
  * @see Task, {@link Checker}
  *
  */

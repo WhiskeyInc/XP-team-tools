@@ -8,10 +8,10 @@ import filtering.Checker;
  * {@link UserStory} validation over name's comparison. A user story is considered as
  * valid if its name contains or is equal to a target string
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  *
  */
-public class nameUserStoryChecker implements Checker<UserStory> {
+public class NameUserStoryChecker implements Checker<UserStory> {
 
 	private String name;
 
@@ -21,7 +21,7 @@ public class nameUserStoryChecker implements Checker<UserStory> {
 	 * @param targetString
 	 *            : the string that will be used to perform validation
 	 */
-	public nameUserStoryChecker(String targetString) {
+	public NameUserStoryChecker(String targetString) {
 		this.name = targetString;
 	}
 

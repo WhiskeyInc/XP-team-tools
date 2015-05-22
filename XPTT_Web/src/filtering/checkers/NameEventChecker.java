@@ -8,7 +8,7 @@ import filtering.Checker;
  * {@link Event} validation over name's comparison. An event is considered as
  * valid if its name contains or is equal to a target string
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  *
  */
 public class NameEventChecker implements Checker<Event> {
