@@ -12,14 +12,13 @@ import filtering.Filter;
 
 /**
  * A simple implementation of {@link UserStoriesManager} interface. It does
- * implement existance control when editing a story, valid name control when
- * adding a new one, but does not implement any kind of futher validation (i.e
+ * implement existence control when editing a story, valid name control when
+ * adding a new one, but does not implement any kind of further validation (i.e
  * {@link InvalidStateException} and {@link InvalidPriorityException} are never
  * thrown)
  * 
  * @author simone, lele, usk, incre
  * @see UserStoriesManager
- * @since 1.0
  *
  */
 public class ConcreteUserStoriesManager implements UserStoriesManager {

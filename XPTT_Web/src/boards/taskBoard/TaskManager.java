@@ -11,11 +11,10 @@ import filtering.Filter;
 /**
  * TaskManager interface represents a generic manager for a collection of tasks.
  * It provides task addition, deletion and editing, within some logic controls.
- * Task istances are identified by their name, so it is impossible to add two
+ * Task instances are identified by their name, so it is impossible to add two
  * tasks with the same name
  * 
  * @author simone, lele, usk, incre
- * @since 1.0
  * @see Task
  */
 public interface TaskManager {
@@ -58,7 +57,7 @@ public interface TaskManager {
 	 * 
 	 * @param taskName
 	 *            : the name of the desired task
-	 * @return: the {@link Task} istance whose name matches with taskName
+	 * @return: the {@link Task} instance whose name matches with taskName
 	 * @throws NoSuchTaskException
 	 *             : if taskName does not match with an existing task
 	 */
@@ -101,7 +100,7 @@ public interface TaskManager {
 	 * Adds one or more developers to a specific task
 	 * 
 	 * @param taskName
-	 *            : the task wich the developers will be added to
+	 *            : the task which the developers will be added to
 	 * @param developers
 	 *            : one or more string representing the developers
 	 * @throws InvalidMemberException

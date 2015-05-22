@@ -11,14 +11,13 @@ import filtering.Filter;
 
 /**
  * A simple implementation of {@link TaskManager} interface. It does implement
- * existance control when editing a task, valid name control when adding a new
+ * existence control when editing a task, valid name control when adding a new
  * one, but does not implement any kind of state or developer validation (i.e
  * {@link InvalidStateException} and {@link InvalidMemberException} are never
  * thrown)
  * 
  * @author simone, lele, usk, incre
  * @see {@link TaskManager}
- * @since 1.0
  *
  */
 public class ConcreteTaskManager implements TaskManager {

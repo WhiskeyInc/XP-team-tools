@@ -6,10 +6,9 @@ import boards.taskBoard.Task;
 import boards.taskBoard.TaskManager;
 
 /**
- * The UserStory class represents a simple develoment user story
+ * The UserStory class represents a simple development user story
  * 
  * @author simone, lele, incre, usk
- * @since 1.0
  *
  */
 public class UserStory implements Comparable<UserStory> {
@@ -63,14 +62,14 @@ public class UserStory implements Comparable<UserStory> {
 	/**
 	 * Returns a description for this story
 	 * 
-	 * @return: a short string descritpion representing this story's details
+	 * @return: a short string description representing this story's details
 	 */
 	public String getDescription() {
 		return this.description;
 	}
 
 	/**
-	 * Returns the state of this story, wich means a representation of the level
+	 * Returns the state of this story, which means a representation of the level
 	 * of accomplishment of this story
 	 * 
 	 * @return: a string representing this story's state
@@ -116,7 +115,7 @@ public class UserStory implements Comparable<UserStory> {
 	 * @param priority
 	 *            : a string representing the priority level
 	 * @throws InvalidPriorityException
-	 *             : if the new priority os out of range
+	 *             : if the new priority is out of range
 	 */
 	public void setPriority(int priority) throws InvalidPriorityException {
 		if (!isValidUserStoryPriority(priority)) {
@@ -136,8 +135,8 @@ public class UserStory implements Comparable<UserStory> {
 	}
 
 	/**
-	 * Returns the istance of {@link TaskManager} interface that is currently
-	 * used to handle all te {@link Task} objects related to this story
+	 * Returns the instance of {@link TaskManager} interface that is currently
+	 * used to handle all the {@link Task} objects related to this story
 	 * 
 	 * @return: the {@link TaskManager} related to this story
 	 * @see TaskManager
@@ -148,7 +147,7 @@ public class UserStory implements Comparable<UserStory> {
 
 	/**
 	 * Returns the number of {@link Task} related to this story. It is perfectly
-	 * equivalent to getting the {@link TaskManager} istance through
+	 * equivalent to getting the {@link TaskManager} instance through
 	 * {@link #getTasksManager()} and then call
 	 * {@link TaskManager#getTasksNumber()}
 	 * 

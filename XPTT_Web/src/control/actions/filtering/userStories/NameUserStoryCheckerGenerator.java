@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import boards.UserStoryBoard.UserStory;
 import control.HttpAction;
 import filtering.Checker;
-import filtering.checkers.nameUserStoryChecker;
+import filtering.checkers.NameUserStoryChecker;
 
 public class NameUserStoryCheckerGenerator extends UserStoryCheckerAction
 		implements HttpAction {
@@ -17,7 +17,7 @@ public class NameUserStoryCheckerGenerator extends UserStoryCheckerAction
 	@Override
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Checker<UserStory> checker = new nameUserStoryChecker(
+		Checker<UserStory> checker = new NameUserStoryChecker(
 				request.getParameter("title"));
 		super.returnChecker(request, checker);
 		super.redirect(response);

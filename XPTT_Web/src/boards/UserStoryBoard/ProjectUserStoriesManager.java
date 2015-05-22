@@ -2,7 +2,7 @@ package boards.UserStoryBoard;
 
 import java.util.ArrayList;
 
-import model.Notifier;
+import model.ProjectManager;
 import model.exceptions.InvalidPriorityException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
@@ -12,31 +12,30 @@ import filtering.Filter;
 /**
  * A DP Decorator oriented implementation of {@link UserStoriesManager}
  * interface. This class encapsulates a concrete implementation of that
- * interface but adds team functionalities, like parameters validation (over
- * {@link Notifier} rules) and event notification
+ * interface but adds project oriented functionalities, like parameters validation (over
+ * {@link ProjectManager} rules) and event notification
  * 
  * @author simone, lele, usk, incre
- * @see {@link UserStoriesManager}, {@link Notifier}
- * @since 1.0
+ * @see {@link UserStoriesManager}, {@link ProjectManager}
  *
  */
 public class ProjectUserStoriesManager implements UserStoriesManager {
 
 	private UserStoriesManager userStoriesManager;
-	private Notifier teamManager;
+	private ProjectManager teamManager;
 
 	/**
-	 * Creates a new istance of this class
+	 * Creates a new instance of this class
 	 * 
 	 * @param userStoriesManager
 	 *            : the concrete implementation of {@link UserStoriesManager} to
 	 *            encapsulate
 	 * @param teamManager
-	 *            : the {@link Notifier} istance that will implement team
+	 *            : the {@link ProjectManager} instance that will implement team
 	 *            functionalities
 	 */
 	public ProjectUserStoriesManager(UserStoriesManager userStoriesManager,
-			Notifier teamManager) {
+			ProjectManager teamManager) {
 		super();
 		this.userStoriesManager = userStoriesManager;
 		this.teamManager = teamManager;

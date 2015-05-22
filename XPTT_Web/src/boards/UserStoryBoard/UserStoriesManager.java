@@ -11,11 +11,10 @@ import filtering.Filter;
 /**
  * UserStoriesManager interface represents a generic manager for a collection of
  * user stories. It provides item addition, deletion and editing, within some
- * logic controls. UserStory istances are identified by their name, so it is
+ * logic controls. UserStory instances are identified by their name, so it is
  * impossible to add two stories with the same name
  * 
  * @author simone, lele, usk, incre
- * @since 1.0
  * @see UserStory
  */
 public interface UserStoriesManager {

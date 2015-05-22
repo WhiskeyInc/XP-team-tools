@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
-import model.ConcreteTeamManager;
-import model.Notifier;
+import model.ConcreteProjectManager;
+import model.ProjectManager;
 import model.TeamComponent;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidPriorityException;
@@ -36,7 +36,7 @@ public class TeamManagerTest {
 	private Timeline timeline = new ConcreteTimeline(
 			TimeZone.getTimeZone("Europe/Rome"),
 			new LocalIdentifiabilitySerializer());
-	private Notifier teamManager = new ConcreteTeamManager(settings,
+	private ProjectManager teamManager = new ConcreteProjectManager(settings,
 			timeline);
 	private TaskManager taskBoard = new ProjectTaskManager(
 			new ConcreteTaskManager(), teamManager);

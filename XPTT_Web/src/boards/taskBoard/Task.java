@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * task
  * 
  * @author simone, lele, usk, incre
- * @since 1.0
  *
  */
 public class Task {
@@ -22,7 +21,7 @@ public class Task {
 	private ArrayList<String> developers = new ArrayList<String>();
 
 	/**
-	 * Creates a new Task istance. The state initialization is forced to TODO
+	 * Creates a new instance of this class. The state initialization is forced to TODO
 	 * 
 	 * @param name
 	 *            : the name of the task
@@ -37,7 +36,7 @@ public class Task {
 	}
 
 	/**
-	 * Creates a new Task istance. The state initialization is forced to TODO
+	 * Creates a new Task instance. The state initialization is forced to TODO
 	 * 
 	 * @param name
 	 *            : the name of the task

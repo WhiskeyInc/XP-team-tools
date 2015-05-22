@@ -2,7 +2,7 @@ package boards.taskBoard;
 
 import java.util.ArrayList;
 
-import model.Notifier;
+import model.ProjectManager;
 import model.exceptions.InvalidMemberException;
 import model.exceptions.InvalidStateException;
 import model.exceptions.NameAlreadyInUseException;
@@ -11,31 +11,31 @@ import filtering.Filter;
 
 /**
  * A DP Decorator oriented implementation of {@link TaskManager} interface. This
- * class encapsulates a concrete implementation of that interface but adds team
- * functionalities, like parameters validation (over {@link Notifier} rules)
- * and event notification
+ * class encapsulates a concrete implementation of that interface but adds
+ * project oriented functionalities, like parameters validation (over
+ * {@link ProjectManager} rules) and event notification to the project's
+ * timeline
  * 
  * @author simone, lele, usk, incre
- * @see {@link TaskManager}, {@link Notifier}
- * @since 1.0
- *
+ * @see {@link TaskManager}, {@link ProjectManager}
  */
 public class ProjectTaskManager implements TaskManager {
 
 	private TaskManager taskManager;
-	private Notifier teamManager;
+	private ProjectManager teamManager;
 
 	/**
-	 * Creates a new istance of this class
+	 * Creates a new instance of this class
 	 * 
 	 * @param taskManager
 	 *            : the concrete implementation of {@link TaskManager} to
 	 *            encapsulate
 	 * @param teamManager
-	 *            : the {@link Notifier} istance that will implement team
+	 *            : the {@link ProjectManager} instance that will implement team
 	 *            functionalities
 	 */
-	public ProjectTaskManager(TaskManager taskManager, Notifier teamManager) {
+	public ProjectTaskManager(TaskManager taskManager,
+			ProjectManager teamManager) {
 		super();
 		this.taskManager = taskManager;
 		this.teamManager = teamManager;
