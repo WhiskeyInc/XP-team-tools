@@ -10,11 +10,11 @@ import util.serialization.Serializable;
 import filtering.Filter;
 
 /**
- * Timeline interface represents a generic timeline object, wich means a
+ * Timeline interface represents a generic timeline object, which means a
  * collection of {@link Event} instances. It provides basic operations and date
  * changing. It also provides filtering over an implementation of {@link Filter}
  * interface. Since {@link Event} extends {@link Serializable} the access to a
- * collected event is made by its identifier
+ * collected event is made by its identifier.
  * 
  * @author simone, lele, andre, incre
  * @see Event
@@ -23,12 +23,12 @@ import filtering.Filter;
 public interface Timeline {
 
 	/**
-	 * Adds an {@link Event} instance to the collection
+	 * Adds an {@link Event} instance to the collection.
 	 * 
 	 * @param event
-	 *            : the object to be added
+	 *            : the object to be added.
 	 * @throws InvalidDateException
-	 *             : if the date is considererd as invalid
+	 *             : if the date is considered as invalid.
 	 */
 	public void addEvent(Event event) throws InvalidDateException;
 
@@ -36,11 +36,11 @@ public interface Timeline {
 	 * Removes an event from this collection
 	 * 
 	 * @param eventId
-	 *            : the identifier of the event
+	 *            : the identifier of the event.
 	 * @throws NoSuchEventException
-	 *             : if there is no such event in the collection
+	 *             : if there is no such event in the collection, and thus cannot be removed.
 	 * @throws UnEditableEventException
-	 *             : if the event is not editable, and thus cannot be removed
+	 *             : if the event is not editable, and thus cannot be removed.
 	 * 
 	 * @see {@link Event#isEditable()}
 	 */
@@ -59,7 +59,7 @@ public interface Timeline {
 	 * @throws NoSuchEventException
 	 *             : if there is no such event in the collection
 	 * @throws InvalidDateException
-	 *             : if the new date is considererd as invalid
+	 *             : if the new date is considered invalid
 	 */
 	public void moveEvent(int eventId, GregorianCalendar newDate)
 			throws UnEditableEventException, NoSuchEventException,
@@ -70,9 +70,9 @@ public interface Timeline {
 	 * 
 	 * @param eventId
 	 *            : the identifier of the event
-	 * @return the instance of {@link Event} whose id matches with the parameter
+	 * @return the instance of {@link Event} whose id matches the parameter
 	 * @throws NoSuchEventException
-	 *             : if there is no such event in the collection
+	 *             : if no event matches the parameter
 	 */
 	public Event getEvent(int eventId) throws NoSuchEventException;
 
@@ -89,7 +89,7 @@ public interface Timeline {
 	/**
 	 * Returns the number of events currently collected
 	 * 
-	 * @return: an integer representing the collection's size
+	 * @return: an integer representing the number of events in the Timeline
 	 */
 	public int getEventsNumber();
 

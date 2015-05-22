@@ -9,9 +9,9 @@ import util.serialization.Serializable;
 
 /**
  * This class represent an event which has five characteristics: an id
- * (exclusive), a name (mandatory), a date, stored with the precision of a
- * second, a list of participant and a flag which indicates whether it's
- * editable or not. The default value for this flag is TRUE: it means the evente
+ * (unique), a name (mandatory), a date, stored with the precision of a
+ * second, a list of participants and a flag which indicates whether it's
+ * editable or not. The default value for this flag is TRUE: it means the event
  * can be modified if not differently specified in the constructor. Event class
  * implements {@link Comparable} interface to provide sorting operations, and
  * extends {@link Serializable} superclass to accept serialization

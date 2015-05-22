@@ -1,7 +1,6 @@
 package timeline;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -9,14 +8,15 @@ import java.util.TimeZone;
 import model.exceptions.InvalidDateException;
 import model.exceptions.NoSuchEventException;
 import model.exceptions.UnEditableEventException;
+import timeline.events.AutomaticEvent;
 import util.serialization.Serializable;
 import util.serialization.SerializerCollector;
 import filtering.Filter;
 
 /**
- * This implementation of {@link Timeline} interface provides uniqueness control
- * for the events to be collected. This is guaranteed by using
- * {@link SerializerCollector} interface to perform events storage
+ * This implementation of {@link Timeline} interface provides unique
+ * identifiability control for the events to be collected. This is guaranteed by
+ * using {@link SerializerCollector} interface to perform events storage.
  * 
  * @author simone, lele, incre, andre
  * @see Event, {@link Timeline}, {@link SerializerCollector},
@@ -33,15 +33,12 @@ public class ConcreteTimeline implements Timeline {
 
 	/**
 	 * Creates a new instance of this class. When created, it will be
-	 * automatically added and event to take note of this creation itself. This
-	 * event's name will always be
-	 * {@link ConcreteTimeline#DEFAULT_CREATION_EVENT}
+	 * automatically added an event to take note of this creation itself. This
+	 * event's name is {@link ConcreteTimeline#DEFAULT_CREATION_EVENT}
 	 */
 	public ConcreteTimeline(TimeZone locale, SerializerCollector serializer) {
 		this.serializer = serializer;
-		GregorianCalendar creationDate = (GregorianCalendar) Calendar
-				.getInstance(locale);
-		Event event = new Event(DEFAULT_CREATION_EVENT, creationDate, false);
+		Event event = new AutomaticEvent(DEFAULT_CREATION_EVENT, locale);
 		this.serializer.addItem(event);
 	}
 
@@ -76,11 +73,10 @@ public class ConcreteTimeline implements Timeline {
 			UnEditableEventException {
 		this.validateEvent(eventId);
 		Event event = (Event) this.serializer.getItem(eventId);
-		if (event.isEditable()) {
-			this.serializer.deleteItem(eventId);
-			return;
+		if (!event.isEditable()) {
+			throw new UnEditableEventException(event.toString());
 		}
-		throw new UnEditableEventException(event.toString());
+		this.serializer.deleteItem(eventId);
 	}
 
 	/*
