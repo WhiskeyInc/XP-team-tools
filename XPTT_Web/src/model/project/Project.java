@@ -9,7 +9,7 @@ import boards.UserStoryBoard.UserStoriesManager;
 
 /**
  * Project class represents a generic software development project. To ensure
- * identifiability, it inherits {@link Serializable} methods.
+ * identifiability, it inherits {@link Serializable} methods. 
  * 
  * @author simone, lele, incre, andre
  * @see Serializable
@@ -18,7 +18,7 @@ import boards.UserStoryBoard.UserStoriesManager;
 public class Project extends Serializable {
 
 	private Timeline timeline;
-	private UserStoriesManager userStoriesmanager;
+	private UserStoriesManager userStoriesManager;
 	private Notifier projectManager;
 	private ProjectSettings settings;
 	private String name;
@@ -40,13 +40,13 @@ public class Project extends Serializable {
 		this.name = name;
 		this.timeline = factory.createTimeline();
 		this.projectManager = factory.createNotifier();
-		this.userStoriesmanager = factory.createUserStoriesManager();
+		this.userStoriesManager = factory.createUserStoriesManager();
 		this.settings = factory.createSettings();
 		this.description = description;
 	}
 
 	/**
-	 * Returns an instance of {@link Timeline} interface, wich represents each
+	 * Returns an instance of {@link Timeline} interface, which represents each
 	 * {@link Event} that occurs in this project
 	 * 
 	 * @return: the timeline of this project
@@ -62,7 +62,7 @@ public class Project extends Serializable {
 	 * @return: a user stories collector, associated to this project
 	 */
 	public UserStoriesManager getUserStoriesManager() {
-		return this.userStoriesmanager;
+		return this.userStoriesManager;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class Project extends Serializable {
 	}
 
 	/**
-	 * Returns the settings that control data consistance and validity
+	 * Returns the settings that control data consistence and validity
 	 * 
 	 * @return: the instance of {@link ProjectSettings} of this project
 	 */

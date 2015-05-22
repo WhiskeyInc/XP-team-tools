@@ -14,12 +14,12 @@ import boards.UserStoryBoard.ProjectUserStoriesManager;
 import boards.UserStoryBoard.UserStoriesManager;
 
 /**
- * ConcreteProjectFactory provides implemetation for each method specified in
+ * ConcreteProjectFactory provides implementation for each method specified in
  * {@link ProjectFactory}, building an integrated system able to write in the
- * project's {@link Timeline} instance an event for each occuring change. This
+ * project's {@link Timeline} instance an event for each occurring change. This
  * is performed through DP Mediator oriented architecture: too apply this
  * structure to other components, in order to perform such integration, just get
- * the mediator's instace by calling
+ * the mediator's instance by calling
  * {@link ConcreteProjectFactory#createNotifier()}
  * 
  * @author simone, lele, incre, andre
@@ -27,22 +27,11 @@ import boards.UserStoryBoard.UserStoriesManager;
  */
 public class ConcreteProjectFactory implements ProjectFactory {
 
-	
-	private Timeline timeline = new ConcreteTimeline(TimeZone.getDefault(),
+	private Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"),
 			new LocalIdentifiabilitySerializer());
 	private ProjectSettings settings = new ConcreteProjectSettings();
 	private Notifier projectManager = new ConcreteTeamManager(settings,
 			timeline);
-
-	/**
-	 * Creates a new instance of this class
-	 * 
-	 * @param timezone
-	 *            : the {@link TimeZone} to be used for time references
-	 */
-	public ConcreteProjectFactory() {
-		super();
-	}
 
 	@Override
 	/*

@@ -11,6 +11,7 @@ import boards.UserStoryBoard.UserStoriesManager;
  * build an instance of {@link Project} class.
  * 
  * @author simone, lele, incre, andre
+ * @see Project
  *
  */
 public interface ProjectFactory {

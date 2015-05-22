@@ -8,7 +8,7 @@ import util.serialization.SerializerCollector;
 /**
  * ProjectsManager class provides simple methods to manage a collection of
  * {@link Project} instances. It provides item addition, deletion and picking.
- * Moreover, to ensure data identifiability, it also uses a
+ * Moreover, to ensure data identifiability, it uses a
  * {@link SerializerCollector} instance to manage the storage
  * 
  * @author simone, lele, incre, andre
