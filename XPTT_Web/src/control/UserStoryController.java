@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import control.actions.userStories.USAdder;
 
 /**
- * Servlet implementation class TimelineController
+ * This HttpServlet performs any action related to user story management
  */
 @WebServlet("/UserStoryController")
 public class UserStoryController extends HttpServlet {
@@ -38,7 +38,8 @@ public class UserStoryController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		this.actions.get(request.getParameter("action")).perform(request, response);
+		this.actions.get(request.getParameter("action")).perform(request,
+				response);
 	}
 
 }

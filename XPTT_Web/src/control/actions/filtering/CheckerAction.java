@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import filtering.Checker;
 import filtering.TargetFilter;
 
+
 public abstract class CheckerAction<T> extends FilterAction<T> {
 
 	protected void returnChecker(HttpServletRequest request, Checker<T> checker) {

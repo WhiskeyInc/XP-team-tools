@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HomeRedirector
+ * This HttpServlet provides response proper redirecting according to the login
+ * situation
  */
 @WebServlet("/home")
 public class HomeRedirector extends HttpServlet {

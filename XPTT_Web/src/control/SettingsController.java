@@ -14,7 +14,7 @@ import control.actions.settings.MemberSearcher;
 import control.actions.settings.ProjectInviter;
 
 /**
- * Servlet implementation class TimelineController
+ * This HttpServlet performs any action related the projects' settings
  */
 @WebServlet("/SettingsController")
 public class SettingsController extends HttpServlet {

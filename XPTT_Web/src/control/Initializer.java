@@ -25,7 +25,8 @@ import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 
 /**
- * Servlet implementation class Initializer
+ * This HttpServlet performs any required operation to properly run this very
+ * application
  */
 @WebServlet("/initialize")
 public class Initializer extends HttpServlet {
@@ -39,6 +40,10 @@ public class Initializer extends HttpServlet {
 	private static final String INFO_STORY_DESCRIPTION = "Come Product Owner, vorrei che gli utenti che arrivano alla nostra landing page, possano disporre di una pagina che parli del progetto e di chi lo sta sviluppando in modo che siano invogliati ad iscriversi";
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see javax.servlet.GenericServlet#init()
+	 */
 	public void init() throws ServletException {
 		super.init();
 
@@ -102,8 +107,10 @@ public class Initializer extends HttpServlet {
 				new LocalIdentifiabilitySerializer());
 		MacroEvent macro;
 		try {
-			macro = new MacroEvent("Third Release", (GregorianCalendar) GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Rome")), new GregorianCalendar(2015, 5, 26, 11, 00),
-					timeline);
+			macro = new MacroEvent("Third Release",
+					(GregorianCalendar) GregorianCalendar.getInstance(TimeZone
+							.getTimeZone("Europe/Rome")),
+					new GregorianCalendar(2015, 5, 26, 11, 00), timeline);
 			macro.addEvent(new Event("Deploy Online", new GregorianCalendar(
 					2015, 5, 26, 10, 00)));
 			macro.addEvent(new Event("Ending Project Party",

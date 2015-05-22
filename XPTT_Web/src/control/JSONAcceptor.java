@@ -19,7 +19,7 @@ import control.actions.timeline.JSONActions.EventAdderFromJSON;
 import control.actions.timeline.JSONActions.MacroEventsListDealer;
 
 /**
- * Servlet implementation class EventAdderFormChat
+ * This HttpServlet performs any action related to JSON communication between servers
  */
 @WebServlet("/JSONAcceptor")
 public class JSONAcceptor extends HttpServlet {

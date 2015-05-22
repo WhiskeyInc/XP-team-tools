@@ -18,7 +18,8 @@ import control.actions.filtering.events.ParticipantEventCheckerGenerator;
 import control.actions.filtering.userStories.NameUserStoryCheckerGenerator;
 
 /**
- * Servlet implementation class TimelineController
+ * This subclass of HttpServlet provides operation useful to perform filtering
+ * actions
  */
 @WebServlet("/FilteringController")
 public class FilteringController extends HttpServlet {
@@ -35,12 +36,16 @@ public class FilteringController extends HttpServlet {
 	}
 
 	private void initializeMap() {
-		this.actions.put("noFilterEvent", new NoFilterGenerator<Event>("timeline.jsp"));
+		this.actions.put("noFilterEvent", new NoFilterGenerator<Event>(
+				"timeline.jsp"));
 		this.actions.put("nameEventFilter", new NameEventCheckerGenerator());
-		this.actions.put("participantEventFilter", new ParticipantEventCheckerGenerator());
+		this.actions.put("participantEventFilter",
+				new ParticipantEventCheckerGenerator());
 		this.actions.put("periodEventFilter", new EventPeriodFilterGenerator());
-		this.actions.put("noFilterUserStory", new NoFilterGenerator<UserStory>("userstory.jsp"));
-		this.actions.put("nameUserStoryFilter", new NameUserStoryCheckerGenerator());		
+		this.actions.put("noFilterUserStory", new NoFilterGenerator<UserStory>(
+				"userstory.jsp"));
+		this.actions.put("nameUserStoryFilter",
+				new NameUserStoryCheckerGenerator());
 	}
 
 	/**
@@ -49,7 +54,8 @@ public class FilteringController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		this.actions.get(request.getParameter("action")).perform(request, response);
+		this.actions.get(request.getParameter("action")).perform(request,
+				response);
 	}
 
 }

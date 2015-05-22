@@ -13,7 +13,7 @@ import control.actions.projects.ProjectAdder;
 import control.actions.projects.ProjectSelector;
 
 /**
- * Servlet implementation class ProjectsController
+ * This HttpServlet performs any action required to manage Project instances
  */
 @WebServlet("/ProjectsController")
 public class ProjectsController extends HttpServlet {

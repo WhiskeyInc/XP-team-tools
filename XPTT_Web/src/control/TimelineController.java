@@ -15,7 +15,8 @@ import control.actions.timeline.EventMover;
 import control.actions.timeline.EventParticipantAdder;
 
 /**
- * Servlet implementation class TimelineController
+ * This HttpServlet performs any action required to manage a Timeline and its
+ * events
  */
 @WebServlet("/TimelineController")
 public class TimelineController extends HttpServlet {
@@ -44,7 +45,8 @@ public class TimelineController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		this.actions.get(request.getParameter("action")).perform(request, response);
+		this.actions.get(request.getParameter("action")).perform(request,
+				response);
 	}
 
 }
