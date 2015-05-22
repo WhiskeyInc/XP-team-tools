@@ -1,6 +1,6 @@
 package model.project;
 
-import model.Notifier;
+import model.ProjectManager;
 import model.ProjectSettings;
 import timeline.Event;
 import timeline.Timeline;
@@ -24,11 +24,11 @@ public interface ProjectFactory {
 	public Timeline createTimeline();
 
 	/**
-	 * Returns the {@link Notifier} object
+	 * Returns the {@link ProjectManager} object
 	 * 
 	 * @return: the project's notifier
 	 */
-	public Notifier createNotifier();
+	public ProjectManager createNotifier();
 
 	/**
 	 * Returns the {@link UserStoriesManager} object

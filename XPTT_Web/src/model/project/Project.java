@@ -1,6 +1,6 @@
 package model.project;
 
-import model.Notifier;
+import model.ProjectManager;
 import model.ProjectSettings;
 import timeline.Event;
 import timeline.Timeline;
@@ -19,7 +19,7 @@ public class Project extends Serializable {
 
 	private Timeline timeline;
 	private UserStoriesManager userStoriesManager;
-	private Notifier projectManager;
+	private ProjectManager projectManager;
 	private ProjectSettings settings;
 	private String name;
 	private String description;
@@ -66,12 +66,12 @@ public class Project extends Serializable {
 	}
 
 	/**
-	 * Returns the instance of {@link Notifier} responsible of notifying
+	 * Returns the instance of {@link ProjectManager} responsible of notifying
 	 * externally or internally every time something changes in this project
 	 * 
 	 * @return: the project notifier
 	 */
-	public Notifier getManager() {
+	public ProjectManager getManager() {
 		return this.projectManager;
 	}
 

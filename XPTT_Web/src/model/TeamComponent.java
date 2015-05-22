@@ -3,7 +3,7 @@ package model;
 /**
  * TeamComponent class represents a generic person who takes part of a team.
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  *
  */
 public class TeamComponent implements Comparable<TeamComponent> {
@@ -48,6 +48,10 @@ public class TeamComponent implements Comparable<TeamComponent> {
 		this.role = role;
 	}
 	
+	/**
+	 * Returns the first name of the member
+	 * @return
+	 */
 	public String getFirstName() {
 		return firstName;
 	}

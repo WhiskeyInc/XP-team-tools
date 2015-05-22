@@ -3,8 +3,8 @@ package model.project;
 import java.util.TimeZone;
 
 import model.ConcreteProjectSettings;
-import model.ConcreteTeamManager;
-import model.Notifier;
+import model.ConcreteProjectManager;
+import model.ProjectManager;
 import model.ProjectSettings;
 import timeline.ConcreteTimeline;
 import timeline.Timeline;
@@ -30,7 +30,7 @@ public class ConcreteProjectFactory implements ProjectFactory {
 	private Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"),
 			new LocalIdentifiabilitySerializer());
 	private ProjectSettings settings = new ConcreteProjectSettings();
-	private Notifier projectManager = new ConcreteTeamManager(settings,
+	private ProjectManager projectManager = new ConcreteProjectManager(settings,
 			timeline);
 
 	@Override
@@ -49,7 +49,7 @@ public class ConcreteProjectFactory implements ProjectFactory {
 	 * 
 	 * @see model.project.ProjectFactory#createManager()
 	 */
-	public Notifier createNotifier() {
+	public ProjectManager createNotifier() {
 		return projectManager;
 	}
 

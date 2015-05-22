@@ -11,14 +11,14 @@ import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.Task;
 
 /**
- * This implementation of {@link Notifier} interface provides project
+ * This implementation of {@link ProjectManager} interface provides project
  * events notification through an instance of {@link Timeline} and data control
  * over an implementation of {@link ProjectSettings} interface
  * 
- * @author simone
+ * @author simone, lele, incre, andre
  *
  */
-public class ConcreteTeamManager implements Notifier {
+public class ConcreteProjectManager implements ProjectManager {
 
 	private Timeline timeline;
 	private TimeZone locale = TimeZone.getTimeZone("Europe/Rome");
@@ -30,10 +30,10 @@ public class ConcreteTeamManager implements Notifier {
 	 * @param settings
 	 *            : the {@link ProjectSettings} to use for data consistency
 	 * @param timeline
-	 *            : the {@link Timeline} object through wich notify some events
+	 *            : the {@link Timeline} object through which notify some events
 	 *            related to the project
 	 */
-	public ConcreteTeamManager(ProjectSettings settings, Timeline timeline) {
+	public ConcreteProjectManager(ProjectSettings settings, Timeline timeline) {
 		this.settings = settings;
 		this.timeline = timeline;
 	}
@@ -47,8 +47,7 @@ public class ConcreteTeamManager implements Notifier {
 	public void taskAdded(Task task) {
 		try {
 			Event event = new AutomaticEvent(
-					"Created task: " + task.toString(),
-					TimeZone.getTimeZone("Europe/Rome"));
+					"Created task: " + task.toString(), locale);
 			event.addParticipants(task.getDevelopers());
 			this.timeline.addEvent(event);
 		} catch (InvalidDateException e) {
