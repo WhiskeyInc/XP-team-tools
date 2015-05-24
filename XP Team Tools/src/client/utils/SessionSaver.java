@@ -1,4 +1,4 @@
-package server.utils;
+package client.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,9 +30,8 @@ public class SessionSaver implements ISessionSaver {
 		this.pwd = pwd;
 
 		// TODO risolvere la riscrittura del file
-		
-
-		
+		// TODO spostare pacchetti in client.utils
+		// TODO crittare file in locale e trasmettere solo HASH
 
 	}
 
@@ -41,7 +40,7 @@ public class SessionSaver implements ISessionSaver {
 			UnsupportedEncodingException {
 
 		writer = new FileWriter(new File("localData/session.ini"));
-		
+
 		try {
 			if (user != null && pwd != null && user.length() <= 100) {
 
@@ -74,7 +73,7 @@ public class SessionSaver implements ISessionSaver {
 		try {
 
 			writer = new FileWriter(new File("localData/session.ini"));
-			
+
 			writer.write("");
 
 			writer.close();
@@ -95,9 +94,9 @@ public class SessionSaver implements ISessionSaver {
 
 		reader = new BufferedReader(new FileReader(new File(
 				"localData/session.ini")));
-		
+
 		String line = reader.readLine();
-		//System.out.println(line);
+		// System.out.println(line);
 
 		if (!(line == null)) {
 			this.user = line;
@@ -107,7 +106,7 @@ public class SessionSaver implements ISessionSaver {
 			String[] tmp = { user, pwd };
 			return tmp;
 		} else {
-			System.out.println("Sessione non salvata!");
+
 			return null;
 		}
 
