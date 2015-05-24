@@ -11,25 +11,25 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonMaker;
 import protocol.JsonParser;
-import server.utils.ISessionSaver;
-import server.utils.SessionSaver;
 import ui.TeamListUI;
 import ui.login.LoginUI;
 import ui.login.MainLoginUI;
 import ui.login.RegUI;
-import client.model.ClientConnectionDetails;
 import client.model.Client;
+import client.model.ClientConnectionDetails;
+import client.utils.ErrorMessage;
+import client.utils.ISessionSaver;
+import client.utils.SessionSaver;
 
 /**
  * This test shows the ultimate version of the chat: if the server is running,
- * the login panel it's shown; after the login, it's possible to select (or create)
- * the team from the team panel: in this way, appears a series of panels which contains
- * all the functionalities of our project:
- * -chat service
- * -timer with adjustable countdown (synchronized with other members of the chat)
- * -team members panel, with the nicknames of other team members, thanks to which it's possible
- *  select certain team members and start private chats
- * -schedule a meeting with the addition of meeting details
+ * the login panel it's shown; after the login, it's possible to select (or
+ * create) the team from the team panel: in this way, appears a series of panels
+ * which contains all the functionalities of our project: -chat service -timer
+ * with adjustable countdown (synchronized with other members of the chat) -team
+ * members panel, with the nicknames of other team members, thanks to which it's
+ * possible select certain team members and start private chats -schedule a
+ * meeting with the addition of meeting details
  * 
  * 
  *
@@ -41,10 +41,11 @@ public class ClientMain {
 	public static void main(String[] args) {
 
 		final MainLoginUI ui = new MainLoginUI();
-
 		final LoginUI login = ui.getLoginUI();
+
 		ISessionSaver sessionSaver;
 		try {
+
 			sessionSaver = new SessionSaver("", "");
 			login.setSessionSaver(sessionSaver);
 
@@ -54,7 +55,9 @@ public class ClientMain {
 			}
 
 		} catch (IOException e3) {
-			// TODO Auto-generated catch block
+			new ErrorMessage();
+			ErrorMessage.infoBox("Error in:  " + e3.toString(), " error");
+			System.exit(1);
 			e3.printStackTrace();
 		}
 
@@ -66,60 +69,22 @@ public class ClientMain {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				saveSession(login);
-
-				final Client client = clientConnection(login);
-				
-				client.sendMessageToServer(JsonMaker.teamsListRequest(client
-						.getNickname()));
-				String response = client.waitServerResponse();
-				
-				teamSelection(client, response);
-
-				ui.dispose();
-			}
-
-			private void teamSelection(final Client client, String response) {
-				String[] teams;
 				try {
-					teams = JsonParser.parseMakeTeamMembs(response);
-					final TeamListUI teamListUI = new TeamListUI(client, teams);
-					teamListUI.setCreateListener(new ActionListener() {
+					login.getSessionSaver().setSessionValues(
+							login.getLoginNick(), login.getPass());
 
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							client.sendMessageToServer(JsonMaker
-									.newTeamRequest(teamListUI.getTeamName(),
-											client.getNickname()));
-							final int index = JsonParser
-									.parseChatIndexRequest(client
-											.waitServerResponse());
-							client.sendMessageToServer(JsonMaker
-									.teamsListRequest(client.getNickname()));
-							teamListUI.setIndex(index);
-							teamListUI.removeTeamPanel();
-							try {
-								teamListUI.fillTeamPane(JsonParser
-										.parseListOfTeamsRequest(client
-												.waitServerResponse()));
-							} catch (ParseException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							teamListUI.refresh();
-						}
-					});
-
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					login.getCheckStatus();
+				} catch (NoSuchAlgorithmException | IOException e2) {
+					new ErrorMessage();
+					ErrorMessage.infoBox("Error in:  " + e2.toString(),
+							" error");
+					System.exit(1);
+					e2.printStackTrace();
 				}
-			}
 
-			private Client clientConnection(final LoginUI login) {
-				final Client client = new Client(
-						new ClientConnectionDetails(login.getLoginNick(), null,
-								login.getPass()));
+				ClientConnectionDetails clientConDet = new ClientConnectionDetails(
+						login.getLoginNick(), null, login.getPass());
+				final Client client = new Client(clientConDet);
 
 				client.openStreams("localhost", 9999);
 				Runnable runnable = new Runnable() {
@@ -131,7 +96,13 @@ public class ClientMain {
 							client.readFromSocket();
 
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
+							new ClientMain();
+							try {
+								this.finalize();
+							} catch (Throwable e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							e.printStackTrace();
 						}
 					}
@@ -139,19 +110,70 @@ public class ClientMain {
 
 				Thread thread = new Thread(runnable);
 				thread.start();
-				return client;
-			}
 
-			private void saveSession(final LoginUI login) {
+				String response;
+
+				client.sendMessageToServer(JsonMaker.authRequest(clientConDet));
+
+				response = client.waitServerResponse();
+
 				try {
-					login.getSessionSaver().setSessionValues(login.getLoginNick(),
-							login.getPass());
+					if (!client.isAuthenticated(response)) {
+						login.setError(true);
+						ui.refresh();
 
-					login.getCheckStatus();
-				} catch (NoSuchAlgorithmException | IOException e2) {
+					} else {
+
+						client.sendMessageToServer(JsonMaker
+								.teamsListRequest(client.getNickname()));
+						response = client.waitServerResponse();
+						String[] teams;
+						try {
+							teams = JsonParser.parseMakeTeamMembs(response);
+							final TeamListUI teamListUI = new TeamListUI(
+									client, teams);
+							teamListUI.setCreateListener(new ActionListener() {
+
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									client.sendMessageToServer(JsonMaker
+											.newTeamRequest(
+													teamListUI.getTeamName(),
+													client.getNickname()));
+									final int index = JsonParser
+											.parseChatIndexRequest(client
+													.waitServerResponse());
+									client.sendMessageToServer(JsonMaker
+											.teamsListRequest(client
+													.getNickname()));
+									teamListUI.setIndex(index);
+									teamListUI.removeTeamPanel();
+									try {
+										teamListUI.fillTeamPane(JsonParser
+												.parseListOfTeamsRequest(client
+														.waitServerResponse()));
+									} catch (ParseException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									teamListUI.refresh();
+								}
+							});
+
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+						ui.dispose();
+
+					}
+
+				} catch (ParseException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
+
 			}
 		});
 
@@ -194,7 +216,7 @@ public class ClientMain {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					
+
 				}
 
 			}
