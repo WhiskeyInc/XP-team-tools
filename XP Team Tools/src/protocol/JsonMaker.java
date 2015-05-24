@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import server.model.services.AuthService;
 import client.model.ClientDetails;
 
 /**
- * This class creates the different requests that will be sent to the server using JSONObject, i.e., 
+ * This class creates different requests that will be sent to the server using JSONObject, i.e., 
  * collections of name/value pairs. All the methods of this class return a String representation 
  * of the instance of JSONObject
  * 
@@ -33,9 +34,8 @@ public class JsonMaker {
 	public static final String TEAMS = "12";
 	public static final String MAKE_TEAMS_LIST = "13";
 	public static final String MACRO_EVENT = "14";
-	
+	public static final String AUTH_REQ = "15";
 
-	
 	public static final String REQ = "request";
 	public static final String TEAM_NAME = "team name";
 	public static final String MESSAGE = "message";
@@ -47,8 +47,10 @@ public class JsonMaker {
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
 	public static final String NICKNAME = "nickname";
+	public static final String AUTH = "auth";
+	public static final String CONNECTED = "connected";
+	public static final String NOT_CONNECTED = "notconnected";
 
-	
 	public static final String EVENT_ACTION = "action";
 	public static final String EVENT_NAME = "event_name";
 	public static final String PARTICIPANTS = "participants";
@@ -57,6 +59,7 @@ public class JsonMaker {
 	public static final String EVENT_DAY = "day";
 	public static final String EVENT_HOUR = "hour";
 	public static final String EVENT_MINUTE = "min";
+
 	
 	public static final String ADD_EVENT = "addEvent"; 
 	public static final String ADD_AUTOMATIC_EVENT = "addAutomaticEvent"; 
@@ -70,7 +73,6 @@ public class JsonMaker {
 	public static final String MACRO_EVENT_ID = "id";
 	
 
-
 	@SuppressWarnings("unchecked")
 	/**
 	 * creates a new chat request for the server
@@ -82,16 +84,16 @@ public class JsonMaker {
 		JSONObject json = new JSONObject();
 		json.put(REQ, NEW_CHAT);
 		JSONArray detArray;
-		
+
 		for (int i = 0; i < details.length; i++) {
 			detArray = new JSONArray();
 			detArray.add(details[i].getNickname());
 			detArray.add(details[i].getTeamName());
-			json.put(ATTENDANT+i, detArray);
+			json.put(ATTENDANT + i, detArray);
 		}
 		return json.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	/**
 	 * Api for the first connection to the Server
@@ -109,7 +111,30 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-	
+
+	/**
+	 * Mirror image of the connectToServerRequest method, but it requests a
+	 * different type of service, that is Authentication Service in
+	 * {@link AuthService} on the Server.
+	 * It substantially probes for Login authentication in {@link AuthService}.
+	 * 
+	 * @param details
+	 * @return
+	 */
+
+	@SuppressWarnings("unchecked")
+	public static String authRequest(ClientDetails details) {
+
+		JSONObject json = new JSONObject();
+		JSONArray detArray = new JSONArray();
+		detArray.add(details.getNickname());
+		detArray.add(details.getTeamName());
+		detArray.add(details.getPwd());
+		json.put(REQ, AUTH_REQ);
+		json.put(ATTENDANT, detArray);
+		return json.toString();
+	}
+
 	@SuppressWarnings("unchecked")
 	/**
 	 * Protocol's Api to require to the server the index of the chat
@@ -123,7 +148,6 @@ public class JsonMaker {
 		json.put(INDEX, String.valueOf(chatIndex));
 		return json.toString();
 	}
-
 
 	/**
 	 * creates a chat request for the server
@@ -157,16 +181,16 @@ public class JsonMaker {
 		json.put(MINUTES, minutes);
 		json.put(SECONDS, seconds);
 		json.put(MACRO_EVENT_ID, id);
-		
+
 		JSONArray array = new JSONArray();
 		if (participants != null) {
 			array.addAll(participants);
-		}	
+		}
 		json.put(PARTICIPANTS, array);
-		
+
 		return json.toString();
 	}
-	
+
 	/**
 	 * creates a new team request for the server
 	 * @param teamName
@@ -181,7 +205,7 @@ public class JsonMaker {
 		json.put(TEAM_NAME, teamName);
 		return json.toString();
 	}
-	
+
 	/**
 	 * creates a request of adding a teamMember
 	 * @param details
@@ -198,6 +222,7 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
+
 	
 	/**
 	 * creates a request of a disconnection
@@ -214,8 +239,18 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	public static String disconnectRequestByServer(boolean b) {
+		JSONObject json = new JSONObject();
+		if (b)
+			json.put(AUTH, CONNECTED);
+		else
+			json.put(AUTH, NOT_CONNECTED);
+
+		return json.toString();
+	}
+
 	@SuppressWarnings("unchecked")
 	public static String makeTeamMembs(String[] nicks) {
 		JSONObject json = new JSONObject();
@@ -227,7 +262,6 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	public static String teamMembsRequest(String nickname, String teamName) {
@@ -246,11 +280,11 @@ public class JsonMaker {
 	 * @return
 	 */
 	public static String manualEventRequest(String user, String eventName,
-			ArrayList<String> participants, String year, String month, String day,
-			String hour, String minute) {
+			ArrayList<String> participants, String year, String month,
+			String day, String hour, String minute) {
 
 		JSONObject json = new JSONObject();
-		
+
 		json.put(REQ, EVENT);
 
 		json.put(USER, user);
@@ -266,10 +300,11 @@ public class JsonMaker {
 			JSONArray array = new JSONArray();
 			array.addAll(participants);
 			json.put(PARTICIPANTS, array);
-		}	
-		
+		}
+
 		return json.toString();
 	}
+
 
 	@SuppressWarnings("unchecked")
 	/**
@@ -298,7 +333,7 @@ public class JsonMaker {
 		
 		return json.toString();
 	}
-	
+
 	/**
 	 * creates a teamsList request for the server
 	 * @param nickname
@@ -309,10 +344,10 @@ public class JsonMaker {
 		JSONObject json = new JSONObject();
 		json.put(REQ, TEAMS);
 		json.put(NICKNAME, nickname);
-		
+
 		return json.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static String requestMacroEventsList(String user) {
 
