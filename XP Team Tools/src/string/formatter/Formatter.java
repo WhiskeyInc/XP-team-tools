@@ -25,6 +25,31 @@ public class Formatter {
 	}
 
 	/**
+	 * It strips the []: chars from the nickname;
+	 * 
+	 * @param message
+	 * @return A String array with the stripped author and the message
+	 */
+	public static String[] deFormatMessage(String message) {
+
+		StringTokenizer tok;
+		String msg;
+
+		tok = new StringTokenizer(message, "[]:");
+
+		String sender = tok.nextToken();
+		if (tok.hasMoreTokens()) {
+			msg = tok.nextToken();
+		} else {
+			msg = ""; // case of no message
+		}
+
+		String[] result = { sender, msg };
+
+		return result;
+	}
+
+	/**
 	 * Purges the raw message from delimitation marks []: useful for DB storing
 	 * in case of timer event it returns a "Pomodoro!"
 	 * 
@@ -35,23 +60,25 @@ public class Formatter {
 
 	public static String formatMessage(String rawmessage) {
 
+		// System.out.println(rawmessage);
+
 		try {
+
 			int request = JsonParser.getRequest(rawmessage);
+
+			String[] lines;
+			String message, formattedMessage;
+
 			switch (request) {
 			case JsonParser.CHAT:
 
-				String[] lines = JsonParser.parseChatRequest(rawmessage);
-				String message = lines[1];
-			    StringTokenizer tok = new StringTokenizer(message, "[]:");
-				String sender = tok.nextToken();
-				String msg;
-				if (tok.hasMoreTokens()) {
-					msg = tok.nextToken();
-				} else {
-					msg = "";
-				}
+				lines = JsonParser.parseChatRequest(rawmessage);
+				message = lines[1];
 
-				String formattedMessage = sender + " " + msg;
+				formattedMessage = deFormatMessage(message)[0] + " "
+						+ deFormatMessage(message)[1];
+				System.out.println("da formatter " + formattedMessage); // testing
+																		// purposes
 				return formattedMessage;
 
 			default:
@@ -62,10 +89,12 @@ public class Formatter {
 		} catch (ParseException e) {
 
 			System.err
-					.println("Errore in Formatter, formatMessage pars exeption");
+					.println("Errore in Formatter, formatMessage Parse Exception");
 		}
-		
-		return "Pomordoro!";
+
+		return "Ne chat ne pomodoro";// to be handled in case of timer parse
+										// case
+
 	}
 
 	/**
