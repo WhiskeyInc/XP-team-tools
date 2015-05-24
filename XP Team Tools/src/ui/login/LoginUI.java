@@ -1,5 +1,6 @@
 package ui.login;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import server.utils.ISessionSaver;
+import client.utils.ISessionSaver;
 
 /**
  * The UI of the login, that allows to insert username and password and has a useful feature, i.e,
@@ -42,6 +43,8 @@ public class LoginUI extends JPanel {
 	private JLabel passLabel = new JLabel("Password:");
 	private JPasswordField pwdField = new JPasswordField(20);
 
+	private JLabel errorLabel = new JLabel("Invalid Username or Password");
+	private boolean errorBool = false;
 	private JCheckBox saveCheck = new JCheckBox("Remembre Me");
 	private ISessionSaver sessionSaver;
 
@@ -103,7 +106,15 @@ public class LoginUI extends JPanel {
 		lim.gridy = 2;
 		super.add(saveCheck, lim);
 
-		saveCheck.setSelected(true);
+		saveCheck.setSelected(false);
+		
+		lim = new GridBagConstraints();
+		lim.gridx = 1;
+		lim.gridy = 4;
+		lim.insets = new Insets(-20, 0, 0, 0);
+		super.add(errorLabel, lim);
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setVisible(errorBool);
 
 	}
 
@@ -170,5 +181,9 @@ public class LoginUI extends JPanel {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setError(boolean b){
+		this.errorLabel.setVisible(b);
 	}
 }

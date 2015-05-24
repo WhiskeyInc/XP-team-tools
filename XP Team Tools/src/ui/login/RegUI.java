@@ -14,9 +14,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
+<<<<<<< .mine
+ * The UI of the registration
+=======
  * The UI of the registration's panel, where a user can perform his registration,
  * after he has added username and password (the password is required twice for a 
  * better control)
+>>>>>>> .r451
  * 
  * @author pavlo
  *
