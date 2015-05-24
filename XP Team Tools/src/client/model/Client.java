@@ -13,13 +13,15 @@ import client.model.teams.IListService;
 import protocol.JsonMaker;
 import protocol.JsonParser;
 import string.formatter.Formatter;
+import org.json.simple.parser.ParseException;
 
 /**
  * A client of the chat system, it sends and receives messages of one or more
  * conversations (chats) It is configurable adding implementation of
+ * 
  * @IClientService and @IListService
  * 
- * @author Alberto
+ * @author Alberto, pav
  */
 public class Client {
 
@@ -28,7 +30,8 @@ public class Client {
 	private DataInputStream is;
 	private HashMap<Integer, IClientService> services = new HashMap<Integer, IClientService>();
 	private HashMap<Integer, IListService> listServices = new HashMap<Integer, IListService>();
-
+	private final static String CONNECTED = "connected";
+	
 
 	public Client() {
 		super();
@@ -56,7 +59,8 @@ public class Client {
 			clientDetails.setOnline(true);
 			os = new DataOutputStream(clientDetails.getRealTimeSocket()
 					.getOutputStream());
-			is = new DataInputStream(clientDetails.getRealTimeSocket().getInputStream());
+			is = new DataInputStream(clientDetails.getRealTimeSocket()
+					.getInputStream());
 			sendMessageToServer(JsonMaker.connectToServerRequest(clientDetails));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +75,8 @@ public class Client {
 	 */
 	public void sendMessageToServer(String message) {
 		message = Formatter.appendNewLine(message);
-		if (clientDetails.getRealTimeSocket() != null && os != null && is != null) {
+		if (clientDetails.getRealTimeSocket() != null && os != null
+				&& is != null) {
 			try {
 				os.writeBytes(message);
 				os.flush();
@@ -96,13 +101,13 @@ public class Client {
 			while (true) {
 				String read = input.readLine();
 				if (read != null) {
-					int requestCode = JsonParser
-							.getRequest(read);
+					int requestCode = JsonParser.getRequest(read);
 					IClientService service = services.get(requestCode);
 					if (service != null) {
 						service.setAttribute(read);
 					} else {
-						IListService listService = listServices.get(requestCode);
+						IListService listService = listServices
+								.get(requestCode);
 						listService.setMembs(read);
 					}
 				}
@@ -163,8 +168,17 @@ public class Client {
 	public void addService(int id, IClientService service) {
 		services.put(id, service);
 	}
-	
+
 	public void addListService(int id, IListService service) {
 		listServices.put(id, service);
+	}
+
+	public boolean isAuthenticated(String response) throws ParseException {
+		String tmp = JsonParser.parseDisconnectRequestByServer(response);
+		if (tmp.equalsIgnoreCase(CONNECTED))
+			return true;
+		else
+			return false;
+
 	}
 }
