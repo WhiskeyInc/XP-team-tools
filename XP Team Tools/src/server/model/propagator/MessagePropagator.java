@@ -10,10 +10,10 @@ import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
 /**
- * The class responsible of the message propagation,
+ * The class responsible of message propagation,
  * it has only one method, a template method which needs a
  * {@link IPropagator} to propagate the message.
- * It' s a component of the Bridge Pattern, to maintain more
+ * It' s a component of the Bridge Pattern, that adds more
  * flexibility
  * @author alberto
  *
@@ -53,12 +53,15 @@ public class MessagePropagator {
 				out.write(Formatter.appendNewLine(message));
 				
 				out.flush();
+				//System.out.println(message);
+				
 			}
 
 		} catch (SocketException e) {
 			propagator.handleSuddenDisconnection(conDet);
 		}
 	}
+
 	public void setPropagator(IPropagator propagator) {
 		this.propagator = propagator;
 	}

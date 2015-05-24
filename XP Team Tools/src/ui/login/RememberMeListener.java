@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JCheckBox;
 
-import server.utils.ISessionSaver;
+import client.utils.ISessionSaver;
 
 /**
  * This class it's an implementation of @ItemListener and it's used for store 
@@ -29,7 +29,7 @@ public class RememberMeListener implements ItemListener {
 	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		Object source = e.getItemSelectable();
+		//Object source = e.getItemSelectable();
 
 		if (saveCheck.isSelected()) {
 			try {

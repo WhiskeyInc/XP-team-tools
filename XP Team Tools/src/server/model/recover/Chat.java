@@ -5,13 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import client.model.ClientDetails;
+
 /**
- * A simple Chat with the teamName,
- * the list of attendants and the list of message
+ * A simple Chat with the teamName, the list of attendants and the list of
+ * message
+ * 
  * @author alberto
  *
  */
-public class Chat implements IMessageRecover{
+public class Chat implements IMessageRecover {
 
 	private String teamName;
 	private ArrayList<ClientDetails> attendantsDetails = new ArrayList<ClientDetails>();
@@ -20,10 +22,12 @@ public class Chat implements IMessageRecover{
 	public Chat(String teamName) {
 		super();
 		this.teamName = teamName;
+
 	}
 
 	public void addMessage(String message) {
 		messageList.add(message);
+
 	}
 
 	public List<String> getMessages() {
@@ -56,26 +60,26 @@ public class Chat implements IMessageRecover{
 	public boolean has(ClientDetails details) {
 		return attendantsDetails.contains(details);
 	}
-	
+
 	public boolean remove(ClientDetails details) {
 		return attendantsDetails.remove(details);
 	}
-	
+
 	/**
 	 * Removes all the attendants from attendants' list
 	 */
 	public void removeAllAttendants() {
 		attendantsDetails.clear();
 	}
-	
+
 	@Override
 	public String[] recoverLastMessages(int numOfMessages)
 			throws NoMessagesException {
 		int size = messageList.size();
-		if(size == 0) {
+		if (size == 0) {
 			throw new NoMessagesException("No messages available");
 		}
-		if(size < numOfMessages) {
+		if (size < numOfMessages) {
 			String[] messages = new String[size];
 			for (int i = 0; i < messages.length; i++) {
 				messages[i] = messageList.get(i);
@@ -91,7 +95,7 @@ public class Chat implements IMessageRecover{
 
 		return messages;
 	}
-	
+
 	/**
 	 * Clears the list of messages
 	 */

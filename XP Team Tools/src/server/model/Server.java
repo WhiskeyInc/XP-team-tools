@@ -19,8 +19,9 @@ import client.model.ClientDetails;
 
 /**
  * A generic server with the possibility to add services, it needs a client
- * manager to manage all the connecting clients
- * Implementation of the design pattern "strategy"
+ * manager to manage all the connecting clients Implementation of the design
+ * pattern "strategy"
+ * 
  * @author nicola, Alberto
  *
  */
@@ -33,11 +34,11 @@ public class Server extends AbstractServer {
 
 	private volatile ClientsManager clientsManager1;
 	private BufferedReader in;
-	
+
 	public Server(ClientsManager clientsManager1) {
 		super();
 		this.clientsManager1 = clientsManager1;
-		
+
 	}
 
 	@Override
@@ -49,39 +50,49 @@ public class Server extends AbstractServer {
 
 				clientSocket = serverSocket.accept();
 				requestSocket = serverSocket.accept();
-				System.out.println("Chat socket: " + clientSocket.getLocalAddress()+ " " + clientSocket.getPort()+ " " + Server.class);
-				System.out.println("Request socket: " + requestSocket.getLocalAddress()+ " " + requestSocket.getPort()+ " " + Server.class);
+				System.out.println("Chat socket: "
+						+ clientSocket.getLocalAddress() + " "
+						+ clientSocket.getPort() + " " + Server.class);
+				System.out.println("Request socket: "
+						+ requestSocket.getLocalAddress() + " "
+						+ requestSocket.getPort() + " " + Server.class);
 
-				
 				setUpStream();
-				
+
+				try {
+					ClientDetails det = JsonParser
+							.parseConnectToServerRequest(getLine(in));
+					ClientConnectionDetails cDet = new ClientConnectionDetails(
+							det.getNickname(), det.getTeamName(), det.getPwd());
+					cDet.setOnline(true);
+					cDet.setRealTimeSocket(clientSocket);
+					cDet.setRequestSocket(requestSocket);
+
 					try {
-						ClientDetails det = JsonParser.parseConnectToServerRequest(getLine(in));
-						ClientConnectionDetails cDet = new ClientConnectionDetails(det.getNickname(), det.getTeamName(), det.getPwd());
-						cDet.setOnline(true);
-						cDet.setRealTimeSocket(clientSocket);
-						cDet.setRequestSocket(requestSocket);
-						try {
-							clientsManager1.registerClient(cDet);
-						} catch (NoSuchAlgorithmException | SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						Iterator<ClientConnectionDetails> iter = clientsManager1.getClients().iterator();
-						while(iter.hasNext()) {
-							System.err.println(iter.next().getNickname() + " " + Server.class);
+						clientsManager1.registerClient(cDet);
 
-						}
-						System.err.println(clientsManager1.size() + " SIZE " + Server.class);
-
-					} catch (ParseException e) {
+					} catch (NoSuchAlgorithmException | SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					Iterator<ClientConnectionDetails> iter = clientsManager1
+							.getClients().iterator();
+					while (iter.hasNext()) {
+						System.err.println(iter.next().getNickname() + " "
+								+ Server.class);
+
+					}
+					System.err.println(clientsManager1.size() + " SIZE "
+							+ Server.class);
+
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				Runnable runnable = generateRunnable();
 				Thread thread = new Thread(runnable);
 				thread.start();
 
-			}
+			}// end while(true)
 		} catch (IOException e) {
 
 		}
@@ -113,12 +124,14 @@ public class Server extends AbstractServer {
 							// TODO controllare se service non c'è... gestire
 							if (service != null) {
 								service.doAction(line);
-								System.out.println(service + " " + Server.class);
+								System.out
+										.println(service + " " + Server.class);
 							}
 
 						}
 					} catch (Exception e) {
-//						clientMap.remove(clientMap.get("Prova"));
+						// clientMap.remove(clientMap.get("Prova"));
+						// in.close();
 						e.printStackTrace();
 					}
 				}
@@ -130,13 +143,16 @@ public class Server extends AbstractServer {
 
 	/**
 	 * add a new Service to this server
-	 * @param request the key of the service
-	 * @param service a @IService
+	 * 
+	 * @param request
+	 *            the key of the service
+	 * @param service
+	 *            a @IService
 	 */
 	public void addService(int request, IService service) {
 		services.put(request, service);
 	}
-	
+
 	public synchronized ClientsManager getClientsManager() {
 		return clientsManager1;
 	}

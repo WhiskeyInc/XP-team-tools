@@ -7,9 +7,9 @@ import server.model.recover.Chat;
 
 /**
  * The ChatsManager is a singleton manager of the Chats.
- * It register each chat and allow to get the index of one chat,
- * in this way the server is able to address the client about the 
- * right chat required
+ * It records each chat and allows to get the index of a chat,
+ * in this way the server is able to address the client to the 
+ * right chat requested.
  * 
  * @author Alberto
  *

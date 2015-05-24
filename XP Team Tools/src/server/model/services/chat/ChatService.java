@@ -9,11 +9,14 @@ import protocol.JsonParser;
 import server.model.propagator.MessagePropagator;
 import server.model.recover.Chat;
 import server.model.services.IService;
+import server.utils.ILogger;
 import client.model.ClientDetails;
 
 /**
- * This class makes the Chat Service concrete, by overriding the abstract method doAction in @IService:
- * it propagates the message to the users of a chat thanks to the controls made by @ChatsManager and
+ * This class makes the Chat Service concrete, by overriding the abstract method
+ * doAction in @IService: it propagates the message to the users of a chat
+ * thanks to the controls made by @ChatsManager and
+ * 
  * @MessagePropagator
  * 
  * @author ALberto
@@ -24,12 +27,14 @@ public class ChatService implements IService {
 	private volatile ChatsManager chatsManager;
 	private volatile MessagePropagator messagePropagator;
 	private int id;
+	private ILogger logger;
 
 	public ChatService(ChatsManager chatsManager,
-			MessagePropagator messagePropagator) {
+			MessagePropagator messagePropagator, ILogger logger) {
 		super();
 		this.chatsManager = chatsManager;
 		this.messagePropagator = messagePropagator;
+		this.logger = logger;
 	}
 
 	@Override
@@ -38,11 +43,18 @@ public class ChatService implements IService {
 		String[] lines = JsonParser.parseChatRequest(line);
 		String id = lines[0];
 		this.id = Integer.parseInt(id);// TODO
-		Chat chat  = chatsManager.get(this.id);
+		Chat chat = chatsManager.get(this.id);
 		ArrayList<ClientDetails> list = chat.getAttendantsDetails();
 		chat.addMessage(line);
+		log(list, line);
 		for (ClientDetails details : list) {
 			messagePropagator.propagateMessage(line, details);
+
 		}
+	}
+
+	private void log(ArrayList<ClientDetails> list, String message) {
+		logger.writeDatabase(list, message);
+
 	}
 }

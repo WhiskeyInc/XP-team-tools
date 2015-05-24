@@ -1,11 +1,12 @@
 package server.utils;
 
 import java.util.ArrayList;
-import java.util.Map;
+
+import client.model.ClientDetails;
 
 public interface ILogger {
 
-	public void writeDatabase();
-	public void setMap(Map<String, ArrayList<String>> m);
+	public void writeDatabase(ArrayList<ClientDetails> attendantsDetails,
+			String m);
 
 }

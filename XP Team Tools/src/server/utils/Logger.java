@@ -1,20 +1,19 @@
 package server.utils;
 
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
 
 import string.formatter.Formatter;
+import client.model.ClientDetails;
 
 /**
  * The class writes out a file of all the conversations for each team; It
  * rewrites them every time. It's needed as a demo for a future implementation
- * of a DB storing (TODO). It is expected in future to flush the mapMessageList buffer in
- * {@link CacheMap} after every writing, as it has obviously to be (TODO).
- * It is expected to add the time stamp for every message (TODO);
+ * of a DB storing (TODO). It is expected to add the time stamp for every
+ * message (TODO);
  * 
  * @author koelio
  *
@@ -22,39 +21,48 @@ import string.formatter.Formatter;
 
 public class Logger implements ILogger {
 
-	private Map<String, ArrayList<String>> mapMessageList;
+	private PrintWriter writer;
+	private ArrayList<String> participants;
+	private String path = "database/";
+	private String fileType = ".txt";
+	
+	public Logger() {
+	}
 
+	public Logger(String path) {
+		this.path = path;
+	}
+	
 	/**
-	 * Writes messages onto the database.
-	 * Need to be improved as not to rewrite, but append new messages. TODO
+	 * Writes messages onto the database (.txts).
 	 */
 	@Override
-	public void writeDatabase() {
+	public void writeDatabase(ArrayList<ClientDetails> attendantsDetails,
+			String m) {
+
+		participants = new ArrayList<String>();
+
+		for (ClientDetails details : attendantsDetails) {
+
+			participants.add(details.getNickname());
+
+		}
+
+		String filename = participants.toString();
+
 		try {
-
-			Set<String> keys = mapMessageList.keySet();
-
-			for (String key : keys) {
-
-				FileWriter writer = new FileWriter(new File(
-						"database/" + key + ".txt"));
-
-				ArrayList<String> value = mapMessageList.get(key);
-
-				for (int i = 0; i < value.size(); i++) {
-					writer.write(Formatter.formatMessage(value.get(i)) + "\n");
-				}
-
-				writer.close();
-			}
-
+			this.writer = new PrintWriter(new BufferedWriter(new FileWriter(
+					path + filename + fileType, true)));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		m = Formatter.formatMessage(m);
+		writer.println("\n" + m);
+
+		writer.close();
+
 	}
 
-	@Override
-	public void setMap(Map<String, ArrayList<String>> m) {
-		this.mapMessageList = m;
-	}
 }

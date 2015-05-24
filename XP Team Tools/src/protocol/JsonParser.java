@@ -9,7 +9,7 @@ import client.model.ClientDetails;
 import client.model.MacroEvents;
 
 /**
- * This class parses the requests sent to the server
+ * This class parses the requests sent to the server and vice versa
  * 
  * @author alberto
  *
@@ -23,6 +23,7 @@ public class JsonParser {
 	public static final String MESSAGE = "message";
 	public static final String MINUTES = "minutes";
 	public static final String SECONDS = "seconds";
+	public static final String AUTH = "auth";
 
 	public static final String EVENT_ACTION = "action";
 	public static final String EVENT_NAME = "event_name";
@@ -92,6 +93,23 @@ public class JsonParser {
 		JSONArray idList = (JSONArray) json.get(JsonMaker.ATTENDANT);
 		ClientDetails det = new ClientDetails((String)idList.get(0), (String)idList.get(1));
 		return det;
+	}
+	
+	/**
+	 * When a Client attempts to connect and gets not authorized, the Server makes a request to the Client
+	 * and the Client uses this method to determine whether it is authorized or not.
+	 * 
+	 * @param s JSON String 
+	 * @return String value for "connected" or "notconnected", see {@link JSonMaker} and {@link AuthService}.
+	 * @throws ParseException
+	 */
+	
+	public static String parseDisconnectRequestByServer(String s) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(s);
+		String connection = (String)json.get(AUTH);
+		
+		return connection;
 	}
 	
 	
