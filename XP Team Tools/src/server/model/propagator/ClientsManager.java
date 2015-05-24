@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import server.db.DBConnection;
-import server.db.IDBConnection;
-import server.utils.auth.Authenticate;
 import client.model.ClientConnectionDetails;
 import client.model.ClientDetails;
 
@@ -23,15 +20,9 @@ import client.model.ClientDetails;
 
 public class ClientsManager {
 
-	private IDBConnection db;
-	private Authenticate auth = new Authenticate();
 	private volatile Set<ClientConnectionDetails> clients = new HashSet<ClientConnectionDetails>();
 	private static volatile ClientsManager instance = new ClientsManager();
 	private boolean testModeEnabled = false;
-
-	private ClientsManager() {
-		db = new DBConnection();
-	}
 
 	/**
 	 * Register a client. If a client is already registered, this method only
@@ -44,17 +35,11 @@ public class ClientsManager {
 	 */
 	public synchronized void registerClient(ClientConnectionDetails client)
 			throws NoSuchAlgorithmException, IOException, SQLException {
+
 		if (!isTestModeEnabled()) {
-			if (authenticate(client.getNickname(), client.getPwd())) {
+		
+			recordClient(client);
 
-			
-				recordClient(client);
-
-			} else {
-				// TODO throw new IOException("The user " + nickname
-				// + "does not exist or invalid password");
-				
-			}
 
 		} else {
 			recordClient(client);
@@ -94,15 +79,6 @@ public class ClientsManager {
 		return null;
 	}
 
-	private boolean authenticate(String nickname, String pwd)
-			throws IOException, NoSuchAlgorithmException, SQLException { // TODO
-
-		boolean autheniticated = auth.authenticate(db.getConnection(),
-				nickname, pwd);
-
-		return autheniticated;
-	}
-
 	public int size() {
 		return clients.size();
 	}
@@ -124,19 +100,6 @@ public class ClientsManager {
 
 	public synchronized static ClientsManager getInstance() {
 		return instance;
-	}
-
-	/**
-	 * Performs the connection to database
-	 */
-	public void connectToDB() {
-		try {
-			db.connect("alemonta", "protgamba", 3306, "52.74.20.119",
-					"extreme01");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 	}
 
 	/**
