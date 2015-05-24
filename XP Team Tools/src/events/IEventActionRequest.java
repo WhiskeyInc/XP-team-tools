@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public interface IEventActionRequest {
 
 	/**
-	 * Function to propagate the event to the second server, from the client's json
+	 * Method to propagate the event to the second server, from the client's json
 	 * @param json
 	 */
 	public String sendJson(String json);
 	
 	
 	/**
-	 * Function to send an automatic event to the second server
+	 * Method to send an automatic event to the second server
 	 * @param user
 	 * @param eventName
 	 * @param participants
@@ -29,7 +29,7 @@ public interface IEventActionRequest {
 
 	
 	/**
-	 * Function to send a manual event to another server
+	 * Method to send a manual event to another server
 	 * @param user
 	 * @param eventName
 	 * @param participants

@@ -14,6 +14,10 @@ public interface IPropagator {
 
 	public abstract Socket getSocket(ClientConnectionDetails conDet);
 
+	/**
+	 * It handles a sudden disconnection from the client
+	 * @param conDet
+	 */
 	public abstract void handleSuddenDisconnection(ClientConnectionDetails conDet);
 
 }

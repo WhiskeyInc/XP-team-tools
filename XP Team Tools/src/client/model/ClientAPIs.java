@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import protocol.JsonMaker;
 
+/**
+ * This class is never used, but it's a useful summary of all the ClientAPIs
+ * 
+ * @author Alberto
+ *
+ */
 public class ClientAPIs{
 	
 	private Client client;

@@ -43,6 +43,11 @@ public class ChatsManager {
 		return completeChatList.contains(chat);
 	}
 
+	/**
+	 * Method for getting a desired chat
+	 * @param the index of required chat
+	 * @return the Chat corresponding to this index
+	 */
 	public Chat get(int index) {
 		return completeChatList.get(index);
 	}
@@ -57,16 +62,27 @@ public class ChatsManager {
 		return completeChatList.indexOf(chat);
 	}
 
+	/**
+	 * Removes a chat
+	 * @param the chat to be removed
+	 */
 	public void remove(Chat chat) {
 		if (has(chat)) {
 			completeChatList.remove(indexOf(chat));
 		}
 	}
 	
+	/**
+	 * Removes all the chats
+	 */
 	public void removeAll() {
 		completeChatList.clear();
 	}
 
+	/**
+	 * 
+	 * @return the size of chatList
+	 */
 	public int size() {
 		return completeChatList.size();
 	}

@@ -134,18 +134,34 @@ public class ChaTimerUI extends JFrame implements Observer {
 
 	}
 
+	/**
+	 * Sets the @ActionListener of the meeting button
+	 * @param actionListener to be setted
+	 */
 	public void setMeetingButtonAction(ActionListener actionListener) {
 		chatUI.setButtonMeeting(actionListener);
 	}
 
+	/**
+	 * Sets the @ActionListener of the Chat Area
+	 * @param actionListener to be setted
+	 */
 	public void setChatUI(ActionListener actionListener) {
 		chatUI.setButtonAction(actionListener);
 	}
 
+	/**
+	 * Sets the @ActionListener of the Timer Button
+	 * @param actionListener to be setted
+	 */
 	public void setTimerUI(ActionListener actionListener) {
 		timerUI.setButtonTimerListener(actionListener);
 	}
 
+	/**
+	 * Sets the @ActionListener of the UserList area
+	 * @param actionListener to be setted
+	 */
 	public void setUserListUi(ActionListener actionListener) {
 		userListUI.setButtonAction(actionListener);
 	}
@@ -158,6 +174,10 @@ public class ChaTimerUI extends JFrame implements Observer {
 		return chatUI;
 	}
 
+	/**
+	 * if there are nicknames, creates the list of teamMembers
+	 * @param nicknames
+	 */
 	public void setMembersList(String[] nicks) {
 		if (nicks != null) {
 			super.getContentPane().remove(mainPanel);
@@ -177,6 +197,9 @@ public class ChaTimerUI extends JFrame implements Observer {
 		return userListUI;
 	}
 
+	/**
+	 * performs the operation of refreshing the JFrame
+	 */
 	public void refresh() {
 		super.getContentPane().revalidate();
 		super.revalidate();
@@ -212,6 +235,10 @@ public class ChaTimerUI extends JFrame implements Observer {
 		refresh();
 	}
 
+	/**
+	 * Inserts a loadingPanel during loading operation
+	 * TODO!!!
+	 */
 	public void insertLoadingPanel() {
 		loadingPanel.add(lp);
 		Timer timer1 = new Timer(1000, new ActionListener() {
@@ -232,6 +259,9 @@ public class ChaTimerUI extends JFrame implements Observer {
 		setVisible(true);
 	}
 
+	/**
+	 * removes the loadingPanel
+	 */
 	public void removeLoadingPanel() {
 		getContentPane().add(mainPanel);
 		setVisible(true);

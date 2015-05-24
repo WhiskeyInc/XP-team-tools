@@ -35,7 +35,7 @@ public class SoundPlayer {
 		 try {
 			stream = AudioSystem.getAudioInputStream(new File(filename));
 		} catch (UnsupportedAudioFileException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		    format = stream.getFormat();
@@ -43,13 +43,13 @@ public class SoundPlayer {
 		    try {
 				clip = (Clip) AudioSystem.getLine(info);
 			} catch (LineUnavailableException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		    try {
 				clip.open(stream);
 			} catch (LineUnavailableException | IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		    clip.start();

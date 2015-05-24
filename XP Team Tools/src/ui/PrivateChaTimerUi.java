@@ -24,7 +24,7 @@ import client.model.service.IClientService;
  * The UI for private chats, which is shown when a user select a list of team-members and
  * starts the chat
  * 
- * 
+ * @author ALberto
  */
 
 public class PrivateChaTimerUi extends JFrame {
@@ -86,14 +86,26 @@ public class PrivateChaTimerUi extends JFrame {
 
 	}
 	
+	/**
+	 * Sets the @ActionListener of the meeting button
+	 * @param actionListener
+	 */
 	public void setMeetingButtonAction(ActionListener actionListener) {
 		chatUI.setButtonMeeting(actionListener);
 	}
 
+	/**
+	 * Sets the @ActionListener of the Chat Area
+	 * @param actionListener to be setted
+	 */
 	public void setChatUI(ActionListener actionListener) {
 		chatUI.setButtonAction(actionListener);
 	}
 
+	/**
+	 * Sets the @ActionListener of the Timer Button
+	 * @param actionListener to be setted
+	 */
 	public void setTimerUI(ActionListener actionListener) {
 		timerUI.setButtonTimerListener(actionListener);
 	}
@@ -106,6 +118,10 @@ public class PrivateChaTimerUi extends JFrame {
 		return chatUI;
 	}
 	
+	/**
+	 * Inserts a loadingPanel during loading operation
+	 * TODO!!!
+	 */
 	public void insertLoadingPanel(){
 		loadingPanel.add(lp);
 		Timer timer1 = new Timer(1000, new ActionListener() {

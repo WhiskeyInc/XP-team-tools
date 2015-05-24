@@ -8,6 +8,13 @@ import protocol.JsonParser;
 import server.model.propagator.ClientsManager;
 import client.model.ClientDetails;
 
+/**
+ * An implementation of @IService for the disconnection service, it overrides doAction 
+ * method and sets offline a certain client
+ * 
+ * @author nicola
+ *
+ */
 public class DisconnectService implements IService{
 
 	private volatile ClientsManager clientsManager;

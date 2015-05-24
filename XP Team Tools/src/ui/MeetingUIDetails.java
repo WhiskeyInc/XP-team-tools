@@ -106,6 +106,10 @@ public class MeetingUIDetails extends JPanel {
 		
 	}
 	
+	/**
+	 * Sets the actionListener for the button of event creation
+	 * @param actionListener
+	 */
 	public void setCreateButtonListener(ActionListener actionListener){
 		this.createButton.addActionListener(actionListener);
 	}

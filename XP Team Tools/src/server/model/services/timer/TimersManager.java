@@ -9,7 +9,7 @@ import javax.swing.Timer;
  *  The TimersManager is a singleton manager of timers. This class has a useful map of all the 
  *  timers (thanks to which, it's possible to handle all the timers) 
  * 
- * @author Alberto
+ * @author Alberto, Alessandro
  *
  */
 

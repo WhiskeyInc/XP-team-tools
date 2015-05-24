@@ -8,7 +8,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 /**
  * A class which concrete methods which allows the connection to database 
  * 
- * @author
+ * @author pavlo
  *
  */
 public class DBConnection implements IDBConnection {

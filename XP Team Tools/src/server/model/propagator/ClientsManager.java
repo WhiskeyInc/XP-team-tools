@@ -47,14 +47,13 @@ public class ClientsManager {
 		if (!isTestModeEnabled()) {
 			if (authenticate(client.getNickname(), client.getPwd())) {
 
-				System.out.println("Sto registrando " + client.getNickname()
-						+ " " + client.getTeamName() + ClientsManager.class);
+			
 				recordClient(client);
 
 			} else {
 				// TODO throw new IOException("The user " + nickname
 				// + "does not exist or invalid password");
-				System.err.println("Utente non autenticato!");
+				
 			}
 
 		} else {
@@ -65,7 +64,7 @@ public class ClientsManager {
 	private void recordClient(ClientConnectionDetails client) {
 		if (has(client)) {
 			remove(client);
-			System.out.println("L ho rimosso " + ClientsManager.class);
+			
 			clients.add(client);
 		} else {
 			clients.add(client);
@@ -108,6 +107,11 @@ public class ClientsManager {
 		return clients.size();
 	}
 
+	/**
+	 * Checks if this client is present in client's list
+	 * @param conDet @ClientConnectionDetails instance
+	 * @return true if the client is present
+	 */
 	public boolean has(ClientConnectionDetails conDet) {
 		Iterator<ClientConnectionDetails> iter = clients.iterator();
 		while (iter.hasNext()) {
@@ -135,6 +139,10 @@ public class ClientsManager {
 		}
 	}
 
+	/**
+	 * Removes this client
+	 * @param conDet
+	 */
 	public void remove(ClientConnectionDetails conDet) {
 		Set<ClientConnectionDetails> clientsTmp = new HashSet<ClientConnectionDetails>();
 

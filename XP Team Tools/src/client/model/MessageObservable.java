@@ -34,10 +34,7 @@ public class MessageObservable extends Observable {
 		return message;
 	}
 	
-	/**
-	 * Enters in a no-end cycle if there are no more Observer: in this way, the update operation
-	 * takes place only if there's at least one Observer
-	 */
+	
 	private void waitObserver() {
 		while(countObservers() == 0) {
 			

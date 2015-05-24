@@ -6,6 +6,8 @@ import java.sql.SQLException;
 /**
  * An interface with abstract methods for the connection to database
  * 
+ * @author pavlo
+ * 
  *
  */
 public interface IDBConnection {

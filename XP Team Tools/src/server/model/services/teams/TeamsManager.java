@@ -41,6 +41,11 @@ public class TeamsManager {
 		return false;
 	}
 
+	/**
+	 * Method fot getting the desired team
+	 * @param the index of teamList
+	 * @return the required team
+	 */
 	public Team get(int index) {
 		return teamList.get(index);
 	}
@@ -61,24 +66,45 @@ public class TeamsManager {
 		return -1;
 	}
 
+	/**
+	 * Removed a team
+	 * @param teamName to be removed
+	 */
 	public void remove(String teamName) {
 		if (has(teamName)) {
 			teamList.remove(indexOf(teamName));
 		}
 	}
 	
+	/**
+	 * Adds a member to a team
+	 * @param teamName
+	 * @param teamMemb to be added to this team
+	 */
 	public void addTeamMemb(String teamName, String teamMemb) {
 		teamList.get(indexOf(teamName)).addMember(teamMemb);
 	}
 
+	/**
+	 * Removes all the teams
+	 */
 	public void removeAll() {
 		teamList.clear();
 	}
 	
+	/**
+	 * 
+	 * @return the size of teamList
+	 */
 	public int size() {
 		return teamList.size();
 	}
 	
+	/**
+	 * Returns all the teams where the nickname of a user is present
+	 * @param nickname
+	 * @return a array with the list of teams
+	 */
 	public Team[] getTeamsByNickname(String nickname) {
 		ArrayList<Team> teams = new ArrayList<Team>();
 		for (Team team : teamList) {

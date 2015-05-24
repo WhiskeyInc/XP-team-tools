@@ -47,7 +47,7 @@ import events.SendPost;
  * The UI shown after the login operation: this UI allows the user to create a new team
  * or select a team that already exists and sign in 
  * 
- *
+ *@author alberto
  */
 public class TeamListUI extends JFrame {
 
@@ -151,10 +151,18 @@ public class TeamListUI extends JFrame {
 		return newTeamPanel;
 	}
 
+	/**
+	 * Sets the @ActionListener for the logoutButton
+	 * @param logoutListener
+	 */
 	public void setLogoutListener(ActionListener logoutListener) {
 		logout.addActionListener(logoutListener);
 	}
 
+	/**
+	 * Fills the team panel with team names and adds a @MouseListener to every team name
+	 * @param teams to be added
+	 */
 	public void fillTeamPane(String[] teams) {
 	
 		JPanel panel = new JPanel();
@@ -211,18 +219,9 @@ public class TeamListUI extends JFrame {
 					client.addListService(Integer.parseInt(JsonMaker.TEAMS),
 							teamsServices);
 
-					// client.addService(Integer.parseInt(JsonMaker.CHAT_INDEX),
-					// chatIndexService);
-					// client.addService(Integer.parseInt(JsonMaker.CONFIRM),
-					// confirmService);
-					//
-//TODO
-					
-					//client.waitServerResponse();
+			
 					final String indexString = String.valueOf(index);
-//					client.sendMessageToServer(JsonMaker.chatRequest(
-//							"- " + client.getNickname() + " has created "
-//									+ client.getTeamName() + " -", indexString));
+
 					if (client.getNickname().equals("Alb")) {
 						client.sendMessageToServer(JsonMaker
 								.addTeamMembRequest(client.getClientDetails()));
@@ -284,9 +283,7 @@ public class TeamListUI extends JFrame {
 										int[] time = TimerFormatter
 												.getMinSec(timerUI
 														.getTimeStamp());
-										timerUI.setTimerEditable(false);// TODO
-																		// se è
-																		// connesso...
+										timerUI.setTimerEditable(false);
 										
 										client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
 										String jsonMembs = client.waitServerResponse();
@@ -298,7 +295,7 @@ public class TeamListUI extends JFrame {
 											for (int i = 0; i < membs.length; i++) {
 												participants.add(membs[i]);
 											}
-											// add myself member
+											
 											participants.add(client.getNickname());
 										} catch (ParseException e1) {
 											e1.printStackTrace();
@@ -345,7 +342,7 @@ public class TeamListUI extends JFrame {
 														+ chatUI.getMessage(),
 												"" + index));
 										chatUI.emptyMessageArea();
-										// chat.getMessageArea().setCaretPosition(0);
+										
 									}
 								}
 							});
@@ -364,7 +361,7 @@ public class TeamListUI extends JFrame {
 						}
 					};
 					SwingUtilities.invokeLater(runnable2);
-					//TODO
+					
 					
 				}
 			});
@@ -386,21 +383,21 @@ public class TeamListUI extends JFrame {
 
 	public void refresh() {
 
-		// super.getContentPane().invalidate();
+		
 		super.getContentPane().revalidate();
-		// super.getContentPane().repaint();
+		
 		super.revalidate();
-		// super.repaint();
+		
 	}
 
 	public String getTeamName() {
-		// TODO, checkare la validità
+		
 		return teamName.getText();
 	}
 
 	@Override
 	public void setCursor(Cursor cursor) {
-		// TODO Auto-generated method stub
+		
 		super.setCursor(cursor);
 	}
 	public void setIndex(int index) {

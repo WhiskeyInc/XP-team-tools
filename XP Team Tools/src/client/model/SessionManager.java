@@ -75,7 +75,6 @@ public class SessionManager {
 		uiMap.put(index, ui);
 	}
 	
-	
 	public void emptyChatUI(int index) {
 		if(uiMap.containsKey(index)) {
 			ChatUI ui = uiMap.get(index).getChatUI();

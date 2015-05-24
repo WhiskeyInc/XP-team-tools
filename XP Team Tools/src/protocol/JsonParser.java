@@ -29,6 +29,12 @@ public class JsonParser {
 	public static final String PARTICIPANTS = "participants";
 
 
+	/**
+	 * It builds a new chat request
+	 * @param s the string to be parsed
+	 * @return a @ClientDetails instance
+	 * @throws ParseException
+	 */
 	public static ClientDetails[] parseNewChatRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -42,6 +48,12 @@ public class JsonParser {
 		return vet;
 	}
 	
+	/**
+	 * It builds a connection to server request
+	 * @param s the string to be parsed
+	 * @return a @ClientDetails instance
+	 * @throws ParseException
+	 */
 	public static ClientDetails parseConnectToServerRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -51,6 +63,11 @@ public class JsonParser {
 		return det;
 	}
 	
+	/**
+	 * It builds a request for getting the index of a chat
+	 * @param s the string to be parsed
+	 * @return the index of the required chat
+	 */
 	public static int parseChatIndexRequest(String s) {
 		JSONParser parser = new JSONParser();
 		JSONObject json = null;
@@ -63,6 +80,12 @@ public class JsonParser {
 		return Integer.parseInt((String)json.get(JsonMaker.INDEX));
 	}
 	
+	/**
+	 * It builds a 
+	 * @param s the string to be parsed
+	 * @return a @ClientDetails instance
+	 * @throws ParseException
+	 */
 	public static ClientDetails parseDisconnectRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -77,7 +100,7 @@ public class JsonParser {
 	 * 
 	 * @param s
 	 *            the string to be parsed
-	 * @return an array containing TeamName and the Message
+	 * @return an array containing ChatIndex and the Message
 	 * @throws ParseException
 	 */
 	public static String[] parseChatRequest(String s) throws ParseException {
@@ -96,7 +119,7 @@ public class JsonParser {
 	 * 
 	 * @param s
 	 *            the string to be parsed
-	 * @return an array containing TeamName, minutes and seconds
+	 * @return an array containing ChatIndex, minutes and seconds
 	 * @throws ParseException
 	 */
 	public static String[] parseTimerRequest(String s) throws ParseException {
@@ -125,7 +148,12 @@ public class JsonParser {
 		return timerVet;
 	}
 	
-	
+	/**
+	 * It builds a new team request
+	 * @param s the string to be parsed
+	 * @return an array containing TeamName and attendants' informations
+	 * @throws ParseException
+	 */
 	public static String[] parseNewTeamRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -135,6 +163,12 @@ public class JsonParser {
 		return vett;
 	}
 	
+	/**
+	 * It builds a request of adding a new team member
+	 * @param s the string to be parsed
+	 * @return a @ClientDetails instance
+	 * @throws ParseException
+	 */
 	public static ClientDetails parseAddTeamMembRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -144,6 +178,12 @@ public class JsonParser {
 		return det;
 	}
 	
+	/**
+	 * It builds a request of creating an array with team's members
+	 * @param s the string to be parsed
+	 * @return an array of strings containing team's members
+	 * @throws ParseException
+	 */
 	public static String[] parseMakeTeamMembs(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -155,12 +195,25 @@ public class JsonParser {
 		}
 		return membs;
 	}
+	
+    /**
+     * It builds a TeamMembers request
+     * @param s the string to be parsed
+     * @return a @ClientDetails instance
+     * @throws ParseException
+     */
 	public static ClientDetails parseTeamMembsRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
 		return new ClientDetails((String)json.get(JsonMaker.NICKNAME), (String)json.get(JsonMaker.TEAM_NAME));
 	}
 
+	/**
+	 * It builds a TeamList request
+	 * @param s the string to be parsed
+	 * @return
+	 * @throws ParseException
+	 */
 	public static String parseTeamsListRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -174,6 +227,12 @@ public class JsonParser {
 		return Integer.parseInt((String) json.get(REQ));
 	}
 	
+	/**
+	 * It builds a List of Teams request
+	 * @param s the string to be parsed
+	 * @return a string array containing the list of teams
+	 * @throws ParseException
+	 */
 	public static String[] parseListOfTeamsRequest(String s) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(s);
@@ -186,7 +245,11 @@ public class JsonParser {
 		return teams;
 	}
 	
-	
+	/**
+	 * It builds a MacroEvents request
+	 * @param s the string to be parsed
+	 * @return an instance of @MacroEvents containing the required macro events
+	 */
 	public static MacroEvents parseMacroEventsResponse(String s) {
 		JSONParser parser = new JSONParser();
 		JSONObject json;
@@ -196,8 +259,6 @@ public class JsonParser {
 		try {
 			json = (JSONObject) parser.parse(s);
 		
-			//String user = (String) json.get(JsonMaker.MACRO_EVENT_USER);
-
 			JSONArray idList = (JSONArray) json.get(JsonMaker.MACRO_EVENT_IDS);
 			JSONArray nameList = (JSONArray) json.get(JsonMaker.MACRO_EVENT_NAMES);
 			int size = idList.size();

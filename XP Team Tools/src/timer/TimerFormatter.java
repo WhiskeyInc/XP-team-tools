@@ -4,15 +4,15 @@ import java.util.StringTokenizer;
 
 
 /**
- * a class that manages the countdown shown on the display
+ * A class that manages the countdown shown on the display
  * 
- * @author alessandro B., Alberto
+ * @author Alessandro, Alberto
  *
  */
 public class TimerFormatter {
 	
 	/**
-	 * 
+	 * Gets the current TimeStamp
 	 * @param millis
 	 * @return an array containing minutes and seconds
 	 */
@@ -27,7 +27,7 @@ public class TimerFormatter {
 	}
 	
 	/**
-	 * 
+	 * Gets the current "display"
 	 * @param minute
 	 * @param second
 	 * @return a string with the display of the timer
@@ -47,6 +47,12 @@ public class TimerFormatter {
 		return display + ":" + name;
 	}
 	
+	/**
+	 * Converts minutes and second in a equivalent millisecond representation
+	 * @param minutes
+	 * @param seconds
+	 * @return a millisecond value
+	 */
 	public static long getMillis(int minutes, int seconds) {
 		return (minutes*60 + seconds)*1000;
 	}
@@ -68,7 +74,7 @@ public class TimerFormatter {
 	/**
 	 * checks the validity of the string representing initial time of the timer
 	 * @param timeStamp
-	 * @return
+	 * @return true if the string is in a valid format
 	 */
 	public static boolean isTimeStampValid(String timeStamp) {
 		StringTokenizer strtok = new StringTokenizer(timeStamp, ":");

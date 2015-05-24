@@ -125,6 +125,12 @@ public class JsonMaker {
 	}
 
 
+	/**
+	 * creates a chat request for the server
+	 * @param message
+	 * @param chatId
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static String chatRequest(String message, String chatId) {
 
@@ -162,7 +168,7 @@ public class JsonMaker {
 	}
 	
 	/**
-	 * 
+	 * creates a new team request for the server
 	 * @param teamName
 	 * @param teamCreatorNick
 	 * @return
@@ -176,6 +182,11 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	/**
+	 * creates a request of adding a teamMember
+	 * @param details
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static String addTeamMembRequest(ClientDetails details) {
 
@@ -188,7 +199,11 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
-	
+	/**
+	 * creates a request of a disconnection
+	 * @param det
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static String disconnectRequest(ClientDetails det) {
 		JSONObject json = new JSONObject();
@@ -199,6 +214,7 @@ public class JsonMaker {
 		json.put(ATTENDANT, detArray);
 		return json.toString();
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public static String makeTeamMembs(String[] nicks) {
@@ -283,6 +299,11 @@ public class JsonMaker {
 		return json.toString();
 	}
 	
+	/**
+	 * creates a teamsList request for the server
+	 * @param nickname
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static String teamsListRequest(String nickname) {
 		JSONObject json = new JSONObject();

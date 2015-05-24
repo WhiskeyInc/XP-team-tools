@@ -18,6 +18,8 @@ import client.model.Client;
  * A class that manages the creation of an event, it's an implementation of ActionListener and, when an event
  * is created, sends a message to the server with the details of the event and the members who will 
  * take part to the event
+ * 
+ * @author Alberto
  *
  */
 public class EventCreationController implements ActionListener {

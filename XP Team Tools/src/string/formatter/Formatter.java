@@ -6,6 +6,12 @@ import org.json.simple.parser.ParseException;
 
 import protocol.JsonParser;
 
+/**
+ * This class allows to format different String that will be sent to the server
+ * 
+ * @author pavlo
+ *
+ */
 public class Formatter {
 
 	/**
@@ -20,8 +26,8 @@ public class Formatter {
 
 	/**
 	 * Purges the raw message from delimitation marks []: useful for DB storing
-	 * in case of timer event it returns a "Pomodoro!" (to be implemented with
-	 * json parsing TIMER )
+	 * in case of timer event it returns a "Pomodoro!"
+	 * 
 	 * 
 	 * @param rawmessage
 	 * @return the formatted output
@@ -42,11 +48,10 @@ public class Formatter {
 				if (tok.hasMoreTokens()) {
 					msg = tok.nextToken();
 				} else {
-					msg = ""; // case of no message, TODO
+					msg = "";
 				}
 
 				String formattedMessage = sender + " " + msg;
-				// System.out.println(formattedMessage); //testing purposes
 				return formattedMessage;
 
 			default:
@@ -60,7 +65,7 @@ public class Formatter {
 					.println("Errore in Formatter, formatMessage pars exeption");
 		}
 		
-		return "Pomordoro!";// to be handled in case of timer parse case
+		return "Pomordoro!";
 	}
 
 	/**

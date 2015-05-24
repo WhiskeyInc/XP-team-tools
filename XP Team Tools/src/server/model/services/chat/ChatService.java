@@ -16,7 +16,7 @@ import client.model.ClientDetails;
  * it propagates the message to the users of a chat thanks to the controls made by @ChatsManager and
  * @MessagePropagator
  * 
- * 
+ * @author ALberto
  *
  */
 public class ChatService implements IService {

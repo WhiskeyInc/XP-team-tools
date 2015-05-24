@@ -126,6 +126,10 @@ public class Client {
 		}
 	}
 
+	/**
+	 * waits a response from the server, this method does nothing until a response comes
+	 * @return the response
+	 */
 	public String waitServerResponse() {
 
 		BufferedReader input;

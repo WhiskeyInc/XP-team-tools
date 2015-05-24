@@ -7,6 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * A class that extends JPanel and creates the LoadingPanel that will be shown during 
+ * loading operations
+ * 
+ * @author Alessandro
+ *
+ */
 
 public class LoadingPanel extends JPanel {
 	

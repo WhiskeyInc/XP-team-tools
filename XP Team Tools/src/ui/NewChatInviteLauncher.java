@@ -29,7 +29,7 @@ import events.SendPost;
  * A class that launchs the UI for the private chat when it receives a notification 
  * from the Observable object @MessageObservable
  * 
- *
+ *@author alberto
  */
 public class NewChatInviteLauncher implements Observer {
 

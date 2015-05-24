@@ -123,14 +123,26 @@ public class TimerUI extends JPanel implements Observer{
 		   ));
 	}
 
+	/**
+	 * Sets the @ActionListener of startTimer button
+	 * @param actionListener
+	 */
 	public void setButtonTimerListener(ActionListener actionListener) {
 		startButton.addActionListener(actionListener);
 	}
 
+	/**
+	 * Sets the timestamp in the display area
+	 * @param timeStamp to be shown in display
+	 */
 	public void setTimer(String timeStamp) {
 		timerArea.setText(timeStamp);
 	}
 
+	/**
+	 * Sets if the button timer is clickable or not
+	 * @param isClickable
+	 */
 	public void setButtomTimerClickable(boolean isClickable) {
 		startButton.setEnabled(isClickable);
 	}

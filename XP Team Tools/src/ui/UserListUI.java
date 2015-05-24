@@ -71,7 +71,10 @@ public class UserListUI extends JPanel {
 	}
 
 
-
+    /**
+     * Sets the @ActionListener to the addButton
+     * @param listener to be setted
+     */
 	public void setButtonAction(ActionListener listener){
 		button.addActionListener(listener);
 	}

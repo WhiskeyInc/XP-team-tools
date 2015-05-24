@@ -201,7 +201,7 @@ public class ChatUI extends JPanel implements Observer{
 		return chatArea.getText();
 	}
 	/**
-	 * Set the ActionListener of the sendMessage button
+	 * Sets the ActionListener of the sendMessage button
 	 * @param actionListener
 	 */
 	public void setButtonAction(ActionListener actionListener) {
@@ -249,8 +249,6 @@ public class ChatUI extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		//NB garbage collector sarà contento?
-		//TODO pensare a qualche altra soluzione
 		Runnable runnable = new Runnable() {
 			
 			@Override

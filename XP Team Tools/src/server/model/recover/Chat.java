@@ -34,6 +34,10 @@ public class Chat implements IMessageRecover{
 		return teamName;
 	}
 
+	/**
+	 * adds an attendant to the list of attendants
+	 * @param details of a client
+	 */
 	public void addAttendant(ClientDetails details) {
 		if (!has(details)) {
 			attendantsDetails.add(details);
@@ -44,6 +48,11 @@ public class Chat implements IMessageRecover{
 		return attendantsDetails;
 	}
 
+	/**
+	 * Checks if a attendant is already present in the list of attendants
+	 * @param details
+	 * @return true if the attendants is present
+	 */
 	public boolean has(ClientDetails details) {
 		return attendantsDetails.contains(details);
 	}
@@ -52,6 +61,9 @@ public class Chat implements IMessageRecover{
 		return attendantsDetails.remove(details);
 	}
 	
+	/**
+	 * Removes all the attendants from attendants' list
+	 */
 	public void removeAllAttendants() {
 		attendantsDetails.clear();
 	}
@@ -80,6 +92,9 @@ public class Chat implements IMessageRecover{
 		return messages;
 	}
 	
+	/**
+	 * Clears the list of messages
+	 */
 	public void emptyMessages() {
 		messageList.clear();
 	}

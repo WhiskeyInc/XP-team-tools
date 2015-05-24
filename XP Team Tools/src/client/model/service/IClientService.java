@@ -13,8 +13,17 @@ import java.util.Observable;
 
 public interface IClientService {
 
+	/**
+	 * Sets the attribute (a generic service) from a String request
+	 * @param request
+	 */
 	public abstract void setAttribute(String request);
 
+	/**
+	 * Gets the attribute in form of an Observable object
+	 * @param index
+	 * @return
+	 */
 	public abstract Observable getAttribute(int index);
 	
 
