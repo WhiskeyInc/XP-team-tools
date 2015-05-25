@@ -14,13 +14,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
-<<<<<<< .mine
- * The UI of the registration
-=======
+
  * The UI of the registration's panel, where a user can perform his registration,
  * after he has added username and password (the password is required twice for a 
  * better control)
->>>>>>> .r451
  * 
  * @author pavlo
  *
@@ -115,9 +112,18 @@ public class RegUI extends JPanel {
 
 	}
 
+	/**
+	 * sets the @ActionListener for the back Button
+	 * @param actionListener to be setted
+	 */
 	public void setBackLoginListener(ActionListener actionListener) {
 		sendBackLogin.addActionListener(actionListener);
 	}
+	
+	/**
+	 * sets the @ActionListener for the register Button
+	 * @param actionListener to be setted
+	 */
 
 	public void setRegisterListener(ActionListener actionListener) {
 		register.addActionListener(actionListener);
@@ -129,7 +135,7 @@ public class RegUI extends JPanel {
 
 	/**
 	 * this method returns the password that the user has written in the first
-	 * password's field and ensure that the user writes the same password in the
+	 * password's field and ensures that the user writes the same password in the
 	 * second password's field
 	 */
 	public String getPass() {

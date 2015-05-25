@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * A class for the authentication of a client who requires the connection 
  * 
- * @author
+ * @author pavlo
  *
  */
 public class Authenticate {

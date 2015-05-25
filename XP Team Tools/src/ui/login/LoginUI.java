@@ -118,14 +118,26 @@ public class LoginUI extends JPanel {
 
 	}
 
+	/**
+	 * sets the @ActionListener for Login button
+	 * @param actionListener
+	 */
 	public void setLoginListener(ActionListener actionListener) {
 		sendLogin.addActionListener(actionListener);
 	}
 
+	/**
+	 * sets the @ActionListener for register button
+	 * @param actionListener
+	 */
 	public void setRegisterListener(ActionListener actionListener) {
 		register.addActionListener(actionListener);
 	}
 
+	/**
+	 * sets the @ActionListener for the password area
+	 * @param keyListener
+	 */
 	public void setEnterListener(KeyListener keyListener) {
 		pwdField.addKeyListener(keyListener);
 

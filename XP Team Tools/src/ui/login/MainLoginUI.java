@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * the main UI for the login, it's an extension of @JFrame a sort of "container"
+ * the main UI for the login, it's an extension of @JFrame, it's a sort of "container"
  * of @LoginUI and @RegUI
  * 
  * @author Alberto

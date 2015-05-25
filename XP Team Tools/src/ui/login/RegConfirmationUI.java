@@ -64,10 +64,18 @@ public class RegConfirmationUI extends JPanel{//TODO
 		
 	}
 	
+	/**
+	 * sets the @ActionListener for continueLogin button
+	 * @param actionListener
+	 */
 	public void setLoginListener(ActionListener actionListener) {
 		continueLogin.addActionListener(actionListener);
 	}
 	
+	/**
+	 * sets the @ActionListener for registerAgain button
+	 * @param actionListener
+	 */
 	public void setRegisterListener(ActionListener actionListener) {
 		registerAgain.addActionListener(actionListener);
 	}

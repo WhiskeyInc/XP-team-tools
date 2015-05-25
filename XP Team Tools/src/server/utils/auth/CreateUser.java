@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * This class allows to insert a new user in database
+ * 
+ * @author pavlo
+ *
+ */
 public class CreateUser {
 
 	private final static int ITERATION_NUMBER = 1000;

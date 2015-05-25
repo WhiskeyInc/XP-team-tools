@@ -82,7 +82,7 @@ public class JsonParser {
 	}
 	
 	/**
-	 * It builds a 
+	 * It builds a disconnection request
 	 * @param s the string to be parsed
 	 * @return a @ClientDetails instance
 	 * @throws ParseException
