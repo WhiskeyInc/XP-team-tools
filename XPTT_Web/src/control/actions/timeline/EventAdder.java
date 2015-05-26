@@ -13,6 +13,16 @@ import timeline.Event;
 import timeline.events.MacroEvent;
 import util.serialization.LocalIdentifiabilitySerializer;
 
+/**
+ * This class adds an event to the timeline of the project the user is
+ * visualizing. To work properly, this class requires that the following
+ * attributes are properly set in the request: eventName, all the attributes
+ * {@link DateHandlerAction} requires to build a date.
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link DateHandlerAction}, {@link Event}
+ *
+ */
 public class EventAdder extends DateHandlerAction {
 
 	@Override
