@@ -11,7 +11,7 @@ import sun.misc.BASE64Encoder;
  * the managed data will be stored in base64 representation in the application's
  * DB.
  * 
- * @author koelio
+ * @author pavlo
  *
  */
 public class BaseToByteViceversa {

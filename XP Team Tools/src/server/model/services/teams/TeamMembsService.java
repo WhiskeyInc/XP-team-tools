@@ -14,6 +14,8 @@ import client.model.Team;
  * An implementation of IService that gets the memebers of the team and then propagates this
  * information thanks to @MessagePropagator
  * 
+ * @author alberto
+ * 
  *
  */
 public class TeamMembsService implements IService{

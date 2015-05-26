@@ -7,9 +7,9 @@ import org.json.simple.parser.ParseException;
 import protocol.JsonParser;
 
 /**
- * This class allows to format different String that will be sent to the server
+ * This class allows to format different strings that will be sent to the server and viceversa
  * 
- * @author pavlo
+ * @author pavlo, alberto
  *
  */
 public class Formatter {

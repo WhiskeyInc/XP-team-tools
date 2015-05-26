@@ -4,6 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * This class is used to generate a hash using SHA-1 algorithm of the inputed password and 
+ * salt 
+ * 
+ * @author pavlo
+ *
+ */
 public class Hash {
 
 	/**
