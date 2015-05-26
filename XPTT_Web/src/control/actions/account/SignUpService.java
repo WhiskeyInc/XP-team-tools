@@ -1,4 +1,4 @@
-package login;
+package control.actions.account;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,6 +15,19 @@ import model.project.Project;
 import model.project.ProjectsCollector;
 import util.serialization.GlobalIdentifiabilitySerializer;
 
+/**
+ * This class implements registration service. When a new user signs in, its
+ * user name is checked for uniqueness. If the test is positive, its credential
+ * are stored in an HashMap stored in the application context as the "users"
+ * attribute. After that, a {@link ProjectsCollector} for the new user is
+ * created and put in another HashMap placed in the "environments" attribute.
+ * Every new account has a default project, named "General", which is assumed to
+ * contain everything is related to the account.
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link AccountAction}
+ *
+ */
 public class SignUpService extends AccountAction {
 
 	private String userName;
@@ -64,9 +77,8 @@ public class SignUpService extends AccountAction {
 				.getServletContext().getAttribute("usersInfo");
 		TeamComponent teamComponent = new TeamComponent(
 				request.getParameter("name"), request.getParameter("lastName"),
-				"Developer");
+				"Owner");
 		usersInfo.put(userName, teamComponent);
-		// TODO: role?
 		try {
 			settings.addTeamMember(teamComponent);
 		} catch (NameAlreadyInUseException e) {

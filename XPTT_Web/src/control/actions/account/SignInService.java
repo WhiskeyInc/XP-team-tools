@@ -1,4 +1,4 @@
-package login;
+package control.actions.account;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,9 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.project.ProjectsCollector;
 
+/**
+ * This class implements the log in service: it extracts the user name and the
+ * password from request's parameters and checks if they match with ones of a
+ * registered user. If they do, the user is set as the currentUser in the
+ * session context; otherwise, an exception is raised and set in the same
+ * context. The required parameters in the request are the same as in
+ * {@link AccountAction}
+ * 
+ * @see {@link AccountAction}
+ * @author lele, simo, incre, andre
+ *
+ */
 public class SignInService extends AccountAction {
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
+	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = super.getUserName(request);
@@ -20,13 +38,11 @@ public class SignInService extends AccountAction {
 		if (users.containsKey(userName)) {
 			if (users.get(userName).equals(password)) {
 				doLogin(userName, request);
+			} else {
+				handleFailure(request, "Invalid password!");
 			}
-			else {
-				handleFailure(request,"Invalid password!");
-			}
-		}
-		else {
-			handleFailure(request,"Invalid user name!");
+		} else {
+			handleFailure(request, "Invalid user name!");
 		}
 		super.forward(response);
 	}
