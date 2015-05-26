@@ -197,7 +197,8 @@
 		Project project = (Project) request.getSession().getAttribute(
 				"currentProject");
 		ProjectSettings settings = project.getSettings();
-		ArrayList<TeamComponent> list = settings.getTeamMembers();
+		ArrayList<TeamComponent> list = new ArrayList<TeamComponent>();
+		list.addAll(settings.getTeamMembers());
 		Collections.sort(list);
 		return list;
 	}

@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.Task;
@@ -19,7 +18,7 @@ public interface ProjectSettings {
 	 * Returns the {@link TeamComponent} instances currently registered to this
 	 * project
 	 * 
-	 * @return: an {@link ArrayList} containing each {@link TeamComponent}
+	 * @return: a {@link List} containing each {@link TeamComponent}
 	 * @see TeamComponent
 	 */
 	public List<TeamComponent> getTeamMembers();
@@ -27,7 +26,7 @@ public interface ProjectSettings {
 	/**
 	 * Returns the available states for a project task
 	 * 
-	 * @return: an {@link ArrayList} containing each available state
+	 * @return: a {@link List} containing each available state
 	 * 
 	 * @see {@link Task#moveTaskToState(String)}
 	 */
@@ -36,7 +35,7 @@ public interface ProjectSettings {
 	/**
 	 * Returns the available states for a development user story
 	 * 
-	 * @return: an {@link ArrayList} containing each available state
+	 * @return: a {@link List} containing each available state
 	 * 
 	 * @see {@link UserStory#moveToState(String)}
 	 */

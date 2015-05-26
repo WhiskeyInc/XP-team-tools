@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.serialization.SerializerCollector;
 import model.project.ProjectsCollector;
 
 /**
@@ -52,13 +53,13 @@ public class SignInService extends AccountAction {
 				new Exception(errormessage));
 	}
 
+	@SuppressWarnings("unchecked")
 	private void doLogin(String userName, HttpServletRequest request) {
 		request.getSession().setAttribute("currentUser", userName);
-		@SuppressWarnings("unchecked")
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
 		ProjectsCollector projects = environments.get(userName);
 		request.getSession().setAttribute("currentProject",
-				projects.getProject(0));
+				projects.getProject(SerializerCollector.FIRST_ID));
 	}
 }
