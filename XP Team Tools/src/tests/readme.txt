@@ -1,3 +1,7 @@
+How to include the libraries:
+The libraries we used are stored in the "libraries" folder, it's enough to import them 
+into the Java Build Path and all the classes will be usable.
+
 How to run a complete test:
 - first of all should be launched the server running "ServerLauncher.java" 
 - then for each client that wants to connect has to be run a "ClientMain.java"
