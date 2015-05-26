@@ -12,11 +12,10 @@ import model.project.ProjectsCollector;
 import control.HttpAction;
 
 /**
- * This class "invites" a member to a project. This is realized by inserting the
- * invited user and the project he has been invited to in an hashMap set in the
- * "pendingProjects" attribute the in application context. To properly work, the
- * following attributes are assumed to be set in the request: user (the name of
- * the invited user)
+ * This class "invites" a member to a project. This is realized by adding to the
+ * {@link ProjectsCollector} of the invited user the project he has been
+ * invited to. To properly work, the following attributes are assumed
+ * to be set in the request: user (the name of the invited user)
  * 
  * @author lele, simo, incre, andre
  *
