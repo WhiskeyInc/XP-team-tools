@@ -12,6 +12,11 @@ import java.security.SecureRandom;
 import server.utils.auth.BaseToByteViceversa;
 import server.utils.auth.Hash;
 
+/**
+ * An implementation of @ISessionSaver
+ * @author pavlo
+ *
+ */
 public class SessionSaver implements ISessionSaver {
 
 	public FileWriter writer;
@@ -28,10 +33,6 @@ public class SessionSaver implements ISessionSaver {
 
 		this.user = user;
 		this.pwd = pwd;
-
-		// TODO risolvere la riscrittura del file
-		// TODO spostare pacchetti in client.utils
-		// TODO crittare file in locale e trasmettere solo HASH
 
 	}
 
@@ -52,8 +53,8 @@ public class SessionSaver implements ISessionSaver {
 				byte[] bDigest = hasher.getHash(ITERATION_NUMBER, pwd, bSalt);
 
 				// TODO
-				String sDigest = BaseToByteViceversa.byteToBase64(bDigest);
-				String sSalt = BaseToByteViceversa.byteToBase64(bSalt);
+				sDigest = BaseToByteViceversa.byteToBase64(bDigest);
+				sSalt = BaseToByteViceversa.byteToBase64(bSalt);
 
 				System.out.println(user);
 				writer.write(user + "\n" + pwd);
@@ -96,13 +97,11 @@ public class SessionSaver implements ISessionSaver {
 				"localData/session.ini")));
 
 		String line = reader.readLine();
-		// System.out.println(line);
 
 		if (!(line == null)) {
 			this.user = line;
 			this.pwd = reader.readLine();
-			// this.sDigest = reader.readLine();
-			// this.sSalt = reader.readLine();
+			
 			String[] tmp = { user, pwd };
 			return tmp;
 		} else {

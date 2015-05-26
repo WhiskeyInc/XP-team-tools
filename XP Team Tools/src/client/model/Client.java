@@ -21,7 +21,7 @@ import org.json.simple.parser.ParseException;
  * 
  * @IClientService and @IListService
  * 
- * @author Alberto, pav
+ * @author Alberto, pavlo
  */
 public class Client {
 
