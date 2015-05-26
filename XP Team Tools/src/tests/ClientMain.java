@@ -30,11 +30,6 @@ import client.utils.SessionSaver;
  * members panel, with the nicknames of other team members, thanks to which it's
  * possible select certain team members and start private chats -schedule a
  * meeting with the addition of meeting details
- * 
- * 
- *
- * 
- *
  *
  */
 public class ClientMain {
