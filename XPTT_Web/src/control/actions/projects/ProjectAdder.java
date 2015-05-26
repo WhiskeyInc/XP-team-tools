@@ -14,6 +14,16 @@ import model.project.ConcreteProjectFactory;
 import model.project.Project;
 import model.project.ProjectsCollector;
 
+/**
+ * This class adds a project to the {@link ProjectsCollector} of the user. To
+ * work properly, this class requires that the following attributes are properly
+ * set in the request: projectName (the name of the new project), description
+ * (its description).
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link ProjectAction}, {@link Project}
+ *
+ */
 public class ProjectAdder extends ProjectAction {
 
 	@Override
@@ -26,8 +36,7 @@ public class ProjectAdder extends ProjectAction {
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ProjectsCollector projects = super.getProjects(request);
-		Project project = new Project(
-				request.getParameter("projectName"),
+		Project project = new Project(request.getParameter("projectName"),
 				new ConcreteProjectFactory(),
 				request.getParameter("description"));
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
