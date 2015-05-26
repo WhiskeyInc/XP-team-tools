@@ -10,12 +10,12 @@ import string.formatter.Formatter;
 import client.model.ClientDetails;
 
 /**
- * The class writes out a file of all the conversations for each team; It
- * rewrites them every time. It's needed as a demo for a future implementation
+ * The class writes out a file of all the conversations for each team;
+ *  It's needed as a demo for a future implementation
  * of a DB storing (TODO). It is expected to add the time stamp for every
  * message (TODO), the messages are written in a database (text file)
  * 
- * @author koelio
+ * @author pavlo
  *
  */
 
