@@ -17,25 +17,52 @@ import timeline.Timeline;
 import timeline.events.AutomaticEvent;
 import timeline.events.MacroEvent;
 
+/**
+ * This class parses the JSONObject taken from an HttpServletRequest and uses
+ * the data to build an {@link AutomaticEvent} and put it in a specified
+ * {@link MacroEvent} of the timeline of default project of the user. All the
+ * filed defined in this class are required to properly build the event.
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link JSONAction}
+ *
+ */
+
 public class AutomaticEventAdderFromJSON extends JSONAction {
 
+	public static final String EVENT_NAME_FIELD = "event_name";
+	public static final String EVENT_ID_FIELD = "year";
+
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * control.actions.timeline.JSONActions.JSONAction#perform(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		JSONObject json = super.getJSONFromRequest(request, response);
-		String name = super.getFieldFromJson(json, "event_name");
-		int id = Integer.parseInt(super.getFieldFromJson(json, "id"));
-		Event event = new AutomaticEvent(name, TimeZone.getDefault());
-		super.addParticipantsToEvent(json, event);
+		int id = Integer.parseInt(super.getFieldFromJson(json,
+				AutomaticEventAdderFromJSON.EVENT_ID_FIELD));
 		Timeline timeline = super.getTimeline(request, json);
+		Event event = createAutomaticEventFromJSON(json);
 		try {
 			MacroEvent macroEvent = (MacroEvent) timeline.getEvent(id);
-			macroEvent.addEvent(event);			
+			macroEvent.addEvent(event);
 		} catch (InvalidDateException | NoSuchEventException e) {
-			System.err.println(e.getMessage());
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	private Event createAutomaticEventFromJSON(JSONObject json) {
+		String name = super.getFieldFromJson(json,
+				AutomaticEventAdderFromJSON.EVENT_NAME_FIELD);
+		Event event = new AutomaticEvent(name, TimeZone.getDefault());
+		super.addParticipantsToEvent(json, event);
+		return event;
 	}
 
 }

@@ -17,21 +17,46 @@ import timeline.events.MacroEvent;
 import control.HttpAction;
 import filtering.NoFilter;
 
+/**
+ * This class builds a list with all the {@link MacroEvent} in the
+ * {@link Timeline} of the default project of a specific user and puts it in a
+ * {@link JSONObject}. It is then put in the {@link HttpServletResponse} and
+ * sent as a response to a proper request. 
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link HttpAction}, {@link JSONAction}
+ *
+ */
 public class MacroEventsListDealer extends JSONAction implements HttpAction {
 
+	public static final String ACTION_FIELD = "action";
+	public static final String NAMES_FIELD = "names";
+	public static final String IDS_FIELD = "ids";
+	public static final String MACRO_EVENT_LIST_RESPONSE = "macro_event_response";
+
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * control.actions.timeline.JSONActions.JSONAction#perform(javax.servlet
+	 * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JSONObject json = super.getJSONFromRequest(request, response);
 		Timeline timeline = super.getTimeline(request, json);
-		ArrayList<Event> macroEvents = this.getMacroEventsOnly(timeline.getEvents(new NoFilter<Event>()));
-		JSONObject jsonResponse = this.writeJSON(macroEvents, request, response);
+		ArrayList<Event> macroEvents = this.getMacroEventsOnly(timeline
+				.getEvents(new NoFilter<Event>()));
+		JSONObject jsonResponse = this
+				.writeJSON(macroEvents, request, response);
 		this.sendResponse(response, jsonResponse);
 	}
 
 	@SuppressWarnings("unchecked")
 	private JSONObject writeJSON(ArrayList<Event> events,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		JSONObject json = new JSONObject();
 		JSONArray names = new JSONArray();
 		JSONArray ids = new JSONArray();
@@ -39,12 +64,15 @@ public class MacroEventsListDealer extends JSONAction implements HttpAction {
 			names.add(event.toString());
 			ids.add(event.getId());
 		}
-		json.put("user", super.getFieldFromJson(super.getJSONFromRequest(request, response), "user"));
-		json.put("action", "macro_event_response");
-		json.put("names", names);
-		json.put("ids", ids);
+		json.put(JSONAction.USER_FIELD, super.getFieldFromJson(
+				super.getJSONFromRequest(request, response),
+				JSONAction.USER_FIELD));
+		json.put(MacroEventsListDealer.ACTION_FIELD,
+				MacroEventsListDealer.MACRO_EVENT_LIST_RESPONSE);
+		json.put(MacroEventsListDealer.NAMES_FIELD, names);
+		json.put(MacroEventsListDealer.IDS_FIELD, ids);
 		return json;
-		
+
 	}
 
 	private void sendResponse(HttpServletResponse response, JSONObject json)
@@ -56,7 +84,7 @@ public class MacroEventsListDealer extends JSONAction implements HttpAction {
 	private ArrayList<Event> getMacroEventsOnly(ArrayList<Event> events) {
 		ArrayList<Event> macroEvents = new ArrayList<Event>();
 		for (Event event : events) {
-			if(event instanceof MacroEvent){ // TODO: brutto!!!!!
+			if (event instanceof MacroEvent) {
 				macroEvents.add(event);
 			}
 		}
