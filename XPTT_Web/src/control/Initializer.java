@@ -103,7 +103,7 @@ public class Initializer extends HttpServlet {
 
 		} catch (Exception e1) {
 		}
-		Timeline timeline = new ConcreteTimeline(TimeZone.getDefault(),
+		Timeline timeline = new ConcreteTimeline(TimeZone.getTimeZone("Europe/Rome"),
 				new LocalIdentifiabilitySerializer());
 		MacroEvent macro;
 		try {
