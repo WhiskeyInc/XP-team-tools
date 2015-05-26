@@ -261,19 +261,23 @@ public class TeamListUI extends JFrame {
 									.getTimerUI();
 							final UserListUI listUI = ui.getUserListUI();
 							final String teamName = client.getTeamName();
+							final String formattedNickname = Formatter
+									.formatNickname(client.getNickname());
+
 							ui.setChatUI(new ActionListener() {
 
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									client.sendMessageToServer(JsonMaker
-											.chatRequest(teamName,
-													client.getNickname()));
+																	
+									client.sendMessageToServer(JsonMaker.chatRequest(
+
+											formattedNickname
+													+ chatUI.getMessage(),
+											"" + index));
 									chatUI.emptyMessageArea();
 								}
 							});
-							final String formattedNickname = Formatter
-									.formatNickname(client.getNickname());
-
+							
 							ui.setTimerUI(new ActionListener() {
 
 								@Override
