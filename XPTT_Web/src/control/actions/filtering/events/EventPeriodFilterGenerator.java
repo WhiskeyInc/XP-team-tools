@@ -11,16 +11,34 @@ import timeline.Event;
 import filtering.Checker;
 import filtering.checkers.PeriodEventChecker;
 
+/**
+ * This class generates and sets in the session context an instance of
+ * {@link PeriodEventChecker} class. The time range where an event is considered
+ * valid is got from the request. To work properly, this class requires that the
+ * following attributes are properly set in the request: fromEventYear,
+ * toEventYear, fromEventMonth, toEventMonth, fromEventDay, toEventDay,
+ * fromEventHour, toEventHour, fromEventMin, toEventMin. These attributes are
+ * assumed to contain the information required to build the checker.
+ * 
+ * @author lele, simo, incre, andre
+ * @see {@link EventCheckerAction}, {@link PeriodEventChecker}
+ */
 public class EventPeriodFilterGenerator extends EventCheckerAction {
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see control.HttpAction#perform(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse)
+	 */
 	public void perform(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Checker<Event> checker;
 		try {
 			checker = new PeriodEventChecker(generateFromDate(request),
 					generateTODate(request));
-			super.returnChecker(request, checker);
+			super.setSessionChecker(request, checker);
 		} catch (Exception e) {
 			request.getSession().setAttribute("exception", e);
 		}
