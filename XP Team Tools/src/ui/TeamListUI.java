@@ -227,6 +227,8 @@ public class TeamListUI extends JFrame {
 								.addTeamMembRequest(client.getClientDetails()));
 						client.sendMessageToServer(JsonMaker.addTeamMembRequest(new ClientDetails("Pav", "Prova")));
 						client.sendMessageToServer(JsonMaker.addTeamMembRequest(new ClientDetails("Nic", "Prova")));
+						client.sendMessageToServer(JsonMaker.addTeamMembRequest(new ClientDetails("Bard", "Prova")));
+						
 					}
 					
 					Runnable runnable2 = new Runnable() {
