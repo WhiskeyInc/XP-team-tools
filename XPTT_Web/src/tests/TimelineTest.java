@@ -17,6 +17,7 @@ import timeline.ConcreteTimeline;
 import timeline.Event;
 import timeline.Timeline;
 import util.serialization.LocalIdentifiabilitySerializer;
+import util.serialization.SerializerCollector;
 import filtering.NoFilter;
 
 public class TimelineTest {
@@ -26,24 +27,33 @@ public class TimelineTest {
 			new LocalIdentifiabilitySerializer());
 
 	@Test
-	public void timelineCreationTest() {
+	public void timelineCreationTest() throws NoSuchEventException {
+		assertEquals(
+				timeline.getEvent(SerializerCollector.FIRST_ID).toString(),
+				ConcreteTimeline.DEFAULT_CREATION_EVENT);
 		assertEquals(1, timeline.getEventsNumber());
 	}
 
 	@Test
-	public void addEventTest() throws InvalidDateException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
-				22, 13, 13, 13), true));
+	public void addEventTest() throws InvalidDateException,
+			NoSuchEventException {
+		Event event = new Event("Briefing", new GregorianCalendar(2050, 12, 22,
+				13, 13, 13), true);
+		timeline.addEvent(event);
+		assertEquals(event, timeline.getEvent(event.getId()));
 		assertEquals(2, timeline.getEventsNumber());
 	}
 
 	@Test
 	public void deleteEventTest() throws InvalidDateException,
 			NoSuchEventException, UnEditableEventException {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2050, 12,
-				22, 13, 13, 13), true));
-		timeline.deleteEvent(1);
+		Event event = new Event("Briefing", new GregorianCalendar(2050, 12, 22,
+				13, 13, 13), true);
+		timeline.addEvent(event);
+		timeline.deleteEvent(event.getId());
 		assertEquals(1, timeline.getEventsNumber());
+		assertEquals(ConcreteTimeline.DEFAULT_CREATION_EVENT, timeline
+				.getEvent(SerializerCollector.FIRST_ID).toString());
 	}
 
 	@Test
@@ -58,19 +68,22 @@ public class TimelineTest {
 	@Test
 	public void timeChangeTest() throws InvalidDateException,
 			NoSuchEventException, UnEditableEventException {
-		timeline.addEvent(new Event("Riunione sulla timeline",
-				new GregorianCalendar(2020, 02, 20, 23, 3, 50), true));
-		timeline.moveEvent(1, new GregorianCalendar(2020, 02, 20, 23, 3, 50));
+		Event event = new Event("Riunione sulla timeline",
+				new GregorianCalendar(2020, 02, 20, 23, 3, 50), true);
+		timeline.addEvent(event);
+		timeline.moveEvent(event.getId(), new GregorianCalendar(2020, 02, 20,
+				23, 3, 50));
 		assertEquals(new GregorianCalendar(2020, 02, 20, 23, 3, 50), timeline
-				.getEvent(1).getDate());
+				.getEvent(event.getId()).getDate());
 	}
 
 	@Test
 	public void participantAdditionTest() throws Exception {
-		timeline.addEvent(new Event("Briefing", new GregorianCalendar(2020, 02,
-				20, 23, 3, 50), true));
-		timeline.getEvent(1).addParticipant("Simone Colucci");
-		assertTrue(timeline.getEvent(1).getParticipants()
+		Event event = new Event("Briefing", new GregorianCalendar(2020, 02,
+				20, 23, 3, 50), true);
+		timeline.addEvent(event);
+		timeline.getEvent(event.getId()).addParticipant("Simone Colucci");
+		assertTrue(timeline.getEvent(event.getId()).getParticipants()
 				.contains("Simone Colucci"));
 	}
 
@@ -100,12 +113,10 @@ public class TimelineTest {
 					29, 02, 02, 02), true));
 			fail();
 		} catch (InvalidDateException e) {
-			assertTrue(true);
 		}
 		try {
 			timeline.addEvent(new Event("Test", new GregorianCalendar(2020, 01,
 					29, 02, 02, 02), true));
-			assertTrue(true);
 		} catch (InvalidDateException e) {
 			fail();
 		}
@@ -117,56 +128,52 @@ public class TimelineTest {
 			timeline.getEvent(3);
 			fail();
 		} catch (NoSuchEventException e) {
-			assertTrue(true);
 		}
 		try {
 			timeline.deleteEvent(3);
 			fail();
 		} catch (NoSuchEventException e) {
-			assertTrue(true);
 		}
 		try {
 			timeline.moveEvent(3, new GregorianCalendar(2020, 1, 1, 1, 1, 1));
 			fail();
 		} catch (NoSuchEventException e) {
-			assertTrue(true);
 		}
 
-		timeline.addEvent(new Event("Esisto", new GregorianCalendar(2020, 1, 1,
-				1, 1, 1), true));
+		Event event = new Event("Esisto", new GregorianCalendar(2020, 1, 1,
+				1, 1, 1), true);
+		timeline.addEvent(event);
 		try {
-			timeline.getEvent(1);
-			assertTrue(true);
+			timeline.getEvent(event.getId());
 		} catch (NoSuchEventException e) {
 			fail();
 		}
 		try {
-			timeline.moveEvent(1, new GregorianCalendar(2020, 1, 1, 1, 1, 1));
-			assertTrue(true);
+			timeline.moveEvent(event.getId(), new GregorianCalendar(2020, 1, 1, 1, 1, 1));
 		} catch (NoSuchEventException e) {
 			fail();
 		}
 		try {
-			timeline.deleteEvent(1);
-			assertTrue(true);
+			timeline.deleteEvent(event.getId());
 		} catch (NoSuchEventException e) {
 			fail();
 		}
 	}
 
 	@Test
-	public void unMovableEventTest() throws InvalidDateException,
+	public void unEditableEventTest() throws InvalidDateException,
 			NoSuchEventException {
-		timeline.addEvent(new Event("Timeline", new GregorianCalendar(2020, 2,
-				2, 2, 2, 2), true));
+		Event event = new Event("Timeline", new GregorianCalendar(2020, 2,
+				2, 2, 2, 2), true);
+		timeline.addEvent(event);
 		try {
-			timeline.moveEvent(0, new GregorianCalendar(2020, 2, 2, 2, 2, 2));
+			timeline.moveEvent(SerializerCollector.FIRST_ID,
+					new GregorianCalendar(2020, 2, 2, 2, 2, 2));
 			fail();
 		} catch (UnEditableEventException e) {
-			assertEquals(1, 1);
 		}
 		try {
-			timeline.moveEvent(1, new GregorianCalendar(2030, 3, 3, 3, 3, 3));
+			timeline.moveEvent(event.getId(), new GregorianCalendar(2030, 3, 3, 3, 3, 3));
 		} catch (UnEditableEventException e) {
 			fail();
 		}

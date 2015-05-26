@@ -127,7 +127,6 @@ public class TeamManagerTest {
 			taskBoard.moveTaskToState("Timeline", "IMPLEMENTED");
 			fail();
 		} catch (InvalidStateException e) {
-			assertTrue(true);
 		}
 	}
 

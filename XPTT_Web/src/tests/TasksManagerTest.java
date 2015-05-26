@@ -54,7 +54,7 @@ public class TasksManagerTest {
 				+ manager.getTask("Timeline").getDescription()
 				+ manager.getTask("Timeline").getState());
 	}
-	
+
 	@Test
 	public void developersAdditionTest() throws Exception {
 		manager.addTask("Timeline");
@@ -71,13 +71,11 @@ public class TasksManagerTest {
 			manager.addTask("Timeline");
 		} catch (NameAlreadyInUseException e) {
 			fail();
-			;
 		}
 		try {
 			manager.addTask("Timeline");
 			fail();
 		} catch (NameAlreadyInUseException e) {
-			assertEquals(1, 1);
 		}
 	}
 
@@ -88,7 +86,6 @@ public class TasksManagerTest {
 			manager.deleteTask("Non esisto");
 			fail();
 		} catch (NoSuchTaskException e) {
-			assertEquals(1, 1);
 		}
 		try {
 			manager.deleteTask("Timeline");
@@ -98,22 +95,4 @@ public class TasksManagerTest {
 
 	}
 
-	/*
-	 * This test is outdated! Filtering according to state has been moved to
-	 * TeamTaskManager
-	 */
-	// @Test
-	// public void findTasksByState() throws Exception {
-	// ArrayList<String> tasks = new ArrayList<String>();
-	// manager.addTask("Timeline");
-	// manager.addTask("Board");
-	// manager.addTask("Chat");
-	// manager.moveTaskToState("Timeline", "IN PROGRESS");
-	// tasks.add("Timeline");
-	// ArrayList<String> inProgressTasks = new ArrayList<String>();
-	// for (Task task : manager.getTasks("IN PROGRESS")) {
-	// inProgressTasks.add(task.toString());
-	// }
-	// assertEquals(tasks, inProgressTasks);
-	// }
 }

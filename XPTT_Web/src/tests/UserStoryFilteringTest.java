@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.TimeZone;
 
@@ -19,6 +19,7 @@ import boards.UserStoryBoard.UserStory;
 import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.TaskManager;
 import filtering.TargetFilter;
+import filtering.checkers.NameUserStoryChecker;
 import filtering.checkers.StateUserStoryChecker;
 
 public class UserStoryFilteringTest {
@@ -64,37 +65,25 @@ public class UserStoryFilteringTest {
 								"IN PROGRESS"))).size());
 	}
 
-	// @Test
-	// public void PriorityUserStoryFilterTest() throws Exception {
-	// settings.setPossibleUserStoriesPriorities("DEFAULT", "MIN",
-	// "MAX");
-	// userStoriesBoard.addUserStory("Timeline",
-	// "Voglio che ci sia un pannello con dei tasti che...");
-	// userStoriesBoard.changeStoryPriority("Timeline", "MIN");
-	// userStoriesBoard.addUserStory("Board",
-	// "Voglio che ci sia un'area di testo editabile...");
-	// assertEquals(
-	// 1,
-	// userStoriesBoard
-	// .getUserStories(
-	// new TargetFilter<UserStory>(
-	// new PriorityUserStoryChecker(
-	// "MIN"))).size());
-	// assertEquals(
-	// "Timeline",
-	// userStoriesBoard
-	// .getUserStories(
-	// new TargetFilter<UserStory>(
-	// new PriorityUserStoryChecker(
-	// "MIN"))).get(0)
-	// .toString());
-	// assertEquals(
-	// 0,
-	// userStoriesBoard
-	// .getUserStories(
-	// new TargetFilter<UserStory>(
-	// new PriorityUserStoryChecker(
-	// "MAX"))).size());
-	// }
+	@Test
+	public void nameUserStoryTest() throws Exception {
+		TaskManager taskmanager1 = new ConcreteTaskManager();
+		TaskManager taskmanager2 = new ConcreteTaskManager();
+		settings.setPossibleUserStoriesStates("TODO", "IN PROGRESS",
+				"ACCOMPLISHED");
+		userStoriesBoard.addUserStory(new UserStory("Timeline test",
+				"Voglio che ci sia un pannello con dei tasti che...",
+				taskmanager1));
+		userStoriesBoard
+				.addUserStory(new UserStory("Board test",
+						"Voglio che ci sia un'area di testo editabile...",
+						taskmanager2));
+		assertEquals(2, userStoriesBoard.getUserStories(new TargetFilter<UserStory>(
+				new NameUserStoryChecker("test"))).size());
+		assertEquals(1, userStoriesBoard.getUserStories(new TargetFilter<UserStory>(
+				new NameUserStoryChecker("Board"))).size());
+		assertEquals(0, userStoriesBoard.getUserStories(new TargetFilter<UserStory>(
+				new NameUserStoryChecker("cdbhuscbidshciscsdicidc"))).size());
+	}
 
 }

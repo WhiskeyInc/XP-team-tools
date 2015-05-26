@@ -61,13 +61,14 @@ public class ProjectTest {
 		manager.addProject(project);
 		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
 		manager.deleteProject(project.getId());
-		assertEquals(1, manager.getProjects().size());
+		assertEquals(2, manager.getProjects().size());
 	}
 
 	@Test
 	public void test06() throws Exception {
-	Project project1 = new Project("uno", new ConcreteProjectFactory(), "unouno");
-	System.out.println(project1.equals(project));
+		Project project1 = new Project("uno", new ConcreteProjectFactory(),
+				"unouno");
+		assertEquals(project1.equals(project), false);
 	}
 
 }

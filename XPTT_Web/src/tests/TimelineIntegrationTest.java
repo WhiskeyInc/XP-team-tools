@@ -24,6 +24,8 @@ import boards.taskBoard.ConcreteTaskManager;
 import boards.taskBoard.ProjectTaskManager;
 import boards.taskBoard.TaskManager;
 import filtering.NoFilter;
+import filtering.TargetFilter;
+import filtering.checkers.NameEventChecker;
 
 public class TimelineIntegrationTest {
 
@@ -38,13 +40,12 @@ public class TimelineIntegrationTest {
 	private UserStoriesManager userStoriesManager = new ProjectUserStoriesManager(
 			new ConcreteUserStoriesManager(), teamManager);
 
-	//The following test sometimes fails, sometimes doesn't
 	@Test 
 	public void taskAdditionCreatesEvent() throws Exception {
 		taskManager.addTask("Nuovo task", "Integrare task in timeline");
 		assertEquals(2, timeline.getEventsNumber());
-		assertEquals("Created task: Nuovo task",
-				timeline.getEvents(new NoFilter<Event>()).get(1).toString());
+		assertEquals(1,
+				timeline.getEvents(new TargetFilter<Event>(new NameEventChecker("Nuovo task"))).size());
 	}
 
 	@Test
@@ -77,7 +78,7 @@ public class TimelineIntegrationTest {
 	}
 
 	@Test
-	public void developersAdditionCreateswEvent() throws Exception {
+	public void developersAdditionCreatesEvent() throws Exception {
 		settings.setManager(teamManager);
 		settings.addTeamMember(new TeamComponent("Simo", "Colucci", "DP"),
 				new TeamComponent("Lele", "Fabbiani", "Test"),
