@@ -1,6 +1,7 @@
 package events;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Interface of a class made to send the information of a new event to the
@@ -33,14 +34,9 @@ public interface IEventActionRequest {
 	 * @param user
 	 * @param eventName
 	 * @param participants
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @param hour
-	 * @param min
+	 * @param date
 	 */
 	public void sendManualEventAction(String user, String eventName,
-			ArrayList<String> participants, String year, String month,
-			String day, String hour, String min);
+			ArrayList<String> participants, Date date);
 
 }

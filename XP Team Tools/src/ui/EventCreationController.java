@@ -3,6 +3,7 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -15,9 +16,9 @@ import client.model.Client;
 
 /**
  * 
- * A class that manages the creation of an event, it's an implementation of ActionListener and, when an event
- * is created, sends a message to the server with the details of the event and the members who will 
- * take part to the event
+ * A class that manages the creation of an event, it's an implementation of
+ * ActionListener and, when an event is created, sends a message to the server
+ * with the details of the event and the members who will take part to the event
  * 
  * @author Alberto
  *
@@ -28,8 +29,7 @@ public class EventCreationController implements ActionListener {
 	private JFrame detailsFrame;
 	private Client client;
 
-	public EventCreationController(MeetingUIDetails ask,
-			Client client) {
+	public EventCreationController(MeetingUIDetails ask, Client client) {
 		super();
 		this.ask = ask;
 		this.client = client;
@@ -42,12 +42,14 @@ public class EventCreationController implements ActionListener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		client.sendMessageToServer(JsonMaker.teamMembsRequest(client.getNickname(), client.getTeamName()));
+		client.sendMessageToServer(JsonMaker.teamMembsRequest(
+				client.getNickname(), client.getTeamName()));
 		String jsonMembs = client.waitServerResponse();
-		
+
 		String[] membs;
 		ArrayList<String> participants = new ArrayList<String>();
 		try {
@@ -59,17 +61,21 @@ public class EventCreationController implements ActionListener {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
-		int year = Integer.parseInt(ask.getYear()) + 2000;
-		
-		client.sendMessageToServer(JsonMaker.manualEventRequest("admin", 
-				ask.getName(), participants, String.valueOf(year), ask.getMonth(),
-				ask.getDay(), ask.getHour(), ask.getMinute()));
 
-		System.out.println("Date: " + ask.getDay()+"/"+ask.getMonth()+"/"+ String.valueOf(year));
-		System.out.println("Hour: " + ask.getHour()+":"+ask.getMinute());
+		int year = Integer.parseInt(ask.getYear()) + 2000;
+
+		client.sendMessageToServer(JsonMaker.manualEventRequest(
+				"admin",
+				ask.getName(),
+				participants,
+				new Date(year, Integer.valueOf(ask.getMonth()), Integer
+						.valueOf(ask.getDay()), Integer.valueOf(ask.getHour()),
+						Integer.valueOf(ask.getMinute()))));
+
+		System.out.println("Date: " + ask.getDay() + "/" + ask.getMonth() + "/"
+				+ String.valueOf(year));
+		System.out.println("Hour: " + ask.getHour() + ":" + ask.getMinute());
 		System.out.println("Name: " + ask.getName());
 		detailsFrame.dispose();
 	}
-
 }

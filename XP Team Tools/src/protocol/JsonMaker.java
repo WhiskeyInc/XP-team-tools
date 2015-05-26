@@ -1,6 +1,8 @@
 package protocol;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -276,13 +278,17 @@ public class JsonMaker {
 	/**
 	 * creates an event json of a manual event to communicate it to the second server
 	 * @param eventName
+	 * @param user
 	 * @param participants
+	 * @param date
 	 * @return
 	 */
 	public static String manualEventRequest(String user, String eventName,
-			ArrayList<String> participants, String year, String month,
-			String day, String hour, String minute) {
-
+			ArrayList<String> participants, Date date) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
 		JSONObject json = new JSONObject();
 
 		json.put(REQ, EVENT);
@@ -290,11 +296,11 @@ public class JsonMaker {
 		json.put(USER, user);
 		json.put(EVENT_ACTION, ADD_EVENT);
 		json.put(EVENT_NAME, eventName);
-		json.put(EVENT_YEAR, year);
-		json.put(EVENT_MONTH, month);
-		json.put(EVENT_DAY, day);
-		json.put(EVENT_HOUR, hour);
-		json.put(EVENT_MINUTE, minute);
+		json.put(EVENT_YEAR, String.valueOf(cal.get(Calendar.YEAR)-1900));
+		json.put(EVENT_MONTH, String.valueOf(cal.get(Calendar.MONTH)));
+		json.put(EVENT_DAY, String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+		json.put(EVENT_HOUR, String.valueOf(cal.get(Calendar.HOUR_OF_DAY)));
+		json.put(EVENT_MINUTE, String.valueOf(cal.get(Calendar.MINUTE)));
 
 		if (participants != null) {
 			JSONArray array = new JSONArray();

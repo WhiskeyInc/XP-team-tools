@@ -1,6 +1,7 @@
 package events.tests;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import events.IEventActionRequest;
 import events.SendPost;
@@ -20,7 +21,9 @@ public class EventSendPostTestMain {
 
 		//sender.sendAutomaticEventAction("admin", "communicationTest", participants, "id");
 		
-		sender.sendManualEventAction("admin", "communicationTestManual",participants, "2050", "2", "12", "12", "12");
+		
+		
+		sender.sendManualEventAction("admin", "communicationTestManual",participants, new Date(System.currentTimeMillis()));
 
 	}
 

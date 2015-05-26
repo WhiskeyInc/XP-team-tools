@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 
 import protocol.JsonMaker;
 
@@ -40,10 +41,9 @@ public class SendPost implements IEventActionRequest {
 
 	@Override
 	public void sendManualEventAction(String user, String eventName,
-			ArrayList<String> participants, String year, String month,
-			String day, String hour, String min) {
+			ArrayList<String> participants, Date date) {
 		String jsonString = JsonMaker.manualEventRequest(user, eventName,
-				participants, year, month, day, hour, min);
+				participants, date);
 
 		try {
 			sendPost(url, jsonString);

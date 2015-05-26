@@ -1,6 +1,7 @@
 package client.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import protocol.JsonMaker;
 
@@ -56,9 +57,8 @@ public class ClientAPIs{
 		}
 
 
-		public void manualEvent(String eventName, ArrayList<String> participants, String year, String month, String day,
-				String hour, String minute) {
-			client.sendMessageToServer(JsonMaker.manualEventRequest("admin", eventName, participants, year, month, day, hour, minute));
+		public void manualEvent(String eventName, ArrayList<String> participants, Date date) {
+			client.sendMessageToServer(JsonMaker.manualEventRequest("admin", eventName, participants, date));
 		}
 		
 		

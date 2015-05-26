@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -157,10 +158,10 @@ public class JSONTest {
 
 		// sender.sendAutomaticEventAction("admin", "communicationTest",
 		// participants, "id");
-
+	
+		@SuppressWarnings("deprecation")
 		String json = JsonMaker.manualEventRequest("admin",
-				"communicationTestManual", participants, "2050", "2", "12",
-				"12", "12");
+				"communicationTestManual", participants, new Date(2050, 2, 12, 12, 12));
 		assertEquals(
 				"{\"request\":\"11\",\"min\":\"12\",\"month\":\"2\",\"hour\":\"12\",\"year\":\"2050\",\"action\":\"addEvent\",\"event_name\":\"communicationTestManual\",\"user\":\"admin\",\"day\":\"12\",\"participants\":[\"Don Lele\",\"Nick the German\",\"Simo\",\"Digio\"]}",
 				json);
