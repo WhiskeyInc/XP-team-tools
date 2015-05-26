@@ -17,20 +17,23 @@ public interface SerializerCollector {
 	 */
 	public static final int FIRST_ID = 0;
 
+	
+	public void registerOwner(Object owner);
+	
 	/**
 	 * Provides addition to the collection, including serialization.
 	 * 
 	 * @param item
 	 *            : the {@link Serializable} item to add
 	 */
-	public void addItem(Serializable item);
+	public void addItem(Serializable item, Object owner);
 
 	/**
 	 * Returns a list containing the whole set of items collected.
 	 * 
 	 * @return: a {@link List} containing every item
 	 */
-	public List<Serializable> getItems();
+	public List<Serializable> getItems(Object owner);
 
 	/**
 	 * Provides a simple method to access an item by its identifier.
@@ -40,7 +43,7 @@ public interface SerializerCollector {
 	 * @return: the item whose id matches with the parameter. If no such item
 	 *          can be found, the return value is null
 	 */
-	public Serializable getItem(int id);
+	public Serializable getItem(int id, Object owner);
 
 	/**
 	 * Provides a simple way to delete an item from this collection.
@@ -48,6 +51,6 @@ public interface SerializerCollector {
 	 * @param id
 	 *            : the identifier for the item to delete
 	 */
-	public void deleteItem(int id);
+	public void deleteItem(int id, Object owner);
 
 }

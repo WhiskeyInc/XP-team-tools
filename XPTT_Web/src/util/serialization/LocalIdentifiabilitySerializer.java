@@ -7,17 +7,18 @@ import java.util.List;
 /**
  * This implementation of {@link SerializerCollector} interface provides proper
  * behavior to all inherited methods and control for identifiability. This
- * control works properly only if the collected objects refer to one
- * single instance of this class. Which means that when one
- * {@link Serializable} instance happens to be collected in two or more different
- * collectors, that may result in a identifiability failure.
+ * control works properly only if the collected objects refer to one single
+ * instance of this class. Which means that when one {@link Serializable}
+ * instance happens to be collected in two or more different collectors, that
+ * may result in a identifiability failure.
+ * 
  * @see {@link SerializerCollector}
  * 
  * @author simone, lele, incre, andre
  */
 public class LocalIdentifiabilitySerializer implements SerializerCollector {
 
-	private HashMap<Integer, Serializable> items = new HashMap<Integer, Serializable>();
+	private HashMap<Object, HashMap<Integer, Serializable>> collections = new HashMap<Object, HashMap<Integer, Serializable>>();
 	private int nextEventId = FIRST_ID;
 
 	/*
@@ -26,9 +27,9 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 * @see util.serialization.SerializerCollectorr#addItem(T)
 	 */
 	@Override
-	public void addItem(Serializable item) {
+	public void addItem(Serializable item, Object owner) {
 		item.setId(nextEventId);
-		this.items.put(nextEventId, item);
+		this.collections.get(owner).put(nextEventId, item);
 		nextEventId++;
 	}
 
@@ -38,9 +39,9 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 * @see util.serialization.SerializerCollectorr#getItems()
 	 */
 	@Override
-	public List<Serializable> getItems() {
+	public List<Serializable> getItems(Object owner) {
 		ArrayList<Serializable> list = new ArrayList<Serializable>();
-		list.addAll(items.values());
+		list.addAll(collections.get(owner).values());
 		return list;
 	}
 
@@ -50,8 +51,8 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 * @see util.serialization.SerializerCollectorr#getItem(int)
 	 */
 	@Override
-	public Serializable getItem(int id) {
-		return items.get(id);
+	public Serializable getItem(int id, Object owner) {
+		return collections.get(owner).get(id);
 	}
 
 	/*
@@ -60,7 +61,18 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 * @see util.serialization.SerializerCollectorr#deleteItem(int)
 	 */
 	@Override
-	public void deleteItem(int id) {
-		items.remove(id);
+	public void deleteItem(int id, Object owner) {
+		collections.get(owner).remove(id);
+	}
+
+	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * util.serialization.SerializerCollector#registerOwner(java.lang.Object)
+	 */
+	public void registerOwner(Object owner) {
+		this.collections.put(owner, new HashMap<Integer, Serializable>());
 	}
 }

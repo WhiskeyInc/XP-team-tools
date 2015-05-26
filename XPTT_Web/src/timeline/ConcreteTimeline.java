@@ -38,8 +38,9 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	public ConcreteTimeline(TimeZone locale, SerializerCollector serializer) {
 		this.serializer = serializer;
+		this.serializer.registerOwner(this);
 		Event event = new AutomaticEvent(DEFAULT_CREATION_EVENT, locale);
-		this.serializer.addItem(event);
+		this.serializer.addItem(event, this);
 	}
 
 	/*
@@ -49,7 +50,7 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	@Override
 	public int getEventsNumber() {
-		return this.serializer.getItems().size();
+		return this.serializer.getItems(this).size();
 	}
 
 	/*
@@ -60,7 +61,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public void addEvent(Event event) throws InvalidDateException {
 		validateDate(event.getDate());
-		this.serializer.addItem(event);
+		this.serializer.addItem(event, this);
 	}
 
 	/*
@@ -72,11 +73,11 @@ public class ConcreteTimeline implements Timeline {
 	public void deleteEvent(int eventId) throws NoSuchEventException,
 			UnEditableEventException {
 		this.validateEvent(eventId);
-		Event event = (Event) this.serializer.getItem(eventId);
+		Event event = (Event) this.serializer.getItem(eventId, this);
 		if (!event.isEditable()) {
 			throw new UnEditableEventException(event.toString());
 		}
-		this.serializer.deleteItem(eventId);
+		this.serializer.deleteItem(eventId, this);
 	}
 
 	/*
@@ -91,7 +92,7 @@ public class ConcreteTimeline implements Timeline {
 			InvalidDateException {
 		this.validateDate(newDate);
 		this.validateEvent(eventId);
-		((Event) this.serializer.getItem(eventId)).setDate(newDate);
+		((Event) this.serializer.getItem(eventId, this)).setDate(newDate);
 	}
 
 	/*
@@ -102,7 +103,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public Event getEvent(int eventId) throws NoSuchEventException {
 		this.validateEvent(eventId);
-		return (Event) this.serializer.getItem(eventId);
+		return (Event) this.serializer.getItem(eventId, this);
 	}
 
 	/*
@@ -113,7 +114,7 @@ public class ConcreteTimeline implements Timeline {
 	@Override
 	public ArrayList<Event> getEvents(Filter<Event> filter) {
 		ArrayList<Event> filteredAndSortedEvents = new ArrayList<Event>();
-		for (Serializable item : this.serializer.getItems()) {
+		for (Serializable item : this.serializer.getItems(this)) {
 			filteredAndSortedEvents.add((Event) item);
 		}
 		filteredAndSortedEvents = filter.filter(filteredAndSortedEvents);
@@ -128,7 +129,7 @@ public class ConcreteTimeline implements Timeline {
 	}
 
 	private boolean eventExists(int eventId) {
-		return (this.serializer.getItem(eventId) != null);
+		return (this.serializer.getItem(eventId, this) != null);
 	}
 
 	private void validateDate(GregorianCalendar date)

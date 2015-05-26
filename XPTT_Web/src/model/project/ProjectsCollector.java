@@ -27,6 +27,7 @@ public class ProjectsCollector {
 	 */
 	public ProjectsCollector(SerializerCollector serializer) {
 		this.serializer = serializer;
+		this.serializer.registerOwner(this);
 	}
 
 	/**
@@ -36,7 +37,7 @@ public class ProjectsCollector {
 	 *            : the project to add to the collection
 	 */
 	public void addProject(Project project) {
-		this.serializer.addItem(project);
+		this.serializer.addItem(project, this);
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class ProjectsCollector {
 	 * @return: the corresponding instance of {@link Project}
 	 */
 	public Project getProject(int id) {
-		return (Project) this.serializer.getItem(id);
+		return (Project) this.serializer.getItem(id, this);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class ProjectsCollector {
 	 *            : an integer that uniquely identify the project
 	 */
 	public void deleteProject(int id) {
-		this.serializer.deleteItem(id);
+		this.serializer.deleteItem(id, this);
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class ProjectsCollector {
 	 */
 	public ArrayList<Project> getProjects() {
 		ArrayList<Project> list = new ArrayList<Project>();
-		for (Serializable item : this.serializer.getItems()) {
+		for (Serializable item : this.serializer.getItems(this)) {
 			list.add((Project) item);
 		}
 		return list;

@@ -36,9 +36,9 @@ public class ProjectInviter implements HttpAction {
 		String invitedUser = request.getParameter("user");
 		Project currentProject = (Project) request.getSession().getAttribute(
 				"currentProject");
-		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
-				.getServletContext().getAttribute("pendingProjects");
-		ProjectsCollector projects = pendingProjects.get(invitedUser);
+		HashMap<String, ProjectsCollector> envp = (HashMap<String, ProjectsCollector>) request
+				.getServletContext().getAttribute("environments");
+		ProjectsCollector projects = envp.get(invitedUser);
 		projects.addProject(currentProject);
 		response.sendRedirect("members.jsp");
 	}

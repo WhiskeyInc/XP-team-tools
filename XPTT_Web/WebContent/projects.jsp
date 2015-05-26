@@ -1,5 +1,5 @@
 <%@page import="model.project.ProjectsCollector"%>
-<%@page import="model.Notifier"%>
+<%@page import="model.*"%>
 <%@page import="java.util.*"%>
 <%@page import="model.project.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -107,7 +107,7 @@
 					<div class="offer-content">
 						<h3 class="lead"><%=project.toString()%></h3>
 						<p>
-							<%=project.getDescription()%></p>
+							<%=project.getId()%></p>
 						<!-- Project Selector -->
 						<form id="projectSelector<%=i%>" action="ProjectsController"
 							method="post">
