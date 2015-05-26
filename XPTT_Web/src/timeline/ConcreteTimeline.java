@@ -38,7 +38,6 @@ public class ConcreteTimeline implements Timeline {
 	 */
 	public ConcreteTimeline(TimeZone locale, SerializerCollector serializer) {
 		this.serializer = serializer;
-		this.serializer.registerOwner(this);
 		Event event = new AutomaticEvent(DEFAULT_CREATION_EVENT, locale);
 		this.serializer.addItem(event, this);
 	}

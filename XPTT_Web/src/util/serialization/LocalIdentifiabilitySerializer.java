@@ -18,7 +18,8 @@ import java.util.List;
  */
 public class LocalIdentifiabilitySerializer implements SerializerCollector {
 
-	private HashMap<Object, HashMap<Integer, Serializable>> collections = new HashMap<Object, HashMap<Integer, Serializable>>();
+	private HashMap<Integer, Serializable> items = new HashMap<Integer, Serializable>();
+	private HashMap<Serializable, ArrayList<Object>> owners = new HashMap<Serializable, ArrayList<Object>>();
 	private int nextEventId = FIRST_ID;
 
 	/*
@@ -28,9 +29,13 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 */
 	@Override
 	public void addItem(Serializable item, Object owner) {
-		item.setId(nextEventId);
-		this.collections.get(owner).put(nextEventId, item);
-		nextEventId++;
+		if (!items.containsKey(item.getId())) {
+			item.setId(nextEventId);
+			items.put(nextEventId, item);
+			owners.put(item, new ArrayList<Object>());
+			nextEventId++;
+		}
+		owners.get(item).add(owner);
 	}
 
 	/*
@@ -40,8 +45,12 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 */
 	@Override
 	public List<Serializable> getItems(Object owner) {
-		ArrayList<Serializable> list = new ArrayList<Serializable>();
-		list.addAll(collections.get(owner).values());
+		List<Serializable> list = new ArrayList<Serializable>();
+		for (Serializable item : owners.keySet()) {
+			if (owners.get(item).contains(owner)) {
+				list.add(item);
+			}
+		}
 		return list;
 	}
 
@@ -52,7 +61,11 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 */
 	@Override
 	public Serializable getItem(int id, Object owner) {
-		return collections.get(owner).get(id);
+		Serializable item = items.get(id);
+		if (owners.get(item).contains(owner)) {
+			return item;
+		}
+		return null;
 	}
 
 	/*
@@ -62,17 +75,9 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	 */
 	@Override
 	public void deleteItem(int id, Object owner) {
-		collections.get(owner).remove(id);
-	}
-
-	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * util.serialization.SerializerCollector#registerOwner(java.lang.Object)
-	 */
-	public void registerOwner(Object owner) {
-		this.collections.put(owner, new HashMap<Integer, Serializable>());
+		Serializable item = items.get(id);
+		if (owners.get(item).contains(owner)) {
+			items.remove(id);
+		}
 	}
 }

@@ -27,7 +27,6 @@ public class ProjectsCollector {
 	 */
 	public ProjectsCollector(SerializerCollector serializer) {
 		this.serializer = serializer;
-		this.serializer.registerOwner(this);
 	}
 
 	/**

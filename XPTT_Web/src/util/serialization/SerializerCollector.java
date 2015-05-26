@@ -17,9 +17,6 @@ public interface SerializerCollector {
 	 */
 	public static final int FIRST_ID = 0;
 
-	
-	public void registerOwner(Object owner);
-	
 	/**
 	 * Provides addition to the collection, including serialization.
 	 * 

@@ -9,7 +9,7 @@ package util.serialization;
  */
 public class Serializable {
 
-	private int id;
+	private int id = -1;
 
 	/**
 	 * Sets the identifier for this object. This operation is available only for
