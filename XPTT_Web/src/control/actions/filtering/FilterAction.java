@@ -7,8 +7,8 @@ import filtering.Filter;
 
 /**
  * This class represents an abstraction of a generic action dealing with
- * filtering. It provides the basic methods to set a filter in the Session
- * context.
+ * filtering. It provides the basic methods to set a filter in the "filter"
+ * attribute of the session context.
  * 
  * @author lele, simo, incre, andre
  * @param <T>

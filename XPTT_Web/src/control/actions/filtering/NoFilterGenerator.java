@@ -11,7 +11,7 @@ import filtering.NoFilter;
 
 /**
  * This class provides the basic methods to set a {@link NoFilter} in the
- * Session context. As a this filter makes no choice among the elements, setting
+ * session context. As a this filter makes no choice among the elements, setting
  * a {@link NoFilter} equals removing any filter.
  * 
  * @author lele, simo, incre, andre

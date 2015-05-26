@@ -10,10 +10,10 @@ import model.project.Project;
 import model.project.ProjectsCollector;
 
 /**
- * This class selects a project from the {@link ProjectsCollector} of the user.
- * To work properly, this class requires that the following attributes are
- * properly set in the request: id (the unique identifier of the project to be
- * selected).
+ * This class selects a project from the {@link ProjectsCollector} of the user
+ * and set it as the "currentProject" attribute in the session context. To work
+ * properly, this class requires that the following attributes are properly set
+ * in the request: id (the unique identifier of the project to be selected).
  * 
  * @author lele, simo, incre, andre
  * @see {@link ProjectAction}

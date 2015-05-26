@@ -12,9 +12,9 @@ import control.HttpAction;
 
 /**
  * This class searches all the registered users whose name partially matches a
- * given string. The list of the user is saved in the application context. Once
- * the matching list is build it is set in the membersList attribute of the
- * session context.
+ * given string. The list of the user is saved in the "user" attribute of the
+ * application context. Once the matching list is build it is set in the
+ * "membersList" attribute of the session context.
  * 
  * @author lele, simo, incre, andre
  * @see {@link HttpAction}

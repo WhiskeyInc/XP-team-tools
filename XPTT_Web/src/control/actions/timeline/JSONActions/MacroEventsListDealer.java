@@ -27,7 +27,7 @@ import filtering.NoFilter;
  * @see {@link HttpAction}, {@link JSONAction}
  *
  */
-public class MacroEventsListDealer extends JSONAction implements HttpAction {
+public class MacroEventsListDealer extends JSONAction {
 
 	public static final String ACTION_FIELD = "action";
 	public static final String NAMES_FIELD = "names";

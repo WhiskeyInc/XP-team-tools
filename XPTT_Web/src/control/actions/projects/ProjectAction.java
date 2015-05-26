@@ -24,7 +24,9 @@ import control.HttpAction;
 public abstract class ProjectAction implements HttpAction {
 
 	/**
-	 * Return the {@link ProjectsCollector} for the current user.
+	 * Return the {@link ProjectsCollector} for the current user from the
+	 * "environments" attributes in the session context. The current user is get
+	 * form the "currentUser" attributes in the session context
 	 * 
 	 * @param request
 	 *            : the specific {@link HttpServletRequest}

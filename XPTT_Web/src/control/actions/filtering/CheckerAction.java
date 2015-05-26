@@ -9,7 +9,7 @@ import filtering.TargetFilter;
 /**
  * This class represents an abstraction of a generic action dealing with
  * filtering. It provides the basic methods to set the checker for the filter
- * which is to be set in the session context.
+ * which is to be set in the "filter" attribute of the session context.
  * 
  * @author lele, simo, incre, andre
  * @param <T>
