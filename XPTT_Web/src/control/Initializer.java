@@ -73,7 +73,7 @@ public class Initializer extends HttpServlet {
 		TeamComponent digio = new TeamComponent("Alberto", "di Gioacchino", "Test & Swing-Thread expert");
 		TeamComponent nick = new TeamComponent("Nicola", "Latella", "Design pattern & user stories manager");
 		TeamComponent bardo = new TeamComponent("Alessandro", "Bardini", "Software analyst & documentation expert");
-		TeamComponent pavlo = new TeamComponent("Pavlo", "Burda", "Server manager & web designer");
+		TeamComponent pavlo = new TeamComponent("Pavlo", "Burda", "Server manager & security expert");
 		
 		try {
 			settings.addTeamMember(teamComponent);

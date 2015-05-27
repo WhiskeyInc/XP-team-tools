@@ -107,7 +107,7 @@
 					<div class="offer-content">
 						<h3 class="lead"><%=project.toString()%></h3>
 						<p>
-							<%=project.getId()%></p>
+							<%=project.getDescription()%></p>
 						<!-- Project Selector -->
 						<form id="projectSelector<%=i%>" action="ProjectsController"
 							method="post">
