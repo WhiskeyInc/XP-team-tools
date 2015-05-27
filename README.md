@@ -1,5 +1,5 @@
 # XP-team-tools
-A toolbox to improve eXtreme Programming experience. An academic project by Computer Science students from University of Pavia, Italy.
+eXtreme Programming is a very helpful set of methodologies to write good and valuable software: our target is to make its usage as easy as we can even for a distributed team. An academic project by Computer Science students from University of Pavia, Italy.
 
 ## Further information   
 * General information about this project is available [in the wiki](https://github.com/WhiskeyInc/XP-team-tools/wiki)    
