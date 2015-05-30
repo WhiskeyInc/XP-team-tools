@@ -1,13 +1,14 @@
 package control.actions.account;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.serialization.SerializerCollector;
+import model.project.Project;
 import model.project.ProjectsCollector;
 
 /**
@@ -59,7 +60,8 @@ public class SignInService extends AccountAction {
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
 		ProjectsCollector projects = environments.get(userName);
+		ArrayList<Project> projectsList = projects.getProjects();
 		request.getSession().setAttribute("currentProject",
-				projects.getProject(SerializerCollector.FIRST_ID));
+				projects.getProject(projectsList.get(0).getId()));
 	}
 }

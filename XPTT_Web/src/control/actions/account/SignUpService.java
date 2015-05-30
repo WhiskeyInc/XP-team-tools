@@ -63,15 +63,11 @@ public class SignUpService extends AccountAction {
 				GlobalIdentifiabilitySerializer.getInstance());
 		HashMap<String, ProjectsCollector> environments = (HashMap<String, ProjectsCollector>) request
 				.getServletContext().getAttribute("environments");
-		HashMap<String, ProjectsCollector> pendingProjects = (HashMap<String, ProjectsCollector>) request
-				.getServletContext().getAttribute("pendingProjects");
 		Project project = new Project("General", new ConcreteProjectFactory(),
 				"Everything related to your account");
 		ConcreteProjectSettings settings = (ConcreteProjectSettings) project
 				.getSettings();
 		projectsCollector.addProject(project);
-		pendingProjects.put(userName, new ProjectsCollector(
-				GlobalIdentifiabilitySerializer.getInstance()));
 		environments.put(userName, projectsCollector);
 		HashMap<String, TeamComponent> usersInfo = (HashMap<String, TeamComponent>) request
 				.getServletContext().getAttribute("usersInfo");
