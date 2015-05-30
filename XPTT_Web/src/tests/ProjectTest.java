@@ -61,7 +61,7 @@ public class ProjectTest {
 		manager.addProject(project);
 		manager.addProject(new Project(null, new ConcreteProjectFactory(), null));
 		manager.deleteProject(project.getId());
-		assertEquals(2, manager.getProjects().size());
+		assertEquals(1, manager.getProjects().size());
 	}
 
 	@Test

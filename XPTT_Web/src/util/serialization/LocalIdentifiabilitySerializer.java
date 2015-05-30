@@ -62,6 +62,9 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	@Override
 	public Serializable getItem(int id, Object owner) {
 		Serializable item = items.get(id);
+		if(item == null){
+			return null;
+		}
 		if (owners.get(item).contains(owner)) {
 			return item;
 		}
@@ -77,6 +80,7 @@ public class LocalIdentifiabilitySerializer implements SerializerCollector {
 	public void deleteItem(int id, Object owner) {
 		Serializable item = items.get(id);
 		if (owners.get(item).contains(owner)) {
+			owners.remove(item);
 			items.remove(id);
 		}
 	}
